@@ -24,8 +24,6 @@ from sklearn.model_selection import cross_validate, validation_curve
 from sklearn.model_selection import GridSearchCV
 ```
 
-# Clustering
-
 In supervised learning, the data samples are supplied with labels, and the goal of the learner is to generalize the examples to new values. In unsupervised learning, there are no labels. Instead, the goal is to discover structure that is intrinsic to the feature matrix. Common problem types in unsupervised learning are
 
 * **Clustering**. Determine whether the samples roughly divide into a small number of classes.
