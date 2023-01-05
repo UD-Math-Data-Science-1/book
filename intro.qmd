@@ -2,7 +2,7 @@
 
 ## Useful guides
 
-* [pandas user guide](https://pandas.pydata.org/docs/user_guide/index.html), [pandas cheat sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf), [pandas long summary](https://www.webpages.uidaho.edu/~stevel/504/pandas%20dataframe%20notes.pdf)
+* [pandas user guide](https://pandas.pydata.org/docs/user_guide/index.html), [pandas cheat sheet](https://datacamp-community-prod.s3.amazonaws.com/f04456d7-8e61-482f-9cc9-da6f7f25fc9b), [pandas long summary](https://www.webpages.uidaho.edu/~stevel/504/pandas%20dataframe%20notes.pdf)
 * [seaborn tutorial](https://seaborn.pydata.org/tutorial.html), [seaborn cheat sheet](https://storage.googleapis.com/kaggle-forum-message-attachments/724698/14798/seaborn.JPG)
 * [scikit-learn user guide](https://scikit-learn.org/stable/user_guide.html), [sklearn cheat sheet](http://datacamp-community-prod.s3.amazonaws.com/eb807da5-dce5-4b97-a54d-74e89f14266b)
 * [numpy cheat sheet](http://datacamp-community-prod.s3.amazonaws.com/ba1fe95a-8b70-4d2f-95b0-bc954e9071b0)
@@ -11,6 +11,13 @@
 
 Here are places around the web with data available for download.
 
+### Search engines
+
+These point to a lot of other resources.
+
+* [Google Dataset Search](https://datasetsearch.research.google.com)
+* [Registry of Open Data on AWS](https://registry.opendata.aws/) Access to datasets used by governments and researchers that happen to be stored on Amazon's servers. Skewed toward large datasets.
+
 ### Packaged
 
 These feature datasets that are essentially already packaged as CSV or Excel files, plus descriptions.
@@ -18,7 +25,7 @@ These feature datasets that are essentially already packaged as CSV or Excel fil
 * [Five Thirty-Eight](https://data.fivethirtyeight.com/) Data used to support the site's journalism, mainly in politics and sports. 
 * [Delaware Open Data](https://data.delaware.gov) Publicly available data from the state government.
 * [Kaggle](https://www.kaggle.com/datasets) Long-time host of data science competitions. The formal competitions are well-curated, but user contributions vary widely.
-* [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) Long-standing site for datasets that have been used extensively in machine learning research, but also recent contributions.
+* [UCI Machine Learning Repository](https://archive-beta.ics.uci.edu) Well-known source for datasets that have been used extensively in machine learning research, but also recent contributions.
 * [Open ML](https://www.openml.org/search?type=data&from=300&q=qualities.NumberOfClasses%3A%3E2) Sort of abandoned years ago, but lots of eclectic datasets remain.
 * [IMDB Datasets](https://www.imdb.com/interfaces/) Information about movies and TVs. (Big files!)
 * [Stanford Network Analysis Project](https://snap.stanford.edu/index.html) Datasets presented as networks.
@@ -32,14 +39,6 @@ These require you to navigate an interface to select data from a large pool. Typ
 * [UNICEF Portal](https://open.unicef.org) Worldwide data about child welfare.
 * [World Bank](https://datacatalog.worldbank.org/home) Focuses on economic and development data.
 * [World Health Organization](https://www.who.int/gho/database/en/) Information on health and disease.
-
-### Search engines
-
-These point to a lot of other resources.
-
-* [Google Dataset Search](https://datasetsearch.research.google.com)
-* [Registry of Open Data on AWS](https://registry.opendata.aws/) Access to datasets used by governments and researchers that happen to be stored on Amazon's servers. Skewed toward large sets, and a bit of a grab-bag.
-
 
 ## Glossary
 
@@ -83,11 +82,11 @@ A much more exhaustive glossary can be found [here](https://www.analyticsvidhya.
 
 ### Editors/IDEs
 
+* **VS Code** *(recommended)* Free all-purpose editor with many extensions for working closely with git, Github, Jupyter, and Python.
 * **Jupyter** Popular format and system for interactive editing, execution, and export of notebooks.
 * **Jupyter Lab** Layer over Jupyter notebook functionality to help manage notebooks and extensions.
-* **PyCharm** Feature-rich freemium development environment for Python, geared toward large, complex projects.
-* **VS Code** Free all-purpose editor with many extensions for working closely with git, Github, Jupyter, and Python.
-* **Spyder** Free development environment that somewhat resembles MATLAB.
-* **Thonny** Bare-bones development environment intended to prioritize beginners.
 * **Google Colab** Free cloud-based service for jumping into Jupyter notebooks without installing any software locally.
+* **Spyder** Free development environment that somewhat resembles MATLAB.
+* **PyCharm** Feature-rich freemium development environment for Python, geared toward large, complex projects.
+* **Thonny** Bare-bones development environment intended to prioritize beginners.
 
