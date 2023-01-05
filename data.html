@@ -156,7 +156,13 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
+</figure>
+</div>
+</div></div>
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
@@ -216,7 +222,9 @@ MathJax = {
 </li>
     </ul>
     </div>
-</nav>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>Copyright 2023 by Toby Driscoll</p>
+</div></div></nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -240,10 +248,7 @@ MathJax = {
   <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text"><span class="toc-section-number">1.3.2</span>  Text</a></li>
   <li><a href="#images" id="toc-images" class="nav-link" data-scroll-target="#images"><span class="toc-section-number">1.3.3</span>  Images</a></li>
   </ul></li>
-  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="toc-section-number">1.4</span>  Data frames</a>
-  <ul class="collapse">
-  <li><a href="#categorical-data" id="toc-categorical-data" class="nav-link" data-scroll-target="#categorical-data"><span class="toc-section-number">1.4.1</span>  Categorical data</a></li>
-  </ul></li>
+  <li><a href="#series-and-frames" id="toc-series-and-frames" class="nav-link" data-scroll-target="#series-and-frames"><span class="toc-section-number">1.4</span>  Series and frames</a></li>
   <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="toc-section-number">1.5</span>  Data preparation</a>
   <ul class="collapse">
   <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values"><span class="toc-section-number">1.5.1</span>  Missing values</a></li>
@@ -455,28 +460,28 @@ Important
 </div>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>np.datetime64(<span class="st">"2020-01-17"</span>)    <span class="co"># YYYY-MM-DD </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="71">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>numpy.datetime64('2020-01-17')</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>np.datetime64(<span class="st">"1969-07-20T20:17"</span>)    <span class="co"># YYYY-MM-DDThh:mm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>numpy.datetime64('1969-07-20T20:17')</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Current date and time, down to the second</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>np.datetime64(<span class="st">"now"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="73">
-<pre><code>numpy.datetime64('2022-12-25T21:53:53')</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>numpy.datetime64('2023-01-05T19:20:57')</code></pre>
 </div>
 </div>
 <p>A time delta in NumPy indicates its units (granularity).</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.datetime64(<span class="st">"1969-07-20T20:17"</span>) <span class="op">-</span> np.datetime64(<span class="st">"today"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="74">
-<pre><code>numpy.timedelta64(-28101823,'m')</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>numpy.timedelta64(-28117663,'m')</code></pre>
 </div>
 </div>
 </section>
@@ -519,7 +524,7 @@ Important
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    s <span class="op">+=</span> rng.normal()</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>s<span class="op">/</span><span class="dv">100000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="78">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>-0.00019715894764449414</code></pre>
 </div>
 </div>
@@ -547,20 +552,20 @@ Important
 </div>
 </div>
 <p>A vector with <span class="math inline">\(n\)</span> elements is often referred to as an <span class="math inline">\(n\)</span>-vector, and we say that <span class="math inline">\(n\)</span> is the <strong>length</strong> of the vector. In math we often use <span class="math inline">\(\real^n\)</span> to denote the set of all <span class="math inline">\(n\)</span>-vectors with real-valued elements.</p>
-<p>The usual way to work with arrays in Python is through NumPy.</p>
+<p>The usual way to work with arrays in Python is through NumPy:</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array( [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] )</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([1, 2, 3, 4, 5])</code></pre>
 </div>
 </div>
 <p>A vector has a data type for its elements:</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x.dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>dtype('int64')</code></pre>
 </div>
 </div>
@@ -568,27 +573,27 @@ Important
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array( [<span class="fl">1.0</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>] )</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>y.dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="81">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>dtype('float64')</code></pre>
 </div>
 </div>
 <p>Use <code>len</code> to determine the length of a vector:</p>
 <div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="82">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>You can create a special type of vector called a <em>range</em> that has equally spaced elements:</p>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>np.arange(<span class="dv">0</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="83">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>array([0, 1, 2, 3, 4])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>np.arange(<span class="dv">1</span>,<span class="dv">3</span>,<span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="84">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>array([1. , 1.5, 2. , 2.5])</code></pre>
 </div>
 </div>
@@ -611,32 +616,32 @@ Danger
 <p>Use square brackets to refer to an element of a vector:</p>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="85">
+<div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>1</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="86">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>Negative values for the index are counted from the end. The last element of a vector always has index <code>-1</code>, and more-negative values move backward through the elements:</p>
 <div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>x[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="87">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>5</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>x[<span class="op">-</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="88">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>3</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x[<span class="op">-</span><span class="bu">len</span>(x)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="89">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>1</code></pre>
 </div>
 </div>
@@ -644,7 +649,7 @@ Danger
 <div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">3</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="90">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>array([ 1,  2, -3,  4,  5])</code></pre>
 </div>
 </div>
@@ -652,27 +657,27 @@ Danger
 <div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="op">=</span> <span class="fl">1.234</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>x    <span class="co"># float was truncated to int, without warning!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="91">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>array([ 1,  2, -3,  4,  5])</code></pre>
 </div>
 </div>
 <p>You can also use a list in square brackets to access multiple elements at once:</p>
 <div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>x[ [<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>] ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="92">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>array([ 1, -3,  5])</code></pre>
 </div>
 </div>
 <p>Accessing elements via a range is known as <strong>slicing</strong>:</p>
 <div class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="93">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>array([ 1,  2, -3])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>x[<span class="op">-</span><span class="dv">3</span>:<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="94">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([-3,  4])</code></pre>
 </div>
 </div>
@@ -680,20 +685,20 @@ Danger
 <p>When the <code>start</code> of the range is omitted, it means “from the beginning”, and when <code>stop</code> is omitted, it means “through to the end.” Hence, <code>[:k]</code> means “first <span class="math inline">\(k\)</span> elements” and <code>[-k:]</code> means “last <span class="math inline">\(k\)</span> elements”:</p>
 <div class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>x[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="95">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>array([ 1,  2, -3])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x[<span class="op">-</span><span class="dv">3</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="96">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>array([-3,  4,  5])</code></pre>
 </div>
 </div>
 <p>And we also have this idiom:</p>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>x[::<span class="op">-</span><span class="dv">1</span>]   <span class="co"># reverse the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="97">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>array([ 5,  4, -3,  2,  1])</code></pre>
 </div>
 </div>
@@ -712,7 +717,7 @@ Warning
 </div>
 <div class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>x[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="98">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>array([ 1,  2, -3,  4,  5])</code></pre>
 </div>
 </div>
@@ -756,7 +761,7 @@ Note
 <div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([ [j<span class="op">-</span>i <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>) ])</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="99">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>array([[ 0,  1,  2,  3,  4,  5],
        [-1,  0,  1,  2,  3,  4],
        [-2, -1,  0,  1,  2,  3],
@@ -766,14 +771,14 @@ Note
 <p>The <code>shape</code> of an array is what we would often call the <em>size</em>:</p>
 <div class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>A.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="100">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>(4, 6)</code></pre>
 </div>
 </div>
 <p>There is no difference between a vector and a 1D array:</p>
 <div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>x.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="101">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>(5,)</code></pre>
 </div>
 </div>
@@ -781,7 +786,7 @@ Note
 <div class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array( [ [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>] ])</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="102">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>array([[1, 2, 3],
        [4, 5, 6]])</code></pre>
 </div>
@@ -789,13 +794,13 @@ Note
 <p>Here are some other common ways to construct arrays.</p>
 <div class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>np.ones(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="103">
+<div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>array([1., 1., 1., 1., 1.])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>np.zeros( (<span class="dv">3</span>,<span class="dv">6</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="104">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>array([[0., 0., 0., 0., 0., 0.],
        [0., 0., 0., 0., 0., 0.],
        [0., 0., 0., 0., 0., 0.]])</code></pre>
@@ -804,7 +809,7 @@ Note
 <div class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See earlier section for definition of rng</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>rng.normal( size<span class="op">=</span>(<span class="dv">3</span>,<span class="dv">4</span>) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="105">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>array([[-1.27264664, -0.62756222, -0.30866094,  0.02293842],
        [ 0.29444108, -0.80103727,  0.34504746, -0.11060255],
        [-1.72285615,  0.22140352, -1.06020551, -0.05159689]])</code></pre>
@@ -812,21 +817,21 @@ Note
 </div>
 <div class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>np.repeat(np.pi, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="106">
+<div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>array([3.14159265, 3.14159265, 3.14159265])</code></pre>
 </div>
 </div>
 <p>You can also stack arrays vertically or horizontally to create new arrays.</p>
 <div class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>np.hstack( ( np.ones((<span class="dv">2</span>,<span class="dv">2</span>)), np.zeros((<span class="dv">2</span>,<span class="dv">3</span>)) ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="107">
+<div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>array([[1., 1., 0., 0., 0.],
        [1., 1., 0., 0., 0.]])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>np.vstack( (<span class="bu">range</span>(<span class="dv">5</span>), <span class="bu">range</span>(<span class="dv">5</span>,<span class="dv">0</span>,<span class="op">-</span><span class="dv">1</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="108">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>array([[0, 1, 2, 3, 4],
        [5, 4, 3, 2, 1]])</code></pre>
 </div>
@@ -837,35 +842,35 @@ Note
 <p>We could therefore use successive brackets to refer to an element:</p>
 <div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>R[<span class="dv">1</span>][<span class="dv">2</span>]    <span class="co"># second row, third column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="109">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>6</code></pre>
 </div>
 </div>
 <p>But it’s more convenient to use a single bracket set with indexes separated by commas:</p>
 <div class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>R[<span class="dv">1</span>, <span class="dv">2</span>]    <span class="co"># second row, third column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="110">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>6</code></pre>
 </div>
 </div>
 <p>You can slice in each dimension individually.</p>
 <div class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>R[:<span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>:]    <span class="co"># first row, last two columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="111">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <pre><code>array([[2, 3]])</code></pre>
 </div>
 </div>
 <p>The result above is another 2D array. Note how this result is subtly different:</p>
 <div class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>R[<span class="dv">0</span>, <span class="op">-</span><span class="dv">2</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="112">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>array([2, 3])</code></pre>
 </div>
 </div>
 <p>Because we accessed an individual row, not a slice, the result is one dimension lower—a vector. Finally, a <code>:</code> in one slice position means to keep everything in that dimension.</p>
 <div class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>A[:, :<span class="dv">2</span>]    <span class="co"># all rows, first 2 columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="113">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>array([[ 0,  1],
        [-1,  0],
        [-2, -1],
@@ -878,20 +883,20 @@ Note
 <p>A common task is to <em>reduce</em> an array along one dimension, called an <em>axis</em> in numpy, resulting in an array of one less dimension. It’s easiest to explain by some examples.</p>
 <div class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(A, axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># sum along the rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="114">
+<div class="cell-output cell-output-display" data-execution_count="47">
 <pre><code>array([-6, -2,  2,  6, 10, 14])</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(A,axis<span class="op">=</span><span class="dv">1</span>)    <span class="co"># sum along the columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="115">
+<div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>array([15,  9,  3, -3])</code></pre>
 </div>
 </div>
 <p>If you don’t give an axis, the reduction occurs over all directions at once, resulting in a single number.</p>
 <div class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="116">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>24</code></pre>
 </div>
 </div>
@@ -906,7 +911,7 @@ x = np.array( [1,2,3,4,5] )
 x + x
 ```
 
-::: {.cell-output .cell-output-display execution_count=117}
+::: {.cell-output .cell-output-display execution_count=50}
 ```
 array([ 2,  4,  6,  8, 10])
 ```
@@ -937,7 +942,7 @@ There is a major exception, though. When one of the operands can be repeated alo
 x+3
 ```
 
-::: {.cell-output .cell-output-display execution_count=119}
+::: {.cell-output .cell-output-display execution_count=52}
 ```
 array([4, 5, 6, 7, 8])
 ```
@@ -952,7 +957,7 @@ For a less trivial example, suppose that within each column of an array, we want
 A - np.mean(A, axis=0)
 ```
 
-::: {.cell-output .cell-output-display execution_count=120}
+::: {.cell-output .cell-output-display execution_count=53}
 ```
 array([[ 1.5,  1.5,  1.5,  1.5,  1.5,  1.5],
        [ 0.5,  0.5,  0.5,  0.5,  0.5,  0.5],
@@ -1022,8 +1027,8 @@ Note
 <p>The most straightforward way to represent an image is as a 3D array of values representing intensities representing of red, green and blue in each pixel. Sometimes it might be preferable to represent the image by a vector of statistics about these values, or by presence or absence of detected objects, etc.</p>
 </section>
 </section>
-<section id="data-frames" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="data-frames"><span class="header-section-number">1.4</span> Data frames</h2>
+<section id="series-and-frames" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="series-and-frames"><span class="header-section-number">1.4</span> Series and frames</h2>
 <p>The most popular Python package for manipulating and analyzing data is <a href="https:pandas.pydata.org">pandas</a>. We will use the paradigm it presents, which is fairly well understood throughout data science.</p>
 <div id="def-data-frame" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.6 </strong></span>A <strong>series</strong> is a vector that is indexed by a finite ordered set. A <strong>data frame</strong> is a collection of series that all share the same index set.</p>
@@ -1038,7 +1043,8 @@ Note
 <li>The scores of gymnasts on multiple apparatus types can be represented as a data frame whose rows are indexed by the names of the gymnasts and whole columns are indexed by the names of the apparatuses.</li>
 </ul>
 </div>
-<p>For example, here is a pandas series for the wavelengths of light corresponding to rainbow colors:</p>
+<div id="exm-data-colors" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.6 </strong></span>Here is a pandas series for the wavelengths of light corresponding to rainbow colors:</p>
 <div class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1058,14 +1064,14 @@ red       710
 dtype: int64</code></pre>
 </div>
 </div>
-<p>We can now use an index value to access a value in the series.</p>
+<p>We can use an index value (one of the colors) to access a value in the series:</p>
 <div class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( wavelength[<span class="st">"blue"</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>470</code></pre>
 </div>
 </div>
-<p>We can access multiple values to get a series that is a subset of the original.</p>
+<p>If we access multiple values, we get a series that is a subset of the original:</p>
 <div class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( wavelength[ [<span class="st">"violet"</span>, <span class="st">"red"</span>] ] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1074,10 +1080,10 @@ red       710
 dtype: int64</code></pre>
 </div>
 </div>
-<p>We can also use the <code>iloc</code> property to access the underlying vector in NumPy fashion.</p>
+<p>We can also use the <code>iloc</code> property to access the underlying vector by NumPy slicing:</p>
 <div class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>wavelength.iloc[:<span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="124">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>violet    400
 blue      470
 green     520
@@ -1085,7 +1091,7 @@ yellow    580
 dtype: int64</code></pre>
 </div>
 </div>
-<p>Here is a series of NFL teams based on the same index.</p>
+<p>Here is a series of NFL teams based on the same index:</p>
 <div class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>teams <span class="op">=</span> pd.Series(</span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  [<span class="st">"Vikings"</span>, <span class="st">"Bills"</span>, <span class="st">"Eagles"</span>, <span class="st">"Chargers"</span>, <span class="st">"Bengals"</span>, <span class="st">"Cardinals"</span>],</span>
@@ -1093,15 +1099,15 @@ dtype: int64</code></pre>
 <span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>teams[<span class="st">"green"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="125">
+<div class="cell-output cell-output-display" data-execution_count="58">
 <pre><code>'Eagles'</code></pre>
 </div>
 </div>
-<p>Now we can create a data frame using these two series as columns.</p>
+<p>Now we can create a data frame using these two series as columns:</p>
 <div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>rainbow <span class="op">=</span> pd.DataFrame( {<span class="st">"wavelength"</span>:wavelength, <span class="st">"team name"</span>:teams} )</span>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>rainbow <span class="op">=</span> pd.DataFrame( {<span class="st">"wavelength"</span>: wavelength, <span class="st">"team name"</span>: teams} )</span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>rainbow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="126">
+<div class="cell-output cell-output-display" data-execution_count="59">
 
 <div>
 
@@ -1149,10 +1155,23 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>We can access a column using simple bracket notation:</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Curly braces <code>{ }</code> are used to construct a dictionary in Python.</p>
+</div>
+</div>
+<p>We can access a single column using simple bracket notation:</p>
 <div class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>rainbow[<span class="st">"team name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="127">
+<div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>violet      Vikings
 blue          Bills
 green        Eagles
@@ -1162,11 +1181,11 @@ red       Cardinals
 Name: team name, dtype: object</code></pre>
 </div>
 </div>
-<p>We can add a column after the fact using a bracket access on the left side of the assignment:</p>
+<p>We can add a column after the fact by using a bracket access on the left side of the assignment:</p>
 <div class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>rainbow[<span class="st">"flower"</span>] <span class="op">=</span> [<span class="st">"Lobelia"</span>, <span class="st">"Cornflower"</span>, <span class="st">"Bells-of-Ireland"</span>, <span class="st">"Daffodil"</span>,<span class="st">" Butterfly weed"</span>,<span class="st">" Rose"</span>]</span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>rainbow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="128">
+<div class="cell-output cell-output-display" data-execution_count="61">
 
 <div>
 
@@ -1221,24 +1240,25 @@ Name: team name, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<p>We can access a row by using brackets with the <code>loc</code> property of the frame:</p>
+<p>We can access a row by using brackets with the <code>loc</code> property of the frame, getting a series indexed by the column names of the frame:</p>
 <div class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>rainbow.loc[<span class="st">"orange"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="129">
+<div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>wavelength                610
 team name             Bengals
 flower         Butterfly weed
 Name: orange, dtype: object</code></pre>
 </div>
 </div>
-<p>The result above is a series indexed by the column names of the frame. We are also free to strip away the index list and get an ordinary array:</p>
+<p>We are also free to strip away the index and get an ordinary array:</p>
 <div class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>rainbow.loc[<span class="st">"red"</span>].to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="130">
+<div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>array([710, 'Cardinals', ' Rose'], dtype=object)</code></pre>
 </div>
 </div>
-<p>Here is another way to construct a data frame. We give a vector of rows, plus (optionally) the index and the names of the columns.</p>
+</div>
+<p>Here is another way to construct a data frame in pandas. We give a vector of rows, plus (optionally) the index and the names of the columns:</p>
 <div class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> pd.DataFrame( </span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>    [ (<span class="st">"a"</span>, <span class="st">"A"</span>), (<span class="st">"b"</span>, <span class="st">"B"</span>), (<span class="st">"c"</span>, <span class="st">"C"</span>) ], </span>
@@ -1246,7 +1266,7 @@ Name: orange, dtype: object</code></pre>
 <span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="131">
+<div class="cell-output cell-output-display" data-execution_count="64">
 
 <div>
 
@@ -1279,9 +1299,9 @@ Name: orange, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<section id="categorical-data" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="categorical-data"><span class="header-section-number">1.4.1</span> Categorical data</h3>
-<p>Pandas has facilities for dealing with categorical variables. For example, here is a vector of chess pieces at the start of a game:</p>
+<p>Pandas has facilities for dealing with categorical variables.</p>
+<div id="exm-data-chess" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1.7 </strong></span>Here is a vector of chess pieces at the start of a game:</p>
 <div class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>pieces <span class="op">=</span> np.hstack( [</span>
 <span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>    np.repeat(<span class="st">"pawn"</span>, <span class="dv">8</span>),</span>
@@ -1291,7 +1311,7 @@ Name: orange, dtype: object</code></pre>
 <span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>] )</span>
 <span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>pieces</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="132">
+<div class="cell-output cell-output-display" data-execution_count="65">
 <pre><code>array(['pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn', 'pawn',
        'knight', 'knight', 'bishop', 'bishop', 'rook', 'rook', 'queen',
        'king'], dtype='&lt;U6')</code></pre>
@@ -1300,15 +1320,27 @@ Name: orange, dtype: object</code></pre>
 <p>We can tell pandas to regard these strings as elements of a category set:</p>
 <div class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>pd.Categorical(pieces)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="133">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <pre><code>['pawn', 'pawn', 'pawn', 'pawn', 'pawn', ..., 'bishop', 'rook', 'rook', 'queen', 'king']
 Length: 16
 Categories (6, object): ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']</code></pre>
 </div>
 </div>
 <p>Notice above how the unique categories were found automatically.</p>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>For much more about pandas fundamentals, try the <a href="https://www.kaggle.com/learn/pandas">Kaggle course</a>.</p>
-</section>
+</div>
+</div>
 </section>
 <section id="data-preparation" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">1.5</span> Data preparation</h2>
@@ -1321,7 +1353,7 @@ Categories (6, object): ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']</c
 <div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="134">
+<div class="cell-output cell-output-display" data-execution_count="67">
 
 <div>
 
@@ -1397,7 +1429,7 @@ Categories (6, object): ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']</c
 <p>Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using <code>isna</code>:</p>
 <div class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>penguins.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="135">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>species               0
 island                0
 bill_length_mm        2
@@ -1472,11 +1504,7 @@ Tip
 <div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> pd.read_csv(<span class="st">"loan.csv"</span>)</span>
 <span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/gc/0752xrm56pnf0r0dsrn5370c0000gr/T/ipykernel_30838/3260967081.py:2: DtypeWarning: Columns (47) have mixed types. Specify dtype option on import or set low_memory=False.
-  loans = pd.read_csv("loan.csv")</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="137">
+<div class="cell-output cell-output-display" data-execution_count="70">
 
 <div>
 
@@ -1649,9 +1677,9 @@ Tip
 </div>
 </div>
 <div class="cell" data-execution_count="72">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>loans[<span class="st">"int_rate"</span>] <span class="op">=</span> loans[<span class="st">"int_rate"</span>].<span class="bu">str</span>.strip(<span class="st">'%'</span>).astype(<span class="bu">float</span>)</span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="138">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>loans[<span class="st">"int_rate"</span>] <span class="op">=</span> loans[<span class="st">"int_rate"</span>].<span class="bu">str</span>.strip(<span class="st">'%'</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="71">
 
 <div>
 
@@ -1811,16 +1839,16 @@ Tip
 </div>
 <p>Let’s add a column for the percentage of the loan request that was eventually funded. This will be a target for some of our learning methods.</p>
 <div class="cell" data-execution_count="73">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>loans[<span class="st">"percent_funded"</span>] <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> loans[<span class="st">"funded_amnt"</span>] <span class="op">/</span> loans[<span class="st">"loan_amnt"</span>]</span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> [<span class="st">"percent_funded"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>loans[<span class="st">"percent_funded"</span>] <span class="op">=</span> <span class="dv">100</span> <span class="op">*</span> loans[<span class="st">"funded_amnt"</span>] <span class="op">/</span> loans[<span class="st">"loan_amnt"</span>]</span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> [<span class="st">"percent_funded"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will only use a small subset of the numerical columns as features. Let’s verify that there are no missing values in those columns.</p>
 <div class="cell" data-execution_count="74">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [ <span class="st">"loan_amnt"</span>, <span class="st">"int_rate"</span>, <span class="st">"installment"</span>, <span class="st">"annual_inc"</span>,</span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dti"</span>, <span class="st">"delinq_2yrs"</span>, <span class="st">"delinq_amnt"</span> ]</span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> loans.loc[:, features <span class="op">+</span> target]</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>loans.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="140">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [ <span class="st">"loan_amnt"</span>, <span class="st">"int_rate"</span>, <span class="st">"installment"</span>, <span class="st">"annual_inc"</span>,</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dti"</span>, <span class="st">"delinq_2yrs"</span>, <span class="st">"delinq_amnt"</span> ]</span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> loans.loc[:, features <span class="op">+</span> target]</span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>loans.isna().<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
 <pre><code>loan_amnt         0
 int_rate          0
 installment       0
@@ -1847,17 +1875,17 @@ Note
 </div>
 <p>Finally, we’ll output this cleaned data frame to its own CSV file. The index row is an ID number that is meaningless to classification, so we will instruct pandas to exclude it from the new file:</p>
 <div class="cell" data-execution_count="75">
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>loans.to_csv(<span class="st">"loan_clean.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>loans.to_csv(<span class="st">"loan_clean.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="diamonds-example" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="diamonds-example"><span class="header-section-number">1.5.3</span> Diamonds example</h3>
 <p>We will also be using a seaborn <a href="https://ggplot2.tidyverse.org/reference/diamonds.html">dataset comprising features of diamonds and their prices</a>:</p>
 <div class="cell" data-execution_count="76">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> sns.load_dataset(<span class="st">"diamonds"</span>)</span>
-<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="142">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> sns.load_dataset(<span class="st">"diamonds"</span>)</span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
 
 <div>
 
@@ -1951,15 +1979,15 @@ Note
 <p>As you can see above, some of the features (cut, color, clarity) have string designations. However, these do have a specific ordering in this context. So we will replace the strings with the correct ordinal values.</p>
 <p>We start with the <em>cut</em> column:</p>
 <div class="cell" data-execution_count="77">
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> [<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>]</span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"cut"</span>].replace(</span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>    cuts,           <span class="co"># to be replaced</span></span>
-<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">5</span>),       <span class="co"># replacements</span></span>
-<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span>    <span class="co"># change the original frame, not a copy</span></span>
-<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> [<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>]</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"cut"</span>].replace(</span>
+<span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>    cuts,           <span class="co"># to be replaced</span></span>
+<span id="cb135-4"><a href="#cb135-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">5</span>),       <span class="co"># replacements</span></span>
+<span id="cb135-5"><a href="#cb135-5" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span>    <span class="co"># change the original frame, not a copy</span></span>
+<span id="cb135-6"><a href="#cb135-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb135-7"><a href="#cb135-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb135-8"><a href="#cb135-8" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
 
 <div>
 
@@ -2052,20 +2080,20 @@ Note
 </div>
 <p>Above, you see that the <em>cut</em> strings have been replaced by integers. Now we do the same for the other categories:</p>
 <div class="cell" data-execution_count="78">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"clarity"</span>].replace(</span>
-<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"I1"</span>, <span class="st">"SI2"</span>, <span class="st">"SI1"</span>, <span class="st">"VS2"</span>, <span class="st">"VS1"</span>, <span class="st">"VVS2"</span>, <span class="st">"VVS1"</span>, <span class="st">"IF"</span>],</span>
-<span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">8</span>),</span>
-<span id="cb137-4"><a href="#cb137-4" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span></span>
-<span id="cb137-5"><a href="#cb137-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb137-6"><a href="#cb137-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-7"><a href="#cb137-7" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"color"</span>].replace(</span>
-<span id="cb137-8"><a href="#cb137-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(<span class="st">"DEFGHIJ"</span>),</span>
-<span id="cb137-9"><a href="#cb137-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">7</span>),</span>
-<span id="cb137-10"><a href="#cb137-10" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span></span>
-<span id="cb137-11"><a href="#cb137-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb137-12"><a href="#cb137-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-13"><a href="#cb137-13" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="144">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"clarity"</span>].replace(</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"I1"</span>, <span class="st">"SI2"</span>, <span class="st">"SI1"</span>, <span class="st">"VS2"</span>, <span class="st">"VS1"</span>, <span class="st">"VVS2"</span>, <span class="st">"VVS1"</span>, <span class="st">"IF"</span>],</span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">8</span>),</span>
+<span id="cb136-4"><a href="#cb136-4" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span></span>
+<span id="cb136-5"><a href="#cb136-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb136-6"><a href="#cb136-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-7"><a href="#cb136-7" aria-hidden="true" tabindex="-1"></a>diamonds[<span class="st">"color"</span>].replace(</span>
+<span id="cb136-8"><a href="#cb136-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>(<span class="st">"DEFGHIJ"</span>),</span>
+<span id="cb136-9"><a href="#cb136-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">7</span>),</span>
+<span id="cb136-10"><a href="#cb136-10" aria-hidden="true" tabindex="-1"></a>    inplace<span class="op">=</span><span class="va">True</span></span>
+<span id="cb136-11"><a href="#cb136-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb136-12"><a href="#cb136-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-13"><a href="#cb136-13" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
 
 <div>
 
@@ -2158,7 +2186,7 @@ Note
 </div>
 <p>We’ll save this modified dataset to its own file for our future use:</p>
 <div class="cell" data-execution_count="79">
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>diamonds.to_csv(<span class="st">"diamonds.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>diamonds.to_csv(<span class="st">"diamonds.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -2312,6 +2340,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Data Science 1
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Toby Driscoll
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 
