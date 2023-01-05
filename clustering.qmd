@@ -557,7 +557,7 @@ def report(clustering):
         );
     return blobs 
 
-report(km2)
+report(km2);
 ```
 
 It's clear in both plots that cluster 0 is more tightly packed than cluster 1. Let's repeat the computation for $k=3$ clusters:
@@ -565,7 +565,7 @@ It's clear in both plots that cluster 0 is more tightly packed than cluster 1. L
 ```{python}
 km3 = KMeans(n_clusters=3, n_init="auto")
 km3.fit(X)
-report(km3)
+report(km3);
 ```
 
 This result shows a modest reduction in silhouette scores for original good cluster, but improvement for the problematic one.
@@ -575,7 +575,7 @@ Moving on to $k=4$ clusters shows clear degradation of the silhouette scores:
 ```{python}
 km4 = KMeans(n_clusters=4, n_init="auto")
 km4.fit(X)
-report(km4)
+report(km4);
 ```
 
 Based on silhouette scores, then, we would probably stop at $k=3$ clusters. 

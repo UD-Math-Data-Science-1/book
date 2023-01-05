@@ -270,7 +270,7 @@ A binary classifier is one that produces just two unique labels, which we call "
 
 The four cases correspond to a 2×2 table according to the states of the prediction and *ground truth*, which is the accepted correct value (i.e., the given label). The table can be filled with counts or percentages of tested instances, to create a **confusion matrix**, as illustrated in @fig-class-confusion. 
 
-![Confusion matrix](confusion.svg){fig-alt="A binary confusion matrix." #fig-class-confusion}
+![Confusion matrix](_media/confusion.png){fig-alt="A binary confusion matrix." height="240" #fig-class-confusion}
 
 `sklearn` makes it straightforward to compute a confusion matrix:
 
@@ -657,7 +657,7 @@ $$
 $$\infnorm{\bfx} = \max_i \abs{x_i}.$$
 
 
-The Euclidean norm generalizes ordinary geometric distance in $\real^2$ and $\real^3$ and is usually considered the default. One of its most important features is that $\twonorm{\bfx}^2$ is a differentiable function of the components of $\bfx%. 
+The Euclidean norm generalizes ordinary geometric distance in $\real^2$ and $\real^3$ and is usually considered the default. One of its most important features is that $\twonorm{\bfx}^2$ is a differentiable function of the components of $\bfx$. 
 
 :::{.callout-note}
 When $\norm{\,}$ is used with no subscript, it's usually meant to be the 2-norm, but sometimes it means a generic, unspecified norm.
@@ -681,7 +681,7 @@ import seaborn as sns
 import pandas as pd
 penguins = sns.load_dataset("penguins")
 penguins = penguins.dropna()
-penguins
+penguins.head(6)
 ```
 
 The data set has four quantitative columns that we use as features, and the species name is the label. 

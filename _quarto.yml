@@ -29,6 +29,7 @@ bibliography: references.bib
 
 execute: 
   cache: true
+  warning: false
   kernelspec:
     name: "python3"
     language: "python"
@@ -45,6 +46,11 @@ format:
   pdf:
     papersize: letter
     include-in-header: _macros.tex
+    geometry: 
+      - top=1.5in
+      - left=1.25in
+      - right=1.25in
+      - bottom=1.25in
     #   documentclass: scrreprt
 
 

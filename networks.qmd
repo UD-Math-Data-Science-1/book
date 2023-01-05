@@ -645,7 +645,7 @@ A few nodes in the network have hundreds of friends:
 
 ```{python}
 friend_counts = twitch_degrees.value_counts()  # histogram heights
-friend_counts.sort_index(ascending=False)
+friend_counts.sort_index(ascending=False).head(10)
 ```
 
 These "gregarious nodes" or *hubs* are characteristic of many social and other real-world networks.
@@ -852,7 +852,7 @@ Each term in the sum is less than or equal to 1, and the number of terms in the 
 ::::{#exm-networks-between-barbell}
 We will find the betweenness centrality of the following *barbell graph*:
 
-![Barbell graph](_media/barbell.svg){width="350"}
+![Barbell graph](_media/barbell.png){width="350"}
 
 Let's begin with node 3, in the middle. Any path, and therefore any shortest path, between nodes 0, 1, or 2 and nodes 4, 5, or 6 must pass through node 3, so these pairings each contribute 1 to the sum. The shortest paths for pairs of nodes within the end triangles clearly do not pass through node 3. Hence 
 
@@ -1260,8 +1260,6 @@ $$
 
 The value $x_i$ can be interpreted as the probability of membership in the community.
 
-+++
-
 Let's try looking for a community of node 0 in the WS graph above.
 
 ```{python}
@@ -1284,8 +1282,6 @@ x /= np.sum(x)  # normalize to probability distribution
 ```
 
 The probabilities tend to be distributed logarithmically:
-
-+++
 
 In the following rendering, any node $i$ with a value of $x_i < 10^{-2}$ gets a node size of 0. (You can ignore the warning below. It happens because we have negative node sizes.)
 
@@ -1342,9 +1338,9 @@ For each graph, give the number of nodes, the number of edges, and the average d
 
 **(a)** The complete graph $K_6$.
 
-**(b)** ![](_media/nws.svg "NWS graph"){width="380"}
+**(b)** ![](_media/nws.png "NWS graph"){width="380"}
 
-**(c)** ![](_media/ladder.svg "Ladder graph"){width="380"}
+**(c)** ![](_media/ladder.png "Ladder graph"){width="380"}
 ::::
 
 ::::{#exr-networks-adjmat}
@@ -1354,7 +1350,7 @@ Give the adjacency matrix for the graphs in @exr-networks-basic (parts (a) and (
 ::::{#exr-networks-ego}
 For the graph below, draw the ego graph of **(a)** node 4 and **(b)** node 8.
 
-![](_media/ba.svg "BA graph"){width="380" fig-align="center"}
+![](_media/ba.png "BA graph"){width="380" fig-align="center"}
 ::::
 
 ::::{#exr-networks-erprob}
@@ -1376,7 +1372,7 @@ Explain why $\mathbf{d}$ is the vector whose components are the degrees of the n
 ::::{#exr-networks-centrality}
 Find **(a)** the clustering coefficient and **(b)** the betweenness centrality for each node in the following graph:
 
-![](_media/lolly.svg "lollipop graph"){width="380" fig-align="center"}
+![](_media/lolly.png "lollipop graph"){width="380" fig-align="center"}
 ::::
 
 ::::{#exr-networks-centrality-star}

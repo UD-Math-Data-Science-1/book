@@ -364,7 +364,7 @@ Here we load data about advertising spending on different media in many markets:
 
 ```{python}
 ads = pd.read_csv("advertising.csv")
-ads
+ads.head(8)
 ```
 
 Pairwise scatter plots yield some hints about what to expect from this dataset:
@@ -625,7 +625,7 @@ We'll apply regularized regression to data collected about the progression of di
 
 ```{python}
 diabetes = datasets.load_diabetes(as_frame=True)["frame"]
-diabetes
+diabetes.head(10)
 ```
 
 The features in this dataset were standardized, making it easy to compare the magnitudes of the regression coefficients. 
@@ -1042,7 +1042,7 @@ We will try logistic regression for a simple spam filter. The data set is based 
 
 ```{python}
 spam = pd.read_csv("spambase.csv")
-spam
+spam.head()
 ```
 
 We create a feature matrix and label vector, and split into train/test sets:
@@ -1157,7 +1157,7 @@ We can now look at probabilistic predictions for each class:
 ```{python}
 p_hat = pipe.predict_proba(X_te)
 cols = ["Class "+str(i) for i in range(1,7)]
-pd.DataFrame(p_hat, columns=cols)
+pd.DataFrame(p_hat, columns=cols).head(10)
 ```
 
 This allows us to see that the ROC curves are nearly perfect:
@@ -1166,9 +1166,9 @@ results = []
 for i, label in enumerate(pipe.classes_):
     actual = (y_te==label)
     fp, tp, theta = roc_curve(actual, p_hat[:,i])
-    results.extend( [(label,fp,tp) for fp,tp in zip(fp,tp)] )
+    results.extend( [ (label,fp,tp) for fp,tp in zip(fp,tp) ] )
 
-roc = pd.DataFrame( results, columns=["label","FP rate","TP rate"] )
+roc = pd.DataFrame( results, columns=["label", "FP rate", "TP rate"] )
 sns.relplot(data=roc, 
     x="FP rate", y="TP rate", 
     hue="label", kind="line", estimator=None
@@ -1235,7 +1235,7 @@ Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAD-
 ::::{#exr-regression-lattice-values}
 Here are values on an integer lattice.
 
-![](_media/griddata.svg)
+![](_media/griddata.png)
 
 Let $\hat{f}(x_1,x_2)$ be a kNN regressor with $k=4$, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of $\hat{f}$ along the given line.
 
@@ -1251,7 +1251,7 @@ Let $\hat{f}(x_1,x_2)$ be a kNN regressor with $k=4$, Euclidean metric, and mean
 ::::{#exr-regression-lattice-colors}
 Here are blue/orange labels on an integer lattice.
 
-![](_media/gridlabels.svg)
+![](_media/gridlabels.png)
 
 Let $\hat{f}(x_1,x_2)$ be a kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of the probability of the blue class along the given line.
 
