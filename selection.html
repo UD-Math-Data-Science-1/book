@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./regression.html" rel="next">
 <link href="./classification.html" rel="prev">
-<link href="./favicon.ico" rel="icon">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -160,6 +160,9 @@ MathJax = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -264,6 +267,7 @@ MathJax = {
 
 </header>
 
+<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -312,6 +316,7 @@ MathJax = {
     \newcommand{\Cov}{\operatorname{Cov}}
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
+</div>
 </div>
 <div class="cell" data-execution_count="2">
 <details>
@@ -571,7 +576,7 @@ Danger
 </section>
 <section id="overfitting-in-decision-trees" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="overfitting-in-decision-trees"><span class="header-section-number">4.2.2</span> Overfitting in decision trees</h3>
-<p>As mentioned in <a href="#exm-select-hyper">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-hyper</span></a>, the depth of a decision tree correlates with its ability to parse the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. With noisy data, we see clear signs of overfitting:</p>
+<p>As mentioned in <a href="#exm-select-hyper">Example&nbsp;<span>4.1</span></a>, the depth of a decision tree correlates with its ability to parse the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. With noisy data, we see clear signs of overfitting:</p>
 <div class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center anchored">
@@ -607,9 +612,9 @@ Danger
 </section>
 <section id="overfitting-and-variance" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="overfitting-and-variance"><span class="header-section-number">4.2.3</span> Overfitting and variance</h3>
-<p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy">Figure&nbsp;<span class="quarto-unresolved-ref">fig-select-knn-1-noisy</span></a>, and <a href="#fig-select-tree-6-noisy">Figure&nbsp;<span class="quarto-unresolved-ref">fig-select-tree-6-noisy</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in <a href="#sec-select-learning-curves"><span class="quarto-unresolved-ref">sec-select-learning-curves</span></a>.</p>
+<p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy">Figure&nbsp;<span>4.2</span></a>, and <a href="#fig-select-tree-6-noisy">Figure&nbsp;<span>4.5</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in <a href="#sec-select-learning-curves"><span>Section&nbsp;4.1</span></a>.</p>
 <div id="exm-select-overfit-forest" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4.3 </strong></span>Returning to the forest data from <a href="#exm-select-learning-curves">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-learning-curves</span></a>, we try decision trees of maximum depth <span class="math inline">\(r=12\)</span> on 100 random training subsets of size 5000:</p>
+<p><span class="theorem-title"><strong>Example 4.3 </strong></span>Returning to the forest data from <a href="#exm-select-learning-curves">Example&nbsp;<span>4.2</span></a>, we try decision trees of maximum depth <span class="math inline">\(r=12\)</span> on 100 random training subsets of size 5000:</p>
 <div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
@@ -660,7 +665,7 @@ Danger
 </div>
 <p>However, notice above that the testing error increased substantially from the overfit case.</p>
 </div>
-<p>We could say that the last tree in <a href="#exm-select-overfit-forest">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-overfit-forest</span></a> is actually <em>underfit</em> to the data: the behavior of the data is probably too complex to be replicated well by such a shallow tree. We have encountered the bias–variance tradeoff again.</p>
+<p>We could say that the last tree in <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a> is actually <em>underfit</em> to the data: the behavior of the data is probably too complex to be replicated well by such a shallow tree. We have encountered the bias–variance tradeoff again.</p>
 </section>
 </section>
 <section id="ensemble-methods" class="level2" data-number="4.3">
@@ -868,7 +873,7 @@ Danger
 </div>
 </div>
 <div id="exm-select-ensemble-forest" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4.5 </strong></span>Let’s return to the experiment of <a href="#exm-select-overfit-forest">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-overfit-forest</span></a>, where we found that a decision tree of depth <span class="math inline">\(r=12\)</span> was badly overfit. Now we use an ensemble of 50 such trees:</p>
+<p><span class="theorem-title"><strong>Example 4.5 </strong></span>Let’s return to the experiment of <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a>, where we found that a decision tree of depth <span class="math inline">\(r=12\)</span> was badly overfit. Now we use an ensemble of 50 such trees:</p>
 <div class="cell" data-execution_count="22">
 <details>
 <summary>Code</summary>
@@ -890,7 +895,7 @@ Danger
 <p><img src="selection_files/figure-html/cell-22-output-1.png" width="556" height="468"></p>
 </div>
 </div>
-<p>Compared to the earlier experiment (see <a href="#fig-select-overfit-forest">Figure&nbsp;<span class="quarto-unresolved-ref">fig-select-overfit-forest</span></a>), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias.</p>
+<p>Compared to the earlier experiment (see <a href="#fig-select-overfit-forest">Figure&nbsp;<span>4.8</span></a>), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias.</p>
 </div>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -902,7 +907,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An ensemble of decision trees is known as a <strong>random forest</strong>. We could have used a <code>RandomForestClassifier</code> to accomplish the bagged decision tree ensemble in <a href="#exm-select-ensemble-forest">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-ensemble-forest</span></a>.</p>
+<p>An ensemble of decision trees is known as a <strong>random forest</strong>. We could have used a <code>RandomForestClassifier</code> to accomplish the bagged decision tree ensemble in <a href="#exm-select-ensemble-forest">Example&nbsp;<span>4.5</span></a>.</p>
 </div>
 </div>
 <p>In addition to training on random subsets of the data, a bagging classifier can use random subsets of features (i.e., dimensions). The purpose again is to increase the diversity of the individual estimators in order to make the ensemble more robust.</p>

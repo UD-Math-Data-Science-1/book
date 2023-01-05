@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./networks.html" rel="next">
 <link href="./regression.html" rel="prev">
-<link href="./favicon.ico" rel="icon">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -162,6 +162,9 @@ MathJax = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -273,6 +276,7 @@ MathJax = {
 
 </header>
 
+<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -321,6 +325,7 @@ MathJax = {
     \newcommand{\Cov}{\operatorname{Cov}}
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
+</div>
 </div>
 <div class="cell" data-execution_count="2">
 <details>
@@ -1984,7 +1989,7 @@ Name: species, dtype: int64</code></pre>
 Name: single, dtype: int64</code></pre>
 </div>
 </div>
-<p>As we saw with the toy datasets in <a href="#exm-cluster-linkage">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-linkage</span></a>, the single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
+<p>As we saw with the toy datasets in <a href="#exm-cluster-linkage">Example&nbsp;<span>7.13</span></a>, the single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
 <div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>ARI <span class="op">=</span> adjusted_rand_score(penguins[<span class="st">"species"</span>],penguins[<span class="st">"single"</span>])</span>

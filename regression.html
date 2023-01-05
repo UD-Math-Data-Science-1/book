@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./clustering.html" rel="next">
 <link href="./selection.html" rel="prev">
-<link href="./favicon.ico" rel="icon">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -162,6 +162,9 @@ MathJax = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -277,6 +280,7 @@ MathJax = {
 
 </header>
 
+<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -325,6 +329,7 @@ MathJax = {
     \newcommand{\Cov}{\operatorname{Cov}}
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
+</div>
 </div>
 <div class="cell" data-execution_count="2">
 <details>
@@ -433,7 +438,7 @@ Note
 <p>There is an important link between the dot product and the 2-norm: <span id="eq-regression-hilbert"><span class="math display">\[
 \bfu^T \bfu = \sum_{i=1}^d u_i^2 = \twonorm{\bfu}^2.
 \tag{5.3}\]</span></span></p>
-<p>The equations in <a href="#eq-regression-linear1d">Equation&nbsp;<span class="quarto-unresolved-ref">eq-regression-linear1d</span></a> may now be written as <span id="eq-regression-linear1d-dot"><span class="math display">\[
+<p>The equations in <a href="#eq-regression-linear1d">Equation&nbsp;<span>5.1</span></a> may now be written as <span id="eq-regression-linear1d-dot"><span class="math display">\[
 \begin{split}
     a \left(\bfx^T \bfx\right) + b \left(\bfx^T\bfe\right) &amp;= \bfx^T\bfy, \\
     a \left(\bfe^T \bfx\right) + b \left(\bfe^T\bfe\right) &amp;= \bfe^T\bfy.
@@ -490,7 +495,7 @@ R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\di
 </ol>
 <p>The notation is <em>highly</em> unfortunate, though, because for other regression methods, <span class="math inline">\(R^2\)</span> can actually be negative! Such a result indicates that the predictor is doing worse than just predicting the mean value every time.</p>
 <div id="exm-regression-cod" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.2 </strong></span>Let’s find the coefficient of determination for the fit in <a href="#exm-regression-linear">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-linear</span></a>, where we found the regressor <span class="math inline">\(\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}\)</span>. Now <span class="math inline">\(\bar{y} = \frac{1}{3}(0+2+3)=\frac{5}{3}\)</span>, and</p>
+<p><span class="theorem-title"><strong>Example 5.2 </strong></span>Let’s find the coefficient of determination for the fit in <a href="#exm-regression-linear">Example&nbsp;<span>5.1</span></a>, where we found the regressor <span class="math inline">\(\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}\)</span>. Now <span class="math inline">\(\bar{y} = \frac{1}{3}(0+2+3)=\frac{5}{3}\)</span>, and</p>
 <p><span class="math display">\[
 \begin{split}
     \sum_{i=1}^m \sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2 &amp;= \left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{19}{6}\right)^2 = \frac{1}{6}, \\
@@ -1831,7 +1836,7 @@ Name: y, dtype: float64</code></pre>
 </div>
 </div>
 <div id="exm-regression-tree-demo" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.7 </strong></span>Continuing with the data from <a href="#exm-regression-knn-demo">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-knn-demo</span></a>, we find that we can do even better with a random forest of decision tree regressors:</p>
+<p><span class="theorem-title"><strong>Example 5.7 </strong></span>Continuing with the data from <a href="#exm-regression-knn-demo">Example&nbsp;<span>5.4</span></a>, we find that we can do even better with a random forest of decision tree regressors:</p>
 <div class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars[features]</span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">"mpg"</span>]</span>
@@ -1887,7 +1892,7 @@ p \approx \sigma(\bfx^T\bfw).
 \sum_{i=1}^n \left( \hat{p}_i - y_i \right)^2.
 \]</span> For binary classification, however, it’s more common to use the <strong>cross-entropy</strong> loss function <span id="eq-regression-cross-entropy"><span class="math display">\[
 L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \right].
-\tag{5.7}\]</span></span> (The logarithms in <a href="#eq-regression-cross-entropy">Equation&nbsp;<span class="quarto-unresolved-ref">eq-regression-cross-entropy</span></a> can be in any base, since that choice only affects <span class="math inline">\(L\)</span> by a constant factor.) In cross-entropy loss, sample <span class="math inline">\(i\)</span> contributes <span class="math display">\[
+\tag{5.7}\]</span></span> (The logarithms in <a href="#eq-regression-cross-entropy">Equation&nbsp;<span>5.7</span></a> can be in any base, since that choice only affects <span class="math inline">\(L\)</span> by a constant factor.) In cross-entropy loss, sample <span class="math inline">\(i\)</span> contributes <span class="math display">\[
 -\log(1-\hat{p}_i)
 \]</span> if <span class="math inline">\(y_i=0\)</span>, which becomes infinite as <span class="math inline">\(\hat{p}_i\to 1^-\)</span>, and <span class="math display">\[
 -\log(\hat{p}_i)
@@ -2302,7 +2307,7 @@ probabilities:
  [0.93740669 0.06259331]]</code></pre>
 </div>
 </div>
-<p>The probabilities might be useful for making decisions based on the results. For example, the first instance above was much less certain about the classification than the second. A more skeptical threshold greater than <span class="math inline">\(0.54\)</span> would change the class to 1. As in <a href="#sec-class-quant"><span class="quarto-unresolved-ref">sec-class-quant</span></a>, the probability matrix can be used to create an ROC curve showing the tradeoffs over all thresholds.</p>
+<p>The probabilities might be useful for making decisions based on the results. For example, the first instance above was much less certain about the classification than the second. A more skeptical threshold greater than <span class="math inline">\(0.54\)</span> would change the class to 1. As in <a href="classification.html#sec-class-quant"><span>Section&nbsp;3.5</span></a>, the probability matrix can be used to create an ROC curve showing the tradeoffs over all thresholds.</p>
 <p>For a validation-based selection of the best regularization parameter value, we can use <code>LogisticRegressionCV</code>, which is a convenience method for a grid search. You can specify which values of <span class="math inline">\(C\)</span> to search over, or just say how many, as we do here:</p>
 <div class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegressionCV</span>
@@ -2510,10 +2515,10 @@ accuracy score: 0.93485</code></pre>
 <p><span class="theorem-title"><strong>Exercise 5.1 </strong></span>Suppose that the distinct plane points <span class="math inline">\((x_i,y_i)\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit using a linear function without intercept, <span class="math inline">\(\hat{f}(x)=\alpha x\)</span>. Use calculus to find a formula for the value of <span class="math inline">\(\alpha\)</span> that minimizes the sum of squared residuals, <span class="math display">\[ r = \sum_{i=1}^n (f(x_i)-y_i)^2. \]</span></p>
 </div>
 <div id="exr-regression-combination" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.2 </strong></span>Suppose that <span class="math inline">\(x_1=-2\)</span>, <span class="math inline">\(x_2=1\)</span>, and <span class="math inline">\(x_3=2\)</span>. Define <span class="math inline">\(\alpha\)</span> as in <a href="#exr-regression-no-intercept">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-regression-no-intercept</span></a>, and define the predicted values <span class="math inline">\(\hat{y}_k=\alpha x_k\)</span> for <span class="math inline">\(k=1,2,3\)</span>. Express each <span class="math inline">\(\hat{y}_k\)</span> as a combination of the three values <span class="math inline">\(y_1\)</span>, <span class="math inline">\(y_2\)</span>, and <span class="math inline">\(y_3\)</span>, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)</p>
+<p><span class="theorem-title"><strong>Exercise 5.2 </strong></span>Suppose that <span class="math inline">\(x_1=-2\)</span>, <span class="math inline">\(x_2=1\)</span>, and <span class="math inline">\(x_3=2\)</span>. Define <span class="math inline">\(\alpha\)</span> as in <a href="#exr-regression-no-intercept">Exercise&nbsp;<span>5.1</span></a>, and define the predicted values <span class="math inline">\(\hat{y}_k=\alpha x_k\)</span> for <span class="math inline">\(k=1,2,3\)</span>. Express each <span class="math inline">\(\hat{y}_k\)</span> as a combination of the three values <span class="math inline">\(y_1\)</span>, <span class="math inline">\(y_2\)</span>, and <span class="math inline">\(y_3\)</span>, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)</p>
 </div>
 <div id="exr-regression-means" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.3 </strong></span>Using the formulas derived in <a href="#sec-regression-linear"><span class="quarto-unresolved-ref">sec-regression-linear</span></a>, show that the point <span class="math inline">\((\bar{x},\bar{y})\)</span> always lies on the linear regression line. (Hint: You only have to show that <span class="math inline">\(f(\bar{x}) = \bar{y}\)</span>. This can be done without first solving for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, which is a bit tedious to write out.)</p>
+<p><span class="theorem-title"><strong>Exercise 5.3 </strong></span>Using the formulas derived in <a href="#sec-regression-linear"><span>Section&nbsp;5.1</span></a>, show that the point <span class="math inline">\((\bar{x},\bar{y})\)</span> always lies on the linear regression line. (Hint: You only have to show that <span class="math inline">\(f(\bar{x}) = \bar{y}\)</span>. This can be done without first solving for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, which is a bit tedious to write out.)</p>
 </div>
 <div id="exr-regression-two-features" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.4 </strong></span>Suppose that values <span class="math inline">\(y_i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit to features <span class="math inline">\((u_i,v_i)\)</span> using a multilinear function <span class="math inline">\(f(u,v)=\alpha u + \beta v\)</span>. Define the sum of squared residuals <span class="math display">\[
@@ -2525,11 +2530,11 @@ r = \sum_{i=1}^n (f(u_i,v_i)-y_i)^2.
 \end{split}
 \]</span></p>
 </div>
-<p>::::{#exr-regression-regular-no-intercept} Repeat <a href="#exr-regression-no-intercept">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-regression-no-intercept</span></a>, but using the regularized residual <span class="math display">\[
+<p>::::{#exr-regression-regular-no-intercept} Repeat <a href="#exr-regression-no-intercept">Exercise&nbsp;<span>5.1</span></a>, but using the regularized residual <span class="math display">\[
 \tilde{r} = C \alpha^2 + \sum_{i=1}^n (f(x_i)-y_i)^2.
 \]</span></p>
 <div id="exr-regression-regular-two-features" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.5 </strong></span>Repeat <a href="#exr-regression-two-features">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-regression-two-features</span></a>, but using the regularized residual <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 5.5 </strong></span>Repeat <a href="#exr-regression-two-features">Exercise&nbsp;<span>5.4</span></a>, but using the regularized residual <span class="math display">\[
 \tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n (f(u_i,v_i)-y_i)^2.
 \]</span></p>
 </div>

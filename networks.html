@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./clustering.html" rel="prev">
-<link href="./favicon.ico" rel="icon">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -159,6 +159,9 @@ MathJax = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -283,6 +286,7 @@ MathJax = {
 
 </header>
 
+<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -331,6 +335,7 @@ MathJax = {
     \newcommand{\Cov}{\operatorname{Cov}}
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
+</div>
 </div>
 <div class="cell" data-execution_count="2">
 <details>
@@ -2013,7 +2018,7 @@ $$
 <p><strong>(c)</strong> <img src="_media/ladder.svg" title="Ladder graph" class="img-fluid" width="380"></p>
 </div>
 <div id="exr-networks-adjmat" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.2 </strong></span>Give the adjacency matrix for the graphs in <a href="#exr-networks-basic">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-networks-basic</span></a> (parts (a) and (b) only).</p>
+<p><span class="theorem-title"><strong>Exercise 7.2 </strong></span>Give the adjacency matrix for the graphs in <a href="#exr-networks-basic">Exercise&nbsp;<span>7.1</span></a> (parts (a) and (b) only).</p>
 </div>
 <div id="exr-networks-ego" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.3 </strong></span>For the graph below, draw the ego graph of <strong>(a)</strong> node 4 and <strong>(b)</strong> node 8.</p>
@@ -2027,7 +2032,7 @@ $$
 <p><span class="theorem-title"><strong>Exercise 7.4 </strong></span>To construct an Erdős-Rényi graph on 25 nodes with expected average degree 8, what should the edge inclusion probability <span class="math inline">\(p\)</span> be?</p>
 </div>
 <div id="exr-networks-diam" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.5 </strong></span>Find the diameters of the graphs in <a href="#exr-networks-basic">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-networks-basic</span></a>.</p>
+<p><span class="theorem-title"><strong>Exercise 7.5 </strong></span>Find the diameters of the graphs in <a href="#exr-networks-basic">Exercise&nbsp;<span>7.1</span></a>.</p>
 </div>
 <div id="exr-networks-degree-vector" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.6 </strong></span>Suppose that <span class="math inline">\(\bfA\)</span> is the adjacency matrix of an undirected graph on <span class="math inline">\(n\)</span> nodes. Let <span class="math inline">\(\boldsymbol{1}\)</span> be the <span class="math inline">\(n\)</span>-vector whose components all equal 1, and let <span class="math display">\[
@@ -2060,7 +2065,7 @@ $$
 \]</span> is an eigenvector of the adjacency matrix, where the central node corresponds to the first element of the vector.</p>
 </div>
 <div id="exr-networks-friendship" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.12 </strong></span>Prove the friendship paradox, i.e., inequality <a href="#eq-networks-friendship-paradox">Equation&nbsp;<span class="quarto-unresolved-ref">eq-networks-friendship-paradox</span></a>. (Hint: Start with <a href="#eq-clustering-angle">Equation&nbsp;<span class="quarto-unresolved-ref">eq-clustering-angle</span></a> using <span class="math inline">\(\bfu=\mathbf{d}\)</span> and <span class="math inline">\(\bfv\)</span> equal to a vector of all ones. Convert from equality to inequality to get rid of the angle <span class="math inline">\(\theta\)</span>. Simplify the inner product, square both sides, and show that it can be rearranged into <a href="#eq-networks-friendship-paradox">Equation&nbsp;<span class="quarto-unresolved-ref">eq-networks-friendship-paradox</span></a>.)</p>
+<p><span class="theorem-title"><strong>Exercise 7.12 </strong></span>Prove the friendship paradox, i.e., inequality <a href="#eq-networks-friendship-paradox">Equation&nbsp;<span>7.1</span></a>. (Hint: Start with <a href="clustering.html#eq-clustering-angle">Equation&nbsp;<span>7.1</span></a> using <span class="math inline">\(\bfu=\mathbf{d}\)</span> and <span class="math inline">\(\bfv\)</span> equal to a vector of all ones. Convert from equality to inequality to get rid of the angle <span class="math inline">\(\theta\)</span>. Simplify the inner product, square both sides, and show that it can be rearranged into <a href="#eq-networks-friendship-paradox">Equation&nbsp;<span>7.1</span></a>.)</p>
 </div>
 
 

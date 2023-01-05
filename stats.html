@@ -95,7 +95,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./classification.html" rel="next">
 <link href="./data.html" rel="prev">
-<link href="./favicon.ico" rel="icon">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -160,6 +160,9 @@ MathJax = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -285,6 +288,7 @@ MathJax = {
 
 </header>
 
+<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -333,6 +337,7 @@ MathJax = {
     \newcommand{\Cov}{\operatorname{Cov}}
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
+</div>
 </div>
 <p>When confronted with a new dataset, it’s wise to get a sense of its characteristics before attempting to draw conclusions or predictions from it.</p>
 <p>One of the fastest ways to become familiar with a data set is to visualize it. Python has many graphics packages with different niches. The most widespread is <strong>Matplotlib</strong>, which is fairly low-level in the sense that you must explicitly specify most aspects of how the plots will look.</p>
@@ -571,12 +576,12 @@ Danger
 <section id="populations-and-samples" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="populations-and-samples"><span class="header-section-number">2.1.3</span> Populations and samples</h3>
 <p>In statistics one refers to the <strong>population</strong> as the entire universe of available values. Thus, the ages of everyone on Earth at some instant has a particular mean and standard deviation. However, in order to estimate those values, we can only measure a <strong>sample</strong> of the population directly.</p>
-<p>When <a href="#eq-stats-mean">Equation&nbsp;<span class="quarto-unresolved-ref">eq-stats-mean</span></a> is used to compute the mean of a sample rather than a population, we change the notation a bit as a reminder:</p>
+<p>When <a href="#eq-stats-mean">Equation&nbsp;<span>2.1</span></a> is used to compute the mean of a sample rather than a population, we change the notation a bit as a reminder:</p>
 <p><span id="eq-stats-mean-sample"><span class="math display">\[
 \bar{x} = \frac{1}{n}\sum_{i=1}^n x_i.
 \tag{2.3}\]</span></span></p>
 <p>It can be proved that the sample mean is an accurate way to estimate the population mean, in a particular precise sense. If, in a thought experiment, we could average <span class="math inline">\(\bar{x}\)</span> over all possible samples of size <span class="math inline">\(n\)</span>, the result would be exactly the population mean <span class="math inline">\(\mu\)</span>. We say that <span class="math inline">\(\bar{x}\)</span> is an <strong>unbiased estimator</strong> for <span class="math inline">\(\mu\)</span>.</p>
-<p>The sample mean in turn can be used within <a href="#eq-stats-var">Equation&nbsp;<span class="quarto-unresolved-ref">eq-stats-var</span></a> to compute <strong>sample variance</strong>:</p>
+<p>The sample mean in turn can be used within <a href="#eq-stats-var">Equation&nbsp;<span>2.2</span></a> to compute <strong>sample variance</strong>:</p>
 <p><span class="math display">\[
 s_n^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2.
 \]</span></p>
@@ -652,7 +657,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In statistics, <a href="#eq-stats-t-score">Equation&nbsp;<span class="quarto-unresolved-ref">eq-stats-t-score</span></a> is referred to as a <em>t-score</em>, and the term <em>sample z-score</em> is not common. In data science practice, however, the sample sizes are usually so large that the difference between z-scores and t-scores is rarely important. Most sources just use the term <em>z-score</em> indiscriminately.</p>
+<p>In statistics, <a href="#eq-stats-t-score">Equation&nbsp;<span>2.5</span></a> is referred to as a <em>t-score</em>, and the term <em>sample z-score</em> is not common. In data science practice, however, the sample sizes are usually so large that the difference between z-scores and t-scores is rarely important. Most sources just use the term <em>z-score</em> indiscriminately.</p>
 </div>
 </div>
 </section>
@@ -693,7 +698,7 @@ t,&amp; 0 \le t \le 1, \\
 </div>
 </div>
 </div>
-<p>As illustrated in <a href="#exm-data-uniform-cdf">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-uniform-cdf</span></a>, the ECDF is a piecewise constant function because it jumps at each observed value. It is also <em>monotone</em>, in the sense that it never decreases going from left to right.</p>
+<p>As illustrated in <a href="#exm-data-uniform-cdf">Example&nbsp;<span>2.2</span></a>, the ECDF is a piecewise constant function because it jumps at each observed value. It is also <em>monotone</em>, in the sense that it never decreases going from left to right.</p>
 <p>By definition, we know that if <span class="math inline">\(a&lt;b\)</span>, <span class="math inline">\(\hat{F}(b) - \hat{F}(a)\)</span> is the number of observations in the half-open interval <span class="math inline">\((a,b]\)</span>. This leads into the next definition.</p>
 <div id="def-data-histogram" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.3 </strong></span>Select the ordered values <span class="math inline">\(t_1 &lt; t_2 &lt; \cdots &lt; t_m\)</span>, called <strong>edges</strong>, and define <strong>bins</strong> as the intervals <span class="math display">\[
@@ -701,7 +706,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 \]</span> where we adopt the convention that <span class="math inline">\(t_0=-\infty\)</span> and <span class="math inline">\(t_{m+1}=\infty\)</span>. Let <span class="math inline">\(c_k\)</span> be the number of data values in <span class="math inline">\(B_k\)</span>. Then a <strong>histogram</strong> relative to the bins is the list of <span class="math inline">\((B_0,c_0),\ldots,(B_m,c_m)\)</span>.</p>
 </div>
 <div id="exm-data-uniform-hist" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2.3 </strong></span>Continuing with the uniform distribution of <a href="#exm-data-uniform-cdf">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-uniform-cdf</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 2.3 </strong></span>Continuing with the uniform distribution of <a href="#exm-data-uniform-cdf">Example&nbsp;<span>2.2</span></a>:</p>
 <div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">200</span>,) )</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -719,15 +724,15 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 <p>The areas of the histograms above sum to 1. This presentation can be useful when comparing sets with widely varying numbers of observations.</p>
 </div>
-<p>An alternative normalization to the one in <a href="#exm-data-uniform-hist">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-uniform-hist</span></a> is to divide by the bin widths: <span id="eq-data-pdf"><span class="math display">\[
+<p>An alternative normalization to the one in <a href="#exm-data-uniform-hist">Example&nbsp;<span>2.3</span></a> is to divide by the bin widths: <span id="eq-data-pdf"><span class="math display">\[
 \frac{c_k}{t_{k+1}-t_k} = \frac{\hat{F}(t_{k+1})-\hat{F}(t_k)}{t_{k+1}-t_k}.
-\tag{2.7}\]</span></span> Perhaps you see where this is going next. If we let the number of observations tend to infinity, then <span class="math inline">\(\hat{F}\)</span> will converge to <span class="math inline">\(F\)</span>, and if we also let the number of bins go to infinity, then the fraction in <a href="#eq-data-pdf">Equation&nbsp;<span class="quarto-unresolved-ref">eq-data-pdf</span></a> converges to <span class="math inline">\(F'(t_k)\)</span>.</p>
+\tag{2.7}\]</span></span> Perhaps you see where this is going next. If we let the number of observations tend to infinity, then <span class="math inline">\(\hat{F}\)</span> will converge to <span class="math inline">\(F\)</span>, and if we also let the number of bins go to infinity, then the fraction in <a href="#eq-data-pdf">Equation&nbsp;<span>2.7</span></a> converges to <span class="math inline">\(F'(t_k)\)</span>.</p>
 <div id="def-data-pdf" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.4 </strong></span>The <strong>probability density function</strong> or PDF of a variable is the derivative of its CDF.</p>
 </div>
 <p>Seaborn uses a process called <em>kernel density estimation</em> to plot an estimate of the PDF from empirical data.</p>
 <div id="exm-data-uniform-pdf" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2.4 </strong></span>Continuing with the uniform distribution of <a href="#exm-data-uniform-cdf">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-uniform-cdf</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 2.4 </strong></span>Continuing with the uniform distribution of <a href="#exm-data-uniform-cdf">Example&nbsp;<span>2.2</span></a>:</p>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">4000</span>,) )</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x, kind<span class="op">=</span><span class="st">"kde"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1197,7 +1202,7 @@ Name: origin, dtype: int64</code></pre>
 </section>
 <section id="aggregation" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="aggregation"><span class="header-section-number">2.3.2</span> Aggregation</h3>
-<p>Groups defined by <code>groupby</code> can then be passed through <em>aggregators</em> that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in <a href="#tbl-stats-agg">Table&nbsp;<span class="quarto-unresolved-ref">tbl-stats-agg</span></a>.</p>
+<p>Groups defined by <code>groupby</code> can then be passed through <em>aggregators</em> that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in <a href="#tbl-stats-agg">Table&nbsp;<span>2.1</span></a>.</p>
 <div id="tbl-stats-agg" class="anchored">
 <table class="table">
 <caption>Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.</caption>
@@ -2711,7 +2716,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p><span class="theorem-title"><strong>Definition 2.11 </strong></span>The <strong>Spearman coefficient</strong> of two series of equal length is the Pearson coefficient of their rank series.</p>
 </div>
 <div id="exm-stats-spearman-outlier" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2.13 </strong></span>Returning to <a href="#exm-stats-pearson-outlier">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-pearson-outlier</span></a>, we find the Spearman coefficient is barely affected by the single outlier:</p>
+<p><span class="theorem-title"><strong>Example 2.13 </strong></span>Returning to <a href="#exm-stats-pearson-outlier">Example&nbsp;<span>2.12</span></a>, we find the Spearman coefficient is barely affected by the single outlier:</p>
 <div class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">20</span>) )</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
@@ -3292,7 +3297,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p><strong>(b)</strong> Show that <span class="math inline">\(\displaystyle \sum_{i=1}^n z_i^2 = n-1.\)</span></p>
 </div>
 <div id="exr-stats-outlier" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>For the sample set in <a href="#exr-stats-summary">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-stats-summary</span></a>, find a value <span class="math inline">\(N\)</span> such that if <span class="math inline">\(n&gt;N\)</span>, there is at least one outlier according to the 2σ criterion.</p>
+<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>For the sample set in <a href="#exr-stats-summary">Exercise&nbsp;<span>2.1</span></a>, find a value <span class="math inline">\(N\)</span> such that if <span class="math inline">\(n&gt;N\)</span>, there is at least one outlier according to the 2σ criterion.</p>
 </div>
 <div id="exr-stats-outlier-iqr" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.4 </strong></span>Define a population by</p>
@@ -3329,7 +3334,7 @@ r_1(x_1) &gt; r_1(x_2) &gt; \cdots &gt; r_1(x_k) &lt; r_1(x_{k+1}) &lt; \cdots &
 \]</span></p>
 </div>
 <div id="exr-stats-pearson-z" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.7 </strong></span>Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: See <a href="#exr-stats-z-scores">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-stats-z-scores</span></a>.)</p>
+<p><span class="theorem-title"><strong>Exercise 2.7 </strong></span>Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: See <a href="#exr-stats-z-scores">Exercise&nbsp;<span>2.2</span></a>.)</p>
 </div>
 <div id="exr-stats-pearson-anti" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.8 </strong></span>Suppose that two sample sets satisfy <span class="math inline">\(y_i=-x_i\)</span> for all <span class="math inline">\(i\)</span>. Prove that the Pearson correlation coefficient between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> equals <span class="math inline">\(-1\)</span>.</p>
