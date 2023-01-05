@@ -22,6 +22,14 @@ book:
     # - references.qmd
   comments:
     hypothesis: true
+  sidebar: 
+    header: "![](_media/logo_small.png){height=120 fig-align='center'}"
+    footer: "Copyright 2023 by Toby Driscoll"
+  page-footer:
+    left: 
+      - text: "Data Science 1"
+    right: 
+      - text: "Toby Driscoll"
   # downloads: [pdf]
 # number-depth: 3
 
