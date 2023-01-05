@@ -7,7 +7,8 @@ book:
   title: "Data Science 1"
   author: "Tobin Driscoll"
   date: "Jan. 2023"
-  favicon: favicon.ico
+  favicon: _media/logo_small.png
+  cover-image: _media/logo.png
   chapters:
     - index.qmd
     - intro.qmd
@@ -21,6 +22,7 @@ book:
     # - references.qmd
   comments:
     hypothesis: true
+  # downloads: [pdf]
 # number-depth: 3
 
 bibliography: references.bib
