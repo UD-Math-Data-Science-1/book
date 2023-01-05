@@ -170,7 +170,7 @@ In math, vector indexes usually begin with 1. In Python, they begin with 0.
 
 A vector with $n$ elements is often referred to as an $n$-vector, and we say that $n$ is the **length** of the vector. In math we often use $\real^n$ to denote the set of all $n$-vectors with real-valued elements.
 
-The usual way to work with arrays in Python is through NumPy.
+The usual way to work with arrays in Python is through NumPy:
 
 ```{python}
 import numpy as np
@@ -512,7 +512,7 @@ Text is a ubiquitous data source. One way to quantify text is to use a dictionar
 
 The most straightforward way to represent an image is as a 3D array of values representing intensities representing of red, green and blue in each pixel. Sometimes it might be preferable to represent the image by a vector of statistics about these values, or by presence or absence of detected objects, etc.
 
-## Data frames
+## Series and frames
 
 The most popular Python package for manipulating and analyzing data is [pandas](https:pandas.pydata.org). We will use the paradigm it presents, which is fairly well understood throughout data science.
 
@@ -531,8 +531,8 @@ Some data that can be viewed as series:
 * The scores of gymnasts on multiple apparatus types can be represented as a data frame whose rows are indexed by the names of the gymnasts and whole columns are indexed by the names of the apparatuses. 
 ::::
 
-For example, here is a pandas series for the wavelengths of light corresponding to rainbow colors:
-
+::::{#exm-data-colors}
+Here is a pandas series for the wavelengths of light corresponding to rainbow colors:
 ```{python}
 import pandas as pd
 
@@ -544,26 +544,22 @@ wavelength = pd.Series(
 print(wavelength)
 ```
 
-We can now use an index value to access a value in the series.
-
+We can use an index value (one of the colors) to access a value in the series:
 ```{python}
 print( wavelength["blue"] )
 ```
 
-We can access multiple values to get a series that is a subset of the original.
-
+If we access multiple values, we get a series that is a subset of the original:
 ```{python}
 print( wavelength[ ["violet", "red"] ] )
 ```
 
-We can also use the `iloc` property to access the underlying vector in NumPy fashion.
-
+We can also use the `iloc` property to access the underlying vector by NumPy slicing:
 ```{python}
 wavelength.iloc[:4]
 ```
 
-Here is a series of NFL teams based on the same index.
-
+Here is a series of NFL teams based on the same index:
 ```{python}
 teams = pd.Series(
   ["Vikings", "Bills", "Eagles", "Chargers", "Bengals", "Cardinals"],
@@ -573,40 +569,40 @@ teams = pd.Series(
 teams["green"]
 ```
 
-Now we can create a data frame using these two series as columns.
-
+Now we can create a data frame using these two series as columns:
 ```{python}
-rainbow = pd.DataFrame( {"wavelength":wavelength, "team name":teams} )
+rainbow = pd.DataFrame( {"wavelength": wavelength, "team name": teams} )
 rainbow
 ```
 
-We can access a column using simple bracket notation:
+::: {.callout-tip}
+Curly braces `{ }` are used to construct a dictionary in Python.
+:::
+
+We can access a single column using simple bracket notation:
 
 ```{python}
 rainbow["team name"]
 ```
 
-We can add a column after the fact using a bracket access on the left side of the assignment:
-
+We can add a column after the fact by using a bracket access on the left side of the assignment:
 ```{python}
 rainbow["flower"] = ["Lobelia", "Cornflower", "Bells-of-Ireland", "Daffodil"," Butterfly weed"," Rose"]
 rainbow
 ```
 
-We can access a row by using brackets with the `loc` property of the frame:
-
+We can access a row by using brackets with the `loc` property of the frame, getting a series indexed by the column names of the frame:
 ```{python}
 rainbow.loc["orange"]
 ```
 
-The result above is a series indexed by the column names of the frame. We are also free to strip away the index list and get an ordinary array:
-
+We are also free to strip away the index and get an ordinary array:
 ```{python}
 rainbow.loc["red"].to_numpy()
 ```
+::::
 
-Here is another way to construct a data frame. We give a vector of rows, plus (optionally) the index and the names of the columns.
-
+Here is another way to construct a data frame in pandas. We give a vector of rows, plus (optionally) the index and the names of the columns:
 ```{python}
 letters = pd.DataFrame( 
     [ ("a", "A"), ("b", "B"), ("c", "C") ], 
@@ -616,9 +612,10 @@ letters = pd.DataFrame(
 letters
 ```
 
-### Categorical data
+Pandas has facilities for dealing with categorical variables.
 
-Pandas has facilities for dealing with categorical variables. For example, here is a vector of chess pieces at the start of a game:
+::::{#exm-data-chess}
+Here is a vector of chess pieces at the start of a game:
 
 ```{python}
 pieces = np.hstack( [
@@ -632,14 +629,16 @@ pieces
 ```
 
 We can tell pandas to regard these strings as elements of a category set:
-
 ```{python}
 pd.Categorical(pieces)
 ```
 
 Notice above how the unique categories were found automatically. 
+::::
 
+::: {.callout-tip}
 For much more about pandas fundamentals, try the [Kaggle course](https://www.kaggle.com/learn/pandas).
+:::
 
 ## Data preparation
 

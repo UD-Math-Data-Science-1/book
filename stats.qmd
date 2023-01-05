@@ -788,9 +788,10 @@ The error ribbon above is drawn at one standard deviation around the mean.
 In order to see multiple pairwise scatter plots, we can use `pairplot` in seaborn:
 
 ```{python}
+#| column: body-outset
 columns = [ "mpg", "horsepower", "displacement", "origin" ]
 sns.pairplot( cars[columns],
-    hue="origin", height=3
+    hue="origin", height=2.75
     );
 ```
 
