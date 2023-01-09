@@ -160,7 +160,7 @@ Sources are not always clear about this terminology. Some use *sample variance* 
 :::
 
 :::{.callout-caution}
-NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee!
+NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee! Fortunately, most datasets today have large enough $n$ to make the difference negligible.  
 :::
 
 For standard deviation, *neither* $s_n$ *nor* $s_{n-1}$ is an unbiased estimator of $\sigma$. There is no simple correction that works for all distributions. Our practice is to use $s_{n-1}$, which is what `std` computes in pandas. Thus, for instance, a **sample z-score** for $x_i$ is 
@@ -169,9 +169,9 @@ $$
 z_i = \frac{x_i-\bar{x}}{s_{n-1}}.
 $$ {#eq-stats-t-score}
 
-:::{.callout-important}
+<!-- :::{.callout-important}
 In statistics, @eq-stats-t-score is referred to as a *t-score*, and the term *sample z-score* is not common. In data science practice, however, the sample sizes are usually so large that the difference between z-scores and t-scores is rarely important. Most sources just use the term *z-score* indiscriminately.
-:::
+::: -->
 
 ### Median and quantiles
 
@@ -1022,19 +1022,20 @@ As you can see from the above, `europe` and `japan` are positively associated wi
 
 Attaching theorem-supported numbers to real data feels precise and infallible. The theorems do what they say, of course---they're theorems---but our intuition can be a little too ready to attach significance to the numbers, causing misconceptions or mistakes. Proper visualizations can help us see through such issues.
 
-### Anscombe's quartet
 
-In 1973, Francis Anscombe created four artificial datasets in order to illustrate the perils of trusting a few numbers to describe sets of observations. These have been made available in seaborn:
+### The datasaurus
+
+The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. The Datasaurus is a set of 142 points making a handsome portrait:
 
 ```{python}
-quartet = sns.load_dataset("anscombe")
-quartet.head()
+dozen = pd.read_csv("DatasaurusDozen.tsv", delimiter="\t")
+sns.relplot(dozen[dozen["dataset"]=="dino"], x="x", y="y");
 ```
 
-Both the *x* and *y* variables have identical means and variances across all four of the sets:
+However, there are 12 other datasets that all have roughly the same mean and variance for $x$ and $y$, and the same correlations between them:
 
 ```{python}
-by_set = quartet.groupby("dataset")
+by_set = dozen.groupby("dataset")
 by_set.mean()
 ```
 
@@ -1042,23 +1043,25 @@ by_set.mean()
 by_set.std()
 ```
 
-It follows that the correlations within each set are also identical:
-
 ```{python}
 by_set.corr()
 ```
 
-Yet scatter plots reveal that the sets are drastically different:
+However, a plot reveals that these sets are, to put it mildly, quite distinct:
 
 ```{python}
-#| column: body-outset-right
-sns.relplot( data=quartet, 
-    x="x", y="y", 
-    col="dataset", col_wrap=2, height=2.2
+others = dozen[ dozen["dataset"] != "dino" ]
+sns.relplot(others,
+    x="x", y="y",
+    col="dataset", col_wrap=3, height=2.2
     );
 ```
 
-Anscombe's quartet shows that a few summary statistics are not able to capture everything important about even a small dataset. 
+::: {.callout-important}
+Always plot your data.
+:::
+
+Always. Plot. Your. Data!
 
 ### Simpson's paradox
 
