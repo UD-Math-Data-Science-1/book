@@ -538,7 +538,8 @@ import pandas as pd
 
 wavelength = pd.Series( 
   [400, 470, 520, 580, 610, 710],    # values
-  index=["violet", "blue", "green", "yellow", "orange", "red"]
+  index=["violet", "blue", "green", "yellow", "orange", "red"],
+  name="wavelength"
   )
 
 print(wavelength)
@@ -561,17 +562,18 @@ wavelength.iloc[:4]
 
 Here is a series of NFL teams based on the same index:
 ```{python}
-teams = pd.Series(
+team = pd.Series(
   ["Vikings", "Bills", "Eagles", "Chargers", "Bengals", "Cardinals"],
-  index = wavelength.index
+  index = wavelength.index,
+  name="team"
   )
 
-teams["green"]
+team["green"]
 ```
 
 Now we can create a data frame using these two series as columns:
 ```{python}
-rainbow = pd.DataFrame( {"wavelength": wavelength, "team name": teams} )
+rainbow = pd.DataFrame( {"wavelength": wavelength, "team name": team} )
 rainbow
 ```
 
