@@ -1,0 +1,62 @@
+# Getting started {.unnumbered} 
+
+We will be using Python extensively. There are choices for two major aspects of using Python:
+
+* How the code runs (the *back end*), and
+* How you create and edit code and use the output (the *front end*).
+
+## Back end
+
+Here is a rundown of somes pros and cons of the usual options:
+
+| Your own machine | Cloud  | 
+|----------------------|---------------------|
+| Available offline 😄 | Use any device 👍 |
+| Total control 😎/😕 | No installations 😌 | 
+| Choose the front end | Browser only   |  
+| Yours forever 😁  | Permanence is an illusion ⛄️ |
+| Your hardware 💵 | You get what you get ¯\_(ツ)_/¯ |
+
+::: {.callout-tip}
+You want to use Python 3.x, not Python 2.x. These coexisted for a while, during a dark time for Python. If you see guidance based on Python 2, it is either outdated or the product of a disordered mind.
+:::
+
+### Run on your own computer
+
+The recommended option is to download [Anaconda](https://www.anaconda.com). It's a big download, but it comes with just about everything ready to go, and you can manage things by point-and-click. 
+
+### Run on the cloud
+
+There are many choices, but a popular one is [Google Colab](https://colab.research.google.com). It's free and saves you from having to install anything. The hardware is basic but most likely fine for our purposes. You will need to download your results for submissions. 
+
+## Front end
+
+Much of data science is expressed using *notebooks*, which we will use exclusively. Specifically, you will use *Jupyter* notebooks.
+
+::: {.callout-tip}
+The name *IPython* refers to the direct ancestor of Jupyter. The older name continues to stick to a few of the tools, though.
+:::
+
+A notebook is a self-contained collection of text, math, code, output, and graphics grouped into *cells*. The front end manages the cells and communicates with a back end called the *kernel*.
+
+If you are using Colab, then you are using a Jupyter notebook, though in an interface customized by Google. 
+
+### On your own machine
+
+Jupyter splits into "classic" Jupyter and the newer Jupyter Lab. Either is fine for us, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.
+
+A worthwhile alternative is to edit the notebook within [VS Code](https://code.visualstudio.com), which is a powerful and popular editor for Python and other languages. 
+
+## Tips on Jupyter success
+
+::: {.callout-warning}
+The order of cells that you see in a notebook is not necessarily the order in which they were executed.
+:::
+
+*By far* the greatest source of confusion and subtle problems in a notebook is the freedom it gives you to execute the cells in whatever order you want. As you experiment and add and delete cells to try things out, you will reach a point at which the code on the screen is no longer a recipe for reaching the current state of your workspace. 
+
+::: {.callout-tip}
+Before submitting a notebook, it's *highly advisable* to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.
+:::
+
+Make use of the code completion tools. If you start typing the name of a variable, data column, or python method, you can either pause or hit TAB to see a list of possible completions. This can (a) save you typing time and (b) remind you of function names that are on the tip of your tongue.
