@@ -439,14 +439,14 @@ cars.groupby(["origin"])["mpg"].describe()
 Both the median and the mean values are quite a bit lower for *usa* cars than for the other regions. This is also apparent when we plot the distributions individually using different colors:
 
 ```{python}
-sns.displot(cars, x="mpg", hue="origin");
+sns.displot(data=cars, x="mpg", hue="origin");
 ```
 
 That graph might be hard to read because of the overlaps. We can instead plot the groups in separate columns in what is often called a *facet plot*:
 
 ```{python}
 #| column: body-outset
-sns.displot(cars, 
+sns.displot(data=cars, 
     x="mpg", 
     col="origin", height=2.2
     );
@@ -457,7 +457,7 @@ It's now clear that the U.S.A. cars are more clustered on the left (smaller MPG)
 Another way to visualize grouped data is with a **box plot**:
 
 ```{python}
-sns.catplot(cars, 
+sns.catplot(data=cars, 
     x="origin", y="mpg", 
     kind="box"
     );
@@ -466,7 +466,7 @@ sns.catplot(cars,
 Each colored box shows the interquartile range, with the interior horizontal line showing the median. The whiskers and dots are explained in a later section. A related visualization is a **violin plot**:
 
 ```{python}
-sns.catplot(cars, 
+sns.catplot(data=cars, 
     x="mpg", y="origin", 
     kind="violin"
     );
@@ -487,7 +487,7 @@ cars.head(10)
 ```
 
 ```{python}
-sns.catplot(cars, 
+sns.catplot(data=cars, 
     x="mpg", y="cuts", 
     kind="violin"
     );
@@ -537,7 +537,7 @@ def standardize(x):
 
 cars["group_z"] = by_weight["mpg"].transform(standardize)
 
-sns.displot(cars, 
+sns.displot(data=cars, 
     x="group_z", 
     col="origin", height=2.3
     );
@@ -549,7 +549,7 @@ Note how this differs from computing z-scores based on global statistics:
 #| column: body-outset
 cars["global_z"] = standardize( cars["mpg"] )
 
-sns.displot(cars, 
+sns.displot(data=cars, 
     x="global_z", 
     col="origin", height=2.3
     );
@@ -676,7 +676,7 @@ fmri.groupby("event")["signal"].describe()
 Here is a box plot of the signal for these groups.
 
 ```{python}
-sns.catplot(fmri,
+sns.catplot(data=fmri,
     x="event", y="signal",
     kind="box"
     );
@@ -819,7 +819,7 @@ There are several ways to measure correlation, but it's good practice to look at
 We can use `relplot` to make a scatter plot of two different columns in a frame:
 
 ```{python}
-sns.relplot(cars, 
+sns.relplot(data=cars, 
     x="model_year", y="mpg"
     );
 ```
@@ -829,7 +829,7 @@ Like the other plot types above, we can use color, column, marker size, etc. to 
 If we want to emphasize a trend, we can instead plot the average value at each $x$ with error bars:
 
 ```{python}
-sns.relplot(cars, 
+sns.relplot(data=cars, 
     x="model_year", y="mpg",
     kind="line", errorbar="sd"
     );
@@ -842,7 +842,7 @@ In order to see multiple pairwise scatter plots, we can use `pairplot` in seabor
 ```{python}
 #| column: body-outset
 columns = [ "mpg", "horsepower", "displacement", "origin" ]
-sns.pairplot( cars[columns],
+sns.pairplot(data= cars[columns],
     hue="origin", height=2
     );
 ```
@@ -1029,7 +1029,7 @@ The Datasaurus Dozen is a collection of datasets that highlights the perils of p
 
 ```{python}
 dozen = pd.read_csv("DatasaurusDozen.tsv", delimiter="\t")
-sns.relplot(dozen[dozen["dataset"]=="dino"], x="x", y="y");
+sns.relplot(data=dozen[dozen["dataset"]=="dino"], x="x", y="y");
 ```
 
 However, there are 12 other datasets that all have roughly the same mean and variance for $x$ and $y$, and the same correlations between them:
@@ -1051,7 +1051,7 @@ However, a plot reveals that these sets are, to put it mildly, quite distinct:
 
 ```{python}
 others = dozen[ dozen["dataset"] != "dino" ]
-sns.relplot(others,
+sns.relplot(data=others,
     x="x", y="y",
     col="dataset", col_wrap=3, height=2.2
     );
@@ -1084,7 +1084,7 @@ Within each individual species, the correlation between the variables is strongl
 This is an example of **Simpson's paradox**. The reason for it can be seen from a scatter plot:
 
 ```{python}
-sns.relplot(penguins,
+sns.relplot(data=penguins,
     x=columns[0], y=columns[1], 
     hue="species"
     );

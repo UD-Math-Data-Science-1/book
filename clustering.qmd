@@ -50,7 +50,7 @@ def blobs_data():
 
 ```{python}
 blobs = blobs_data()
-sns.relplot(blobs, x="x1", y="x2", hue="class");
+sns.relplot(data=blobs, x="x1", y="x2", hue="class");
 ```
 
 * stripes 
@@ -69,7 +69,7 @@ def stripes_data():
 
 ```{python}
 stripes = stripes_data()
-sns.relplot(stripes, x="x1", y="x2", hue="class");
+sns.relplot(data=stripes, x="x1", y="x2", hue="class");
 ```
 
 * bullseye 
@@ -92,7 +92,7 @@ def bullseye_data():
 
 ```{python}
 bullseye = bullseye_data()
-p = sns.relplot(bullseye,
+p = sns.relplot(data=bullseye,
         x="x1", y="x2", 
         hue="class"
         )
@@ -340,7 +340,7 @@ blobs = blobs_data()
 X = blobs.drop("class", axis=1)
 
 blobs["sil"] = silhouette_samples(X, blobs["class"])
-sns.relplot(blobs,
+sns.relplot(data=blobs,
     x="x1", y="x2",
     hue="class",size="sil"
     );
@@ -365,7 +365,7 @@ def quad(x,y):
 
 blobs["quadrant"] = [quad(x,y) for (x,y) in zip(blobs.x1, blobs.x2)]
 blobs["sil"] = silhouette_samples(X, blobs["quadrant"])
-sns.relplot(blobs, 
+sns.relplot(data=blobs, 
     x="x1", y="x2",
     hue="quadrant",size="sil"
     );
@@ -428,7 +428,7 @@ digits.groupby("target")["sil"].mean()
 As usual, means can tell us only so much. A look at the distributions of the values reveals more details:
 
 ```{python}
-sns.catplot(digits,
+sns.catplot(data=digits,
     x="target", y="sil",
     kind="violin"
     );
@@ -545,11 +545,11 @@ def report(clustering):
     blobs["sil"] = silhouette_samples(X, blobs["cluster"])
     print(f"inertia: {clustering.inertia_:.5g}")
     print(f"overall silhouette score: {blobs['sil'].mean():.5g}")
-    sns.catplot(blobs,
+    sns.catplot(data=blobs,
         x="cluster", y="sil",
         kind="violin", height=3.5
         );
-    sns.relplot(blobs,
+    sns.relplot(data=blobs,
         x="x1", y="x2",
         hue="cluster", size=blobs["sil"], height=3.5
         );
@@ -593,7 +593,7 @@ for k in [2,3,4]:
     stripes["k"] = k
     results = pd.concat( (results, stripes) )
     
-sns.relplot(results,
+sns.relplot(data=results,
     x="x1", y="x2",
     hue="cluster", col="k", height=3.5
     );
@@ -609,7 +609,7 @@ for k in [2,3,4]:
     stripes["k"] = k
     results = pd.concat( (results, stripes) )
     
-sns.relplot(results,
+sns.relplot(data=results,
     x="x1", y="x2",
     hue="cluster", col="k", height=3.5
     );
@@ -799,7 +799,7 @@ blobs.head()
 ```{python}
 #| column: body-outset
 results = run_experiment(blobs)
-sns.relplot(results,
+sns.relplot(data=results,
         x="x1", y="x2", 
         hue="cluster", col="linkage", height=4
         )
@@ -813,7 +813,7 @@ Next, we try data points lying in three distinct stripes:
 #| column: body-outset
 stripes = stripes_data()
 results = run_experiment(stripes)
-sns.relplot(results,
+sns.relplot(data=results,
         x="x1", y="x2", 
         hue="cluster", col="linkage", height=4
         )
@@ -827,7 +827,7 @@ Finally, we try the most demanding test, points that are arranged in rings:
 #| column: body-outset
 bullseye = bullseye_data()
 results = run_experiment(bullseye)
-p = sns.relplot(results,
+p = sns.relplot(data=results,
         x="x1", y="x2", 
         hue="cluster", col="linkage", height=4
         )
@@ -840,7 +840,7 @@ The single linkage is the only one with enough geometric flexibility to cluster 
 #| column: body-outset
 bullseye = pd.concat( ( bullseye, pd.DataFrame({"x1": [0], "x2": [2.25]}) ) )
 results = run_experiment(bullseye)
-p = sns.relplot(results,
+p = sns.relplot(data=results,
         x="x1", y="x2", 
         hue="cluster", col="linkage", height=4
         )

@@ -394,7 +394,7 @@ for q in np.arange(0.05, 1.05, 0.05):
 results = pd.DataFrame( results, columns=["q", "mean clustering"] )
 
 print("Mean clustering in WS graphs on 60 nodes:")
-sns.relplot(results,
+sns.relplot(data=results,
     x="q", y="mean clustering",
     kind="line"
     );
@@ -619,7 +619,7 @@ for q in np.arange(0.1, 0.76, 0.05):
 
 results = pd.DataFrame( results, columns=["q", "avg distance"] )
 print("Pairwise distances in WS graphs:")
-sns.relplot(results, x="q", y="avg distance", kind="line");
+sns.relplot(data=results, x="q", y="avg distance", kind="line");
 ```
 
 The decrease with $q$ is less pronounced that it was for the smaller WS graphs above. In the previous section, we found that $q=0.42$ reproduces the same average clustering as in the Twitch network. That corresponds to a mean distance of about 4.5, which is a bit above the observed Twitch mean distance of 3.87, but not dramatically so. Thus, the Watts-Strogatz model could still be considered a plausible one for the Twitch network. In the next section, though, we will see that it misses badly in at least one important aspect.
@@ -751,7 +751,7 @@ $$
 m = round(kbar/2)
 BA = nx.barabasi_albert_graph(n, m, seed=5)
 BA_degrees = pd.Series( dict(BA.degree), index=BA.nodes )
-hist = sns.displot(BA_degrees, log_scale=True)
+hist = sns.displot(data=BA_degrees, log_scale=True)
 hist.axes[0,0].set_yscale("log")
 ```
 
@@ -834,7 +834,7 @@ There is little variation in the degrees of the nodes. In fact, there are only 3
 
 ```{python}
 centrality = pd.DataFrame( {"degree":nx.degree_centrality(G)}, index=G.nodes )
-sns.displot(centrality, x="degree");
+sns.displot(data=centrality, x="degree");
 ```
 
 From the drawing of the graph, however, it's clear that (for instance) nodes 3 and 6 do not have comparable roles, despite the fact that both have degree equal to 2.
@@ -875,7 +875,7 @@ The `betweenness_centrality` function returns a dictionary with nodes as keys an
 
 ```{python}
 centrality["between"] = pd.Series(nx.betweenness_centrality(G), index=G.nodes)
-sns.displot(centrality, x="between");
+sns.displot(data=centrality, x="between");
 ```
 
 The distribution above shows that few nodes have a relatively high betweenness score in our graph.

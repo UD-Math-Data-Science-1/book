@@ -371,7 +371,7 @@ Pairwise scatter plots yield some hints about what to expect from this dataset:
 
 ```{python}
 #| column: body-outset
-sns.pairplot(ads, height=2);
+sns.pairplot(data=ads, height=2);
 ```
 
 The clearest association between *Sales* and spending is with *TV*. So we first try a univariate linear fit of sales against TV spending alone:
@@ -989,7 +989,7 @@ The logistic function has the real line as its domain and takes the form of a sm
 #| echo: false
 x = np.linspace(-8,8,501)
 data = pd.DataFrame({"x":x,"σ(x)":1/(1+np.exp(-x))})
-sns.relplot(data, x="x", y="σ(x)", kind="line", aspect=1.5, height=3.5);
+sns.relplot(data=data, x="x", y="σ(x)", kind="line", aspect=1.5, height=3.5);
 ```
 
 Given samples of a probability variable $p(\bfx)$, the regression task is to find a weight vector $\bfw$ so that
