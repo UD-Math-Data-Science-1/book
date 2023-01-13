@@ -635,11 +635,72 @@ We can tell pandas to regard these strings as elements of a category set:
 pd.Categorical(pieces)
 ```
 
-Notice above how the unique categories were found automatically. 
+Notice above that the unique categories were found automatically. 
+::::
+
+### Loading from files 
+
+Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These can be read by pandas locally or over the web.
+
+::::{#exm-data-read}
+The pandas function we use to load a dataset is `read_csv`. Here we use it to read a file that is availble over the web:
+
+```{python}
+ads = pd.read_csv("https://raw.githubusercontent.com/tobydriscoll/ds1book/master/advertising.csv")
+ads.head(6)    # show the first 6 rows
+```
+
+A data frame has a few properties that describe its contents:
+```{python}
+ads.shape    # number of rows, number of columns
+```
+
+```{python}
+ads.columns   # names of the columns
+```
+
+```{python}
+ads.dtypes    # data types of the columns
+```
+
+Here's a local file that contains estimates and projections for greenhouse gas emissions in Delaware:
+```{python}
+emissions = pd.read_csv("Delaware_Greenhouse_Gas_Emissions.csv")
+emissions.head()
+```
+::::
+
+### Selecting rows
+
+Above we saw that you can use the `loc` property to access a frame's row by name, or `iloc` to access by position. It's more common, though, to select them by some criteria. 
+
+::::{#exm-data-selection}
+If we apply a relational operator to a column of a frame, we get a series of Boolean values:
+```{python}
+emissions["Fuel type"] == "Coal"
+```
+
+This kind of series can then be used to select the rows that have value `True`:
+```{python}
+coal = emissions[ emissions["Fuel type"]=="Coal" ]
+coal.head()
+```
+
+You can use logical operators `&` (and), `|` (or), and `~` (not) on these Boolean series:
+```{python}
+ispower = (emissions["Economic sectors"]=="Electric power")
+isco2 = (emissions["Gas"]=="CO2")
+selected = emissions[ ispower & ~isco2 ]
+selected.head(10)
+```
 ::::
 
 ::: {.callout-tip}
-For much more about pandas fundamentals, try the [Kaggle course](https://www.kaggle.com/learn/pandas).
+The pandas user guide has a handy [section on selections](https://pandas.pydata.org/docs/user_guide/10min.html?highlight=boolean#selection).
+:::
+
+::: {.callout-tip}
+For practice with pandas fundamentals, try the [Kaggle course](https://www.kaggle.com/learn/pandas).
 :::
 
 ## Data preparation
