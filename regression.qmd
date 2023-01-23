@@ -747,61 +747,6 @@ lm.fit(X_tr_reduced, y_tr)
 R2 = lm.score(X_te_reduced, y_te)
 print(f"reduced linear model score: {R2:.4f}")
 ```
-## Time series
-
-Time series have a structure that allows some particular types of analyses: namely, that the past and present can affect the future.
-
-A simple way to exploit this structure is **autoregression**. To use it, we have to make a standard assumption that the time series is *stationary*. A formal definition is beyond us here, but in words, stationarity means that the statistical properties of the time series do not change over time. As a crude example, it might be justified to view the readings of a self-driving car as stationary during rural freeway driving in clear weather, but not as the car makes a transition to city streets or a thunderstorm.
-
-```{python}
-ghcn = pd.read_csv("ghcn_newark.csv", date_parser="datetime", index_col=1)
-ghcn.head()
-```
-
-```{python}
-sns.relplot(data=ghcn["1980"], 
-    x="DATE", y="TMIN",
-    kind="line"
-    )
-```
-
-```{python}
-ghcn["Tdev"] = ghcn.groupby(ghcn.index.month)["TMIN"].transform(lambda x: x - x.mean())
-sns.relplot(data=ghcn["1980"], 
-    x="DATE", y="Tdev",
-    kind="line"
-    )
-```
-
-```{python}
-yr = pd.date_range("1990-01-01", "1990-12-31", freq="D")
-
-def lag(x, n):
-    return x[yr - pd.DateOffset(days=n)].values
-
-lag(ghcn["Tdev"],1)
-```
-
-```{python}
-y = lag(ghcn["Tdev"], 0)
-cols = {} 
-names = []
-for l in range(1,5):
-    cols["lag"+str(l)] = lag(ghcn["Tdev"],l)
-
-X = pd.DataFrame(cols)
-X
-```
-
-```{python}
-lm = LinearRegression()
-lm.fit(X,y)
-lm.coef_
-```
-
-```{python}
-mean_absolute_error(y, lm.predict(X))
-```
 ## Nonlinear regression
 
 Multilinear regression limits the representation of the dataset to a function of the form
