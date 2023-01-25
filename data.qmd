@@ -663,11 +663,6 @@ ads.columns   # names of the columns
 ads.dtypes    # data types of the columns
 ```
 
-Here's a local file that contains estimates and projections for greenhouse gas emissions in Delaware:
-```{python}
-emissions = pd.read_csv("Delaware_Greenhouse_Gas_Emissions.csv")
-emissions.head()
-```
 ::::
 
 ### Selecting rows
@@ -675,23 +670,49 @@ emissions.head()
 Above we saw that you can use the `loc` property to access a frame's row by name, or `iloc` to access by position. It's more common, though, to select them by some criteria. 
 
 ::::{#exm-data-selection}
+Here's a local file that contains daily weather summaries from Newark, Delaware:
+```{python}
+weather = pd.read_csv("ghcn_newark.csv")
+weather.head()
+```
+
 If we apply a relational operator to a column of a frame, we get a series of Boolean values:
 ```{python}
-emissions["Fuel type"] == "Coal"
+isprecip = (weather["PRCP"] > 10)
+isprecip
 ```
 
 This kind of series can then be used to select the rows that have value `True`:
 ```{python}
-coal = emissions[ emissions["Fuel type"]=="Coal" ]
-coal.head()
+precip = weather[isprecip]
+precip.head()
 ```
 
 You can use logical operators `&` (and), `|` (or), and `~` (not) on these Boolean series:
 ```{python}
-ispower = (emissions["Economic sectors"]=="Electric power")
-isco2 = (emissions["Gas"]=="CO2")
-selected = emissions[ ispower & ~isco2 ]
-selected.head(10)
+iscold = (weather["TMAX"] < 0)
+dry_cold = weather[ iscold & ~isprecip ]
+dry_cold.head(6)
+```
+::::
+
+When a column of a dataset is a time stamp, it can be used as the index of the data frame, which makes some time-centric operations easier.
+
+::::{#exm-data-time-index}
+Let's reload the dataset using the *DATE* column (which is second in the file) as a `datetime` index:
+```{python}
+weather = pd.read_csv("ghcn_newark.csv", index_col=1, parse_dates=True)
+weather.head()
+```
+
+We can extract a row by referencing the date in the index with `loc`:
+```{python}
+weather.loc["1979-03-28"]
+```
+
+But we can also easily select all the rows from a particular month or year:
+```{python}
+weather["1979-03"].head()
 ```
 ::::
 
