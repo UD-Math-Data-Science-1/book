@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.280">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Science 1 - 4&nbsp; Model selection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./regression.html" rel="next">
+<link href="./classification.html" rel="prev">
+<link href="./_media/logo_small.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script> 
+MathJax = {
+  chtml: {
+    scale: 0.92,
+  }
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
+</figure>
+</div>
+</div></div>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science 1</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./selection.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+<div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
+<p>Copyright 2023 by Toby Driscoll</p>
+</div></div></nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-select-learning-curves" id="toc-sec-select-learning-curves" class="nav-link active" data-scroll-target="#sec-select-learning-curves"><span class="toc-section-number">4.1</span>  Bias–variance tradeoff</a>
+  <ul class="collapse">
+  <li><a href="#learner-bias" id="toc-learner-bias" class="nav-link" data-scroll-target="#learner-bias"><span class="toc-section-number">4.1.1</span>  Learner bias</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="toc-section-number">4.1.2</span>  Variance</a></li>
+  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves"><span class="toc-section-number">4.1.3</span>  Learning curves</a></li>
+  </ul></li>
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="toc-section-number">4.2</span>  Overfitting</a>
+  <ul class="collapse">
+  <li><a href="#overfitting-in-knn" id="toc-overfitting-in-knn" class="nav-link" data-scroll-target="#overfitting-in-knn"><span class="toc-section-number">4.2.1</span>  Overfitting in kNN</a></li>
+  <li><a href="#overfitting-in-decision-trees" id="toc-overfitting-in-decision-trees" class="nav-link" data-scroll-target="#overfitting-in-decision-trees"><span class="toc-section-number">4.2.2</span>  Overfitting in decision trees</a></li>
+  <li><a href="#overfitting-and-variance" id="toc-overfitting-and-variance" class="nav-link" data-scroll-target="#overfitting-and-variance"><span class="toc-section-number">4.2.3</span>  Overfitting and variance</a></li>
+  </ul></li>
+  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods"><span class="toc-section-number">4.3</span>  Ensemble methods</a></li>
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"><span class="toc-section-number">4.4</span>  Validation</a>
+  <ul class="collapse">
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="toc-section-number">4.4.1</span>  Cross-validation</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="toc-section-number">4.4.2</span>  Hyperparameter tuning</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div>
+<div class="hidden">
+<p><span class="math display">\[
+    \newcommand{\float}{\mathbb{F}}
+    \newcommand{\real}{\mathbb{R}}
+    \newcommand{\complex}{\mathbb{C}}
+    \newcommand{\nat}{\mathbb{N}}
+    \newcommand{\integer}{\mathbb{Z}}
+    \newcommand{\bfa}{\mathbf{a}}
+    \newcommand{\bfe}{\mathbf{e}}
+    \newcommand{\bfh}{\mathbf{h}}
+    \newcommand{\bfp}{\mathbf{p}}
+    \newcommand{\bfq}{\mathbf{q}}
+    \newcommand{\bfu}{\mathbf{u}}
+    \newcommand{\bfv}{\mathbf{v}}
+    \newcommand{\bfw}{\mathbf{w}}
+    \newcommand{\bfx}{\mathbf{x}}
+    \newcommand{\bfy}{\mathbf{y}}
+    \newcommand{\bfz}{\mathbf{z}}
+    \newcommand{\bfA}{\mathbf{A}}
+    \newcommand{\bfW}{\mathbf{W}}
+    \newcommand{\bfX}{\mathbf{X}}
+    \newcommand{\bfzero}{\boldsymbol{0}}
+    \newcommand{\bfmu}{\boldsymbol{\mu}}
+    \newcommand{\TP}{\text{TP}}
+    \newcommand{\TN}{\text{TN}}
+    \newcommand{\FP}{\text{FP}}
+    \newcommand{\FN}{\text{FN}}
+    \newcommand{\rmn}[2]{\mathbb{R}^{#1 \times #2}}
+    \newcommand{\dd}[2]{\frac{d #1}{d #2}}
+    \newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+    \newcommand{\norm}[1]{\left\lVert \mathstrut #1 \right\rVert}
+    \newcommand{\abs}[1]{\left\lvert \mathstrut #1 \right\rvert}
+    \newcommand{\twonorm}[1]{\norm{#1}_2}
+    \newcommand{\onenorm}[1]{\norm{#1}_1}
+    \newcommand{\infnorm}[1]{\norm{#1}_\infty}
+    \newcommand{\innerprod}[2]{\langle #1,#2 \rangle}
+    \newcommand{\pr}[1]{^{(#1)}}
+    \newcommand{\diag}{\operatorname{diag}}
+    \newcommand{\sign}{\operatorname{sign}}
+    \newcommand{\dist}{\operatorname{dist}}
+    \newcommand{\simil}{\operatorname{sim}}
+    \newcommand{\ee}{\times 10^}
+    \newcommand{\floor}[1]{\lfloor#1\rfloor}
+    \newcommand{\argmin}{\operatorname{argmin}}
+    \newcommand{\E}[1]{\operatorname{\mathbb{E}}\left[\mathstrut #1\right]}
+    \newcommand{\Cov}{\operatorname{Cov}}
+    \newcommand{\logit}{\operatorname{logit}}
+\]</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.utils <span class="im">import</span> shuffle</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, f1_score, balanced_accuracy_score</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We have barely scratched the surface of the universe of classification algorithms. Even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through <em>hyperparameters</em>.</p>
+<div id="def-select-hyper" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.1 </strong></span>A <strong>hyperparameter</strong> of a learning algorithm is a value or setting affecting the algorithm that remains fixed throughout training.</p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In ML, a <em>parameter</em> is a value that is adjusted during training; i.e., it is learned from the training data. In most of mathematics, we would refer to these as <em>variables</em>, but in ML that term is often understood to be synonymous with <em>feature</em>.</p>
+</div>
+</div>
+<p>Some hyperparameters, such as the choice of norm in the nearest-neighbors algorithm, have an influence that is not easy to characterize. But others clearly affect the potential expressive power of the algorithm.</p>
+<div id="exm-select-hyper" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.1 </strong></span>The maximum depth <span class="math inline">\(r\)</span> of a decision tree limits the complexity that the tree can attain. When <span class="math inline">\(r=1\)</span>, the tree can divide the data only once and assign different values to the different sides. On the other hand, the tree can assign up to <span class="math inline">\(2^r\)</span> unique values, which grows exponentially with <span class="math inline">\(r\)</span>; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.</p>
+<p>For a kNN classifier, when <span class="math inline">\(k\)</span> is as large as the number of samples, the classifier can only take one value on the entire set—all the samples have a vote everywhere. The other extreme is <span class="math inline">\(k=1\)</span>, where each sample rules within its own neighborhood, and again we achieve 100% training accuracy.</p>
+</div>
+<p>Options provide flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.</p>
+<section id="sec-select-learning-curves" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-select-learning-curves"><span class="header-section-number">4.1</span> Bias–variance tradeoff</h2>
+<p>When we train a classifier, we use a particular set of training data. In a different parallel universe, we might have been handed a different training set drawn from the same overall population. While we might be optimistic and hope for the best-case scenario of a training set that is perfectly representative, it’s more prudent to consider what’s best in the average case.</p>
+<section id="learner-bias" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="learner-bias"><span class="header-section-number">4.1.1</span> Learner bias</h3>
+<p>Suppose that <span class="math inline">\(f(x)\)</span> is a perfect labeller, i.e., a function with 100% accuracy over an entire population. For simplicity, we can imagine that <span class="math inline">\(f\)</span> is a binary classifier, i.e., <span class="math inline">\(f(x) \in \{0,1\}\)</span>, although this assumption is not essential.</p>
+<p>Let <span class="math inline">\(\hat{f}(x)\)</span> denote a classification function obtained after training. It depends on the particular training set we used. Suppose there are <span class="math inline">\(N\)</span> total possible training sets, leading to labelling functions <span class="math display">\[
+\hat{f}_1(x),\hat{f}_2(x),\dots,\hat{f}_N(x).
+\]</span> Then we define the <strong>expected value</strong> of the classifier as the average over all training sets: <span class="math display">\[
+\E{\hat{f}(x)} = \frac{1}{N} \sum_{i=1}^N \hat{f_i}(x).
+\]</span></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Except on toy problems, we don’t know how to calculate this average. This is more of a thought experiment. But we will simulate the idea later on.</p>
+</div>
+</div>
+<p>The term <em>expected</em> doesn’t mean that we anticipate getting this answer for our particular <span class="math inline">\(\hat{f}\)</span>. It’s just what we would get by averaging over all parallel universes that received unique training sets.</p>
+<p>We can apply the expectation operator <span class="math inline">\(\mathbb{E}\)</span> to any function of <span class="math inline">\(x\)</span>. In particular, the expected error in our own universe’s prediction is <span class="math display">\[
+\begin{split}
+    \E{f(x) - \hat{f}(x)} &amp;= \frac{1}{N} \sum_{i=1}^N \left( f(x) - \hat{f_i}(x) \right) \\
+  &amp;= \frac{1}{N} \left( \sum_{i=1}^N  f(x)  \right) - \frac{1}{N}\left( \sum_{i=1}^N \hat{f_i}(x) \right) \\
+  &amp;= f(x) - \E{\hat{f}(x)}.
+\end{split}
+\]</span> We will set <span class="math inline">\(y=f(x)\)</span> as the true label and <span class="math inline">\(\hat{y}=\E{\hat{f}(x)}\)</span> as the expected prediction. The quantity above, <span class="math inline">\(y-\hat{y}\)</span>, is called the <strong>bias</strong> of the classifier. Bias depends on the particular algorithm and its hyperparameters. Each architecture can reproduce a function of limited complexity.</p>
+</section>
+<section id="variance" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">4.1.2</span> Variance</h3>
+<p>It might seem as though the only important goal is to minimize the bias. To see why this is not the case, imagine that you are playing a ring toss game at a carnival. You have an array of sticks on a grid laid out horizontally in front of you, and the goal is to toss rings so that they land surrounding any one of the sticks.</p>
+<p>One strategy is to aim for the middle of the grid, because missing in any direction still gives you a chance to score. This is like aiming directly for the mean position. However, it’s likely that you have more consistency with shorter throws than longer ones: the farther away your aiming point is, the more variation there will be in the landing spots. Hence, it might be superior to aim at a closer stick. Even though throws that are too short may have no chance at scoring, you will do better due to the decreased spread of your throws.</p>
+<p>In essence, you have only a finite—probably small—number of throws to make, so the performance of the average case isn’t the only consideration. Reducing variance can improve your odds of getting close, even if the average case is mediocre.</p>
+<p>To see this tradeoff mathematically, we can compute the variance of the predicted labels at any <span class="math inline">\(x\)</span>: <span class="math display">\[
+\begin{split}
+    \E{(y - \hat{y})^2} &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{f_i}(x) \right)^2 \\   
+    &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} + \hat{y} - \hat{f_i}(x) \right)^2  \\
+    &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} \right)^2 + \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right)^2 \\
+  &amp; \qquad - 2 \left( y - \hat{y} \right) \cdot \frac{1}{N}\sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right).  
+\end{split}
+\]</span> Now we find something interesting: <span class="math display">\[
+\frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right) =
+\hat{y} - \frac{1}{N} \sum_{i=1}^N \hat{f}_i(x) = 0,
+\]</span> by the definition of <span class="math inline">\(\hat{y}\)</span>. So overall, <span class="math display">\[
+\begin{split}
+    \E{(y - \hat{y})^2} &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} \right)^2 + \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right)^2 \\
+  &amp;= (y-\hat{y})^2 + \E{\left(\hat{y} - \hat{f}(x)\right)^2}
+\end{split}
+\]</span> The first term is the squared bias. The second is the <strong>variance</strong> of the learning method. In words, the variance of the learning process has two contributions:</p>
+<dl>
+<dt>Bias</dt>
+<dd>
+How close is the average prediction to the ground truth? Variance
+</dd>
+<dd>
+How close to the average prediction is any one prediction likely to be?
+</dd>
+</dl>
+<p>Why would these two factors be in opposition? When a learning method has the capacity to capture complex behavior, it potentially has a low bias. However, that same capacity means that the learner will fit itself very well to each individual training set, which increases the potential for variance over the whole collection of training sets.</p>
+<p>This tension is known as the <em>bias–variance tradeoff</em>. Perhaps we can view this tradeoff as a special case of <em>Occam’s Razor</em>: it’s best to choose the least complex method necessary to reach a particular level of explanatory power.</p>
+</section>
+<section id="learning-curves" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="learning-curves"><span class="header-section-number">4.1.3</span> Learning curves</h3>
+<p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
+<div id="exm-select-learning-curves" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.2 </strong></span>We will use a subset of a realistic data set used to predict the dominant type of tree in patches of forest. We train a decision tree classifier with fixed depth throughout. (Don’t confuse the forest data for the tree classifier, haha.)</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">8</span>]   <span class="co"># 250,000 samples, 8 dimensions</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>][:<span class="dv">250000</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.05</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>alln <span class="op">=</span> <span class="bu">range</span>(<span class="dv">200</span>, <span class="dv">4001</span>, <span class="dv">200</span>)       <span class="co"># sizes of the training subsets</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []                       <span class="co"># for tracking results</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>) </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n <span class="kw">in</span> alln:             <span class="co"># iterate over training set sizes</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):    <span class="co"># iterate over training sets</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        X_tr, y_tr <span class="op">=</span> shuffle(X_tr, y_tr, random_state<span class="op">=</span>i)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        XX, yy <span class="op">=</span> X_tr[:n,:], y_tr[:n]       <span class="co"># training subset of size n</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        tree.fit(XX, yy)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        results.append( (<span class="st">"train"</span>, n, <span class="dv">1</span><span class="op">-</span>tree.score(XX,yy)) )</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        results.append( (<span class="st">"test"</span>, n, <span class="dv">1</span><span class="op">-</span>tree.score(X_te, y_te)) )</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [ <span class="st">"kind"</span>, <span class="st">"training set size"</span>, <span class="st">"error"</span> ]</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame(results, columns<span class="op">=</span>cols)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>results, </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>cols[<span class="dv">1</span>], y<span class="op">=</span>cols[<span class="dv">2</span>], </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span>, hue<span class="op">=</span>cols[<span class="dv">0</span>]</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="selection_files/figure-html/cell-3-output-1.png" width="543" height="468"></p>
+</div>
+</div>
+<p>The plot above shows <strong>learning curves</strong>. The solid line is the mean result over all trials, and the ribbon has a width of one standard deviation. For a small training set, the tree has more than enough resolving power, and the result is severe overfitting, as seen by the large gap between testing and training. As the size of the training set grows, however, variance decreases and the two error measurements come together.</p>
+<p>Note that the curves seem to approach a horizontal asymptote at a nonzero level of error. This level indicates an unavoidable bias for this tree size, no matter how much of the data we throw at it. As a simple analogy, think about approximating curves in the plane by a parabola. You will be able to do a perfect job for linear and quadratic functions, but if you approximate a cosine curve, you can’t get it exactly correct no matter how much information you have about it.</p>
+</div>
+<p>When you see a large gap between training and test errors, you should suspect that the learner will not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.</p>
+</section>
+</section>
+<section id="overfitting" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">4.2</span> Overfitting</h2>
+<p>One important factor we have not yet considered is noise in the training data—that is, erroneous values. If a learner responds too adeptly to isolated wrong values, it will also respond incorrectly to other nearby inputs. This situation is known as <strong>overfitting</strong>.</p>
+<!-- As a demonstration, consider the case of representing 5 points by a polynomial. One option is to 
+
+::: {.cell execution_count=4}
+``` {.python .cell-code}
+import numpy as np
+from numpy.polynomial import Polynomial as P
+import matplotlib.pyplot as plt
+x = np.arange(5)/4
+y = [1,0.99,1,0.99,1]
+
+xx = np.arange(400)/399
+
+plt.scatter(x, y, 20, color="black")
+
+p = P.fit(x, y, 4)
+plt.plot(xx, p(xx))
+
+p = P.fit(x, y, 1)
+plt.plot(xx, p(xx))
+plt.ylim(0.85,1.05)
+
+plt.legend(("data","degree 4","degree 1"))
+```
+
+::: {.cell-output .cell-output-display execution_count=3}
+```
+<matplotlib.legend.Legend at 0x13fe90b50>
+```
+:::
+
+::: {.cell-output .cell-output-display}
+![](selection_files/figure-html/cell-4-output-2.png){width=588 height=416}
+:::
+:::
+
+
+In @sec-select-learning-curves we saw that if too little data is supplied to a learner, there is a large gap between training error and generalization as measured on a testing set.  -->
+<!-- 
+
+, referring to the idea that the learner adapts 
+
+as the amount of training data increases for a particular learner, the training set variance decreases until the learner approximately reaches a steady state of essential bias. In practice, we usually leave the training set data fixed and adjust the hyperparameters. It becomes important, then, to detect when increasing the resolving power stops reducing bias and serves only to increase dependence on the training set.  -->
+<section id="overfitting-in-knn" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="overfitting-in-knn"><span class="header-section-number">4.2.1</span> Overfitting in kNN</h3>
+<p>Consider a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Let’s see how this plays out in about as simple a classification problem as we can come up with: a single feature, with the class being the sign of the feature’s value. (We arbitrarily assign zero to have class <span class="math inline">\(+1\)</span>.)</p>
+<p>Using <span class="math inline">\(k=1\)</span> produces fine results, as shown here for 4 different training sets of size 40:</p>
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-select-knn-1-clean" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-knn-1-clean-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: kNN with k=1 and perfect data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now suppose we use training sets that have just 3 mislabeled examples each. Here are some resulting classification functions:</p>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-select-knn-1-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-knn-1-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: kNN with k=1 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. This is an extreme example of overfitting.</p>
+<p>Now let’s bump up to <span class="math inline">\(k=3\)</span>. The results are more like we want, even with noisy data:</p>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div id="fig-select-knn-3-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-knn-3-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: kNN with k=3 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The voting mechanism of kNN allows the classifier to ignore isolated outliers. If we continue to <span class="math inline">\(k=7\)</span>, then the 3 outliers will never be able to outvote the correct values:</p>
+<div class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div id="fig-select-knn-7-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-knn-7-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: kNN with k=7 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note above that the decision boundary is still affected by the noisy values, so some of the more-borderline predictions are wrong, but clearer cases are always handled correctly.</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The lesson here is not simply that “bigger <span class="math inline">\(k\)</span> is better.” In the extreme case of <span class="math inline">\(k=21\)</span> above, the classifier will predict the same value everywhere! If the true classification boundary were more complicated (i.e., if the classes switched back and forth at high frequency), using even <span class="math inline">\(k=7\)</span> would be unable to capture many of the details.</p>
+</div>
+</div>
+</section>
+<section id="overfitting-in-decision-trees" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="overfitting-in-decision-trees"><span class="header-section-number">4.2.2</span> Overfitting in decision trees</h3>
+<p>As mentioned in <a href="#exm-select-hyper">Example&nbsp;<span>4.1</span></a>, the depth of a decision tree correlates with its ability to parse the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. With noisy data, we see clear signs of overfitting:</p>
+<div class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-tree-6-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: Decision tree with depth=6 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using a shallower tree reduces the extent of overfitting:</p>
+<div class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div id="fig-select-tree-3-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-tree-3-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Decision tree with depth=3 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can eliminate the overfitting completely and get a single point as the decision boundary, although its location still might not be ideal:</p>
+<div class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div id="fig-select-tree-2-noisy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-tree-2-noisy-output-1.png" width="569" height="411" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: Decision tree with depth=2 and noisy data</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="overfitting-and-variance" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="overfitting-and-variance"><span class="header-section-number">4.2.3</span> Overfitting and variance</h3>
+<p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy">Figure&nbsp;<span>4.2</span></a>, and <a href="#fig-select-tree-6-noisy">Figure&nbsp;<span>4.5</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in <a href="#sec-select-learning-curves"><span>Section&nbsp;4.1</span></a>.</p>
+<div id="exm-select-overfit-forest" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.3 </strong></span>Returning to the forest data from <a href="#exm-select-learning-curves">Example&nbsp;<span>4.2</span></a>, we try decision trees of maximum depth <span class="math inline">\(r=12\)</span> on 100 random training subsets of size 5000:</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">50000</span>,:<span class="dv">8</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (forest[<span class="st">"target"</span>][:<span class="dv">50000</span>] <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> experiment(learner, X, y, n):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        X, y,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> [] </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        X_tr, y_tr <span class="op">=</span> shuffle(X_tr, y_tr, random_state<span class="op">=</span>i)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        XX, yy <span class="op">=</span> X_tr[:n,:], y_tr[:n]</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        learner.fit(XX, yy) </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        err <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> balanced_accuracy_score(yy, learner.predict(XX))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        results.append( (<span class="st">"train"</span>, err) )   <span class="co"># training error</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        err <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> balanced_accuracy_score(y_te, learner.predict(X_te))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        results.append( (<span class="st">"test"</span>, err) )    <span class="co"># test error</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"kind"</span>, <span class="st">"error"</span>] )</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    sns.displot(data<span class="op">=</span>results, x<span class="op">=</span><span class="st">"error"</span>, hue<span class="op">=</span><span class="st">"kind"</span>, bins<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-fig-caption="Results from an overfit decision tree" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>experiment(tree, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="fig-select-overfit-forest" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="selection_files/figure-html/fig-select-overfit-forest-output-1.png" width="556" height="468" class="figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.8: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since <span class="math inline">\(2^{12}=4096\)</span>, this tree is probably overfit to the training data, and we also see the wide separation between training and testing that suggests the training does not generalize well. With a depth of <span class="math inline">\(r=4\)</span>, the training and testing results completely overlap:</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>experiment(tree, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="selection_files/figure-html/cell-15-output-1.png" width="556" height="468"></p>
+</div>
+</div>
+<p>However, notice above that the testing error increased substantially from the overfit case.</p>
+</div>
+<p>We could say that the last tree in <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a> is actually <em>underfit</em> to the data: the behavior of the data is probably too complex to be replicated well by such a shallow tree. We have encountered the bias–variance tradeoff again.</p>
+</section>
+</section>
+<section id="ensemble-methods" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="ensemble-methods"><span class="header-section-number">4.3</span> Ensemble methods</h2>
+<p>When a relatively expressive learning model is used, overfitting and strong dependence on the training set are possible. One meta-strategy for reducing training variance without decreasing the model expressiveness is to use an <strong>ensemble</strong> method.</p>
+<p>The idea of an ensemble is that averaging over many different training sets will reduce the variance that comes from overfitting. It’s much like trying to simulate the computation we used in the theory of expected values. The most common way to construct the training sets is called <em>bootstrap aggregation</em>, or <strong>bagging</strong> for short, in which samples are drawn randomly from the original training set. (Usually this is done <em>with replacement</em>, which means that some samples might be selected multiple times.)</p>
+<p>Sklearn has a <code>BaggingClassifier</code> that automates the process of generating an ensemble from just one basic type of estimator.</p>
+<div id="exm-select-ensemble-knn" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.4 </strong></span>Here is a dataset collected from images of dried beans:</p>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"Dry_Bean_Dataset.xlsx"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Area</th>
+      <th>Perimeter</th>
+      <th>MajorAxisLength</th>
+      <th>MinorAxisLength</th>
+      <th>AspectRation</th>
+      <th>Eccentricity</th>
+      <th>ConvexArea</th>
+      <th>EquivDiameter</th>
+      <th>Extent</th>
+      <th>Solidity</th>
+      <th>roundness</th>
+      <th>Compactness</th>
+      <th>ShapeFactor1</th>
+      <th>ShapeFactor2</th>
+      <th>ShapeFactor3</th>
+      <th>ShapeFactor4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>28395</td>
+      <td>610.291</td>
+      <td>208.178117</td>
+      <td>173.888747</td>
+      <td>1.197191</td>
+      <td>0.549812</td>
+      <td>28715</td>
+      <td>190.141097</td>
+      <td>0.763923</td>
+      <td>0.988856</td>
+      <td>0.958027</td>
+      <td>0.913358</td>
+      <td>0.007332</td>
+      <td>0.003147</td>
+      <td>0.834222</td>
+      <td>0.998724</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>28734</td>
+      <td>638.018</td>
+      <td>200.524796</td>
+      <td>182.734419</td>
+      <td>1.097356</td>
+      <td>0.411785</td>
+      <td>29172</td>
+      <td>191.272750</td>
+      <td>0.783968</td>
+      <td>0.984986</td>
+      <td>0.887034</td>
+      <td>0.953861</td>
+      <td>0.006979</td>
+      <td>0.003564</td>
+      <td>0.909851</td>
+      <td>0.998430</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29380</td>
+      <td>624.110</td>
+      <td>212.826130</td>
+      <td>175.931143</td>
+      <td>1.209713</td>
+      <td>0.562727</td>
+      <td>29690</td>
+      <td>193.410904</td>
+      <td>0.778113</td>
+      <td>0.989559</td>
+      <td>0.947849</td>
+      <td>0.908774</td>
+      <td>0.007244</td>
+      <td>0.003048</td>
+      <td>0.825871</td>
+      <td>0.999066</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30008</td>
+      <td>645.884</td>
+      <td>210.557999</td>
+      <td>182.516516</td>
+      <td>1.153638</td>
+      <td>0.498616</td>
+      <td>30724</td>
+      <td>195.467062</td>
+      <td>0.782681</td>
+      <td>0.976696</td>
+      <td>0.903936</td>
+      <td>0.928329</td>
+      <td>0.007017</td>
+      <td>0.003215</td>
+      <td>0.861794</td>
+      <td>0.994199</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>30140</td>
+      <td>620.134</td>
+      <td>201.847882</td>
+      <td>190.279279</td>
+      <td>1.060798</td>
+      <td>0.333680</td>
+      <td>30417</td>
+      <td>195.896503</td>
+      <td>0.773098</td>
+      <td>0.990893</td>
+      <td>0.984877</td>
+      <td>0.970516</td>
+      <td>0.006697</td>
+      <td>0.003665</td>
+      <td>0.941900</td>
+      <td>0.999166</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Although the dataset has data on 7 classes of beans, we will simplify our output by making it a one-vs-rest problem for just one class:</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"DERMASON"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is the confusion matrix we get from training a single kNN classifier on this dataset:</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  X, y,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  shuffle<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  random_state<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">3</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_tr, y_tr)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> pipe.predict(X_te)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( confusion_matrix(y_te, yhat, labels<span class="op">=</span>[<span class="va">True</span>,<span class="va">False</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 650   55]
+ [  46 1972]]</code></pre>
+</div>
+</div>
+<p>Here, we create an ensemble with 100 such classifiers, each trained on a different subset of size 40% of the size of the original training set:</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.75</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ensemble.fit(X_tr, y_tr)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> ensemble.predict(X.iloc[:<span class="dv">1</span>,:])</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"prediction on first sample is"</span>, </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">bool</span>(yhat[<span class="dv">0</span>])</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>prediction on first sample is False</code></pre>
+</div>
+</div>
+<p>The <code>estimators_</code> field of the ensemble object is a list of the individual trained classifiers. With a little work, we can manually tally up the number that vote <code>True</code> on a query:</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X.to_numpy()[:<span class="dv">1</span>,:]   <span class="co"># must use an array</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> [ model.predict(query)[<span class="dv">0</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">sum</span>(yy) <span class="op">/</span> <span class="bu">len</span>(yy)<span class="sc">:.0%}</span><span class="ss"> vote for True"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>26% vote for True</code></pre>
+</div>
+</div>
+<p>Since only 26% vote <code>True</code>, the prediction of the ensemble is <code>False</code>, as printed out above. Over the testing set, we find some improvement in the confusion matrix:</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> ensemble.predict(X_te)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( confusion_matrix(y_te, yhat, labels<span class="op">=</span>[<span class="va">True</span>,<span class="va">False</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 654   51]
+ [  41 1977]]</code></pre>
+</div>
+</div>
+</div>
+<div id="exm-select-ensemble-forest" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.5 </strong></span>Let’s return to the experiment of <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a>, where we found that a decision tree of depth <span class="math inline">\(r=12\)</span> was badly overfit. Now we use an ensemble of 50 such trees:</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">50000</span>,:<span class="dv">8</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (forest[<span class="st">"target"</span>][:<span class="dv">50000</span>] <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    tree,               <span class="co"># model used in each estimator</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.25</span>,   <span class="co"># fraction of data to use for each</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>            <span class="co"># use processes in parallel</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>experiment(ensemble, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img src="selection_files/figure-html/cell-22-output-1.png" width="556" height="468"></p>
+</div>
+</div>
+<p>Compared to the earlier experiment (see <a href="#fig-select-overfit-forest">Figure&nbsp;<span>4.8</span></a>), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias.</p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An ensemble of decision trees is known as a <strong>random forest</strong>. We could have used a <code>RandomForestClassifier</code> to accomplish the bagged decision tree ensemble in <a href="#exm-select-ensemble-forest">Example&nbsp;<span>4.5</span></a>.</p>
+</div>
+</div>
+<p>In addition to training on random subsets of the data, a bagging classifier can use random subsets of features (i.e., dimensions). The purpose again is to increase the diversity of the individual estimators in order to make the ensemble more robust.</p>
+<p>Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the potential for interpreting the decision process the way we can for an individual tree.</p>
+</section>
+<section id="validation" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="validation"><span class="header-section-number">4.4</span> Validation</h2>
+<p>We now return to the opening questions of this chapter: how should we determine optimal hyperparameters and algorithms?</p>
+<p>It’s tempting to compute test scores over a range of hyperparameter choices and simply choose the cast that scores best. That amounts to inspecting the graphs and values in the examples above and choosing the best outcomes. However, if we base hyperparameter optimization on a fixed test set, then we are effectively learning from that set! The hyperparameters might become too tuned—i.e., overfit—to our particular choice of the test set.</p>
+<p>To avoid this pitfall, we can split the data into <em>three</em> subsets for training, <strong>validation</strong>, and testing. The validation set is used to tune hyperparameters. Once training is performed at values determined to be best on validation, the test set is used to assess the generalization of the optimized learner.</p>
+<p>Unfortunately, a fixed three-way split of the data further reduces the amount of data available for training, which we often want to avoid.</p>
+<section id="cross-validation" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">4.4.1</span> Cross-validation</h3>
+<p>In <strong>cross-validation</strong>, each learner is trained multiple times using unique training and validation sets drawn from the same pool. The most common version is <strong><span class="math inline">\(k\)</span>-fold cross-validation</strong>:</p>
+<ol type="1">
+<li>Divide the original data into training and testing sets.</li>
+<li>Further divide the training data set into <span class="math inline">\(k\)</span> roughly equal parts called <em>folds</em>.</li>
+<li>Train a learner using folds <span class="math inline">\(2,3,\ldots,k\)</span> and validate on the cases in fold 1. Then train another learner on folds <span class="math inline">\(1,3,\ldots,k\)</span> and validate against the cases in fold 2. Continue until each fold has served once for validation.</li>
+<li>Select the hyperparameters producing the best validation score and retrain on the entire training set.</li>
+<li>Assess performance using the test set.</li>
+</ol>
+<p>A variation is <strong>stratified</strong> <span class="math inline">\(k\)</span>-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.</p>
+<div id="exm-select-folds" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.6 </strong></span>Here is how 16 elements can be split into 4 folds:</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train,test <span class="kw">in</span> kf.split(<span class="bu">range</span>(<span class="dv">16</span>)): </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"train:"</span>, train, <span class="st">", test:"</span>, test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>train: [ 0  2  3  4  5  7 10 11 12 13 14 15] , test: [1 6 8 9]
+train: [ 0  1  3  5  6  7  8  9 10 11 12 15] , test: [ 2  4 13 14]
+train: [ 0  1  2  3  4  5  6  8  9 12 13 14] , test: [ 7 10 11 15]
+train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
+</div>
+</div>
+</div>
+<div id="exm-select-cv-beans" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.7 </strong></span>Let’s apply cross-validation to the beans dataset.</p>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"Dry_Bean_Dataset.xlsx"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), knn)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    learner, </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    X_tr, y_tr, </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"balanced_accuracy"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Validation scores:"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( scores[<span class="st">"test_score"</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Validation scores:
+[0.93393194 0.93762617 0.923854   0.93617109 0.93037398 0.9326016 ]</code></pre>
+</div>
+</div>
+<p>The low variance across the folds that we see above is reassurance that they are representative. Conversely, if the scores were spread more widely, we would be concerned that there was too much dependence on the training set, which might indicate overfitting.</p>
+</div>
+</section>
+<section id="hyperparameter-tuning" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">4.4.2</span> Hyperparameter tuning</h3>
+<p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
+<div id="exm-select-vc-beans" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.8 </strong></span>Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>depths <span class="op">=</span> <span class="bu">range</span>(<span class="dv">4</span>, <span class="dv">16</span>, <span class="dv">1</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">8</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []    <span class="co"># for keeping results</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> depths:</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span>d, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    cv <span class="op">=</span> cross_validate(tree, </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        X_tr, y_tr, </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        cv<span class="op">=</span>kf, </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        scoring<span class="op">=</span><span class="st">"balanced_accuracy"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> err <span class="kw">in</span> <span class="dv">1</span> <span class="op">-</span> cv[<span class="st">"test_score"</span>]:</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      results.append( (d, err) )</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> pd.DataFrame(results, columns<span class="op">=</span>[<span class="st">"depth"</span>, <span class="st">"error"</span>] )</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>results, </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"depth"</span>, y<span class="op">=</span><span class="st">"error"</span>, </span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="selection_files/figure-html/cell-26-output-1.png" width="469" height="468"></p>
+</div>
+</div>
+<p>Initially the error decreases because the shallowest decision trees are underfit. The minimum error is at max depth 9, after which overfitting seems to take over:</p>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>results.groupby(<span class="st">"depth"</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>error</th>
+    </tr>
+    <tr>
+      <th>depth</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>0.203600</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.115527</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.098991</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.090455</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.086932</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.081718</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.082619</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.085970</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.084984</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.086531</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.085893</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.087356</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>We can now train this optimal classifier on the entire training set and measure performance on the reserved testing data:</p>
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">9</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>tree.fit(X_tr, y_tr)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> tree.predict(X_te)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"score is"</span>, balanced_accuracy_score(y_te, yhat) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>score is 0.9191394340897692</code></pre>
+</div>
+</div>
+</div>
+<section id="grid-search" class="level4" data-number="4.4.2.1">
+<h4 data-number="4.4.2.1" class="anchored" data-anchor-id="grid-search"><span class="header-section-number">4.4.2.1</span> Grid search</h4>
+<p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
+<div id="exm-select-grid-cancer" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.9 </strong></span>Let’s work with a dataset on breast cancer detection:</p>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cancer.drop(<span class="st">"target"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cancer[<span class="st">"target"</span>]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    X, y, </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>X_te.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>mean radius</th>
+      <th>mean texture</th>
+      <th>mean perimeter</th>
+      <th>mean area</th>
+      <th>mean smoothness</th>
+      <th>mean compactness</th>
+      <th>mean concavity</th>
+      <th>mean concave points</th>
+      <th>mean symmetry</th>
+      <th>mean fractal dimension</th>
+      <th>...</th>
+      <th>worst radius</th>
+      <th>worst texture</th>
+      <th>worst perimeter</th>
+      <th>worst area</th>
+      <th>worst smoothness</th>
+      <th>worst compactness</th>
+      <th>worst concavity</th>
+      <th>worst concave points</th>
+      <th>worst symmetry</th>
+      <th>worst fractal dimension</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>528</th>
+      <td>13.940</td>
+      <td>13.17</td>
+      <td>90.31</td>
+      <td>594.2</td>
+      <td>0.12480</td>
+      <td>0.09755</td>
+      <td>0.10100</td>
+      <td>0.066150</td>
+      <td>0.1976</td>
+      <td>0.06457</td>
+      <td>...</td>
+      <td>14.62</td>
+      <td>15.38</td>
+      <td>94.52</td>
+      <td>653.3</td>
+      <td>0.1394</td>
+      <td>0.1364</td>
+      <td>0.15590</td>
+      <td>0.1015</td>
+      <td>0.2160</td>
+      <td>0.07253</td>
+    </tr>
+    <tr>
+      <th>291</th>
+      <td>14.960</td>
+      <td>19.10</td>
+      <td>97.03</td>
+      <td>687.3</td>
+      <td>0.08992</td>
+      <td>0.09823</td>
+      <td>0.05940</td>
+      <td>0.048190</td>
+      <td>0.1879</td>
+      <td>0.05852</td>
+      <td>...</td>
+      <td>16.25</td>
+      <td>26.19</td>
+      <td>109.10</td>
+      <td>809.8</td>
+      <td>0.1313</td>
+      <td>0.3030</td>
+      <td>0.18040</td>
+      <td>0.1489</td>
+      <td>0.2962</td>
+      <td>0.08472</td>
+    </tr>
+    <tr>
+      <th>467</th>
+      <td>9.668</td>
+      <td>18.10</td>
+      <td>61.06</td>
+      <td>286.3</td>
+      <td>0.08311</td>
+      <td>0.05428</td>
+      <td>0.01479</td>
+      <td>0.005769</td>
+      <td>0.1680</td>
+      <td>0.06412</td>
+      <td>...</td>
+      <td>11.15</td>
+      <td>24.62</td>
+      <td>71.11</td>
+      <td>380.2</td>
+      <td>0.1388</td>
+      <td>0.1255</td>
+      <td>0.06409</td>
+      <td>0.0250</td>
+      <td>0.3057</td>
+      <td>0.07875</td>
+    </tr>
+    <tr>
+      <th>108</th>
+      <td>22.270</td>
+      <td>19.67</td>
+      <td>152.80</td>
+      <td>1509.0</td>
+      <td>0.13260</td>
+      <td>0.27680</td>
+      <td>0.42640</td>
+      <td>0.182300</td>
+      <td>0.2556</td>
+      <td>0.07039</td>
+      <td>...</td>
+      <td>28.40</td>
+      <td>28.01</td>
+      <td>206.80</td>
+      <td>2360.0</td>
+      <td>0.1701</td>
+      <td>0.6997</td>
+      <td>0.96080</td>
+      <td>0.2910</td>
+      <td>0.4055</td>
+      <td>0.09789</td>
+    </tr>
+    <tr>
+      <th>340</th>
+      <td>14.420</td>
+      <td>16.54</td>
+      <td>94.15</td>
+      <td>641.2</td>
+      <td>0.09751</td>
+      <td>0.11390</td>
+      <td>0.08007</td>
+      <td>0.042230</td>
+      <td>0.1912</td>
+      <td>0.06412</td>
+      <td>...</td>
+      <td>16.67</td>
+      <td>21.51</td>
+      <td>111.40</td>
+      <td>862.1</td>
+      <td>0.1294</td>
+      <td>0.3371</td>
+      <td>0.37550</td>
+      <td>0.1414</td>
+      <td>0.3053</td>
+      <td>0.08764</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div>
+</div>
+</div>
+<p>We start by trying decision tree classifiers in which we vary the maximum depth as well as some other options.</p>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"criterion"</span>:[<span class="st">"gini"</span>, <span class="st">"entropy"</span>], </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"max_depth"</span>:<span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">15</span>), </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"min_impurity_decrease"</span>:np.arange(<span class="dv">0</span>,<span class="fl">0.01</span>,<span class="fl">0.002</span>) }</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>grid_dt <span class="op">=</span> GridSearchCV(learner, grid, </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>grid_dt.fit(X_tr, y_tr)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_params_)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best parameters:
+{'criterion': 'gini', 'max_depth': 5, 'min_impurity_decrease': 0.0}
+
+Best score:
+0.9582328658156416</code></pre>
+</div>
+</div>
+<p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"kneighborsclassifier__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier())</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>grid_knn <span class="op">=</span> GridSearchCV(learner, grid, </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_tr, y_tr)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>grid_knn.best_params_, grid_knn.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>({'kneighborsclassifier__metric': 'euclidean',
+  'kneighborsclassifier__n_neighbors': 8,
+  'kneighborsclassifier__weights': 'uniform'},
+ 0.9749108434555516)</code></pre>
+</div>
+</div>
+<p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
+<div class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="kw">lambda</span> cl, X, y: f1_score( y, cl.predict(X) )</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"best tree f1 score:"</span>,score(grid_dt, X_te, y_te))</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"best knn f1 score:"</span>,score(grid_knn, X_te, y_te))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>best tree f1 score: 0.9306930693069307
+best knn f1 score: 0.9814814814814815</code></pre>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It may be instructive to rerun the competition above using different random seeds. The meaningfulness of the results is limited by their sensitivity to such choices. Don’t let floating-point values give you a false feeling of precision!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="alternatives-to-grid-search" class="level4" data-number="4.4.2.2">
+<h4 data-number="4.4.2.2" class="anchored" data-anchor-id="alternatives-to-grid-search"><span class="header-section-number">4.4.2.2</span> Alternatives to grid search</h4>
+<p>Grid search is a brute-force approach. It is <em>embarrassingly parallel</em>, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./classification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Data Science 1
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Toby Driscoll
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
