@@ -1099,11 +1099,16 @@ As often happens in statistics, the precise framing of the question can strongly
 For these exercises, you may of course use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).
 
 :::{#exr-stats-summary}
-For $n>2$, let $x_i=0$ for $i=1,\ldots,n-1$, and $x_n=M>0$. Find the **(a)** sample mean, **(b)** sample median, **(c)** corrected sample variance $s_{n-1}^2$, and **(d)** sample z-scores of the $x_i$ in terms of $M$ and $n$.
+Suppose that $n>2$, and let $x_i=0$ for $i=1,\ldots,n-1$, and $x_n=M$ for a positive number $M$. 
+
+a. Find the sample mean.
+a. Find the sample median. (You will have to describe multiple cases.)
+a. Find the corrected sample variance $s_{n-1}^2$.
+a. Find the sample z-scores of the $x_i$ in terms of $M$ and $n$.
 :::
 
 :::{#exr-stats-z-scores}
-Suppose the samples $x_1,\ldots,x_n$ have z-scores $z_1,\ldots,z_n$. 
+Suppose the samples $x_1,\ldots,x_n$ have the z-scores $z_1,\ldots,z_n$. 
 
 **(a)** Show that $\displaystyle \sum_{i=1}^n z_i = 0.$
 
@@ -1128,9 +1133,11 @@ $$
 
 **(a)** Find the median of the population.
 
-**(b)** Which of the following are outliers according to the 1.5 IQR criterion?
+**(b)** Which of the following values are outliers according to the 1.5 IQR criterion?
 
-$$-5,0,5,10,15,20$$
+$$
+-10,-5,0,5,10,15,20
+$$
 :::
 
 :::{#exr-stats-least-squares}
@@ -1140,23 +1147,23 @@ $$
 r_2(x) = \sum_{i=1}^n (x_i-x)^2.
 $$
 
-Show that $r_2$ has a global minimum at $x=\mu$, the population mean.
+Show using calculus that $r_2$ is minimized at $x=\mu$, the population mean.
 :::
 
 :::{#exr-stats-least-mad}
 Suppose that $n=2k+1$ and a population has values $x_1,x_2,\ldots,x_{n}$ in sorted order, so that the median is equal to $x_k$. Define the function 
 
 $$
-r_1(x) = \sum_{i=1}^n |x_i-x|.
+r_1(x) = \sum_{i=1}^n |x_i - x|.
 $$
 
-(This function is the *total absolute deviation* of $x$ from the population.) Show that $r_1$ has a global minimum at $x=x_k$ by way of the following steps. 
+(This function is called the *total absolute deviation* of $x$ from the population.) Show that $r_1$ has a global minimum at $x=x_k$ by way of the following steps. 
 
 **(a)** Explain why the derivative of $r_1$ is undefined at every $x_i$. Consequently, all of the $x_i$ are critical points of $r_1$. 
 
-**(b)** Determine $r_1'$ within each piece of the real axis between the $x_i$, and explain why there cannot be any additional critical points to consider. (Note: you can replace the absolute values with a piecewise definition of $r_1$, where the formula for the pieces changes as you cross over each $x_i$.) 
+**(b)** Determine $r_1'$ within each interval $(-\infty,x_1),\, (x_1,x_2),\, (x_2,x_3),$ and so on. Explain why this shows that there cannot be any additional critical points to consider. (Note: you can replace the absolute values with a piecewise definition of $r_1$, where the formula for the pieces changes as you cross over each $x_i$.) 
 
-**(c)** By appealing to the derivative values between the $x_i$, explain why it must be that
+**(c)** By considering the $r_1'$ values between the $x_i$, explain why it must be that
 
 $$
 r_1(x_1) > r_1(x_2) > \cdots > r_1(x_k) < r_1(x_{k+1}) < \cdots < r_1(x_n).

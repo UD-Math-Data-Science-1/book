@@ -1027,21 +1027,21 @@ For these exercises, you may use computer help to work on a problem, but your an
 ::::{#exr-class-dankness}
 Here is a confusion matrix for a classifier of meme dankness. 
 
-![](_media/dankness.png)
+![](_media/dankness.png){width=360}
 
-Calculate the **(a)** recall, **(b)** precision, **(c)** specificity, **(d)** accuracy, and **(e)** $F_1$ score of the classifier, where *dank* is the positive outcome.
+Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(b)** precision, **(c)** specificity, **(d)** accuracy, and **(e)** $F_1$ score of the classifier.
 ::::
 
 ::::{#exr-class-flavors}
 Here is a confusion matrix for a classifier of ice cream flavors. 
 
-![](_media/flavors.png)
+![](_media/flavors.png){width=500}
 
-**(a)** Calculate the recall rate for chocolate.
+**(a)** Calculate the recall rate for *chocolate*.
 
-**(b)** Find the precision for vanilla. 
+**(b)** Find the precision for *vanilla*. 
 
-**(c)** Find the accuracy for strawberry.
+**(c)** Find the accuracy for *strawberry*.
 ::::
 
 ::::{#exr-class-gini}
@@ -1062,9 +1062,13 @@ Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from t
 ::::
 
 ::::{#exr-class-triangle}
-Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary of $k$-nearest neighbors with $k=1$, using the 2-norm. 
+Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for $k$-nearest neighbors with $k=1$, using **(a)** the 2-norm and **(b)** the $\infty$-norm. 
 ::::
 
 ::::{#exr-class-ellipse}
-Define points on an ellipse by $x_k=a\cos(\theta_k)$ and $y_k=b\sin(\theta_k)$, where $a$ and $b$ are positive and $\theta_k=2k\pi/8$ for $k=0,1,\ldots,7$. Show that if the $x_k$ and $y_k$ are standardized into z-scores, then the resulting points all lie on a circle centered at the origin. (Standardizing points into z-scores is sometimes called *sphereing* them.)
+Define 8 points on an ellipse by $x_k=a\cos(\theta_k)$ and $y_k=b\sin(\theta_k)$, where $a$ and $b$ are positive and 
+$$
+\theta_k \in \left{ \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \ldots, 2\pi \right}. 
+$$
+Let $u_1,\ldots,u_8$ and $v_1,\ldots,v_8$ be the z-scores of the $x_k$ and the $y_k$, respectively. Show that the points $(u_k,v_k)$ all lie on a circle centered at the origin for all $k=1,\ldots,8$. (By extension, standardizing points into z-scores is sometimes called *sphereing* them.)
 ::::

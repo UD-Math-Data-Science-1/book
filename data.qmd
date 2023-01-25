@@ -839,3 +839,35 @@ We'll save this modified dataset to its own file for our future use:
 ```{python}
 diamonds.to_csv("diamonds.csv", index=False)
 ```
+
+## Exercises {.unnumbered}
+
+::::{#exr-data-types}
+For each type of data, classify it as discrete quantitative, continuous quantitative, categorical, or other.
+
+a) How many students are enrolled at a university
+a) Your favorite day of the week
+a) How many inches of rain fall at an airport during one day
+a) Weight of a motor vehicle
+a) Manufacturer of a motor vehicle
+a) Text of all Yelp reviews for a restaurant
+a) Star ratings from all Yelp reviews for a restaurant
+a) Size of the living area of an apartment
+a) DNA nucleotide sequence of a cell
+::::
+
+::::{#exr-data-vectors}
+Give the length of each vector or series.
+
+a. Morning waking times every day for a week
+a. Number of siblings (max 12) for each student in a class of 30
+a. Position and momentum of a roller coaster car
+::::
+
+::::{#exr-test-dummy}
+Describe a scheme for creating dummy variables for the days of the week. Use your scheme to encode the vector:
+
+``` 
+[Tuesday, Sunday, Friday, Tuesday, Monday]
+```
+::::
