@@ -530,7 +530,7 @@ R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\di
 <h3 data-number="5.1.3" class="anchored" data-anchor-id="case-study-arctic-ice"><span class="header-section-number">5.1.3</span> Case study: Arctic ice</h3>
 <p>Let’s import data about the extent of sea ice in the Arctic circle, collected monthly since 1979.</p>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ice <span class="op">=</span> pd.read_csv(<span class="st">"sea-ice.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ice <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/sea-ice.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify column names:</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ice.columns <span class="op">=</span> [s.strip() <span class="cf">for</span> s <span class="kw">in</span> ice.columns]   </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ice.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -759,7 +759,7 @@ L(\bfw) = \twonorm{\bfX \bfw- \bfy}^2.
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="case-study-advertising-and-sales"><span class="header-section-number">5.2.1</span> Case study: Advertising and sales</h3>
 <p>Here we load data about advertising spending on different media in many markets:</p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ads <span class="op">=</span> pd.read_csv(<span class="st">"advertising.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ads <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/advertising.csv"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ads.head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
@@ -1835,7 +1835,7 @@ Name: y, dtype: float64</code></pre>
 <span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best forest CoD: </span><span class="sc">{</span>optim<span class="sc">.</span>score(X_te, y_te)<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>best forest CoD: 0.7855</code></pre>
+<pre><code>best forest CoD: 0.7751</code></pre>
 </div>
 </div>
 </div>
@@ -1896,7 +1896,7 @@ Important
 <h3 data-number="5.5.3" class="anchored" data-anchor-id="case-study-personal-spam-filter"><span class="header-section-number">5.5.3</span> Case study: Personal spam filter</h3>
 <p>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
 <div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(<span class="st">"spambase.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/spambase.csv"</span>)</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>spam.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 
@@ -2172,7 +2172,7 @@ accuracy score: 0.93485</code></pre>
 <div id="exm-regression-logistic-gas" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.8 </strong></span>As a multiclass example, we use a data set about gas sensors recording values over long periods of time:</p>
 <div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>gas <span class="op">=</span> pd.read_csv(<span class="st">"gas_drift.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>gas <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/gas_drift.csv"</span>)</span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> gas[<span class="st">"Class"</span>]</span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> gas.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="st">"columns"</span>)</span>
 <span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>X_tr, X_te, y_tr, y_te <span class="op">=</span> train_test_split(</span>
