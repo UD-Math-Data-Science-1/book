@@ -370,7 +370,7 @@ Sklearn has a `BaggingClassifier` that automates the process of generating an en
 Here is a dataset collected from images of dried beans:
 
 ```{python}
-beans = pd.read_excel("Dry_Bean_Dataset.xlsx")
+beans = pd.read_excel("_datasets/Dry_Bean_Dataset.xlsx")
 X = beans.drop("Class", axis=1)
 X.head()
 ```
@@ -504,7 +504,7 @@ for train,test in kf.split(range(16)):
 Let's apply cross-validation to the beans dataset. 
 
 ```{python}
-beans = pd.read_excel("Dry_Bean_Dataset.xlsx")
+beans = pd.read_excel("_datasets/Dry_Bean_Dataset.xlsx")
 X = beans.drop("Class", axis=1)
 y = beans["Class"]
 

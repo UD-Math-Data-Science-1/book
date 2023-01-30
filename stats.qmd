@@ -1028,7 +1028,7 @@ Attaching theorem-supported numbers to real data feels precise and infallible. T
 The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. The Datasaurus is a set of 142 points making a handsome portrait:
 
 ```{python}
-dozen = pd.read_csv("DatasaurusDozen.tsv", delimiter="\t")
+dozen = pd.read_csv("_datasets/DatasaurusDozen.tsv", delimiter="\t")
 sns.relplot(data=dozen[dozen["dataset"]=="dino"], x="x", y="y");
 ```
 

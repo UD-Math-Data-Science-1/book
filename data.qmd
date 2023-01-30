@@ -672,7 +672,7 @@ Above we saw that you can use the `loc` property to access a frame's row by name
 ::::{#exm-data-selection}
 Here's a local file that contains daily weather summaries from Newark, Delaware:
 ```{python}
-weather = pd.read_csv("ghcn_newark.csv")
+weather = pd.read_csv("_datasets/ghcn_newark.csv")
 weather.head()
 ```
 
@@ -701,7 +701,7 @@ When a column of a dataset is a time stamp, it can be used as the index of the d
 ::::{#exm-data-time-index}
 Let's reload the dataset using the *DATE* column (which is second in the file) as a `datetime` index:
 ```{python}
-weather = pd.read_csv("ghcn_newark.csv", index_col=1, parse_dates=True)
+weather = pd.read_csv("_datasets/ghcn_newark.csv", index_col=1, parse_dates=True)
 weather.head()
 ```
 
@@ -771,7 +771,7 @@ It's possible to import datasets from the Web directly into pandas. However, web
 
 ```{python}
 import pandas as pd
-loans = pd.read_csv("loan.csv")
+loans = pd.read_csv("_datasets/loan.csv")
 loans.head()
 ```
 

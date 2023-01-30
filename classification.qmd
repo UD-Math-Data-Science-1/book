@@ -178,7 +178,7 @@ Let's return to the (previously cleaned) loan applications dataset.
 
 ```{python}
 import pandas as pd
-loans = pd.read_csv("loan_clean.csv")
+loans = pd.read_csv("_datasets/loan_clean.csv")
 loans.head()
 ```
 

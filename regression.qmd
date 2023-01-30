@@ -216,7 +216,7 @@ This yields $R^2 = 1 - (9)(3/14) = -13/14$. Since the result is negative, we wou
 Let's import data about the extent of sea ice in the Arctic circle, collected monthly since 1979.
 
 ```{python}
-ice = pd.read_csv("sea-ice.csv")
+ice = pd.read_csv("_datasets/sea-ice.csv")
 # Simplify column names:
 ice.columns = [s.strip() for s in ice.columns]   
 ice.head()
@@ -363,7 +363,7 @@ As in the $d=1$ case, minimizing the loss is equivalent to solving a linear syst
 Here we load data about advertising spending on different media in many markets:
 
 ```{python}
-ads = pd.read_csv("advertising.csv")
+ads = pd.read_csv("_datasets/advertising.csv")
 ads.head(8)
 ```
 
@@ -1040,7 +1040,7 @@ The parameter $C$ functions like the inverse of the regularization parameter $\a
 We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.
 
 ```{python}
-spam = pd.read_csv("spambase.csv")
+spam = pd.read_csv("_datasets/spambase.csv")
 spam.head()
 ```
 
@@ -1136,7 +1136,7 @@ Computed over a testing set, we get a matrix of probabilities. Each of the rows 
 As a multiclass example, we use a data set about gas sensors recording values over long periods of time:
 
 ```{python}
-gas = pd.read_csv("gas_drift.csv")
+gas = pd.read_csv("_datasets/gas_drift.csv")
 y = gas["Class"]
 X = gas.drop("Class", axis="columns")
 X_tr, X_te, y_tr, y_te = train_test_split(
