@@ -32,7 +32,7 @@ In each case, it makes sense, for example, to order different values and compute
 :::
 
 :::{.column-margin}
-{{< video _media/Example1_1.mp4 >}}
+{{< video https://www.dropbox.com/s/l9fs3fa43hup08l/Example1_1.mp4?raw=1 >}}
 :::
 
 :::{.callout-note}
@@ -186,7 +186,7 @@ x
 ```
 
 :::{.column-margin}
-{{< video _media/Section1_2_a.mp4 >}}
+{{< video https://www.dropbox.com/s/eq4n2508uhtwjir/Section1_2_a.mp4?raw=1 >}}
 :::
 
 A vector has a data type for its elements:
@@ -227,7 +227,7 @@ In base Python and in NumPy, the last element of a range is omitted. This is gua
 #### Access and slicing
 
 :::{.column-margin}
-{{< video _media/Section1_2_b.mp4 >}}
+{{< video https://www.dropbox.com/s/adsliy9ncce8ivx/Section1_2_b.mp4?raw=1 >}}
 :::
 
 Use square brackets to refer to an element of a vector:
@@ -328,7 +328,7 @@ The term **matrix** is often used simply to mean a 2D array. Technically, though
 #### Construction
 
 :::{.column-margin}
-{{< video _media/Section1_2_c.mp4 >}}
+{{< video https://www.dropbox.com/s/xk5nyx52miba267/Section1_2_c.mp4?raw=1 >}}
 :::
 
 One way to construct an array is by a list comprehension:
@@ -389,7 +389,7 @@ np.vstack( (range(5), range(5,0,-1)) )
 #### Indexing and slicing
 
 :::{.column-margin}
-{{< video _media/Section1_2_d.mp4 >}}
+{{< video https://www.dropbox.com/s/b8187f40a2vghjv/Section1_2_d.mp4?raw=1 >}}
 :::
 
 We can use successive brackets to refer to an element, row then column:
@@ -425,7 +425,7 @@ A[:, :2]    # all rows, first 2 columns
 #### Reductions
 
 :::{.column-margin}
-{{< video _media/Section1_2_e.mp4 >}}
+{{< video https://www.dropbox.com/s/nvt91p4okytb33e/Section1_2_e.mp4?raw=1 >}}
 :::
 
 A common task is to *reduce* an array along one dimension, called an *axis* in numpy, resulting in an array of one less dimension. It's easiest to explain by some examples.
@@ -638,7 +638,7 @@ rainbow.loc["red"].to_numpy()
 ::::
 
 :::{.column-margin}
-{{< video _media/Section1_4_a.mp4 >}}
+{{< video https://www.dropbox.com/s/t74l0mltts3s9vz/Section1_4_a.mp4?raw=1 >}}
 :::
 
 Here is another way to construct a data frame in pandas. We give a list of rows, plus (optionally) the index and the names of the columns:
@@ -715,7 +715,7 @@ ads.dtypes    # data types of the columns
 ::::
 
 :::{.column-margin}
-{{< video _media/Section1_4_b.mp4 >}}
+{{< video  https://www.dropbox.com/s/1r9is5thcryuarl/Section1_4_b.mp4?raw=1 >}}
 :::
 
 It's also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with `pd.read_` showing the formats pandas understands.
@@ -752,7 +752,7 @@ dry_cold.head(6)
 ::::
 
 :::{.column-margin}
-{{< video _media/Example1_10.mp4 >}}
+{{< video https://www.dropbox.com/s/uwrmgpz15mm5aj9/Example1_10.mp4?raw=1 >}}
 :::
 
 When a column of a dataset is a time stamp, it can be used as the index of the data frame, which makes some time-centric operations easier.
@@ -776,7 +776,7 @@ weather.loc["1979-03"].head()
 ::::
 
 :::{.column-margin}
-{{< video _media/Section1_4_c.mp4 >}}
+{{< video https://www.dropbox.com/s/h3ezvnpyn8xe5ch/Section1_4_c.mp4?raw=1 >}}
 :::
 
 ::: {.callout-tip}
@@ -796,7 +796,7 @@ Raw data often needs to be manipulated into a useable format before algorithms c
 In real data sets, we often must cope with data series that have missing values. This is a common source of mistakes and confusion, especially because there is no universal practice. Sometimes zero is used to represent a missing number. It's also common to use an impossible value, such as $-999$ to represent weight, to signify missing data. 
 
 :::{.column-margin}
-{{< video _media/Section1_5_a.mp4 >}}
+{{< video https://www.dropbox.com/s/wz9vpncyyyw2xex/Section1_5_a.mp4?raw=1 >}}
 :::
 
 Formally, the most natural way to represent missing data in Python is as `nan` or `NaN`, and pandas makes it easy to find and manipulate such values. Here is another well-known data set, this time about penguins:
@@ -837,7 +837,7 @@ It's possible to import datasets from the Web directly into pandas. However, web
 :::
 
 :::{.column-margin}
-{{< video _media/Section1_5_b.mp4 >}}
+{{< video https://www.dropbox.com/s/t56b2blgzn6s9a6/Section1_5_b.mp4?raw=1 >}}
 :::
 
 ```{python}
@@ -886,7 +886,7 @@ loans.to_csv("loan_clean.csv", index=False)
 ### Diamonds example
 
 :::{.column-margin}
-{{< video _media/Section1_5_c.mp4 >}}
+{{< video https://www.dropbox.com/s/fjf4gj8bj5hwvwm/Section1_5_c.mp4?raw=1 >}}
 :::
 
 We will also be using a seaborn [dataset comprising features of diamonds and their prices](https://ggplot2.tidyverse.org/reference/diamonds.html):
