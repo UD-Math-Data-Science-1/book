@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -280,7 +280,6 @@ MathJax = {
 
 </header>
 
-<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -330,7 +329,6 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-</div>
 <div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
@@ -352,7 +350,7 @@ MathJax = {
 <div id="def-select-hyper" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.1 </strong></span>A <strong>hyperparameter</strong> of a learning algorithm is a value or setting affecting the algorithm that remains fixed throughout training.</p>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -382,7 +380,7 @@ Note
 \]</span> Then we define the <strong>expected value</strong> of the classifier as the average over all training sets: <span class="math display">\[
 \E{\hat{f}(x)} = \frac{1}{N} \sum_{i=1}^N \hat{f_i}(x).
 \]</span></p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -573,7 +571,7 @@ as the amount of training data increases for a particular learner, the training 
 </div>
 </div>
 <p>Note above that the decision boundary is still affected by the noisy values, so some of the more-borderline predictions are wrong, but clearer cases are always handled correctly.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -693,129 +691,130 @@ Danger
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Area</th>
-      <th>Perimeter</th>
-      <th>MajorAxisLength</th>
-      <th>MinorAxisLength</th>
-      <th>AspectRation</th>
-      <th>Eccentricity</th>
-      <th>ConvexArea</th>
-      <th>EquivDiameter</th>
-      <th>Extent</th>
-      <th>Solidity</th>
-      <th>roundness</th>
-      <th>Compactness</th>
-      <th>ShapeFactor1</th>
-      <th>ShapeFactor2</th>
-      <th>ShapeFactor3</th>
-      <th>ShapeFactor4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>28395</td>
-      <td>610.291</td>
-      <td>208.178117</td>
-      <td>173.888747</td>
-      <td>1.197191</td>
-      <td>0.549812</td>
-      <td>28715</td>
-      <td>190.141097</td>
-      <td>0.763923</td>
-      <td>0.988856</td>
-      <td>0.958027</td>
-      <td>0.913358</td>
-      <td>0.007332</td>
-      <td>0.003147</td>
-      <td>0.834222</td>
-      <td>0.998724</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>28734</td>
-      <td>638.018</td>
-      <td>200.524796</td>
-      <td>182.734419</td>
-      <td>1.097356</td>
-      <td>0.411785</td>
-      <td>29172</td>
-      <td>191.272750</td>
-      <td>0.783968</td>
-      <td>0.984986</td>
-      <td>0.887034</td>
-      <td>0.953861</td>
-      <td>0.006979</td>
-      <td>0.003564</td>
-      <td>0.909851</td>
-      <td>0.998430</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>29380</td>
-      <td>624.110</td>
-      <td>212.826130</td>
-      <td>175.931143</td>
-      <td>1.209713</td>
-      <td>0.562727</td>
-      <td>29690</td>
-      <td>193.410904</td>
-      <td>0.778113</td>
-      <td>0.989559</td>
-      <td>0.947849</td>
-      <td>0.908774</td>
-      <td>0.007244</td>
-      <td>0.003048</td>
-      <td>0.825871</td>
-      <td>0.999066</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>30008</td>
-      <td>645.884</td>
-      <td>210.557999</td>
-      <td>182.516516</td>
-      <td>1.153638</td>
-      <td>0.498616</td>
-      <td>30724</td>
-      <td>195.467062</td>
-      <td>0.782681</td>
-      <td>0.976696</td>
-      <td>0.903936</td>
-      <td>0.928329</td>
-      <td>0.007017</td>
-      <td>0.003215</td>
-      <td>0.861794</td>
-      <td>0.994199</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>30140</td>
-      <td>620.134</td>
-      <td>201.847882</td>
-      <td>190.279279</td>
-      <td>1.060798</td>
-      <td>0.333680</td>
-      <td>30417</td>
-      <td>195.896503</td>
-      <td>0.773098</td>
-      <td>0.990893</td>
-      <td>0.984877</td>
-      <td>0.970516</td>
-      <td>0.006697</td>
-      <td>0.003665</td>
-      <td>0.941900</td>
-      <td>0.999166</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>Area</th>
+<th>Perimeter</th>
+<th>MajorAxisLength</th>
+<th>MinorAxisLength</th>
+<th>AspectRation</th>
+<th>Eccentricity</th>
+<th>ConvexArea</th>
+<th>EquivDiameter</th>
+<th>Extent</th>
+<th>Solidity</th>
+<th>roundness</th>
+<th>Compactness</th>
+<th>ShapeFactor1</th>
+<th>ShapeFactor2</th>
+<th>ShapeFactor3</th>
+<th>ShapeFactor4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>28395</td>
+<td>610.291</td>
+<td>208.178117</td>
+<td>173.888747</td>
+<td>1.197191</td>
+<td>0.549812</td>
+<td>28715</td>
+<td>190.141097</td>
+<td>0.763923</td>
+<td>0.988856</td>
+<td>0.958027</td>
+<td>0.913358</td>
+<td>0.007332</td>
+<td>0.003147</td>
+<td>0.834222</td>
+<td>0.998724</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>28734</td>
+<td>638.018</td>
+<td>200.524796</td>
+<td>182.734419</td>
+<td>1.097356</td>
+<td>0.411785</td>
+<td>29172</td>
+<td>191.272750</td>
+<td>0.783968</td>
+<td>0.984986</td>
+<td>0.887034</td>
+<td>0.953861</td>
+<td>0.006979</td>
+<td>0.003564</td>
+<td>0.909851</td>
+<td>0.998430</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>29380</td>
+<td>624.110</td>
+<td>212.826130</td>
+<td>175.931143</td>
+<td>1.209713</td>
+<td>0.562727</td>
+<td>29690</td>
+<td>193.410904</td>
+<td>0.778113</td>
+<td>0.989559</td>
+<td>0.947849</td>
+<td>0.908774</td>
+<td>0.007244</td>
+<td>0.003048</td>
+<td>0.825871</td>
+<td>0.999066</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>30008</td>
+<td>645.884</td>
+<td>210.557999</td>
+<td>182.516516</td>
+<td>1.153638</td>
+<td>0.498616</td>
+<td>30724</td>
+<td>195.467062</td>
+<td>0.782681</td>
+<td>0.976696</td>
+<td>0.903936</td>
+<td>0.928329</td>
+<td>0.007017</td>
+<td>0.003215</td>
+<td>0.861794</td>
+<td>0.994199</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>30140</td>
+<td>620.134</td>
+<td>201.847882</td>
+<td>190.279279</td>
+<td>1.060798</td>
+<td>0.333680</td>
+<td>30417</td>
+<td>195.896503</td>
+<td>0.773098</td>
+<td>0.990893</td>
+<td>0.984877</td>
+<td>0.970516</td>
+<td>0.006697</td>
+<td>0.003665</td>
+<td>0.941900</td>
+<td>0.999166</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -910,7 +909,7 @@ Danger
 </div>
 <p>Compared to the earlier experiment (see <a href="#fig-select-overfit-forest">Figure&nbsp;<span>4.8</span></a>), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias.</p>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1032,71 +1031,72 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <div class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>results.groupby(<span class="st">"depth"</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>error</th>
-    </tr>
-    <tr>
-      <th>depth</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>4</th>
-      <td>0.203600</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0.115527</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0.098991</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0.090455</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0.086932</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>0.081718</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0.082619</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0.085970</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0.084984</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0.086531</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>0.085893</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>0.087356</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>error</th>
+</tr>
+<tr class="odd">
+<th>depth</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>4</th>
+<td>0.203600</td>
+</tr>
+<tr class="even">
+<th>5</th>
+<td>0.115527</td>
+</tr>
+<tr class="odd">
+<th>6</th>
+<td>0.098991</td>
+</tr>
+<tr class="even">
+<th>7</th>
+<td>0.090455</td>
+</tr>
+<tr class="odd">
+<th>8</th>
+<td>0.086932</td>
+</tr>
+<tr class="even">
+<th>9</th>
+<td>0.081718</td>
+</tr>
+<tr class="odd">
+<th>10</th>
+<td>0.082619</td>
+</tr>
+<tr class="even">
+<th>11</th>
+<td>0.085970</td>
+</tr>
+<tr class="odd">
+<th>12</th>
+<td>0.084984</td>
+</tr>
+<tr class="even">
+<th>13</th>
+<td>0.086531</td>
+</tr>
+<tr class="odd">
+<th>14</th>
+<td>0.085893</td>
+</tr>
+<tr class="even">
+<th>15</th>
+<td>0.087356</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1130,159 +1130,160 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>X_te.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mean radius</th>
-      <th>mean texture</th>
-      <th>mean perimeter</th>
-      <th>mean area</th>
-      <th>mean smoothness</th>
-      <th>mean compactness</th>
-      <th>mean concavity</th>
-      <th>mean concave points</th>
-      <th>mean symmetry</th>
-      <th>mean fractal dimension</th>
-      <th>...</th>
-      <th>worst radius</th>
-      <th>worst texture</th>
-      <th>worst perimeter</th>
-      <th>worst area</th>
-      <th>worst smoothness</th>
-      <th>worst compactness</th>
-      <th>worst concavity</th>
-      <th>worst concave points</th>
-      <th>worst symmetry</th>
-      <th>worst fractal dimension</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>528</th>
-      <td>13.940</td>
-      <td>13.17</td>
-      <td>90.31</td>
-      <td>594.2</td>
-      <td>0.12480</td>
-      <td>0.09755</td>
-      <td>0.10100</td>
-      <td>0.066150</td>
-      <td>0.1976</td>
-      <td>0.06457</td>
-      <td>...</td>
-      <td>14.62</td>
-      <td>15.38</td>
-      <td>94.52</td>
-      <td>653.3</td>
-      <td>0.1394</td>
-      <td>0.1364</td>
-      <td>0.15590</td>
-      <td>0.1015</td>
-      <td>0.2160</td>
-      <td>0.07253</td>
-    </tr>
-    <tr>
-      <th>291</th>
-      <td>14.960</td>
-      <td>19.10</td>
-      <td>97.03</td>
-      <td>687.3</td>
-      <td>0.08992</td>
-      <td>0.09823</td>
-      <td>0.05940</td>
-      <td>0.048190</td>
-      <td>0.1879</td>
-      <td>0.05852</td>
-      <td>...</td>
-      <td>16.25</td>
-      <td>26.19</td>
-      <td>109.10</td>
-      <td>809.8</td>
-      <td>0.1313</td>
-      <td>0.3030</td>
-      <td>0.18040</td>
-      <td>0.1489</td>
-      <td>0.2962</td>
-      <td>0.08472</td>
-    </tr>
-    <tr>
-      <th>467</th>
-      <td>9.668</td>
-      <td>18.10</td>
-      <td>61.06</td>
-      <td>286.3</td>
-      <td>0.08311</td>
-      <td>0.05428</td>
-      <td>0.01479</td>
-      <td>0.005769</td>
-      <td>0.1680</td>
-      <td>0.06412</td>
-      <td>...</td>
-      <td>11.15</td>
-      <td>24.62</td>
-      <td>71.11</td>
-      <td>380.2</td>
-      <td>0.1388</td>
-      <td>0.1255</td>
-      <td>0.06409</td>
-      <td>0.0250</td>
-      <td>0.3057</td>
-      <td>0.07875</td>
-    </tr>
-    <tr>
-      <th>108</th>
-      <td>22.270</td>
-      <td>19.67</td>
-      <td>152.80</td>
-      <td>1509.0</td>
-      <td>0.13260</td>
-      <td>0.27680</td>
-      <td>0.42640</td>
-      <td>0.182300</td>
-      <td>0.2556</td>
-      <td>0.07039</td>
-      <td>...</td>
-      <td>28.40</td>
-      <td>28.01</td>
-      <td>206.80</td>
-      <td>2360.0</td>
-      <td>0.1701</td>
-      <td>0.6997</td>
-      <td>0.96080</td>
-      <td>0.2910</td>
-      <td>0.4055</td>
-      <td>0.09789</td>
-    </tr>
-    <tr>
-      <th>340</th>
-      <td>14.420</td>
-      <td>16.54</td>
-      <td>94.15</td>
-      <td>641.2</td>
-      <td>0.09751</td>
-      <td>0.11390</td>
-      <td>0.08007</td>
-      <td>0.042230</td>
-      <td>0.1912</td>
-      <td>0.06412</td>
-      <td>...</td>
-      <td>16.67</td>
-      <td>21.51</td>
-      <td>111.40</td>
-      <td>862.1</td>
-      <td>0.1294</td>
-      <td>0.3371</td>
-      <td>0.37550</td>
-      <td>0.1414</td>
-      <td>0.3053</td>
-      <td>0.08764</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mean radius</th>
+<th>mean texture</th>
+<th>mean perimeter</th>
+<th>mean area</th>
+<th>mean smoothness</th>
+<th>mean compactness</th>
+<th>mean concavity</th>
+<th>mean concave points</th>
+<th>mean symmetry</th>
+<th>mean fractal dimension</th>
+<th>...</th>
+<th>worst radius</th>
+<th>worst texture</th>
+<th>worst perimeter</th>
+<th>worst area</th>
+<th>worst smoothness</th>
+<th>worst compactness</th>
+<th>worst concavity</th>
+<th>worst concave points</th>
+<th>worst symmetry</th>
+<th>worst fractal dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>528</th>
+<td>13.940</td>
+<td>13.17</td>
+<td>90.31</td>
+<td>594.2</td>
+<td>0.12480</td>
+<td>0.09755</td>
+<td>0.10100</td>
+<td>0.066150</td>
+<td>0.1976</td>
+<td>0.06457</td>
+<td>...</td>
+<td>14.62</td>
+<td>15.38</td>
+<td>94.52</td>
+<td>653.3</td>
+<td>0.1394</td>
+<td>0.1364</td>
+<td>0.15590</td>
+<td>0.1015</td>
+<td>0.2160</td>
+<td>0.07253</td>
+</tr>
+<tr class="even">
+<th>291</th>
+<td>14.960</td>
+<td>19.10</td>
+<td>97.03</td>
+<td>687.3</td>
+<td>0.08992</td>
+<td>0.09823</td>
+<td>0.05940</td>
+<td>0.048190</td>
+<td>0.1879</td>
+<td>0.05852</td>
+<td>...</td>
+<td>16.25</td>
+<td>26.19</td>
+<td>109.10</td>
+<td>809.8</td>
+<td>0.1313</td>
+<td>0.3030</td>
+<td>0.18040</td>
+<td>0.1489</td>
+<td>0.2962</td>
+<td>0.08472</td>
+</tr>
+<tr class="odd">
+<th>467</th>
+<td>9.668</td>
+<td>18.10</td>
+<td>61.06</td>
+<td>286.3</td>
+<td>0.08311</td>
+<td>0.05428</td>
+<td>0.01479</td>
+<td>0.005769</td>
+<td>0.1680</td>
+<td>0.06412</td>
+<td>...</td>
+<td>11.15</td>
+<td>24.62</td>
+<td>71.11</td>
+<td>380.2</td>
+<td>0.1388</td>
+<td>0.1255</td>
+<td>0.06409</td>
+<td>0.0250</td>
+<td>0.3057</td>
+<td>0.07875</td>
+</tr>
+<tr class="even">
+<th>108</th>
+<td>22.270</td>
+<td>19.67</td>
+<td>152.80</td>
+<td>1509.0</td>
+<td>0.13260</td>
+<td>0.27680</td>
+<td>0.42640</td>
+<td>0.182300</td>
+<td>0.2556</td>
+<td>0.07039</td>
+<td>...</td>
+<td>28.40</td>
+<td>28.01</td>
+<td>206.80</td>
+<td>2360.0</td>
+<td>0.1701</td>
+<td>0.6997</td>
+<td>0.96080</td>
+<td>0.2910</td>
+<td>0.4055</td>
+<td>0.09789</td>
+</tr>
+<tr class="odd">
+<th>340</th>
+<td>14.420</td>
+<td>16.54</td>
+<td>94.15</td>
+<td>641.2</td>
+<td>0.09751</td>
+<td>0.11390</td>
+<td>0.08007</td>
+<td>0.042230</td>
+<td>0.1912</td>
+<td>0.06412</td>
+<td>...</td>
+<td>16.67</td>
+<td>21.51</td>
+<td>111.40</td>
+<td>862.1</td>
+<td>0.1294</td>
+<td>0.3371</td>
+<td>0.37550</td>
+<td>0.1414</td>
+<td>0.3053</td>
+<td>0.08764</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 30 columns</p>
 </div>
 </div>
@@ -1348,7 +1349,7 @@ Best score:
 best knn f1 score: 0.9814814814814815</code></pre>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1467,6 +1468,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

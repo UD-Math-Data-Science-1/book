@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -297,7 +297,6 @@ MathJax = {
 
 </header>
 
-<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -347,7 +346,6 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-</div>
 <p>Machine learning is the use of data to tune algorithms for making decisions or predictions. Unlike deduction based on reasoning from principles governing the application, machine learning is a “black box” that just adapts via training.</p>
 <p>We divide machine learning into three major forms:</p>
 <dl>
@@ -382,7 +380,7 @@ X_{21} &amp; X_{22} &amp; \cdots &amp; X_{2d} \\
 X_{n1} &amp; X_{n2} &amp; \cdots &amp; X_{nd}
 \end{bmatrix}.
 \]</span></p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -406,7 +404,7 @@ Important
 y_1 \\ y_2 \\ \vdots \\ y_n
 \end{bmatrix}
 \]</span></p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -489,7 +487,7 @@ there are 64 features and 1797 samples</code></pre>
 <pre><code>array([False])</code></pre>
 </div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -542,81 +540,82 @@ knn score is 99.9%</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/loan_clean.csv"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>loan_amnt</th>
-      <th>int_rate</th>
-      <th>installment</th>
-      <th>annual_inc</th>
-      <th>dti</th>
-      <th>delinq_2yrs</th>
-      <th>delinq_amnt</th>
-      <th>percent_funded</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>5000</td>
-      <td>10.65</td>
-      <td>162.87</td>
-      <td>24000.0</td>
-      <td>27.65</td>
-      <td>0</td>
-      <td>0</td>
-      <td>100.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2500</td>
-      <td>15.27</td>
-      <td>59.83</td>
-      <td>30000.0</td>
-      <td>1.00</td>
-      <td>0</td>
-      <td>0</td>
-      <td>100.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2400</td>
-      <td>15.96</td>
-      <td>84.33</td>
-      <td>12252.0</td>
-      <td>8.72</td>
-      <td>0</td>
-      <td>0</td>
-      <td>100.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>10000</td>
-      <td>13.49</td>
-      <td>339.31</td>
-      <td>49200.0</td>
-      <td>20.00</td>
-      <td>0</td>
-      <td>0</td>
-      <td>100.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3000</td>
-      <td>12.69</td>
-      <td>67.79</td>
-      <td>80000.0</td>
-      <td>17.94</td>
-      <td>0</td>
-      <td>0</td>
-      <td>100.0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>loan_amnt</th>
+<th>int_rate</th>
+<th>installment</th>
+<th>annual_inc</th>
+<th>dti</th>
+<th>delinq_2yrs</th>
+<th>delinq_amnt</th>
+<th>percent_funded</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>5000</td>
+<td>10.65</td>
+<td>162.87</td>
+<td>24000.0</td>
+<td>27.65</td>
+<td>0</td>
+<td>0</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>2500</td>
+<td>15.27</td>
+<td>59.83</td>
+<td>30000.0</td>
+<td>1.00</td>
+<td>0</td>
+<td>0</td>
+<td>100.0</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>2400</td>
+<td>15.96</td>
+<td>84.33</td>
+<td>12252.0</td>
+<td>8.72</td>
+<td>0</td>
+<td>0</td>
+<td>100.0</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>10000</td>
+<td>13.49</td>
+<td>339.31</td>
+<td>49200.0</td>
+<td>20.00</td>
+<td>0</td>
+<td>0</td>
+<td>100.0</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>3000</td>
+<td>12.69</td>
+<td>67.79</td>
+<td>80000.0</td>
+<td>17.94</td>
+<td>0</td>
+<td>0</td>
+<td>100.0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -625,7 +624,7 @@ knn score is 99.9%</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> loans.drop(<span class="st">"percent_funded"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> loans[<span class="st">"percent_funded"</span>] <span class="op">&gt;</span> <span class="dv">95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -747,7 +746,7 @@ Name: percent_funded, dtype: object</code></pre>
 <p><img src="classification_files/figure-html/cell-20-output-1.png" width="542" height="429"></p>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -860,87 +859,88 @@ Balanced: 0.5349003193002227</code></pre>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna()</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>cars.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-      <th>origin</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>307.0</td>
-      <td>130.0</td>
-      <td>3504</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>chevrolet chevelle malibu</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>350.0</td>
-      <td>165.0</td>
-      <td>3693</td>
-      <td>11.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>buick skylark 320</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>318.0</td>
-      <td>150.0</td>
-      <td>3436</td>
-      <td>11.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>plymouth satellite</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>16.0</td>
-      <td>8</td>
-      <td>304.0</td>
-      <td>150.0</td>
-      <td>3433</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>amc rebel sst</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>17.0</td>
-      <td>8</td>
-      <td>302.0</td>
-      <td>140.0</td>
-      <td>3449</td>
-      <td>10.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>ford torino</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>18.0</td>
+<td>8</td>
+<td>307.0</td>
+<td>130.0</td>
+<td>3504</td>
+<td>12.0</td>
+<td>70</td>
+<td>usa</td>
+<td>chevrolet chevelle malibu</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>15.0</td>
+<td>8</td>
+<td>350.0</td>
+<td>165.0</td>
+<td>3693</td>
+<td>11.5</td>
+<td>70</td>
+<td>usa</td>
+<td>buick skylark 320</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150.0</td>
+<td>3436</td>
+<td>11.0</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth satellite</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150.0</td>
+<td>3433</td>
+<td>12.0</td>
+<td>70</td>
+<td>usa</td>
+<td>amc rebel sst</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>17.0</td>
+<td>8</td>
+<td>302.0</td>
+<td>140.0</td>
+<td>3449</td>
+<td>10.5</td>
+<td>70</td>
+<td>usa</td>
+<td>ford torino</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1221,7 +1221,7 @@ Name: species, dtype: int64</code></pre>
 <li>The <strong><span class="math inline">\(\infty\)</span>-norm</strong> or max norm: <span class="math display">\[\infnorm{\bfx} = \max_i \abs{x_i}.\]</span></li>
 </ul>
 <p>The Euclidean norm generalizes ordinary geometric distance in <span class="math inline">\(\real^2\)</span> and <span class="math inline">\(\real^3\)</span> and is usually considered the default. One of its most important features is that <span class="math inline">\(\twonorm{\bfx}^2\)</span> is a differentiable function of the components of <span class="math inline">\(\bfx\)</span>.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1252,85 +1252,86 @@ Note
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> penguins.dropna()</span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>penguins.head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>species</th>
-      <th>island</th>
-      <th>bill_length_mm</th>
-      <th>bill_depth_mm</th>
-      <th>flipper_length_mm</th>
-      <th>body_mass_g</th>
-      <th>sex</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.1</td>
-      <td>18.7</td>
-      <td>181.0</td>
-      <td>3750.0</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.5</td>
-      <td>17.4</td>
-      <td>186.0</td>
-      <td>3800.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>40.3</td>
-      <td>18.0</td>
-      <td>195.0</td>
-      <td>3250.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>36.7</td>
-      <td>19.3</td>
-      <td>193.0</td>
-      <td>3450.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.3</td>
-      <td>20.6</td>
-      <td>190.0</td>
-      <td>3650.0</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>38.9</td>
-      <td>17.8</td>
-      <td>181.0</td>
-      <td>3625.0</td>
-      <td>Female</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>species</th>
+<th>island</th>
+<th>bill_length_mm</th>
+<th>bill_depth_mm</th>
+<th>flipper_length_mm</th>
+<th>body_mass_g</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>Female</td>
+</tr>
+<tr class="even">
+<th>4</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>5</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.3</td>
+<td>20.6</td>
+<td>190.0</td>
+<td>3650.0</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<th>6</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.9</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3625.0</td>
+<td>Female</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1515,51 +1516,52 @@ weighted avg       1.00      1.00      1.00        67
 <p><span class="theorem-title"><strong>Example 3.5 </strong></span>Suppose we have trained a kNN classifier with <span class="math inline">\(k=10\)</span> for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:</p>
 <div class="cell" data-execution_count="50">
 <div class="cell-output cell-output-display" data-execution_count="49">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>3</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>6</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>0</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>5</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>5</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>6</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>2</td>
+<td>0</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1626,211 +1628,215 @@ $$ --></p>
 <p><span class="theorem-title"><strong>Example 3.7 </strong></span>Continuing with the data in <a href="#exm-class-phat">Example&nbsp;<span>3.5</span></a>, we find that at <span class="math inline">\(\theta=0\)</span>, everything always hits:</p>
 <div class="cell" data-execution_count="55">
 <div class="cell-output cell-output-display" data-execution_count="54">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>At <span class="math inline">\(\theta=0.05\)</span>, say, we lose all the cases where no votes were received:</p>
 <div class="cell" data-execution_count="56">
 <div class="cell-output cell-output-display" data-execution_count="55">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>At <span class="math inline">\(\theta=0.15\)</span>, we have also lost all those receiving 1 out of 10 votes:</p>
 <div class="cell" data-execution_count="57">
 <div class="cell-output cell-output-display" data-execution_count="56">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>By the time we get to <span class="math inline">\(\theta=0.7\)</span>, there are only two hits left:</p>
 <div class="cell" data-execution_count="58">
 <div class="cell-output cell-output-display" data-execution_count="57">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 </div>
 <p>The probability vector <span class="math inline">\(\hat{p}(\bfx)\)</span> holds the largest possible <span class="math inline">\(\theta\)</span> values for which each class hits at <span class="math inline">\(\bfx\)</span>. Looking at it another way, <span class="math inline">\(\theta=0\)</span> represents maximum credulity—everybody’s a winner!—while <span class="math inline">\(\theta=1\)</span> represents maximum skepticism—unanimous winners only.</p>
 <p>The <strong>ROC curve</strong>, or <em>receiver operator characteristic</em> curve, is a way to visualize the hits as a function of <span class="math inline">\(\theta\)</span> over a fixed testing set. The name is a little misleading, since the multiclass case requires multiple curves. The idea is to tally, at each value of <span class="math inline">\(\theta\)</span>, all the hits within each class that represent true positives and false positives.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1847,114 +1853,116 @@ Note
 <p><span class="theorem-title"><strong>Example 3.8 </strong></span>We continue with the data from <a href="#exm-class-phat">Example&nbsp;<span>3.5</span></a>, but now we add ground truth to the queries:</p>
 <div class="cell" data-execution_count="59">
 <div class="cell-output cell-output-display" data-execution_count="58">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>A</th>
-      <th>B</th>
-      <th>C</th>
-      <th>truth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9</td>
-      <td>0</td>
-      <td>1</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5</td>
-      <td>3</td>
-      <td>2</td>
-      <td>B</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>6</td>
-      <td>1</td>
-      <td>3</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2</td>
-      <td>0</td>
-      <td>8</td>
-      <td>C</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>4</td>
-      <td>5</td>
-      <td>1</td>
-      <td>A</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>truth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>5</td>
+<td>3</td>
+<td>2</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>6</td>
+<td>1</td>
+<td>3</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>2</td>
+<td>0</td>
+<td>8</td>
+<td>C</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+<td>A</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <p>Let’s look at class A. At <span class="math inline">\(\theta=0.05\)</span>, class A hits in every case, giving TP=3 and FP=2. At <span class="math inline">\(\theta=0.25\)</span>, the fourth query drops out; we still have TP=3, but now FP=1. Here is the table of all the unique values of TP and FP that we can achieve as <span class="math inline">\(\theta\)</span> varies between 0 and 1:</p>
 <div class="cell" data-execution_count="60">
 <div class="cell-output cell-output-display" data-execution_count="59">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>theta</th>
-      <th>FP</th>
-      <th>TP</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.05</td>
-      <td>2</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.25</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.45</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.55</td>
-      <td>0</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.65</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0.95</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>theta</th>
+<th>FP</th>
+<th>TP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>0.05</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>0.25</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>0.45</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>0.55</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>0.65</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>5</th>
+<td>0.95</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1987,135 +1995,136 @@ Note
 <span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>roc <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"label"</span>,<span class="st">"FP rate"</span>,<span class="st">"TP rate"</span>] )</span>
 <span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>roc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>label</th>
-      <th>FP rate</th>
-      <th>TP rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Adelie</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Adelie</td>
-      <td>0.027027</td>
-      <td>0.233333</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Adelie</td>
-      <td>0.054054</td>
-      <td>0.566667</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Adelie</td>
-      <td>0.216216</td>
-      <td>0.900000</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Adelie</td>
-      <td>0.405405</td>
-      <td>0.966667</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Adelie</td>
-      <td>0.459459</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Adelie</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Chinstrap</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Chinstrap</td>
-      <td>0.019231</td>
-      <td>0.333333</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Chinstrap</td>
-      <td>0.153846</td>
-      <td>0.733333</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Chinstrap</td>
-      <td>0.423077</td>
-      <td>0.933333</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Chinstrap</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Gentoo</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Gentoo</td>
-      <td>0.000000</td>
-      <td>0.909091</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Gentoo</td>
-      <td>0.022222</td>
-      <td>0.909091</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Gentoo</td>
-      <td>0.022222</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Gentoo</td>
-      <td>0.088889</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Gentoo</td>
-      <td>0.200000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Gentoo</td>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>label</th>
+<th>FP rate</th>
+<th>TP rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>Adelie</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>Adelie</td>
+<td>0.027027</td>
+<td>0.233333</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>Adelie</td>
+<td>0.054054</td>
+<td>0.566667</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>Adelie</td>
+<td>0.216216</td>
+<td>0.900000</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>Adelie</td>
+<td>0.405405</td>
+<td>0.966667</td>
+</tr>
+<tr class="even">
+<th>5</th>
+<td>Adelie</td>
+<td>0.459459</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th>6</th>
+<td>Adelie</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<th>7</th>
+<td>Chinstrap</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<th>8</th>
+<td>Chinstrap</td>
+<td>0.019231</td>
+<td>0.333333</td>
+</tr>
+<tr class="even">
+<th>9</th>
+<td>Chinstrap</td>
+<td>0.153846</td>
+<td>0.733333</td>
+</tr>
+<tr class="odd">
+<th>10</th>
+<td>Chinstrap</td>
+<td>0.423077</td>
+<td>0.933333</td>
+</tr>
+<tr class="even">
+<th>11</th>
+<td>Chinstrap</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th>12</th>
+<td>Gentoo</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="even">
+<th>13</th>
+<td>Gentoo</td>
+<td>0.000000</td>
+<td>0.909091</td>
+</tr>
+<tr class="odd">
+<th>14</th>
+<td>Gentoo</td>
+<td>0.022222</td>
+<td>0.909091</td>
+</tr>
+<tr class="even">
+<th>15</th>
+<td>Gentoo</td>
+<td>0.022222</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th>16</th>
+<td>Gentoo</td>
+<td>0.088889</td>
+<td>1.000000</td>
+</tr>
+<tr class="even">
+<th>17</th>
+<td>Gentoo</td>
+<td>0.200000</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th>18</th>
+<td>Gentoo</td>
+<td>1.000000</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2174,35 +2183,36 @@ Note
 <span id="cb90-14"><a href="#cb90-14" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>knn.classes_</span>
 <span id="cb90-15"><a href="#cb90-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>standard</th>
-      <th>weighted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Adelie</th>
-      <td>0.903153</td>
-      <td>0.935586</td>
-    </tr>
-    <tr>
-      <th>Chinstrap</th>
-      <td>0.857051</td>
-      <td>0.883333</td>
-    </tr>
-    <tr>
-      <th>Gentoo</th>
-      <td>0.997980</td>
-      <td>0.998990</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>standard</th>
+<th>weighted</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>Adelie</th>
+<td>0.903153</td>
+<td>0.935586</td>
+</tr>
+<tr class="even">
+<th>Chinstrap</th>
+<td>0.857051</td>
+<td>0.883333</td>
+</tr>
+<tr class="odd">
+<th>Gentoo</th>
+<td>0.997980</td>
+<td>0.998990</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2343,6 +2353,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

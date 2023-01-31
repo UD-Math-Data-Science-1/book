@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -304,7 +304,6 @@ MathJax = {
 
 </header>
 
-<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -354,7 +353,6 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-</div>
 <p>When confronted with a new dataset, it’s crucial to get a sense of its characteristics before attempting to draw conclusions or predictions from it.</p>
 <p>One of the fastest ways to become familiar with a data set is to visualize it. Python has many graphics packages with different niches. The most widespread is <strong>Matplotlib</strong>, which is fairly low-level in the sense that you must explicitly specify most aspects of how the plots will look.</p>
 <p>We will make extensive use of <strong>seaborn</strong>, which is built on top of Matplotlib. It’s meant to be used at a higher level, i.e., letting you describe what you want to see and making it look pretty good. (It is possible to customize seaborn plots using Matplotlib commands, but we won’t need much of that.)</p>
@@ -386,105 +384,106 @@ How values of two variables are related to each other.
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cars.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>398.000000</td>
-      <td>398.000000</td>
-      <td>398.000000</td>
-      <td>392.000000</td>
-      <td>398.000000</td>
-      <td>398.000000</td>
-      <td>398.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>23.514573</td>
-      <td>5.454774</td>
-      <td>193.425879</td>
-      <td>104.469388</td>
-      <td>2970.424623</td>
-      <td>15.568090</td>
-      <td>76.010050</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>7.815984</td>
-      <td>1.701004</td>
-      <td>104.269838</td>
-      <td>38.491160</td>
-      <td>846.841774</td>
-      <td>2.757689</td>
-      <td>3.697627</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>9.000000</td>
-      <td>3.000000</td>
-      <td>68.000000</td>
-      <td>46.000000</td>
-      <td>1613.000000</td>
-      <td>8.000000</td>
-      <td>70.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>17.500000</td>
-      <td>4.000000</td>
-      <td>104.250000</td>
-      <td>75.000000</td>
-      <td>2223.750000</td>
-      <td>13.825000</td>
-      <td>73.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>23.000000</td>
-      <td>4.000000</td>
-      <td>148.500000</td>
-      <td>93.500000</td>
-      <td>2803.500000</td>
-      <td>15.500000</td>
-      <td>76.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>29.000000</td>
-      <td>8.000000</td>
-      <td>262.000000</td>
-      <td>126.000000</td>
-      <td>3608.000000</td>
-      <td>17.175000</td>
-      <td>79.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>46.600000</td>
-      <td>8.000000</td>
-      <td>455.000000</td>
-      <td>230.000000</td>
-      <td>5140.000000</td>
-      <td>24.800000</td>
-      <td>82.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>count</th>
+<td>398.000000</td>
+<td>398.000000</td>
+<td>398.000000</td>
+<td>392.000000</td>
+<td>398.000000</td>
+<td>398.000000</td>
+<td>398.000000</td>
+</tr>
+<tr class="even">
+<th>mean</th>
+<td>23.514573</td>
+<td>5.454774</td>
+<td>193.425879</td>
+<td>104.469388</td>
+<td>2970.424623</td>
+<td>15.568090</td>
+<td>76.010050</td>
+</tr>
+<tr class="odd">
+<th>std</th>
+<td>7.815984</td>
+<td>1.701004</td>
+<td>104.269838</td>
+<td>38.491160</td>
+<td>846.841774</td>
+<td>2.757689</td>
+<td>3.697627</td>
+</tr>
+<tr class="even">
+<th>min</th>
+<td>9.000000</td>
+<td>3.000000</td>
+<td>68.000000</td>
+<td>46.000000</td>
+<td>1613.000000</td>
+<td>8.000000</td>
+<td>70.000000</td>
+</tr>
+<tr class="odd">
+<th>25%</th>
+<td>17.500000</td>
+<td>4.000000</td>
+<td>104.250000</td>
+<td>75.000000</td>
+<td>2223.750000</td>
+<td>13.825000</td>
+<td>73.000000</td>
+</tr>
+<tr class="even">
+<th>50%</th>
+<td>23.000000</td>
+<td>4.000000</td>
+<td>148.500000</td>
+<td>93.500000</td>
+<td>2803.500000</td>
+<td>15.500000</td>
+<td>76.000000</td>
+</tr>
+<tr class="odd">
+<th>75%</th>
+<td>29.000000</td>
+<td>8.000000</td>
+<td>262.000000</td>
+<td>126.000000</td>
+<td>3608.000000</td>
+<td>17.175000</td>
+<td>79.000000</td>
+</tr>
+<tr class="even">
+<th>max</th>
+<td>46.600000</td>
+<td>8.000000</td>
+<td>455.000000</td>
+<td>230.000000</td>
+<td>5140.000000</td>
+<td>24.800000</td>
+<td>82.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -508,7 +507,7 @@ How values of two variables are related to each other.
 \]</span> The function <span class="math inline">\(f(t)=2t^2\)</span> has a single critical value at <span class="math inline">\(t=0\)</span>. Clearly, <span class="math inline">\(f(0)=0\)</span> is both a local and a global minimum. Since <span class="math inline">\(-5\le t \le 5\)</span>, we also find that <span class="math inline">\(f(\pm5)=50\)</span> is a global maximum.</p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -548,64 +547,65 @@ z_1 = \frac{0-0}{t\sqrt{2}} = 0, \quad z_2 = \frac{t-0}{t\sqrt{2}} = \frac{1}{\s
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"mpg_z"</span>] <span class="op">=</span> standardize( cars[<span class="st">"mpg"</span>] )</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"mpg"</span>, <span class="st">"mpg_z"</span>] ].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>mpg_z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>398.000000</td>
-      <td>3.980000e+02</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>23.514573</td>
-      <td>1.071170e-16</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>7.815984</td>
-      <td>1.000000e+00</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>9.000000</td>
-      <td>-1.857037e+00</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>17.500000</td>
-      <td>-7.695221e-01</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>23.000000</td>
-      <td>-6.583596e-02</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>29.000000</td>
-      <td>7.018217e-01</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>46.600000</td>
-      <td>2.953617e+00</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>mpg_z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>count</th>
+<td>398.000000</td>
+<td>3.980000e+02</td>
+</tr>
+<tr class="even">
+<th>mean</th>
+<td>23.514573</td>
+<td>1.071170e-16</td>
+</tr>
+<tr class="odd">
+<th>std</th>
+<td>7.815984</td>
+<td>1.000000e+00</td>
+</tr>
+<tr class="even">
+<th>min</th>
+<td>9.000000</td>
+<td>-1.857037e+00</td>
+</tr>
+<tr class="odd">
+<th>25%</th>
+<td>17.500000</td>
+<td>-7.695221e-01</td>
+</tr>
+<tr class="even">
+<th>50%</th>
+<td>23.000000</td>
+<td>-6.583596e-02</td>
+</tr>
+<tr class="odd">
+<th>75%</th>
+<td>29.000000</td>
+<td>7.018217e-01</td>
+</tr>
+<tr class="even">
+<th>max</th>
+<td>46.600000</td>
+<td>2.953617e+00</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -648,7 +648,7 @@ s_{n-1}^2 = \frac{374}{4} = 93.5.
 \]</span></p>
 </div>
 <p>As you can see from the formulas and the example, the sample variance is always too large as an estimator, but the difference vanishes as the sample size <span class="math inline">\(n\)</span> increases.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -661,7 +661,7 @@ Warning
 <p>Sources are not always clear about this terminology. Some use <em>sample variance</em> to mean <span class="math inline">\(s_{n-1}^2\)</span>, not <span class="math inline">\(s_n^2\)</span>, and many even omit the subscripts. You always have to check each source.</p>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -700,7 +700,7 @@ In statistics, @eq-stats-t-score is referred to as a *t-score*, and the term *sa
 <p><span class="theorem-title"><strong>Example 2.5 </strong></span>The 4-quantiles are called <strong>quartiles</strong>. The first quartile is the 25th percentile, or the value that exceeds 1/4 of the population. The second quartile is the median. The third quartile is the 75th percentile.</p>
 <p>Sometimes the definition is extended to the <em>zeroth quartile</em>, which is the minimum sample value, and the <em>fourth quartile</em>, which is the maximum sample value.</p>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -729,60 +729,61 @@ Danger
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    } )</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>normal</th>
-      <th>uniform</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>4000.000000</td>
-      <td>4000.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>-0.026801</td>
-      <td>0.493338</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.995135</td>
-      <td>0.293177</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>-3.361732</td>
-      <td>0.000257</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>-0.685307</td>
-      <td>0.232339</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>-0.017852</td>
-      <td>0.486322</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>0.633775</td>
-      <td>0.750565</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>3.115486</td>
-      <td>0.999204</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>normal</th>
+<th>uniform</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>count</th>
+<td>4000.000000</td>
+<td>4000.000000</td>
+</tr>
+<tr class="even">
+<th>mean</th>
+<td>-0.026801</td>
+<td>0.493338</td>
+</tr>
+<tr class="odd">
+<th>std</th>
+<td>0.995135</td>
+<td>0.293177</td>
+</tr>
+<tr class="even">
+<th>min</th>
+<td>-3.361732</td>
+<td>0.000257</td>
+</tr>
+<tr class="odd">
+<th>25%</th>
+<td>-0.685307</td>
+<td>0.232339</td>
+</tr>
+<tr class="even">
+<th>50%</th>
+<td>-0.017852</td>
+<td>0.486322</td>
+</tr>
+<tr class="odd">
+<th>75%</th>
+<td>0.633775</td>
+<td>0.750565</td>
+</tr>
+<tr class="even">
+<th>max</th>
+<td>3.115486</td>
+<td>0.999204</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -948,60 +949,61 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame( {<span class="st">"x"</span>: x, <span class="st">"3x-10"</span>: <span class="dv">3</span><span class="op">*</span>x<span class="op">-</span><span class="dv">10</span>} )</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>3x-10</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>10000.000000</td>
-      <td>10000.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>-0.012414</td>
-      <td>-10.037242</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.993568</td>
-      <td>2.980704</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>-3.436924</td>
-      <td>-20.310773</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>-0.672352</td>
-      <td>-12.017056</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>-0.008374</td>
-      <td>-10.025122</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>0.659730</td>
-      <td>-8.020809</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>4.044099</td>
-      <td>2.132297</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>x</th>
+<th>3x-10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>count</th>
+<td>10000.000000</td>
+<td>10000.000000</td>
+</tr>
+<tr class="even">
+<th>mean</th>
+<td>-0.012414</td>
+<td>-10.037242</td>
+</tr>
+<tr class="odd">
+<th>std</th>
+<td>0.993568</td>
+<td>2.980704</td>
+</tr>
+<tr class="even">
+<th>min</th>
+<td>-3.436924</td>
+<td>-20.310773</td>
+</tr>
+<tr class="odd">
+<th>25%</th>
+<td>-0.672352</td>
+<td>-12.017056</td>
+</tr>
+<tr class="even">
+<th>50%</th>
+<td>-0.008374</td>
+<td>-10.025122</td>
+</tr>
+<tr class="odd">
+<th>75%</th>
+<td>0.659730</td>
+<td>-8.020809</td>
+</tr>
+<tr class="even">
+<th>max</th>
+<td>4.044099</td>
+<td>2.132297</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1042,70 +1044,71 @@ Name: origin, dtype: int64</code></pre>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cars.groupby([<span class="st">"origin"</span>])[<span class="st">"mpg"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>origin</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>europe</th>
-      <td>70.0</td>
-      <td>27.891429</td>
-      <td>6.723930</td>
-      <td>16.2</td>
-      <td>24.0</td>
-      <td>26.5</td>
-      <td>30.65</td>
-      <td>44.3</td>
-    </tr>
-    <tr>
-      <th>japan</th>
-      <td>79.0</td>
-      <td>30.450633</td>
-      <td>6.090048</td>
-      <td>18.0</td>
-      <td>25.7</td>
-      <td>31.6</td>
-      <td>34.05</td>
-      <td>46.6</td>
-    </tr>
-    <tr>
-      <th>usa</th>
-      <td>249.0</td>
-      <td>20.083534</td>
-      <td>6.402892</td>
-      <td>9.0</td>
-      <td>15.0</td>
-      <td>18.5</td>
-      <td>24.00</td>
-      <td>39.0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+</tr>
+<tr class="odd">
+<th>origin</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>europe</th>
+<td>70.0</td>
+<td>27.891429</td>
+<td>6.723930</td>
+<td>16.2</td>
+<td>24.0</td>
+<td>26.5</td>
+<td>30.65</td>
+<td>44.3</td>
+</tr>
+<tr class="even">
+<th>japan</th>
+<td>79.0</td>
+<td>30.450633</td>
+<td>6.090048</td>
+<td>18.0</td>
+<td>25.7</td>
+<td>31.6</td>
+<td>34.05</td>
+<td>46.6</td>
+</tr>
+<tr class="odd">
+<th>usa</th>
+<td>249.0</td>
+<td>20.083534</td>
+<td>6.402892</td>
+<td>9.0</td>
+<td>15.0</td>
+<td>18.5</td>
+<td>24.00</td>
+<td>39.0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1158,169 +1161,170 @@ Name: origin, dtype: int64</code></pre>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"cuts"</span>] <span class="op">=</span> cuts</span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>cars.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-      <th>origin</th>
-      <th>name</th>
-      <th>mpg_z</th>
-      <th>cuts</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>307.0</td>
-      <td>130.0</td>
-      <td>3504</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>chevrolet chevelle malibu</td>
-      <td>-0.705551</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>350.0</td>
-      <td>165.0</td>
-      <td>3693</td>
-      <td>11.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>buick skylark 320</td>
-      <td>-1.089379</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>318.0</td>
-      <td>150.0</td>
-      <td>3436</td>
-      <td>11.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>plymouth satellite</td>
-      <td>-0.705551</td>
-      <td>(2500, 3500]</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>16.0</td>
-      <td>8</td>
-      <td>304.0</td>
-      <td>150.0</td>
-      <td>3433</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>amc rebel sst</td>
-      <td>-0.961437</td>
-      <td>(2500, 3500]</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>17.0</td>
-      <td>8</td>
-      <td>302.0</td>
-      <td>140.0</td>
-      <td>3449</td>
-      <td>10.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>ford torino</td>
-      <td>-0.833494</td>
-      <td>(2500, 3500]</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>429.0</td>
-      <td>198.0</td>
-      <td>4341</td>
-      <td>10.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>ford galaxie 500</td>
-      <td>-1.089379</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>14.0</td>
-      <td>8</td>
-      <td>454.0</td>
-      <td>220.0</td>
-      <td>4354</td>
-      <td>9.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>chevrolet impala</td>
-      <td>-1.217322</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>14.0</td>
-      <td>8</td>
-      <td>440.0</td>
-      <td>215.0</td>
-      <td>4312</td>
-      <td>8.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>plymouth fury iii</td>
-      <td>-1.217322</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>14.0</td>
-      <td>8</td>
-      <td>455.0</td>
-      <td>225.0</td>
-      <td>4425</td>
-      <td>10.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>pontiac catalina</td>
-      <td>-1.217322</td>
-      <td>(3500, 4500]</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>390.0</td>
-      <td>190.0</td>
-      <td>3850</td>
-      <td>8.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>amc ambassador dpl</td>
-      <td>-1.089379</td>
-      <td>(3500, 4500]</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
+<th>mpg_z</th>
+<th>cuts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>18.0</td>
+<td>8</td>
+<td>307.0</td>
+<td>130.0</td>
+<td>3504</td>
+<td>12.0</td>
+<td>70</td>
+<td>usa</td>
+<td>chevrolet chevelle malibu</td>
+<td>-0.705551</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>15.0</td>
+<td>8</td>
+<td>350.0</td>
+<td>165.0</td>
+<td>3693</td>
+<td>11.5</td>
+<td>70</td>
+<td>usa</td>
+<td>buick skylark 320</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150.0</td>
+<td>3436</td>
+<td>11.0</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth satellite</td>
+<td>-0.705551</td>
+<td>(2500, 3500]</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150.0</td>
+<td>3433</td>
+<td>12.0</td>
+<td>70</td>
+<td>usa</td>
+<td>amc rebel sst</td>
+<td>-0.961437</td>
+<td>(2500, 3500]</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>17.0</td>
+<td>8</td>
+<td>302.0</td>
+<td>140.0</td>
+<td>3449</td>
+<td>10.5</td>
+<td>70</td>
+<td>usa</td>
+<td>ford torino</td>
+<td>-0.833494</td>
+<td>(2500, 3500]</td>
+</tr>
+<tr class="even">
+<th>5</th>
+<td>15.0</td>
+<td>8</td>
+<td>429.0</td>
+<td>198.0</td>
+<td>4341</td>
+<td>10.0</td>
+<td>70</td>
+<td>usa</td>
+<td>ford galaxie 500</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="odd">
+<th>6</th>
+<td>14.0</td>
+<td>8</td>
+<td>454.0</td>
+<td>220.0</td>
+<td>4354</td>
+<td>9.0</td>
+<td>70</td>
+<td>usa</td>
+<td>chevrolet impala</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="even">
+<th>7</th>
+<td>14.0</td>
+<td>8</td>
+<td>440.0</td>
+<td>215.0</td>
+<td>4312</td>
+<td>8.5</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth fury iii</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="odd">
+<th>8</th>
+<td>14.0</td>
+<td>8</td>
+<td>455.0</td>
+<td>225.0</td>
+<td>4425</td>
+<td>10.0</td>
+<td>70</td>
+<td>usa</td>
+<td>pontiac catalina</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="even">
+<th>9</th>
+<td>15.0</td>
+<td>8</td>
+<td>390.0</td>
+<td>190.0</td>
+<td>3850</td>
+<td>8.5</td>
+<td>70</td>
+<td>usa</td>
+<td>amc ambassador dpl</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1382,81 +1386,82 @@ Name: origin, dtype: int64</code></pre>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>by_weight <span class="op">=</span> cars.groupby(cuts)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>by_weight[<span class="st">"mpg"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>weight</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>(1500, 2500]</th>
-      <td>147.0</td>
-      <td>30.631293</td>
-      <td>5.864413</td>
-      <td>18.0</td>
-      <td>26.0</td>
-      <td>30.5</td>
-      <td>34.450</td>
-      <td>46.6</td>
-    </tr>
-    <tr>
-      <th>(2500, 3500]</th>
-      <td>142.0</td>
-      <td>22.547183</td>
-      <td>4.754061</td>
-      <td>13.0</td>
-      <td>19.0</td>
-      <td>22.0</td>
-      <td>25.325</td>
-      <td>38.0</td>
-    </tr>
-    <tr>
-      <th>(3500, 4500]</th>
-      <td>92.0</td>
-      <td>15.688043</td>
-      <td>2.760428</td>
-      <td>10.0</td>
-      <td>14.0</td>
-      <td>15.0</td>
-      <td>17.125</td>
-      <td>26.6</td>
-    </tr>
-    <tr>
-      <th>(4500, 5500]</th>
-      <td>17.0</td>
-      <td>12.411765</td>
-      <td>1.622453</td>
-      <td>9.0</td>
-      <td>12.0</td>
-      <td>13.0</td>
-      <td>13.000</td>
-      <td>16.0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+</tr>
+<tr class="odd">
+<th>weight</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>(1500, 2500]</th>
+<td>147.0</td>
+<td>30.631293</td>
+<td>5.864413</td>
+<td>18.0</td>
+<td>26.0</td>
+<td>30.5</td>
+<td>34.450</td>
+<td>46.6</td>
+</tr>
+<tr class="even">
+<th>(2500, 3500]</th>
+<td>142.0</td>
+<td>22.547183</td>
+<td>4.754061</td>
+<td>13.0</td>
+<td>19.0</td>
+<td>22.0</td>
+<td>25.325</td>
+<td>38.0</td>
+</tr>
+<tr class="odd">
+<th>(3500, 4500]</th>
+<td>92.0</td>
+<td>15.688043</td>
+<td>2.760428</td>
+<td>10.0</td>
+<td>14.0</td>
+<td>15.0</td>
+<td>17.125</td>
+<td>26.6</td>
+</tr>
+<tr class="even">
+<th>(4500, 5500]</th>
+<td>17.0</td>
+<td>12.411765</td>
+<td>1.622453</td>
+<td>9.0</td>
+<td>12.0</td>
+<td>13.0</td>
+<td>13.000</td>
+<td>16.0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1518,175 +1523,176 @@ Name: mpg, dtype: float64</code></pre>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>by_hp <span class="op">=</span> cars.groupby(cuts)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>by_hp.count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-      <th>origin</th>
-      <th>name</th>
-      <th>mpg_z</th>
-      <th>cuts</th>
-      <th>group_z</th>
-      <th>global_z</th>
-    </tr>
-    <tr>
-      <th>horsepower</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>(40, 60]</th>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>(60, 80]</th>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-      <td>99</td>
-    </tr>
-    <tr>
-      <th>(80, 100]</th>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-      <td>123</td>
-    </tr>
-    <tr>
-      <th>(100, 120]</th>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-      <td>48</td>
-    </tr>
-    <tr>
-      <th>(120, 140]</th>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>(140, 160]</th>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>(160, 180]</th>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>(180, 200]</th>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-      <td>7</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
+<th>mpg_z</th>
+<th>cuts</th>
+<th>group_z</th>
+<th>global_z</th>
+</tr>
+<tr class="odd">
+<th>horsepower</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>(40, 60]</th>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<th>(60, 80]</th>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+<td>99</td>
+</tr>
+<tr class="odd">
+<th>(80, 100]</th>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+<td>123</td>
+</tr>
+<tr class="even">
+<th>(100, 120]</th>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<th>(120, 140]</th>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<th>(140, 160]</th>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<th>(160, 180]</th>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<th>(180, 200]</th>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+<td>7</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1695,111 +1701,112 @@ Name: mpg, dtype: float64</code></pre>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>hp_30 <span class="op">=</span> by_hp.<span class="bu">filter</span>( <span class="kw">lambda</span> x: <span class="bu">len</span>(x) <span class="op">&gt;</span> <span class="dv">29</span> )</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>hp_30.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-      <th>origin</th>
-      <th>name</th>
-      <th>mpg_z</th>
-      <th>cuts</th>
-      <th>group_z</th>
-      <th>global_z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>318.0</td>
-      <td>150.0</td>
-      <td>3436</td>
-      <td>11.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>plymouth satellite</td>
-      <td>-0.705551</td>
-      <td>(2500, 3500]</td>
-      <td>-0.956484</td>
-      <td>-0.705551</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>16.0</td>
-      <td>8</td>
-      <td>304.0</td>
-      <td>150.0</td>
-      <td>3433</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>amc rebel sst</td>
-      <td>-0.961437</td>
-      <td>(2500, 3500]</td>
-      <td>-1.377177</td>
-      <td>-0.961437</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>14.0</td>
-      <td>8</td>
-      <td>340.0</td>
-      <td>160.0</td>
-      <td>3609</td>
-      <td>8.0</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>plymouth 'cuda 340</td>
-      <td>-1.217322</td>
-      <td>(3500, 4500]</td>
-      <td>-0.611515</td>
-      <td>-1.217322</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>400.0</td>
-      <td>150.0</td>
-      <td>3761</td>
-      <td>9.5</td>
-      <td>70</td>
-      <td>usa</td>
-      <td>chevrolet monte carlo</td>
-      <td>-1.089379</td>
-      <td>(3500, 4500]</td>
-      <td>-0.249252</td>
-      <td>-1.089379</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>24.0</td>
-      <td>4</td>
-      <td>113.0</td>
-      <td>95.0</td>
-      <td>2372</td>
-      <td>15.0</td>
-      <td>70</td>
-      <td>japan</td>
-      <td>toyota corona mark ii</td>
-      <td>0.062107</td>
-      <td>(1500, 2500]</td>
-      <td>-1.130768</td>
-      <td>0.062107</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
+<th>mpg_z</th>
+<th>cuts</th>
+<th>group_z</th>
+<th>global_z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150.0</td>
+<td>3436</td>
+<td>11.0</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth satellite</td>
+<td>-0.705551</td>
+<td>(2500, 3500]</td>
+<td>-0.956484</td>
+<td>-0.705551</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150.0</td>
+<td>3433</td>
+<td>12.0</td>
+<td>70</td>
+<td>usa</td>
+<td>amc rebel sst</td>
+<td>-0.961437</td>
+<td>(2500, 3500]</td>
+<td>-1.377177</td>
+<td>-0.961437</td>
+</tr>
+<tr class="odd">
+<th>11</th>
+<td>14.0</td>
+<td>8</td>
+<td>340.0</td>
+<td>160.0</td>
+<td>3609</td>
+<td>8.0</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth 'cuda 340</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+<td>-0.611515</td>
+<td>-1.217322</td>
+</tr>
+<tr class="even">
+<th>12</th>
+<td>15.0</td>
+<td>8</td>
+<td>400.0</td>
+<td>150.0</td>
+<td>3761</td>
+<td>9.5</td>
+<td>70</td>
+<td>usa</td>
+<td>chevrolet monte carlo</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+<td>-0.249252</td>
+<td>-1.089379</td>
+</tr>
+<tr class="odd">
+<th>14</th>
+<td>24.0</td>
+<td>4</td>
+<td>113.0</td>
+<td>95.0</td>
+<td>2372</td>
+<td>15.0</td>
+<td>70</td>
+<td>japan</td>
+<td>toyota corona mark ii</td>
+<td>0.062107</td>
+<td>(1500, 2500]</td>
+<td>-1.130768</td>
+<td>0.062107</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1838,7 +1845,7 @@ sns.displot(data=cars, x="mpg", col="origin",
 
 
 Also note in the above that we asked to stack bars rather than overlap them. Other options to designate different groups are `size` and `style` (marker type). -->
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1851,7 +1858,6 @@ Tip
 <p>There is a balance to strike between a plot that is information-poor versus one that is too busy to read clearly. But you can probably fit more information comfortably than you have been accustomed to. Great data visualizations reward time spent by the reader to examine them. <a href="https://www.edwardtufte.com/tufte/">Edward Tufte</a> has written several great books on this subject.</p>
 </div>
 </div>
-
 <!-- ## Split–apply–combine
 
 One of the most important workflows in data analysis is called **split–apply–combine**:
@@ -1892,132 +1898,134 @@ penguins
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>species</th>
-      <th>island</th>
-      <th>bill_length_mm</th>
-      <th>bill_depth_mm</th>
-      <th>flipper_length_mm</th>
-      <th>body_mass_g</th>
-      <th>sex</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.1</td>
-      <td>18.7</td>
-      <td>181.0</td>
-      <td>3750.0</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.5</td>
-      <td>17.4</td>
-      <td>186.0</td>
-      <td>3800.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>40.3</td>
-      <td>18.0</td>
-      <td>195.0</td>
-      <td>3250.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>36.7</td>
-      <td>19.3</td>
-      <td>193.0</td>
-      <td>3450.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>339</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>340</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>46.8</td>
-      <td>14.3</td>
-      <td>215.0</td>
-      <td>4850.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>341</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>50.4</td>
-      <td>15.7</td>
-      <td>222.0</td>
-      <td>5750.0</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th>342</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>45.2</td>
-      <td>14.8</td>
-      <td>212.0</td>
-      <td>5200.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>343</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>49.9</td>
-      <td>16.1</td>
-      <td>213.0</td>
-      <td>5400.0</td>
-      <td>Male</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th></th>
+<th>species</th>
+<th>island</th>
+<th>bill_length_mm</th>
+<th>bill_depth_mm</th>
+<th>flipper_length_mm</th>
+<th>body_mass_g</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>Female</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>Female</td>
+</tr>
+<tr class="even">
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th>339</th>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>340</th>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>46.8</td>
+<td>14.3</td>
+<td>215.0</td>
+<td>4850.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>341</th>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.4</td>
+<td>15.7</td>
+<td>222.0</td>
+<td>5750.0</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<th>342</th>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>45.2</td>
+<td>14.8</td>
+<td>212.0</td>
+<td>5200.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>343</th>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>49.9</td>
+<td>16.1</td>
+<td>213.0</td>
+<td>5400.0</td>
+<td>Male</td>
+</tr>
+</tbody>
 </table>
+
 <p>344 rows × 7 columns</p>
 </div>
 ```
@@ -2095,63 +2103,64 @@ As a rule of thumb, aggregation produces a single numerical result from a series
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fmri <span class="op">=</span> sns.load_dataset(<span class="st">"fmri"</span>)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fmri.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>subject</th>
-      <th>timepoint</th>
-      <th>event</th>
-      <th>region</th>
-      <th>signal</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>s13</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.017552</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>s5</td>
-      <td>14</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.080883</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>s12</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.081033</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>s11</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.046134</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>s10</td>
-      <td>18</td>
-      <td>stim</td>
-      <td>parietal</td>
-      <td>-0.037970</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>subject</th>
+<th>timepoint</th>
+<th>event</th>
+<th>region</th>
+<th>signal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>s13</td>
+<td>18</td>
+<td>stim</td>
+<td>parietal</td>
+<td>-0.017552</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>s5</td>
+<td>14</td>
+<td>stim</td>
+<td>parietal</td>
+<td>-0.080883</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>s12</td>
+<td>18</td>
+<td>stim</td>
+<td>parietal</td>
+<td>-0.081033</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>s11</td>
+<td>18</td>
+<td>stim</td>
+<td>parietal</td>
+<td>-0.046134</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>s10</td>
+<td>18</td>
+<td>stim</td>
+<td>parietal</td>
+<td>-0.037970</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2159,59 +2168,60 @@ As a rule of thumb, aggregation produces a single numerical result from a series
 <div class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>event</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>cue</th>
-      <td>532.0</td>
-      <td>-0.006669</td>
-      <td>0.047752</td>
-      <td>-0.181241</td>
-      <td>-0.031122</td>
-      <td>-0.008871</td>
-      <td>0.015825</td>
-      <td>0.215735</td>
-    </tr>
-    <tr>
-      <th>stim</th>
-      <td>532.0</td>
-      <td>0.013748</td>
-      <td>0.123179</td>
-      <td>-0.255486</td>
-      <td>-0.062378</td>
-      <td>-0.022202</td>
-      <td>0.058143</td>
-      <td>0.564985</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+</tr>
+<tr class="odd">
+<th>event</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>cue</th>
+<td>532.0</td>
+<td>-0.006669</td>
+<td>0.047752</td>
+<td>-0.181241</td>
+<td>-0.031122</td>
+<td>-0.008871</td>
+<td>0.015825</td>
+<td>0.215735</td>
+</tr>
+<tr class="even">
+<th>stim</th>
+<td>532.0</td>
+<td>0.013748</td>
+<td>0.123179</td>
+<td>-0.255486</td>
+<td>-0.062378</td>
+<td>-0.022202</td>
+<td>0.058143</td>
+<td>0.564985</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2258,7 +2268,7 @@ x &lt; Q_1 - 1.5I \text{ or } x &gt; Q_3 + 1.5I.
 </div>
 </div>
 <p>For asymmetric distributions, or those with a heavy tail, these criteria might show greater differences.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2778,30 +2788,31 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <div class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].cov()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>horsepower</th>
-      <th>mpg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>horsepower</th>
-      <td>1481.569393</td>
-      <td>-233.857926</td>
-    </tr>
-    <tr>
-      <th>mpg</th>
-      <td>-233.857926</td>
-      <td>61.089611</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>horsepower</th>
+<th>mpg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>horsepower</th>
+<td>1481.569393</td>
+<td>-233.857926</td>
+</tr>
+<tr class="even">
+<th>mpg</th>
+<td>-233.857926</td>
+<td>61.089611</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2809,30 +2820,31 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <div class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>horsepower</th>
-      <th>mpg</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>horsepower</th>
-      <td>1.000000</td>
-      <td>-0.778427</td>
-    </tr>
-    <tr>
-      <th>mpg</th>
-      <td>-0.778427</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>horsepower</th>
+<th>mpg</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>horsepower</th>
+<td>1.000000</td>
+<td>-0.778427</td>
+</tr>
+<tr class="even">
+<th>mpg</th>
+<td>-0.778427</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2914,123 +2926,124 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>dum <span class="op">=</span> pd.get_dummies(cars, columns<span class="op">=</span>[<span class="st">"origin"</span>])</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>dum.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>cylinders</th>
-      <th>displacement</th>
-      <th>horsepower</th>
-      <th>weight</th>
-      <th>acceleration</th>
-      <th>model_year</th>
-      <th>name</th>
-      <th>mpg_z</th>
-      <th>cuts</th>
-      <th>group_z</th>
-      <th>global_z</th>
-      <th>origin_europe</th>
-      <th>origin_japan</th>
-      <th>origin_usa</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>307.0</td>
-      <td>130.0</td>
-      <td>3504</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>chevrolet chevelle malibu</td>
-      <td>-0.705551</td>
-      <td>(3500, 4500]</td>
-      <td>0.837535</td>
-      <td>-0.705551</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15.0</td>
-      <td>8</td>
-      <td>350.0</td>
-      <td>165.0</td>
-      <td>3693</td>
-      <td>11.5</td>
-      <td>70</td>
-      <td>buick skylark 320</td>
-      <td>-1.089379</td>
-      <td>(3500, 4500]</td>
-      <td>-0.249252</td>
-      <td>-1.089379</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>18.0</td>
-      <td>8</td>
-      <td>318.0</td>
-      <td>150.0</td>
-      <td>3436</td>
-      <td>11.0</td>
-      <td>70</td>
-      <td>plymouth satellite</td>
-      <td>-0.705551</td>
-      <td>(2500, 3500]</td>
-      <td>-0.956484</td>
-      <td>-0.705551</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>16.0</td>
-      <td>8</td>
-      <td>304.0</td>
-      <td>150.0</td>
-      <td>3433</td>
-      <td>12.0</td>
-      <td>70</td>
-      <td>amc rebel sst</td>
-      <td>-0.961437</td>
-      <td>(2500, 3500]</td>
-      <td>-1.377177</td>
-      <td>-0.961437</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>17.0</td>
-      <td>8</td>
-      <td>302.0</td>
-      <td>140.0</td>
-      <td>3449</td>
-      <td>10.5</td>
-      <td>70</td>
-      <td>ford torino</td>
-      <td>-0.833494</td>
-      <td>(2500, 3500]</td>
-      <td>-1.166831</td>
-      <td>-0.833494</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>name</th>
+<th>mpg_z</th>
+<th>cuts</th>
+<th>group_z</th>
+<th>global_z</th>
+<th>origin_europe</th>
+<th>origin_japan</th>
+<th>origin_usa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>18.0</td>
+<td>8</td>
+<td>307.0</td>
+<td>130.0</td>
+<td>3504</td>
+<td>12.0</td>
+<td>70</td>
+<td>chevrolet chevelle malibu</td>
+<td>-0.705551</td>
+<td>(3500, 4500]</td>
+<td>0.837535</td>
+<td>-0.705551</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>15.0</td>
+<td>8</td>
+<td>350.0</td>
+<td>165.0</td>
+<td>3693</td>
+<td>11.5</td>
+<td>70</td>
+<td>buick skylark 320</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+<td>-0.249252</td>
+<td>-1.089379</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150.0</td>
+<td>3436</td>
+<td>11.0</td>
+<td>70</td>
+<td>plymouth satellite</td>
+<td>-0.705551</td>
+<td>(2500, 3500]</td>
+<td>-0.956484</td>
+<td>-0.705551</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150.0</td>
+<td>3433</td>
+<td>12.0</td>
+<td>70</td>
+<td>amc rebel sst</td>
+<td>-0.961437</td>
+<td>(2500, 3500]</td>
+<td>-1.377177</td>
+<td>-0.961437</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>17.0</td>
+<td>8</td>
+<td>302.0</td>
+<td>140.0</td>
+<td>3449</td>
+<td>10.5</td>
+<td>70</td>
+<td>ford torino</td>
+<td>-0.833494</td>
+<td>(2500, 3500]</td>
+<td>-1.166831</td>
+<td>-0.833494</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3044,50 +3057,51 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>dum[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>mpg</th>
-      <th>origin_europe</th>
-      <th>origin_japan</th>
-      <th>origin_usa</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>mpg</th>
-      <td>1.000000</td>
-      <td>0.259022</td>
-      <td>0.442174</td>
-      <td>-0.568192</td>
-    </tr>
-    <tr>
-      <th>origin_europe</th>
-      <td>0.259022</td>
-      <td>1.000000</td>
-      <td>-0.229895</td>
-      <td>-0.597198</td>
-    </tr>
-    <tr>
-      <th>origin_japan</th>
-      <td>0.442174</td>
-      <td>-0.229895</td>
-      <td>1.000000</td>
-      <td>-0.643317</td>
-    </tr>
-    <tr>
-      <th>origin_usa</th>
-      <td>-0.568192</td>
-      <td>-0.597198</td>
-      <td>-0.643317</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>mpg</th>
+<th>origin_europe</th>
+<th>origin_japan</th>
+<th>origin_usa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>mpg</th>
+<td>1.000000</td>
+<td>0.259022</td>
+<td>0.442174</td>
+<td>-0.568192</td>
+</tr>
+<tr class="even">
+<th>origin_europe</th>
+<td>0.259022</td>
+<td>1.000000</td>
+<td>-0.229895</td>
+<td>-0.597198</td>
+</tr>
+<tr class="odd">
+<th>origin_japan</th>
+<td>0.442174</td>
+<td>-0.229895</td>
+<td>1.000000</td>
+<td>-0.643317</td>
+</tr>
+<tr class="even">
+<th>origin_usa</th>
+<td>-0.568192</td>
+<td>-0.597198</td>
+<td>-0.643317</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3113,350 +3127,353 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>by_set <span class="op">=</span> dozen.groupby(<span class="st">"dataset"</span>)</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>by_set.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-    <tr>
-      <th>dataset</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>away</th>
-      <td>54.266100</td>
-      <td>47.834721</td>
-    </tr>
-    <tr>
-      <th>bullseye</th>
-      <td>54.268730</td>
-      <td>47.830823</td>
-    </tr>
-    <tr>
-      <th>circle</th>
-      <td>54.267320</td>
-      <td>47.837717</td>
-    </tr>
-    <tr>
-      <th>dino</th>
-      <td>54.263273</td>
-      <td>47.832253</td>
-    </tr>
-    <tr>
-      <th>dots</th>
-      <td>54.260303</td>
-      <td>47.839829</td>
-    </tr>
-    <tr>
-      <th>h_lines</th>
-      <td>54.261442</td>
-      <td>47.830252</td>
-    </tr>
-    <tr>
-      <th>high_lines</th>
-      <td>54.268805</td>
-      <td>47.835450</td>
-    </tr>
-    <tr>
-      <th>slant_down</th>
-      <td>54.267849</td>
-      <td>47.835896</td>
-    </tr>
-    <tr>
-      <th>slant_up</th>
-      <td>54.265882</td>
-      <td>47.831496</td>
-    </tr>
-    <tr>
-      <th>star</th>
-      <td>54.267341</td>
-      <td>47.839545</td>
-    </tr>
-    <tr>
-      <th>v_lines</th>
-      <td>54.269927</td>
-      <td>47.836988</td>
-    </tr>
-    <tr>
-      <th>wide_lines</th>
-      <td>54.266916</td>
-      <td>47.831602</td>
-    </tr>
-    <tr>
-      <th>x_shape</th>
-      <td>54.260150</td>
-      <td>47.839717</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>x</th>
+<th>y</th>
+</tr>
+<tr class="odd">
+<th>dataset</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>away</th>
+<td>54.266100</td>
+<td>47.834721</td>
+</tr>
+<tr class="even">
+<th>bullseye</th>
+<td>54.268730</td>
+<td>47.830823</td>
+</tr>
+<tr class="odd">
+<th>circle</th>
+<td>54.267320</td>
+<td>47.837717</td>
+</tr>
+<tr class="even">
+<th>dino</th>
+<td>54.263273</td>
+<td>47.832253</td>
+</tr>
+<tr class="odd">
+<th>dots</th>
+<td>54.260303</td>
+<td>47.839829</td>
+</tr>
+<tr class="even">
+<th>h_lines</th>
+<td>54.261442</td>
+<td>47.830252</td>
+</tr>
+<tr class="odd">
+<th>high_lines</th>
+<td>54.268805</td>
+<td>47.835450</td>
+</tr>
+<tr class="even">
+<th>slant_down</th>
+<td>54.267849</td>
+<td>47.835896</td>
+</tr>
+<tr class="odd">
+<th>slant_up</th>
+<td>54.265882</td>
+<td>47.831496</td>
+</tr>
+<tr class="even">
+<th>star</th>
+<td>54.267341</td>
+<td>47.839545</td>
+</tr>
+<tr class="odd">
+<th>v_lines</th>
+<td>54.269927</td>
+<td>47.836988</td>
+</tr>
+<tr class="even">
+<th>wide_lines</th>
+<td>54.266916</td>
+<td>47.831602</td>
+</tr>
+<tr class="odd">
+<th>x_shape</th>
+<td>54.260150</td>
+<td>47.839717</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <div class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>by_set.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-    <tr>
-      <th>dataset</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>away</th>
-      <td>16.769825</td>
-      <td>26.939743</td>
-    </tr>
-    <tr>
-      <th>bullseye</th>
-      <td>16.769239</td>
-      <td>26.935727</td>
-    </tr>
-    <tr>
-      <th>circle</th>
-      <td>16.760013</td>
-      <td>26.930036</td>
-    </tr>
-    <tr>
-      <th>dino</th>
-      <td>16.765142</td>
-      <td>26.935403</td>
-    </tr>
-    <tr>
-      <th>dots</th>
-      <td>16.767735</td>
-      <td>26.930192</td>
-    </tr>
-    <tr>
-      <th>h_lines</th>
-      <td>16.765898</td>
-      <td>26.939876</td>
-    </tr>
-    <tr>
-      <th>high_lines</th>
-      <td>16.766704</td>
-      <td>26.939998</td>
-    </tr>
-    <tr>
-      <th>slant_down</th>
-      <td>16.766759</td>
-      <td>26.936105</td>
-    </tr>
-    <tr>
-      <th>slant_up</th>
-      <td>16.768853</td>
-      <td>26.938608</td>
-    </tr>
-    <tr>
-      <th>star</th>
-      <td>16.768959</td>
-      <td>26.930275</td>
-    </tr>
-    <tr>
-      <th>v_lines</th>
-      <td>16.769959</td>
-      <td>26.937684</td>
-    </tr>
-    <tr>
-      <th>wide_lines</th>
-      <td>16.770000</td>
-      <td>26.937902</td>
-    </tr>
-    <tr>
-      <th>x_shape</th>
-      <td>16.769958</td>
-      <td>26.930002</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>x</th>
+<th>y</th>
+</tr>
+<tr class="odd">
+<th>dataset</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>away</th>
+<td>16.769825</td>
+<td>26.939743</td>
+</tr>
+<tr class="even">
+<th>bullseye</th>
+<td>16.769239</td>
+<td>26.935727</td>
+</tr>
+<tr class="odd">
+<th>circle</th>
+<td>16.760013</td>
+<td>26.930036</td>
+</tr>
+<tr class="even">
+<th>dino</th>
+<td>16.765142</td>
+<td>26.935403</td>
+</tr>
+<tr class="odd">
+<th>dots</th>
+<td>16.767735</td>
+<td>26.930192</td>
+</tr>
+<tr class="even">
+<th>h_lines</th>
+<td>16.765898</td>
+<td>26.939876</td>
+</tr>
+<tr class="odd">
+<th>high_lines</th>
+<td>16.766704</td>
+<td>26.939998</td>
+</tr>
+<tr class="even">
+<th>slant_down</th>
+<td>16.766759</td>
+<td>26.936105</td>
+</tr>
+<tr class="odd">
+<th>slant_up</th>
+<td>16.768853</td>
+<td>26.938608</td>
+</tr>
+<tr class="even">
+<th>star</th>
+<td>16.768959</td>
+<td>26.930275</td>
+</tr>
+<tr class="odd">
+<th>v_lines</th>
+<td>16.769959</td>
+<td>26.937684</td>
+</tr>
+<tr class="even">
+<th>wide_lines</th>
+<td>16.770000</td>
+<td>26.937902</td>
+</tr>
+<tr class="odd">
+<th>x_shape</th>
+<td>16.769958</td>
+<td>26.930002</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
 <div class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>by_set.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-    <tr>
-      <th>dataset</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">away</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.064128</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.064128</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">bullseye</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.068586</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.068586</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">circle</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.068343</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.068343</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">dino</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.064472</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.064472</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">dots</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.060341</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.060341</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">h_lines</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.061715</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.061715</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">high_lines</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.068504</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.068504</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">slant_down</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.068980</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.068980</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">slant_up</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.068609</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.068609</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">star</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.062961</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.062961</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">v_lines</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.069446</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.069446</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">wide_lines</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.066575</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.066575</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">x_shape</th>
-      <th>x</th>
-      <td>1.000000</td>
-      <td>-0.065583</td>
-    </tr>
-    <tr>
-      <th>y</th>
-      <td>-0.065583</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>x</th>
+<th>y</th>
+</tr>
+<tr class="odd">
+<th>dataset</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="2" data-valign="top">away</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.064128</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.064128</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">bullseye</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.068586</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.068586</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">circle</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.068343</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.068343</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">dino</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.064472</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.064472</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">dots</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.060341</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.060341</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">h_lines</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.061715</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.061715</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">high_lines</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.068504</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.068504</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">slant_down</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.068980</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.068980</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">slant_up</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.068609</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.068609</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">star</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.062961</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.062961</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">v_lines</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.069446</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.069446</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">wide_lines</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.066575</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.066575</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">x_shape</th>
+<th>x</th>
+<td>1.000000</td>
+<td>-0.065583</td>
+</tr>
+<tr class="even">
+<th>y</th>
+<td>-0.065583</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3471,7 +3488,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p><img src="stats_files/figure-html/cell-66-output-1.png" width="623" height="832"></p>
 </div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -3494,30 +3511,31 @@ Important
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"body_mass_g"</span>, <span class="st">"bill_depth_mm"</span> ]</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>penguins[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="66">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>body_mass_g</th>
-      <th>bill_depth_mm</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>body_mass_g</th>
-      <td>1.000000</td>
-      <td>-0.471916</td>
-    </tr>
-    <tr>
-      <th>bill_depth_mm</th>
-      <td>-0.471916</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>body_mass_g</th>
+<th>bill_depth_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>body_mass_g</th>
+<td>1.000000</td>
+<td>-0.471916</td>
+</tr>
+<tr class="even">
+<th>bill_depth_mm</th>
+<td>-0.471916</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3525,60 +3543,61 @@ Important
 <div class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>body_mass_g</th>
-      <th>bill_depth_mm</th>
-    </tr>
-    <tr>
-      <th>species</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="2" valign="top">Adelie</th>
-      <th>body_mass_g</th>
-      <td>1.000000</td>
-      <td>0.576138</td>
-    </tr>
-    <tr>
-      <th>bill_depth_mm</th>
-      <td>0.576138</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Chinstrap</th>
-      <th>body_mass_g</th>
-      <td>1.000000</td>
-      <td>0.604498</td>
-    </tr>
-    <tr>
-      <th>bill_depth_mm</th>
-      <td>0.604498</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th rowspan="2" valign="top">Gentoo</th>
-      <th>body_mass_g</th>
-      <td>1.000000</td>
-      <td>0.719085</td>
-    </tr>
-    <tr>
-      <th>bill_depth_mm</th>
-      <td>0.719085</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>body_mass_g</th>
+<th>bill_depth_mm</th>
+</tr>
+<tr class="odd">
+<th>species</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th rowspan="2" data-valign="top">Adelie</th>
+<th>body_mass_g</th>
+<td>1.000000</td>
+<td>0.576138</td>
+</tr>
+<tr class="even">
+<th>bill_depth_mm</th>
+<td>0.576138</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">Chinstrap</th>
+<th>body_mass_g</th>
+<td>1.000000</td>
+<td>0.604498</td>
+</tr>
+<tr class="even">
+<th>bill_depth_mm</th>
+<td>0.604498</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th rowspan="2" data-valign="top">Gentoo</th>
+<th>body_mass_g</th>
+<td>1.000000</td>
+<td>0.719085</td>
+</tr>
+<tr class="even">
+<th>bill_depth_mm</th>
+<td>0.719085</td>
+<td>1.000000</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3758,6 +3777,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

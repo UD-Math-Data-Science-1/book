@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.280">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -293,7 +293,6 @@ MathJax = {
 
 </header>
 
-<div>
 <div class="hidden">
 <p><span class="math display">\[
     \newcommand{\float}{\mathbb{F}}
@@ -343,7 +342,6 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-</div>
 <p>First we have to discuss how to represent data, both abstractly and in Python.</p>
 <section id="quantitative-data" class="level2 page-columns page-full" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="quantitative-data"><span class="header-section-number">1.1</span> Quantitative data</h2>
@@ -368,8 +366,8 @@ MathJax = {
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Example1_1.mp4"></video></div>
-</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/l9fs3fa43hup08l/Example1_1.mp4?raw=1"></video></div>
+</div></div><div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -408,7 +406,7 @@ int(3.14) creates 3</code></pre>
 <section id="special-values" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="special-values"><span class="header-section-number">1.1.1</span> Special values</h3>
 <p>There are two additional quasi-numerical <code>float</code> values to be aware of as well.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -441,7 +439,7 @@ np.inf + np.inf is inf
 </div>
 </div>
 <p>The result <code>nan</code> stands for <em>Not a Number</em>. It is the result of indeterminate arithmetic operations, like <span class="math inline">\(\infty/\infty\)</span> and <span class="math inline">\(\infty - \infty\)</span>. It is also used sometimes as a placeholder for missing data, i.e.&nbsp;to mean, “unknown value”.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -463,7 +461,7 @@ Warning
 <div id="def-data-time" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.2 </strong></span>A <strong>datetime</strong> is a representation of an instant in time. A <strong>time delta</strong> is a representation of a duration; i.e., a difference between two datetimes.</p>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -558,7 +556,7 @@ Important
 <div id="def-data-vector" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.3 </strong></span>A <strong>vector</strong> is a collection of values called <strong>elements</strong>, all of the same type, indexed by consecutive integers.</p>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -584,7 +582,7 @@ Important
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_2_a.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/eq4n2508uhtwjir/Section1_2_a.mp4?raw=1"></video></div>
 </div></div><p>A vector has a data type for its elements:</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x.dtype</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -621,7 +619,7 @@ Important
 </div>
 </div>
 <p>The syntax here is <code>(start,stop,step)</code>. Note something critical and counterintuitive from the above results:</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -638,7 +636,7 @@ Danger
 <h4 data-number="1.2.1.1" class="anchored" data-anchor-id="access-and-slicing"><span class="header-section-number">1.2.1.1</span> Access and slicing</h4>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_2_b.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/adsliy9ncce8ivx/Section1_2_b.mp4?raw=1"></video></div>
 </div></div><p>Use square brackets to refer to an element of a vector:</p>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -743,7 +741,7 @@ Danger
 <div id="def-data-array" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.4 </strong></span>An <strong>array</strong> is a collection of values called <strong>elements</strong>, all of the same type, indexed by one or more sets of consecutive integers. The number of indexes needed to specify a value is the <strong>dimension</strong> of the array.</p>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -756,7 +754,7 @@ Note
 <p>A dimension is called an <code>axis</code> in NumPy and related packages.</p>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -773,7 +771,7 @@ Note
 <h4 data-number="1.2.2.1" class="anchored" data-anchor-id="construction"><span class="header-section-number">1.2.2.1</span> Construction</h4>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_2_c.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/xk5nyx52miba267/Section1_2_c.mp4?raw=1"></video></div>
 </div></div><p>One way to construct an array is by a list comprehension:</p>
 <div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([ [j<span class="op">-</span>i <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>) ])</span>
@@ -858,7 +856,7 @@ Note
 <h4 data-number="1.2.2.2" class="anchored" data-anchor-id="indexing-and-slicing"><span class="header-section-number">1.2.2.2</span> Indexing and slicing</h4>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_2_d.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/b8187f40a2vghjv/Section1_2_d.mp4?raw=1"></video></div>
 </div></div><p>We can use successive brackets to refer to an element, row then column:</p>
 <div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>R[<span class="dv">1</span>][<span class="dv">2</span>]    <span class="co"># second row, third column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -902,7 +900,7 @@ Note
 <h4 data-number="1.2.2.3" class="anchored" data-anchor-id="reductions"><span class="header-section-number">1.2.2.3</span> Reductions</h4>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video6" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_2_e.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video6" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/nvt91p4okytb33e/Section1_2_e.mp4?raw=1"></video></div>
 </div></div><p>A common task is to <em>reduce</em> an array along one dimension, called an <em>axis</em> in numpy, resulting in an array of one less dimension. It’s easiest to explain by some examples.</p>
 <div class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(A, axis<span class="op">=</span><span class="dv">0</span>)    <span class="co"># sum along the rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1027,7 +1025,7 @@ x_i = \begin{cases} 1, &amp; x=c_i, \\ 0, &amp; x\neq c_i. \end{cases}
 <p>would be replaced by the array</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>[ [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>], [<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>], [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>], [<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>] ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1133,54 +1131,55 @@ Name: wavelength, dtype: int64</code></pre>
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>rainbow <span class="op">=</span> pd.DataFrame( {<span class="st">"wavelength"</span>: wavelength, <span class="st">"team name"</span>: team} )</span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>rainbow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>wavelength</th>
-      <th>team name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>violet</th>
-      <td>400</td>
-      <td>Vikings</td>
-    </tr>
-    <tr>
-      <th>blue</th>
-      <td>470</td>
-      <td>Bills</td>
-    </tr>
-    <tr>
-      <th>green</th>
-      <td>520</td>
-      <td>Eagles</td>
-    </tr>
-    <tr>
-      <th>yellow</th>
-      <td>580</td>
-      <td>Chargers</td>
-    </tr>
-    <tr>
-      <th>orange</th>
-      <td>610</td>
-      <td>Bengals</td>
-    </tr>
-    <tr>
-      <th>red</th>
-      <td>710</td>
-      <td>Cardinals</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>wavelength</th>
+<th>team name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>violet</th>
+<td>400</td>
+<td>Vikings</td>
+</tr>
+<tr class="even">
+<th>blue</th>
+<td>470</td>
+<td>Bills</td>
+</tr>
+<tr class="odd">
+<th>green</th>
+<td>520</td>
+<td>Eagles</td>
+</tr>
+<tr class="even">
+<th>yellow</th>
+<td>580</td>
+<td>Chargers</td>
+</tr>
+<tr class="odd">
+<th>orange</th>
+<td>610</td>
+<td>Bengals</td>
+</tr>
+<tr class="even">
+<th>red</th>
+<td>710</td>
+<td>Cardinals</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1219,57 +1218,58 @@ Name: team name, dtype: object</code></pre>
 <span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a>rainbow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>wavelength</th>
-      <th>team name</th>
-      <th>flower</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>violet</th>
-      <td>400</td>
-      <td>Vikings</td>
-      <td>Lobelia</td>
-    </tr>
-    <tr>
-      <th>blue</th>
-      <td>470</td>
-      <td>Bills</td>
-      <td>Cornflower</td>
-    </tr>
-    <tr>
-      <th>green</th>
-      <td>520</td>
-      <td>Eagles</td>
-      <td>Bells-of-Ireland</td>
-    </tr>
-    <tr>
-      <th>yellow</th>
-      <td>580</td>
-      <td>Chargers</td>
-      <td>Daffodil</td>
-    </tr>
-    <tr>
-      <th>orange</th>
-      <td>610</td>
-      <td>Bengals</td>
-      <td>Butterfly weed</td>
-    </tr>
-    <tr>
-      <th>red</th>
-      <td>710</td>
-      <td>Cardinals</td>
-      <td>Rose</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>wavelength</th>
+<th>team name</th>
+<th>flower</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>violet</th>
+<td>400</td>
+<td>Vikings</td>
+<td>Lobelia</td>
+</tr>
+<tr class="even">
+<th>blue</th>
+<td>470</td>
+<td>Bills</td>
+<td>Cornflower</td>
+</tr>
+<tr class="odd">
+<th>green</th>
+<td>520</td>
+<td>Eagles</td>
+<td>Bells-of-Ireland</td>
+</tr>
+<tr class="even">
+<th>yellow</th>
+<td>580</td>
+<td>Chargers</td>
+<td>Daffodil</td>
+</tr>
+<tr class="odd">
+<th>orange</th>
+<td>610</td>
+<td>Bengals</td>
+<td>Butterfly weed</td>
+</tr>
+<tr class="even">
+<th>red</th>
+<td>710</td>
+<td>Cardinals</td>
+<td>Rose</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1293,7 +1293,7 @@ Name: orange, dtype: object</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video7" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_4_a.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video7" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/t74l0mltts3s9vz/Section1_4_a.mp4?raw=1"></video></div>
 </div></div><p>Here is another way to construct a data frame in pandas. We give a list of rows, plus (optionally) the index and the names of the columns:</p>
 <div class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> pd.DataFrame( </span>
@@ -1303,35 +1303,36 @@ Name: orange, dtype: object</code></pre>
 <span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>lowercase</th>
-      <th>uppercase</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>b</td>
-      <td>B</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>c</td>
-      <td>C</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>lowercase</th>
+<th>uppercase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>a</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>b</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>c</td>
+<td>C</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1343,35 +1344,36 @@ Name: orange, dtype: object</code></pre>
 <span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>lowercase</th>
-      <th>uppercase</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>a</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>b</td>
-      <td>B</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>c</td>
-      <td>C</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>lowercase</th>
+<th>uppercase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>a</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>b</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>c</td>
+<td>C</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1413,64 +1415,65 @@ Categories (6, object): ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']</c
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>ads <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/tobydriscoll/ds1book/master/advertising.csv"</span>)</span>
 <span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>ads.head(<span class="dv">6</span>)    <span class="co"># show the first 6 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="68">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>TV</th>
-      <th>Radio</th>
-      <th>Newspaper</th>
-      <th>Sales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>230.1</td>
-      <td>37.8</td>
-      <td>69.2</td>
-      <td>22.1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>44.5</td>
-      <td>39.3</td>
-      <td>45.1</td>
-      <td>10.4</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>17.2</td>
-      <td>45.9</td>
-      <td>69.3</td>
-      <td>12.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>151.5</td>
-      <td>41.3</td>
-      <td>58.5</td>
-      <td>16.5</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>180.8</td>
-      <td>10.8</td>
-      <td>58.4</td>
-      <td>17.9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>8.7</td>
-      <td>48.9</td>
-      <td>75.0</td>
-      <td>7.2</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>TV</th>
+<th>Radio</th>
+<th>Newspaper</th>
+<th>Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>230.1</td>
+<td>37.8</td>
+<td>69.2</td>
+<td>22.1</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>44.5</td>
+<td>39.3</td>
+<td>45.1</td>
+<td>10.4</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>17.2</td>
+<td>45.9</td>
+<td>69.3</td>
+<td>12.0</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>151.5</td>
+<td>41.3</td>
+<td>58.5</td>
+<td>16.5</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>180.8</td>
+<td>10.8</td>
+<td>58.4</td>
+<td>17.9</td>
+</tr>
+<tr class="even">
+<th>5</th>
+<td>8.7</td>
+<td>48.9</td>
+<td>75.0</td>
+<td>7.2</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1501,7 +1504,7 @@ dtype: object</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_4_b.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1r9is5thcryuarl/Section1_4_b.mp4?raw=1"></video></div>
 </div></div><p>It’s also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with <code>pd.read_</code> showing the formats pandas understands.</p>
 </section>
 <section id="selecting-rows" class="level3 page-columns page-full" data-number="1.4.2">
@@ -1513,159 +1516,160 @@ dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/ghcn_newark.csv"</span>)</span>
 <span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>weather.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="72">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>STATION</th>
-      <th>DATE</th>
-      <th>LATITUDE</th>
-      <th>LONGITUDE</th>
-      <th>ELEVATION</th>
-      <th>NAME</th>
-      <th>PRCP</th>
-      <th>PRCP_ATTRIBUTES</th>
-      <th>SNOW</th>
-      <th>SNOW_ATTRIBUTES</th>
-      <th>...</th>
-      <th>WT08</th>
-      <th>WT08_ATTRIBUTES</th>
-      <th>WT11</th>
-      <th>WT11_ATTRIBUTES</th>
-      <th>WT14</th>
-      <th>WT14_ATTRIBUTES</th>
-      <th>WT16</th>
-      <th>WT16_ATTRIBUTES</th>
-      <th>WT18</th>
-      <th>WT18_ATTRIBUTES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>USC00076410</td>
-      <td>1894-04-01</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>USC00076410</td>
-      <td>1894-04-02</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>USC00076410</td>
-      <td>1894-04-03</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>USC00076410</td>
-      <td>1894-04-04</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>165.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>USC00076410</td>
-      <td>1894-04-05</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>STATION</th>
+<th>DATE</th>
+<th>LATITUDE</th>
+<th>LONGITUDE</th>
+<th>ELEVATION</th>
+<th>NAME</th>
+<th>PRCP</th>
+<th>PRCP_ATTRIBUTES</th>
+<th>SNOW</th>
+<th>SNOW_ATTRIBUTES</th>
+<th>...</th>
+<th>WT08</th>
+<th>WT08_ATTRIBUTES</th>
+<th>WT11</th>
+<th>WT11_ATTRIBUTES</th>
+<th>WT14</th>
+<th>WT14_ATTRIBUTES</th>
+<th>WT16</th>
+<th>WT16_ATTRIBUTES</th>
+<th>WT18</th>
+<th>WT18_ATTRIBUTES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>USC00076410</td>
+<td>1894-04-01</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>USC00076410</td>
+<td>1894-04-02</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>USC00076410</td>
+<td>1894-04-03</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>USC00076410</td>
+<td>1894-04-04</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>165.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>USC00076410</td>
+<td>1894-04-05</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 56 columns</p>
 </div>
 </div>
@@ -1688,159 +1692,160 @@ Name: PRCP, dtype: bool</code></pre>
 <div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>precip <span class="op">=</span> weather[isprecip]</span>
 <span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>precip.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="74">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>STATION</th>
-      <th>DATE</th>
-      <th>LATITUDE</th>
-      <th>LONGITUDE</th>
-      <th>ELEVATION</th>
-      <th>NAME</th>
-      <th>PRCP</th>
-      <th>PRCP_ATTRIBUTES</th>
-      <th>SNOW</th>
-      <th>SNOW_ATTRIBUTES</th>
-      <th>...</th>
-      <th>WT08</th>
-      <th>WT08_ATTRIBUTES</th>
-      <th>WT11</th>
-      <th>WT11_ATTRIBUTES</th>
-      <th>WT14</th>
-      <th>WT14_ATTRIBUTES</th>
-      <th>WT16</th>
-      <th>WT16_ATTRIBUTES</th>
-      <th>WT18</th>
-      <th>WT18_ATTRIBUTES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>USC00076410</td>
-      <td>1894-04-04</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>165.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>USC00076410</td>
-      <td>1894-04-08</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>104.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>USC00076410</td>
-      <td>1894-04-11</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>531.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>USC00076410</td>
-      <td>1894-04-12</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>15.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>USC00076410</td>
-      <td>1894-04-22</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>30.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>STATION</th>
+<th>DATE</th>
+<th>LATITUDE</th>
+<th>LONGITUDE</th>
+<th>ELEVATION</th>
+<th>NAME</th>
+<th>PRCP</th>
+<th>PRCP_ATTRIBUTES</th>
+<th>SNOW</th>
+<th>SNOW_ATTRIBUTES</th>
+<th>...</th>
+<th>WT08</th>
+<th>WT08_ATTRIBUTES</th>
+<th>WT11</th>
+<th>WT11_ATTRIBUTES</th>
+<th>WT14</th>
+<th>WT14_ATTRIBUTES</th>
+<th>WT16</th>
+<th>WT16_ATTRIBUTES</th>
+<th>WT18</th>
+<th>WT18_ATTRIBUTES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>3</th>
+<td>USC00076410</td>
+<td>1894-04-04</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>165.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>7</th>
+<td>USC00076410</td>
+<td>1894-04-08</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>104.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>10</th>
+<td>USC00076410</td>
+<td>1894-04-11</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>531.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>11</th>
+<td>USC00076410</td>
+<td>1894-04-12</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>15.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>21</th>
+<td>USC00076410</td>
+<td>1894-04-22</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>30.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 56 columns</p>
 </div>
 </div>
@@ -1851,183 +1856,184 @@ Name: PRCP, dtype: bool</code></pre>
 <span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>dry_cold <span class="op">=</span> weather[ iscold <span class="op">&amp;</span> <span class="op">~</span>isprecip ]</span>
 <span id="cb135-3"><a href="#cb135-3" aria-hidden="true" tabindex="-1"></a>dry_cold.head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="75">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>STATION</th>
-      <th>DATE</th>
-      <th>LATITUDE</th>
-      <th>LONGITUDE</th>
-      <th>ELEVATION</th>
-      <th>NAME</th>
-      <th>PRCP</th>
-      <th>PRCP_ATTRIBUTES</th>
-      <th>SNOW</th>
-      <th>SNOW_ATTRIBUTES</th>
-      <th>...</th>
-      <th>WT08</th>
-      <th>WT08_ATTRIBUTES</th>
-      <th>WT11</th>
-      <th>WT11_ATTRIBUTES</th>
-      <th>WT14</th>
-      <th>WT14_ATTRIBUTES</th>
-      <th>WT16</th>
-      <th>WT16_ATTRIBUTES</th>
-      <th>WT18</th>
-      <th>WT18_ATTRIBUTES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>240</th>
-      <td>USC00076410</td>
-      <td>1894-12-28</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>241</th>
-      <td>USC00076410</td>
-      <td>1894-12-29</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>242</th>
-      <td>USC00076410</td>
-      <td>1894-12-30</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>243</th>
-      <td>USC00076410</td>
-      <td>1894-12-31</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>244</th>
-      <td>USC00076410</td>
-      <td>1895-01-01</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>0.0</td>
-      <td>,,6</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>245</th>
-      <td>USC00076410</td>
-      <td>1895-01-02</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>0.0</td>
-      <td>,,6</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>STATION</th>
+<th>DATE</th>
+<th>LATITUDE</th>
+<th>LONGITUDE</th>
+<th>ELEVATION</th>
+<th>NAME</th>
+<th>PRCP</th>
+<th>PRCP_ATTRIBUTES</th>
+<th>SNOW</th>
+<th>SNOW_ATTRIBUTES</th>
+<th>...</th>
+<th>WT08</th>
+<th>WT08_ATTRIBUTES</th>
+<th>WT11</th>
+<th>WT11_ATTRIBUTES</th>
+<th>WT14</th>
+<th>WT14_ATTRIBUTES</th>
+<th>WT16</th>
+<th>WT16_ATTRIBUTES</th>
+<th>WT18</th>
+<th>WT18_ATTRIBUTES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>240</th>
+<td>USC00076410</td>
+<td>1894-12-28</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>241</th>
+<td>USC00076410</td>
+<td>1894-12-29</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>242</th>
+<td>USC00076410</td>
+<td>1894-12-30</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>243</th>
+<td>USC00076410</td>
+<td>1894-12-31</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>244</th>
+<td>USC00076410</td>
+<td>1895-01-01</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>0.0</td>
+<td>,,6</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>245</th>
+<td>USC00076410</td>
+<td>1895-01-02</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>0.0</td>
+<td>,,6</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>6 rows × 56 columns</p>
 </div>
 </div>
@@ -2035,7 +2041,7 @@ Name: PRCP, dtype: bool</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video9" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Example1_10.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video9" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/uwrmgpz15mm5aj9/Example1_10.mp4?raw=1"></video></div>
 </div></div><p>When a column of a dataset is a time stamp, it can be used as the index of the data frame, which makes some time-centric operations easier.</p>
 <div id="exm-data-time-index" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.11 </strong></span>Let’s reload the dataset using the <em>DATE</em> column (which is second in the file) as a <code>datetime</code> index:</p>
@@ -2043,183 +2049,184 @@ Name: PRCP, dtype: bool</code></pre>
 <div class="sourceCode cell-code" id="cb136"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/ghcn_newark.csv"</span>, index_col<span class="op">=</span><span class="dv">1</span>, parse_dates<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>weather.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>STATION</th>
-      <th>LATITUDE</th>
-      <th>LONGITUDE</th>
-      <th>ELEVATION</th>
-      <th>NAME</th>
-      <th>PRCP</th>
-      <th>PRCP_ATTRIBUTES</th>
-      <th>SNOW</th>
-      <th>SNOW_ATTRIBUTES</th>
-      <th>SNWD</th>
-      <th>...</th>
-      <th>WT08</th>
-      <th>WT08_ATTRIBUTES</th>
-      <th>WT11</th>
-      <th>WT11_ATTRIBUTES</th>
-      <th>WT14</th>
-      <th>WT14_ATTRIBUTES</th>
-      <th>WT16</th>
-      <th>WT16_ATTRIBUTES</th>
-      <th>WT18</th>
-      <th>WT18_ATTRIBUTES</th>
-    </tr>
-    <tr>
-      <th>DATE</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1894-04-01</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1894-04-02</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1894-04-03</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1894-04-04</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>165.0</td>
-      <td>,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1894-04-05</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>P,,6,</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>STATION</th>
+<th>LATITUDE</th>
+<th>LONGITUDE</th>
+<th>ELEVATION</th>
+<th>NAME</th>
+<th>PRCP</th>
+<th>PRCP_ATTRIBUTES</th>
+<th>SNOW</th>
+<th>SNOW_ATTRIBUTES</th>
+<th>SNWD</th>
+<th>...</th>
+<th>WT08</th>
+<th>WT08_ATTRIBUTES</th>
+<th>WT11</th>
+<th>WT11_ATTRIBUTES</th>
+<th>WT14</th>
+<th>WT14_ATTRIBUTES</th>
+<th>WT16</th>
+<th>WT16_ATTRIBUTES</th>
+<th>WT18</th>
+<th>WT18_ATTRIBUTES</th>
+</tr>
+<tr class="odd">
+<th>DATE</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>1894-04-01</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1894-04-02</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>1894-04-03</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1894-04-04</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>165.0</td>
+<td>,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>1894-04-05</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>P,,6,</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 55 columns</p>
 </div>
 </div>
@@ -2290,183 +2297,184 @@ Name: 1979-03-28 00:00:00, dtype: object</code></pre>
 <div class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>weather.loc[<span class="st">"1979-03"</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>STATION</th>
-      <th>LATITUDE</th>
-      <th>LONGITUDE</th>
-      <th>ELEVATION</th>
-      <th>NAME</th>
-      <th>PRCP</th>
-      <th>PRCP_ATTRIBUTES</th>
-      <th>SNOW</th>
-      <th>SNOW_ATTRIBUTES</th>
-      <th>SNWD</th>
-      <th>...</th>
-      <th>WT08</th>
-      <th>WT08_ATTRIBUTES</th>
-      <th>WT11</th>
-      <th>WT11_ATTRIBUTES</th>
-      <th>WT14</th>
-      <th>WT14_ATTRIBUTES</th>
-      <th>WT16</th>
-      <th>WT16_ATTRIBUTES</th>
-      <th>WT18</th>
-      <th>WT18_ATTRIBUTES</th>
-    </tr>
-    <tr>
-      <th>DATE</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1979-03-01</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>,,0,1700</td>
-      <td>0.0</td>
-      <td>,,0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1979-03-02</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>3.0</td>
-      <td>,,0,1700</td>
-      <td>0.0</td>
-      <td>,,0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1979-03-03</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>,,0,1700</td>
-      <td>0.0</td>
-      <td>,,0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1979-03-04</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>0.0</td>
-      <td>,,0,1700</td>
-      <td>0.0</td>
-      <td>,,0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1979-03-05</th>
-      <td>USC00076410</td>
-      <td>39.6682</td>
-      <td>-75.74569</td>
-      <td>32.3</td>
-      <td>NEWARK AG FARM, DE US</td>
-      <td>61.0</td>
-      <td>,,0,1700</td>
-      <td>0.0</td>
-      <td>,,0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>STATION</th>
+<th>LATITUDE</th>
+<th>LONGITUDE</th>
+<th>ELEVATION</th>
+<th>NAME</th>
+<th>PRCP</th>
+<th>PRCP_ATTRIBUTES</th>
+<th>SNOW</th>
+<th>SNOW_ATTRIBUTES</th>
+<th>SNWD</th>
+<th>...</th>
+<th>WT08</th>
+<th>WT08_ATTRIBUTES</th>
+<th>WT11</th>
+<th>WT11_ATTRIBUTES</th>
+<th>WT14</th>
+<th>WT14_ATTRIBUTES</th>
+<th>WT16</th>
+<th>WT16_ATTRIBUTES</th>
+<th>WT18</th>
+<th>WT18_ATTRIBUTES</th>
+</tr>
+<tr class="odd">
+<th>DATE</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>1979-03-01</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>,,0,1700</td>
+<td>0.0</td>
+<td>,,0</td>
+<td>0.0</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1979-03-02</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>3.0</td>
+<td>,,0,1700</td>
+<td>0.0</td>
+<td>,,0</td>
+<td>0.0</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>1979-03-03</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>,,0,1700</td>
+<td>0.0</td>
+<td>,,0</td>
+<td>0.0</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1979-03-04</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>0.0</td>
+<td>,,0,1700</td>
+<td>0.0</td>
+<td>,,0</td>
+<td>0.0</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>1979-03-05</th>
+<td>USC00076410</td>
+<td>39.6682</td>
+<td>-75.74569</td>
+<td>32.3</td>
+<td>NEWARK AG FARM, DE US</td>
+<td>61.0</td>
+<td>,,0,1700</td>
+<td>0.0</td>
+<td>,,0</td>
+<td>0.0</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 55 columns</p>
 </div>
 </div>
@@ -2474,8 +2482,8 @@ Name: 1979-03-28 00:00:00, dtype: object</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_4_c.mp4"></video></div>
-</div></div><div class="callout-tip callout callout-style-default callout-captioned">
+<div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/h3ezvnpyn8xe5ch/Section1_4_c.mp4?raw=1"></video></div>
+</div></div><div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2488,7 +2496,7 @@ Tip
 <p>The pandas user guide has a handy <a href="https://pandas.pydata.org/docs/user_guide/10min.html?highlight=boolean#selection">section on selections</a>.</p>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2511,82 +2519,83 @@ Tip
 <p>In real data sets, we often must cope with data series that have missing values. This is a common source of mistakes and confusion, especially because there is no universal practice. Sometimes zero is used to represent a missing number. It’s also common to use an impossible value, such as <span class="math inline">\(-999\)</span> to represent weight, to signify missing data.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video11" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_5_a.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video11" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wz9vpncyyyw2xex/Section1_5_a.mp4?raw=1"></video></div>
 </div></div><p>Formally, the most natural way to represent missing data in Python is as <code>nan</code> or <code>NaN</code>, and pandas makes it easy to find and manipulate such values. Here is another well-known data set, this time about penguins:</p>
 <div class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>penguins.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>species</th>
-      <th>island</th>
-      <th>bill_length_mm</th>
-      <th>bill_depth_mm</th>
-      <th>flipper_length_mm</th>
-      <th>body_mass_g</th>
-      <th>sex</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.1</td>
-      <td>18.7</td>
-      <td>181.0</td>
-      <td>3750.0</td>
-      <td>Male</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>39.5</td>
-      <td>17.4</td>
-      <td>186.0</td>
-      <td>3800.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>40.3</td>
-      <td>18.0</td>
-      <td>195.0</td>
-      <td>3250.0</td>
-      <td>Female</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>36.7</td>
-      <td>19.3</td>
-      <td>193.0</td>
-      <td>3450.0</td>
-      <td>Female</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>species</th>
+<th>island</th>
+<th>bill_length_mm</th>
+<th>bill_depth_mm</th>
+<th>flipper_length_mm</th>
+<th>body_mass_g</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>Female</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>Female</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -2634,7 +2643,7 @@ sex                  333
 dtype: int64</code></pre>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2651,7 +2660,7 @@ Tip
 <section id="loans-example" class="level3 page-columns page-full" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="loans-example"><span class="header-section-number">1.5.2</span> Loans example</h3>
 <p>To demonstrate algortihms in later sections, we will be using a <a href="https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011">dataset describing loans</a> made on the crowdfunding site LendingClub. First, we load the raw data from a CSV (comma separated values) file.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2666,171 +2675,172 @@ Tip
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video12" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_5_b.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video12" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/t56b2blgzn6s9a6/Section1_5_b.mp4?raw=1"></video></div>
 </div></div><div class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/loan.csv"</span>)</span>
 <span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="82">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>id</th>
-      <th>member_id</th>
-      <th>loan_amnt</th>
-      <th>funded_amnt</th>
-      <th>funded_amnt_inv</th>
-      <th>term</th>
-      <th>int_rate</th>
-      <th>installment</th>
-      <th>grade</th>
-      <th>sub_grade</th>
-      <th>...</th>
-      <th>num_tl_90g_dpd_24m</th>
-      <th>num_tl_op_past_12m</th>
-      <th>pct_tl_nvr_dlq</th>
-      <th>percent_bc_gt_75</th>
-      <th>pub_rec_bankruptcies</th>
-      <th>tax_liens</th>
-      <th>tot_hi_cred_lim</th>
-      <th>total_bal_ex_mort</th>
-      <th>total_bc_limit</th>
-      <th>total_il_high_credit_limit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1077501</td>
-      <td>1296599</td>
-      <td>5000</td>
-      <td>5000</td>
-      <td>4975.0</td>
-      <td>36 months</td>
-      <td>10.65%</td>
-      <td>162.87</td>
-      <td>B</td>
-      <td>B2</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1077430</td>
-      <td>1314167</td>
-      <td>2500</td>
-      <td>2500</td>
-      <td>2500.0</td>
-      <td>60 months</td>
-      <td>15.27%</td>
-      <td>59.83</td>
-      <td>C</td>
-      <td>C4</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1077175</td>
-      <td>1313524</td>
-      <td>2400</td>
-      <td>2400</td>
-      <td>2400.0</td>
-      <td>36 months</td>
-      <td>15.96%</td>
-      <td>84.33</td>
-      <td>C</td>
-      <td>C5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1076863</td>
-      <td>1277178</td>
-      <td>10000</td>
-      <td>10000</td>
-      <td>10000.0</td>
-      <td>36 months</td>
-      <td>13.49%</td>
-      <td>339.31</td>
-      <td>C</td>
-      <td>C1</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1075358</td>
-      <td>1311748</td>
-      <td>3000</td>
-      <td>3000</td>
-      <td>3000.0</td>
-      <td>60 months</td>
-      <td>12.69%</td>
-      <td>67.79</td>
-      <td>B</td>
-      <td>B5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>id</th>
+<th>member_id</th>
+<th>loan_amnt</th>
+<th>funded_amnt</th>
+<th>funded_amnt_inv</th>
+<th>term</th>
+<th>int_rate</th>
+<th>installment</th>
+<th>grade</th>
+<th>sub_grade</th>
+<th>...</th>
+<th>num_tl_90g_dpd_24m</th>
+<th>num_tl_op_past_12m</th>
+<th>pct_tl_nvr_dlq</th>
+<th>percent_bc_gt_75</th>
+<th>pub_rec_bankruptcies</th>
+<th>tax_liens</th>
+<th>tot_hi_cred_lim</th>
+<th>total_bal_ex_mort</th>
+<th>total_bc_limit</th>
+<th>total_il_high_credit_limit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1077501</td>
+<td>1296599</td>
+<td>5000</td>
+<td>5000</td>
+<td>4975.0</td>
+<td>36 months</td>
+<td>10.65%</td>
+<td>162.87</td>
+<td>B</td>
+<td>B2</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>1077430</td>
+<td>1314167</td>
+<td>2500</td>
+<td>2500</td>
+<td>2500.0</td>
+<td>60 months</td>
+<td>15.27%</td>
+<td>59.83</td>
+<td>C</td>
+<td>C4</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>1077175</td>
+<td>1313524</td>
+<td>2400</td>
+<td>2400</td>
+<td>2400.0</td>
+<td>36 months</td>
+<td>15.96%</td>
+<td>84.33</td>
+<td>C</td>
+<td>C5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>1076863</td>
+<td>1277178</td>
+<td>10000</td>
+<td>10000</td>
+<td>10000.0</td>
+<td>36 months</td>
+<td>13.49%</td>
+<td>339.31</td>
+<td>C</td>
+<td>C1</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>1075358</td>
+<td>1311748</td>
+<td>3000</td>
+<td>3000</td>
+<td>3000.0</td>
+<td>60 months</td>
+<td>12.69%</td>
+<td>67.79</td>
+<td>B</td>
+<td>B5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 111 columns</p>
 </div>
 </div>
 </div>
 <p>The <code>int_rate</code> column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We’ll strip out those percent signs and convert them to floats.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -2847,159 +2857,160 @@ Tip
 <div class="sourceCode cell-code" id="cb146"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>loans[<span class="st">"int_rate"</span>] <span class="op">=</span> loans[<span class="st">"int_rate"</span>].<span class="bu">str</span>.strip(<span class="st">'%'</span>).astype(<span class="bu">float</span>)</span>
 <span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="83">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>id</th>
-      <th>member_id</th>
-      <th>loan_amnt</th>
-      <th>funded_amnt</th>
-      <th>funded_amnt_inv</th>
-      <th>term</th>
-      <th>int_rate</th>
-      <th>installment</th>
-      <th>grade</th>
-      <th>sub_grade</th>
-      <th>...</th>
-      <th>num_tl_90g_dpd_24m</th>
-      <th>num_tl_op_past_12m</th>
-      <th>pct_tl_nvr_dlq</th>
-      <th>percent_bc_gt_75</th>
-      <th>pub_rec_bankruptcies</th>
-      <th>tax_liens</th>
-      <th>tot_hi_cred_lim</th>
-      <th>total_bal_ex_mort</th>
-      <th>total_bc_limit</th>
-      <th>total_il_high_credit_limit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1077501</td>
-      <td>1296599</td>
-      <td>5000</td>
-      <td>5000</td>
-      <td>4975.0</td>
-      <td>36 months</td>
-      <td>10.65</td>
-      <td>162.87</td>
-      <td>B</td>
-      <td>B2</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1077430</td>
-      <td>1314167</td>
-      <td>2500</td>
-      <td>2500</td>
-      <td>2500.0</td>
-      <td>60 months</td>
-      <td>15.27</td>
-      <td>59.83</td>
-      <td>C</td>
-      <td>C4</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1077175</td>
-      <td>1313524</td>
-      <td>2400</td>
-      <td>2400</td>
-      <td>2400.0</td>
-      <td>36 months</td>
-      <td>15.96</td>
-      <td>84.33</td>
-      <td>C</td>
-      <td>C5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1076863</td>
-      <td>1277178</td>
-      <td>10000</td>
-      <td>10000</td>
-      <td>10000.0</td>
-      <td>36 months</td>
-      <td>13.49</td>
-      <td>339.31</td>
-      <td>C</td>
-      <td>C1</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1075358</td>
-      <td>1311748</td>
-      <td>3000</td>
-      <td>3000</td>
-      <td>3000.0</td>
-      <td>60 months</td>
-      <td>12.69</td>
-      <td>67.79</td>
-      <td>B</td>
-      <td>B5</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>id</th>
+<th>member_id</th>
+<th>loan_amnt</th>
+<th>funded_amnt</th>
+<th>funded_amnt_inv</th>
+<th>term</th>
+<th>int_rate</th>
+<th>installment</th>
+<th>grade</th>
+<th>sub_grade</th>
+<th>...</th>
+<th>num_tl_90g_dpd_24m</th>
+<th>num_tl_op_past_12m</th>
+<th>pct_tl_nvr_dlq</th>
+<th>percent_bc_gt_75</th>
+<th>pub_rec_bankruptcies</th>
+<th>tax_liens</th>
+<th>tot_hi_cred_lim</th>
+<th>total_bal_ex_mort</th>
+<th>total_bc_limit</th>
+<th>total_il_high_credit_limit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>1077501</td>
+<td>1296599</td>
+<td>5000</td>
+<td>5000</td>
+<td>4975.0</td>
+<td>36 months</td>
+<td>10.65</td>
+<td>162.87</td>
+<td>B</td>
+<td>B2</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>1077430</td>
+<td>1314167</td>
+<td>2500</td>
+<td>2500</td>
+<td>2500.0</td>
+<td>60 months</td>
+<td>15.27</td>
+<td>59.83</td>
+<td>C</td>
+<td>C4</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>1077175</td>
+<td>1313524</td>
+<td>2400</td>
+<td>2400</td>
+<td>2400.0</td>
+<td>36 months</td>
+<td>15.96</td>
+<td>84.33</td>
+<td>C</td>
+<td>C5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>1076863</td>
+<td>1277178</td>
+<td>10000</td>
+<td>10000</td>
+<td>10000.0</td>
+<td>36 months</td>
+<td>13.49</td>
+<td>339.31</td>
+<td>C</td>
+<td>C1</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>1075358</td>
+<td>1311748</td>
+<td>3000</td>
+<td>3000</td>
+<td>3000.0</td>
+<td>60 months</td>
+<td>12.69</td>
+<td>67.79</td>
+<td>B</td>
+<td>B5</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
 </table>
+
 <p>5 rows × 111 columns</p>
 </div>
 </div>
@@ -3027,7 +3038,7 @@ percent_funded    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -3049,100 +3060,101 @@ Note
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="diamonds-example"><span class="header-section-number">1.5.3</span> Diamonds example</h3>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/Section1_5_c.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/fjf4gj8bj5hwvwm/Section1_5_c.mp4?raw=1"></video></div>
 </div></div><p>We will also be using a seaborn <a href="https://ggplot2.tidyverse.org/reference/diamonds.html">dataset comprising features of diamonds and their prices</a>:</p>
 <div class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>diamonds <span class="op">=</span> sns.load_dataset(<span class="st">"diamonds"</span>)</span>
 <span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="87">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>carat</th>
-      <th>cut</th>
-      <th>color</th>
-      <th>clarity</th>
-      <th>depth</th>
-      <th>table</th>
-      <th>price</th>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.23</td>
-      <td>Ideal</td>
-      <td>E</td>
-      <td>SI2</td>
-      <td>61.5</td>
-      <td>55.0</td>
-      <td>326</td>
-      <td>3.95</td>
-      <td>3.98</td>
-      <td>2.43</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.21</td>
-      <td>Premium</td>
-      <td>E</td>
-      <td>SI1</td>
-      <td>59.8</td>
-      <td>61.0</td>
-      <td>326</td>
-      <td>3.89</td>
-      <td>3.84</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.23</td>
-      <td>Good</td>
-      <td>E</td>
-      <td>VS1</td>
-      <td>56.9</td>
-      <td>65.0</td>
-      <td>327</td>
-      <td>4.05</td>
-      <td>4.07</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.29</td>
-      <td>Premium</td>
-      <td>I</td>
-      <td>VS2</td>
-      <td>62.4</td>
-      <td>58.0</td>
-      <td>334</td>
-      <td>4.20</td>
-      <td>4.23</td>
-      <td>2.63</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.31</td>
-      <td>Good</td>
-      <td>J</td>
-      <td>SI2</td>
-      <td>63.3</td>
-      <td>58.0</td>
-      <td>335</td>
-      <td>4.34</td>
-      <td>4.35</td>
-      <td>2.75</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>carat</th>
+<th>cut</th>
+<th>color</th>
+<th>clarity</th>
+<th>depth</th>
+<th>table</th>
+<th>price</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>0.23</td>
+<td>Ideal</td>
+<td>E</td>
+<td>SI2</td>
+<td>61.5</td>
+<td>55.0</td>
+<td>326</td>
+<td>3.95</td>
+<td>3.98</td>
+<td>2.43</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>0.21</td>
+<td>Premium</td>
+<td>E</td>
+<td>SI1</td>
+<td>59.8</td>
+<td>61.0</td>
+<td>326</td>
+<td>3.89</td>
+<td>3.84</td>
+<td>2.31</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>0.23</td>
+<td>Good</td>
+<td>E</td>
+<td>VS1</td>
+<td>56.9</td>
+<td>65.0</td>
+<td>327</td>
+<td>4.05</td>
+<td>4.07</td>
+<td>2.31</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>0.29</td>
+<td>Premium</td>
+<td>I</td>
+<td>VS2</td>
+<td>62.4</td>
+<td>58.0</td>
+<td>334</td>
+<td>4.20</td>
+<td>4.23</td>
+<td>2.63</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>0.31</td>
+<td>Good</td>
+<td>J</td>
+<td>SI2</td>
+<td>63.3</td>
+<td>58.0</td>
+<td>335</td>
+<td>4.34</td>
+<td>4.35</td>
+<td>2.75</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3158,93 +3170,94 @@ Note
 <span id="cb152-7"><a href="#cb152-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb152-8"><a href="#cb152-8" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="88">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>carat</th>
-      <th>cut</th>
-      <th>color</th>
-      <th>clarity</th>
-      <th>depth</th>
-      <th>table</th>
-      <th>price</th>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.23</td>
-      <td>4</td>
-      <td>E</td>
-      <td>SI2</td>
-      <td>61.5</td>
-      <td>55.0</td>
-      <td>326</td>
-      <td>3.95</td>
-      <td>3.98</td>
-      <td>2.43</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.21</td>
-      <td>3</td>
-      <td>E</td>
-      <td>SI1</td>
-      <td>59.8</td>
-      <td>61.0</td>
-      <td>326</td>
-      <td>3.89</td>
-      <td>3.84</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.23</td>
-      <td>1</td>
-      <td>E</td>
-      <td>VS1</td>
-      <td>56.9</td>
-      <td>65.0</td>
-      <td>327</td>
-      <td>4.05</td>
-      <td>4.07</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.29</td>
-      <td>3</td>
-      <td>I</td>
-      <td>VS2</td>
-      <td>62.4</td>
-      <td>58.0</td>
-      <td>334</td>
-      <td>4.20</td>
-      <td>4.23</td>
-      <td>2.63</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.31</td>
-      <td>1</td>
-      <td>J</td>
-      <td>SI2</td>
-      <td>63.3</td>
-      <td>58.0</td>
-      <td>335</td>
-      <td>4.34</td>
-      <td>4.35</td>
-      <td>2.75</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>carat</th>
+<th>cut</th>
+<th>color</th>
+<th>clarity</th>
+<th>depth</th>
+<th>table</th>
+<th>price</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>0.23</td>
+<td>4</td>
+<td>E</td>
+<td>SI2</td>
+<td>61.5</td>
+<td>55.0</td>
+<td>326</td>
+<td>3.95</td>
+<td>3.98</td>
+<td>2.43</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>0.21</td>
+<td>3</td>
+<td>E</td>
+<td>SI1</td>
+<td>59.8</td>
+<td>61.0</td>
+<td>326</td>
+<td>3.89</td>
+<td>3.84</td>
+<td>2.31</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>0.23</td>
+<td>1</td>
+<td>E</td>
+<td>VS1</td>
+<td>56.9</td>
+<td>65.0</td>
+<td>327</td>
+<td>4.05</td>
+<td>4.07</td>
+<td>2.31</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>0.29</td>
+<td>3</td>
+<td>I</td>
+<td>VS2</td>
+<td>62.4</td>
+<td>58.0</td>
+<td>334</td>
+<td>4.20</td>
+<td>4.23</td>
+<td>2.63</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>0.31</td>
+<td>1</td>
+<td>J</td>
+<td>SI2</td>
+<td>63.3</td>
+<td>58.0</td>
+<td>335</td>
+<td>4.34</td>
+<td>4.35</td>
+<td>2.75</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3264,93 +3277,94 @@ Note
 <span id="cb153-12"><a href="#cb153-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb153-13"><a href="#cb153-13" aria-hidden="true" tabindex="-1"></a>diamonds.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="89">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>carat</th>
-      <th>cut</th>
-      <th>color</th>
-      <th>clarity</th>
-      <th>depth</th>
-      <th>table</th>
-      <th>price</th>
-      <th>x</th>
-      <th>y</th>
-      <th>z</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.23</td>
-      <td>4</td>
-      <td>1</td>
-      <td>1</td>
-      <td>61.5</td>
-      <td>55.0</td>
-      <td>326</td>
-      <td>3.95</td>
-      <td>3.98</td>
-      <td>2.43</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.21</td>
-      <td>3</td>
-      <td>1</td>
-      <td>2</td>
-      <td>59.8</td>
-      <td>61.0</td>
-      <td>326</td>
-      <td>3.89</td>
-      <td>3.84</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.23</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>56.9</td>
-      <td>65.0</td>
-      <td>327</td>
-      <td>4.05</td>
-      <td>4.07</td>
-      <td>2.31</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.29</td>
-      <td>3</td>
-      <td>5</td>
-      <td>3</td>
-      <td>62.4</td>
-      <td>58.0</td>
-      <td>334</td>
-      <td>4.20</td>
-      <td>4.23</td>
-      <td>2.63</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.31</td>
-      <td>1</td>
-      <td>6</td>
-      <td>1</td>
-      <td>63.3</td>
-      <td>58.0</td>
-      <td>335</td>
-      <td>4.34</td>
-      <td>4.35</td>
-      <td>2.75</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>carat</th>
+<th>cut</th>
+<th>color</th>
+<th>clarity</th>
+<th>depth</th>
+<th>table</th>
+<th>price</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>0</th>
+<td>0.23</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>61.5</td>
+<td>55.0</td>
+<td>326</td>
+<td>3.95</td>
+<td>3.98</td>
+<td>2.43</td>
+</tr>
+<tr class="even">
+<th>1</th>
+<td>0.21</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>59.8</td>
+<td>61.0</td>
+<td>326</td>
+<td>3.89</td>
+<td>3.84</td>
+<td>2.31</td>
+</tr>
+<tr class="odd">
+<th>2</th>
+<td>0.23</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>56.9</td>
+<td>65.0</td>
+<td>327</td>
+<td>4.05</td>
+<td>4.07</td>
+<td>2.31</td>
+</tr>
+<tr class="even">
+<th>3</th>
+<td>0.29</td>
+<td>3</td>
+<td>5</td>
+<td>3</td>
+<td>62.4</td>
+<td>58.0</td>
+<td>334</td>
+<td>4.20</td>
+<td>4.23</td>
+<td>2.63</td>
+</tr>
+<tr class="odd">
+<th>4</th>
+<td>0.31</td>
+<td>1</td>
+<td>6</td>
+<td>1</td>
+<td>63.3</td>
+<td>58.0</td>
+<td>335</td>
+<td>4.34</td>
+<td>4.35</td>
+<td>2.75</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -3487,6 +3501,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
