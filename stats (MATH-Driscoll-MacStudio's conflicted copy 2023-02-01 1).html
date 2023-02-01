@@ -358,7 +358,7 @@ MathJax = {
 <p>When confronted with a new dataset, it’s crucial to get a sense of its characteristics before attempting to draw conclusions or predictions from it.</p>
 <p>One of the fastest ways to become familiar with a data set is to visualize it. Python has many graphics packages with different niches. The most widespread is <strong>Matplotlib</strong>, which is fairly low-level in the sense that you must explicitly specify most aspects of how the plots will look.</p>
 <p>We will make extensive use of <strong>seaborn</strong>, which is built on top of Matplotlib. It’s meant to be used at a higher level, i.e., letting you describe what you want to see and making it look pretty good. (It is possible to customize seaborn plots using Matplotlib commands, but we won’t need much of that.)</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are three major plot types within seaborn:</p>
@@ -379,11 +379,11 @@ How values of two variables are related to each other.
 <section id="summary-statistics" class="level2 page-columns page-full" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="summary-statistics"><span class="header-section-number">2.1</span> Summary statistics</h2>
 <p>We will use data about car fuel efficiency for illustrations.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>describe</code> method of a data frame gives summary statistics for each column of quantitative data:</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cars.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
@@ -550,7 +550,7 @@ z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{
 \]</span> These are independent of <span class="math inline">\(t\)</span>, which just scales the original values.</p>
 </div>
 <p>We can write a little function to compute z-scores in Python:</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standardize(x):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -732,7 +732,7 @@ Danger
 <p>IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.</p>
 <div id="exm-data-describe" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.6 </strong></span>The <code>describe</code> method includes mean, standard deviation, and the quartiles.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
@@ -841,7 +841,7 @@ t,&amp; 0 \le t \le 1, \\
 </div>
 <div id="exm-stats-ecdf-uniform" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.8 </strong></span>Here is an experiment that producing the ECDF for a sample from the random number generator:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">100</span>,) )</span>
@@ -851,7 +851,7 @@ t,&amp; 0 \le t \le 1, \\
 </div>
 </div>
 <p>If we take more samples, we expect to see a curve closer to the theoretical CDF, <span class="math inline">\(F(t)=t\)</span>:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">4000</span>,) )</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x, kind<span class="op">=</span><span class="st">"ecdf"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -874,7 +874,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 <p>The default for a seaborn <code>displot</code> is to show a histogram.</p>
 <div id="exm-data-uniform-hist" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.9 </strong></span>Continuing with the uniform distribution over <span class="math inline">\([0,1]\)</span>:</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">1000</span>,) )</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -882,7 +882,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 </div>
 <p>We can choose the number of bins to use, or give a vector of their edges:</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x, bins<span class="op">=</span><span class="dv">40</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-10-output-1.png" width="469" height="469"></p>
@@ -900,7 +900,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 <div id="exm-data-uniform-pdf" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.10 </strong></span>If we have many samples, then we can use a normalized histogram to give an approximation of the PDF:</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">20000</span>,) )</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x, bins<span class="op">=</span><span class="dv">24</span>, stat<span class="op">=</span><span class="st">"density"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -908,7 +908,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 </div>
 <p>Alternatively, we can use process called <em>kernel density estimation</em> to plot a continuous estimate of the PDF:</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x, kind<span class="op">=</span><span class="st">"kde"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-12-output-1.png" width="469" height="469"></p>
@@ -936,7 +936,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 \end{split}
 \]</span></p>
 <p>Let’s check these results empirically:</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -952,7 +952,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/sf9esiixeugop8g/Example2_11.mp4?raw=1"></video></div>
 </div></div></section>
-<section id="normal-distribution" class="level3 page-columns page-full" data-number="2.2.5">
+<section id="normal-distribution" class="level3" data-number="2.2.5">
 <h3 data-number="2.2.5" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">2.2.5</span> Normal distribution</h3>
 <p>Next to perhaps the uniform distribution, the following is the most widely used distribution of a random variable.</p>
 <div id="def-stats-normal" class="theorem definition">
@@ -960,13 +960,10 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 \tag{2.8}\]</span></span> The <strong>standard normal</strong> distribution uses <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video9" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1ir47qpdrycjqim/Section2_2_5.mp4?raw=1"></video></div>
-</div></div><p>For data that are distributed normally, about 68% of the values lie within one standard deviation of the mean, and 95% lie within two standard deviations.</p>
+<p>For data that are distributed normally, about 68% of the values lie within one standard deviation of the mean, and 95% lie within two standard deviations.</p>
 <div id="exm-stats-normal" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.12 </strong></span>The <code>normal</code> method of a NumPy RNG simulates a standard normal distribution.</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.normal( size<span class="op">=</span>(<span class="dv">10000</span>,) )</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sns.displot(x, bins<span class="op">=</span>np.linspace(<span class="op">-</span><span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">28</span>), stat<span class="op">=</span><span class="st">"probability"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -975,7 +972,7 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>We can change the variance by multiplication by <span class="math inline">\(\sigma\)</span> and change the mean by adding <span class="math inline">\(\mu\)</span>:</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame( {<span class="st">"x"</span>: x, <span class="st">"3x-10"</span>: <span class="dv">3</span><span class="op">*</span>x<span class="op">-</span><span class="dv">10</span>} )</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -1038,7 +1035,7 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>The KDE density estimator works pretty well for normally distributed data, except in the tails where there are few observations:</p>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"3x-10"</span>, kind<span class="op">=</span><span class="st">"kde"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-16-output-1.png" width="469" height="468"></p>
@@ -1051,7 +1048,7 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 <h2 data-number="2.3" class="anchored" data-anchor-id="grouping-data"><span class="header-section-number">2.3</span> Grouping data</h2>
 <p>Sometimes we are interested in breaking down data by categorical values or other criteria. Both seaborn and pandas make this relatively straightforward.</p>
 <p>Here is the distribution of the <em>mpg</em> variable over the entire dataset:</p>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, bins<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-17-output-1.png" width="469" height="468"></p>
@@ -1061,7 +1058,7 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 <section id="splitting" class="level3 page-columns page-full" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="splitting"><span class="header-section-number">2.3.1</span> Splitting</h3>
 <p>We can use categorical variables to define groups within the data set. Suppose we want to separate by the <em>origin</em> column:</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"origin"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>usa       249
@@ -1070,52 +1067,10 @@ europe     70
 Name: origin, dtype: int64</code></pre>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/eco3xmlp7jp0o8l/Section2_3_1.mp4?raw=1"></video></div>
-</div></div><p>When we plot the distributions in the regions individually using different colors, we see that one is quite different:</p>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="stats_files/figure-html/cell-19-output-1.png" width="572" height="468"></p>
-</div>
-</div>
-<p>That graph might be hard to read because of the overlaps. We can instead plot the groups in separate columns in what is often called a <em>facet plot</em>:</p>
-<div class="cell page-columns page-full" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.2</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display column-body-outset">
-<p><img src="stats_files/figure-html/cell-20-output-1.png" width="623" height="199"></p>
-</div>
-</div>
-<p>Clearly, the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.</p>
-<p>Another way to visualize grouped data is with a <strong>box plot</strong>:</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"origin"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="stats_files/figure-html/cell-21-output-1.png" width="469" height="468"></p>
-</div>
-</div>
-<p>Each colored box shows the interquartile range, with the interior horizontal line showing the median. The whiskers and dots are explained in a later section. A related visualization is a <strong>violin plot</strong>:</p>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, y<span class="op">=</span><span class="st">"origin"</span>, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"violin"</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="stats_files/figure-html/cell-22-output-1.png" width="469" height="468"></p>
-</div>
-</div>
-<p>In a violin plot, the inner lines show the same information as the box plot, with the thick part showing the IQR, while the sides of the “violins” are KDE estimates of the density functions.</p>
-<p>In pandas, the <code>groupby</code> method splits a data frame into groups based on categorical values in a designated column. So to split based on <em>origin</em> and then look at the statistics of the <em>mpg</em> column within each group, we say:</p>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cars.groupby(<span class="st">"origin"</span>)[<span class="st">"mpg"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<p>The <code>groupby</code> method for a data frame splits the frame into groups based on categorical values in a designated column:</p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cars.groupby([<span class="st">"origin"</span>])[<span class="st">"mpg"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
 <div>
 
 
@@ -1184,15 +1139,54 @@ Name: origin, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>It’s also possible to split using a quantitative variable. The <code>cut</code> method will put the values into bins that define the groups:</p>
-<div class="cell" data-execution_count="24">
+<p>Both the median and the mean values are quite a bit lower for <em>usa</em> cars than for the other regions. This is also apparent when we plot the distributions individually using different colors:</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="stats_files/figure-html/cell-20-output-1.png" width="572" height="468"></p>
+</div>
+</div>
+<p>That graph might be hard to read because of the overlaps. We can instead plot the groups in separate columns in what is often called a <em>facet plot</em>:</p>
+<div class="cell page-columns page-full" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.2</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display column-body-outset">
+<p><img src="stats_files/figure-html/cell-21-output-1.png" width="623" height="199"></p>
+</div>
+</div>
+<p>It’s now clear that the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.</p>
+<p>Another way to visualize grouped data is with a <strong>box plot</strong>:</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"origin"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="stats_files/figure-html/cell-22-output-1.png" width="469" height="468"></p>
+</div>
+</div>
+<p>Each colored box shows the interquartile range, with the interior horizontal line showing the median. The whiskers and dots are explained in a later section. A related visualization is a <strong>violin plot</strong>:</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, y<span class="op">=</span><span class="st">"origin"</span>, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"violin"</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="stats_files/figure-html/cell-23-output-1.png" width="469" height="468"></p>
+</div>
+</div>
+<p>In a violin plot, the inner lines show the same information as the box plot, with the thick part showing the IQR, while the sides of the “violins” are KDE estimates of the density functions.</p>
+<p>It’s also possible to split using a quantitative variable. The <code>cut</code> method will put the values into bins that serve to define the groups:</p>
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> pd.cut( </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    cars[<span class="st">"weight"</span>],         <span class="co"># series to cut by</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(<span class="dv">1500</span>, <span class="dv">5800</span>, <span class="dv">1000</span>)    <span class="co"># bin edges</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"cuts"</span>] <span class="op">=</span> cuts</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>cars.head(<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>cars.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 
@@ -1299,13 +1293,69 @@ Name: origin, dtype: int64</code></pre>
 <td>-1.089379</td>
 <td>(3500, 4500]</td>
 </tr>
+<tr class="odd">
+<th>6</th>
+<td>14.0</td>
+<td>8</td>
+<td>454.0</td>
+<td>220.0</td>
+<td>4354</td>
+<td>9.0</td>
+<td>70</td>
+<td>usa</td>
+<td>chevrolet impala</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="even">
+<th>7</th>
+<td>14.0</td>
+<td>8</td>
+<td>440.0</td>
+<td>215.0</td>
+<td>4312</td>
+<td>8.5</td>
+<td>70</td>
+<td>usa</td>
+<td>plymouth fury iii</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="odd">
+<th>8</th>
+<td>14.0</td>
+<td>8</td>
+<td>455.0</td>
+<td>225.0</td>
+<td>4425</td>
+<td>10.0</td>
+<td>70</td>
+<td>usa</td>
+<td>pontiac catalina</td>
+<td>-1.217322</td>
+<td>(3500, 4500]</td>
+</tr>
+<tr class="even">
+<th>9</th>
+<td>15.0</td>
+<td>8</td>
+<td>390.0</td>
+<td>190.0</td>
+<td>3850</td>
+<td>8.5</td>
+<td>70</td>
+<td>usa</td>
+<td>amc ambassador dpl</td>
+<td>-1.089379</td>
+<td>(3500, 4500]</td>
+</tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, y<span class="op">=</span><span class="st">"cuts"</span>, </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"violin"</span></span>
@@ -1315,7 +1365,7 @@ Name: origin, dtype: int64</code></pre>
 </div>
 </div>
 </section>
-<section id="aggregation" class="level3 page-columns page-full" data-number="2.3.2">
+<section id="aggregation" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="aggregation"><span class="header-section-number">2.3.2</span> Aggregation</h3>
 <p>Groups defined by <code>groupby</code> can then be passed through <em>aggregators</em> that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in <a href="#tbl-stats-agg">Table&nbsp;<span>2.1</span></a>.</p>
 <div id="tbl-stats-agg" class="anchored">
@@ -1359,29 +1409,96 @@ Name: origin, dtype: int64</code></pre>
 </tbody>
 </table>
 </div>
-<p>Here, for example, we group the rows by weight bins and find the max of <em>mpg</em> within each bin:</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video11" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/p1hvt4cojjpoo5a/Section2_3_2.mp4?raw=1"></video></div>
-</div></div><div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>by_weight <span class="op">=</span> cars.groupby(cuts)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>by_weight[<span class="st">"mpg"</span>].<span class="bu">max</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>by_weight[<span class="st">"mpg"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
-<pre><code>weight
-(1500, 2500]    46.6
-(2500, 3500]    38.0
-(3500, 4500]    26.6
-(4500, 5500]    16.0
-Name: mpg, dtype: float64</code></pre>
+<div>
+
+
+<table class="dataframe table table-sm table-striped" data-border="1">
+<thead>
+<tr class="header">
+<th></th>
+<th>count</th>
+<th>mean</th>
+<th>std</th>
+<th>min</th>
+<th>25%</th>
+<th>50%</th>
+<th>75%</th>
+<th>max</th>
+</tr>
+<tr class="odd">
+<th>weight</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th>(1500, 2500]</th>
+<td>147.0</td>
+<td>30.631293</td>
+<td>5.864413</td>
+<td>18.0</td>
+<td>26.0</td>
+<td>30.5</td>
+<td>34.450</td>
+<td>46.6</td>
+</tr>
+<tr class="even">
+<th>(2500, 3500]</th>
+<td>142.0</td>
+<td>22.547183</td>
+<td>4.754061</td>
+<td>13.0</td>
+<td>19.0</td>
+<td>22.0</td>
+<td>25.325</td>
+<td>38.0</td>
+</tr>
+<tr class="odd">
+<th>(3500, 4500]</th>
+<td>92.0</td>
+<td>15.688043</td>
+<td>2.760428</td>
+<td>10.0</td>
+<td>14.0</td>
+<td>15.0</td>
+<td>17.125</td>
+<td>26.6</td>
+</tr>
+<tr class="even">
+<th>(4500, 5500]</th>
+<td>17.0</td>
+<td>12.411765</td>
+<td>1.622453</td>
+<td>9.0</td>
+<td>12.0</td>
+<td>13.0</td>
+<td>13.000</td>
+<td>16.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 <p>If you want a more exotic operation, you can call <code>agg</code> with your own function:</p>
-<div class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iqr(x):</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    q1,q3 <span class="op">=</span> x.quantile( [<span class="fl">.25</span>, <span class="fl">.75</span>] )</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> q3 <span class="op">-</span> q1</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>by_weight[<span class="st">"mpg"</span>].agg(iqr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iqr(x):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    q1,q3 <span class="op">=</span> x.quantile( [<span class="fl">.25</span>, <span class="fl">.75</span>] )</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> q3 <span class="op">-</span> q1</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>by_weight[<span class="st">"mpg"</span>].agg(iqr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>weight
 (1500, 2500]    8.450
@@ -1396,48 +1513,42 @@ Name: mpg, dtype: float64</code></pre>
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="transformation"><span class="header-section-number">2.3.3</span> Transformation</h3>
 <p>A transformation applies a function to each element of a column, producing a result of the same length that can be indexed the same way. This transformation can be applied group by group.</p>
 <p>For example, we can standardize to z-scores within each group separately:</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video12" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/jf2nkthnf4xygig/Section2_3_3.mp4?raw=1"></video></div>
-</div></div><div class="cell page-columns page-full" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standardize(x):</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std()</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"group_z"</span>] <span class="op">=</span> by_weight[<span class="st">"mpg"</span>].transform(standardize)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"group_z"</span>, </span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.3</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standardize(x):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"group_z"</span>] <span class="op">=</span> by_weight[<span class="st">"mpg"</span>].transform(standardize)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"group_z"</span>, </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.3</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display column-body-outset">
 <p><img src="stats_files/figure-html/cell-28-output-1.png" width="652" height="208"></p>
 </div>
 </div>
 <p>Note how this differs from computing z-scores based on global statistics:</p>
-<div class="cell page-columns page-full" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"global_z"</span>] <span class="op">=</span> standardize( cars[<span class="st">"mpg"</span>] )</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"global_z"</span>, </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.3</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"global_z"</span>] <span class="op">=</span> standardize( cars[<span class="st">"mpg"</span>] )</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"global_z"</span>, </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.3</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display column-body-outset">
 <p><img src="stats_files/figure-html/cell-29-output-1.png" width="652" height="208"></p>
 </div>
 </div>
 </section>
-<section id="filtering" class="level3 page-columns page-full" data-number="2.3.4">
+<section id="filtering" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="filtering"><span class="header-section-number">2.3.4</span> Filtering</h3>
 <p>To apply a filter, provide a function that operates on a column and returns either <code>True</code>, meaning to keep the column, or <code>False</code>, meaning to reject it. This filter is applied groupwise.</p>
 <p>For example, suppose we want to group cars by horsepower:</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/8htwbb8mj8xxmri/Section2_3_4.mp4?raw=1"></video></div>
-</div></div><div class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> pd.cut(cars[<span class="st">"horsepower"</span>], <span class="bu">range</span>(<span class="dv">40</span>,<span class="dv">220</span>,<span class="dv">20</span>))</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>by_hp <span class="op">=</span> cars.groupby(cuts)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>by_hp[<span class="st">"mpg"</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> pd.cut(cars[<span class="st">"horsepower"</span>], <span class="bu">range</span>(<span class="dv">40</span>,<span class="dv">220</span>,<span class="dv">20</span>))</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>by_hp <span class="op">=</span> cars.groupby(cuts)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>by_hp[<span class="st">"mpg"</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <pre><code>horsepower
 (40, 60]       20
@@ -1452,9 +1563,9 @@ Name: mpg, dtype: int64</code></pre>
 </div>
 </div>
 <p>Say we want to drop the cars belonging to groups having fewer than 30 members:</p>
-<div class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hp_30 <span class="op">=</span> by_hp.<span class="bu">filter</span>( <span class="kw">lambda</span> x: <span class="bu">len</span>(x) <span class="op">&gt;</span> <span class="dv">29</span> )</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>hp_30.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hp_30 <span class="op">=</span> by_hp.<span class="bu">filter</span>( <span class="kw">lambda</span> x: <span class="bu">len</span>(x) <span class="op">&gt;</span> <span class="dv">29</span> )</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>hp_30.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 
@@ -1566,8 +1677,8 @@ Name: mpg, dtype: int64</code></pre>
 </div>
 </div>
 <p>The result is a single frame in which the members of all groups that failed the filter were removed. Thus, the <em>horsepower</em> column has no values left less than 60 or greater than 160:</p>
-<div class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>hp_30[<span class="st">"horsepower"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hp_30[<span class="st">"horsepower"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>count    310.000000
 mean      95.309677
@@ -1584,7 +1695,7 @@ Name: horsepower, dtype: float64</code></pre>
 
 You can simultaneously use columns for one category with colors for another:
 
-::: {.cell .column-body-outset execution_count=33}
+::: {.cell .column-body-outset execution_count=32}
 ``` {.python .cell-code}
 sns.displot(data=cars, x="mpg", col="origin",
     hue="cylinders", multiple="stack", height=2.5
@@ -1617,7 +1728,7 @@ Of these, the *apply* step is typically the most complex. In fact, in pandas you
 
 For illustrations, we will load a dataset supplied with seaborn. 
 
-::: {.cell execution_count=34}
+::: {.cell execution_count=33}
 ``` {.python .cell-code}
 import pandas as pd
 import seaborn as sns
@@ -1779,7 +1890,7 @@ penguins
 :::
 
 
-::: {.cell execution_count=35}
+::: {.cell execution_count=34}
 ``` {.python .cell-code}
 by_species = penguins.groupby("species")
 ```
@@ -1788,7 +1899,7 @@ by_species = penguins.groupby("species")
 
 In computer science, this is what is called a *lazy* operation: nothing is actually done yet to the data frame. It's just set up for applying future operations to each group.
 
-::: {.cell execution_count=36}
+::: {.cell execution_count=35}
 ``` {.python .cell-code}
 for name,group in by_species:
     print(name)
@@ -1844,9 +1955,9 @@ As a rule of thumb, aggregation produces a single numerical result from a series
 <section id="iqr" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="iqr"><span class="header-section-number">2.4.1</span> IQR</h3>
 <p>Let’s look at another data set, based on an fMRI experiment.</p>
-<div class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fmri <span class="op">=</span> sns.load_dataset(<span class="st">"fmri"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>fmri.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fmri <span class="op">=</span> sns.load_dataset(<span class="st">"fmri"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>fmri.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
@@ -1910,8 +2021,8 @@ As a rule of thumb, aggregation produces a single numerical result from a series
 </div>
 </div>
 <p>We want to focus on the <em>signal</em> column, splitting according to the <em>event</em>.</p>
-<div class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
@@ -1971,11 +2082,11 @@ As a rule of thumb, aggregation produces a single numerical result from a series
 </div>
 </div>
 <p>Here is a box plot of the signal for these groups.</p>
-<div class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>fmri,</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"event"</span>, y<span class="op">=</span><span class="st">"signal"</span>,</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>fmri,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"event"</span>, y<span class="op">=</span><span class="st">"signal"</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"box"</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-39-output-1.png" width="469" height="468"></p>
 </div>
@@ -1989,24 +2100,24 @@ x &lt; Q_1 - 1.5I \text{ or } x &gt; Q_3 + 1.5I.
 <h3 data-number="2.4.2" class="anchored" data-anchor-id="mean-and-std"><span class="header-section-number">2.4.2</span> Mean and STD</h3>
 <p>For normal distributions, values more than twice the standard deviation <span class="math inline">\(\sigma\)</span> from the mean might be declared to be outliers; this would exclude 5% of the values, on average. A less aggressive criterion is to allow a distance of <span class="math inline">\(3\sigma\)</span>, which excludes only about 0.3% of the values. The IQR criterion above corresponds to about <span class="math inline">\(2.7\sigma\)</span> in the normal case.</p>
 <p>The following plot shows the outlier cutoffs for 2000 samples from a normal distribution, using the criteria for 2σ (red), 3σ (blue), and 1.5 IQR (black).</p>
-<div class="cell" data-execution_count="40">
+<div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>randn <span class="op">=</span> default_rng(<span class="dv">1</span>).normal </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series(randn(size<span class="op">=</span><span class="dv">2000</span>))</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>x,bins<span class="op">=</span><span class="dv">30</span>)<span class="op">;</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>m,s <span class="op">=</span> x.mean(),x.std()</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">-</span><span class="dv">2</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'r'</span>)</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">+</span><span class="dv">2</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'r'</span>)</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">-</span><span class="dv">3</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'b'</span>)</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">+</span><span class="dv">3</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'b'</span>)</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>q1,q3 <span class="op">=</span> x.quantile([<span class="fl">.25</span>,<span class="fl">.75</span>])</span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(q3<span class="op">+</span><span class="fl">1.5</span><span class="op">*</span>(q3<span class="op">-</span>q1),color<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>plt.axvline(q1<span class="op">-</span><span class="fl">1.5</span><span class="op">*</span>(q3<span class="op">-</span>q1),color<span class="op">=</span><span class="st">'k'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>randn <span class="op">=</span> default_rng(<span class="dv">1</span>).normal </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series(randn(size<span class="op">=</span><span class="dv">2000</span>))</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>x,bins<span class="op">=</span><span class="dv">30</span>)<span class="op">;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>m,s <span class="op">=</span> x.mean(),x.std()</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">-</span><span class="dv">2</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">+</span><span class="dv">2</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">-</span><span class="dv">3</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>plt.axvline(m<span class="op">+</span><span class="dv">3</span><span class="op">*</span>s,color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>q1,q3 <span class="op">=</span> x.quantile([<span class="fl">.25</span>,<span class="fl">.75</span>])</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>plt.axvline(q3<span class="op">+</span><span class="fl">1.5</span><span class="op">*</span>(q3<span class="op">-</span>q1),color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>plt.axvline(q1<span class="op">-</span><span class="fl">1.5</span><span class="op">*</span>(q3<span class="op">-</span>q1),color<span class="op">=</span><span class="st">'k'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-40-output-1.png" width="469" height="469"></p>
@@ -2034,14 +2145,14 @@ Note
 <p><span class="theorem-title"><strong>Example 2.13 </strong></span>The values <span class="math inline">\(1,2,3,4,5\)</span> have a mean and median both equal to 3. If we change the largest value to be a lot larger, say <span class="math inline">\(1,2,3,4,1000\)</span>, then the mean changes to 202. But the median is still 3!</p>
 </div>
 <p>Let’s use IQR to remove outliers from the fmri data set. We do this by creating a Boolean-valued series indicating which rows of the frame represent outliers within their group.</p>
-<div class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_outlier(x):</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    Q1,Q3 <span class="op">=</span> x.quantile([<span class="fl">.25</span>,<span class="fl">.75</span>])</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    I <span class="op">=</span> Q3<span class="op">-</span>Q1</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">&lt;</span> Q1<span class="op">-</span><span class="fl">1.5</span><span class="op">*</span>I) <span class="op">|</span>  (x <span class="op">&gt;</span> Q3<span class="op">+</span><span class="fl">1.5</span><span class="op">*</span>I)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>outs <span class="op">=</span> fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].transform(is_outlier)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>fmri[outs][<span class="st">"event"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_outlier(x):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    Q1,Q3 <span class="op">=</span> x.quantile([<span class="fl">.25</span>,<span class="fl">.75</span>])</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    I <span class="op">=</span> Q3<span class="op">-</span>Q1</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">&lt;</span> Q1<span class="op">-</span><span class="fl">1.5</span><span class="op">*</span>I) <span class="op">|</span>  (x <span class="op">&gt;</span> Q3<span class="op">+</span><span class="fl">1.5</span><span class="op">*</span>I)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>outs <span class="op">=</span> fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].transform(is_outlier)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>fmri[outs][<span class="st">"event"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>stim    40
 cue     26
@@ -2049,15 +2160,15 @@ Name: event, dtype: int64</code></pre>
 </div>
 </div>
 <p>You can see above that there are 66 outliers. To negate the outlier indicator, we can use <code>~outs</code> as a row selector.</p>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> fmri[<span class="op">~</span>outs]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> fmri[<span class="op">~</span>outs]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The median values are barely affected by the omission of the outliers.</p>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"medians with outliers:"</span> )</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].median() )</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">medians without outliers:"</span> )</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( cleaned.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].median() )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"medians with outliers:"</span> )</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].median() )</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">medians without outliers:"</span> )</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( cleaned.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].median() )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>medians with outliers:
 event
@@ -2073,11 +2184,11 @@ Name: signal, dtype: float64</code></pre>
 </div>
 </div>
 <p>The means show much greater change.</p>
-<div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"means with outliers:"</span> )</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].mean() )</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">means without outliers:"</span> )</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( cleaned.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].mean() )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"means with outliers:"</span> )</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( fmri.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].mean() )</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">means without outliers:"</span> )</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( cleaned.groupby(<span class="st">"event"</span>)[<span class="st">"signal"</span>].mean() )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>means with outliers:
 event
@@ -2097,7 +2208,7 @@ Name: signal, dtype: float64</code></pre>
 
 It's common to form chains of operations that can be written separately or in one line. For example, consider the task of **imputation**, which is the replacement of missing values by a standard value such as the mean or median. In the penguin dataset, there are two rows with missing numerical values:
 
-::: {.cell execution_count=45}
+::: {.cell execution_count=44}
 ``` {.python .cell-code}
 bills = ["bill_length_mm","bill_depth_mm"]
 penguins[bills].isna().sum()
@@ -2115,7 +2226,7 @@ dtype: int64
 
 Given variations between species, we probably want to compute values aggregated by species. 
 
-::: {.cell execution_count=46}
+::: {.cell execution_count=45}
 ``` {.python .cell-code}
 by_species = penguins.groupby("species")
 by_species[bills].median()
@@ -2178,7 +2289,7 @@ by_species[bills].median()
 
 In order to operate columnwise, we apply a custom transformation function using the `fillna` method to replace missing values. 
 
-::: {.cell execution_count=47}
+::: {.cell execution_count=46}
 ``` {.python .cell-code}
 def impute(col):
     return col.fillna(col.median())
@@ -2280,7 +2391,7 @@ replaced
 
 Replacement has happened in the row with index 3, for example. Finally, we can overwrite the columns of the original data frame, if we don't care to know in the future which values were imputed. All of the necessary steps can be compressed into one chain:
 
-::: {.cell execution_count=48}
+::: {.cell execution_count=47}
 ``` {.python .cell-code}
 penguins[bills] = penguins.groupby("species")[bills].transform(lambda x: x.fillna(x.median()))
 penguins
@@ -2454,32 +2565,32 @@ penguins.head()
 <section id="relational-plots" class="level3 page-columns page-full" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="relational-plots"><span class="header-section-number">2.5.1</span> Relational plots</h3>
 <p>We can use <code>relplot</code> to make a scatter plot of two different columns in a frame:</p>
-<div class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-49-output-1.png" width="469" height="468"></p>
 </div>
 </div>
 <p>Like the other plot types above, we can use color, column, marker size, etc. to separate the dots into groups.</p>
 <p>If we want to emphasize a trend, we can instead plot the average value at each <span class="math inline">\(x\)</span> with error bars:</p>
-<div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span>,</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span>,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-50-output-1.png" width="469" height="468"></p>
 </div>
 </div>
 <p>The error ribbon above is drawn at one standard deviation around the mean.</p>
 <p>In order to see multiple pairwise scatter plots, we can use <code>pairplot</code> in seaborn:</p>
-<div class="cell page-columns page-full" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"mpg"</span>, <span class="st">"horsepower"</span>, <span class="st">"displacement"</span>, <span class="st">"origin"</span> ]</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(data<span class="op">=</span> cars[columns],</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell page-columns page-full" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"mpg"</span>, <span class="st">"horsepower"</span>, <span class="st">"displacement"</span>, <span class="st">"origin"</span> ]</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>sns.pairplot(data<span class="op">=</span> cars[columns],</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display column-body-outset">
 <p><img src="stats_files/figure-html/cell-51-output-1.png" width="669" height="568"></p>
 </div>
@@ -2521,17 +2632,17 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 \tag{2.11}\]</span></span> where the quantities in parentheses are z-scores.</p>
 <div id="exm-stats-pearson-cars" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.14 </strong></span>We might reasonably expect horsepower and miles per gallon to be inversely correlated:</p>
-<div class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>sns.relplot( data<span class="op">=</span>cars,</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"horsepower"</span>,y<span class="op">=</span><span class="st">"mpg"</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>sns.relplot( data<span class="op">=</span>cars,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"horsepower"</span>,y<span class="op">=</span><span class="st">"mpg"</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-52-output-1.png" width="469" height="468"></p>
 </div>
 </div>
 <p>Covariance allows us to confirm the relationship:</p>
-<div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].cov()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].cov()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
 <div>
 
@@ -2562,8 +2673,8 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 </div>
 <p>But should these numbers considered big? The Pearson coefficient is more helpful:</p>
-<div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 <div>
 
@@ -2598,11 +2709,11 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <p>As usual when dealing with means, however, the Pearson coefficient can be sensitive to outlier values.</p>
 <div id="exm-stats-pearson-outlier" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.15 </strong></span>The Pearson coefficient of any variable with itself is 1. But let’s correlate two series that differ in only one element: <span class="math inline">\(0,1,2,\ldots,19\)</span>, and the same sequence but with the fifth value replaced by <span class="math inline">\(-100\)</span>:</p>
-<div class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">20</span>) )</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">100</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>x.corr(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">20</span>) )</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">100</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>x.corr(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
 <pre><code>0.43636501543147005</code></pre>
 </div>
@@ -2623,30 +2734,30 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 <div id="exm-stats-spearman-outlier" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.16 </strong></span>Returning to <a href="#exm-stats-pearson-outlier">Example&nbsp;<span>2.15</span></a>, we find the Spearman coefficient is barely affected by the single outlier:</p>
-<div class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">20</span>) )</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">100</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>x.corr(y,<span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">20</span>) )</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">100</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>x.corr(y,<span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="55">
 <pre><code>0.9849624060150375</code></pre>
 </div>
 </div>
 <p>It’s trivial in this case to produce the two rank series by hand:</p>
-<div class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">21</span>) )    <span class="co"># already sorted</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> s.copy()</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>t[:<span class="dv">5</span>] <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>]     <span class="co"># modified sort ordering</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>t.corr(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">21</span>) )    <span class="co"># already sorted</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> s.copy()</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>t[:<span class="dv">5</span>] <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">1</span>]     <span class="co"># modified sort ordering</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>t.corr(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="56">
 <pre><code>0.9849624060150375</code></pre>
 </div>
 </div>
 <p>As long as <code>y[4]</code> is negative, it doesn’t matter what its particular value is:</p>
-<div class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1000000</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>x.corr(y,<span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1000000</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>x.corr(y,<span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>0.9849624060150375</code></pre>
 </div>
@@ -2659,17 +2770,17 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p>An ordinal variable, such as the days of the week, is often straightforward to quantify as integers. But a nominal variable poses a different challenge.</p>
 <div id="exm-stats-catcorr" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.17 </strong></span>Grouped histograms suggest an association between country of origin and MPG:</p>
-<div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, kind<span class="op">=</span><span class="st">"kde"</span>,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, kind<span class="op">=</span><span class="st">"kde"</span>,</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-59-output-1.png" width="572" height="468"></p>
 </div>
 </div>
 <p>How can we quantify the association? The first step is to convert the <em>origin</em> column into dummy variables:</p>
-<div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>dum <span class="op">=</span> pd.get_dummies(cars, columns<span class="op">=</span>[<span class="st">"origin"</span>])</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>dum.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>dum <span class="op">=</span> pd.get_dummies(cars, columns<span class="op">=</span>[<span class="st">"origin"</span>])</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>dum.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <div>
 
@@ -2793,14 +2904,14 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>The original <em>origin</em> column has been replaced by three binary indicator columns. Now we can look for correlations between them and <em>mpg</em>:</p>
-<div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mpg"</span>,</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_europe"</span>,</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_japan"</span>,</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_usa"</span></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>dum[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mpg"</span>,</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_europe"</span>,</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_japan"</span>,</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_usa"</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>dum[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <div>
 
@@ -2860,17 +2971,17 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <section id="the-datasaurus" class="level3" data-number="2.6.1">
 <h3 data-number="2.6.1" class="anchored" data-anchor-id="the-datasaurus"><span class="header-section-number">2.6.1</span> The datasaurus</h3>
 <p>The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. The Datasaurus is a set of 142 points making a handsome portrait:</p>
-<div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>dozen <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/DatasaurusDozen.tsv"</span>, delimiter<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>dozen[dozen[<span class="st">"dataset"</span>]<span class="op">==</span><span class="st">"dino"</span>], x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dozen <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/DatasaurusDozen.tsv"</span>, delimiter<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>dozen[dozen[<span class="st">"dataset"</span>]<span class="op">==</span><span class="st">"dino"</span>], x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-62-output-1.png" width="470" height="468"></p>
 </div>
 </div>
 <p>However, there are 12 other datasets that all have roughly the same mean and variance for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and the same correlations between them:</p>
-<div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>by_set <span class="op">=</span> dozen.groupby(<span class="st">"dataset"</span>)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>by_set.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>by_set <span class="op">=</span> dozen.groupby(<span class="st">"dataset"</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>by_set.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
 <div>
 
@@ -2960,8 +3071,8 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>by_set.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>by_set.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 
@@ -3051,8 +3162,8 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="65">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>by_set.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>by_set.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
@@ -3223,12 +3334,12 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>However, a plot reveals that these sets are, to put it mildly, quite distinct:</p>
-<div class="cell" data-execution_count="66">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>others <span class="op">=</span> dozen[ dozen[<span class="st">"dataset"</span>] <span class="op">!=</span> <span class="st">"dino"</span> ]</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>others,</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>,</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"dataset"</span>, col_wrap<span class="op">=</span><span class="dv">3</span>, height<span class="op">=</span><span class="fl">2.2</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>others <span class="op">=</span> dozen[ dozen[<span class="st">"dataset"</span>] <span class="op">!=</span> <span class="st">"dino"</span> ]</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>others,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>,</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"dataset"</span>, col_wrap<span class="op">=</span><span class="dv">3</span>, height<span class="op">=</span><span class="fl">2.2</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-66-output-1.png" width="623" height="832"></p>
 </div>
@@ -3251,10 +3362,10 @@ Important
 <section id="simpsons-paradox" class="level3" data-number="2.6.2">
 <h3 data-number="2.6.2" class="anchored" data-anchor-id="simpsons-paradox"><span class="header-section-number">2.6.2</span> Simpson’s paradox</h3>
 <p>The penguin dataset contains a common paradox (well, a counterintuitive phenomenon, anyway). Two of the variables show a fairly strong negative correlation:</p>
-<div class="cell" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"body_mass_g"</span>, <span class="st">"bill_depth_mm"</span> ]</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>penguins[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"body_mass_g"</span>, <span class="st">"bill_depth_mm"</span> ]</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>penguins[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
@@ -3285,8 +3396,8 @@ Important
 </div>
 </div>
 <p>But something surprising happens if we compute correlations <em>after</em> grouping by species.</p>
-<div class="cell" data-execution_count="68">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
 <div>
 
@@ -3348,11 +3459,11 @@ Important
 </div>
 <p>Within each individual species, the correlation between the variables is strongly positive!</p>
 <p>This is an example of <strong>Simpson’s paradox</strong>. The reason for it can be seen from a scatter plot:</p>
-<div class="cell" data-execution_count="69">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>penguins,</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>columns[<span class="dv">0</span>], y<span class="op">=</span>columns[<span class="dv">1</span>], </span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"species"</span></span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>penguins,</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>columns[<span class="dv">0</span>], y<span class="op">=</span>columns[<span class="dv">1</span>], </span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"species"</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="stats_files/figure-html/cell-69-output-1.png" width="575" height="468"></p>
 </div>
@@ -3686,11 +3797,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video6);</script>
 <script>videojs(video_shortcode_videojs_video7);</script>
 <script>videojs(video_shortcode_videojs_video8);</script>
-<script>videojs(video_shortcode_videojs_video9);</script>
-<script>videojs(video_shortcode_videojs_video10);</script>
-<script>videojs(video_shortcode_videojs_video11);</script>
-<script>videojs(video_shortcode_videojs_video12);</script>
-<script>videojs(video_shortcode_videojs_video13);</script>
 
 
 
