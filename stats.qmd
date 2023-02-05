@@ -1120,6 +1120,10 @@ dozen = pd.read_csv("_datasets/DatasaurusDozen.tsv", delimiter="\t")
 sns.relplot(data=dozen[dozen["dataset"]=="dino"], x="x", y="y");
 ```
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/qmnh7s2w58oim7n/Section2_6_1.mp4?raw=1 >}}
+:::
+
 However, there are 12 other datasets that all have roughly the same mean and variance for $x$ and $y$, and the same correlations between them:
 
 ```{python}
@@ -1160,6 +1164,10 @@ penguins = sns.load_dataset("penguins")
 columns = [ "body_mass_g", "bill_depth_mm" ]
 penguins[columns].corr()
 ```
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/1zlkjz3642u3tyo/Sectioon2_6_2.mp4?raw=1 >}}
+:::
 
 But something surprising happens if we compute correlations *after* grouping by species.
 
