@@ -2816,10 +2816,10 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div></div><p><img src="https://imgs.xkcd.com/comics/correlation.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="cautionary-tales" class="level2" data-number="2.6">
+<section id="cautionary-tales" class="level2 page-columns page-full" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="cautionary-tales"><span class="header-section-number">2.6</span> Cautionary tales</h2>
 <p>Attaching theorem-supported numbers to real data feels precise and infallible. The theorems do what they say, of course—they’re theorems—but our intuition can be a little too ready to attach significance to the numbers, causing misconceptions or mistakes. Proper visualizations can help us see through such issues.</p>
-<section id="the-datasaurus" class="level3" data-number="2.6.1">
+<section id="the-datasaurus" class="level3 page-columns page-full" data-number="2.6.1">
 <h3 data-number="2.6.1" class="anchored" data-anchor-id="the-datasaurus"><span class="header-section-number">2.6.1</span> The datasaurus</h3>
 <p>The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. The Datasaurus is a set of 142 points making a handsome portrait:</p>
 <div class="cell" data-execution_count="62">
@@ -2829,7 +2829,10 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p><img src="stats_files/figure-html/cell-62-output-1.png" width="470" height="468"></p>
 </div>
 </div>
-<p>However, there are 12 other datasets that all have roughly the same mean and variance for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and the same correlations between them:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video21" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/qmnh7s2w58oim7n/Section2_6_1.mp4?raw=1"></video></div>
+</div></div><p>However, there are 12 other datasets that all have roughly the same mean and variance for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and the same correlations between them:</p>
 <div class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>by_set <span class="op">=</span> dozen.groupby(<span class="st">"dataset"</span>)</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>by_set.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3210,7 +3213,7 @@ Important
 </div>
 <p>Always. Plot. Your. Data!</p>
 </section>
-<section id="simpsons-paradox" class="level3" data-number="2.6.2">
+<section id="simpsons-paradox" class="level3 page-columns page-full" data-number="2.6.2">
 <h3 data-number="2.6.2" class="anchored" data-anchor-id="simpsons-paradox"><span class="header-section-number">2.6.2</span> Simpson’s paradox</h3>
 <p>The penguin dataset contains a common paradox (well, a counterintuitive phenomenon, anyway). Two of the variables show a fairly strong negative correlation:</p>
 <div class="cell" data-execution_count="67">
@@ -3246,7 +3249,10 @@ Important
 </div>
 </div>
 </div>
-<p>But something surprising happens if we compute correlations <em>after</em> grouping by species.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video22" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1zlkjz3642u3tyo/Sectioon2_6_2.mp4?raw=1"></video></div>
+</div></div><p>But something surprising happens if we compute correlations <em>after</em> grouping by species.</p>
 <div class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="135">
@@ -3660,6 +3666,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video18);</script>
 <script>videojs(video_shortcode_videojs_video19);</script>
 <script>videojs(video_shortcode_videojs_video20);</script>
+<script>videojs(video_shortcode_videojs_video21);</script>
+<script>videojs(video_shortcode_videojs_video22);</script>
 
 
 
