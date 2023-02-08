@@ -83,26 +83,53 @@ A better strategy is to use the one-hot or dummy encoding. If a particular featu
 
 ### Walkthrough
 
-The *scikit-learn* package `sklearn` is a collection of well-known machine learning algorithms and tools. It includes a few classic example datasets. We will load one derived from automatic recognition of handwritten digits. 
+The *scikit-learn* package `sklearn` is a collection of well-known machine learning algorithms and tools. Scikit-learn offers a uniform framework across all classifier types:
+
+1. Define features and labels as numpy arrays or pandas frames.
+1. Create a learner object, specifying any values that specialize the behavior.
+1. Train the learner on the data by calling the `fit` method.
+1. Apply the learner to a feature matrix/frame using the `predict` method.
+
+The package also includes a few classic example datasets. We load one derived from automatic recognition of handwritten digits:
 
 ```{python}
 from sklearn import datasets 
 ds = datasets.load_digits()        # loads a well-known dataset
-X, dig = ds["data"], ds["target"]      # assign feature matrix and label vector
+X, digits = ds["data"], ds["target"]      # assign feature matrix and label vector
 print("The feature matrix has shape", X.shape)
-print("The label vector has shape", dig.shape)
+print("The label vector has shape", digits.shape)
 n, d = X.shape
 print("there are", d, "features and", n, "samples")
 ```
 
-It happens that the 64 features are the pixel grayscale values from an $8\times 8$ bitmap of a handwritten digit. The labels are the integer values 0 through 9, indicating the true value of the digit.
-
-Let's consider the binary problem, "is this digit a 6?" That implies the following label vector:
+The entries of `digits` are integer values 0 through 9, indicating the true value of the corresponding handwritten digit. Let's consider the binary problem, "is this digit a 6?" That implies the following Boolean label vector:
 
 ```{python}
-y = (dig == 6)
-print("Number of sixes in training set:", sum(y))
+y = (digits == 6)
+print("Number of sixes in dataset:", sum(y))
 ```
+
+It so happens that the 64 features in the dataset are the pixel grayscale values from an $8\times 8$ bitmap of a handwritten digit. We can visualize the raw data. Here are some of the 6s, for example:
+
+```{python}
+#| code-fold: true
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+def plot_digits(X):
+    fig, axes = plt.subplots(4,4)
+    for i in range(4):
+        for j in range(4):
+            row = j + 4*i
+            A = np.reshape(np.array(X[row,:]),(8,8))
+            sns.heatmap(A,ax=axes[i,j],square=True,cmap="gray",cbar=False)
+            axes[i,j].axis(False)
+    return None
+
+plot_digits(X[y])
+```
+
 
 The process of training a classifier is called **fitting**. We first have to import a particular classifier type, then create an instance of that type. Here, we choose one that we will study in a future section:
 
@@ -190,7 +217,7 @@ y = loans["percent_funded"] > 95
 ```
 
 :::{.callout-tip}
-Scikit-learn works as seamlessly with pandas data frames as it does with numerical arrays. In an application, it's often worthwhile to refer to quantities by memorable names, rather than relying on numerical indexes into a matrix.
+Scikit-learn works as easily with pandas data frames as it does with numerical arrays. In an application, it's often worthwhile to refer to quantities by memorable names as columns of a frame, rather than relying on numerical indexes into a matrix.
 :::
 
 ### Train–test paradigm
@@ -206,14 +233,14 @@ In order to gauge generalization, we hold back some of the labeled data from tra
 ```{python}
 from sklearn.model_selection import train_test_split
 
-X_tr, X_te, y_tr, y_te = train_test_split(X, y,
+X_train, X_test, y_train, y_test = train_test_split(X, y,
   test_size=0.2,
   shuffle=True,
   random_state=3
 )
 
-print("There are", X_tr.shape[0], "training samples.")
-print("There are", X_te.shape[0], "testing samples.")
+print("There are", X_train.shape[0], "training samples.")
+print("There are", X_test.shape[0], "testing samples.")
 ```
 
 We can check that the test and train labels have similar characteristics:
@@ -221,23 +248,23 @@ We can check that the test and train labels have similar characteristics:
 ```{python}
 import pandas as pd
 print("labels in the training set:")
-print( pd.Series(y_tr).describe() )
+print( pd.Series(y_train).describe() )
 
 print("\nlabels in the testing set:")
-print( pd.Series(y_te).describe() )
+print( pd.Series(y_test).describe() )
 ```
 
 Now we train on the training data...
 
 ```{python}
 knn = KNeighborsClassifier(n_neighbors=9)
-knn.fit(X_tr, y_tr)    # fit only to train set
+knn.fit(X_train, y_train)    # fit only to train set
 ```
 
 ...and test on the rest.
 
 ```{python}
-acc = knn.score(X_te, y_te)    # score only on test set
+acc = knn.score(X_test, y_test)    # score only on test set
 print(f"test accuracy is {acc:.1%}")
 ```
 
@@ -252,8 +279,8 @@ Therefore, an algorithm that simply "predicts" funding every single loan could d
 
 ```{python}
 from sklearn import metrics
-generous = [True]*len(y_te)
-acc = metrics.accuracy_score(y_te, generous)
+generous = [True]*len(y_test)
+acc = metrics.accuracy_score(y_test, generous)
 print(f"fund-them-all accuracy is {acc:.1%}")
 ```
 
@@ -275,14 +302,14 @@ The four cases correspond to a 2×2 table according to the states of the predict
 `sklearn` makes it straightforward to compute a confusion matrix:
 
 ```{python}
-yhat = knn.predict(X_te)
-C = metrics.confusion_matrix(y_te, yhat, labels=[True,False])
+yhat = knn.predict(X_test)
+C = metrics.confusion_matrix(y_test, yhat, labels=[True,False])
 lbl = ["fund", "reject"]
 metrics.ConfusionMatrixDisplay(C, display_labels=lbl).plot();
 ```
 
 :::{.callout-caution}
-It's advisable to call `confusion_matrix` with the `labels` argument, even though it is optional, in order to have control over the ordering within the matrix. In particular, `False` < `True`, so the default is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
+It's advisable to always call `confusion_matrix` with the `labels` argument, even though it is optional, in order to control the ordering within the matrix. In particular, `False` < `True`, so the default for Boolean labels is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
 :::
 
 Hence, there are 7570 true positives. Therefore, the **accuracy** is 
@@ -326,9 +353,9 @@ In `sklearn.metrics` there are functions to compute recall and precision without
 ```{python}
 for pos in [True,False]:
   print("With", pos, "as positive:")
-  s = metrics.recall_score(y_te, yhat, pos_label=pos)
+  s = metrics.recall_score(y_test, yhat, pos_label=pos)
   print(f"    recall is {s:.3f}")
-  s = metrics.precision_score(y_te, yhat, pos_label=pos) 
+  s = metrics.precision_score(y_test, yhat, pos_label=pos) 
   print(f"    precision is {s:.3f}")
   print()
 ```
@@ -344,8 +371,8 @@ This score varies between 0 (poor) and 1 (ideal). If one of the quantities is mu
 Another composite score is **balanced accuracy**, which is the arithmetic mean of recall and specificity. It also ranges from 0 to 1, with 1 meaning perfect accuracy.
 
 ```{python}
-print( "F1:", metrics.f1_score(y_te, yhat) )
-print( "Balanced:", metrics.balanced_accuracy_score(y_te, yhat) )
+print( "F1:", metrics.f1_score(y_test, yhat) )
+print( "Balanced:", metrics.balanced_accuracy_score(y_test, yhat) )
 ```
 
 The loan classifier trained above has excellent recall, respectable precision, and terrible specificity, resulting in a good *F*₁ score and a low balanced accuracy score.
@@ -378,13 +405,17 @@ independently of $a$. This quantity is sensitive to the low specificity.
 
 When there are more than two unique possible labels, these metrics can be applied using the **one-vs-rest** paradigm. For $K$ unique labels, this paradigm poses $K$ binary questions: "Is it in class 1, or not?", "Is it in class 2, or not?", etc. The confusion matrix becomes $K\times K$. 
 
-It's easiest to see how this works by an example. We will load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin. 
+::::{#exm-class-multiclass}
+We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:
 
 ```{python}
 import seaborn as sns
 cars = sns.load_dataset("mpg").dropna()
 cars.head()
 ```
+
+Now we extract the quantitative features and labels:
+
 ```{python}
 features = ["cylinders", "horsepower", "weight", "acceleration", "mpg"]
 X = cars[features]
@@ -392,22 +423,33 @@ y = pd.Categorical(cars["origin"])
 print(X.shape[0], "samples and", X.shape[1], "features")
 ```
 
+::: {.callout-tip}
+It's not necessary to convert a vector of strings into a `Categorical` vector of labels, but it does make a few things handy in post-processing.
+:::
+
+Next, we split into training and testing subsets:
 ```{python}
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
   X, y, 
   test_size=0.2, 
   shuffle=True, 
   random_state=1
 )
-knn = KNeighborsClassifier(n_neighbors=8)
-knn.fit(X_tr, y_tr)
-yhat = knn.predict(X_te)
-print(f"accuracy is {metrics.accuracy_score(y_te, yhat):.1%}")
 ```
+
+Now we perform the fit and measure the accuracy:
+```{python}
+knn = KNeighborsClassifier(n_neighbors=8)
+knn.fit(X_train, y_train)
+yhat = knn.predict(X_test)
+print(f"accuracy is {metrics.accuracy_score(y_test, yhat):.1%}")
+```
+
+Here is the confusion matrix:
 
 ```{python}
 labels = y.categories
-C = metrics.confusion_matrix(y_te, yhat, labels=labels)
+C = metrics.confusion_matrix(y_test, yhat, labels=labels)
 metrics.ConfusionMatrixDisplay(C, display_labels=labels).plot();
 ```
 
@@ -416,19 +458,20 @@ From the confusion matrix above we can see that, for example, out of 54 predicti
 We also get $K$ versions of the metrics like accuracy, recall, *F*₁ score, and so on. We can get all the individual precision scores, say, automatically:
 
 ```{python}
-prec = metrics.precision_score(y_te, yhat, average=None)
-for (i,p) in enumerate(prec): 
-    print(f"{labels[i]}: {p:.1%}")
+precisions = metrics.precision_score(y_test, yhat, average=None)
+for (label,p) in zip(labels,precisions): 
+    print(f"{label}: {p:.1%}")
 ```
 
 To get a composite precision score, we have to specify an averaging method. The `"macro"` option simply takes the mean of the vector above.
 
 ```{python}
-mac = metrics.precision_score(y_te, yhat, average="macro")
+mac = metrics.precision_score(y_test, yhat, average="macro")
 print(mac)
 ```
+::::
 
-There are other ways to perform the averaging, depending on whether poorly represented classes should be weighted more weakly than others.
+There are other ways to average performance scores over the classes, depending on whether poorly represented classes should be weighted more weakly than others.
 
 ## Decision trees
 
@@ -508,9 +551,10 @@ The best partition threshold is $x\le 0$ (or $x\le 2$, which is equivalent).
 :::
 ::::
 
-### Toy example
+### Usage in sklearn
 
-We first create a toy dataset with 20 random points, with two subsets of 10 that are shifted left/right a bit.
+::::{#exm-class-tree-toy}
+We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks: 
 
 ```{python}
 #| code-fold: true
@@ -519,39 +563,51 @@ import pandas as pd
 from numpy.random import default_rng
 
 rng = default_rng(1)
-x1 = rng.random((10,2))
-x1[:,0] -= 0.25
-x2 = rng.random((10,2))
-x2[:,0] += 0.25
-X = np.vstack((x1,x2))
+gp1 = rng.random((10,2))
+gp1[:,0] -= 0.25
+gp2 = rng.random((10,2))
+gp2[:,0] += 0.25
+X = np.vstack((gp1,gp2))
 y = np.hstack(([1]*10,[2]*10))
+print("feature matrix X:")
+print(X)
+print("\nlabel vector y:")
+print(y)
+```
 
+The features are the two point coordinates, giving a 20-by-2 feature matrix `X`, and the labels are a vector `y` of length 20. We will create a data frame for aiding in visualization:
+
+```{python}
 import seaborn as sns
 df = pd.DataFrame( {"x₁":X[:,0], "x₂":X[:,1], "y":y} )
 sns.scatterplot(data=df, x="x₁", y="x₂", hue="y");
 ```
 
-Now we create a decision tree for these samples.
+Now we create and fit a decision tree for these samples:
 
 ```{python}
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-t = DecisionTreeClassifier(max_depth=3)
-t.fit(X,y)
-
-from matplotlib.pyplot import figure
-figure(figsize=(18,11), dpi=160)
-plot_tree(t, feature_names=["x₁", "x₂"]);
+tree = DecisionTreeClassifier(max_depth=3)
+tree.fit(X,y)
 ```
 
-The root of the tree (at the top) shows that the best split was found at the vertical line $x_1=0.644$. To the right of that line is a Gini value of zero: 8 samples, all with label 2. Thus, any future prediction by this tree will immediately return label 2 if the first feature of the input exceeds 0.644. Otherwise, it moves to the left child node and tests whether the second feature is greater than $0.96$. This splits along a horizontal line, above which there is a single sample with label 2. And so on.
+At this point, the `tree` object has created and stored all the information derived from the dataset that defines the decision tree. Since this is a small tree, we can easily look under the hood:
 
-Notice that the bottom right node has a nonzero Gini impurity. This node could be partitioned, but the classifier was constrained to stop at a depth of 3. If a prediction ends up here, then the classifier returns label 1, which is the most likely outcome.
+```{python}
+from matplotlib.pyplot import figure
+figure(figsize=(18,11), dpi=160)
+plot_tree(tree, feature_names=["x₁", "x₂"]);
+```
 
-Because we can follow the decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the numbers of features and observations increase.
+The root of the tree at the top shows that the best initial split was found at the vertical line $x_1=0.644$. To the right of that line is a Gini value of zero: 8 samples, all with label 2. That is, any future prediction by this tree will immediately return label 2 if its value for $x_1$ exceeds 0.644. Otherwise, it moves to the left child node and tests whether $x_2$ is greater than $0.96$. As you can see from the scatterplot above, that horizontal line has a single sample with label 2 above it. And so on.
 
-### Penguin data
+Notice that the bottom right node has a nonzero final Gini impurity. This node could be partitioned, but the classifier was constrained to stop at a depth of 3. If a prediction ends up here, then the classifier returns label 1, which is the most likely outcome.
+::::
 
-We return to the penguins. There is no need to standardize the columns for a decision tree, because each feature is considered on its own.
+Because we can follow a decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.
+
+::::{#exm-class-tree-penguins}
+We return to the penguins: 
 
 ```{python}
 import pandas as pd
@@ -567,7 +623,7 @@ X = pen[features]
 y = pen["species"]
 ```
 
-We get some interesting information from looking at the top levels of a decision tree trained on the full dataset.
+We get some interesting information from looking at the top levels of a decision tree trained on the full dataset:
 
 ```{python}
 dt = DecisionTreeClassifier(max_depth=4)
@@ -578,40 +634,42 @@ figure(figsize=(18,11), dpi=160)
 plot_tree(dt, max_depth=2, feature_names=features);
 ```
 
-The most determinative feature for identifying the species is the flipper length. If it exceeds 206.5 mm, then the penguin is rather likely to be a Gentoo. 
+The most determinative feature for identifying the species is apparently the flipper length. If it exceeds 206.5 mm, then the penguin is rather likely to be a Gentoo. 
 
-We can measure the relative importance of each feature by comparing their total contributions to reducing the Gini index. This is known as **Gini importance**.  
+We can measure the relative importance of each feature by comparing their total contributions to reducing the Gini index:  
 
 ```{python}
 pd.Series(dt.feature_importances_, index=features)
 ```
+This ranking is known as **Gini importance**. 
 
 Flipper length alone accounts for about half of the resolving power of the tree, followed in importance by the bill length. The other measurements apparently have little discriminative value.
 
-In order to assess the effectiveness of the tree, we use the train–test paradigm.
+In order to assess the effectiveness of the tree, we use the train–test paradigm:
 
 ```{python}
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix,classification_report
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
   X, y,
   test_size=0.2,
   shuffle=True,
   random_state=0
 )
-dt.fit(X_tr, y_tr)
+dt.fit(X_train, y_train)
 
-yhat = dt.predict(X_te)
-print( confusion_matrix(y_te, yhat) )
-print( classification_report(y_te, yhat) )
+yhat = dt.predict(X_test)
+print( confusion_matrix(y_test, yhat) )
+print( classification_report(y_test, yhat) )
 ```
 
 The performance is quite good, although the Chinstrap case is hindered by the relatively low number of training examples:
 
 ```{python}
-y_tr.value_counts()
+y_train.value_counts()
 ```
+::::
 
 ### Limitations
 
@@ -671,10 +729,9 @@ KNN divides up the feature space into domains that are dominated by nearby insta
 
 {{< video _media/knn_demo.mp4 >}}
 
-Implementation of KNN is straightforward for small data sets, but requires care to get reasonable execution efficiency for large sets.
+Implementation of KNN is straightforward for small data sets, but requires care to get reasonable execution efficiency for large sets. We won't go into the details.
 
-### KNN in sklearn
-
+::::{#exm-class-knn}
 Let's revisit the penguins. We use `dropna` to drop any rows with missing values.
 ```{python}
 import seaborn as sns
@@ -742,19 +799,20 @@ Next, we split into training and test sets to gauge the performance of the class
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report,confusion_matrix
 
-X_tr, X_te, y_tr, y_te = train_test_split(X,y,test_size=0.2)
-knn.fit(X_tr,y_tr)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
+knn.fit(X_train,y_train)
 
-yhat = knn.predict(X_te)
-print(confusion_matrix(y_te,yhat))
-print(classification_report(y_te,yhat))
+yhat = knn.predict(X_test)
+print(confusion_matrix(y_test,yhat))
+print(classification_report(y_test,yhat))
 ```
 
 The default norm in the KNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
+::::
 
 ### Standardization
 
-The values in the columns of the penguin frame are scaled quite differently. In particular, the values in the body mass column are more than 20x larger than the other columns on average:
+The values in the columns of the penguin frame in @exm-class-knn are scaled quite differently. In particular, the values in the body mass column are more than 20x larger than the other columns on average:
 
 ```{python}
 X.mean()
@@ -769,27 +827,24 @@ Z = X.transform( lambda x: (x - x.mean()) / x.std() )
 In this instance, standardization makes performance dramatically better:
 
 ```{python}
-Z_tr, Z_te, y_tr, y_te = train_test_split(Z,y,test_size=0.2)
-knn.fit(Z_tr,y_tr)
+Z_train, Z_test, y_train, y_test = train_test_split(Z, y, test_size=0.2)
+knn.fit(Z_train, y_train)
 
-yhat = knn.predict(Z_te)
-print(confusion_matrix(y_te,yhat))
-print(classification_report(y_te,yhat))
+yhat = knn.predict(Z_test)
+print( confusion_matrix(y_test, yhat) )
+print( classification_report(y_test, yhat) )
 ```
 
-### Pipelines
+One nuisance of the standardization step above is that it must be performed again for every new query vector that comes along. This means we need to keep track of the mean and std of the original training set. Scikit-learn allows us to instead create a **pipeline** that automates the standardization transformation. Pipelines make it easy to chain together data transformations followed by a learner. 
 
-One nuisance of the standardization step above is that it must be performed again for any new query vector that comes along. This means we need to keep track of the mean and std of the original training set. 
+::::{#exm-class-knn-standard}
 
-Scikit-learn allows us to create a **pipeline** that automates the transformation. Pipelines make it easy to chain together data transformations followed by a learner. The composite object acts much like a regular learner.
-
-As you might guess, standardization of data is so common that it is predefined:
-
+Once created, a pipeline object can mostly be treated the same as any other learner:
 ```{python}
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler   # converts to z-scores
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
   X, y, 
   test_size=0.2,
   shuffle=True,
@@ -799,8 +854,8 @@ X_tr, X_te, y_tr, y_te = train_test_split(
 knn = KNeighborsClassifier(n_neighbors=5)
 pipe = make_pipeline(StandardScaler(), knn)
 
-pipe.fit(X_tr, y_tr)
-pipe.score(X_te, y_te)
+pipe.fit(X_train, y_train)
+pipe.score(X_test, y_test)
 ```
 
 We can look under the hood of the pipeline. For example, we can see that the mean and variance of each of the original data columns is stored in the first part of the pipeline:
@@ -809,8 +864,11 @@ We can look under the hood of the pipeline. For example, we can see that the mea
 print( pipe[0].mean_ )
 print( pipe[0].var_ )
 ```
+However, we don't need to access that data just to use the pipeline. That's taken care of when we use `pipe.score` or `pipe.predict`.
+::::
 
-## Quantifying votes {#sec-class-quant}
+
+## Probabilistic interpretation {#sec-class-quant}
 
 Both kNN and decision trees base classification on a voting procedure---for kNN, the $k$ nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information. 
 
@@ -851,7 +909,7 @@ penguins = sns.load_dataset("penguins").dropna()
 X = penguins.loc[:, penguins.dtypes=="float64"]  
 y = penguins["species"].astype("category")
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2, 
     shuffle=True, random_state=5
@@ -862,15 +920,15 @@ We can train a kNN classifier and then retrieve the probabilities via `predict_p
 
 ```{python}
 knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(X_tr, y_tr)
-p_hat = knn.predict_proba(X_te)
+knn.fit(X_train, y_train)
+p_hat = knn.predict_proba(X_test)
 p_hat[:6,:]
 ```
 
 From the output above we see that, for example, while the third and fourth test cases led to unanimous votes for *Gentoo*, the sixth case is deemed *Adelie* in a 3--2 squeaker (or is it a squawker?):
 
 ```{python}
-yhat = knn.predict(X_te)
+yhat = knn.predict(X_test)
 yhat[:6]
 ```
 ::::
@@ -942,19 +1000,21 @@ sns.relplot(data=data,
     kind="line", estimator=None
     );
 ```
+
+As we're about to see, the step-by-step process above is just for illustration and is completely automated in practice.
 ::::
 
-Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them.
+Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for identification of each class.
 
 ::::{#exm-class-roc-penguin}
 Continuing @exm-class-prob, we will plot ROC curves for the three species in the penguin data:
 ```{python}
 from sklearn.metrics import roc_curve
 
-p_hat = knn.predict_proba(X_te)
+p_hat = knn.predict_proba(X_test)
 results = []
 for i, label in enumerate(knn.classes_):
-    actual = (y_te==label)
+    actual = (y_test==label)
     fp, tp, theta = roc_curve(actual,p_hat[:,i])
     results.extend( [(label,fp,tp) for fp,tp in zip(fp,tp)] )
 roc = pd.DataFrame( results, columns=["label","FP rate","TP rate"] )
@@ -976,12 +1036,12 @@ If we weight neighbors' votes inversely to their distances from the query point,
 
 ```{python}
 knnw = KNeighborsClassifier(n_neighbors=5, weights="distance")
-knnw.fit(X_tr, y_tr)
-p_hat = knnw.predict_proba(X_te)
+knnw.fit(X_train, y_train)
+p_hat = knnw.predict_proba(X_test)
 
 results = []
 for i, label in enumerate(knn.classes_):
-    actual = (y_te==label)
+    actual = (y_test==label)
     fp, tp, theta = roc_curve(actual,p_hat[:,i])
     results.extend( [(label,fp,tp) for fp,tp in zip(fp,tp)] )
 roc = pd.DataFrame( results, columns=["label","FP rate","TP rate"] )
@@ -1002,12 +1062,12 @@ The AUC metric allows us to compare the standard and weighted kNN classifiers fr
 ```{python}
 from sklearn.metrics import roc_auc_score
 s = roc_auc_score(
-    y_te, knn.predict_proba(X_te), 
+    y_test, knn.predict_proba(X_test), 
     multi_class="ovr", average=None
     )
 
 sw = roc_auc_score(
-  y_te, knnw.predict_proba(X_te), 
+  y_test, knnw.predict_proba(X_test), 
   multi_class="ovr", average=None
   )
 

@@ -398,26 +398,6 @@ y = digits.target
 y.value_counts()
 ```
 
-We can visualize the raw data. Here are some of the 6s:
-
-```{python}
-#| code-fold: true
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_digits(X):
-    fig, axes = plt.subplots(4,4)
-    for i in range(4):
-        for j in range(4):
-            row = j + 4*i
-            A = np.reshape(np.array(X.iloc[row,:]),(8,8))
-            sns.heatmap(A,ax=axes[i,j],square=True,cmap="gray",cbar=False)
-            axes[i,j].axis(False)
-    return None
-
-plot_digits(X[y==6])
-```
-
 A clustering method won't be able to learn from the ground truth labels. In order to set expectations, we should see how well the originally labels cluster the samples. Here are the mean silhouette scores for the clusters.
 
 ```{python}
