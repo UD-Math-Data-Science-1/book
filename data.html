@@ -260,8 +260,9 @@ MathJax = {
   </ul></li>
   <li><a href="#series-and-frames" id="toc-series-and-frames" class="nav-link" data-scroll-target="#series-and-frames"><span class="toc-section-number">1.4</span>  Series and frames</a>
   <ul class="collapse">
-  <li><a href="#loading-from-files" id="toc-loading-from-files" class="nav-link" data-scroll-target="#loading-from-files"><span class="toc-section-number">1.4.1</span>  Loading from files</a></li>
-  <li><a href="#selecting-rows" id="toc-selecting-rows" class="nav-link" data-scroll-target="#selecting-rows"><span class="toc-section-number">1.4.2</span>  Selecting rows</a></li>
+  <li><a href="#common-operations" id="toc-common-operations" class="nav-link" data-scroll-target="#common-operations"><span class="toc-section-number">1.4.1</span>  Common operations</a></li>
+  <li><a href="#loading-from-files" id="toc-loading-from-files" class="nav-link" data-scroll-target="#loading-from-files"><span class="toc-section-number">1.4.2</span>  Loading from files</a></li>
+  <li><a href="#selecting-rows" id="toc-selecting-rows" class="nav-link" data-scroll-target="#selecting-rows"><span class="toc-section-number">1.4.3</span>  Selecting rows</a></li>
   </ul></li>
   <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="toc-section-number">1.5</span>  Data preparation</a>
   <ul class="collapse">
@@ -1406,8 +1407,204 @@ Categories (6, object): ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']</c
 </div>
 <p>Notice above that the unique categories were found automatically.</p>
 </div>
-<section id="loading-from-files" class="level3 page-columns page-full" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="loading-from-files"><span class="header-section-number">1.4.1</span> Loading from files</h3>
+<section id="common-operations" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="common-operations"><span class="header-section-number">1.4.1</span> Common operations</h3>
+<div id="tbl-data-series" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1.1: Operations on pandas series</caption>
+<colgroup>
+<col style="width: 42%">
+<col style="width: 36%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Syntax</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">First or last entries</td>
+<td style="text-align: left;"><code>s.head()</code>, <code>s.tail()</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Length</td>
+<td style="text-align: left;"><code>len(s)</code></td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of entries</td>
+<td style="text-align: left;"><code>s.shape</code></td>
+<td style="text-align: left;">tuple</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All of the values</td>
+<td style="text-align: left;"><code>s.values</code></td>
+<td style="text-align: left;">array</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Convert to list</td>
+<td style="text-align: left;"><code>list(s)</code></td>
+<td style="text-align: left;">list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Index</td>
+<td style="text-align: left;"><code>s.index</code></td>
+<td style="text-align: left;">Index</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unique values</td>
+<td style="text-align: left;"><code>s.unique()</code></td>
+<td style="text-align: left;">array</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Appearance counts for values</td>
+<td style="text-align: left;"><code>s.value_counts()</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Extreme values</td>
+<td style="text-align: left;"><code>s.min()</code>, <code>s.max()</code></td>
+<td style="text-align: left;">number</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: left;"><code>s.sum()</code></td>
+<td style="text-align: left;">number</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Comparison</td>
+<td style="text-align: left;"><code>s &gt; 1</code>, <code>s=="foo"</code></td>
+<td style="text-align: left;">boolean Series</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Locate missing</td>
+<td style="text-align: left;"><code>s.isna()</code>, <code>s.isnull()</code></td>
+<td style="text-align: left;">boolean Series</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Arithmetic</td>
+<td style="text-align: left;"><code>s + 1</code>, <code>s * t</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Delete one or more rows</td>
+<td style="text-align: left;"><code>s.drop(0)</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Pandas offers many methods for manipulating series and dataframes. <a href="#tbl-data-series">Table&nbsp;<span>1.1</span></a> shows common operations that can be applied to a series. Since a column of a dataframe is a series, these operations can be applied in that context, too.</p>
+<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As always in Python, you need to pay attention to the difference between applying a function, like <code>foo(bar)</code>, accessing a property, like <code>foo.bar</code>, and calling an object method, <code>foo.bar()</code>. Extra or missing parentheses groups can cause errors.</p>
+</div>
+</div>
+<div id="tbl-data-frames" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1.2: Operations on pandas dataframes</caption>
+<colgroup>
+<col style="width: 37%">
+<col style="width: 34%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Syntax</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">First or last rows</td>
+<td style="text-align: left;"><code>df.head()</code>, <code>df.tail()</code></td>
+<td style="text-align: left;">DataFrame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;"><code>len(df)</code></td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of rows and columns</td>
+<td style="text-align: left;"><code>df.shape</code></td>
+<td style="text-align: left;">tuple</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">All of the values</td>
+<td style="text-align: left;"><code>df.values</code></td>
+<td style="text-align: left;">array</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Row index</td>
+<td style="text-align: left;"><code>df.index</code></td>
+<td style="text-align: left;">Index</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Column names</td>
+<td style="text-align: left;"><code>list(df)</code></td>
+<td style="text-align: left;">list</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column names</td>
+<td style="text-align: left;"><code>df.columns</code></td>
+<td style="text-align: left;">Index</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Access by column name(s)</td>
+<td style="text-align: left;"><code>df["name"]</code></td>
+<td style="text-align: left;">Series or DataFrame</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Access by name</td>
+<td style="text-align: left;"><code>df.loc[rows, "name"]</code></td>
+<td style="text-align: left;">(varies)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Access by position</td>
+<td style="text-align: left;"><code>df.iloc[i, j]</code></td>
+<td style="text-align: left;">(varies)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sum</td>
+<td style="text-align: left;"><code>df.sum()</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Comparison</td>
+<td style="text-align: left;"><code>s &gt; 1</code>, <code>s=="foo"</code></td>
+<td style="text-align: left;">boolean DataFrame</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Delete a column</td>
+<td style="text-align: left;"><code>df.drop(name, axis=1)</code></td>
+<td style="text-align: left;">DataFrame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Apply columnwise</td>
+<td style="text-align: left;"><code>df.apply(myfun)</code></td>
+<td style="text-align: left;">(varies)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a href="#tbl-data-frames">Table&nbsp;<span>1.2</span></a> shows additional operations that can be applied to an entire dataframe (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the <a href="https://pandas.pydata.org/docs/user_guide/basics.html">pandas user guide</a>, so they are just collected here for future reference.</p>
+</section>
+<section id="loading-from-files" class="level3 page-columns page-full" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="loading-from-files"><span class="header-section-number">1.4.2</span> Loading from files</h3>
 <p>Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in <em>comma-separated value</em> (CSV) files. These can be read by pandas locally or over the web.</p>
 <div id="exm-data-read" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.9 </strong></span>The pandas function we use to load a dataset is <code>read_csv</code>. Here we use it to read a file that is availble over the web:</p>
@@ -1507,8 +1704,8 @@ dtype: object</code></pre>
 <div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1r9is5thcryuarl/Section1_4_b.mp4?raw=1"></video></div>
 </div></div><p>It’s also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with <code>pd.read_</code> showing the formats pandas understands.</p>
 </section>
-<section id="selecting-rows" class="level3 page-columns page-full" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="selecting-rows"><span class="header-section-number">1.4.2</span> Selecting rows</h3>
+<section id="selecting-rows" class="level3 page-columns page-full" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="selecting-rows"><span class="header-section-number">1.4.3</span> Selecting rows</h3>
 <p>Above we saw that you can use the <code>loc</code> property to access a frame’s row by name, or <code>iloc</code> to access by position. It’s more common, though, to select them by some criteria.</p>
 <div id="exm-data-selection" class="theorem example">
 <p><span class="theorem-title"><strong>Example 1.10 </strong></span>Here’s a local file that contains daily weather summaries from Newark, Delaware:</p>
