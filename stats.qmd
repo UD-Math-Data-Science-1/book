@@ -39,9 +39,9 @@ cars.describe()
 ```
 We now discuss the definitions and interpretations of these values.
 
-### Mean and dispersion
+### Mean and spread
 
-You may already know the "big three" summary statistics: 
+You may already know the Big Three summary statistics: 
 
 ::::{#def-stats-meanvarstd}
 Given data values $x_1,\ldots,x_n$, their **mean** is
@@ -194,57 +194,96 @@ In statistics, @eq-stats-t-score is referred to as a *t-score*, and the term *sa
 Mean and variance are not the most relevant summary statistics for every dataset. There are important alternatives.
 
 :::{#def-stats-percentile}
-For any $0 < p < 1$, the $100p$-**percentile** is the value of $x$ such that $p$ is the probability of observing a population value less than or equal to $x$. 
+For any $0 < p < 1$, the $100p$-**percentile** or **quantile** is the value of $x$ such that $p$ is the probability of observing a population value less than or equal to $x$. 
 
 The 50th percentile is known as the **median** of the population.
 :::
 
-In other words, percentiles are the inverse function of the CDF. 
+<!-- In other words, percentiles are the inverse function of the CDF.  -->
+
+::: {.callout-note}
+Some sources reserve the term *quantile* for another meaning, but since pandas offers `quantile` to compute percentiles, we don't draw a distinction.
+:::
 
 The unbiased sample median of $x_1,\ldots,x_n$ can be computed by sorting the values into $y_1,\ldots,y_n$. If $n$ is odd, then $y_{(n+1)/2}$ is the sample median; otherwise, the average of $y_{n/2}$ and $y_{1+(n/2)}$ is the sample median. 
-
-Computing unbiased sample estimates of percentiles other than the median is complicated, and we won't go into the details. For large datasets, the sample values are good estimators in practice.
 
 :::{#exm-stats-median}
 If the sorted values are $1,3,3,4,5,5,5$, then $n=7$ and the sample median is $y_4=4$. If the sample values are $1,3,3,4,5,5,5,9$, then $n=8$ and the sample median is $(4+5)/2=4.5$.
 :::
 
-A set of percentiles dividing probability into $q$ equal pieces is called the $q$–**quantiles**.
+Computing unbiased sample estimates of percentiles other than the median is complicated, and we won't go into the details. For large datasets, the sample values are good estimators in practice.
 
-::: {#exm-stats-quartiles}
-The 4-quantiles are called **quartiles**. The first quartile is the 25th percentile, or the value that exceeds 1/4 of the population. The second quartile is the median. The third quartile is the 75th percentile. 
+::::{#exm-stats-quantiles}
+Let's create a vector of 101 random numbers drawn uniformly from $[0,1]$:
+```{python}
+from numpy.random import default_rng
+import pandas as pd
 
-Sometimes the definition is extended to the *zeroth quartile*, which is the minimum sample value, and the *fourth quartile*, which is the maximum sample value.
-:::
+rng = default_rng(19716)
+x = rng.uniform( size=(101) )
+```
 
-:::{.callout-caution}
-If this all isn't confusing enough yet, sometimes the word *quantile* is used to mean *percentile*. This is the case for the `quantile` method in pandas.
-:::
+We can turn the vector into a pandas series and then find the 20th percentile:
+```{python}
+data = pd.Series(x)
+data.quantile(0.2)
+```
 
-::::{#def-stats-IQR}
-The **interquartile range** (IQR) is the difference between the 75th percentile and the 25th percentile.
+This is equivalent to looking at the 21st element of the sorted values:
+```{python}
+x.sort()
+x[20]
+```
+
+As we increase the length of the random vector, in theory the $100p$th percentile should be at $x=p$:
+```{python}
+rng = default_rng(19716)
+data = pd.Series( rng.uniform(size=(200000)) )
+data.quantile( [0.2, 0.5, 0.8] )
+```
+The 50th percentile is the same thing as the median:
+```{python}
+data.median()
+```
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/9wov44dazmiyg64/Example2_5.mp4?raw=1 >}}
+:::
+
+::::{#def-stats-quartile}
+The 25th, 50th, and 75th percentiles are the first, second, and third **quartiles** of the distribution. The **interquartile range** (IQR) is the difference between the 75th percentile and the 25th percentile.
+::::
+
+Sometimes the definition above is extended to the *zeroth quartile*, which is the minimum sample value, and the *fourth quartile*, which is the maximum sample value.
 
 IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.
 
 ::::{#exm-data-describe}
-The `describe` method includes mean, standard deviation, and the quartiles. 
+The dataframe `describe` method includes mean, standard deviation, and the quartiles:
 
 ```{python}
-from numpy.random import default_rng
-import pandas as pd
 rng = default_rng(19716)
 df = pd.DataFrame( {
-    "normal" : rng.normal( size=(4000,) ),
-    "uniform" : rng.uniform( size=(4000,) )
+    "normal" : rng.normal( size=(10000,) ),
+    "uniform" : rng.uniform( size=(10000,) )
     } )
 df.describe()
+```
+
+It's easy to write a function to compute the IQR of a series:
+```{python}
+def IQR(x):
+    Q25, Q75 = x.quantile( [0.25, 0.75] )
+    return Q75 - Q25 
+
+IQR(df.normal)
 ```
 ::::
 
 ## Distributions
 
-Mean and dispersion (variance or STD) attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution of all values precisely using a function. 
+Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution of all values precisely using a function. 
 
 ### CDF
 
