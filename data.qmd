@@ -685,8 +685,55 @@ pd.Categorical(pieces)
 Notice above that the unique categories were found automatically. 
 ::::
 
-### Loading from files 
+### Common operations
 
+| Description                  | Syntax                   | Result         |
+| :--------------------------- | :----------------------- | :------------- |
+| First or last entries        | `s.head()`, `s.tail()`   | Series         |
+| Length                       | `len(s)`                 | integer        |
+| Number of entries            | `s.shape`                | tuple          |
+| All of the values            | `s.values`               | array          |
+| Convert to list              | `list(s)`                | list           |
+| Index                        | `s.index`                | Index          |
+| Unique values                | `s.unique()`             | array          |
+| Appearance counts for values | `s.value_counts()`       | Series         |
+| Extreme values               | `s.min()`, `s.max()`     | number         |
+| Sum                          | `s.sum()`                | number         |
+| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
+| Locate missing               | `s.isna()`, `s.isnull()` | boolean Series |
+| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
+| Delete one or more rows      | `s.drop(0)`              | Series         |
+
+: Operations on pandas series {#tbl-data-series}
+
+Pandas offers many methods for manipulating series and dataframes. @tbl-data-series shows common operations that can be applied to a series. Since a column of a dataframe is a series, these operations can be applied in that context, too.
+
+::: {.callout-caution}
+As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
+:::
+
+| Description                | Syntax                   | Result              |
+| :------------------------- | :----------------------- | :------------------ |
+| First or last rows         | `df.head()`, `df.tail()` | DataFrame           |
+| Number of rows             | `len(df)`                | integer             |
+| Number of rows and columns | `df.shape`               | tuple               |
+| All of the values          | `df.values`              | array               |
+| Row index                  | `df.index`               | Index               |
+| Column names               | `list(df)`               | list                |
+| Column names               | `df.columns`             | Index               |
+| Access by column name(s)   | `df["name"]`             | Series or DataFrame |
+| Access by name             | `df.loc[rows, "name"]`   | (varies)            |
+| Access by position         | `df.iloc[i, j]`          | (varies)            |
+| Sum                        | `df.sum()`               | Series              |
+| Comparison                 | `s > 1`, `s=="foo"`      | boolean DataFrame   |
+| Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
+| Apply columnwise           | `df.apply(myfun)`        | (varies)            |
+
+: Operations on pandas dataframes {#tbl-data-frames}
+
+@tbl-data-frames shows additional operations that can be applied to an entire dataframe (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference.
+
+### Loading from files 
 
 Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These can be read by pandas locally or over the web.
 
