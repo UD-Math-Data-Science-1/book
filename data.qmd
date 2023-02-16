@@ -706,7 +706,7 @@ Notice above that the unique categories were found automatically.
 
 : Operations on pandas series {#tbl-data-series}
 
-Pandas offers many methods for manipulating series and dataframes. @tbl-data-series shows common operations that can be applied to a series. Since a column of a dataframe is a series, these operations can be applied in that context, too.
+Pandas offers many methods for manipulating series and dataframes. @tbl-data-series shows common operations that can be applied to a series. Since a column of a dataframe is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
 
 ::: {.callout-caution}
 As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
@@ -731,7 +731,7 @@ As always in Python, you need to pay attention to the difference between applyin
 
 : Operations on pandas dataframes {#tbl-data-frames}
 
-@tbl-data-frames shows additional operations that can be applied to an entire dataframe (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference.
+@tbl-data-frames shows additional operations that can be applied to an entire dataframe (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
 
 ### Loading from files 
 
