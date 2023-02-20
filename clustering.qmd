@@ -116,7 +116,7 @@ There are ways to define similarity without making use of a distance, but we won
 ### Distance metrics
 
 ::::{#def-cluster-metric}
-A **distance metric** is a function dist on pairs of vectors that satisfies the following properties for all vectors:
+A **distance metric** is a function $\dist$ on pairs of vectors that satisfies the following properties for all vectors:
 
 1. $\dist(\bfx,\bfy)=0$ if and only if $\bfx=\bfy$,
 2. $\dist(\bfx,\bfy) = \dist(\bfy,\bfx)$, and
@@ -897,10 +897,6 @@ ConfusionMatrixDisplay(confusion_matrix(y,y_hat),display_labels=y.unique()).plot
 ```
 
 ## Exercises {.unnumbered}
-
-::::{#exr-cluster-positive}
-Using only the three axioms of a distance metric, prove that $\dist(\bfx,\bfy) \ge 0$ for all vectors $\bfx$ and $\bfy$. (Hint: apply the triangle inequality to go from $\bfx$ to $\bfy$ and back again.)
-::::
 
 ::::{#exr-cluster-angular}
 Prove that the angular distance between any nonzero vector and itself is zero.

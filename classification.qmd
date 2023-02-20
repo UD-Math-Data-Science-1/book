@@ -39,6 +39,10 @@ X_{n1} & X_{n2} & \cdots & X_{nd}
 \end{bmatrix}.
 $$
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/lqeka4m8p5q44k2/Section3_1.mp4?raw=1 >}}
+:::
+
 :::{.callout-important}
 A 2D array or matrix has elements that are addressed by two subscripts. These are always given in order *row*, *column*.
 
@@ -91,6 +95,10 @@ The *scikit-learn* package `sklearn` is a collection of well-known machine learn
 1. Apply the learner to a feature matrix/frame using the `predict` method.
 
 The package also includes a few classic example datasets. We load one derived from automatic recognition of handwritten digits:
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/zxclh4l1v3v15y5/Section3_1_2.mp4?raw=1 >}}
+:::
 
 ```{python}
 from sklearn import datasets 
@@ -215,9 +223,8 @@ We create a binary classification problem by labelling whether each loan was at 
 X = loans.drop("percent_funded", axis=1)
 y = loans["percent_funded"] > 95
 ```
-
-:::{.callout-tip}
-Scikit-learn works as easily with pandas data frames as it does with numerical arrays. In an application, it's often worthwhile to refer to quantities by memorable names as columns of a frame, rather than relying on numerical indexes into a matrix.
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/6midrbwhjta9tjm/Section3_2.mp4?raw=1 >}}
 :::
 
 ### Train–test paradigm
@@ -229,6 +236,10 @@ The performance of a predictor on previously unseen data is known as the **gener
 :::
 
 In order to gauge generalization, we hold back some of the labeled data from training and use it only to test the performance. An `sklearn` helper function called `train_test_split` allows us to split off 20% of the data to use for testing. It's usually recommended to shuffle the order of the samples before the split, and in order to make the results reproducible, we give a specific random seed to the RNG used for the shuffle.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/ofj6kirff2q1gkh/Section3_2_1.mp4?raw=1 >}}
+:::
 
 ```{python}
 from sklearn.model_selection import train_test_split
@@ -278,9 +289,9 @@ print(f"{funded/len(y):.1%} were funded")
 Therefore, an algorithm that simply "predicts" funding every single loan could do as well as the trained classifier! 
 
 ```{python}
-from sklearn import metrics
+from sklearn.metrics import accuracy_score
 generous = [True]*len(y_test)
-acc = metrics.accuracy_score(y_test, generous)
+acc = accuracy_score(y_test, generous)
 print(f"fund-them-all accuracy is {acc:.1%}")
 ```
 
@@ -290,94 +301,139 @@ In this context, our trained classifier is not impressive at all. We need a metr
 
 A binary classifier is one that produces just two unique labels, which we call "yes" and "no" here. To fully understand the performance of a binary classifier, we have to account for four cases:
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/hxu66k8g2gqa06t/Section3_2_2.mp4?raw=1 >}}
+:::
+
 * True positives (TP): Predicts "yes", actually is "yes"
 * False positives (FP): Predicts "yes", actually is "no"
 * True negatives (TN): Predicts "no", actually is "no"
 * False negatives (FN): Predicts "no", actually is "yes"
 
-The four cases correspond to a 2×2 table according to the states of the prediction and *ground truth*, which is the accepted correct value (i.e., the given label). The table can be filled with counts or percentages of tested instances, to create a **confusion matrix**, as illustrated in @fig-class-confusion. 
+We often display these in a 2×2 table according to the states of the prediction and *ground truth* (i.e., the given label in the dataset). The table can be filled with counts or percentages of tested instances to create a **confusion matrix**, as illustrated in @fig-class-confusion. 
 
-![Confusion matrix](_media/confusion.png){fig-alt="A binary confusion matrix." height="240" #fig-class-confusion}
+![A confusion matrix. Correct predictions are on the diagonal.](_media/confusion.png){fig-alt="A binary confusion matrix." height="240" #fig-class-confusion}
 
-`sklearn` makes it straightforward to compute a confusion matrix:
 
-```{python}
-yhat = knn.predict(X_test)
-C = metrics.confusion_matrix(y_test, yhat, labels=[True,False])
-lbl = ["fund", "reject"]
-metrics.ConfusionMatrixDisplay(C, display_labels=lbl).plot();
-```
+::::{#def-class-metrics}
+The following primary metrics are defined for a binary classifier:
 
-:::{.callout-caution}
-It's advisable to always call `confusion_matrix` with the `labels` argument, even though it is optional, in order to control the ordering within the matrix. In particular, `False` < `True`, so the default for Boolean labels is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
+|                                     |                                            |
+| ----------------------------------: | :----------------------------------------: |
+|                        **accuracy** | $\dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}$ |
+|                          **recall** |          $\dfrac{\TP}{\TP + \FN}$          |
+|                     **specificity** |          $\dfrac{\TN}{\TN + \FP}$          |
+|                       **precision** |          $\dfrac{\TP}{\TP + \FP}$          |
+| **negative predictive value** (NPV) |          $\dfrac{\TN}{\TN + \FN}$          |
+::::
+
+::: {.callout-note}
+Recall is also known as *sensitivity* or the *true positive rate*. Specificity is the *true negative rate*. 
 :::
 
-Hence, there are 7570 true positives. Therefore, the **accuracy** is 
-
-$$
-\text{accuracy} = \frac{\TP + \TN}{\TP + \FP + \TN + \FN} = \frac{7570}{7944} \approx 0.95292
-$$
-
-i.e., 95.3%. However, there are four other useful quantities defined by putting a "number correct" value in the numerator and the sum of a confusion matrix row or column in the denominator:
-
-$$
-\begin{split}
-\text{recall (aka sensitivity)} &= \frac{\TP}{\TP + \FN} \\[2mm]
-\text{specificity} &= \frac{\TN}{\TN + \FP} \\[2mm] 
-\text{precision} &= \frac{\TP}{\TP + \FP} \\[2mm] 
-\text{negative predictive value (NPV)} &= \frac{\TN}{\TN + \FN} 
-\end{split}
-$$
-
-In words, these metrics answer the following questions:
+All of the primary metrics vary between 0 (worst) and 1 (best). Accuracy is self-explanatory; the other metrics answer the following questions:
 
 * **recall** How often are actual "yes" cases predicted correctly?
 * **specificity** How often are actual "no" cases predicted correctly?
 * **precision** How often are the "yes" predictions correct?
 * **NPV** How often are the "no" predictions correct?
 
-For our loan classifier, here are the scores:
+::::{#exm-class-confusion}
+Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:
+
+|              |               |               |
+| -----------: | :-----------: | :-----------: |
+|              | Predicted $+$ | Predicted $-$ |
+| Actually $+$ |      22       |       4       |
+| Actually $-$ |      12       |      62       |
+
+From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that had the antigen, the test identified 22, for a recall of $20/26=84.6$\%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of $62/74=83.8$\%. Finally, the precision is $22/34=64.7$\% and the NPV is $62/66=93.9$\%. 
+::::
+
+The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and seek a high precision.
+
+There are ways of combining the primary metrics in order to account for two at once:
+
+::::{#def-class-metrics-2nd}
+The ***F*₁ score**, which is the harmonic mean of the precision and the recall, i.e.,
+$$
+F_1 = \left[ \frac{1}{2} \left(\text{precision} + \text{recall} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
+$$
+
+The **balanced accuracy** is the arithmetic mean of recall and specificity.
+::::
+
+Like the primary metrics, $F_1$ and balanced accuracy range between 0 (worst) and 1 (best). The harmonic mean is small if either of its terms is small, so a high $F_1$ means both precision and recall are good.
+
+::::{#exm-class-metrics}
+Continuing with the loan classifier trained earlier in this section, we can find the confusion matrix:
+
+```{python}
+from sklearn.metrics import confusion_matrix
+yhat = knn.predict(X_test)
+C = confusion_matrix(y_test, yhat, labels=[True, False])
+C
+```
+
+:::{.callout-caution}
+It's advisable to always call `confusion_matrix` with the `labels` argument, even though it is optional, in order to control the ordering within the matrix. In particular, `False` < `True`, so the default for Boolean labels is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
+:::
+
+In order order to help keep track of what the entries mean, we can also make a picture of the confusion matrix:
+
+```{python}
+from sklearn.metrics import ConfusionMatrixDisplay
+lbl = ["fund", "reject"]
+ConfusionMatrixDisplay(C, display_labels=lbl).plot();
+```
+
+Hence, there are 7570 true positives. The accuracy is
+```{python}
+print( f"accuracy = {(7570 + 26) / np.sum(C):.1%}" )
+```
+(In practice, of course, we can use the `accuracy` function we imported earlier.) Here are the other primary scores:
 
 ```{python}
 TP,FN,FP,TN = C.ravel()    # grab the 4 values in the confusion matrix
-print(f"recall = {TP/(TP+FN):.1%}")
-print(f"specificity = {TN/(TN+FP):.1%}")
-print(f"precision = {TP/(TP+FP):.1%}")
-print(f"NPV = {TN/(TN+FN):.1%}")
+print( f"recall = {TP/(TP+FN):.1%}" )
+print( f"specificity = {TN/(TN+FP):.1%}" )
+print( f"precision = {TP/(TP+FP):.1%}" )
+print( f"NPV = {TN/(TN+FN):.1%}" )
 ```
+As noted above, few who ought to get a loan will go away disappointed, a loan officer might get nervous about the low specificity score that indicates bad loans. 
 
-The high recall rate means that few who ought to get a loan will go away disappointed. However, the low specificity would be concerning to those providing the funds, because almost all of those who should be rejected will be approved by the classifier. 
-
-In `sklearn.metrics` there are functions to compute recall and precision without reference to the confusion matrix. You must put the ground-truth labels before the predicted labels, and you should also specify which of the labels corresponds to a "positive" result. Swapping the "positive" role effectively swaps recall with specificity, and precision with NPV.
+In `sklearn.metrics` there are functions to compute recall and precision without reference to the confusion matrix. You must put the ground-truth labels before the predicted labels, and you should also specify which label value corresponds to a "positive" result. Swapping the "positive" role effectively swaps recall with specificity and precision with NPV.
 
 ```{python}
-for pos in [True,False]:
+from sklearn.metrics import precision_score, recall_score
+
+for pos in [True, False]:
   print("With", pos, "as positive:")
-  s = metrics.recall_score(y_test, yhat, pos_label=pos)
+  s = recall_score(y_test, yhat, pos_label=pos)
   print(f"    recall is {s:.3f}")
-  s = metrics.precision_score(y_test, yhat, pos_label=pos) 
+  s = precision_score(y_test, yhat, pos_label=pos) 
   print(f"    precision is {s:.3f}")
   print()
 ```
 
-There are several ways to combine the measures above into a single value. None is universally best, because different applications emphasize different aspects of performance. One of the most popular is the ***F*₁ score**, which is the harmonic mean of the precision and the recall:
-
-$$
-F_1 = \left[ \frac{1}{2} \left(\frac{\TP + \FN}{\TP} + \frac{\TP+\FP}{\TP} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
-$$
-
-This score varies between 0 (poor) and 1 (ideal). If one of the quantities is much smaller than the other, their harmonic mean will be close to the small value. Thus, *F*₁ score punishes a classifier if either recall or precision is poor. 
-
-Another composite score is **balanced accuracy**, which is the arithmetic mean of recall and specificity. It also ranges from 0 to 1, with 1 meaning perfect accuracy.
+There are also functions for the composite scores defined in @def-class-metrics-2nd:
 
 ```{python}
-print( "F1:", metrics.f1_score(y_test, yhat) )
-print( "Balanced:", metrics.balanced_accuracy_score(y_test, yhat) )
+from sklearn.metrics import f1_score, balanced_accuracy_score
+
+print( f"F1 = {f1_score(y_test, yhat):.1%}" )
+print( f"balanced accuracy = {balanced_accuracy_score(y_test, yhat):.1%}" )
 ```
 
-The loan classifier trained above has excellent recall, respectable precision, and terrible specificity, resulting in a good *F*₁ score and a low balanced accuracy score.
+The loan classifier has excellent recall, respectable precision, and terrible specificity, resulting in a good *F*₁ score and a low balanced accuracy score.
+::::
 
-:::{#exm-class-scores}
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/napiitmwlezyqrq/Example3_3.mp4?raw=1 >}}
+:::
+
+
+:::{#exm-class-scores-simple}
 If $k$ of the $n$ testing samples were funded loans, then the fund-them-all loan classifier has
 
 $$
@@ -404,6 +460,10 @@ independently of $a$. This quantity is sensitive to the low specificity.
 ### Multiclass classifiers
 
 When there are more than two unique possible labels, these metrics can be applied using the **one-vs-rest** paradigm. For $K$ unique labels, this paradigm poses $K$ binary questions: "Is it in class 1, or not?", "Is it in class 2, or not?", etc. The confusion matrix becomes $K\times K$. 
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/sk7gua9paulqmn6/Section3_2_3.mp4?raw=1 >}}
+:::
 
 ::::{#exm-class-multiclass}
 We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:
@@ -442,15 +502,15 @@ Now we perform the fit and measure the accuracy:
 knn = KNeighborsClassifier(n_neighbors=8)
 knn.fit(X_train, y_train)
 yhat = knn.predict(X_test)
-print(f"accuracy is {metrics.accuracy_score(y_test, yhat):.1%}")
+print(f"accuracy is {accuracy_score(y_test, yhat):.1%}")
 ```
 
 Here is the confusion matrix:
 
 ```{python}
 labels = y.categories
-C = metrics.confusion_matrix(y_test, yhat, labels=labels)
-metrics.ConfusionMatrixDisplay(C, display_labels=labels).plot();
+C = confusion_matrix(y_test, yhat, labels=labels)
+ConfusionMatrixDisplay(C, display_labels=labels).plot();
 ```
 
 From the confusion matrix above we can see that, for example, out of 54 predictions of "usa" on the test set, there are 8 total false positives, in the sense that the actual labels were otherwise.
@@ -458,7 +518,7 @@ From the confusion matrix above we can see that, for example, out of 54 predicti
 We also get $K$ versions of the metrics like accuracy, recall, *F*₁ score, and so on. We can get all the individual precision scores, say, automatically:
 
 ```{python}
-precisions = metrics.precision_score(y_test, yhat, average=None)
+precisions = precision_score(y_test, yhat, average=None)
 for (label,p) in zip(labels,precisions): 
     print(f"{label}: {p:.1%}")
 ```
@@ -466,44 +526,54 @@ for (label,p) in zip(labels,precisions):
 To get a composite precision score, we have to specify an averaging method. The `"macro"` option simply takes the mean of the vector above.
 
 ```{python}
-mac = metrics.precision_score(y_test, yhat, average="macro")
+mac = precision_score(y_test, yhat, average="macro")
 print(mac)
 ```
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/p0s4kshrlnfcp0z/Example3_5.mp4?raw=1 >}}
+:::
 
 There are other ways to average performance scores over the classes, depending on whether poorly represented classes should be weighted more weakly than others.
 
 ## Decision trees
 
-A decision tree is much like playing "Twenty Questions." A question is asked, and the answer reduces the possible results, leading to a new question. **CART** (Classification And Regression Tree) is a popular method for systematizing the idea.
+A decision tree is much like playing Twenty Questions. A question is asked, and the answer reduces the possible results, leading to a new question. **CART** (Classification And Regression Tree), which we present here, is a popular method for systematizing the idea.
 
-Given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, the immediate goal is to partition the samples into subsets whose labels are as uniform as possible. The process is then repeated recursively on the subsets. Defining a measurement of label uniformity is a key step. 
+Given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, the immediate goal is to partition the samples into two subsets, each of which has as uniform as set of labels as possible. The process is then repeated recursively: the subsets are bisected to make four subsets, and so on. These splits form a binary tree. When a prediction is required, we apply the same criteria as the splits in our tree, and when we reach a *leaf* of the tree (i.e., no further subdivisions), we take a vote of all the samples in the leaf subset to determine the label. 
+
+There are two details that need to be specified: what kind of subset splits to allow, and how to determine the uniformity of labels within each subset. We start with the latter.
 
 ### Gini impurity
 
-Let $S$ be a subset of the samples, given as a list of indices into the original set. Suppose there are $K$ unique labels, which we denote $1,2,\ldots,K$. Define
-
-$$
-p_k = \frac{1}{ |S| } \sum_{i\in S} \mathbb{1}_k(y_i),
-$$
-
-where $|S|$ is the number of elements in $S$ and $\mathbb{1}_k$ is the **indicator function**
-
+::::{#def-class-indicator}
+Let $k$ be an integer. The **indicator function** $\mathbb{1}_k$ is the function on integers defined as
 $$
 \mathbb{1}_k(t) = \begin{cases} 
   1, & \text{if } t=k, \\ 
   0, & \text{otherwise.}
   \end{cases}
 $$
+::::
 
-In words, $p_k$ is the proportion of samples in $S$ that have label $k$. Then the **Gini impurity** is defined as 
+Let $S$ be any subset of samples, given as a list of indices into the original set. Suppose there are $K$ unique labels, which we denote $1,2,\ldots,K$. Define the values
 
 $$
-H(S) = \sum_{k=1}^K p_k(1-p_k).
+p_k = \frac{1}{ |S| } \sum_{i\in S} \mathbb{1}_k(y_i), \qquad k=1,\ldots,K,
+$$ {#eq-class-prop-samples}
+
+where $|S|$ is the number of elements in $S$. In words, $p_k$ is the proportion of samples in $S$ that have label $k$. Note that the sum over all the $p_k$ equals 1.
+
+::::{#def-class-gini}
+The **Gini impurity** of set $S$ is defined as 
 $$
+H(S) = \sum_{k=1}^K p_k(1-p_k),
+$$
+where $p_k$ is defined in @eq-class-prop-samples.
+::::
 
-If one of the $p_k$ is 1, then the others are all zero and $H(S)=0$. This is considered optimal. At the other extreme, if $p_k=1/K$ for all $k$, then 
-
+If one of the $p_k$ is 1, then the others are all zero and $H(S)=0$. This is considered optimal---it indicates that all the labels in the set $S$ are identical. At the other extreme, if $p_k=1/K$ for all $k$, then 
 $$
 H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{K}\cdot\frac{K-1}{K} = \frac{K-1}{K} < 1.
 $$
@@ -526,32 +596,56 @@ This value is 1/2 for $n=0$ and approaches zero as $n\to\infty$.
 :::
 ::::
 
+
 ### Partitioning
 
-Now we can describe the partition process. If $j$ is a dimension (feature) number and $\theta$ is a numerical threshold, then the sample set can be partitioned into complementary sets $S_L$, in which $x_j \le \theta$, and $S_R$, in which $x_j > \theta$. Define the **total impurity** of the partition to be 
+Suppose we start with a sample set $S$ that we partition into disjoint (i.e., nonoverlapping) subsets $S_L$ and $S_R$. We want to assign a total impurity to the partitioning so that we can compare different scenarios. One pitfall we should avoid is to put just one sample into $S_L$ and all the rest into $S_R$, which would make $H(S_L)=0$ automatically and give an advantage. So we will choose a formula that rewards more evenly divided subsets.
 
+::::{#def-class-impurity}
+The **total impurity** of the partition $(S_L,S_R)$ is 
 $$
-Q(j,\theta) = \lvert S\rvert\, H(S) + \lvert T \rvert \, H(T).
+Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 $$
+::::
 
-Choose the $(j,\theta)$ that minimize $Q$, and then recursively partition $S$ and $T$.
+If $S_L$ and $S_R$ are both pure subsets, then $Q(S_L,S_R)=0$. Otherwise, $Q$ tends to be larger in response to less purity and greater size in the subsets.
+
+Our goal is to choose a partition that minimizes $Q$. However, we constrain ourselves to allow only certain kinds of partitions. If feature space is $d$-dimensional, we select a dimension $1 \le j \le d$ and a real threshold value $\theta$. Then each feature vector $\bfx$ is placed in $S_L$ if $x_j \le \theta$ and in $S_R$ if $x_j > \theta$. Geometrically, we are dividing feature space by an axis-aligned line if $d=2$ or an axis-aligned plane if $d=3$. This splitting criterion can be evaluated extremely quickly, and we can find the best possible such partitioning in the sense of minimizing $Q(S_L,S_R)$ in a reasonable amount of time. 
+
 
 ::::{#exm-class-tree-partition}
-
-Suppose the 1D real samples $x_i=i$ for $i=0,1,2,3$ have labels A,B,A,B. What is the optimal partition?
+Suppose we have $d=1$ feature and are given the four samples $(X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}$. What is the optimal partition?
 
 ::: {.solution}
-There are three ways to partition them.
+There are three allowable ways to partition the samples:
 
-* $S=\{0\}$, $T=\{1,2,3\}$. We have $H(S)=0$ and $H(T)=(2/3)(1/3)+(1/3)(2/3)=4/9$. Hence the total impurity for this partition is $(1)(0) + (3)(4/9) = 4/3$.
-* $S=\{0,1\}$, $T=\{2,3\}$. Then $H(S)=H(T)=2(1/2)(1/2)=1/2$, and the total impurity is $(2)(1/2)+(2)(1/2)=2$. 
-* $S=\{0,1,2\}$, $T=\{3\}$. This arrangement is the same as the first case with $A↔B$.
+* $S_L=\{0\}$, $S_R=\{1,2,3\}$. We have 
+$$
+H(S_L)=0, \quad H(S_R)=(2/3)(1/3)+(1/3)(2/3)=4/9.
+$$ Hence the total impurity for this partition is $Q = (1)(0) + (3)(4/9) = 4/3$.
+* $S_L=\{0,1\}$, $S_R=\{2,3\}$. Then 
+$$
+H(S_L) =H(S_R) = 2(1/2)(1/2)=1/2,
+$$
+and the total impurity is $Q = (2)(1/2)+(2)(1/2)=2$. 
+* $S_L=\{0,1,2\}$, $S_R=\{3\}$. This arrangement is the same as the first case with A and B swapped, so $Q=4/3$. 
 
-The best partition threshold is $x\le 0$ (or $x\le 2$, which is equivalent).
+Both $x\le 0$ and $x\le 2$ are equally good, and better than the alternative.
 :::
 ::::
 
-### Usage in sklearn
+Finally, once we have found the optimal way to split $S$ into $(S_L,S_R)$, we need to check whether it is an improvement---that is, whether 
+$$
+Q(S_L,S_R) + \alpha < Q(S,\varnothing) = |S| H(S),
+$$
+where $\alpha$ is an optional nonnegative number that requires a certain minimum amount of decrease.
+If the condition is satisfied, then $S$ is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both $S_L$ and $S_R$ for partitioning. 
+
+The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 8 subsets might require you to look ahead in order to avoid a first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
+
+### Usage
+
+In naive form, the decision tree construction will continue to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
 
 ::::{#exm-class-tree-toy}
 We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks: 
@@ -671,65 +765,114 @@ y_train.value_counts()
 ```
 ::::
 
-### Limitations
-
-Decision trees depend sensitively on the sample locations. A tree trained on one data subset may not do well on a new set. A small change can completely rewrite large parts of the tree, which gives a caveat about interpretation. Also, the partition algorithm, which is *greedy* by doing the best thing at the moment, does not necessarily find a globally optimal tree, or even a nearby one. 
-
+Decision trees can depend sensitively on the sample locations; a small change might completely rewrite large parts of the tree, in which case interpretability becomes less clear. 
 
 ## Nearest neighbors
 
-Our first learning algorithm is conceptually simple: Given a new point to classify, survey the nearest known examples and choose the most frequently occurring class. This is called the **$k$ nearest neighbors** (KNN) algorithm, where $k$ is the number of neighboring examples to survey.
+The next learner type is conceptually simple: given a point in feature space to classify, survey the nearest known examples and choose the most frequently occurring class. This is called the **$k$ nearest neighbors** (KNN or $k$-NN) algorithm, where $k$ is the number of neighboring examples to survey.
 
-### Norms
+### Distances and norms
 
-The existence of "closest" examples means that we need to define a notion of distance in spaces of any dimension. Let $\real^d$ be the space of vectors with $d$ real components, and let $\bfzero$ be the vector of all zeros.
+The existence of "closest" examples means that we need to define a notion of distance in feature spaces of any dimension. Let $\real^d$ be the space of vectors with $d$ real components, and let $\bfzero$ be the vector of all zeros.
+
+::::{#def-class-metric}
+A **distance metric** is a function $\dist$ on pairs of vectors that satisfies the following properties for all vectors $\bfu$, $\bfv$, and $\bfz$:
+
+1. $\dist(\bfu,\bfv) \ge 0$,
+2. $\dist(\bfu,\bfv)=0$ if and only if $\bfu=\bfv$,
+3. $\dist(\bfu,\bfv) = \dist(\bfv,\bfu)$, and
+4. $\dist(\bfu,\bfv) \le \dist(\bfu,\bfz) + \dist(\bfz,\bfv)$, known as the triangle inequality.
+::::
+
+These are considered the essential properties desired of a distance metric. We will define a distance metric by using a function on vectors known as a *norm*. 
 
 :::{#def-class-norm}
-A **norm** is a function $\norm{\bfx}$ on $\real^d$ that satisfies the following properties:
+For any vector $\bfu \in \real^d$, we define the following norms.
+
+* The **2-norm** or *Euclidean norm*:
+$$
+\twonorm{\bfu} = \bigl(u_1^2 + u_2^2 + \cdots + u_d^2\bigr)^{1/2}.
+$$
+* The **1-norm** or *Manhattan norm*: 
+$$
+\onenorm{\bfu} = |u_1| + |u_2| + \cdots + |u_d|.
+$$
+* The **$\infty$-norm**, *max norm*, or *Chebyshev norm*:
+$$
+\infnorm{\bfu} = \max_{1\le i \le d} \abs{u_i}.
+$$
+
+<!-- A **norm** is a function $\norm{\bfu}$ on $\real^d$ that satisfies the following properties:
 
 $$
 \begin{split}
 \norm{\bfzero} &= 0,  \\ 
-\norm{\bfx} &> 0 \text{ if $\bfx$ is a nonzero vector}, \\ 
-\norm{c\bfx} &= |c| \, \norm{x} \text{ for any real number $c$}, \\ 
-\norm{\bfx + \bfy } &\le \norm{\bfx} + \norm{\bfy} 
+\norm{\bfu} &> 0 \text{ if $\bfu$ is a nonzero vector}, \\ 
+\norm{c\bfu} &= |c| \, \norm{u} \text{ for any real number $c$}, \\ 
+\norm{\bfu + \bfv } &\le \norm{\bfu} + \norm{\bfv} 
+\end{split}
+$$ -->
+:::
+
+Given a norm, the distance between vectors $\bfu$ and $\bfv$ is defined by
+$$
+\dist(\bfu,\bfv) = \norm{\bfu - \bfv}. 
+$$
+
+::::{#exm-class-distance}
+Given $\bfu=[-1,1,0,4]$ and $\bfv=[-2,1,2,2]$, find the distance between them using all three common norms.
+
+:::{.solution}
+We first calculate $\bfu - \bfv = [-3,0,-2,2]$. Then 
+$$
+\begin{split}
+\twonorm{\bfu-\bfv} &= \bigl( 3^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{17}, \\ 
+\onenorm{\bfu-\bfv} &= 3  + 0 + 2 + 2 = 7, \\ 
+\infnorm{\bfu-\bfv} &= \max\{ 3, 0, 2, 2 \} = 3.
 \end{split}
 $$
 :::
-
-The last inequality above is called the **triangle inequality**. It turns out that these four characteristics are all we expect from a function that behaves like a distance. 
-
-On the number line (i.e., $\real^1$), the distance between two values is just the absolute value of their difference, $\abs{x-y}$. In $\real^d$, the distance between two vectors is the norm of their difference, $\norm{ \bfx - \bfy }$. 
-
-There are three commonly used norms:
-
-* The **2-norm** or Euclidean norm:
-$$
-\twonorm{\bfx} = \bigl(x_1^2 + x_2^2 + \cdots + x_d^2\bigr)^{1/2}.
-$$
-* The **1-norm** or Manhattan norm: 
-$$
-\onenorm{\bfx} = |x_1| + |x_2| + \cdots + |x_d|.
-$$
-* The **$\infty$-norm** or max norm:
-$$\infnorm{\bfx} = \max_i \abs{x_i}.$$
-
+::::
 
 The Euclidean norm generalizes ordinary geometric distance in $\real^2$ and $\real^3$ and is usually considered the default. One of its most important features is that $\twonorm{\bfx}^2$ is a differentiable function of the components of $\bfx$. 
 
 :::{.callout-note}
-When $\norm{\,}$ is used with no subscript, it's usually meant to be the 2-norm, but sometimes it means a generic, unspecified norm.
+When $\norm{\,}$ is used with no subscript, it's usually meant to be the 2-norm, but it can also mean a generic, unspecified norm.
 :::
 
 ### Algorithm
 
-As data, we are given labeled examples $\bfx_1,\ldots,\bfx_n$ in $\real^d$. Given a new query vector $\bfx$, find the $k$ labeled vectors closest to $\bfx$ and choose the most frequently occurring label among them. Ties can be broken randomly.
+As data, we are given labeled samples $\bfx_1,\ldots,\bfx_n$ in $\real^d$. 
 
-KNN divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called **decision boundaries**, can be fairly complicated, though, as shown in the animation below. 
+::::{#def-class-knn}
+Given a new query vector $\bfx$, the **KNN algorithm** finds the $k$ labeled samples closest to $\bfx$ and chooses the most frequently occurring label among them. Ties are broken randomly.
+::::
+
+::: {.callout-note}
+The *nearest neighbor search* is a well-studied problem in computer science, and there are specialized data structures used for its efficient solution. 
+:::
+
+::::{#exm-class-knn-small}
+Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:
+
+![](_media/knn_example1.svg)
+
+Using inf-norm distance and $k=3$, find the KNN labels at the locations marked A and B.
+
+:::{.solution}
+At point A, the nearest samples are at $(0,2)$ with distance $1$, $(0,0)$ with distance $1$, and $(2,1)$ with distance $1.5$. By a 2-1 vote, the point should be labeled blue.
+
+At point B, the nearest samples are at $(0,0)$ with distance 1, $(-2,-1)$ with distance 1, and $(0,-2)$ with distance $1.5$. By a 2-1 vote, the point should be labeled red.
+
+Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in KNN with $k=3$, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.
+:::
+::::
+
+KNN effectively divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called **decision boundaries**, are usually fairly complicated, as shown in the animation below for 2-norm distance.
 
 {{< video _media/knn_demo.mp4 >}}
 
-Implementation of KNN is straightforward for small data sets, but requires care to get reasonable execution efficiency for large sets. We won't go into the details.
+At $k=1$ neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with $k=n$ neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers). 
 
 ::::{#exm-class-knn}
 Let's revisit the penguins. We use `dropna` to drop any rows with missing values.
@@ -799,16 +942,24 @@ Next, we split into training and test sets to gauge the performance of the class
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report,confusion_matrix
 
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y,
+  test_size=0.2,
+  shuffle=True, random_state=302
+  )
 knn.fit(X_train,y_train)
 
 yhat = knn.predict(X_test)
-print(confusion_matrix(y_test,yhat))
-print(classification_report(y_test,yhat))
+print("Confusion matrix:")
+print( confusion_matrix(y_test, yhat) )
+print("\nPerformance metrics:")
+print( classification_report(y_test, yhat) )
 ```
-
-The default norm in the KNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
 ::::
+
+::: {.callout-tip}
+The default norm in the KNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
+:::
 
 ### Standardization
 
@@ -818,44 +969,32 @@ The values in the columns of the penguin frame in @exm-class-knn are scaled quit
 X.mean()
 ```
 
-Consequently, the mass feature will dominate the distance calculations. To remedy this issue, we can transform the data into z-scores:
+Consequently, the mass feature will dominate the distance calculations. To remedy this issue, we could transform the data into z-scores:
 
 ```{python}
 Z = X.transform( lambda x: (x - x.mean()) / x.std() )
 ```
 
-In this instance, standardization makes performance dramatically better:
-
-```{python}
-Z_train, Z_test, y_train, y_test = train_test_split(Z, y, test_size=0.2)
-knn.fit(Z_train, y_train)
-
-yhat = knn.predict(Z_test)
-print( confusion_matrix(y_test, yhat) )
-print( classification_report(y_test, yhat) )
-```
-
-One nuisance of the standardization step above is that it must be performed again for every new query vector that comes along. This means we need to keep track of the mean and std of the original training set. Scikit-learn allows us to instead create a **pipeline** that automates the standardization transformation. Pipelines make it easy to chain together data transformations followed by a learner. 
+We could then retrain the classifier using `Z` in place of `X`. A nuisance of doing so is that the standardization transformation must also be performed on every new query vector that comes along, requiring us to keep track of the mean and std of the original dataset. Scikit-learn allows us to automate this process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
 
 ::::{#exm-class-knn-standard}
-
 Once created, a pipeline object can mostly be treated the same as any other learner:
 ```{python}
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler   # converts to z-scores
 
-X_train, X_test, y_train, y_test = train_test_split(
-  X, y, 
-  test_size=0.2,
-  shuffle=True,
-  random_state=0
-)
-
 knn = KNeighborsClassifier(n_neighbors=5)
 pipe = make_pipeline(StandardScaler(), knn)
-
 pipe.fit(X_train, y_train)
-pipe.score(X_test, y_test)
+```
+
+In this case, standardization allows us to perform perfectly!
+```{python}
+yhat = pipe.predict(X_test)
+print("Confusion matrix:")
+print( confusion_matrix(y_test, yhat) )
+print("\nPerformance metrics:")
+print( classification_report(y_test, yhat) )
 ```
 
 We can look under the hood of the pipeline. For example, we can see that the mean and variance of each of the original data columns is stored in the first part of the pipeline:
@@ -1115,6 +1254,10 @@ $$
 y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 $$
 find an optimal partition threshold using Gini impurity.
+::::
+
+::::{#exr-cluster-positive}
+Using only the three axioms of a distance metric, prove that $\dist(\bfx,\bfy) \ge 0$ for all vectors $\bfx$ and $\bfy$. (Hint: apply the triangle inequality to go from $\bfx$ to $\bfy$ and back again.)
 ::::
 
 ::::{#exr-class-manhattan}
