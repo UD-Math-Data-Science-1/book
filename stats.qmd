@@ -1194,9 +1194,27 @@ Always plot your data.
 
 Always. Plot. Your. Data!
 
+### Correlation vs. dependence
+
+In casual speech, you might expect two variables that are uncorrelated to be unrelated. But that is not at all how the mathematical definitions play out. For example, here are $x$ and $y$ variables that both depend on a hidden variable $\theta$:
+
+```{python}
+theta = np.linspace(0,2*np.pi,50)
+x = pd.Series(np.cos(theta))
+y = pd.Series(np.sin(theta))
+sns.relplot(x=x, y=y);
+```
+
+Neither informally nor mathematically would we say that $x$ and $y$ are independent! For example, if $y=0$, then there is only one possible value for $x$. Yet the correlation between $x$ and $y$ is zero:
+```{python}
+x.corr(y)
+```
+
+Correlation can only measure the extent of the relationship that is *linear*; $x$ and $y$ lying on a straight line means perfect correlation. In this case, every line you can draw that passes through $(0,0)$ is essentially equally bad at representing the data, and correlation cannot express the relationship.
+
 ### Simpson's paradox
 
-The penguin dataset contains a common paradox (well, a counterintuitive phenomenon, anyway). Two of the variables show a fairly strong negative correlation:
+The penguin dataset contains a common paradox---or a counterintuitive phenomenon, at least. Two of the variables show a fairly strong negative correlation:
 
 ```{python}
 penguins = sns.load_dataset("penguins")
