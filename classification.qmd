@@ -573,16 +573,23 @@ $$
 where $p_k$ is defined in @eq-class-prop-samples.
 ::::
 
-If one of the $p_k$ is 1, then the others are all zero and $H(S)=0$. This is considered optimal---it indicates that all the labels in the set $S$ are identical. At the other extreme, if $p_k=1/K$ for all $k$, then 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/giztxxn7q669ug0/Section3_3_1.mp4?raw=1 >}}
+:::
+
+If one of the $p_k$ is 1, then the others are all zero and $H(S)=0$. This is considered optimal---it indicates that all the labels in the set $S$ are identical. 
+
+At the other extreme, if $p_k=1/K$ for all $k$, then 
 $$
 H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{K}\cdot\frac{K-1}{K} = \frac{K-1}{K} < 1.
 $$
+In general, $H$ is always nonnegative and less than 1, and it only approaches 1 in the limit of a large number of equally distributed classes.
 
 ::::{#exm-class-gini}
-Suppose a set $S$ has $n$ members with label 1, 1 member with label 2, and 1 member with label 3. What is the Gini impurity of $S$?
+Suppose a set $S$ has $n$ members with label A, 1 member with label B, and 1 member with label C. What is the Gini impurity of $S$?
 
 ::: {.solution}
-We have $p_1=n/(n+2)$, $p_2=p_3=1/(n+2)$. Hence
+We have $p_A=n/(n+2)$, $p_B=p_C=1/(n+2)$. Hence
 
 $$
 \begin{split}
@@ -608,10 +615,13 @@ Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 $$
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/vaz7ymxfwjg79kt/Section3_3_2.mp4?raw=1 >}}
+:::
+
 If $S_L$ and $S_R$ are both pure subsets, then $Q(S_L,S_R)=0$. Otherwise, $Q$ tends to be larger in response to less purity and greater size in the subsets.
 
 Our goal is to choose a partition that minimizes $Q$. However, we constrain ourselves to allow only certain kinds of partitions. If feature space is $d$-dimensional, we select a dimension $1 \le j \le d$ and a real threshold value $\theta$. Then each feature vector $\bfx$ is placed in $S_L$ if $x_j \le \theta$ and in $S_R$ if $x_j > \theta$. Geometrically, we are dividing feature space by an axis-aligned line if $d=2$ or an axis-aligned plane if $d=3$. This splitting criterion can be evaluated extremely quickly, and we can find the best possible such partitioning in the sense of minimizing $Q(S_L,S_R)$ in a reasonable amount of time. 
-
 
 ::::{#exm-class-tree-partition}
 Suppose we have $d=1$ feature and are given the four samples $(X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}$. What is the optimal partition?
@@ -641,11 +651,11 @@ $$
 where $\alpha$ is an optional nonnegative number that requires a certain minimum amount of decrease.
 If the condition is satisfied, then $S$ is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both $S_L$ and $S_R$ for partitioning. 
 
-The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 8 subsets might require you to look ahead in order to avoid a first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
+The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
 
 ### Usage
 
-In naive form, the decision tree construction will continue to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
+In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
 
 ::::{#exm-class-tree-toy}
 We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks: 
@@ -697,6 +707,10 @@ The root of the tree at the top shows that the best initial split was found at t
 
 Notice that the bottom right node has a nonzero final Gini impurity. This node could be partitioned, but the classifier was constrained to stop at a depth of 3. If a prediction ends up here, then the classifier returns label 1, which is the most likely outcome.
 ::::
+
+:::{.column-margin}
+{{< video  https://www.dropbox.com/s/7piwuswj773unku/Example3_8.mp4?raw=1 >}}
+:::
 
 Because we can follow a decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.
 
@@ -1012,7 +1026,7 @@ However, we don't need to access that data just to use the pipeline. That's take
 Both kNN and decision trees base classification on a voting procedure---for kNN, the $k$ nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information. 
 
 ::::{#def-class-phat}
-Let $\bfx$ be a query vector in a vote-based classification method. The **probability vector** $\hat{p}(\bfx)$ is the vector of vote fraction received by each class.
+Let $\bfx$ be a query vector in a vote-based classification method. The **probability vector** $\hat{p}(\bfx)$ is the vector of vote fractions received by each class.
 ::::
 
 ::::{#exm-class-phat}
@@ -1020,7 +1034,7 @@ Suppose we have trained a kNN classifier with $k=10$ for data with three classes
 ```{python}
 #| echo: false
 import pandas as pd
-pd.DataFrame({"A":[9,5,6,2,4],"B":[0,3,1,0,5],"C":[1,2,3,8,1]})
+pd.DataFrame({ "A":[9,5,6,2,4], "B":[0,3,1,0,5], "C":[1,2,3,8,1] })
 ```
 The values of $\hat{p}$ over the test set form a $5\times 3$ matrix:
 <!-- $$
@@ -1037,7 +1051,7 @@ p_hat = np.array( [
 ```
 ::::
 
-It's natural to interpret $\hat{p}$ as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given $\hat{p}$, we can still output a predicted class; it's just that the information we get is upstream in the process.
+It's natural to interpret $\hat{p}$ as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given $\hat{p}$, we can still output a predicted class; it's just that we also get additional information about how the prediction was made. 
 
 ::::{#exm-class-prob}
 Consider the penguin species classification problem:
@@ -1074,7 +1088,7 @@ yhat[:6]
 
 ### ROC curve
 
-Having values between the classes means that we can fine-tune how we decide to assign them. 
+In the binary label case, our assumption so far has been that a simple majority vote determines a positive outcome. But we could choose a different threshold---a supermajority, for example, if we want to reduce false positives. This way of thinking leads us to a new way to fine-tune classification methods.
 
 ::::{#def-class-hits}
 Let $\theta$ be a number in the interval $[0,1]$. We say that a class $T$ **hits** at level $\theta$ at a query point if the fraction of votes that $T$ receives at that point is at least $\theta$. 
@@ -1103,9 +1117,9 @@ pd.DataFrame({"A":[1,0,0,0,0],"B":[0,0,0,0,0],"C":[0,0,0,1,0]})
 ```
 ::::
 
-The probability vector $\hat{p}(\bfx)$ holds the largest possible $\theta$ values for which each class hits at $\bfx$. Looking at it another way, $\theta=0$ represents maximum credulity---everybody's a winner!---while $\theta=1$ represents maximum skepticism---unanimous winners only.
+The probability vector $\hat{p}(\bfx)$ holds the largest possible $\theta$ values for which each class hits at $\bfx$. Looking at it another way, $\theta=0$ represents maximum credulity---everybody's a winner!---while $\theta=1$ represents maximum skepticism---unanimous winners only, please.
 
-The **ROC curve**, or *receiver operator characteristic* curve, is a way to visualize the hits as a function of $\theta$ over a fixed testing set. The name is a little misleading, since the multiclass case requires multiple curves. The idea is to tally, at each value of $\theta$, all the hits within each class that represent true positives and false positives. 
+The **ROC curve** is a way to visualize the hits as a function of $\theta$ over a fixed testing set. The idea is to tally, at each value of $\theta$, all the hits within each class that represent true positives and false positives, and present the results visually.
 
 ::: {.callout-note}
 The name of the ROC curve is a throwback to the early days of radar, when the idea was first developed.
@@ -1143,7 +1157,7 @@ sns.relplot(data=data,
 As we're about to see, the step-by-step process above is just for illustration and is completely automated in practice.
 ::::
 
-Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for identification of each class.
+Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for the identification of each class.
 
 ::::{#exm-class-roc-penguin}
 Continuing @exm-class-prob, we will plot ROC curves for the three species in the penguin data:
@@ -1246,6 +1260,10 @@ Here is a confusion matrix for a classifier of ice cream flavors.
 ::::{#exr-class-gini}
 Find the Gini impurity of this set: 
 $$ \{ A, B, B, C, C, C \}.$$
+::::
+
+::::{#exr-class-gini-bounds}
+Use the definition of Gini impurity to prove that it is never negative and always less than 1.
 ::::
 
 ::::{#exr-class-partition}
