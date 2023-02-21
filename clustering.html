@@ -470,7 +470,7 @@ This is the most challenging dataset, because the clusters can’t be separated 
 <section id="distance-metrics" class="level3" data-number="6.1.1">
 <h3 data-number="6.1.1" class="anchored" data-anchor-id="distance-metrics"><span class="header-section-number">6.1.1</span> Distance metrics</h3>
 <div id="def-cluster-metric" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6.1 </strong></span>A <strong>distance metric</strong> is a function dist on pairs of vectors that satisfies the following properties for all vectors:</p>
+<p><span class="theorem-title"><strong>Definition 6.1 </strong></span>A <strong>distance metric</strong> is a function <span class="math inline">\(\dist\)</span> on pairs of vectors that satisfies the following properties for all vectors:</p>
 <ol type="1">
 <li><span class="math inline">\(\dist(\bfx,\bfy)=0\)</span> if and only if <span class="math inline">\(\bfx=\bfy\)</span>,</li>
 <li><span class="math inline">\(\dist(\bfx,\bfy) = \dist(\bfy,\bfx)\)</span>, and</li>
@@ -1640,20 +1640,17 @@ Name: ward, dtype: int64</code></pre>
 </section>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
-<div id="exr-cluster-positive" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.1 </strong></span>Using only the three axioms of a distance metric, prove that <span class="math inline">\(\dist(\bfx,\bfy) \ge 0\)</span> for all vectors <span class="math inline">\(\bfx\)</span> and <span class="math inline">\(\bfy\)</span>. (Hint: apply the triangle inequality to go from <span class="math inline">\(\bfx\)</span> to <span class="math inline">\(\bfy\)</span> and back again.)</p>
-</div>
 <div id="exr-cluster-angular" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.2 </strong></span>Prove that the angular distance between any nonzero vector and itself is zero.</p>
+<p><span class="theorem-title"><strong>Exercise 6.1 </strong></span>Prove that the angular distance between any nonzero vector and itself is zero.</p>
 </div>
 <div id="exr-cluster-cosine" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.3 </strong></span>Find a counterexample showing that cosine distance does not satisfy the triangle inequality. (Hint: it’s enough to consider some simple vectors in two dimensions.)</p>
+<p><span class="theorem-title"><strong>Exercise 6.2 </strong></span>Find a counterexample showing that cosine distance does not satisfy the triangle inequality. (Hint: it’s enough to consider some simple vectors in two dimensions.)</p>
 </div>
 <div id="exr-cluster-inertia" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.4 </strong></span>Let <span class="math inline">\(c\)</span> be a positive number, and consider the 12 sample points <span class="math inline">\(\{(\pm c,\pm j): j=1,2,3\}\)</span>. One way to cluster the sample points, which we designate as clustering <span class="math inline">\(\alpha\)</span>, is to split according to the sign of <span class="math inline">\(x_1\)</span>. Another way, which we designate as clustering <span class="math inline">\(\beta\)</span>, is to split according to the sign of <span class="math inline">\(x_2\)</span>. Compute the inertia of both clusterings. For which values of <span class="math inline">\(c\)</span>, if any, does clustering <span class="math inline">\(\alpha\)</span> have less inertia than clustering <span class="math inline">\(\beta\)</span>?</p>
+<p><span class="theorem-title"><strong>Exercise 6.3 </strong></span>Let <span class="math inline">\(c\)</span> be a positive number, and consider the 12 sample points <span class="math inline">\(\{(\pm c,\pm j): j=1,2,3\}\)</span>. One way to cluster the sample points, which we designate as clustering <span class="math inline">\(\alpha\)</span>, is to split according to the sign of <span class="math inline">\(x_1\)</span>. Another way, which we designate as clustering <span class="math inline">\(\beta\)</span>, is to split according to the sign of <span class="math inline">\(x_2\)</span>. Compute the inertia of both clusterings. For which values of <span class="math inline">\(c\)</span>, if any, does clustering <span class="math inline">\(\alpha\)</span> have less inertia than clustering <span class="math inline">\(\beta\)</span>?</p>
 </div>
 <div id="exr-cluster-linkage" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.5 </strong></span>Here is a distance matrix for points <span class="math inline">\(\bfx_1,\ldots,\bfx_5\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 6.4 </strong></span>Here is a distance matrix for points <span class="math inline">\(\bfx_1,\ldots,\bfx_5\)</span>.</p>
 <p><span class="math display">\[
 \left[
 \begin{array}{ccccc}
@@ -1668,7 +1665,7 @@ Name: ward, dtype: int64</code></pre>
 <p>Compute the average linkage between the clusters with index sets <span class="math inline">\(C_1=\{1,3\}\)</span> and <span class="math inline">\(C_2=\{2,4,5\}\)</span>.</p>
 </div>
 <div id="exr-cluster-agglom" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.6 </strong></span>Perform by hand an agglomerative clustering for the values <span class="math inline">\(2,4,5,8,12\)</span> using single linkage. This means finding the four merge steps needed to convert five singleton clusters into one global cluster.</p>
+<p><span class="theorem-title"><strong>Exercise 6.5 </strong></span>Perform by hand an agglomerative clustering for the values <span class="math inline">\(2,4,5,8,12\)</span> using single linkage. This means finding the four merge steps needed to convert five singleton clusters into one global cluster.</p>
 </div>
 
 
