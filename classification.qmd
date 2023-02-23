@@ -841,6 +841,10 @@ $$
 $$ -->
 :::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/rscyxjwazq4ol9v/Section3_4_1.mp4?raw=1 >}}
+:::
+
 Given a norm, the distance between vectors $\bfu$ and $\bfv$ is defined by
 $$
 \dist(\bfu,\bfv) = \norm{\bfu - \bfv}. 
@@ -900,6 +904,10 @@ kNN effectively divides up the feature space into domains that are dominated by 
 {{< video _media/knn_demo.mp4 >}}
 
 At $k=1$ neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with $k=n$ neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers). 
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/ll53u6gi1i42qes/Section3_4_2.mp4?raw=1 >}}
+:::
 
 ::::{#exm-class-knn}
 Back to the penguins! We use `dropna` to drop any rows with missing values.
