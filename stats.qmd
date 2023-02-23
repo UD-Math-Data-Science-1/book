@@ -677,6 +677,8 @@ The result is a single frame in which the members of all groups that failed the 
 hp_30["horsepower"].describe()
 ```
 
+![](_media/memes/groupby.jpg){height="240"}
+
 <!-- 
 
 You can simultaneously use columns for one category with colors for another:
@@ -914,6 +916,8 @@ penguins
 ```
  -->
 
+![](_media/memes/outlier.jpg){height="240"}
+
 ## Correlation
 
 There are often variables that we believe to be linked, either because one influences the other, or because both are influenced by some other factor. In either case, we say the quantities are *correlated*.
@@ -1142,7 +1146,6 @@ As you can see from the above, `europe` and `japan` are positively associated wi
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/9yc5jw2x0scjyer/Example2_19.mp4?raw=1 >}}
 :::
-
 
 ![](https://imgs.xkcd.com/comics/correlation.png)
 

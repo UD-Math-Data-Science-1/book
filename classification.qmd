@@ -207,6 +207,8 @@ print(f"knn score is {acc:.1%}")
 
 Does this mean that the classifier is a good one? The raw number looks great, but that question is more subtle than you would expect.
 
+<!-- ![](_media/memes/biden.png){height="240"} -->
+
 ## Classifier performance
 
 Let's return to the (previously cleaned) loan applications dataset.
@@ -698,6 +700,7 @@ tree.fit(X,y)
 At this point, the `tree` object has created and stored all the information derived from the dataset that defines the decision tree. Since this is a small tree, we can easily look under the hood:
 
 ```{python}
+#| code-fold: true
 from matplotlib.pyplot import figure
 figure(figsize=(18,11), dpi=160)
 plot_tree(tree, feature_names=["x₁", "x₂"]);
@@ -715,7 +718,7 @@ Notice that the bottom right node has a nonzero final Gini impurity. This node c
 Because we can follow a decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.
 
 ::::{#exm-class-tree-penguins}
-We return to the penguins: 
+We return to the penguins and fit a decision tree to the quantitative features:
 
 ```{python}
 import pandas as pd
@@ -729,14 +732,15 @@ features = [
 ]
 X = pen[features]
 y = pen["species"]
+
+dt = DecisionTreeClassifier(max_depth=4)
+dt.fit(X, y)
 ```
 
 We get some interesting information from looking at the top levels of a decision tree trained on the full dataset:
 
 ```{python}
-dt = DecisionTreeClassifier(max_depth=4)
-dt.fit(X, y)
-
+#| code-fold: true
 from matplotlib.pyplot import figure
 figure(figsize=(18,11), dpi=160)
 plot_tree(dt, max_depth=2, feature_names=features);
@@ -768,7 +772,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 dt.fit(X_train, y_train)
 
 yhat = dt.predict(X_test)
-print( confusion_matrix(y_test, yhat) )
+print("Confusion matrix:")
+print( confusion_matrix(
+  y_test, yhat, 
+  labels=["Adelie", "Chinstrap", "Gentoo"]
+  ) )
+print("\nPerformance metrics:")
 print( classification_report(y_test, yhat) )
 ```
 
@@ -779,11 +788,15 @@ y_train.value_counts()
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/mrdr38t2tzpv6kq/Example3_9.mp4?raw=1 >}}
+:::
+
 Decision trees can depend sensitively on the sample locations; a small change might completely rewrite large parts of the tree, in which case interpretability becomes less clear. 
 
 ## Nearest neighbors
 
-The next learner type is conceptually simple: given a point in feature space to classify, survey the nearest known examples and choose the most frequently occurring class. This is called the **$k$ nearest neighbors** (KNN or $k$-NN) algorithm, where $k$ is the number of neighboring examples to survey.
+The next learner type is conceptually simple: given a point in feature space to classify, survey the nearest known examples and choose the most frequently occurring class. This is called the **$k$ nearest neighbors** (kNN or $k$-NN) algorithm, where $k$ is the number of neighboring examples to survey.
 
 ### Distances and norms
 
@@ -859,7 +872,7 @@ When $\norm{\,}$ is used with no subscript, it's usually meant to be the 2-norm,
 As data, we are given labeled samples $\bfx_1,\ldots,\bfx_n$ in $\real^d$. 
 
 ::::{#def-class-knn}
-Given a new query vector $\bfx$, the **KNN algorithm** finds the $k$ labeled samples closest to $\bfx$ and chooses the most frequently occurring label among them. Ties are broken randomly.
+Given a new query vector $\bfx$, the **kNN algorithm** finds the $k$ labeled samples closest to $\bfx$ and chooses the most frequently occurring label among them. Ties are broken randomly.
 ::::
 
 ::: {.callout-note}
@@ -871,25 +884,25 @@ Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:
 
 ![](_media/knn_example1.svg)
 
-Using inf-norm distance and $k=3$, find the KNN labels at the locations marked A and B.
+Using inf-norm distance and $k=3$, find the kNN labels at the locations marked A and B.
 
 :::{.solution}
 At point A, the nearest samples are at $(0,2)$ with distance $1$, $(0,0)$ with distance $1$, and $(2,1)$ with distance $1.5$. By a 2-1 vote, the point should be labeled blue.
 
 At point B, the nearest samples are at $(0,0)$ with distance 1, $(-2,-1)$ with distance 1, and $(0,-2)$ with distance $1.5$. By a 2-1 vote, the point should be labeled red.
 
-Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in KNN with $k=3$, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.
+Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with $k=3$, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.
 :::
 ::::
 
-KNN effectively divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called **decision boundaries**, are usually fairly complicated, as shown in the animation below for 2-norm distance.
+kNN effectively divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called **decision boundaries**, are usually fairly complicated, as shown in the animation below for 2-norm distance.
 
 {{< video _media/knn_demo.mp4 >}}
 
 At $k=1$ neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with $k=n$ neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers). 
 
 ::::{#exm-class-knn}
-Let's revisit the penguins. We use `dropna` to drop any rows with missing values.
+Back to the penguins! We use `dropna` to drop any rows with missing values.
 ```{python}
 import seaborn as sns
 import pandas as pd
@@ -965,14 +978,21 @@ knn.fit(X_train,y_train)
 
 yhat = knn.predict(X_test)
 print("Confusion matrix:")
-print( confusion_matrix(y_test, yhat) )
+print( confusion_matrix(
+    y_test, yhat, 
+    labels=["Adelie", "Chinstrap", "Gentoo"]
+    ) )
 print("\nPerformance metrics:")
 print( classification_report(y_test, yhat) )
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/yj9d51w4e67l5bw/Example3_12.mp4?raw=1 >}}
+:::
+
 ::: {.callout-tip}
-The default norm in the KNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
+The default norm in the kNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
 :::
 
 ### Standardization
@@ -1005,8 +1025,12 @@ pipe.fit(X_train, y_train)
 In this case, standardization allows us to perform perfectly!
 ```{python}
 yhat = pipe.predict(X_test)
+
 print("Confusion matrix:")
-print( confusion_matrix(y_test, yhat) )
+print( confusion_matrix(
+    y_test, yhat, 
+    labels=["Adelie", "Chinstrap", "Gentoo"]
+    ) )
 print("\nPerformance metrics:")
 print( classification_report(y_test, yhat) )
 ```
@@ -1020,6 +1044,9 @@ print( pipe[0].var_ )
 However, we don't need to access that data just to use the pipeline. That's taken care of when we use `pipe.score` or `pipe.predict`.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/x7br8qha5gcfsz4/Example3_13.mp4?raw=1 >}}
+:::
 
 ## Probabilistic interpretation {#sec-class-quant}
 
@@ -1028,6 +1055,10 @@ Both kNN and decision trees base classification on a voting procedure---for kNN,
 ::::{#def-class-phat}
 Let $\bfx$ be a query vector in a vote-based classification method. The **probability vector** $\hat{p}(\bfx)$ is the vector of vote fractions received by each class.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/oxil4vxd891ve8v/Section3_5.mp4?raw=1 >}}
+:::
 
 ::::{#exm-class-phat}
 Suppose we have trained a kNN classifier with $k=10$ for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:
@@ -1121,6 +1152,10 @@ The probability vector $\hat{p}(\bfx)$ holds the largest possible $\theta$ value
 
 The **ROC curve** is a way to visualize the hits as a function of $\theta$ over a fixed testing set. The idea is to tally, at each value of $\theta$, all the hits within each class that represent true positives and false positives, and present the results visually.
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/km6h1w1c7hprzww/Section3_5_1.mp4?raw=1 >}}
+:::
+
 ::: {.callout-note}
 The name of the ROC curve is a throwback to the early days of radar, when the idea was first developed.
 :::
@@ -1205,6 +1240,11 @@ sns.relplot(data=roc,
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/82dsuclyo76r0ut/Example3_18.mp4?raw=1 >}}
+:::
+
+
 ### AUC
 
 ROC curves lead to another classification performance metric known as **area under ROC curve (AUC)**. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range from credulous to skeptical. You might think of it as grading with partial credit.
@@ -1274,8 +1314,18 @@ $$
 find an optimal partition threshold using Gini impurity.
 ::::
 
-::::{#exr-cluster-positive}
-Using only the three axioms of a distance metric, prove that $\dist(\bfx,\bfy) \ge 0$ for all vectors $\bfx$ and $\bfy$. (Hint: apply the triangle inequality to go from $\bfx$ to $\bfy$ and back again.)
+::::{#exr-class-distance}
+Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vectors.
+
+**(a)** $\bfu=[2,3,0]$, $\;\bfv=[-2,2,1]$
+
+**(b)** $\bfu=[0,1,0,1,0]$, $\;\bfv=[1,1,1,1,1]$
+::::
+
+::::{#exr-class-norm}
+**(a)** Prove that for any $\bfu \in \real^d$, $\infnorm{\bfu} \le \twonorm{\bfu}$. 
+
+**(b)** Prove that for any $\bfu \in \real^d$, $\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}$. 
 ::::
 
 ::::{#exr-class-manhattan}
@@ -1289,7 +1339,7 @@ Three points in the plane lie at the vertices of an equilateral triangle. One is
 ::::{#exr-class-ellipse}
 Define 8 points on an ellipse by $x_k=a\cos(\theta_k)$ and $y_k=b\sin(\theta_k)$, where $a$ and $b$ are positive and 
 $$
-\theta_k \in \left\{ \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \ldots, 2\pi \right\}. 
+\theta_1= \frac{\pi}{4}, \theta_2 = \frac{\pi}{2}, \theta_3 = \frac{3\pi}{4}, \ldots, \theta_8 = 2\pi. 
 $$
 Let $u_1,\ldots,u_8$ and $v_1,\ldots,v_8$ be the z-scores of the $x_k$ and the $y_k$, respectively. Show that the points $(u_k,v_k)$ all lie on a circle centered at the origin for all $k=1,\ldots,8$. (By extension, standardizing points into z-scores is sometimes called *sphereing* them.)
 ::::
