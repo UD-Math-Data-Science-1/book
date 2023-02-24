@@ -359,7 +359,7 @@ There are ways of combining the primary metrics in order to account for two at o
 ::::{#def-class-metrics-2nd}
 The ***F*₁ score**, which is the harmonic mean of the precision and the recall, i.e.,
 $$
-F_1 = \left[ \frac{1}{2} \left(\text{precision} + \text{recall} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
+F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recall}} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
 $$
 
 The **balanced accuracy** is the arithmetic mean of recall and specificity.
