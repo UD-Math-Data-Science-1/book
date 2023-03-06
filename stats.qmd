@@ -1215,7 +1215,7 @@ x.corr(y)
 
 Correlation can only measure the extent of the relationship that is *linear*; $x$ and $y$ lying on a straight line means perfect correlation. In this case, every line you can draw that passes through $(0,0)$ is essentially equally bad at representing the data, and correlation cannot express the relationship.
 
-### Simpson's paradox
+### Simpson's paradox {#sec-stats-simpson}
 
 The penguin dataset contains a common paradox---or a counterintuitive phenomenon, at least. Two of the variables show a fairly strong negative correlation:
 
@@ -1255,24 +1255,31 @@ As often happens in statistics, the precise framing of the question can strongly
 For these exercises, you may of course use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).
 
 :::{#exr-stats-summary}
-Suppose that $n>2$, and let $x_i=0$ for $i=1,\ldots,n-1$, and $x_n=M$ for a positive number $M$. 
+The following parts are about the sample set of $n$ values $x_1,\ldots,x_n$, where $n>2$, $x_i=0$ for $i=1,\ldots,n-1$, and $x_n=M$ for a positive number $M$. 
 
-a. Find the sample mean.
-a. Find the sample median. (You will have to describe multiple cases.)
-a. Find the corrected sample variance $s_{n-1}^2$.
-a. Find the sample z-scores of the $x_i$ in terms of $M$ and $n$.
+**(a)** Show that the sample mean is $M/n$.
+
+**(b)** Find the sample median. (You will have to describe multiple cases for $n$, even if they give the same result.)
+
+**(c)** Show that the corrected sample variance $s_{n-1}^2$ is $M^2/n$.
+
+**(d)** Find the sample z-scores of all the $x_i$ in terms of $M$ and $n$.
 :::
 
 :::{#exr-stats-z-scores}
 Suppose the samples $x_1,\ldots,x_n$ have the z-scores $z_1,\ldots,z_n$. 
 
-**(a)** Show that $\displaystyle \sum_{i=1}^n z_i = 0.$
+**(a)** Show that the sample z-scores satsify $\displaystyle \sum_{i=1}^n z_i = 0.$
 
-**(b)** Show that $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
+**(b)** Show that the sample z-scores satsify $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
 :::
 
 :::{#exr-stats-outlier}
-For the sample set in @exr-stats-summary, find a value $N$ such that if $n>N$, there is at least one outlier according to the 2σ criterion.
+For this exercise, apply the 2σ outlier criterion the sample set given in @exr-stats-summary using the sample mean and sample variance. (Again assume that $n>2$ and $M>0$.)
+
+**(a)** Show that regardless of $n$ and $M$, the value 0 is never an outlier.
+
+**(b)** Show that the value $M$ is an outlier if $n \ge 6$, regardless of $M$.
 :::
 
 :::{#exr-stats-outlier-iqr}
@@ -1289,7 +1296,9 @@ $$
 
 **(a)** Find the median of the population.
 
-**(b)** Which of the following values are outliers according to the 1.5 IQR criterion?
+**(b)** Find the smallest interval containing all non-outlier values according to the 1.5 IQR criterion.
+
+**(b)** (old version) Which of the following values are outliers ?
 
 $$
 -10,-5,0,5,10,15,20
