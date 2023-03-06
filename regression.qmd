@@ -107,6 +107,7 @@ $$
 Minimizing $L$ over all values of $a$ and $b$ is called the **least squares** problem. (More specifically, this setup is called *simple least squares* or *ordinary least squares*.)
 
 We can write out the equations for $a$ and $b$ using another important idea from linear algebra.
+
 ::::{#def-regression-inner-product}
 Given any $d$-dimensional real-values vectors $\bfu$ and $\bfv$, their **inner product** is
 $$
@@ -114,14 +115,30 @@ $$
 $$ {#eq-regression-inner-product}
 ::::
 
+The vector inner product is defined only between two vectors of the same length (dimension). There is an important link between the inner product and the 2-norm:
+$$
+\bfu^T \bfu = \sum_{i=1}^d u_i^2 = \twonorm{\bfu}^2. 
+$$ {#eq-regression-hilbert}
+
 ::: {.callout-note}
 *Inner product* is a term from linear algebra. In physics and vector calculus with $d=2$ or $d=3$, the same thing is often called a *dot product* and written as $\bfu \cdot \bfv$.
 :::
 
-There is an important link between the dot product and the 2-norm:
+::: {.callout-note}
+The ${}^T$ symbol is a *transpose* operation in linear algebra. We won't need it as an independent concept, so we are just using it as notation in the inner product.
+:::
+
+::::{#exm-regression-dot}
+Let $\bfu = [1,-1,1,-2]$ and $\bfv = [5,3,-1,2]$. Then 
 $$
-\bfu^T \bfu = \sum_{i=1}^d u_i^2 = \twonorm{\bfu}^2. 
-$$ {#eq-regression-hilbert}
+\bfu^T \bfv = (1)(5) + (-1)(3) + (1)(-1) + (-2)(2) = -3. 
+$$
+We also have 
+$$
+\twonorm{\bfu}^2 = \bfu^T \bfu = (1)^2 + (-1)^2 + (1)^2 + (-2)^2 = 7. 
+$$
+::::
+
 
 The equations in @eq-regression-linear1d may now be written as
 $$
@@ -130,6 +147,38 @@ $$
     a \left(\bfe^T \bfx\right) + b \left(\bfe^T\bfe\right) &= \bfe^T\bfy. 
 \end{split}
 $$ {#eq-regression-linear1d-dot}
+
+We can write this as a single equation between two vectors:
+$$
+a
+\begin{bmatrix}
+\bfx^T \bfx \\ \bfe^T \bfx
+\end{bmatrix}
++ b
+\begin{bmatrix}
+\bfx^T\bfe \\ \bfe^T\bfe
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\bfx^T\bfy \\  \bfe^T\bfy
+\end{bmatrix}.
+$$ 
+In fact, the operation on the left-hand side is how we define the product of a matrix and a vector, and we can write  
+$$
+\begin{bmatrix}
+\bfx^T \bfx & \bfx^T\bfe \\
+\bfe^T \bfx & \bfe^T\bfe
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+a \\ b
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\bfx^T\bfy \\  \bfe^T\bfy
+\end{bmatrix}.
+$$ 
+This is referred to as a *linear system* of equations for the unknown vector $[a,b]$. Linear systems and their solutions are the central topic of linear algebra. In the background, it is this linear system that is being solved when you perform a linear regression fit.
 
 ### Performance metrics
 
@@ -145,16 +194,10 @@ $$ {#eq-regression-residual}
 We can express them as the vector $\bfy-\hat{\bfy}$.
 ::::
 
-A quirk of linear regression is that it's an older idea than most of machine learning, and it's often presented as though the training and testing sets are identical. We give the following definitions in terms of $\bfy$ and $\hat{\bfy}$ from the training data. They can also be calculated for a set of values and predictions obtained from a separate testing set, though a few of the properties don't translate in that case.
-
-<!-- If we are given test data in the form $(\xi_i,\eta_i)$ for $i=1,\ldots,m$, then we define the **errors** by
-$$
-\eta_i - \hat{f}(\xi_i), \qquad i=1,\ldots,m. 
-$$ {#eq-regression-error}
- -->
+A quirk of linear regression is that it's an older idea than most of machine learning, and it's often presented as though the training and testing sets are identical. We therefore give the following definitions in terms of $\bfy$ and $\hat{\bfy}$ arising from the training data. The same quantities can also be calculated for a set of labels and predictions obtained from a separate testing set, though a few of the properties stated here don't apply in that case.
 
 ::: {.callout-caution}
-The terms *error* and *residual* are frequently used interchangeably and inconsistently.  We try to follow the most common practices here, even though the names can be confusing if you think about them too hard.
+The terms *error* and *residual* are frequently used interchangeably and even inconsistently.  I try to follow the most common practices here, even though the names can be confusing if you think about them too hard.
 :::
 
 ::::{#def-regression-mse}
@@ -178,14 +221,18 @@ $$
 where $\bar{y}$ is the mean of $y_1,\ldots,y_n$. 
 ::::
 
-Important things to know about the coefficient of determination:
+Here are important things to know about the coefficient of determination. 
 
+::::{#thm-regression-cod}
 1. The CoD is dimensionless and therefore independent of scaling. 
 2. If the $\hat{y}_i$ are found from a linear regression, then $R^2$ is the square of the Pearson correlation coefficient between $\bfy$ and $\hat{\bfy}$.
 3. If $\hat{y}_i=y_i$ for all $i$ (i.e., perfect predictions), then $R^2=1$. 
-4. If $\hat{y}_i=\bar{y}$ for all $i$, then $R^2=0$.
+4. If $\hat{y}_i=\bar{y}$ for all $i$ (i.e., always predict the sample mean), then $R^2=0$.
+::::
 
-The notation is *highly* unfortunate, though, because for other regression methods, $R^2$ can actually be negative! Such a result indicates that the predictor is doing worse than just predicting the mean value every time.
+::: {.callout-warning}
+The notation $R^2$ is *highly* unfortunate, because for other regression methods, $R^2$ can actually be negative! Such a result indicates that the predictor is doing worse than just predicting the mean value every time. It has nothing to do with imaginary numbers.
+:::
 
 ::::{#exm-regression-cod}
 Let's find the coefficient of determination for the fit in @exm-regression-linear, where we found the regressor $\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}$.  Now $\bar{y} = \frac{1}{3}(0+2+3)=\frac{5}{3}$, and 
@@ -211,9 +258,8 @@ $$
 This yields $R^2 = 1 - (9)(3/14) = -13/14$. Since the result is negative, we would be better off always predicting $5/3$. 
 ::::
 
-### Case study: Arctic ice
-
-Let's import data about the extent of sea ice in the Arctic circle, collected monthly since 1979.
+::::{#exm-regression-ice-linear}
+We import data about the extent of sea ice in the Arctic circle, collected monthly since 1979:
 
 ```{python}
 ice = pd.read_csv("_datasets/sea-ice.csv")
@@ -222,27 +268,31 @@ ice.columns = [s.strip() for s in ice.columns]
 ice.head()
 ```
 
-A quick plot reveals something odd-looking.
+A quick plot reveals something odd-looking:
 
 ```{python}
 sns.relplot(data=ice, x="mo", y="extent");
 ```
 
-Everything in the plot is dominated by two large negative values. These probably represent missing or unreliable data, so we remove those rows.
+Everything in the plot above is dominated by two large negative values. These probably represent missing data, so we make a new copy without those rows:
 
 ```{python}
-ice = ice[ ice["extent"]>0 ].copy()
+ice = ice[ice["extent"] > 0]
 sns.relplot(data=ice, x="mo", y="extent");
 ```
 
-Each dot represents one measurement. As you would expect, the extent of ice rises in the winter and falls in summer. 
+Each dot in the plot above represents one measurement. As you would expect, the extent of ice rises in the winter months and falls in summer:
 
 ```{python}
 bymonth = ice.groupby("mo")
 bymonth["extent"].mean()
 ```
 
-While the effect of the seasonal variation somewhat cancels out over time when fitting a line, it's preferable to remove this obvious trend before the fit takes place. We will add a column that measures the relative change from the mean in each month, i.e., $(x-\bar{x})/\bar{x}$ within each group.
+While the effect of the seasonal variation somewhat cancels out over time when fitting a line, it's preferable to remove this obvious trend before the fit takes place. To do that, we add a column that measures within each month group the relative change from the mean,
+$$
+\frac{x-\bar{x}}{\bar{x}}.
+$$ 
+This is done with a `transform` method applied to the grouped frame:
 
 ```{python}
 recenter = lambda x: x/x.mean() - 1
@@ -250,13 +300,13 @@ ice["detrended"] = bymonth["extent"].transform(recenter)
 sns.relplot(data=ice, x="mo", y="detrended");
 ```
 
-An `lmplot` in seaborn will show the best-fit line.
+An `lmplot` in seaborn shows the least squares line:
 
 ```{python}
 sns.lmplot(data=ice, x="year", y="detrended");
 ```
 
-However, keep Simpson's paradox in mind. The previous plot showed considerably more variance in the warm months. How do the fits look for the data *within* each month?
+However, we should be mindful of [Simpson's paradox](@sec-stats-simpson). The previous plot showed considerably more variance within the warm months. How do these fits look for the data *within* each month? This is where a facet plot shines:
 
 ```{python}
 sns.lmplot(data=ice,
@@ -265,28 +315,30 @@ sns.lmplot(data=ice,
     );
 ```
 
-While the correlation is negative in each month, the effect size is clearly larger in the summer. 
+Thus, while the correlation is negative within each month, the effect size is clearly larger in the summer and early fall.
 
-We can get numerical information about a regression line by using a `LinearRegression()` in sklearn. We will focus on the data for August.
+We can get numerical information about a regression line from a `LinearRegression()` learner in sklearn. We will focus on the data for August:
 
 ```{python}
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
 
-aug = ice["mo"]==8
-# We need a frame, not a series, so use a vector for columns for X: 
-X = ice.loc[aug, ["year"] ]  
-y = ice.loc[aug, "detrended"]
+ice = ice[ ice["mo"]==8 ]
+X = ice[ ["year"] ]  
+y = ice["detrended"]
 lm.fit(X, y)
 ```
 
 We can get the slope and $y$-intercept of the regression line from the learner's properties. (Calculated parameters tend to have underscores at the ends of their names in sklearn.)
 
 ```{python}
-(lm.coef_, lm.intercept_)
+slope, intercept = lm.coef_[0], lm.intercept_
+print(f"Slope is {slope:.3g} and intercept is {intercept:.3g}")
 ```
 
-The slope indicates average decrease over time. Here, we assess the performance on the training set. Both the MSE and mean absolute error are small relative to dispersion within the values themselves:
+The slope indicates average decrease over time. 
+
+Next, we assess the performance on the training set. Both the MSE and mean absolute error are small relative to dispersion within the values themselves:
 
 
 ```{python}
@@ -303,33 +355,33 @@ The `score` method of the regressor object computes the coefficient of determina
 
 ```{python}
 R2 = lm.score(X, y)
-print("R-squared:", R2)
+print(f"R-squared: {R2:.3f}")
 ```
 
 An $R^2$ value this close to 1 would usually be considered a sign of a good fit, although we have not tested for generalization to new data.
+::::
 
-## Multilinear and polynomial regression
+
+## Multilinear regression
 
 We can extend linear regression to $d$ predictor variables $x_1,\ldots,x_d$:
 
 $$
-\begin{split}
-    y \approx \hat{f}(\bfx) &= b + w_1 x_1 + w_2x_2 + \cdots w_d x_d. 
-\end{split}
+    y \approx \hat{f}(\bfx) = b + w_1 x_1 + w_2x_2 + \cdots w_d x_d. 
 $$
 
-We can drop the intercept term $b$ from the discussion, because we could always define an additional constant predictor variable $x_{d+1}=1$ and get the same effect. 
+First, observe that we can actually drop the intercept term $b$ from the discussion, because we could always define an additional constant feature $x_0=1$ and get the same effect in one higher dimension. So we will use the following.
 
 ::::{#def-regression-multilinear}
 **Multilinear regression** is the approximation
 $$
 y \approx \hat{f}(\bfx) = w_1 x_1 + w_2x_2 + \cdots w_d x_d = \bfw^T\bfx,
 $$
-for a constant vector $\bfw$ known as the *weight vector*.
+for a constant vector $\bfw$ known as the **weight vector**.
 ::::
 
 ::: {.callout-note}
-Multilinear regression is also simply called linear regression in many contexts.
+Multilinear regression is also simply called *linear regression* most of the time. What we previously called linear regression is just a special case. The `LinearRegression` learner class does both types of fits.
 :::
 
 As before, we find the unknown weight vector $\bfw$ by minimizing a loss function. To create the least-squares loss function, we use $\bfx_i$ to denote the $i$th row of an $n\times d$ feature matrix $\bfX$. Then
@@ -338,7 +390,7 @@ $$
 L(\bfw) = \sum_{i=1}^n (y_i - \hat{f}(\bfx_i))^2 = \sum_{i=1}^n (y_i - \bfx_i^T\bfw)^2.
 $$
 
-We introduce a shorthand notation that is actually the backbone of linear algebra.
+We encountered a matrix-vector product earlier. It turns out that the following definition is equivalent. 
 
 ::::{#def-regression-matvec}
 Given an $n\times d$ matrix $\bfX$ with rows $\bfx_1,\ldots,\bfx_n$ and a $d$-vector $\bfw$, the product $\bfX\bfw$ is defined by
@@ -358,20 +410,94 @@ $$ {#eq-regression-multilinear-loss}
 
 As in the $d=1$ case, minimizing the loss is equivalent to solving a linear system of equations known as the *normal equations* for $\bfw$. We do not present them here.
 
-### Case study: Advertising and sales
+::: {.callout-caution}
+Be careful interpreting the magnitudes of regression coefficients. These are sensitive to the units and scales of the features. For example, distances expressed in meters would have a coefficient that is 1000 times larger than the same distances expressed in kilometers. For quantitative comparisons, it helps to standardize the features first, which does not affect the quality of the fit.
+:::
 
+::::{#exm-regression-cars-multi}
+We return to the data set regarding the fuel efficiency of cars:
+
+```{python}
+cars = sns.load_dataset("mpg").dropna()
+cars.head()
+```
+
+In order to ease experimentation, we define a function that fits a given learner to the *mpg* variable using a given list of features from the data frame:
+
+```{python}
+def fitcars(model, features):
+    X = cars[features]
+    y = cars["mpg"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y,
+        test_size=0.2, 
+        shuffle=True, random_state=302
+        )
+
+
+    model.fit(X_train, y_train)
+    MSE = mean_squared_error(y_test, model.predict(X_test))
+    print(f"MSE: {MSE:.3f}, compared to variance {y_test.var():.3f}")
+    return None
+```
+
+::: {.callout-tip}
+When you run the same lines of code over and over with only a slight change at the beginning, it's advisable to put that code into a function. It makes the overall code shorter and easier to understand and adapt.
+:::
+
+First, we try using *horsepower* as the only feature in a linear regression to fit *mpg*:
+
+```{python}
+features = ["horsepower"]
+lm = LinearRegression( fit_intercept=True )
+fitcars(lm, features)
+```
+
+As we would expect, there is an inverse relationship between horsepower and vehicle efficiency:
+```{python}
+lm.coef_
+```
+
+Next, we add *displacement* to the regression:
+```{python}
+features = ["horsepower", "displacement"]
+fitcars(lm, features)
+```
+
+The error has decreased from the univariate case because we have a more capable model.
+
+Finally, we try using 4 features as predictors. In order to help us compare the regression coefficients, we chain the model with a `StandardScaler` so that all columns are z-scores:
+
+```{python}
+features = ["horsepower", "displacement", "cylinders", "weight"]
+pipe = make_pipeline(StandardScaler(), lm)
+fitcars(pipe, features)
+```
+
+We did not get much improvement in the fit this time. But by comparing the coefficients of the individual features, some interesting information emerges:
+
+```{python}
+pd.Series(pipe[1].coef_, index=features)
+```
+We now have evidence that *weight* is the most significant negative factor for MPG, by a wide margin.
+::::
+
+In the next example, we will see that we can create new features from the ones that are initially given. Sometimes these new features add a lot to the quality of the regression. 
+
+::::{#exm-regression-sales-multi}
 Here we load data about advertising spending on different media in many markets:
 
 ```{python}
 ads = pd.read_csv("_datasets/advertising.csv")
-ads.head(8)
+ads.head(6)
 ```
 
 Pairwise scatter plots yield some hints about what to expect from this dataset:
 
 ```{python}
 #| column: body-outset
-sns.pairplot(data=ads, height=2);
+sns.pairplot(data=ads, height=1.8);
 ```
 
 The clearest association between *Sales* and spending is with *TV*. So we first try a univariate linear fit of sales against TV spending alone:
@@ -380,7 +506,6 @@ The clearest association between *Sales* and spending is with *TV*. So we first 
 X = ads[ ["TV"] ]    # has to be a frame, so ["TV"] not "TV"
 y = ads["Sales"]
 
-from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
 lm.fit(X, y)
 print("R^2 score:", f"{lm.score(X, y):.4f}")
@@ -400,11 +525,7 @@ def regress(lm, data, y, features):
     return None
 ```
 
-::: {.callout-tip}
-When you run the same lines of code over and over with only a slight change at the beginning, it's advisable to put that code into a function. It makes the overall code shorter and easier to understand and change.
-:::
-
-Next we try folding in *Newspaper* as well:
+Next, we try folding in *Newspaper* as well:
 
 ```{python}
 regress(lm, ads, y, ["TV", "Newspaper"])
@@ -435,14 +556,11 @@ In order to modify a frame, it has to be an independent copy, not just a subset 
 :::
 
 We did see some increase in the $R^2$ score, and therefore the combination of both types of spending does have a positive effect on *Sales*. 
+::::
 
-::: {.callout-caution}
-We have to be careful interpreting the magnitudes of regression coefficients. These are sensitive to the scales of the features. For example, distances expressed in meters would have a coefficient that is 1000 times larger than the same distances expressed in kilometers.
+It's not uncommon to introduce a product term as done in @exm-regression-sales-multi, and more exotic choices are also possible. Keep in mind, though, that additional variables usually add variance to the model, even if they don't seriously affect the bias.
 
-Comparisons of coefficients are more meaningful if the features are first standardized.
-:::
-
-Interpreting linear regression is a major topic in statistics. There are tests that can lend more precision and rigor to the brief discussion above.
+Interpreting linear regression is a major topic in statistics. There are tests that can lend much more precision and rigor to the brief discussion above.
 
 ### Polynomial regression
 
@@ -460,8 +578,9 @@ $$
 
 which is a polynomial of degree $d-1$. This allows representation of data that depends on $t$ in ways more complicated than a straight line. However, it can lead to overfitting if taken too far.
 
-### Case study: Fuel efficiency
+We don't have to add polynomial features manually, if we use a pipeline instead.
 
+::::{#exm-regression-polynomial}
 We return to the data set regarding the fuel efficiency of cars:
 
 ```{python}
@@ -484,12 +603,11 @@ sns.lmplot(data=cars, x="horsepower", y="mpg", order=3);
 In order to produce the cubic fit within sklearn, we use the `PolynomialFeatures` preprocessor in a pipeline. If the original predictor variable is $t$, then the preprocessor will create features for $1$, $t$, $t^2$, and $t^3$. (Since the constant feature is added in, we don't need to fit the intercept with the linear regressor.)
 
 ```{python}
-from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
 X = cars[ ["horsepower"] ]
 y = cars["mpg"]
-lm = LinearRegression(fit_intercept=False)
+lm = LinearRegression( fit_intercept=False )
 cubic = make_pipeline(PolynomialFeatures(degree=3), lm)
 cubic.fit(X, y)
 
@@ -506,10 +624,12 @@ cubic[1].coef_
 ```
 
 The coefficients go in order of increasing degree.
+::::
 
 If a cubic polynomial can fit better than a line, it's plausible that increasing the degree more will lead to even better fits. In fact, the training error can only go down, because a lower-degree polynomial case is a subset of a higher-degree case.
 
-To explore the effect of degree, we split into train and test sets:
+::::{#exm-regression-polynomial-high}
+Continuing with @exm-regression-polynomial, we explore the effect of polynomial degree, we split into train and test sets:
 
 ```{python}
 from sklearn.metrics import mean_squared_error
@@ -520,7 +640,7 @@ X_tr, X_te, y_tr, y_te = train_test_split(
     )
 
 for deg in range(2,11):
-    poly = make_pipeline(PolynomialFeatures(degree=deg), lm)
+    poly = make_pipeline( PolynomialFeatures(degree=deg), lm )
     poly.fit(X_tr, y_tr)
     MSE = mean_squared_error(y_te, poly.predict(X_te))
     print(f"MSE for degree {deg:2}: {MSE:.3f}")
@@ -534,33 +654,6 @@ sns.lmplot(data=cars, x="horsepower", y="mpg", order=10);
 
 In the above plot, note the widening of the confidence intervals near the ends of the domain, indicating increased variance in the predictions. 
 
-Next, we keep more of the original data features and pursue a multilinear fit. We chain it with a `StandardScaler` so that all columns have equal mean and scale:
-
-```{python}
-def fitcars(model, cars, features):
-    X = cars[features]
-    X_tr, X_te, y_tr, y_te = train_test_split(
-        X, y,
-        test_size=0.2, random_state=0
-        )
-    model.fit(X_tr, y_tr)
-    MSE = mean_squared_error(y_te, model.predict(X_te))
-    print(f"MSE: {MSE:.3f}")
-    return None
-
-features = ["horsepower", "displacement", "cylinders", "weight"]
-lm = LinearRegression(fit_intercept=True)
-pipe = make_pipeline(StandardScaler(), lm)
-fitcars(pipe, cars, features)
-```
-
-The fit here is actually a little worse than the low-degree fits based on *horsepower* alone. However, by comparing the coefficients of the individual features, some interesting information emerges:
-
-```{python}
-pd.Series(pipe[1].coef_, index=features)
-```
-
-We now have a hypothesis that weight is the most significant negative factor for MPG, and by a wide margin.
 
 Finally, we can combine the use of multiple features and higher degree:
 
@@ -570,10 +663,11 @@ pipe = make_pipeline(
     PolynomialFeatures(degree=2),
     lm
     )
-fitcars(pipe, cars, features)
+fitcars(pipe, features)
 ```
 
 This is our best regression fit so far, by a mile.
+::::
 
 ## Regularization
 
