@@ -105,8 +105,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -142,7 +140,7 @@ MathJax = {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -263,7 +261,7 @@ MathJax = {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -331,7 +329,7 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -353,10 +351,7 @@ MathJax = {
 <div id="def-select-hyper" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.1 </strong></span>A <strong>hyperparameter</strong> of a learning algorithm is a value or setting affecting the algorithm that remains fixed throughout training.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/zzly25dlcm5dg53/Section4_0.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -375,7 +370,7 @@ Note
 <p>For a kNN classifier, when <span class="math inline">\(k\)</span> is as large as the number of samples, the classifier can only take one value on the entire set—all the samples have a vote everywhere. The other extreme is <span class="math inline">\(k=1\)</span>, where each sample rules within its own neighborhood, and again we achieve 100% training accuracy.</p>
 </div>
 <p>Options provide flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.</p>
-<section id="sec-select-learning-curves" class="level2 page-columns page-full" data-number="4.1">
+<section id="sec-select-learning-curves" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-select-learning-curves"><span class="header-section-number">4.1</span> Bias–variance tradeoff</h2>
 <p>When we train a classifier, we use a particular set of training data. In a different parallel universe, we might have been handed a different training set drawn from the same overall population. While we might be optimistic and hope for receiving the best-case training set, it’s more prudent to consider what happens in the average case.</p>
 <section id="learner-bias" class="level3" data-number="4.1.1">
@@ -408,7 +403,7 @@ Note
 \end{split}
 \]</span> We will set <span class="math inline">\(y=f(x)\)</span> as the true label and <span class="math inline">\(\hat{y}=\E{\hat{f}(x)}\)</span> as the expected prediction. The quantity above, <span class="math inline">\(y-\hat{y}\)</span>, is called the <strong>bias</strong> of the classifier. Bias depends on the particular algorithm and its hyperparameters, but not on the training set. Among other things, bias accounts for the fact that any particular finite algorithm can represent only some labelling functions perfectly.</p>
 </section>
-<section id="variance" class="level3 page-columns page-full" data-number="4.1.2">
+<section id="variance" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">4.1.2</span> Variance</h3>
 <p>It might seem as though the only important goal is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You’re capable of landing the ball on the green in one swing, but it’s near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water’s edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing pretty well, though not optimally.</p>
 <p>In essence, a good chance of a mediocre result can outweigh a small chance of a better result. To express this tradeoff mathematically, we can compute the variance of the predicted label at any <span class="math inline">\(x\)</span>: <span class="math display">\[
@@ -418,11 +413,7 @@ Note
     &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} \right)^2 + \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right)^2 \\
   &amp; \qquad + 2 \left( y - \hat{y} \right) \cdot \frac{1}{N}\sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right).  
 \end{split}
-\]</span></p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/h7siuimkbyio4fj/Section4_1_2.mp4?raw=1"></video></div>
-</div></div><p>Now we find something interesting: <span class="math display">\[
+\]</span> Now we find something interesting: <span class="math display">\[
 \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right) =
 \hat{y} - \frac{1}{N} \sum_{i=1}^N \hat{f}_i(x) = 0,
 \]</span> by the definition of <span class="math inline">\(\hat{y}\)</span>. So overall, <span id="eq-select-biasvar"><span class="math display">\[
@@ -441,7 +432,7 @@ How close is the average prediction to the ground truth?
 How close to the average prediction is any one prediction likely to be?
 </dd>
 </dl>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">302</span>)</span>
@@ -462,8 +453,8 @@ How close to the average prediction is any one prediction likely to be?
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>y.extend(rng.normal(<span class="op">-</span><span class="fl">0.35</span>,<span class="fl">0.33</span>,<span class="dv">40</span>))</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>bias.extend([<span class="st">"high"</span>]<span class="op">*</span><span class="dv">40</span>)</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>var.extend([<span class="st">"high"</span>]<span class="op">*</span><span class="dv">40</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> pd.DataFrame({<span class="st">"bias"</span>: bias, <span class="st">"variance"</span>: var, <span class="st">"x₁"</span>: x, <span class="st">"x₂"</span>: y})</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> sns.relplot(data<span class="op">=</span>points, x<span class="op">=</span><span class="st">"x₁"</span>, y<span class="op">=</span><span class="st">"x₂"</span>, row<span class="op">=</span><span class="st">"variance"</span>, col<span class="op">=</span><span class="st">"bias"</span>, aspect<span class="op">=</span><span class="dv">1</span>, height<span class="op">=</span><span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> pd.DataFrame({<span class="st">"bias"</span>: bias, <span class="st">"variance"</span>: var, <span class="st">"x"</span>: x, <span class="st">"y"</span>: y})</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> sns.relplot(data<span class="op">=</span>points, x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>, row<span class="op">=</span><span class="st">"variance"</span>, col<span class="op">=</span><span class="st">"bias"</span>, aspect<span class="op">=</span><span class="dv">1</span>, height<span class="op">=</span><span class="dv">3</span>)<span class="op">;</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fig.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -478,12 +469,12 @@ How close to the average prediction is any one prediction likely to be?
 <p>Why would these two factors be in opposition? When a learning method has the capacity to capture complex behavior, it potentially has a low bias. However, that same capacity means that the learner will fit itself very well to each individual training set, which increases the potential for variance over the whole collection of training sets.</p>
 <p>This tension is known as the <em>bias–variance tradeoff</em>. Perhaps we can view this tradeoff as a special case of <em>Occam’s Razor</em>: it’s best to choose the least complex method necessary to reach a particular level of explanatory power.</p>
 </section>
-<section id="learning-curves" class="level3 page-columns page-full" data-number="4.1.3">
+<section id="learning-curves" class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="learning-curves"><span class="header-section-number">4.1.3</span> Learning curves</h3>
 <p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
 <div id="exm-select-learning-curves" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4.2 </strong></span>We will use a subset of a realistic data set used to predict the dominant type of tree in patches of forest. We train a decision tree classifier with fixed depth throughout. (Don’t confuse the forest data for the tree classifier, haha.)</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">8</span>]   <span class="co"># 250,000 samples, 8 dimensions</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>][:<span class="dv">250000</span>]</span>
@@ -517,22 +508,58 @@ How close to the average prediction is any one prediction likely to be?
 <p>The plot above shows <strong>learning curves</strong>. The solid line is the mean result over all trials, and the ribbon has a width of one standard deviation. For a small training set, the tree has more than enough resolving power, and the result is severe overfitting, as seen by the large gap between testing and training. As the size of the training set grows, however, variance decreases and the two error measurements come together.</p>
 <p>Note that the curves seem to approach a horizontal asymptote at a nonzero level of error. This level indicates an unavoidable bias for this tree size, no matter how much of the data we throw at it. As a simple analogy, think about approximating curves in the plane by a parabola. You will be able to do a perfect job for linear and quadratic functions, but if you approximate a cosine curve, you can’t get it exactly correct no matter how much information you have about it.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/9orxrc78e7cg0hn/Example4_2.mp4?raw=1"></video></div>
-</div></div><p>When you see a large gap between training and test errors, you should suspect that the learner will not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.</p>
+<p>When you see a large gap between training and test errors, you should suspect that the learner will not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.</p>
 </section>
 </section>
-<section id="overfitting" class="level2 page-columns page-full" data-number="4.2">
+<section id="overfitting" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">4.2</span> Overfitting</h2>
 <p>One important factor we have not yet considered is noise in the training data—that is, erroneous values. If a learner responds too adeptly to isolated wrong values, it will also respond incorrectly to other nearby inputs. This situation is known as <strong>overfitting</strong>.</p>
-<section id="overfitting-in-knn" class="level3 page-columns page-full" data-number="4.2.1">
+<!-- As a demonstration, consider the case of representing 5 points by a polynomial. One option is to 
+
+::: {.cell execution_count=4}
+``` {.python .cell-code}
+import numpy as np
+from numpy.polynomial import Polynomial as P
+import matplotlib.pyplot as plt
+x = np.arange(5)/4
+y = [1,0.99,1,0.99,1]
+
+xx = np.arange(400)/399
+
+plt.scatter(x, y, 20, color="black")
+
+p = P.fit(x, y, 4)
+plt.plot(xx, p(xx))
+
+p = P.fit(x, y, 1)
+plt.plot(xx, p(xx))
+plt.ylim(0.85,1.05)
+
+plt.legend(("data","degree 4","degree 1"))
+```
+
+::: {.cell-output .cell-output-display execution_count=109}
+```
+<matplotlib.legend.Legend at 0x12529f990>
+```
+:::
+
+::: {.cell-output .cell-output-display}
+![](selection_files/figure-html/cell-5-output-2.png){width=588 height=416}
+:::
+:::
+
+
+In @sec-select-learning-curves we saw that if too little data is supplied to a learner, there is a large gap between training error and generalization as measured on a testing set.  -->
+<!-- 
+
+, referring to the idea that the learner adapts 
+
+as the amount of training data increases for a particular learner, the training set variance decreases until the learner approximately reaches a steady state of essential bias. In practice, we usually leave the training set data fixed and adjust the hyperparameters. It becomes important, then, to detect when increasing the resolving power stops reducing bias and serves only to increase dependence on the training set.  -->
+<section id="overfitting-in-knn" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="overfitting-in-knn"><span class="header-section-number">4.2.1</span> Overfitting in kNN</h3>
 <p>To illustrate overfitting, let’s use a really simple classification problem: a single feature, with the class being the sign of the feature’s value. (We arbitrarily assign zero to have class <span class="math inline">\(+1\)</span>.)</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/0x8jpxmca1zw184/Section4_2_1.mp4?raw=1"></video></div>
-</div></div><p>Consider first a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Here are the results for four different training sets, each of size 40:</p>
+<p>Consider first a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Here are the results for four different training sets, each of size 40:</p>
 <div class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-1-clean" class="quarto-figure quarto-figure-center anchored">
@@ -592,13 +619,10 @@ Danger
 </div>
 </div>
 </section>
-<section id="overfitting-in-decision-trees" class="level3 page-columns page-full" data-number="4.2.2">
+<section id="overfitting-in-decision-trees" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="overfitting-in-decision-trees"><span class="header-section-number">4.2.2</span> Overfitting in decision trees</h3>
 <p>As mentioned in <a href="#exm-select-hyper">Example&nbsp;<span>4.1</span></a>, the depth of a decision tree correlates with its ability to divide the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. Thus, with noisy data, we see clear signs of overfitting:</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/c9j46ab7a0ypxaz/Section4_2_2.mp4?raw=1"></video></div>
-</div></div><div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -631,7 +655,7 @@ Danger
 </div>
 </div>
 </section>
-<section id="overfitting-and-variance" class="level3 page-columns page-full" data-number="4.2.3">
+<section id="overfitting-and-variance" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="overfitting-and-variance"><span class="header-section-number">4.2.3</span> Overfitting and variance</h3>
 <p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy">Figure&nbsp;<span>4.3</span></a>, and <a href="#fig-select-tree-6-noisy">Figure&nbsp;<span>4.6</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in <a href="#sec-select-learning-curves"><span>Section&nbsp;4.1</span></a>.</p>
 <div id="exm-select-overfit-forest" class="theorem example">
@@ -681,28 +705,21 @@ Danger
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>experiment(tree, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="selection_files/figure-html/cell-15-output-1.png" width="556" height="468"></p>
+<p><img src="selection_files/figure-html/cell-16-output-1.png" width="556" height="468"></p>
 </div>
 </div>
 <p>However, notice above that the testing error increased substantially from the overfit case.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video6" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/o68bl19we1mbgfv/Example4_3.mp4?raw=1"></video></div>
-</div></div><p>We could say that the last tree in <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a> is underfitting the data; the behavior of the labelling function is probably too complex to be replicated well by any tree that shallow. In short, the overfitting/underfitting dilemma is another manifestation of the bias–variance tradeoff.</p>
+<p>We could say that the last tree in <a href="#exm-select-overfit-forest">Example&nbsp;<span>4.3</span></a> is underfitting the data; the behavior of the labelling function is probably too complex to be replicated well by any tree that shallow. In short, the overfitting/underfitting dilemma is another manifestation of the bias–variance tradeoff.</p>
 </section>
 </section>
-<section id="ensemble-methods" class="level2 page-columns page-full" data-number="4.3">
+<section id="ensemble-methods" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="ensemble-methods"><span class="header-section-number">4.3</span> Ensemble methods</h2>
 <p>When a relatively expressive learning model is used, overfitting and strong dependence on the training set are possible. One meta-strategy for reducing training variance without decreasing the model expressiveness is to use an <strong>ensemble</strong> method. The idea of an ensemble is that averaging over many different training sets will reduce the variance that comes from overfitting. It’s a way to simulate the computation of expected values.</p>
 <div id="def-select-bagging" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.2 </strong></span>In <em>bootstrap aggregation</em>, or <strong>bagging</strong> for short, samples are drawn randomly from the original training set. Usually, this is done <em>with replacement</em>, which means that some samples might be selected multiple times.</p>
 </div>
-<p>Why should bagging work? It comes down to the way that bias and variance behave. Suppose we produce <span class="math inline">\(M\)</span> prbabilstic binary classifiers, <span class="math inline">\(\hat{f}_1,\ldots,\hat{f}_M\)</span>, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video7" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/hi52361ot3zxak2/Section4_3.mp4?raw=1"></video></div>
-</div></div><p><span class="math display">\[
+<p>Why should bagging work? It comes down to the way that bias and variance behave. Suppose we produce <span class="math inline">\(M\)</span> prbabilstic binary classifiers, <span class="math inline">\(\hat{f}_1,\ldots,\hat{f}_M\)</span>, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier <span class="math display">\[
 \hat{F}(x) = \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x).
 \]</span> The bias of the bagging classifier is the expectation of <span class="math display">\[
 y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \frac{1}{M} \sum_{m=1}^M \left(  y - \hat{f}_m(x)  \right).
@@ -716,7 +733,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="121">
 <div>
 
 
@@ -889,7 +906,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>][<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="125">
 <pre><code>[0.6666666666666666,
  1.0,
  0.3333333333333333,
@@ -972,7 +989,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>experiment(ensemble, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="selection_files/figure-html/cell-25-output-1.png" width="556" height="468"></p>
+<p><img src="selection_files/figure-html/cell-26-output-1.png" width="556" height="468"></p>
 </div>
 </div>
 <p>Compared to the earlier experiment (see <a href="#fig-select-overfit-forest">Figure&nbsp;<span>4.9</span></a>), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias.</p>
@@ -1095,13 +1112,13 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span></span>
 <span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="selection_files/figure-html/cell-29-output-1.png" width="469" height="468"></p>
+<p><img src="selection_files/figure-html/cell-30-output-1.png" width="469" height="468"></p>
 </div>
 </div>
 <p>Initially the error decreases because the shallowest decision trees are underfit. The minimum error is at max depth 9, after which overfitting seems to take over:</p>
 <div class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>results.groupby(<span class="st">"depth"</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="135">
 <div>
 
 
@@ -1200,7 +1217,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">2</span></span>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="137">
 <div>
 
 
@@ -1402,7 +1419,7 @@ Best score:
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_train, y_train)</span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>grid_knn.best_params_, grid_knn.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="139">
 <pre><code>({'kneighborsclassifier__metric': 'euclidean',
   'kneighborsclassifier__n_neighbors': 8,
   'kneighborsclassifier__weights': 'uniform'},
@@ -1695,13 +1712,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>videojs(video_shortcode_videojs_video1);</script>
-<script>videojs(video_shortcode_videojs_video2);</script>
-<script>videojs(video_shortcode_videojs_video3);</script>
-<script>videojs(video_shortcode_videojs_video4);</script>
-<script>videojs(video_shortcode_videojs_video5);</script>
-<script>videojs(video_shortcode_videojs_video6);</script>
-<script>videojs(video_shortcode_videojs_video7);</script>
 
 
 

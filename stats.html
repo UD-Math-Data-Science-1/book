@@ -280,7 +280,7 @@ MathJax = {
   <ul class="collapse">
   <li><a href="#the-datasaurus" id="toc-the-datasaurus" class="nav-link" data-scroll-target="#the-datasaurus"><span class="toc-section-number">2.6.1</span>  The datasaurus</a></li>
   <li><a href="#correlation-vs.-dependence" id="toc-correlation-vs.-dependence" class="nav-link" data-scroll-target="#correlation-vs.-dependence"><span class="toc-section-number">2.6.2</span>  Correlation vs.&nbsp;dependence</a></li>
-  <li><a href="#simpsons-paradox" id="toc-simpsons-paradox" class="nav-link" data-scroll-target="#simpsons-paradox"><span class="toc-section-number">2.6.3</span>  Simpson’s paradox</a></li>
+  <li><a href="#sec-stats-simpson" id="toc-sec-stats-simpson" class="nav-link" data-scroll-target="#sec-stats-simpson"><span class="toc-section-number">2.6.3</span>  Simpson’s paradox</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
@@ -3290,8 +3290,8 @@ Important
 </div>
 <p>Correlation can only measure the extent of the relationship that is <em>linear</em>; <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> lying on a straight line means perfect correlation. In this case, every line you can draw that passes through <span class="math inline">\((0,0)\)</span> is essentially equally bad at representing the data, and correlation cannot express the relationship.</p>
 </section>
-<section id="simpsons-paradox" class="level3 page-columns page-full" data-number="2.6.3">
-<h3 data-number="2.6.3" class="anchored" data-anchor-id="simpsons-paradox"><span class="header-section-number">2.6.3</span> Simpson’s paradox</h3>
+<section id="sec-stats-simpson" class="level3 page-columns page-full" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="sec-stats-simpson"><span class="header-section-number">2.6.3</span> Simpson’s paradox</h3>
 <p>The penguin dataset contains a common paradox—or a counterintuitive phenomenon, at least. Two of the variables show a fairly strong negative correlation:</p>
 <div class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
@@ -3410,21 +3410,21 @@ Important
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
 <p>For these exercises, you may of course use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).</p>
 <div id="exr-stats-summary" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>Suppose that <span class="math inline">\(n&gt;2\)</span>, and let <span class="math inline">\(x_i=0\)</span> for <span class="math inline">\(i=1,\ldots,n-1\)</span>, and <span class="math inline">\(x_n=M\)</span> for a positive number <span class="math inline">\(M\)</span>.</p>
-<ol type="a">
-<li>Find the sample mean.</li>
-<li>Find the sample median. (You will have to describe multiple cases.)</li>
-<li>Find the corrected sample variance <span class="math inline">\(s_{n-1}^2\)</span>.</li>
-<li>Find the sample z-scores of the <span class="math inline">\(x_i\)</span> in terms of <span class="math inline">\(M\)</span> and <span class="math inline">\(n\)</span>.</li>
-</ol>
+<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>The following parts are about the sample set of <span class="math inline">\(n\)</span> values <span class="math inline">\(x_1,\ldots,x_n\)</span>, where <span class="math inline">\(n&gt;2\)</span>, <span class="math inline">\(x_i=0\)</span> for <span class="math inline">\(i=1,\ldots,n-1\)</span>, and <span class="math inline">\(x_n=M\)</span> for a positive number <span class="math inline">\(M\)</span>.</p>
+<p><strong>(a)</strong> Show that the sample mean is <span class="math inline">\(M/n\)</span>.</p>
+<p><strong>(b)</strong> Find the sample median. (You will have to describe multiple cases for <span class="math inline">\(n\)</span>, even if they give the same result.)</p>
+<p><strong>(c)</strong> Show that the corrected sample variance <span class="math inline">\(s_{n-1}^2\)</span> is <span class="math inline">\(M^2/n\)</span>.</p>
+<p><strong>(d)</strong> Find the sample z-scores of all the <span class="math inline">\(x_i\)</span> in terms of <span class="math inline">\(M\)</span> and <span class="math inline">\(n\)</span>.</p>
 </div>
 <div id="exr-stats-z-scores" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.2 </strong></span>Suppose the samples <span class="math inline">\(x_1,\ldots,x_n\)</span> have the z-scores <span class="math inline">\(z_1,\ldots,z_n\)</span>.</p>
-<p><strong>(a)</strong> Show that <span class="math inline">\(\displaystyle \sum_{i=1}^n z_i = 0.\)</span></p>
-<p><strong>(b)</strong> Show that <span class="math inline">\(\displaystyle \sum_{i=1}^n z_i^2 = n-1.\)</span></p>
+<p><strong>(a)</strong> Show that the sample z-scores satsify <span class="math inline">\(\displaystyle \sum_{i=1}^n z_i = 0.\)</span></p>
+<p><strong>(b)</strong> Show that the sample z-scores satsify <span class="math inline">\(\displaystyle \sum_{i=1}^n z_i^2 = n-1.\)</span></p>
 </div>
 <div id="exr-stats-outlier" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>For the sample set in <a href="#exr-stats-summary">Exercise&nbsp;<span>2.1</span></a>, find a value <span class="math inline">\(N\)</span> such that if <span class="math inline">\(n&gt;N\)</span>, there is at least one outlier according to the 2σ criterion.</p>
+<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>For this exercise, apply the 2σ outlier criterion the sample set given in <a href="#exr-stats-summary">Exercise&nbsp;<span>2.1</span></a> using the sample mean and sample variance. (Again assume that <span class="math inline">\(n&gt;2\)</span> and <span class="math inline">\(M&gt;0\)</span>.)</p>
+<p><strong>(a)</strong> Show that regardless of <span class="math inline">\(n\)</span> and <span class="math inline">\(M\)</span>, the value 0 is never an outlier.</p>
+<p><strong>(b)</strong> Show that the value <span class="math inline">\(M\)</span> is an outlier if <span class="math inline">\(n \ge 6\)</span>, regardless of <span class="math inline">\(M\)</span>.</p>
 </div>
 <div id="exr-stats-outlier-iqr" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.4 </strong></span>Define a population by</p>
@@ -3437,7 +3437,8 @@ x_i = \begin{cases}
 \end{cases}
 \]</span></p>
 <p><strong>(a)</strong> Find the median of the population.</p>
-<p><strong>(b)</strong> Which of the following values are outliers according to the 1.5 IQR criterion?</p>
+<p><strong>(b)</strong> Find the smallest interval containing all non-outlier values according to the 1.5 IQR criterion.</p>
+<p><strong>(b)</strong> (old version) Which of the following values are outliers ?</p>
 <p><span class="math display">\[
 -10,-5,0,5,10,15,20
 \]</span></p>

@@ -840,9 +840,9 @@ Note
 <p>From this we see that the accuracy is <span class="math inline">\(84/100\)</span>, or 84%. Out of 26 samples that had the antigen, the test identified 22, for a recall of <span class="math inline">\(20/26=84.6\)</span>%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of <span class="math inline">\(62/74=83.8\)</span>%. Finally, the precision is <span class="math inline">\(22/34=64.7\)</span>% and the NPV is <span class="math inline">\(62/66=93.9\)</span>%.</p>
 </div>
 <p>The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e.&nbsp;a low false positive rate, and seek a high precision.</p>
-<p>There are ways of combining the primary metrics in order to account for two at once:</p>
+<p>There are ways of combining the primary metrics in order to account for two at once.</p>
 <div id="def-class-metrics-2nd" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.3 </strong></span>The <strong><em>F</em>₁ score</strong>, which is the harmonic mean of the precision and the recall, i.e., <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.3 </strong></span>The <strong><em>F</em>₁ score</strong> is the harmonic mean of the precision and the recall, i.e., <span class="math display">\[
 F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recall}} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
 \]</span></p>
 <p>The <strong>balanced accuracy</strong> is the arithmetic mean of recall and specificity.</p>
