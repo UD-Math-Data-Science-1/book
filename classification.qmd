@@ -354,10 +354,10 @@ From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that 
 
 The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and seek a high precision.
 
-There are ways of combining the primary metrics in order to account for two at once:
+There are ways of combining the primary metrics in order to account for two at once.
 
 ::::{#def-class-metrics-2nd}
-The ***F*₁ score**, which is the harmonic mean of the precision and the recall, i.e.,
+The ***F*₁ score** is the harmonic mean of the precision and the recall, i.e.,
 $$
 F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recall}} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
 $$
