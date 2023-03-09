@@ -932,7 +932,10 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 </div>
 </div>
 </div>
-<p>There is a significant catch in that the theory requires the constituent learners to be uncorrelated, which is less true as the size of the bagging sample grows relative to the original training set. This can somewhat counterintuitively lead to better results by training on <em>smaller</em> individual training sets.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/55aiz2i5br6psok/Example4_4.mp4?raw=1"></video></div>
+</div></div><p>There is a significant catch in that the theory requires the constituent learners to be uncorrelated, which is less true as the size of the bagging sample grows relative to the original training set. This can somewhat counterintuitively lead to better results by training on <em>smaller</em> individual training sets.</p>
 <div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -966,10 +969,7 @@ Note
 </div>
 <p>We may get better results by increasing the size of the ensemble, too, though in this case there isn’t much room left for improvement.</p>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/55aiz2i5br6psok/Example4_4.mp4?raw=1"></video></div>
-</div></div><div id="exm-select-ensemble-forest" class="theorem example">
+<div id="exm-select-ensemble-forest" class="theorem example">
 <p><span class="theorem-title"><strong>Example 4.6 </strong></span>Let’s work again with the forest cover dataset. It’s got over 500,000 samples and 54 features:</p>
 <div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
@@ -997,7 +997,7 @@ Note
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, tree.predict(X_test) )</span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a single tree is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a single tree is 0.8108</code></pre>
+<pre><code>F₁ for a single tree is 0.8107</code></pre>
 </div>
 </div>
 <p>A simple averaging over the same type of tree actually does worse here:</p>
@@ -1013,7 +1013,7 @@ Note
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a random forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a random forest is 0.7790</code></pre>
+<pre><code>F₁ for a random forest is 0.7737</code></pre>
 </div>
 </div>
 <p>It’s possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:</p>
@@ -1028,7 +1028,7 @@ Note
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a taller forest is 0.9008</code></pre>
+<pre><code>F₁ for a taller forest is 0.9031</code></pre>
 </div>
 </div>
 <p>In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:</p>
@@ -1044,7 +1044,7 @@ Note
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller, skinnier forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a taller, skinnier forest is 0.9412</code></pre>
+<pre><code>F₁ for a taller, skinnier forest is 0.9413</code></pre>
 </div>
 </div>
 </div>
@@ -1053,16 +1053,22 @@ Note
 <div class="quarto-video"><video id="video_shortcode_videojs_video9" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/73nq8mjams2imeg/Example4_6.mp4?raw=1"></video></div>
 </div></div><p>Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.</p>
 </section>
-<section id="validation" class="level2" data-number="4.4">
+<section id="validation" class="level2 page-columns page-full" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="validation"><span class="header-section-number">4.4</span> Validation</h2>
 <p>We now return to the opening questions of this chapter: how should we determine optimal hyperparameters and algorithms?</p>
 <p>It’s tempting to compute some test scores over a range of hyperparameter choices and simply choose the case that scores best. However, if we base hyperparameter optimization on a fixed testing set, then we are effectively learning from that set! The hyperparameters might become too tuned—i.e., overfit—to our particular choice of the test set.</p>
-<p>To avoid this pitfall, we can split the data into <em>three</em> subsets for training, <strong>validation</strong>, and testing. The validation set is used to tune hyperparameters. Once training is performed at values determined to be best on validation, the test set is used to assess the generalization of the optimized learner.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/87jspt2wxhrvhnt/Section4_4.mp4?raw=1"></video></div>
+</div></div><p>To avoid this pitfall, we can split the data into <em>three</em> subsets for training, <strong>validation</strong>, and testing. The validation set is used to tune hyperparameters. Once training is performed at values determined to be best on validation, the test set is used to assess the generalization of the optimized learner.</p>
 <p>Unfortunately, a fixed three-way split of the data further reduces the amount of data available for training, so we often turn to an alternative.</p>
-<section id="cross-validation" class="level3" data-number="4.4.1">
+<section id="cross-validation" class="level3 page-columns page-full" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">4.4.1</span> Cross-validation</h3>
 <p>In <strong>cross-validation</strong>, each learner is trained multiple times using unique training and validation sets drawn from the same pool.</p>
-<div id="def-select-cv" class="theorem definition">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video11" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/amedhad5b13q662/Section4_4_1.mp4?raw=1"></video></div>
+</div></div><div id="def-select-cv" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.3 </strong></span>The steps for <strong><span class="math inline">\(k\)</span>-fold cross-validation</strong> are as follows:</p>
 <ol type="1">
 <li>Divide the original data into training and testing sets.</li>
@@ -1099,7 +1105,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
@@ -1109,7 +1115,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), knn)</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">18621</span>)</span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    learner, </span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    X_train, y_train, </span>
@@ -1121,13 +1127,13 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( scores[<span class="st">"test_score"</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Validation scores:
-[0.93393194 0.93762617 0.923854   0.93617109 0.93037398 0.9326016 ]</code></pre>
+[0.93344028 0.9297571  0.92846513 0.93272807 0.94025875 0.93982356]</code></pre>
 </div>
 </div>
 <p>The low variance across the folds that we see above is reassurance that they are representative. Conversely, if the scores were spread more widely, we would be concerned that there was strong dependence on the training set, which might indicate overfitting.</p>
 </div>
 </section>
-<section id="hyperparameter-tuning" class="level3" data-number="4.4.2">
+<section id="hyperparameter-tuning" class="level3 page-columns page-full" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">4.4.2</span> Hyperparameter tuning</h3>
 <p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
 <div id="exm-select-vc-beans" class="theorem example">
@@ -1179,51 +1185,51 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <tbody>
 <tr class="odd">
 <th>4</th>
-<td>0.203600</td>
+<td>0.206700</td>
 </tr>
 <tr class="even">
 <th>5</th>
-<td>0.115527</td>
+<td>0.118655</td>
 </tr>
 <tr class="odd">
 <th>6</th>
-<td>0.098991</td>
+<td>0.097290</td>
 </tr>
 <tr class="even">
 <th>7</th>
-<td>0.090455</td>
+<td>0.092586</td>
 </tr>
 <tr class="odd">
 <th>8</th>
-<td>0.086932</td>
+<td>0.088454</td>
 </tr>
 <tr class="even">
 <th>9</th>
-<td>0.081718</td>
+<td>0.083948</td>
 </tr>
 <tr class="odd">
 <th>10</th>
-<td>0.082619</td>
+<td>0.082687</td>
 </tr>
 <tr class="even">
 <th>11</th>
-<td>0.085970</td>
+<td>0.084315</td>
 </tr>
 <tr class="odd">
 <th>12</th>
-<td>0.084984</td>
+<td>0.085555</td>
 </tr>
 <tr class="even">
 <th>13</th>
-<td>0.086531</td>
+<td>0.087055</td>
 </tr>
 <tr class="odd">
 <th>14</th>
-<td>0.085893</td>
+<td>0.087295</td>
 </tr>
 <tr class="even">
 <th>15</th>
-<td>0.087356</td>
+<td>0.086693</td>
 </tr>
 </tbody>
 </table>
@@ -1238,11 +1244,14 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> tree.predict(X_test)</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"score is"</span>, balanced_accuracy_score(y_test, yhat) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>score is 0.9191394340897692</code></pre>
+<pre><code>score is 0.9192506467389886</code></pre>
 </div>
 </div>
 </div>
-<section id="grid-search" class="level4" data-number="4.4.2.1">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video12" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/dg0su9kvhvvcx7g/Example4_9.mp4?raw=1"></video></div>
+</div></div><section id="grid-search" class="level4 page-columns page-full" data-number="4.4.2.1">
 <h4 data-number="4.4.2.1" class="anchored" data-anchor-id="grid-search"><span class="header-section-number">4.4.2.1</span> Grid search</h4>
 <p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
 <div id="exm-select-grid-cancer" class="theorem example">
@@ -1257,7 +1266,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    X, y, </span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">3383</span></span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
@@ -1293,124 +1302,124 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<th>528</th>
-<td>13.940</td>
-<td>13.17</td>
-<td>90.31</td>
-<td>594.2</td>
-<td>0.12480</td>
-<td>0.09755</td>
-<td>0.10100</td>
-<td>0.066150</td>
-<td>0.1976</td>
-<td>0.06457</td>
+<th>242</th>
+<td>11.300</td>
+<td>18.19</td>
+<td>73.93</td>
+<td>389.4</td>
+<td>0.09592</td>
+<td>0.13250</td>
+<td>0.15480</td>
+<td>0.02854</td>
+<td>0.2054</td>
+<td>0.07669</td>
 <td>...</td>
-<td>14.62</td>
-<td>15.38</td>
-<td>94.52</td>
-<td>653.3</td>
-<td>0.1394</td>
-<td>0.1364</td>
-<td>0.15590</td>
-<td>0.1015</td>
-<td>0.2160</td>
-<td>0.07253</td>
+<td>12.58</td>
+<td>27.96</td>
+<td>87.16</td>
+<td>472.9</td>
+<td>0.1347</td>
+<td>0.48480</td>
+<td>0.74360</td>
+<td>0.12180</td>
+<td>0.3308</td>
+<td>0.12970</td>
 </tr>
 <tr class="even">
-<th>291</th>
-<td>14.960</td>
-<td>19.10</td>
-<td>97.03</td>
-<td>687.3</td>
-<td>0.08992</td>
-<td>0.09823</td>
-<td>0.05940</td>
-<td>0.048190</td>
-<td>0.1879</td>
-<td>0.05852</td>
+<th>375</th>
+<td>16.170</td>
+<td>16.07</td>
+<td>106.30</td>
+<td>788.5</td>
+<td>0.09880</td>
+<td>0.14380</td>
+<td>0.06651</td>
+<td>0.05397</td>
+<td>0.1990</td>
+<td>0.06572</td>
 <td>...</td>
-<td>16.25</td>
-<td>26.19</td>
-<td>109.10</td>
-<td>809.8</td>
-<td>0.1313</td>
-<td>0.3030</td>
-<td>0.18040</td>
-<td>0.1489</td>
-<td>0.2962</td>
-<td>0.08472</td>
+<td>16.97</td>
+<td>19.14</td>
+<td>113.10</td>
+<td>861.5</td>
+<td>0.1235</td>
+<td>0.25500</td>
+<td>0.21140</td>
+<td>0.12510</td>
+<td>0.3153</td>
+<td>0.08960</td>
 </tr>
 <tr class="odd">
-<th>467</th>
-<td>9.668</td>
-<td>18.10</td>
-<td>61.06</td>
-<td>286.3</td>
-<td>0.08311</td>
-<td>0.05428</td>
-<td>0.01479</td>
-<td>0.005769</td>
-<td>0.1680</td>
-<td>0.06412</td>
+<th>446</th>
+<td>17.750</td>
+<td>28.03</td>
+<td>117.30</td>
+<td>981.6</td>
+<td>0.09997</td>
+<td>0.13140</td>
+<td>0.16980</td>
+<td>0.08293</td>
+<td>0.1713</td>
+<td>0.05916</td>
 <td>...</td>
-<td>11.15</td>
-<td>24.62</td>
-<td>71.11</td>
-<td>380.2</td>
-<td>0.1388</td>
-<td>0.1255</td>
-<td>0.06409</td>
-<td>0.0250</td>
-<td>0.3057</td>
-<td>0.07875</td>
+<td>21.53</td>
+<td>38.54</td>
+<td>145.40</td>
+<td>1437.0</td>
+<td>0.1401</td>
+<td>0.37620</td>
+<td>0.63990</td>
+<td>0.19700</td>
+<td>0.2972</td>
+<td>0.09075</td>
 </tr>
 <tr class="even">
-<th>108</th>
-<td>22.270</td>
-<td>19.67</td>
-<td>152.80</td>
-<td>1509.0</td>
-<td>0.13260</td>
-<td>0.27680</td>
-<td>0.42640</td>
-<td>0.182300</td>
-<td>0.2556</td>
-<td>0.07039</td>
+<th>289</th>
+<td>11.370</td>
+<td>18.89</td>
+<td>72.17</td>
+<td>396.0</td>
+<td>0.08713</td>
+<td>0.05008</td>
+<td>0.02399</td>
+<td>0.02173</td>
+<td>0.2013</td>
+<td>0.05955</td>
 <td>...</td>
-<td>28.40</td>
-<td>28.01</td>
-<td>206.80</td>
-<td>2360.0</td>
-<td>0.1701</td>
-<td>0.6997</td>
-<td>0.96080</td>
-<td>0.2910</td>
-<td>0.4055</td>
-<td>0.09789</td>
+<td>12.36</td>
+<td>26.14</td>
+<td>79.29</td>
+<td>459.3</td>
+<td>0.1118</td>
+<td>0.09708</td>
+<td>0.07529</td>
+<td>0.06203</td>
+<td>0.3267</td>
+<td>0.06994</td>
 </tr>
 <tr class="odd">
-<th>340</th>
-<td>14.420</td>
-<td>16.54</td>
-<td>94.15</td>
-<td>641.2</td>
-<td>0.09751</td>
-<td>0.11390</td>
-<td>0.08007</td>
-<td>0.042230</td>
-<td>0.1912</td>
-<td>0.06412</td>
+<th>318</th>
+<td>9.042</td>
+<td>18.90</td>
+<td>60.07</td>
+<td>244.5</td>
+<td>0.09968</td>
+<td>0.19720</td>
+<td>0.19750</td>
+<td>0.04908</td>
+<td>0.2330</td>
+<td>0.08743</td>
 <td>...</td>
-<td>16.67</td>
-<td>21.51</td>
-<td>111.40</td>
-<td>862.1</td>
-<td>0.1294</td>
-<td>0.3371</td>
-<td>0.37550</td>
-<td>0.1414</td>
-<td>0.3053</td>
-<td>0.08764</td>
+<td>10.06</td>
+<td>23.40</td>
+<td>68.62</td>
+<td>297.1</td>
+<td>0.1221</td>
+<td>0.37480</td>
+<td>0.46090</td>
+<td>0.11450</td>
+<td>0.3135</td>
+<td>0.10550</td>
 </tr>
 </tbody>
 </table>
@@ -1427,26 +1436,27 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"max_depth"</span>:<span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">15</span>), </span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">"min_impurity_decrease"</span>:np.arange(<span class="dv">0</span>,<span class="fl">0.01</span>,<span class="fl">0.002</span>) }</span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span>)</span>
 <span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>grid_dt <span class="op">=</span> GridSearchCV(learner, grid, </span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>grid_dt.fit(X_train, y_train)</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_params_)</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>grid_dt <span class="op">=</span> GridSearchCV(</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    learner, grid, </span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>grid_dt.fit(X_train, y_train)</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_params_)</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters:
-{'criterion': 'gini', 'max_depth': 5, 'min_impurity_decrease': 0.0}
+{'criterion': 'gini', 'max_depth': 7, 'min_impurity_decrease': 0.0}
 
 Best score:
-0.9582328658156416</code></pre>
+0.9455901279430692</code></pre>
 </div>
 </div>
 <p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
@@ -1454,30 +1464,39 @@ Best score:
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"kneighborsclassifier__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier())</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>grid_knn <span class="op">=</span> GridSearchCV(learner, grid, </span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_train, y_train)</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>grid_knn.best_params_, grid_knn.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
-<pre><code>({'kneighborsclassifier__metric': 'euclidean',
-  'kneighborsclassifier__n_neighbors': 8,
-  'kneighborsclassifier__weights': 'uniform'},
- 0.9749108434555516)</code></pre>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier())</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>grid_knn <span class="op">=</span> GridSearchCV(</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    learner, grid, </span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_train, y_train)</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_params_)</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best parameters:
+{'kneighborsclassifier__metric': 'manhattan', 'kneighborsclassifier__n_neighbors': 4, 'kneighborsclassifier__weights': 'distance'}
+
+Best score:
+0.9734627184207015</code></pre>
 </div>
 </div>
 <p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
 <div class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="kw">lambda</span> cl, X, y: f1_score( y, cl.predict(X) )</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"best tree f1 score:"</span>,score(grid_dt, X_test, y_test))</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"best knn f1 score:"</span>,score(grid_knn, X_test, y_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>knn_score <span class="op">=</span> f1_score( y_test, grid_knn.predict(X_test) )</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best tree f1 score: </span><span class="sc">{</span>dt_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best knn f1 score: </span><span class="sc">{</span>knn_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>best tree f1 score: 0.9306930693069307
-best knn f1 score: 0.9814814814814815</code></pre>
+<pre><code>best tree f1 score: 0.94915
+best knn f1 score: 0.99187</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-captioned">
@@ -1494,7 +1513,10 @@ Note
 </div>
 </div>
 </div>
-</section>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/di1np5781wkxndy/Example4_10.mp4?raw=1"></video></div>
+</div></div></section>
 <section id="alternatives-to-grid-search" class="level4" data-number="4.4.2.2">
 <h4 data-number="4.4.2.2" class="anchored" data-anchor-id="alternatives-to-grid-search"><span class="header-section-number">4.4.2.2</span> Alternatives to grid search</h4>
 <p>Grid search is a brute-force approach. It is <em>embarrassingly parallel</em>, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.</p>
@@ -1764,6 +1786,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video7);</script>
 <script>videojs(video_shortcode_videojs_video8);</script>
 <script>videojs(video_shortcode_videojs_video9);</script>
+<script>videojs(video_shortcode_videojs_video10);</script>
+<script>videojs(video_shortcode_videojs_video11);</script>
+<script>videojs(video_shortcode_videojs_video12);</script>
+<script>videojs(video_shortcode_videojs_video13);</script>
 
 
 
