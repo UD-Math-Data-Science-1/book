@@ -450,24 +450,31 @@ ensemble = BaggingClassifier(
     )
 
 ensemble.fit(X_train, y_train)
+```
+
+We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:
+
+```{python}
 query = X_test.iloc[-1:,:]
 p_hat = ensemble.predict_proba(query)
 print(f"Predicted ensemble probability of True on query is {p_hat[0][1]:.2%}")
 ```
 
-The `estimators_` field of the ensemble object is a list of the individual trained classifiers. With a little work, we can find out the prediction for *True* from every constituent:
+Internally, the `estimators_` field of the ensemble object is a list of the individual trained classifiers. With a little work, we could find out the prediction for *True* from every constituent:
 
 ```{python}
-pm = [ model.predict_proba(query.to_numpy())[0][1] for model in ensemble.estimators_ ]
-pm[:6]
+pm = [ model.predict_proba(query.to_numpy())[0,1] for model in ensemble.estimators_ ]
+pm[:6]   # first 6 predictions
 ```
 
-When we average these, we get the ensemble's prediction:
+The ensemble takes the average of this list to create its prediction:
 ```{python}
 print(f"Mean probability of True for query is {np.mean(pm):.2%}")
 ```
 
-Over the testing set, we find some improvement in the AUC score:
+The result above matches what we got by predicting directly from the ensemble, which is the normal mode of operation. 
+
+Over the testing set, we find that the ensemble has improved the AUC score:
 
 ```{python}
 p_hat = ensemble.predict_proba(X_test)
@@ -476,7 +483,16 @@ print(f"AUC for ensemble is {auc:.4f}")
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/55aiz2i5br6psok/Example4_4.mp4?raw=1 >}}
+:::
+
 There is a significant catch in that the theory requires the constituent learners to be uncorrelated, which is less true as the size of the bagging sample grows relative to the original training set. This can somewhat counterintuitively lead to better results by training on *smaller* individual training sets.
+
+::: {.callout-note}
+An ensemble of decision trees is known as a **random forest**. We can use a `RandomForestClassifier` to accomplish the same thing as a bagged decision tree ensemble. 
+:::
+
 
 ::::{#exm-select-ensemble-knn-better}
 If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:
@@ -491,62 +507,100 @@ ensemble = BaggingClassifier(
 ensemble.fit(X_train, y_train)
 p_hat = ensemble.predict_proba(X_test)
 auc = roc_auc_score(y_test==True, p_hat[:,1])   # columns are for [False, True]
-print(f"AUC for new ensemble is {auc:.4f}")
+print(f"AUC for the new ensemble is {auc:.4f}")
 ```
 
-We often get better results by increasing the size of the ensemble, too. Here, though, we don't find much more improvement:
-```{python}
-ensemble = BaggingClassifier( 
-    pipe, 
-    max_samples=0.2,
-    n_estimators=400,
-    random_state=18621
-    )
-
-ensemble.fit(X_train, y_train)
-p_hat = ensemble.predict_proba(X_test)
-auc = roc_auc_score(y_test==True, p_hat[:,1])   # columns are for [False, True]
-print(f"AUC for new ensemble is {auc:.4f}")
-```
+We may get better results by increasing the size of the ensemble, too, though in this case there isn't much room left for improvement.
 ::::
-
 
 ::::{#exm-select-ensemble-forest}
-Let's return to the experiment of @exm-select-overfit-forest, where we found that a decision tree of depth $r=12$ was badly overfit. Now we use an ensemble of 50 such trees:
-
+Let's work again with the forest cover dataset. It's got over 500,000 samples and 54 features:
 ```{python}
-#| code-fold: true
 forest = datasets.fetch_covtype()
-X = forest["data"][:50000,:8]
-y = (forest["target"][:50000] == 1)
-
-tree = DecisionTreeClassifier(max_depth=12)
-ensemble = BaggingClassifier( 
-    tree,               # model used in each estimator
-    max_samples=0.25,   # fraction of data to use for each
-    n_estimators=50,
-    random_state=18621,
-    n_jobs=-1            # use processes in parallel
-    )
-experiment(ensemble, X, y, 5000)
+forest["data"].shape
 ```
 
-Compared to the earlier experiment (see @fig-select-overfit-forest), the separation between training and testing was greatly reduced, although seemingly at a small cost to the bias. 
+We'll turn this into a binary classification by looking for just one of the possible label values:
+
+```{python}
+X = forest["data"]
+y = forest["target"] == 1
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2, 
+    shuffle=True, random_state=302
+)
+```
+
+How should we best make use of all that data? We can use a fairly deep decision tree without fear of overfitting, and the result is not bad:
+
+```{python}
+tree = DecisionTreeClassifier(max_depth=12) 
+tree.fit(X_train, y_train)
+
+from sklearn.metrics import f1_score
+F1 = f1_score(y_test, tree.predict(X_test) )
+print(f"F₁ for a single tree is {F1:.4f}")
+```
+
+A simple averaging over the same type of tree actually does worse here:
+```{python}
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(
+    max_depth=12, 
+    max_samples=0.2,
+    n_estimators=100, n_jobs=-1
+    )
+
+rf.fit(X_train,y_train)
+F1 = f1_score(y_test, rf.predict(X_test) )
+print(f"F₁ for a random forest is {F1:.4f}")
+```
+
+It's possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:
+
+```{python}
+rf = RandomForestClassifier(
+    max_depth=24, 
+    max_samples=0.2,
+    n_estimators=100, n_jobs=-1
+    )
+
+rf.fit(X_train,y_train)
+F1 = f1_score(y_test, rf.predict(X_test) )
+print(f"F₁ for a taller forest is {F1:.4f}")
+```
+
+In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:
+```{python}
+rf = RandomForestClassifier(
+    max_depth=24, 
+    max_features=0.5,
+    max_samples=0.2,
+    n_estimators=100, n_jobs=-1
+    )
+
+rf.fit(X_train,y_train)
+F1 = f1_score(y_test, rf.predict(X_test) )
+print(f"F₁ for a taller, skinnier forest is {F1:.4f}")
+```
 ::::
 
-::: {.callout-note}
-An ensemble of decision trees is known as a **random forest**. In fact, we could have used a `RandomForestClassifier` to accomplish the bagged decision tree ensemble in @exm-select-ensemble-forest. 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/73nq8mjams2imeg/Example4_6.mp4?raw=1 >}}
 :::
 
-In addition to training on random subsets of the data, a bagging classifier can use random subsets of features (i.e., dimensions). The purpose again is to increase the diversity of the individual estimators in order to make the ensemble more robust.
-
-Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the potential for interpreting the decision process the way we can for an individual tree.
+Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.
 
 ## Validation
 
 We now return to the opening questions of this chapter: how should we determine optimal hyperparameters and algorithms? 
 
 It's tempting to compute some test scores over a range of hyperparameter choices and simply choose the case that scores best. However, if we base hyperparameter optimization on a fixed testing set, then we are effectively learning from that set! The hyperparameters might become too tuned---i.e., overfit---to our particular choice of the test set. 
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/87jspt2wxhrvhnt/Section4_4.mp4?raw=1 >}}
+:::
 
 To avoid this pitfall, we can split the data into *three* subsets for training, **validation**, and testing. The validation set is used to tune hyperparameters. Once training is performed at values determined to be best on validation, the test set is used to assess the generalization of the optimized learner. 
 
@@ -555,6 +609,10 @@ Unfortunately, a fixed three-way split of the data further reduces the amount of
 ### Cross-validation
 
 In **cross-validation**, each learner is trained multiple times using unique training and validation sets drawn from the same pool. 
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/amedhad5b13q662/Section4_4_1.mp4?raw=1 >}}
+:::
 
 ::::{#def-select-cv}
 The steps for **$k$-fold cross-validation** are as follows:
@@ -591,7 +649,7 @@ y = beans["Class"]
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.15, 
-    shuffle=True, random_state=0
+    shuffle=True, random_state=302
     )
 ```
 
@@ -603,7 +661,7 @@ from sklearn.model_selection import cross_validate
 knn = KNeighborsClassifier(n_neighbors=5)
 learner = make_pipeline(StandardScaler(), knn)
 
-kf = KFold(n_splits=6, shuffle=True, random_state=0)
+kf = KFold(n_splits=6, shuffle=True, random_state=18621)
 scores = cross_validate(
     learner, 
     X_train, y_train, 
@@ -665,6 +723,11 @@ print( "score is", balanced_accuracy_score(y_test, yhat) )
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/dg0su9kvhvvcx7g/Example4_9.mp4?raw=1 >}}
+:::
+
+
 #### Grid search 
 When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it's common to perform a *grid search*, in which we try cross-validated fitting using every specified combination of parameter values. 
 
@@ -681,7 +744,7 @@ y = cancer["target"]
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, 
     test_size=0.15, 
-    shuffle=True, random_state=2
+    shuffle=True, random_state=3383
     )
 X_test.head()
 ```
@@ -695,9 +758,10 @@ grid = { "criterion":["gini", "entropy"],
          "max_depth":range(2, 15), 
          "min_impurity_decrease":np.arange(0,0.01,0.002) }
 learner = DecisionTreeClassifier(random_state=1)
-kf = KFold(n_splits=4, shuffle=True, random_state=0)
+kf = StratifiedKFold(n_splits=4, shuffle=True, random_state=302)
 
-grid_dt = GridSearchCV(learner, grid, 
+grid_dt = GridSearchCV(
+    learner, grid, 
     scoring="f1", 
     cv=kf,
     n_jobs=-1
@@ -717,29 +781,42 @@ Next, we do the same search over kNN classifiers. We always use standardization 
 grid = { "kneighborsclassifier__metric":["euclidean", "manhattan"], 
          "kneighborsclassifier__n_neighbors":range(1, 20), 
          "kneighborsclassifier__weights":["uniform", "distance"] }
+
 learner = make_pipeline(StandardScaler(), KNeighborsClassifier())
-grid_knn = GridSearchCV(learner, grid, 
+
+grid_knn = GridSearchCV(
+    learner, grid, 
     scoring="f1", 
     cv=kf,
     n_jobs=-1
     )
 grid_knn.fit(X_train, y_train)
-grid_knn.best_params_, grid_knn.best_score_
+
+print("Best parameters:")
+print(grid_knn.best_params_)
+print()
+print("Best score:")
+print(grid_knn.best_score_)
 ```
 
 Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:
 
 ```{python}
-score = lambda cl, X, y: f1_score( y, cl.predict(X) )
-
-print("best tree f1 score:",score(grid_dt, X_test, y_test))
-print("best knn f1 score:",score(grid_knn, X_test, y_test))
+dt_score = f1_score( y_test, grid_dt.predict(X_test) )
+knn_score = f1_score( y_test, grid_knn.predict(X_test) )
+print(f"best tree f1 score: {dt_score:.5f}")
+print(f"best knn f1 score: {knn_score:.5f}")
 ```
 
 :::{.callout-note}
 It may be instructive to rerun the competition above using different random seeds. The meaningfulness of the results is limited by their sensitivity to such choices.  Don't let floating-point values give you a false feeling of precision!
 :::
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/di1np5781wkxndy/Example4_10.mp4?raw=1 >}}
+:::
+
 
 #### Alternatives to grid search
 
