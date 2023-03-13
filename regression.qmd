@@ -918,15 +918,14 @@ Next we try a kNN regressor, doing a grid search to find good hyperparameters:
 ```{python}
 from sklearn.neighbors import KNeighborsRegressor
 
-kf = KFold(n_splits=6, shuffle=True, random_state=1)
+kf = KFold(n_splits=6, shuffle=True, random_state=3383)
 grid = {
     "kneighborsregressor__n_neighbors": range(2, 25),
     "kneighborsregressor__weights": ["uniform", "distance"] 
     }
 knn = make_pipeline( StandardScaler(), KNeighborsRegressor() )
 optim = GridSearchCV(
-    knn,
-    grid, 
+    knn, grid, 
     cv=kf, 
     n_jobs=-1
     )
@@ -1001,10 +1000,10 @@ x1[:,0] -= 0.25
 x2 = rng.random((10,2))
 x2[:,0] += 0.25
 X = np.vstack((x1,x2))
-y = np.exp(X[:,0]-2*X[:,1]**2+X[:,0]*X[:,1])
+y = np.exp( X[:,0]-2*X[:,1]**2+X[:,0]*X[:,1] )
 
-df = pd.DataFrame({"x₁":X[:,0],"x₂":X[:,1],"y":y})
-sns.scatterplot(data=df,x="x₁",y="x₂",hue="y");
+df = pd.DataFrame({"x₁": X[:,0], "x₂": X[:,1], "y": y})
+sns.scatterplot(data=df, x="x₁", y="x₂", hue="y");
 ```
 
 The default in `sklearn` is to use STD as the dispersion measure (called `squared_error` in sklearn). Here is a shallow tree fitted to the data:
@@ -1088,7 +1087,7 @@ The logistic function has the real line as its domain and takes the form of a sm
 
 ```{python}
 #| echo: false
-x = np.linspace(-8,8,501)
+x = np.linspace(-8, 8, 501)
 data = pd.DataFrame({"x":x,"σ(x)":1/(1+np.exp(-x))})
 sns.relplot(data=data, x="x", y="σ(x)", kind="line", aspect=1.5, height=3.5);
 ```
@@ -1137,8 +1136,7 @@ where $C$ is a positive hyperparameter and the vector norm is either the 2-norm 
 The parameter $C$ functions like the inverse of the regularization parameter $\alpha$ we used in the linear regressor. It's just a different convention chosen historically. As $C$ decreases, the regularization strength increases.
 :::
 
-### Case study: Personal spam filter
-
+::::{#exm-regression-spam}
 We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.
 
 ```{python}
@@ -1215,6 +1213,8 @@ pipe.fit(X_train, y_train)
 print(f"best C value: {logr.C_[0]:.3g}")
 print(f"accuracy score: {pipe.score(X_test,y_test):.5f}")
 ```
+::::
+
 
 ### Multiclass case
 
@@ -1229,7 +1229,7 @@ $$
 Since the $K$ OVR regressors are done independently, there is no reason to think these probabilities will sum to 1 over all the classes. So we must normalize them:
 
 $$
-\hat{p}_{k}(bfx) = \frac{\hat{q}_{k}(\bfx)}{\sum_{k=1}^K \hat{q}_{k}(\bfx)}.
+\hat{p}_{k}(\bfx) = \frac{\hat{q}_{k}(\bfx)}{\sum_{k=1}^K \hat{q}_{k}(\bfx)}.
 $$
 
 Computed over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point, and each of the $K$ columns gives the probability of one class at all the points.
