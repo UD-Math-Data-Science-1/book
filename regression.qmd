@@ -693,28 +693,32 @@ $$
 
 A problem with more than one valid solution is called **ill-posed**. If we made tiny changes to the predictor variables in this thought experiment, the problem would technically be well-posed, but there would be a wide range of solutions that were very nearly correct, in which case the problem is said to be **ill-conditioned**; for practical purposes, it remains just as difficult.
 
-The poor conditioning can be regularized away by modifying the least-squares loss function to penalize complexity in the model, in the form of excessively large regression coefficients. The common choices are **ridge regression**,
+The poor conditioning can be regularized away by modifying the least-squares loss function to penalize complexity in the model, in the form of excessively large regression coefficients. There are two dominant variants for doing this.
+
+::::{#def-regression-regular}
+**Ridge regression** minimizes the loss function 
 
 $$
 L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \twonorm{\bfw}^2,
+$${#eq-regression-ridge}
+
+where $\alpha$ is a nonnegative hyperparameter. **LASSO regression** minimizes the loss function 
+$$
+L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 $$
 
-and **LASSO**, 
+again for a nonnegative value of $\alpha$.
+::::
 
-$$
-L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw}.
-$$
-
-As $\alpha\to 0$, both forms revert to the usual least-squares loss, but as $\alpha \to \infty$, the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. 
+As $\alpha\to 0$, both types of regularization revert to the usual least-squares loss, but as $\alpha \to \infty$, the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. 
 
 While ridge regression is an easier function to minimize quickly, LASSO has an interesting advantage, as illustrated in this figure.
 
 ![](_media/regularization.png)
 
-LASSO tends to produce **sparse** results, meaning that some of the regression coefficients are zero or negligible. These zeros indicate predictor variables that have minor predictive value, which can be valuable information in itself. Moreover, when regression is run without these variables, there may be little effect on the bias, but a reduction in variance.
+LASSO tends to produce *sparse* results, meaning that some of the regression coefficients are zero or negligible. These zeros indicate predictor variables that have minor predictive value, which can be valuable information in itself. Moreover, these variables can often be removed from the regression to reduce variance without noticeably affecting the bias.
 
-### Case study: Diabetes
-
+::::{#exm-regression-ridge-diabetes}
 We'll apply regularized regression to data collected about the progression of diabetes:
 
 ```{python}
@@ -770,26 +774,28 @@ for alpha in [0.25, 0.5, 1, 2]:
     print(f"ridge regression CoD score: {rr.score(X_test, y_test):.4f}")
     print()
 ```
+::::
 
-LASSO penalizes the 1-norm of the coefficient vector. Here's a LASSO regression fit:
+::::{#exm-regression-lasso-diabetes}
+Here's a LASSO regression fit on the diabetes data:
 
 ```{python}
 from sklearn.linear_model import Lasso
 lass = Lasso(alpha=0.1)
-lass.fit(X_tr, y_tr)
-R2 = lass.score(X_te, y_te)
+lass.fit(X_train, y_train)
+R2 = lass.score(X_test, y_test)
 print(f"LASSO model CoD score: {R2:.4f}")
 ```
 
 A validation curve suggests modest gains in the $R^2$ score as the regularization parameter is varied:
 
 ```{python}
-kf = KFold(n_splits=4, shuffle=True, random_state=0)
-alpha = np.linspace(0,0.1,80)[1:]  # exclude alpha=0
+kf = KFold(n_splits=4, shuffle=True, random_state=302)
+alpha = np.linspace(0, 0.1, 80)[1:]  # exclude alpha=0
 
 _,scores = validation_curve(
     lass,
-    X_tr, y_tr,
+    X_train, y_train,
     cv=kf,
     n_jobs=-1,
     param_name="alpha", param_range=alpha
@@ -804,9 +810,9 @@ Moreover, while ridge regression still used all of the features, LASSO put zero 
 lass = Lasso(alpha=0.05)
 lass.fit(X_train, y_train)
 pd.DataFrame( {
-    "feature":X.columns,
-    "ridge":rr.coef_,
-    "LASSO":lass.coef_
+    "feature": X.columns,
+    "ridge": rr.coef_,
+    "LASSO": lass.coef_
     } )
 ```
 
@@ -841,6 +847,8 @@ lm.fit(X_train_reduced, y_train)
 R2 = lm.score(X_test_reduced, y_test)
 print(f"reduced linear model score: {R2:.4f}")
 ```
+::::
+
 ## Nonlinear regression
 
 Multilinear regression limits the representation of the dataset to a function of the form
