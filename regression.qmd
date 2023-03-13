@@ -634,15 +634,15 @@ Continuing with @exm-regression-polynomial, we explore the effect of polynomial 
 ```{python}
 from sklearn.metrics import mean_squared_error
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2, random_state=0
     )
 
 for deg in range(2,11):
     poly = make_pipeline( PolynomialFeatures(degree=deg), lm )
-    poly.fit(X_tr, y_tr)
-    MSE = mean_squared_error(y_te, poly.predict(X_te))
+    poly.fit(X_train, y_train)
+    MSE = mean_squared_error(y_test, poly.predict(X_test))
     print(f"MSE for degree {deg:2}: {MSE:.3f}")
 ```
 
@@ -730,15 +730,15 @@ First, we look at basic linear regression on all ten predictive features in the 
 X = diabetes.drop("target", axis=1)
 y = diabetes["target"]
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2, random_state=2
     )
 
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
-lm.fit(X_tr, y_tr)
-print(f"linear model CoD score: {lm.score(X_te, y_te):.4f}")
+lm.fit(X_train, y_train)
+print(f"linear model CoD score: {lm.score(X_test, y_test):.4f}")
 ```
 
 First, we find that ridge regression can improve the score a bit:
@@ -747,8 +747,8 @@ First, we find that ridge regression can improve the score a bit:
 from sklearn.linear_model import Ridge
 
 rr = Ridge(alpha=0.5)
-rr.fit(X_tr, y_tr)
-print(f"ridge CoD score: {rr.score(X_te, y_te):.4f}")
+rr.fit(X_train, y_train)
+print(f"ridge CoD score: {rr.score(X_test, y_test):.4f}")
 ```
 
 Ridge regularization added a penalty for the 2-norm of the regression coefficients vector. Accordingly, the regularized solution has smaller coefficients:
@@ -764,10 +764,10 @@ As we continue to increase the regularization parameter, the method becomes incr
 ```{python}
 for alpha in [0.25, 0.5, 1, 2]:
     rr = Ridge(alpha=alpha)    # more regularization
-    rr.fit(X_tr, y_tr)
+    rr.fit(X_train, y_train)
     print(f"alpha = {alpha:.2f}")
     print(f"2-norm of coefficient vector: {norm(rr.coef_):.1f}")
-    print(f"ridge regression CoD score: {rr.score(X_te, y_te):.4f}")
+    print(f"ridge regression CoD score: {rr.score(X_test, y_test):.4f}")
     print()
 ```
 
@@ -802,7 +802,7 @@ Moreover, while ridge regression still used all of the features, LASSO put zero 
 
 ```{python}
 lass = Lasso(alpha=0.05)
-lass.fit(X_tr, y_tr)
+lass.fit(X_train, y_train)
 pd.DataFrame( {
     "feature":X.columns,
     "ridge":rr.coef_,
@@ -829,16 +829,16 @@ print(zeroed)
 Now we can drop these features from the dataset:
 
 ```{python}
-X_tr_reduced = X_tr.drop(zeroed, axis=1)
-X_te_reduced = X_te.drop(zeroed, axis=1)
+X_train_reduced = X_train.drop(zeroed, axis=1)
+X_test_reduced = X_test.drop(zeroed, axis=1)
 ```
 
 Returning to a fit with no regularization, we find that little is lost by using the reduced feature set:
 
 ```{python}
-print(f"original linear model score: {lm.score(X_te,y_te):.4f}")
-lm.fit(X_tr_reduced, y_tr)
-R2 = lm.score(X_te_reduced, y_te)
+print(f"original linear model score: {lm.score(X_test, y_test):.4f}")
+lm.fit(X_train_reduced, y_train)
+R2 = lm.score(X_test_reduced, y_test)
 print(f"reduced linear model score: {R2:.4f}")
 ```
 ## Nonlinear regression
@@ -895,14 +895,14 @@ features = ["displacement", "horsepower", "weight", "acceleration"]
 X = cars[features]
 y = cars["mpg"]
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.2, random_state=0
+    test_size=0.2, random_state=302
     )
 
 lm = LinearRegression()
-lm.fit(X_tr, y_tr)
-print(f"linear model CoD: {lm.score(X_te, y_te):.4f}")
+lm.fit(X_train, y_train)
+print(f"linear model CoD: {lm.score(X_test, y_test):.4f}")
 ```
 
 Next we try a kNN regressor, doing a grid search to find good hyperparameters:
@@ -922,9 +922,9 @@ optim = GridSearchCV(
     cv=kf, 
     n_jobs=-1
     )
-optim.fit(X_tr, y_tr)
+optim.fit(X_train, y_train)
 
-print(f"best kNN CoD: {optim.score(X_te, y_te):.4f}")
+print(f"best kNN CoD: {optim.score(X_test, y_test):.4f}")
 ```
 
 As you can see above, we got some improvement over the linear regressor.
@@ -1042,9 +1042,9 @@ Continuing with the data from @exm-regression-knn-demo, we find that we can do e
 X = cars[features]
 y = cars["mpg"]
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.2, random_state=0
+    test_size=0.2, random_state=302
     )
 
 from sklearn.ensemble import RandomForestRegressor
@@ -1060,9 +1060,9 @@ optim = GridSearchCV(
     cv=kf, 
     n_jobs=-1
     )
-optim.fit(X_tr, y_tr)
+optim.fit(X_train, y_train)
 
-print(f"best forest CoD: {optim.score(X_te, y_te):.4f}")
+print(f"best forest CoD: {optim.score(X_test, y_test):.4f}")
 ```
 ::::
 
@@ -1144,10 +1144,10 @@ We create a feature matrix and label vector, and split into train/test sets:
 X = spam.drop("class", axis="columns")
 y = spam["class"]
 
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2,
-    shuffle=True, random_state=1
+    shuffle=True, random_state=19716
     )
 ```
 
@@ -1158,8 +1158,8 @@ from sklearn.linear_model import LogisticRegression
 
 logr = LogisticRegression(C=100, solver="liblinear")
 pipe = make_pipeline(StandardScaler(), logr)
-pipe.fit(X_tr, y_tr)
-print("accuracy:", pipe.score(X_te, y_te))
+pipe.fit(X_train, y_train)
+print("accuracy:", pipe.score(X_test, y_test))
 ```
 
 ::: {.callout-tip}
@@ -1183,9 +1183,9 @@ The ultimate predictions by the regressor are all either 0 or 1. But we can also
 
 ```{python}
 print("predicted classes:")
-print( pipe.predict(X_tr.iloc[:5,:]) )
+print( pipe.predict(X_train.iloc[:5,:]) )
 print("\nprobabilities:")
-print( pipe.predict_proba(X_tr.iloc[:5,:]) )
+print( pipe.predict_proba(X_train.iloc[:5,:]) )
 ```
 
 The probabilities might be useful for making decisions based on the results. For example, the first instance above was much less certain about the classification than the second. A more skeptical threshold greater than $0.54$ would change the class to 1. As in @sec-class-quant, the probability matrix can be used to create an ROC curve showing the tradeoffs over all thresholds.
@@ -1202,10 +1202,10 @@ logr = LogisticRegressionCV(
     n_jobs=-1, random_state=0
     )
 pipe = make_pipeline(StandardScaler(), logr)
-pipe.fit(X_tr, y_tr)
+pipe.fit(X_train, y_train)
 
 print(f"best C value: {logr.C_[0]:.3g}")
-print(f"accuracy score: {pipe.score(X_te,y_te):.5f}")
+print(f"accuracy score: {pipe.score(X_test,y_test):.5f}")
 ```
 
 ### Multiclass case
@@ -1233,22 +1233,22 @@ As a multiclass example, we use a data set about gas sensors recording values ov
 gas = pd.read_csv("_datasets/gas_drift.csv")
 y = gas["Class"]
 X = gas.drop("Class", axis="columns")
-X_tr, X_te, y_tr, y_te = train_test_split(
+X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2,
-    shuffle=True, random_state=1
+    shuffle=True, random_state=302
     )
 
 logr = LogisticRegression(solver="liblinear")
 pipe = make_pipeline(StandardScaler(), logr)
-pipe.fit(X_tr, y_tr)
-print("accuracy score:", pipe.score(X_te, y_te))
+pipe.fit(X_train, y_train)
+print("accuracy score:", pipe.score(X_test, y_test))
 ```
 
 We can now look at probabilistic predictions for each class:
 
 ```{python}
-p_hat = pipe.predict_proba(X_te)
+p_hat = pipe.predict_proba(X_test)
 cols = ["Class "+str(i) for i in range(1,7)]
 pd.DataFrame(p_hat, columns=cols).head(10)
 ```
@@ -1257,7 +1257,7 @@ This allows us to see that the ROC curves are nearly perfect:
 ```{python}
 results = []
 for i, label in enumerate(pipe.classes_):
-    actual = (y_te==label)
+    actual = (y_test==label)
     fp, tp, theta = roc_curve(actual, p_hat[:,i])
     results.extend( [ (label,fp,tp) for fp,tp in zip(fp,tp) ] )
 
