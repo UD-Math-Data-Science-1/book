@@ -164,15 +164,15 @@ X_train, X_test, y_train, y_test = train_test_split(
     shuffle=True, random_state=0
 )
 
-alln = range(200, 4001, 200)       # sizes of the training subsets
+alln = range(300, 6001, 300)       # sizes of the training subsets
 results = []                       # for tracking results
-tree = DecisionTreeClassifier(max_depth=4) 
+tree = DecisionTreeClassifier(max_depth=3) 
 for n in alln:             # iterate over training set sizes
-    for i in range(50):    # iterate over training sets
-        X_train, y_train = shuffle(X_train, y_train, random_state=i)
+    for i in range(100):        # iterate over training sets
+        X_train, y_train = shuffle(X_train, y_train, random_state=10*i)
         XX, yy = X_train[:n,:], y_train[:n]       # training subset of size n
         tree.fit(XX, yy)
-        results.append( ("train", n, 1-tree.score(XX,yy)) )
+        results.append( ("train", n, 1-tree.score(XX, yy)) )
         results.append( ("test", n, 1-tree.score(X_test, y_test)) )
 
 cols = [ "kind", "training set size", "error" ]
@@ -183,9 +183,9 @@ sns.relplot(data=results,
 );
 ```
 
-The plot above shows **learning curves**. The solid line is the mean result over all trials, and the ribbon has a width of one standard deviation. For a small training set, the tree has more than enough resolving power, and the result is severe overfitting, as seen by the large gap between testing and training. As the size of the training set grows, however, variance decreases and the two error measurements come together. 
+The plot above shows **learning curves**. The solid line is the mean result over all trials, and the ribbon has a width of one standard deviation. For each small training set, the tree has more than enough resolving power and adapts itself too well to the training data, leading to a large gap with the testing error (i.e., a failure to generalize past the training set). You can also see large variance (ribbon widths) in the results at the smaller sizes. As the training set size increases, we observe the training error increasing, because the task of reproducing the training set is now harder. The testing errors decrease, though, because the model has been fit to a more representative subset of the data. The gap between training and testing closes as more training data is used and the model is pushed to its limits.
 
-Note that the curves seem to approach a horizontal asymptote at a nonzero level of error. This level indicates an unavoidable bias for this tree size, no matter how much of the data we throw at it. As a simple analogy, think about approximating curves in the plane by a parabola. You will be able to do a perfect job for linear and quadratic functions, but if you approximate a cosine curve, you can't get it exactly correct no matter how much information you have about it. 
+Note that the curves seem to approach a horizontal asymptote at a nonzero level of error. This level indicates an unavoidable bias for this tree size, no matter how much of the data we throw at it. As a simple analogy, think about approximating curves in the plane by a parabola. You will be able to do a perfect job for linear and quadratic functions, but if you approximate one period of a cosine curve, you can't do a great job no matter how much information you have. 
 ::::
 
 :::{.column-margin}
