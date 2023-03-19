@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.253">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,10 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +46,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -117,16 +146,11 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./classification.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -134,7 +158,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -145,75 +169,65 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting started</span></a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
   </div>
 </li>
     </ul>
@@ -221,40 +235,39 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#classification-basics" id="toc-classification-basics" class="nav-link active" data-scroll-target="#classification-basics"><span class="header-section-number">3.1</span> Classification basics</a>
+  <li><a href="#classification-basics" id="toc-classification-basics" class="nav-link active" data-scroll-target="#classification-basics"><span class="toc-section-number">3.1</span>  Classification basics</a>
   <ul class="collapse">
-  <li><a href="#encoding-qualitative-data" id="toc-encoding-qualitative-data" class="nav-link" data-scroll-target="#encoding-qualitative-data"><span class="header-section-number">3.1.1</span> Encoding qualitative data</a></li>
-  <li><a href="#walkthrough" id="toc-walkthrough" class="nav-link" data-scroll-target="#walkthrough"><span class="header-section-number">3.1.2</span> Walkthrough</a></li>
+  <li><a href="#encoding-qualitative-data" id="toc-encoding-qualitative-data" class="nav-link" data-scroll-target="#encoding-qualitative-data"><span class="toc-section-number">3.1.1</span>  Encoding qualitative data</a></li>
+  <li><a href="#walkthrough" id="toc-walkthrough" class="nav-link" data-scroll-target="#walkthrough"><span class="toc-section-number">3.1.2</span>  Walkthrough</a></li>
   </ul></li>
-  <li><a href="#classifier-performance" id="toc-classifier-performance" class="nav-link" data-scroll-target="#classifier-performance"><span class="header-section-number">3.2</span> Classifier performance</a>
+  <li><a href="#classifier-performance" id="toc-classifier-performance" class="nav-link" data-scroll-target="#classifier-performance"><span class="toc-section-number">3.2</span>  Classifier performance</a>
   <ul class="collapse">
-  <li><a href="#traintest-paradigm" id="toc-traintest-paradigm" class="nav-link" data-scroll-target="#traintest-paradigm"><span class="header-section-number">3.2.1</span> Train–test paradigm</a></li>
-  <li><a href="#binary-classifiers" id="toc-binary-classifiers" class="nav-link" data-scroll-target="#binary-classifiers"><span class="header-section-number">3.2.2</span> Binary classifiers</a></li>
-  <li><a href="#multiclass-classifiers" id="toc-multiclass-classifiers" class="nav-link" data-scroll-target="#multiclass-classifiers"><span class="header-section-number">3.2.3</span> Multiclass classifiers</a></li>
+  <li><a href="#traintest-paradigm" id="toc-traintest-paradigm" class="nav-link" data-scroll-target="#traintest-paradigm"><span class="toc-section-number">3.2.1</span>  Train–test paradigm</a></li>
+  <li><a href="#binary-classifiers" id="toc-binary-classifiers" class="nav-link" data-scroll-target="#binary-classifiers"><span class="toc-section-number">3.2.2</span>  Binary classifiers</a></li>
+  <li><a href="#multiclass-classifiers" id="toc-multiclass-classifiers" class="nav-link" data-scroll-target="#multiclass-classifiers"><span class="toc-section-number">3.2.3</span>  Multiclass classifiers</a></li>
   </ul></li>
-  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="header-section-number">3.3</span> Decision trees</a>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="toc-section-number">3.3</span>  Decision trees</a>
   <ul class="collapse">
-  <li><a href="#gini-impurity" id="toc-gini-impurity" class="nav-link" data-scroll-target="#gini-impurity"><span class="header-section-number">3.3.1</span> Gini impurity</a></li>
-  <li><a href="#partitioning" id="toc-partitioning" class="nav-link" data-scroll-target="#partitioning"><span class="header-section-number">3.3.2</span> Partitioning</a></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage"><span class="header-section-number">3.3.3</span> Usage</a></li>
+  <li><a href="#gini-impurity" id="toc-gini-impurity" class="nav-link" data-scroll-target="#gini-impurity"><span class="toc-section-number">3.3.1</span>  Gini impurity</a></li>
+  <li><a href="#partitioning" id="toc-partitioning" class="nav-link" data-scroll-target="#partitioning"><span class="toc-section-number">3.3.2</span>  Partitioning</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage"><span class="toc-section-number">3.3.3</span>  Usage</a></li>
   </ul></li>
-  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="header-section-number">3.4</span> Nearest neighbors</a>
+  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="toc-section-number">3.4</span>  Nearest neighbors</a>
   <ul class="collapse">
-  <li><a href="#distances-and-norms" id="toc-distances-and-norms" class="nav-link" data-scroll-target="#distances-and-norms"><span class="header-section-number">3.4.1</span> Distances and norms</a></li>
-  <li><a href="#algorithm" id="toc-algorithm" class="nav-link" data-scroll-target="#algorithm"><span class="header-section-number">3.4.2</span> Algorithm</a></li>
-  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="header-section-number">3.4.3</span> Standardization</a></li>
+  <li><a href="#distances-and-norms" id="toc-distances-and-norms" class="nav-link" data-scroll-target="#distances-and-norms"><span class="toc-section-number">3.4.1</span>  Distances and norms</a></li>
+  <li><a href="#algorithm" id="toc-algorithm" class="nav-link" data-scroll-target="#algorithm"><span class="toc-section-number">3.4.2</span>  Algorithm</a></li>
+  <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="toc-section-number">3.4.3</span>  Standardization</a></li>
   </ul></li>
-  <li><a href="#sec-class-quant" id="toc-sec-class-quant" class="nav-link" data-scroll-target="#sec-class-quant"><span class="header-section-number">3.5</span> Probabilistic interpretation</a>
+  <li><a href="#sec-class-quant" id="toc-sec-class-quant" class="nav-link" data-scroll-target="#sec-class-quant"><span class="toc-section-number">3.5</span>  Probabilistic interpretation</a>
   <ul class="collapse">
-  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="header-section-number">3.5.1</span> ROC curve</a></li>
-  <li><a href="#auc" id="toc-auc" class="nav-link" data-scroll-target="#auc"><span class="header-section-number">3.5.2</span> AUC</a></li>
+  <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="toc-section-number">3.5.1</span>  ROC curve</a></li>
+  <li><a href="#auc" id="toc-auc" class="nav-link" data-scroll-target="#auc"><span class="toc-section-number">3.5.2</span>  AUC</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
@@ -265,7 +278,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></h1>
 </div>
 
 
@@ -366,12 +379,12 @@ X_{n1} &amp; X_{n2} &amp; \cdots &amp; X_{nd}
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/lqeka4m8p5q44k2/Section3_1.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-important callout-titled">
+</div></div><div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Important
 </div>
 </div>
@@ -390,12 +403,12 @@ Important
 y_1 \\ y_2 \\ \vdots \\ y_n
 \end{bmatrix}
 \]</span></p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Important
 </div>
 </div>
@@ -506,12 +519,12 @@ there are 64 features and 1797 samples</code></pre>
 <pre><code>array([False])</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Important
 </div>
 </div>
@@ -563,23 +576,23 @@ knn score is 99.9%</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">loan_amnt</th>
-<th data-quarto-table-cell-role="th">int_rate</th>
-<th data-quarto-table-cell-role="th">installment</th>
-<th data-quarto-table-cell-role="th">annual_inc</th>
-<th data-quarto-table-cell-role="th">dti</th>
-<th data-quarto-table-cell-role="th">delinq_2yrs</th>
-<th data-quarto-table-cell-role="th">delinq_amnt</th>
-<th data-quarto-table-cell-role="th">percent_funded</th>
+<th></th>
+<th>loan_amnt</th>
+<th>int_rate</th>
+<th>installment</th>
+<th>annual_inc</th>
+<th>dti</th>
+<th>delinq_2yrs</th>
+<th>delinq_amnt</th>
+<th>percent_funded</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>5000</td>
 <td>10.65</td>
 <td>162.87</td>
@@ -590,7 +603,7 @@ knn score is 99.9%</code></pre>
 <td>100.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>2500</td>
 <td>15.27</td>
 <td>59.83</td>
@@ -601,7 +614,7 @@ knn score is 99.9%</code></pre>
 <td>100.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>2400</td>
 <td>15.96</td>
 <td>84.33</td>
@@ -612,7 +625,7 @@ knn score is 99.9%</code></pre>
 <td>100.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>10000</td>
 <td>13.49</td>
 <td>339.31</td>
@@ -623,7 +636,7 @@ knn score is 99.9%</code></pre>
 <td>100.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>3000</td>
 <td>12.69</td>
 <td>67.79</td>
@@ -783,12 +796,12 @@ Name: percent_funded, dtype: object</code></pre>
 </tbody>
 </table>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -847,12 +860,12 @@ F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recal
        [ 343,   26]])</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Danger
 </div>
 </div>
@@ -962,24 +975,24 @@ balanced accuracy = 53.5%</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mpg</th>
-<th data-quarto-table-cell-role="th">cylinders</th>
-<th data-quarto-table-cell-role="th">displacement</th>
-<th data-quarto-table-cell-role="th">horsepower</th>
-<th data-quarto-table-cell-role="th">weight</th>
-<th data-quarto-table-cell-role="th">acceleration</th>
-<th data-quarto-table-cell-role="th">model_year</th>
-<th data-quarto-table-cell-role="th">origin</th>
-<th data-quarto-table-cell-role="th">name</th>
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -991,7 +1004,7 @@ balanced accuracy = 53.5%</code></pre>
 <td>chevrolet chevelle malibu</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -1003,7 +1016,7 @@ balanced accuracy = 53.5%</code></pre>
 <td>buick skylark 320</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -1015,7 +1028,7 @@ balanced accuracy = 53.5%</code></pre>
 <td>plymouth satellite</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -1027,7 +1040,7 @@ balanced accuracy = 53.5%</code></pre>
 <td>amc rebel sst</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -1054,12 +1067,12 @@ balanced accuracy = 53.5%</code></pre>
 <pre><code>392 samples and 5 features</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Tip
 </div>
 </div>
@@ -1454,12 +1467,12 @@ $$ -->
 </div>
 </div>
 <p>The Euclidean norm generalizes ordinary geometric distance in <span class="math inline">\(\real^2\)</span> and <span class="math inline">\(\real^3\)</span> and is usually considered the default. One of its most important features is that <span class="math inline">\(\twonorm{\bfx}^2\)</span> is a differentiable function of the components of <span class="math inline">\(\bfx\)</span>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -1474,12 +1487,12 @@ Note
 <div id="def-class-knn" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.9 </strong></span>Given a new query vector <span class="math inline">\(\bfx\)</span>, the <strong>kNN algorithm</strong> finds the <span class="math inline">\(k\)</span> labeled samples closest to <span class="math inline">\(\bfx\)</span> and chooses the most frequently occurring label among them. Ties are broken randomly.</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -1515,22 +1528,22 @@ Note
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">species</th>
-<th data-quarto-table-cell-role="th">island</th>
-<th data-quarto-table-cell-role="th">bill_length_mm</th>
-<th data-quarto-table-cell-role="th">bill_depth_mm</th>
-<th data-quarto-table-cell-role="th">flipper_length_mm</th>
-<th data-quarto-table-cell-role="th">body_mass_g</th>
-<th data-quarto-table-cell-role="th">sex</th>
+<th></th>
+<th>species</th>
+<th>island</th>
+<th>bill_length_mm</th>
+<th>bill_depth_mm</th>
+<th>flipper_length_mm</th>
+<th>body_mass_g</th>
+<th>sex</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.1</td>
@@ -1540,7 +1553,7 @@ Note
 <td>Male</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.5</td>
@@ -1550,7 +1563,7 @@ Note
 <td>Female</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>40.3</td>
@@ -1560,7 +1573,7 @@ Note
 <td>Female</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>36.7</td>
@@ -1570,7 +1583,7 @@ Note
 <td>Female</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.3</td>
@@ -1580,7 +1593,7 @@ Note
 <td>Male</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
+<th>6</th>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>38.9</td>
@@ -1702,12 +1715,12 @@ weighted avg       0.79      0.79      0.77        67
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video15" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/yj9d51w4e67l5bw/Example3_12.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-tip callout-titled">
+</div></div><div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Tip
 </div>
 </div>
@@ -1811,42 +1824,42 @@ weighted avg       1.00      1.00      1.00        67
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>9</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>5</td>
 <td>3</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>6</td>
 <td>1</td>
 <td>3</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>2</td>
 <td>0</td>
 <td>8</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>4</td>
 <td>5</td>
 <td>1</td>
@@ -1923,42 +1936,42 @@ $$ --></p>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
@@ -1975,42 +1988,42 @@ $$ --></p>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
@@ -2027,42 +2040,42 @@ $$ --></p>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>1</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>1</td>
 <td>1</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>1</td>
 <td>1</td>
 <td>0</td>
@@ -2079,42 +2092,42 @@ $$ --></p>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>1</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>0</td>
 <td>0</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>0</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -2131,12 +2144,12 @@ $$ --></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video18" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/km6h1w1c7hprzww/Section3_5_1.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-note callout-titled">
+</div></div><div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -2151,47 +2164,47 @@ Note
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">A</th>
-<th data-quarto-table-cell-role="th">B</th>
-<th data-quarto-table-cell-role="th">C</th>
-<th data-quarto-table-cell-role="th">truth</th>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>truth</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>9</td>
 <td>0</td>
 <td>1</td>
 <td>A</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>5</td>
 <td>3</td>
 <td>2</td>
 <td>B</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>6</td>
 <td>1</td>
 <td>3</td>
 <td>A</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>2</td>
 <td>0</td>
 <td>8</td>
 <td>C</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>4</td>
 <td>5</td>
 <td>1</td>
@@ -2209,48 +2222,48 @@ Note
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">theta</th>
-<th data-quarto-table-cell-role="th">FP</th>
-<th data-quarto-table-cell-role="th">TP</th>
+<th></th>
+<th>theta</th>
+<th>FP</th>
+<th>TP</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>0.05</td>
 <td>2</td>
 <td>3</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>0.25</td>
 <td>1</td>
 <td>3</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>0.45</td>
 <td>1</td>
 <td>2</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>0.55</td>
 <td>0</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>0.65</td>
 <td>0</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>0.95</td>
 <td>0</td>
 <td>0</td>
@@ -2294,126 +2307,126 @@ Note
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">label</th>
-<th data-quarto-table-cell-role="th">FP rate</th>
-<th data-quarto-table-cell-role="th">TP rate</th>
+<th></th>
+<th>label</th>
+<th>FP rate</th>
+<th>TP rate</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>Adelie</td>
 <td>0.000000</td>
 <td>0.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>Adelie</td>
 <td>0.027027</td>
 <td>0.233333</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>Adelie</td>
 <td>0.054054</td>
 <td>0.566667</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>Adelie</td>
 <td>0.216216</td>
 <td>0.900000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>Adelie</td>
 <td>0.405405</td>
 <td>0.966667</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>Adelie</td>
 <td>0.459459</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th>6</th>
 <td>Adelie</td>
 <td>1.000000</td>
 <td>1.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th>7</th>
 <td>Chinstrap</td>
 <td>0.000000</td>
 <td>0.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th>8</th>
 <td>Chinstrap</td>
 <td>0.019231</td>
 <td>0.333333</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th>9</th>
 <td>Chinstrap</td>
 <td>0.153846</td>
 <td>0.733333</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">10</td>
+<th>10</th>
 <td>Chinstrap</td>
 <td>0.423077</td>
 <td>0.933333</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">11</td>
+<th>11</th>
 <td>Chinstrap</td>
 <td>1.000000</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">12</td>
+<th>12</th>
 <td>Gentoo</td>
 <td>0.000000</td>
 <td>0.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">13</td>
+<th>13</th>
 <td>Gentoo</td>
 <td>0.000000</td>
 <td>0.909091</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">14</td>
+<th>14</th>
 <td>Gentoo</td>
 <td>0.022222</td>
 <td>0.909091</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">15</td>
+<th>15</th>
 <td>Gentoo</td>
 <td>0.022222</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">16</td>
+<th>16</th>
 <td>Gentoo</td>
 <td>0.088889</td>
 <td>1.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">17</td>
+<th>17</th>
 <td>Gentoo</td>
 <td>0.200000</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">18</td>
+<th>18</th>
 <td>Gentoo</td>
 <td>1.000000</td>
 <td>1.000000</td>
@@ -2485,27 +2498,27 @@ Note
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">standard</th>
-<th data-quarto-table-cell-role="th">weighted</th>
+<th></th>
+<th>standard</th>
+<th>weighted</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Adelie</td>
+<th>Adelie</th>
 <td>0.903153</td>
 <td>0.935586</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">Chinstrap</td>
+<th>Chinstrap</th>
 <td>0.857051</td>
 <td>0.883333</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">Gentoo</td>
+<th>Gentoo</th>
 <td>0.997980</td>
 <td>0.998990</td>
 </tr>
@@ -2558,7 +2571,7 @@ y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 <p><span class="theorem-title"><strong>Exercise 3.8 </strong></span>Carefully sketch the set of all points in <span class="math inline">\(\real^2\)</span> whose 1-norm distance from the origin equals 1. This is a <em>Manhattan unit circle</em>.</p>
 </div>
 <div id="exr-class-triangle" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.9 </strong></span>Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for <span class="math inline">\(k\)</span>-nearest neighbors with <span class="math inline">\(k=1\)</span>, using <strong>(a)</strong> the 2-norm and <strong>(b)</strong> the <span class="math inline">\(\infty\)</span>-norm.</p>
+<p><span class="theorem-title"><strong>Exercise 3.9 </strong></span>Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for <span class="math inline">\(k\)</span>-nearest neighbors with <span class="math inline">\(k=1\)</span>, using <strong>(a)</strong> the 2-norm <del>and <strong>(b)</strong> the <span class="math inline">\(\infty\)</span>-norm.</del></p>
 </div>
 <div id="exr-class-ellipse" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.10 </strong></span>Define 8 points on an ellipse by <span class="math inline">\(x_k=a\cos(\theta_k)\)</span> and <span class="math inline">\(y_k=b\sin(\theta_k)\)</span>, where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are positive and <span class="math display">\[
@@ -2597,23 +2610,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -2825,9 +2824,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
