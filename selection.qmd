@@ -194,6 +194,8 @@ Note that the curves seem to approach a horizontal asymptote at a nonzero level 
 
 When you see a large gap between training and test errors, you should suspect that the learner will not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.
 
+![](_media/memes/learning-curve.jpg){height="240"}
+
 ## Overfitting
 
 One important factor we have not yet considered is noise in the training data---that is, erroneous values. If a learner responds too adeptly to isolated wrong values, it will also respond incorrectly to other nearby inputs. This situation is known as **overfitting**.
@@ -376,6 +378,8 @@ However, notice above that the testing error increased substantially from the ov
 :::
 
 We could say that the last tree in @exm-select-overfit-forest is underfitting the data; the behavior of the labelling function is probably too complex to be replicated well by any tree that shallow. In short, the overfitting/underfitting dilemma is another manifestation of the bias--variance tradeoff.
+
+![](_media/memes/overfit.jpg){height="240"}
 
 ## Ensemble methods
 
@@ -591,6 +595,8 @@ print(f"F₁ for a taller, skinnier forest is {F1:.4f}")
 :::
 
 Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.
+
+![](_media/memes/random-forest.jpeg){width="360"}
 
 ## Validation
 
@@ -821,3 +827,5 @@ It may be instructive to rerun the competition above using different random seed
 #### Alternatives to grid search
 
 Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.
+
+![](_media/memes/validation.jpg){height="300"}
