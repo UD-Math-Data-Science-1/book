@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.3.253">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -146,11 +117,16 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -158,7 +134,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -169,65 +145,75 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
   </div>
 </li>
     </ul>
@@ -235,32 +221,33 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-regression-linear" id="toc-sec-regression-linear" class="nav-link active" data-scroll-target="#sec-regression-linear"><span class="toc-section-number">5.1</span>  Linear regression</a>
+  <li><a href="#sec-regression-linear" id="toc-sec-regression-linear" class="nav-link active" data-scroll-target="#sec-regression-linear"><span class="header-section-number">5.1</span> Linear regression</a>
   <ul class="collapse">
-  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="toc-section-number">5.1.1</span>  Linear algebra</a></li>
-  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics"><span class="toc-section-number">5.1.2</span>  Performance metrics</a></li>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="header-section-number">5.1.1</span> Linear algebra</a></li>
+  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics"><span class="header-section-number">5.1.2</span> Performance metrics</a></li>
   </ul></li>
-  <li><a href="#multilinear-regression" id="toc-multilinear-regression" class="nav-link" data-scroll-target="#multilinear-regression"><span class="toc-section-number">5.2</span>  Multilinear regression</a>
+  <li><a href="#multilinear-regression" id="toc-multilinear-regression" class="nav-link" data-scroll-target="#multilinear-regression"><span class="header-section-number">5.2</span> Multilinear regression</a>
   <ul class="collapse">
-  <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression"><span class="toc-section-number">5.2.1</span>  Polynomial regression</a></li>
+  <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression"><span class="header-section-number">5.2.1</span> Polynomial regression</a></li>
   </ul></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="toc-section-number">5.3</span>  Regularization</a></li>
-  <li><a href="#nonlinear-regression" id="toc-nonlinear-regression" class="nav-link" data-scroll-target="#nonlinear-regression"><span class="toc-section-number">5.4</span>  Nonlinear regression</a>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">5.3</span> Regularization</a></li>
+  <li><a href="#nonlinear-regression" id="toc-nonlinear-regression" class="nav-link" data-scroll-target="#nonlinear-regression"><span class="header-section-number">5.4</span> Nonlinear regression</a>
   <ul class="collapse">
-  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="toc-section-number">5.4.1</span>  Nearest neighbors</a></li>
-  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree"><span class="toc-section-number">5.4.2</span>  Decision tree</a></li>
+  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="header-section-number">5.4.1</span> Nearest neighbors</a></li>
+  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree"><span class="header-section-number">5.4.2</span> Decision tree</a></li>
   </ul></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="toc-section-number">5.5</span>  Logistic regression</a>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">5.5</span> Logistic regression</a>
   <ul class="collapse">
-  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="toc-section-number">5.5.1</span>  Loss function</a></li>
-  <li><a href="#regularization-1" id="toc-regularization-1" class="nav-link" data-scroll-target="#regularization-1"><span class="toc-section-number">5.5.2</span>  Regularization</a></li>
-  <li><a href="#multiclass-case" id="toc-multiclass-case" class="nav-link" data-scroll-target="#multiclass-case"><span class="toc-section-number">5.5.3</span>  Multiclass case</a></li>
+  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="header-section-number">5.5.1</span> Loss function</a></li>
+  <li><a href="#regularization-1" id="toc-regularization-1" class="nav-link" data-scroll-target="#regularization-1"><span class="header-section-number">5.5.2</span> Regularization</a></li>
+  <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="header-section-number">5.5.3</span> Multiclass classification</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
@@ -271,7 +258,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
 </div>
 
 
@@ -382,12 +369,12 @@ L(a,b) = \sum_{i=1}^n (\hat{f}(x_i)-y_i)^2 = \sum_{i=1}^n (a x_i + b - y_i)^2.
 <p><span class="math display">\[
 \pp{L}{a} = \sum_{i=1}^n 2x_i(a x_i + b - y_i) = 2 a \left(\sum_{i=1}^n x_i^2\right) + 2b\left(\sum_{i=1}^n x_i\right) - 2\sum_{i=1}^n x_i y_i.
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -441,12 +428,12 @@ L(a,b) =  \twonorm{a\, \bfx + b \,\bfe - \bfy}^2,
 <p>The vector inner product is defined only between two vectors of the same length (dimension). There is an important link between the inner product and the 2-norm: <span id="eq-regression-hilbert"><span class="math display">\[
 \bfu^T \bfu = \sum_{i=1}^d u_i^2 = \twonorm{\bfu}^2.
 \tag{5.3}\]</span></span></p>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -454,12 +441,12 @@ Note
 <p><em>Inner product</em> is a term from linear algebra. In physics and vector calculus with <span class="math inline">\(d=2\)</span> or <span class="math inline">\(d=3\)</span>, the same thing is often called a <em>dot product</em> and written as <span class="math inline">\(\bfu \cdot \bfv\)</span>.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -521,12 +508,12 @@ y_i - \hat{y}_i, \qquad i=1,\ldots,n,
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/pl9jy2qtqpk8zr2/Section5_1_2.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-caution callout-captioned">
+</div></div><div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Danger
 </div>
 </div>
@@ -572,12 +559,12 @@ R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\di
 <li>If the <span class="math inline">\(\hat{y}_i\)</span> are found from a linear regression, then <span class="math inline">\(R^2\)</span> is the square of the Pearson correlation coefficient between <span class="math inline">\(\bfy\)</span> and <span class="math inline">\(\hat{\bfy}\)</span>.</li>
 </ol>
 </div>
-<div class="callout callout-style-default callout-warning callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -616,21 +603,21 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>year</th>
-<th>mo</th>
-<th>data-type</th>
-<th>region</th>
-<th>extent</th>
-<th>area</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">mo</th>
+<th data-quarto-table-cell-role="th">data-type</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">extent</th>
+<th data-quarto-table-cell-role="th">area</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>1979</td>
 <td>1</td>
 <td>Goddard</td>
@@ -639,7 +626,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>12.41</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>1980</td>
 <td>1</td>
 <td>Goddard</td>
@@ -648,7 +635,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>11.94</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>1981</td>
 <td>1</td>
 <td>Goddard</td>
@@ -657,7 +644,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>11.91</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>1982</td>
 <td>1</td>
 <td>Goddard</td>
@@ -666,7 +653,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>12.19</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>1983</td>
 <td>1</td>
 <td>Goddard</td>
@@ -811,12 +798,12 @@ MAE: 4.93e-02, compared to standard deviation 1.53e-01</code></pre>
 y \approx \hat{f}(\bfx) = w_1 x_1 + w_2x_2 + \cdots w_d x_d = \bfw^T\bfx,
 \]</span> for a constant vector <span class="math inline">\(\bfw\)</span> known as the <strong>weight vector</strong>.</p>
 </div>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -859,12 +846,12 @@ L(\bfw) = \sum_{i=1}^n (y_i - \hat{f}(\bfX_i))^2 = \sum_{i=1}^n (y_i - \bfX_i^T\
 L(\bfw) = \twonorm{\bfX \bfw- \bfy}^2.
 \tag{5.6}\]</span></span></p>
 <p>As in the <span class="math inline">\(d=1\)</span> case, minimizing the loss is equivalent to solving a linear system of equations known as the <em>normal equations</em> for the weight vector <span class="math inline">\(\bfw\)</span>. We do not present the details here.</p>
-<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Danger
 </div>
 </div>
@@ -881,24 +868,24 @@ Danger
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
-<th>origin</th>
-<th>name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -910,7 +897,7 @@ Danger
 <td>chevrolet chevelle malibu</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -922,7 +909,7 @@ Danger
 <td>buick skylark 320</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -934,7 +921,7 @@ Danger
 <td>plymouth satellite</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -946,7 +933,7 @@ Danger
 <td>amc rebel sst</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -981,12 +968,12 @@ Danger
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MSE: </span><span class="sc">{</span>MSE<span class="sc">:.3f}</span><span class="ss">, compared to variance </span><span class="sc">{</span>y_test<span class="sc">.</span>var()<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1051,54 +1038,54 @@ dtype: float64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>TV</th>
-<th>Radio</th>
-<th>Newspaper</th>
-<th>Sales</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TV</th>
+<th data-quarto-table-cell-role="th">Radio</th>
+<th data-quarto-table-cell-role="th">Newspaper</th>
+<th data-quarto-table-cell-role="th">Sales</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>230.1</td>
 <td>37.8</td>
 <td>69.2</td>
 <td>22.1</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>44.5</td>
 <td>39.3</td>
 <td>45.1</td>
 <td>10.4</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>17.2</td>
 <td>45.9</td>
 <td>69.3</td>
 <td>12.0</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>151.5</td>
 <td>41.3</td>
 <td>58.5</td>
 <td>16.5</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>180.8</td>
 <td>10.8</td>
 <td>58.4</td>
 <td>17.9</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>8.7</td>
 <td>48.9</td>
 <td>75.0</td>
@@ -1177,12 +1164,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>While we have a very good <span class="math inline">\(R^2\)</span> score now, we can try to improve it. We can add an additional feature that is the product of <em>TV</em> and <em>Radio</em>, representing the possibility that these media reinforce one another’s effects:</p>
-<div class="callout callout-style-default callout-tip callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -1234,24 +1221,24 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
-<th>origin</th>
-<th>name</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -1263,7 +1250,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>chevrolet chevelle malibu</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -1275,7 +1262,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>buick skylark 320</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -1287,7 +1274,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>plymouth satellite</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -1299,7 +1286,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>amc rebel sst</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -1427,12 +1414,12 @@ This is our best regression fit so far, by a mile. --></p>
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/mgkf1r9wlrxeqxl/Example5_8.mp4?raw=1"></video></div>
 </div></div><p>Let’s summarize the situation:</p>
-<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Danger
 </div>
 </div>
@@ -1485,26 +1472,26 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>age</th>
-<th>sex</th>
-<th>bmi</th>
-<th>bp</th>
-<th>s1</th>
-<th>s2</th>
-<th>s3</th>
-<th>s4</th>
-<th>s5</th>
-<th>s6</th>
-<th>target</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">bmi</th>
+<th data-quarto-table-cell-role="th">bp</th>
+<th data-quarto-table-cell-role="th">s1</th>
+<th data-quarto-table-cell-role="th">s2</th>
+<th data-quarto-table-cell-role="th">s3</th>
+<th data-quarto-table-cell-role="th">s4</th>
+<th data-quarto-table-cell-role="th">s5</th>
+<th data-quarto-table-cell-role="th">s6</th>
+<th data-quarto-table-cell-role="th">target</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>0.038076</td>
 <td>0.050680</td>
 <td>0.061696</td>
@@ -1518,7 +1505,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>151.0</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>-0.001882</td>
 <td>-0.044642</td>
 <td>-0.051474</td>
@@ -1532,7 +1519,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>75.0</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>0.085299</td>
 <td>0.050680</td>
 <td>0.044451</td>
@@ -1546,7 +1533,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>141.0</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>-0.089063</td>
 <td>-0.044642</td>
 <td>-0.011595</td>
@@ -1560,7 +1547,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>206.0</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>0.005383</td>
 <td>-0.044642</td>
 <td>-0.036385</td>
@@ -1574,7 +1561,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>135.0</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>-0.092695</td>
 <td>-0.044642</td>
 <td>-0.040696</td>
@@ -1588,7 +1575,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>97.0</td>
 </tr>
 <tr class="odd">
-<th>6</th>
+<td data-quarto-table-cell-role="th">6</td>
 <td>-0.045472</td>
 <td>0.050680</td>
 <td>-0.047163</td>
@@ -1602,7 +1589,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>138.0</td>
 </tr>
 <tr class="even">
-<th>7</th>
+<td data-quarto-table-cell-role="th">7</td>
 <td>0.063504</td>
 <td>0.050680</td>
 <td>-0.001895</td>
@@ -1616,7 +1603,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>63.0</td>
 </tr>
 <tr class="odd">
-<th>8</th>
+<td data-quarto-table-cell-role="th">8</td>
 <td>0.041708</td>
 <td>0.050680</td>
 <td>0.061696</td>
@@ -1630,7 +1617,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>110.0</td>
 </tr>
 <tr class="even">
-<th>9</th>
+<td data-quarto-table-cell-role="th">9</td>
 <td>-0.070900</td>
 <td>-0.044642</td>
 <td>0.039062</td>
@@ -1755,72 +1742,72 @@ ridge regression CoD score: 0.3478
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>feature</th>
-<th>ridge</th>
-<th>LASSO</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">feature</th>
+<th data-quarto-table-cell-role="th">ridge</th>
+<th data-quarto-table-cell-role="th">LASSO</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>age</td>
 <td>43.113029</td>
 <td>-0.000000</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>sex</td>
 <td>-23.953301</td>
 <td>-155.276227</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>bmi</td>
 <td>199.535945</td>
 <td>529.173009</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>bp</td>
 <td>144.586873</td>
 <td>313.419043</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>s1</td>
 <td>25.977923</td>
 <td>-132.507438</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>s2</td>
 <td>2.751708</td>
 <td>-0.000000</td>
 </tr>
 <tr class="odd">
-<th>6</th>
+<td data-quarto-table-cell-role="th">6</td>
 <td>s3</td>
 <td>-106.337626</td>
 <td>-165.167100</td>
 </tr>
 <tr class="even">
-<th>7</th>
+<td data-quarto-table-cell-role="th">7</td>
 <td>s4</td>
 <td>89.526889</td>
 <td>0.000000</td>
 </tr>
 <tr class="odd">
-<th>8</th>
+<td data-quarto-table-cell-role="th">8</td>
 <td>s5</td>
 <td>185.660175</td>
 <td>580.262391</td>
 </tr>
 <tr class="even">
-<th>9</th>
+<td data-quarto-table-cell-role="th">9</td>
 <td>s6</td>
 <td>85.576399</td>
 <td>30.557703</td>
@@ -2096,7 +2083,7 @@ Name: y, dtype: float64</code></pre>
 <span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best forest CoD: </span><span class="sc">{</span>optim<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>best forest CoD: 0.7280</code></pre>
+<pre><code>best forest CoD: 0.7626</code></pre>
 </div>
 </div>
 </div>
@@ -2136,6 +2123,19 @@ L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \
 \]</span> if <span class="math inline">\(y_i=0\)</span>, which becomes infinite as <span class="math inline">\(\hat{p}_i\to 1^-\)</span>, and <span class="math display">\[
 -\log(\hat{p}_i)
 \]</span> if <span class="math inline">\(y_i=1\)</span>, which becomes infinite as <span class="math inline">\(\hat{p}_i\to 0^+\)</span>. Thus, there is a steep penalty for being almost completely wrong about an observation.</p>
+<div id="exm-regression-cross-entropy" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.18 </strong></span>Suppose we have true labels <span class="math inline">\(\bfy=[0,0,0,1]\)</span> and predicted probabilities <span class="math inline">\(\hat{\mathbf{p}} = [0.1,0.4,0.2,0.3].\)</span> This gives the following terms in the cross-entropy sum: <span class="math display">\[
+\begin{split}
+\cancel{y_1 \log(\hat{p}_1)} + (1-y_1) \log(1-\hat{p}_1) &amp;= \log(0.9), \\
+\cancel{y_2 \log(\hat{p}_2)} + (1-y_2) \log(1-\hat{p}_2) &amp;= \log(0.6), \\
+\cancel{y_3 \log(\hat{p}_3)} + (1-y_3) \log(1-\hat{p}_3) &amp;= \log(0.8), \\
+y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
+\end{split}
+\]</span></p>
+<p>Hence the total cross-entropy is <span class="math display">\[
+-\log\bigl[ (0.9)(0.6)(0.8)(0.3)\bigr] = -\log(0.1296).
+\]</span> Using the natural log, this is about <span class="math inline">\(2.043\)</span>.</p>
+</div>
 <p>Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does <em>not</em> lead to a linear problem for the weight vector <span class="math inline">\(\bfw\)</span>. The difference in practice is usually not a concern, though.</p>
 </section>
 <section id="regularization-1" class="level3" data-number="5.5.2">
@@ -2145,12 +2145,12 @@ L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \
 \widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
 \]</span></p>
 <p>where <span class="math inline">\(C\)</span> is a positive hyperparameter and the vector norm is either the 2-norm (ridge) or 1-norm (LASSO).</p>
-<div class="callout callout-style-default callout-important callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -2158,8 +2158,9 @@ Important
 <p>The parameter <span class="math inline">\(C\)</span> functions like the inverse of the regularization parameter <span class="math inline">\(\alpha\)</span> we used in the linear regressor. It’s just a different convention chosen historically. As <span class="math inline">\(C\)</span> <em>decreases</em>, the regularization strength <em>increases</em>.</p>
 </div>
 </div>
+<p>For binary classification, it’s natural to let the labels all be 0 or 1 and interpret a logistic regression as the probability of being in class 1, as shown in <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>.</p>
 <div id="exm-regression-spam" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.18 </strong></span>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
+<p><span class="theorem-title"><strong>Example 5.19 </strong></span>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
 <div class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/spambase.csv"</span>)</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>spam.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2167,36 +2168,36 @@ Important
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>word_freq_make</th>
-<th>word_freq_address</th>
-<th>word_freq_all</th>
-<th>word_freq_3d</th>
-<th>word_freq_our</th>
-<th>word_freq_over</th>
-<th>word_freq_remove</th>
-<th>word_freq_internet</th>
-<th>word_freq_order</th>
-<th>word_freq_mail</th>
-<th>...</th>
-<th>char_freq_%3B</th>
-<th>char_freq_%28</th>
-<th>char_freq_%5B</th>
-<th>char_freq_%21</th>
-<th>char_freq_%24</th>
-<th>char_freq_%23</th>
-<th>capital_run_length_average</th>
-<th>capital_run_length_longest</th>
-<th>capital_run_length_total</th>
-<th>class</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">word_freq_make</th>
+<th data-quarto-table-cell-role="th">word_freq_address</th>
+<th data-quarto-table-cell-role="th">word_freq_all</th>
+<th data-quarto-table-cell-role="th">word_freq_3d</th>
+<th data-quarto-table-cell-role="th">word_freq_our</th>
+<th data-quarto-table-cell-role="th">word_freq_over</th>
+<th data-quarto-table-cell-role="th">word_freq_remove</th>
+<th data-quarto-table-cell-role="th">word_freq_internet</th>
+<th data-quarto-table-cell-role="th">word_freq_order</th>
+<th data-quarto-table-cell-role="th">word_freq_mail</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">char_freq_%3B</th>
+<th data-quarto-table-cell-role="th">char_freq_%28</th>
+<th data-quarto-table-cell-role="th">char_freq_%5B</th>
+<th data-quarto-table-cell-role="th">char_freq_%21</th>
+<th data-quarto-table-cell-role="th">char_freq_%24</th>
+<th data-quarto-table-cell-role="th">char_freq_%23</th>
+<th data-quarto-table-cell-role="th">capital_run_length_average</th>
+<th data-quarto-table-cell-role="th">capital_run_length_longest</th>
+<th data-quarto-table-cell-role="th">capital_run_length_total</th>
+<th data-quarto-table-cell-role="th">class</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>0.00</td>
 <td>0.64</td>
 <td>0.64</td>
@@ -2220,7 +2221,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>0.21</td>
 <td>0.28</td>
 <td>0.50</td>
@@ -2244,7 +2245,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>0.06</td>
 <td>0.00</td>
 <td>0.71</td>
@@ -2268,7 +2269,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -2292,7 +2293,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -2322,7 +2323,7 @@ Important
 </div>
 </div>
 </div>
-<p>We create a feature matrix and label vector, and split into train/test sets:</p>
+<p>The labels in this case are 0 for “ham” (not spam) and 1 for “spam”. We create a feature matrix and label vector, and split into train/test sets:</p>
 <div class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> spam.drop(<span class="st">"class"</span>, axis<span class="op">=</span><span class="st">"columns"</span>)</span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> spam[<span class="st">"class"</span>]</span>
@@ -2345,12 +2346,12 @@ Important
 <pre><code>accuracy: 0.9359391965255157</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -2382,7 +2383,7 @@ word_freq_3d                  2.911420
 dtype: float64</code></pre>
 </div>
 </div>
-<p>The word “george” is a strong counter-indicator for spam; remember that this data set comes from an individual’s inbox. Its presence makes the inner product <span class="math inline">\(\bfx^T\bfw\)</span> more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability closer to 1.</p>
+<p>We see above that the word “george” is a strong counter-indicator for spam; remember that this data set comes from an individual’s inbox. Its presence makes the inner product <span class="math inline">\(\bfx^T\bfw\)</span> more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability of spam closer to 1.</p>
 <p>The ultimate predictions by the regressor are all either 0 or 1. But we can also see the forecasted probabilities before thresholding:</p>
 <div class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"predicted classes:"</span>)</span>
@@ -2424,174 +2425,89 @@ accuracy score: 0.93594</code></pre>
 </div>
 </div>
 </section>
-<section id="multiclass-case" class="level3" data-number="5.5.3">
-<h3 data-number="5.5.3" class="anchored" data-anchor-id="multiclass-case"><span class="header-section-number">5.5.3</span> Multiclass case</h3>
-<p>When there are more than two unique labels possible, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously.</p>
-<p>Given <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> binary regressors fit for the outcomes “class 1/not class 1,” “class 2/not class 2,” and so on, giving <span class="math inline">\(K\)</span> different coefficient vectors, <span class="math inline">\(\bfw_k\)</span>. Now for a query point <span class="math inline">\(\bfx\)</span>, we can predict probabilities for it being in each class:</p>
+<section id="multiclass-classification" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="multiclass-classification"><span class="header-section-number">5.5.3</span> Multiclass classification</h3>
+<p>When there are more than two unique labels possible in a classification, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously.</p>
+<p>Given <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> binary regressors fit for the outcomes “class 1/not class 1,” “class 2/not class 2,” and so on. These giving <span class="math inline">\(K\)</span> different weight vectors, <span class="math inline">\(\bfw_1,\ldots,\bfw_K\)</span>. For a query point <span class="math inline">\(\bfx\)</span>, we can predict the probabilities for it being in each class:</p>
 <p><span class="math display">\[
 \hat{q}_{k}(\bfx) = \sigma(\bfx^T \bfw_k), \qquad k=1,\ldots,K.
 \]</span></p>
-<p>Since the <span class="math inline">\(K\)</span> OVR regressors are done independently, there is no reason to think these probabilities will sum to 1 over all the classes. So we must normalize them:</p>
+<p>However, since the regressions were performed separately, there is no reason to think the <span class="math inline">\(q_k\)</span> are probabilities that sum to 1 over all the classes. So we must normalize them:</p>
 <p><span class="math display">\[
 \hat{p}_{k}(\bfx) = \frac{\hat{q}_{k}(\bfx)}{\sum_{k=1}^K \hat{q}_{k}(\bfx)}.
 \]</span></p>
-<p>Computed over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point, and each of the <span class="math inline">\(K\)</span> columns gives the probability of one class at all the points.</p>
+<p>Now we can interpret <span class="math inline">\(\hat{p}_{k}(\bfx)\)</span> as the probability of <span class="math inline">\(\bfx\)</span> belonging to class <span class="math inline">\(k\)</span>.</p>
+<div id="exm-regression-logistic-ovr" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.20 </strong></span>Suppose we have <span class="math inline">\(d=2\)</span> features and three classes, and that the three logistic regressions gave the weight vectors <span class="math display">\[
+\bfw_1 = [-2,0], \qquad \bfw_2=[1,1], \qquad \bfw_3=[0,1].
+\]</span></p>
+<p>For the query <span class="math inline">\(\bfx=[1,0]\)</span>, we get the predictions <span class="math display">\[
+\begin{split}
+\hat{q}_1 &amp;= \sigma\bigl((1)(-2)+(0)(0)\bigr) \approx 0.11920, \\
+\hat{q}_2 &amp;= \sigma\bigl((1)(1)+(0)(1)\bigr) \approx 0.73106, \\
+\hat{q}_3 &amp;= \sigma\bigl((1)(0)+(0)(1)\bigr) = 0.5.
+\end{split}
+\]</span></p>
+<p>So, if we ask, “How much does this <span class="math inline">\(\bfx\)</span> look like class 1?” the answer is, “11.9%”, for “How much like class 2?” it’s “73.1%”, and so on. Since there are three exclusive options for the class of <span class="math inline">\(\bfx\)</span>, the probabilities assigned to the classes are <span class="math display">\[
+\begin{split}
+\hat{p}_1 &amp;= \frac{\hat{q}_1}{\hat{q}_1 + \hat{q_2} + \hat{q_3}}  \approx 0.08828, \\
+\hat{p}_2 &amp;= \frac{\hat{q}_2}{\hat{q}_1 + \hat{q_2} + \hat{q_3}}  \approx 0.54142, \\
+\hat{p}_3 &amp;= \frac{\hat{q}_3}{\hat{q}_1 + \hat{q_2} + \hat{q_3}} \approx 0.37030.
+\end{split}
+\]</span> These probabilities, in exact arithmetic, add up to 100%.</p>
+</div>
+<p>The situation is now the same as for probabilistic classification in <a href="classification.html#sec-class-quant"><span>Section&nbsp;3.5</span></a>. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.</p>
 <div id="exm-regression-logistic-gas" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.19 </strong></span>As a multiclass example, we use a data set about gas sensors recording values over long periods of time:</p>
+<p><span class="theorem-title"><strong>Example 5.21 </strong></span>As a multiclass example, we return to the dataset for classifying forest cover:</p>
 <div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>gas <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/gas_drift.csv"</span>)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> gas[<span class="st">"Class"</span>]</span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> gas.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="st">"columns"</span>)</span>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">12</span>]   <span class="co"># 250,000 samples, 12 features</span></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>][:<span class="dv">250000</span>]</span>
 <span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
-<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
 <span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
-<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a>logr <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
 <span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logr)</span>
 <span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
-<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"accuracy score:"</span>, pipe.score(X_test, y_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy score is </span><span class="sc">{</span>pipe<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>accuracy score: 0.99137311286844</code></pre>
+<pre><code>accuracy score is 72.74%</code></pre>
 </div>
 </div>
 <p>We can now look at probabilistic predictions for each class:</p>
 <div class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> [<span class="st">"Class "</span><span class="op">+</span><span class="bu">str</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">7</span>)]</span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(p_hat, columns<span class="op">=</span>cols).head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>p_hat[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
-<div>
-
-
-<table class="dataframe table table-sm table-striped" data-border="1">
-<thead>
-<tr class="header">
-<th></th>
-<th>Class 1</th>
-<th>Class 2</th>
-<th>Class 3</th>
-<th>Class 4</th>
-<th>Class 5</th>
-<th>Class 6</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th>0</th>
-<td>1.930718e-04</td>
-<td>0.020736</td>
-<td>0.004224</td>
-<td>9.730793e-01</td>
-<td>0.001764</td>
-<td>3.542203e-06</td>
-</tr>
-<tr class="even">
-<th>1</th>
-<td>2.630618e-04</td>
-<td>0.001604</td>
-<td>0.966318</td>
-<td>1.964188e-04</td>
-<td>0.031077</td>
-<td>5.408623e-04</td>
-</tr>
-<tr class="odd">
-<th>2</th>
-<td>9.968064e-01</td>
-<td>0.000137</td>
-<td>0.000026</td>
-<td>2.914540e-03</td>
-<td>0.000010</td>
-<td>1.056237e-04</td>
-</tr>
-<tr class="even">
-<th>3</th>
-<td>1.498015e-05</td>
-<td>0.000065</td>
-<td>0.020443</td>
-<td>2.165619e-02</td>
-<td>0.955607</td>
-<td>2.213865e-03</td>
-</tr>
-<tr class="odd">
-<th>4</th>
-<td>2.173213e-04</td>
-<td>0.021678</td>
-<td>0.004209</td>
-<td>9.713205e-01</td>
-<td>0.002571</td>
-<td>4.228783e-06</td>
-</tr>
-<tr class="even">
-<th>5</th>
-<td>3.621792e-03</td>
-<td>0.146466</td>
-<td>0.043117</td>
-<td>4.745117e-02</td>
-<td>0.048257</td>
-<td>7.110873e-01</td>
-</tr>
-<tr class="odd">
-<th>6</th>
-<td>5.123286e-04</td>
-<td>0.018192</td>
-<td>0.002193</td>
-<td>9.752838e-01</td>
-<td>0.003780</td>
-<td>3.934537e-05</td>
-</tr>
-<tr class="even">
-<th>7</th>
-<td>1.180427e-03</td>
-<td>0.000749</td>
-<td>0.988466</td>
-<td>1.408981e-03</td>
-<td>0.007354</td>
-<td>8.409613e-04</td>
-</tr>
-<tr class="odd">
-<th>8</th>
-<td>9.350395e-09</td>
-<td>0.998688</td>
-<td>0.001307</td>
-<td>3.213497e-09</td>
-<td>0.000005</td>
-<td>2.996895e-17</td>
-</tr>
-<tr class="even">
-<th>9</th>
-<td>4.379157e-02</td>
-<td>0.045804</td>
-<td>0.098845</td>
-<td>6.591202e-01</td>
-<td>0.096294</td>
-<td>5.614547e-02</td>
-</tr>
-</tbody>
-</table>
-
+<pre><code>array([[3.27753115e-01, 6.71344154e-01, 8.83821740e-06, 1.47289531e-05,
+        6.20692039e-04, 2.57492056e-04, 9.79562864e-07],
+       [4.20545770e-01, 5.66374061e-01, 2.90422085e-06, 4.50982065e-07,
+        1.40842869e-03, 8.15605577e-06, 1.16602291e-02],
+       [2.40111415e-01, 7.59067843e-01, 1.21609701e-05, 1.42404726e-05,
+        3.93333619e-04, 3.98538413e-04, 2.46805163e-06]])</code></pre>
 </div>
 </div>
-</div>
-<p>This allows us to see that the ROC curves are nearly perfect:</p>
+<p>The ROC curves show that the performance is much worse for 3 of the classes than for the others:</p>
 <div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(pipe.classes_):</span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> (y_test<span class="op">==</span>label)</span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>    fp, tp, theta <span class="op">=</span> roc_curve(actual, p_hat[:,i])</span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>    results.extend( [ (label,fp,tp) <span class="cf">for</span> fp,tp <span class="kw">in</span> <span class="bu">zip</span>(fp,tp) ] )</span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>roc <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"label"</span>, <span class="st">"FP rate"</span>, <span class="st">"TP rate"</span>] )</span>
-<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>roc, </span>
-<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
-<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span></span>
-<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(pipe.classes_):</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> (y_test<span class="op">==</span>label)</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>    fp, tp, theta <span class="op">=</span> roc_curve(actual, p_hat[:,i])</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>    results.extend( [ (label,fp,tp) <span class="cf">for</span> fp,tp <span class="kw">in</span> <span class="bu">zip</span>(fp,tp) ] )</span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>roc <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"label"</span>, <span class="st">"FP rate"</span>, <span class="st">"TP rate"</span>] )</span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>roc, </span>
+<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
+<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"Dark2"</span></span>
+<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="regression_files/figure-html/cell-64-output-1.png" width="526" height="468"></p>
 </div>
 </div>
-<p>Based on the ROC curves, we could choose a high decision threshold to cut down on false positives without losing many true positives.</p>
 </div>
 </section>
 </section>
@@ -2716,9 +2632,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2930,6 +2860,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
