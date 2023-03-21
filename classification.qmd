@@ -1351,3 +1351,19 @@ $$
 $$
 Let $u_1,\ldots,u_8$ and $v_1,\ldots,v_8$ be the z-scores of the $x_k$ and the $y_k$, respectively. Show that the points $(u_k,v_k)$ all lie on a circle centered at the origin for all $k=1,\ldots,8$. (By extension, standardizing points into z-scores is sometimes called *sphereing* them.)
 ::::
+
+::::{#exr-class-lattice-colors}
+Here are blue/orange labels on an integer lattice.
+
+![](_media/gridlabels.png){width="360"}
+
+Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $2\le t \le 2$. 
+
+**(a)** $g(t) = \hat{f}(1.2,t)$ 
+
+**(b)** $g(t) = \hat{f}(t,-0.75)$ 
+
+**(c)** $g(t) = \hat{f}(t,1.6)$ 
+
+**(d)** $g(t) = \hat{f}(-0.25,t)$ 
+::::
