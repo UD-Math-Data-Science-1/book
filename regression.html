@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.253">
+<meta name="generator" content="quarto-99.9.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,10 +17,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,13 +46,43 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -117,16 +146,11 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -134,7 +158,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -145,75 +169,65 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Getting started</span></a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
   </div>
 </li>
     </ul>
@@ -221,33 +235,32 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-regression-linear" id="toc-sec-regression-linear" class="nav-link active" data-scroll-target="#sec-regression-linear"><span class="header-section-number">5.1</span> Linear regression</a>
+  <li><a href="#sec-regression-linear" id="toc-sec-regression-linear" class="nav-link active" data-scroll-target="#sec-regression-linear"><span class="toc-section-number">5.1</span>  Linear regression</a>
   <ul class="collapse">
-  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="header-section-number">5.1.1</span> Linear algebra</a></li>
-  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics"><span class="header-section-number">5.1.2</span> Performance metrics</a></li>
+  <li><a href="#linear-algebra" id="toc-linear-algebra" class="nav-link" data-scroll-target="#linear-algebra"><span class="toc-section-number">5.1.1</span>  Linear algebra</a></li>
+  <li><a href="#performance-metrics" id="toc-performance-metrics" class="nav-link" data-scroll-target="#performance-metrics"><span class="toc-section-number">5.1.2</span>  Performance metrics</a></li>
   </ul></li>
-  <li><a href="#multilinear-regression" id="toc-multilinear-regression" class="nav-link" data-scroll-target="#multilinear-regression"><span class="header-section-number">5.2</span> Multilinear regression</a>
+  <li><a href="#multilinear-regression" id="toc-multilinear-regression" class="nav-link" data-scroll-target="#multilinear-regression"><span class="toc-section-number">5.2</span>  Multilinear regression</a>
   <ul class="collapse">
-  <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression"><span class="header-section-number">5.2.1</span> Polynomial regression</a></li>
+  <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression"><span class="toc-section-number">5.2.1</span>  Polynomial regression</a></li>
   </ul></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">5.3</span> Regularization</a></li>
-  <li><a href="#nonlinear-regression" id="toc-nonlinear-regression" class="nav-link" data-scroll-target="#nonlinear-regression"><span class="header-section-number">5.4</span> Nonlinear regression</a>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="toc-section-number">5.3</span>  Regularization</a></li>
+  <li><a href="#nonlinear-regression" id="toc-nonlinear-regression" class="nav-link" data-scroll-target="#nonlinear-regression"><span class="toc-section-number">5.4</span>  Nonlinear regression</a>
   <ul class="collapse">
-  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="header-section-number">5.4.1</span> Nearest neighbors</a></li>
-  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree"><span class="header-section-number">5.4.2</span> Decision tree</a></li>
+  <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="toc-section-number">5.4.1</span>  Nearest neighbors</a></li>
+  <li><a href="#decision-tree" id="toc-decision-tree" class="nav-link" data-scroll-target="#decision-tree"><span class="toc-section-number">5.4.2</span>  Decision tree</a></li>
   </ul></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">5.5</span> Logistic regression</a>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="toc-section-number">5.5</span>  Logistic regression</a>
   <ul class="collapse">
-  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="header-section-number">5.5.1</span> Loss function</a></li>
-  <li><a href="#regularization-1" id="toc-regularization-1" class="nav-link" data-scroll-target="#regularization-1"><span class="header-section-number">5.5.2</span> Regularization</a></li>
-  <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="header-section-number">5.5.3</span> Multiclass classification</a></li>
+  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="toc-section-number">5.5.1</span>  Loss function</a></li>
+  <li><a href="#regularization-1" id="toc-regularization-1" class="nav-link" data-scroll-target="#regularization-1"><span class="toc-section-number">5.5.2</span>  Regularization</a></li>
+  <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="toc-section-number">5.5.3</span>  Multiclass classification</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
@@ -258,7 +271,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></h1>
 </div>
 
 
@@ -369,12 +382,12 @@ L(a,b) = \sum_{i=1}^n (\hat{f}(x_i)-y_i)^2 = \sum_{i=1}^n (a x_i + b - y_i)^2.
 <p><span class="math display">\[
 \pp{L}{a} = \sum_{i=1}^n 2x_i(a x_i + b - y_i) = 2 a \left(\sum_{i=1}^n x_i^2\right) + 2b\left(\sum_{i=1}^n x_i\right) - 2\sum_{i=1}^n x_i y_i.
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -428,12 +441,12 @@ L(a,b) =  \twonorm{a\, \bfx + b \,\bfe - \bfy}^2,
 <p>The vector inner product is defined only between two vectors of the same length (dimension). There is an important link between the inner product and the 2-norm: <span id="eq-regression-hilbert"><span class="math display">\[
 \bfu^T \bfu = \sum_{i=1}^d u_i^2 = \twonorm{\bfu}^2.
 \tag{5.3}\]</span></span></p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -441,12 +454,12 @@ Note
 <p><em>Inner product</em> is a term from linear algebra. In physics and vector calculus with <span class="math inline">\(d=2\)</span> or <span class="math inline">\(d=3\)</span>, the same thing is often called a <em>dot product</em> and written as <span class="math inline">\(\bfu \cdot \bfv\)</span>.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -508,12 +521,12 @@ y_i - \hat{y}_i, \qquad i=1,\ldots,n,
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/pl9jy2qtqpk8zr2/Section5_1_2.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-caution callout-titled">
+</div></div><div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Danger
 </div>
 </div>
@@ -559,12 +572,12 @@ R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\di
 <li>If the <span class="math inline">\(\hat{y}_i\)</span> are found from a linear regression, then <span class="math inline">\(R^2\)</span> is the square of the Pearson correlation coefficient between <span class="math inline">\(\bfy\)</span> and <span class="math inline">\(\hat{\bfy}\)</span>.</li>
 </ol>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Warning
 </div>
 </div>
@@ -603,21 +616,21 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">year</th>
-<th data-quarto-table-cell-role="th">mo</th>
-<th data-quarto-table-cell-role="th">data-type</th>
-<th data-quarto-table-cell-role="th">region</th>
-<th data-quarto-table-cell-role="th">extent</th>
-<th data-quarto-table-cell-role="th">area</th>
+<th></th>
+<th>year</th>
+<th>mo</th>
+<th>data-type</th>
+<th>region</th>
+<th>extent</th>
+<th>area</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>1979</td>
 <td>1</td>
 <td>Goddard</td>
@@ -626,7 +639,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>12.41</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>1980</td>
 <td>1</td>
 <td>Goddard</td>
@@ -635,7 +648,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>11.94</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>1981</td>
 <td>1</td>
 <td>Goddard</td>
@@ -644,7 +657,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>11.91</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>1982</td>
 <td>1</td>
 <td>Goddard</td>
@@ -653,7 +666,7 @@ R^2 &amp;= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)
 <td>12.19</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>1983</td>
 <td>1</td>
 <td>Goddard</td>
@@ -798,12 +811,12 @@ MAE: 4.93e-02, compared to standard deviation 1.53e-01</code></pre>
 y \approx \hat{f}(\bfx) = w_1 x_1 + w_2x_2 + \cdots w_d x_d = \bfw^T\bfx,
 \]</span> for a constant vector <span class="math inline">\(\bfw\)</span> known as the <strong>weight vector</strong>.</p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Note
 </div>
 </div>
@@ -846,12 +859,12 @@ L(\bfw) = \sum_{i=1}^n (y_i - \hat{f}(\bfX_i))^2 = \sum_{i=1}^n (y_i - \bfX_i^T\
 L(\bfw) = \twonorm{\bfX \bfw- \bfy}^2.
 \tag{5.6}\]</span></span></p>
 <p>As in the <span class="math inline">\(d=1\)</span> case, minimizing the loss is equivalent to solving a linear system of equations known as the <em>normal equations</em> for the weight vector <span class="math inline">\(\bfw\)</span>. We do not present the details here.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Danger
 </div>
 </div>
@@ -868,24 +881,24 @@ Danger
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mpg</th>
-<th data-quarto-table-cell-role="th">cylinders</th>
-<th data-quarto-table-cell-role="th">displacement</th>
-<th data-quarto-table-cell-role="th">horsepower</th>
-<th data-quarto-table-cell-role="th">weight</th>
-<th data-quarto-table-cell-role="th">acceleration</th>
-<th data-quarto-table-cell-role="th">model_year</th>
-<th data-quarto-table-cell-role="th">origin</th>
-<th data-quarto-table-cell-role="th">name</th>
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -897,7 +910,7 @@ Danger
 <td>chevrolet chevelle malibu</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -909,7 +922,7 @@ Danger
 <td>buick skylark 320</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -921,7 +934,7 @@ Danger
 <td>plymouth satellite</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -933,7 +946,7 @@ Danger
 <td>amc rebel sst</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -968,12 +981,12 @@ Danger
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"MSE: </span><span class="sc">{</span>MSE<span class="sc">:.3f}</span><span class="ss">, compared to variance </span><span class="sc">{</span>y_test<span class="sc">.</span>var()<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Tip
 </div>
 </div>
@@ -1038,54 +1051,54 @@ dtype: float64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">TV</th>
-<th data-quarto-table-cell-role="th">Radio</th>
-<th data-quarto-table-cell-role="th">Newspaper</th>
-<th data-quarto-table-cell-role="th">Sales</th>
+<th></th>
+<th>TV</th>
+<th>Radio</th>
+<th>Newspaper</th>
+<th>Sales</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>230.1</td>
 <td>37.8</td>
 <td>69.2</td>
 <td>22.1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>44.5</td>
 <td>39.3</td>
 <td>45.1</td>
 <td>10.4</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>17.2</td>
 <td>45.9</td>
 <td>69.3</td>
 <td>12.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>151.5</td>
 <td>41.3</td>
 <td>58.5</td>
 <td>16.5</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>180.8</td>
 <td>10.8</td>
 <td>58.4</td>
 <td>17.9</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>8.7</td>
 <td>48.9</td>
 <td>75.0</td>
@@ -1164,12 +1177,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>While we have a very good <span class="math inline">\(R^2\)</span> score now, we can try to improve it. We can add an additional feature that is the product of <em>TV</em> and <em>Radio</em>, representing the possibility that these media reinforce one another’s effects:</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Tip
 </div>
 </div>
@@ -1221,24 +1234,24 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mpg</th>
-<th data-quarto-table-cell-role="th">cylinders</th>
-<th data-quarto-table-cell-role="th">displacement</th>
-<th data-quarto-table-cell-role="th">horsepower</th>
-<th data-quarto-table-cell-role="th">weight</th>
-<th data-quarto-table-cell-role="th">acceleration</th>
-<th data-quarto-table-cell-role="th">model_year</th>
-<th data-quarto-table-cell-role="th">origin</th>
-<th data-quarto-table-cell-role="th">name</th>
+<th></th>
+<th>mpg</th>
+<th>cylinders</th>
+<th>displacement</th>
+<th>horsepower</th>
+<th>weight</th>
+<th>acceleration</th>
+<th>model_year</th>
+<th>origin</th>
+<th>name</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -1250,7 +1263,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>chevrolet chevelle malibu</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -1262,7 +1275,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>buick skylark 320</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -1274,7 +1287,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>plymouth satellite</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -1286,7 +1299,7 @@ y \approx w_1 + w_2 t + \cdots + w_d t^{d-1},
 <td>amc rebel sst</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -1414,12 +1427,12 @@ This is our best regression fit so far, by a mile. --></p>
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/mgkf1r9wlrxeqxl/Example5_8.mp4?raw=1"></video></div>
 </div></div><p>Let’s summarize the situation:</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Danger
 </div>
 </div>
@@ -1472,26 +1485,26 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">age</th>
-<th data-quarto-table-cell-role="th">sex</th>
-<th data-quarto-table-cell-role="th">bmi</th>
-<th data-quarto-table-cell-role="th">bp</th>
-<th data-quarto-table-cell-role="th">s1</th>
-<th data-quarto-table-cell-role="th">s2</th>
-<th data-quarto-table-cell-role="th">s3</th>
-<th data-quarto-table-cell-role="th">s4</th>
-<th data-quarto-table-cell-role="th">s5</th>
-<th data-quarto-table-cell-role="th">s6</th>
-<th data-quarto-table-cell-role="th">target</th>
+<th></th>
+<th>age</th>
+<th>sex</th>
+<th>bmi</th>
+<th>bp</th>
+<th>s1</th>
+<th>s2</th>
+<th>s3</th>
+<th>s4</th>
+<th>s5</th>
+<th>s6</th>
+<th>target</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>0.038076</td>
 <td>0.050680</td>
 <td>0.061696</td>
@@ -1505,7 +1518,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>151.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>-0.001882</td>
 <td>-0.044642</td>
 <td>-0.051474</td>
@@ -1519,7 +1532,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>75.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>0.085299</td>
 <td>0.050680</td>
 <td>0.044451</td>
@@ -1533,7 +1546,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>141.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>-0.089063</td>
 <td>-0.044642</td>
 <td>-0.011595</td>
@@ -1547,7 +1560,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>206.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>0.005383</td>
 <td>-0.044642</td>
 <td>-0.036385</td>
@@ -1561,7 +1574,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>135.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>-0.092695</td>
 <td>-0.044642</td>
 <td>-0.040696</td>
@@ -1575,7 +1588,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>97.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th>6</th>
 <td>-0.045472</td>
 <td>0.050680</td>
 <td>-0.047163</td>
@@ -1589,7 +1602,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>138.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th>7</th>
 <td>0.063504</td>
 <td>0.050680</td>
 <td>-0.001895</td>
@@ -1603,7 +1616,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>63.0</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th>8</th>
 <td>0.041708</td>
 <td>0.050680</td>
 <td>0.061696</td>
@@ -1617,7 +1630,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 <td>110.0</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th>9</th>
 <td>-0.070900</td>
 <td>-0.044642</td>
 <td>0.039062</td>
@@ -1742,72 +1755,72 @@ ridge regression CoD score: 0.3478
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">feature</th>
-<th data-quarto-table-cell-role="th">ridge</th>
-<th data-quarto-table-cell-role="th">LASSO</th>
+<th></th>
+<th>feature</th>
+<th>ridge</th>
+<th>LASSO</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>age</td>
 <td>43.113029</td>
 <td>-0.000000</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>sex</td>
 <td>-23.953301</td>
 <td>-155.276227</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>bmi</td>
 <td>199.535945</td>
 <td>529.173009</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>bp</td>
 <td>144.586873</td>
 <td>313.419043</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>s1</td>
 <td>25.977923</td>
 <td>-132.507438</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th>5</th>
 <td>s2</td>
 <td>2.751708</td>
 <td>-0.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th>6</th>
 <td>s3</td>
 <td>-106.337626</td>
 <td>-165.167100</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th>7</th>
 <td>s4</td>
 <td>89.526889</td>
 <td>0.000000</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th>8</th>
 <td>s5</td>
 <td>185.660175</td>
 <td>580.262391</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th>9</th>
 <td>s6</td>
 <td>85.576399</td>
 <td>30.557703</td>
@@ -2145,12 +2158,12 @@ y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
 \widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
 \]</span></p>
 <p>where <span class="math inline">\(C\)</span> is a positive hyperparameter and the vector norm is either the 2-norm (ridge) or 1-norm (LASSO).</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Important
 </div>
 </div>
@@ -2168,36 +2181,36 @@ Important
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe table table-sm table-striped" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">word_freq_make</th>
-<th data-quarto-table-cell-role="th">word_freq_address</th>
-<th data-quarto-table-cell-role="th">word_freq_all</th>
-<th data-quarto-table-cell-role="th">word_freq_3d</th>
-<th data-quarto-table-cell-role="th">word_freq_our</th>
-<th data-quarto-table-cell-role="th">word_freq_over</th>
-<th data-quarto-table-cell-role="th">word_freq_remove</th>
-<th data-quarto-table-cell-role="th">word_freq_internet</th>
-<th data-quarto-table-cell-role="th">word_freq_order</th>
-<th data-quarto-table-cell-role="th">word_freq_mail</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">char_freq_%3B</th>
-<th data-quarto-table-cell-role="th">char_freq_%28</th>
-<th data-quarto-table-cell-role="th">char_freq_%5B</th>
-<th data-quarto-table-cell-role="th">char_freq_%21</th>
-<th data-quarto-table-cell-role="th">char_freq_%24</th>
-<th data-quarto-table-cell-role="th">char_freq_%23</th>
-<th data-quarto-table-cell-role="th">capital_run_length_average</th>
-<th data-quarto-table-cell-role="th">capital_run_length_longest</th>
-<th data-quarto-table-cell-role="th">capital_run_length_total</th>
-<th data-quarto-table-cell-role="th">class</th>
+<th></th>
+<th>word_freq_make</th>
+<th>word_freq_address</th>
+<th>word_freq_all</th>
+<th>word_freq_3d</th>
+<th>word_freq_our</th>
+<th>word_freq_over</th>
+<th>word_freq_remove</th>
+<th>word_freq_internet</th>
+<th>word_freq_order</th>
+<th>word_freq_mail</th>
+<th>...</th>
+<th>char_freq_%3B</th>
+<th>char_freq_%28</th>
+<th>char_freq_%5B</th>
+<th>char_freq_%21</th>
+<th>char_freq_%24</th>
+<th>char_freq_%23</th>
+<th>capital_run_length_average</th>
+<th>capital_run_length_longest</th>
+<th>capital_run_length_total</th>
+<th>class</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th>0</th>
 <td>0.00</td>
 <td>0.64</td>
 <td>0.64</td>
@@ -2221,7 +2234,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th>1</th>
 <td>0.21</td>
 <td>0.28</td>
 <td>0.50</td>
@@ -2245,7 +2258,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th>2</th>
 <td>0.06</td>
 <td>0.00</td>
 <td>0.71</td>
@@ -2269,7 +2282,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th>3</th>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -2293,7 +2306,7 @@ Important
 <td>1</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th>4</th>
 <td>0.00</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -2346,12 +2359,12 @@ Important
 <pre><code>accuracy: 0.9359391965255157</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
+<div class="callout-caption-container flex-fill">
 Tip
 </div>
 </div>
@@ -2514,91 +2527,97 @@ accuracy score: 0.93594</code></pre>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
 <div id="exr-regression-no-intercept" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.1 </strong></span>Suppose that the distinct plane points <span class="math inline">\((x_i,y_i)\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit using a linear function without intercept, <span class="math inline">\(\hat{f}(x)=\alpha x\)</span>. Use calculus to find a formula for the value of <span class="math inline">\(\alpha\)</span> that minimizes the sum of squared residuals, <span class="math display">\[ r = \sum_{i=1}^n \bigl(\hat{f}(x_i)-y_i\bigr)^2. \]</span></p>
+<p><span class="theorem-title"><strong>Exercise 5.1 </strong></span>(5.1) Suppose that the distinct plane points <span class="math inline">\((x_i,y_i)\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit using a linear function without intercept, <span class="math inline">\(\hat{f}(x)=w x\)</span>. Use calculus to find a formula for the value of <span class="math inline">\(w\)</span> that minimizes the sum of squared residuals, <span class="math display">\[ r = \sum_{i=1}^n \bigl(y_i - \hat{f}(x_i)\bigr)^2. \]</span></p>
 </div>
-<div id="exr-regression-combination" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.2 </strong></span>Suppose that <span class="math inline">\(x_1=-2\)</span>, <span class="math inline">\(x_2=1\)</span>, and <span class="math inline">\(x_3=2\)</span>. Define <span class="math inline">\(\alpha\)</span> as in <a href="#exr-regression-no-intercept">Exercise&nbsp;<span>5.1</span></a>, and define the predicted values <span class="math inline">\(\hat{y}_k=\alpha x_k\)</span> for <span class="math inline">\(k=1,2,3\)</span>. Express each <span class="math inline">\(\hat{y}_k\)</span> as a combination of the three values <span class="math inline">\(y_1\)</span>, <span class="math inline">\(y_2\)</span>, and <span class="math inline">\(y_3\)</span>, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)</p>
-</div>
+<!-- ::::{#exr-regression-combination}
+Suppose that $x_1=-2$, $x_2=1$, and $x_3=2$. Define $\alpha$ as in @exr-regression-no-intercept, and define the predicted values $\hat{y}_k=w x_k$ for $k=1,2,3$. Express each $\hat{y}_k$ as a combination of the three values $y_1$, $y_2$, and $y_3$, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)
+:::: -->
 <div id="exr-regression-means" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.3 </strong></span>Using the formulas derived in <a href="#sec-regression-linear"><span>Section&nbsp;5.1</span></a>, show that the point <span class="math inline">\((\bar{x},\bar{y})\)</span> always lies on the linear regression line. (Hint: You only have to show that <span class="math inline">\(\hat{f}(\bar{x}) = \bar{y}\)</span>, which can be done without first solving for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.)</p>
+<p><span class="theorem-title"><strong>Exercise 5.2 </strong></span>(5.1) Using the formulas derived in <a href="#sec-regression-linear"><span>Section&nbsp;5.1</span></a>, show that the point <span class="math inline">\((\bar{x},\bar{y})\)</span> always lies on the linear regression line. (Hint: You only have to show that <span class="math inline">\(\hat{f}(\bar{x}) = \bar{y}\)</span>, which can be done without first solving for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.)</p>
+</div>
+<div id="exr-regression-performance" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.3 </strong></span>(5.1) Suppose that <span class="math display">\[
+\begin{split}
+    \bfx &amp;= [-2, 0, 1, 3] \\
+    \bfy &amp;= [4, 1, 2, 0].
+\end{split}
+\]</span> Find the <strong>(a)</strong> MSE, <strong>(b)</strong> MAE, and <strong>(c)</strong> coefficient of determination on this set for the regression function <span class="math inline">\(\hat{f}(x)=1-x\)</span>.</p>
+</div>
+<div id="exr-regression-matvec" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.4 </strong></span>(5.2) Suppose for <span class="math inline">\(d=3\)</span> features you have the <span class="math inline">\(n=4\)</span> sample vectors <span class="math display">\[
+\bfx_1 = [1,0,1], \quad \bfx_2 = [-1,2,2],\quad \bfx_3=[3,-1,0], \quad \bfx_4 = [0,2,-2],
+\]</span> and a multilinear regression computes the weight vector <span class="math inline">\(\bfw = [2,1,-1]\)</span>. Find <strong>(a)</strong> the matrix-vector product <span class="math inline">\(\bfX\bfw\)</span>, and <strong>(b)</strong> the predictions of the regressor on the sample vectors.</p>
 </div>
 <div id="exr-regression-two-features" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.4 </strong></span>Suppose that values <span class="math inline">\(y_i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit to features <span class="math inline">\((u_i,v_i)\)</span> using a multilinear function <span class="math inline">\(\hat{f}(u,v)=\alpha u + \beta v\)</span>. Define the sum of squared residuals <span class="math display">\[
-r = \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2.
-\]</span> Show that by holding <span class="math inline">\(\alpha\)</span> is constant and taking a derivative with respect to <span class="math inline">\(\beta\)</span>, and then holding <span class="math inline">\(\beta\)</span> constant and taking a derivative with respect to <span class="math inline">\(\alpha\)</span>, at the minimum residual we must have <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 5.5 </strong></span>(5.2) Suppose that values <span class="math inline">\(y_i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span> are to be fit to 2D sample vectors using a multilinear regression function <span class="math inline">\(\hat{f}(\bfx)=w_1 x_1 + w_2 x_2\)</span>. Define the sum of squared residuals <span class="math display">\[
+r = \sum_{i=1}^n \bigl(y_i - \hat{f}(\bfx_i)\bigr)^2.
+\]</span> Show that by holding <span class="math inline">\(w_1\)</span> constant and taking a derivative with respect to <span class="math inline">\(w_2\)</span>, and then holding <span class="math inline">\(w_2\)</span> constant and taking a derivative with respect to <span class="math inline">\(w_1\)</span>, at the minimum residual we must have <span class="math display">\[
 \begin{split}
-\left(\sum u_i^2 \right) \alpha + \left(\sum u_i v_i \right) \beta &amp;= \sum u_i y_i, \\
-\left(\sum u_i v_i \right) \alpha + \left(\sum v_i^2 \right) \beta &amp;= \sum v_i y_i.
+\left(\sum X_{i,1}^2 \right) w_1 + \left(\sum X_{i,1} X_{i,2}  \right) w_2 &amp;= \sum X_{i,1}\, y_i, \\
+\left(\sum X_{i,1} X_{i,2} \right) w_1 + \left(\sum X_{i,2}^2 \right) w_2 &amp;= \sum X_{i,2} \, y_i,
 \end{split}
-\]</span></p>
+\]</span> where <span class="math inline">\(X_{i,1}\)</span> and <span class="math inline">\(X_{i,2}\)</span> are the entries in the <span class="math inline">\(i\)</span>th row of the feature matrix <span class="math inline">\(\bfX\)</span>. (In each case above the sum is from <span class="math inline">\(i=1\)</span> to <span class="math inline">\(i=n\)</span>.)</p>
 </div>
-<div id="exr-regression-regular-no-intercept" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.5 </strong></span>Repeat <a href="#exr-regression-no-intercept">Exercise&nbsp;<span>5.1</span></a>, but using the regularized residual <span class="math display">\[
-\tilde{r} = C \alpha^2 + \sum_{i=1}^n \bigl(\hat{f}(x_i)-y_i\bigr)^2.
-\]</span></p>
+<div id="exr-regression-ridge" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.6 </strong></span>(5.3) If we fit the model <span class="math inline">\(\hat{f}(x)=w x\)</span> to the single data point <span class="math inline">\((2,6)\)</span>, then the ridge loss is <span class="math display">\[
+r(w) = (2w-6)^2 + \alpha w^2,
+\]</span> where <span class="math inline">\(\alpha\)</span> is a nonnegative constant. When <span class="math inline">\(\alpha = 0\)</span>, it’s clear that <span class="math inline">\(w=3\)</span> is the minimizer of <span class="math inline">\(r(w)\)</span>. Show that if <span class="math inline">\(\alpha&gt;0\)</span>, then <span class="math inline">\(r'(w)\)</span> is zero at at most two values of <span class="math inline">\(w\)</span>, both of which are less than 3.</p>
 </div>
-<div id="exr-regression-regular-two-features" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.6 </strong></span>Repeat <a href="#exr-regression-two-features">Exercise&nbsp;<span>5.4</span></a>, but using the regularized residual <span class="math display">\[
-\tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2.
-\]</span></p>
+<div id="exr-regression-lasso" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.7 </strong></span>(5.3) If we fit the model <span class="math inline">\(\hat{f}(x)=w x\)</span> to the single data point <span class="math inline">\((2,6)\)</span>, then the LASSO loss is <span class="math display">\[
+r(w) = (2w-6)^2 + \alpha |w|,
+\]</span> where <span class="math inline">\(\alpha\)</span> is a nonnegative constant. When <span class="math inline">\(\alpha = 0\)</span>, it’s clear that <span class="math inline">\(w=3\)</span> is the minimizer of <span class="math inline">\(r(w)\)</span>. Below you will show that the minimizer is less than this if <span class="math inline">\(\alpha &gt; 0\)</span>.</p>
+<p><strong>(a)</strong> Show that if <span class="math inline">\(w &lt; 0\)</span>, then <span class="math inline">\(r'(w)\)</span> cannot be zero. (Remember that for such <span class="math inline">\(w\)</span>, <span class="math inline">\(|w|=-w\)</span>.)</p>
+<p><strong>(b)</strong> Show that if <span class="math inline">\(w&gt;0\)</span> and <span class="math inline">\(0&lt;\alpha &lt; 24\)</span>, then <span class="math inline">\(r'(w)\)</span> has a single root in the interval <span class="math inline">\((0,3)\)</span>.</p>
 </div>
+<!-- 
+::::{#exr-regression-regular-two-features}
+Repeat @exr-regression-two-features, but using the regularized residual 
+$$ 
+\tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2. 
+$$
+:::: -->
 <div id="exr-regression-splits" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.7 </strong></span>Given the data set <span class="math inline">\((x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}\)</span>, find the MAD-based <span class="math inline">\(Q\)</span> score for the following hypothetical decision tree splits.</p>
-<p><strong>(a)</strong> <span class="math inline">\(x \le 0.5\quad\)</span></p>
-<p><strong>(b)</strong> <span class="math inline">\(x \le 1.5\quad\)</span></p>
-<p><strong>(c)</strong> <span class="math inline">\(x \le 2.5\quad\)</span></p>
-<p><strong>(d)</strong> <span class="math inline">\(x \le 3.5\)</span></p>
+<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>(5.4) Given the data set <span class="math inline">\((x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}\)</span>, find the MAD-based <span class="math inline">\(Q\)</span> score for the following hypothetical decision tree splits.</p>
+<p><strong>(a)</strong> <span class="math inline">\(x \le 0.5, \qquad\)</span> <strong>(b)</strong> <span class="math inline">\(x \le 1.5, \qquad\)</span> <strong>(c)</strong> <span class="math inline">\(x \le 2.5,\qquad\)</span> <strong>(d)</strong> <span class="math inline">\(x \le 3.5\)</span>.</p>
 </div>
 <div id="exr-regression-lattice-values" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>Here are values on an integer lattice.</p>
+<p><span class="theorem-title"><strong>Exercise 5.9 </strong></span>(5.4) Here are values (labels) on an integer lattice.</p>
 <p><img src="_media/griddata.png" class="img-fluid" width="360"></p>
-<p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be a kNN regressor with <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of <span class="math inline">\(\hat{f}\)</span> along the given line.</p>
-<p><strong>(a)</strong> <span class="math inline">\(\hat{f}(1.2,t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(b)</strong> <span class="math inline">\(\hat{f}(t,-0.75)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(c)</strong> <span class="math inline">\(\hat{f}(t,1.6)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(d)</strong> <span class="math inline">\(\hat{f}(-0.25,t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-</div>
-<div id="exr-regression-lattice-colors" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.9 </strong></span>Here are blue/orange labels on an integer lattice.</p>
-<p><img src="_media/gridlabels.png" class="img-fluid" width="360"></p>
-<p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be a kNN probabilistic classifier with <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of the probability of the blue class along the given line.</p>
-<p><strong>(a)</strong> <span class="math inline">\(\hat{f}(1.2,t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(b)</strong> <span class="math inline">\(\hat{f}(t,-0.75)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(c)</strong> <span class="math inline">\(\hat{f}(t,1.6)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
-<p><strong>(d)</strong> <span class="math inline">\(\hat{f}(-0.25,t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span></p>
+<p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be the kNN regressor using <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging. In each case below, a function <span class="math inline">\(g(t)\)</span> is defined from values of <span class="math inline">\(\hat{f}\)</span> along a vertical or horizontal line. Carefully sketch a plot of <span class="math inline">\(g(t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span>.</p>
+<p><strong>(a)</strong> <span class="math inline">\(g(t) = \hat{f}(1.2,t)\)</span></p>
+<p><strong>(b)</strong> <span class="math inline">\(g(t) = \hat{f}(t,-0.75)\)</span></p>
+<p><strong>(c)</strong> <span class="math inline">\(g(t) = \hat{f}(t,1.6)\)</span></p>
+<p><strong>(d)</strong> <span class="math inline">\(g(t) = \hat{f}(-0.25,t)\)</span></p>
 </div>
 <div id="exr-regression-cross-entropy" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.10 </strong></span>Here are some label values and probabilistic predicted categories for them.</p>
-<p><span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 5.10 </strong></span>(5.5) Here are some label values and probabilistic predictions by a logistic regressor: <span class="math display">\[
 \begin{split}
-    y: &amp;\quad [0,0,1,1] \\
-    \hat{p}: &amp;\quad [\tfrac{1}{4},0,\tfrac{1}{2},1]
+    \bfy  &amp;= [0,0,1,1], \\
+    \hat{\mathbf{p}} &amp;= [\tfrac{3}{4},0,1,\tfrac{1}{2}].
 \end{split}
-\]</span></p>
-<p>Using base-2 logarithms, calculate the cross-entropy loss for these predictions.</p>
+\]</span> Using base-2 logarithms, calculate the cross-entropy loss for these predictions.</p>
 </div>
 <div id="exr-regression-cross-entropy-optim" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.11 </strong></span>Let <span class="math inline">\(\bfx=[-1,0,1]\)</span> and <span class="math inline">\(\bfy=[0,1,0]\)</span>. This is to be fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(a x)\)</span> for parameter <span class="math inline">\(a\)</span>.</p>
-<p><strong>(a)</strong> Show that the cross-entropy loss function <span class="math inline">\(L(a)\)</span>, using natural logarithms, satisfies</p>
-<p><span class="math display">\[
-L'(a) = \frac{e^a-1}{e^a+1}.
+<p><span class="theorem-title"><strong>Exercise 5.11 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,0,1]\)</span> and <span class="math inline">\(\bfy=[0,1,0]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>.</p>
+<p><strong>(a)</strong> Let <span class="math inline">\(L(w)\)</span> be the cross-entropy loss function using natural logarithms. Show that <span class="math display">\[
+L'(w) = \frac{e^w-1}{e^w+1}.
 \]</span></p>
-<p><strong>(b)</strong> Explain why part (a) implies that <span class="math inline">\(a=0\)</span> is the global minimizer of the loss <span class="math inline">\(L\)</span>.</p>
-<p><strong>(c)</strong> Using the result of part (b), simplify the optimum predictor function <span class="math inline">\(\hat{p}\)</span>.</p>
+<p><strong>(b)</strong> Explain why part (a) implies that <span class="math inline">\(w=0\)</span> is the global minimizer of the loss <span class="math inline">\(L\)</span>.</p>
+<p><strong>(c)</strong> Using the result of part (b), simplify the optimum predictor function <span class="math inline">\(\hat{p}(x)\)</span>.</p>
 </div>
 <div id="exr-regression-logistic-lasso" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.12 </strong></span>Let <span class="math inline">\(\bfx=[-1,1]\)</span> and <span class="math inline">\(\bfy=[0,1]\)</span>. This is to be fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(a x)\)</span> for parameter <span class="math inline">\(a\)</span>. Without regularization, the best fit takes <span class="math inline">\(a\to\infty\)</span>, which makes the predictor become infinitely steep at <span class="math inline">\(x=0\)</span>. To combat this behavior, let <span class="math inline">\(L\)</span> be the cross-entropy loss function with LASSO penalty, i.e.,</p>
+<p><span class="theorem-title"><strong>Exercise 5.12 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,1]\)</span> and <span class="math inline">\(\bfy=[0,1]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>. Without regularization, the best fit takes <span class="math inline">\(w\to\infty\)</span>, which makes the predictor become infinitely steep at <span class="math inline">\(x=0\)</span>. To combat this behavior, let <span class="math inline">\(L\)</span> be the cross-entropy loss function with LASSO penalty, i.e.,</p>
 <p><span class="math display">\[
-L(a) = \ln[1-\hat{p}(-1)] - \ln[\hat{p}(1)] + C |a|,
+L(w) = \ln[1-\hat{p}(-1)] - \ln[\hat{p}(1)] + \alpha |w|,
 \]</span></p>
-<p>for a positive regularization constant <span class="math inline">\(C\)</span>.</p>
-<p><strong>(a)</strong> Show that <span class="math inline">\(L'\)</span> is never zero for <span class="math inline">\(a&lt;0\)</span>.</p>
-<p><strong>(b)</strong> Show that if <span class="math inline">\(0&lt;C&lt;1\)</span>, then <span class="math inline">\(L'\)</span> has a zero at</p>
+<p>for a positive regularization constant <span class="math inline">\(\alpha\)</span>.</p>
+<p><strong>(a)</strong> Show that <span class="math inline">\(L'\)</span> is never zero for <span class="math inline">\(w &lt; 0\)</span>.</p>
+<p><strong>(b)</strong> Show that if <span class="math inline">\(0 &lt;\alpha &lt;1\)</span>, then <span class="math inline">\(L'\)</span> has a zero at</p>
 <p><span class="math display">\[
-a=\ln\left(\frac{2}{C}-1\right).
+w = \ln\left( \frac{2}{\alpha}-1 \right).
 \]</span></p>
-<p>Assume that this value minimizes <span class="math inline">\(L\)</span>.</p>
-<p><strong>(c)</strong> Show that the minimizer above is a decreasing function of <span class="math inline">\(C\)</span>. (Therefore, increasing <span class="math inline">\(C\)</span> makes the predictor less steep as a function of <span class="math inline">\(x\)</span>.)</p>
+<p><strong>(c)</strong> Show that <span class="math inline">\(w\)</span> from part (b) is a decreasing function of <span class="math inline">\(\alpha\)</span>. (Therefore, increasing <span class="math inline">\(\alpha\)</span> makes the predictor less steep as a function of <span class="math inline">\(x\)</span>.)</p>
 </div>
 
 
@@ -2632,23 +2651,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -2860,9 +2865,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
