@@ -1282,134 +1282,142 @@ Based on the ROC curves, we could choose a high decision threshold to cut down o
 ## Exercises {.unnumbered}
 
 ::::{#exr-regression-no-intercept}
-Suppose that the distinct plane points $(x_i,y_i)$ for $i=1,\ldots,n$ are to be fit using a linear function without intercept, $\hat{f}(x)=\alpha x$. Use calculus to find a formula for the value of $\alpha$ that minimizes the sum of squared residuals,
-$$ r = \sum_{i=1}^n (f(x_i)-y_i)^2. $$
+(5.1) Suppose that the distinct plane points $(x_i,y_i)$ for $i=1,\ldots,n$ are to be fit using a linear function without intercept, $\hat{f}(x)=w x$. Use calculus to find a formula for the value of $w$ that minimizes the sum of squared residuals,
+$$ r = \sum_{i=1}^n \bigl(y_i - \hat{f}(x_i)\bigr)^2. $$
 ::::
 
-::::{#exr-regression-combination}
-Suppose that $x_1=-2$, $x_2=1$, and $x_3=2$. Define $\alpha$ as in @exr-regression-no-intercept, and define the predicted values $\hat{y}_k=\alpha x_k$ for $k=1,2,3$. Express each $\hat{y}_k$ as a combination of the three values $y_1$, $y_2$, and $y_3$, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)
-::::
+<!-- ::::{#exr-regression-combination}
+Suppose that $x_1=-2$, $x_2=1$, and $x_3=2$. Define $\alpha$ as in @exr-regression-no-intercept, and define the predicted values $\hat{y}_k=w x_k$ for $k=1,2,3$. Express each $\hat{y}_k$ as a combination of the three values $y_1$, $y_2$, and $y_3$, which remain arbitrary. (This is a special case of a general fact about linear regression: each prediction is a linear combination of the training values.)
+:::: -->
 
 ::::{#exr-regression-means}
-Using the formulas derived in @sec-regression-linear, show that the point $(\bar{x},\bar{y})$ always lies on the linear regression line. (Hint: You only have to show that $f(\bar{x}) = \bar{y}$. This can be done without first solving for $a$ and $b$, which is a bit tedious to write out.)
+(5.1) Using the formulas derived in @sec-regression-linear, show that the point $(\bar{x},\bar{y})$ always lies on the linear regression line. (Hint: You only have to show that $\hat{f}(\bar{x}) = \bar{y}$, which can be done without first solving for $a$ and $b$.)
+::::
+
+::::{#exr-regression-performance}
+(5.1) Suppose that 
+$$
+\begin{split}
+    \bfx &= [-2, 0, 1, 3] \\ 
+    \bfy &= [4, 1, 2, 0].
+\end{split}
+$$
+Find the **(a)** MSE, **(b)** MAE, and **(c)** coefficient of determination on this set for the regression function $\hat{f}(x)=1-x$. 
+::::
+
+::::{#exr-regression-matvec}
+(5.2) Suppose for $d=3$ features you have the $n=4$ sample vectors
+$$
+\bfx_1 = [1,0,1], \quad \bfx_2 = [-1,2,2],\quad \bfx_3=[3,-1,0], \quad \bfx_4 = [0,2,-2], 
+$$
+and a multilinear regression computes the weight vector $\bfw = [2,1,-1]$. Find **(a)** the matrix-vector product $\bfX\bfw$, and **(b)** the predictions of the regressor on the sample vectors. 
 ::::
 
 ::::{#exr-regression-two-features}
-Suppose that values $y_i$ for $i=1,\ldots,n$ are to be fit to features $(u_i,v_i)$ using a multilinear function $f(u,v)=\alpha u + \beta v$. Define the sum of squared residuals
+(5.2) Suppose that values $y_i$ for $i=1,\ldots,n$ are to be fit to 2D sample vectors using a multilinear regression function $\hat{f}(\bfx)=w_1 x_1 + w_2 x_2$. Define the sum of squared residuals
 $$ 
-r = \sum_{i=1}^n (f(u_i,v_i)-y_i)^2. 
+r = \sum_{i=1}^n \bigl(y_i - \hat{f}(\bfx_i)\bigr)^2. 
 $$
-Show that by holding $\alpha$ is constant and taking a derivative with respect to $\beta$, and then holding $\beta$ constant and taking a derivative with respect to $\alpha$, at the minimum residual we must have 
+Show that by holding $w_1$ constant and taking a derivative with respect to $w_2$, and then holding $w_2$ constant and taking a derivative with respect to $w_1$, at the minimum residual we must have 
 $$
 \begin{split}
-\left(\sum u_i^2 \right) \alpha + \left(\sum u_i v_i \right) \beta &= \sum u_i y_i, \\ 
-\left(\sum u_i v_i \right) \alpha + \left(\sum v_i^2 \right) \beta &= \sum v_i y_i. 
+\left(\sum X_{i,1}^2 \right) w_1 + \left(\sum X_{i,1} X_{i,2}  \right) w_2 &= \sum X_{i,1}\, y_i, \\ 
+\left(\sum X_{i,1} X_{i,2} \right) w_1 + \left(\sum X_{i,2}^2 \right) w_2 &= \sum X_{i,2} \, y_i, 
 \end{split}
 $$
+where $X_{i,1}$ and $X_{i,2}$ are the entries in the $i$th row of the feature matrix $\bfX$. (In each case above the sum is from $i=1$ to $i=n$.)
 ::::
 
-::::{#exr-regression-regular-no-intercept}
-Repeat @exr-regression-no-intercept, but using the regularized residual 
-$$ 
-\tilde{r} = C \alpha^2 + \sum_{i=1}^n (f(x_i)-y_i)^2. 
+::::{#exr-regression-ridge}
+(5.3) If we fit the model $\hat{f}(x)=w x$ to the single data point $(2,6)$, then the ridge loss is 
 $$
+r(w) = (2w-6)^2 + \alpha w^2,
+$$
+where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Show that if $\alpha>0$, then $r'(w)$ is zero at at most two values of $w$, both of which are less than 3. 
+::::
 
+::::{#exr-regression-lasso}
+(5.3) If we fit the model $\hat{f}(x)=w x$ to the single data point $(2,6)$, then the LASSO loss is 
+$$
+r(w) = (2w-6)^2 + \alpha |w|,
+$$
+where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Below you will show that the minimizer is less than this if $\alpha > 0$.
+
+**(a)** Show that if $w < 0$, then $r'(w)$ cannot be zero. (Remember that for such $w$, $|w|=-w$.)
+
+**(b)** Show that if $w>0$ and $0<\alpha < 24$, then $r'(w)$ has a single root in the interval $(0,3)$. 
+::::
+
+<!-- 
 ::::{#exr-regression-regular-two-features}
 Repeat @exr-regression-two-features, but using the regularized residual 
 $$ 
-\tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n (f(u_i,v_i)-y_i)^2. 
+\tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2. 
 $$
-::::
+:::: -->
 
 ::::{#exr-regression-splits}
-Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAD-based $Q$ score for the following hypothetical decision tree splits.
+(5.4) Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAD-based $Q$ score for the following hypothetical decision tree splits.
 
-**(a)** $x \le 0.5\quad$
-
-**(b)** $x \le 1.5\quad$
-
-**(c)** $x \le 2.5\quad$
-
-**(d)** $x \le 3.5$
+**(a)** $x \le 0.5, \qquad$ **(b)** $x \le 1.5, \qquad$ **(c)** $x \le 2.5,\qquad$ **(d)** $x \le 3.5$.
 ::::
 
 ::::{#exr-regression-lattice-values}
-Here are values on an integer lattice.
+(5.4) Here are values (labels) on an integer lattice.
 
-![](_media/griddata.png)
+![](_media/griddata.png){width="360"}
 
-Let $\hat{f}(x_1,x_2)$ be a kNN regressor with $k=4$, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of $\hat{f}$ along the given line.
+Let $\hat{f}(x_1,x_2)$ be the kNN regressor using $k=4$, Euclidean metric, and mean averaging. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $2\le t \le 2$.
 
-**(a)** $\hat{f}(1.2,t)$ for $2\le t \le 2$
+**(a)** $g(t) = \hat{f}(1.2,t)$ 
 
-**(b)** $\hat{f}(t,-0.75)$ for $2\le t \le 2$
+**(b)** $g(t) = \hat{f}(t,-0.75)$
 
-**(c)** $\hat{f}(t,1.6)$ for $2\le t \le 2$
+**(c)** $g(t) = \hat{f}(t,1.6)$ 
 
-**(d)** $\hat{f}(-0.25,t)$ for $2\le t \le 2$
-::::
-
-::::{#exr-regression-lattice-colors}
-Here are blue/orange labels on an integer lattice.
-
-![](_media/gridlabels.png)
-
-Let $\hat{f}(x_1,x_2)$ be a kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging. Carefully sketch a one-dimensional plot of the probability of the blue class along the given line.
-
-**(a)** $\hat{f}(1.2,t)$ for $2\le t \le 2$
-
-**(b)** $\hat{f}(t,-0.75)$ for $2\le t \le 2$
-
-**(c)** $\hat{f}(t,1.6)$ for $2\le t \le 2$
-
-**(d)** $\hat{f}(-0.25,t)$ for $2\le t \le 2$
+**(d)** $g(t) = \hat{f}(-0.25,t)$
 ::::
 
 ::::{#exr-regression-cross-entropy}
-Here are some label values and probabilistic predicted categories for them.
-
+(5.5) Here are some label values and probabilistic predictions by a logistic regressor:
 $$
 \begin{split}
-    y: &\quad [0,0,1,1] \\ 
-    \hat{p}: &\quad [\tfrac{1}{4},0,\tfrac{1}{2},1] 
+    \bfy  &= [0,0,1,1], \\ 
+    \hat{\mathbf{p}} &= [\tfrac{3}{4},0,1,\tfrac{1}{2}]. 
 \end{split}
 $$
-
 Using base-2 logarithms, calculate the cross-entropy loss for these predictions.
 ::::
 
 ::::{#exr-regression-cross-entropy-optim}
-Let $\bfx=[-1,0,1]$ and $\bfy=[0,1,0]$. This is to be fit to a probabilistic predictor $\hat{p}(x) = \sigma(a x)$ for parameter $a$. 
+(5.5) Let $\bfx=[-1,0,1]$ and $\bfy=[0,1,0]$. This small dataset is fit to a probabilistic predictor $\hat{p}(x) = \sigma(w x)$ for weight $w$. 
 
-**(a)** Show that the cross-entropy loss function $L(a)$, using natural logarithms, satisfies 
-
+**(a)** Let $L(w)$ be the cross-entropy loss function using natural logarithms. Show that
 $$
-L'(a) = \frac{e^a-1}{e^a+1}. 
+L'(w) = \frac{e^w-1}{e^w+1}. 
 $$
 
-**(b)** Explain why part (a) implies that $a=0$ is the global minimizer of the loss $L$.
+**(b)** Explain why part (a) implies that $w=0$ is the global minimizer of the loss $L$.
 
-**(c)** Using the result of part (b), simplify the optimum predictor function $\hat{p}$.
+**(c)** Using the result of part (b), simplify the optimum predictor function $\hat{p}(x)$.
 ::::
 
 ::::{#exr-regression-logistic-lasso}
-Let $\bfx=[-1,1]$ and $\bfy=[0,1]$. This is to be fit to a probabilistic predictor $\hat{p}(x) = \sigma(a x)$ for parameter $a$. Without regularization, the best fit takes $a\to\infty$, which makes the predictor become infinitely steep at $x=0$. To combat this behavior, let $L$ be the cross-entropy loss function with LASSO penalty, i.e.,
+(5.5) Let $\bfx=[-1,1]$ and $\bfy=[0,1]$. This small dataset is fit to a probabilistic predictor $\hat{p}(x) = \sigma(w x)$ for weight $w$. Without regularization, the best fit takes $w\to\infty$, which makes the predictor become infinitely steep at $x=0$. To combat this behavior, let $L$ be the cross-entropy loss function with LASSO penalty, i.e.,
 
 $$
-L(a) = \ln[1-\hat{p}(-1)] - \ln[\hat{p}(1)] + C |a|, 
+L(w) = \ln[1-\hat{p}(-1)] - \ln[\hat{p}(1)] + \alpha |w|, 
 $$
 
-for a positive regularization constant $C$.
+for a positive regularization constant $\alpha$.
 
-**(a)** Show that $L'$ is never zero for $a<0$.
+**(a)** Show that $L'$ is never zero for $w < 0$.
 
-**(b)** Show that if $0<C<1$, then $L'$ has a zero at 
+**(b)** Show that if $0 <\alpha <1$, then $L'$ has a zero at 
 
 $$
-a=\ln\left(\frac{2}{C}-1\right). 
+w = \ln\left( \frac{2}{\alpha}-1 \right). 
 $$
 
-Assume that this value minimizes $L$. 
-
-**(c)** Show that the minimizer above is a decreasing function of $C$. (Therefore, increasing $C$ makes the predictor less steep as a function of $x$.)
+**(c)** Show that $w$ from part (b) is a decreasing function of $\alpha$. (Therefore, increasing $\alpha$ makes the predictor less steep as a function of $x$.)
 ::::
