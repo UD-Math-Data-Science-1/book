@@ -259,7 +259,7 @@ MathJax = {
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="toc-section-number">5.5</span>  Logistic regression</a>
   <ul class="collapse">
   <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="toc-section-number">5.5.1</span>  Loss function</a></li>
-  <li><a href="#regularization-1" id="toc-regularization-1" class="nav-link" data-scroll-target="#regularization-1"><span class="toc-section-number">5.5.2</span>  Regularization</a></li>
+  <li><a href="#sec-regression-logistic-regular" id="toc-sec-regression-logistic-regular" class="nav-link" data-scroll-target="#sec-regression-logistic-regular"><span class="toc-section-number">5.5.2</span>  Regularization</a></li>
   <li><a href="#multiclass-classification" id="toc-multiclass-classification" class="nav-link" data-scroll-target="#multiclass-classification"><span class="toc-section-number">5.5.3</span>  Multiclass classification</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
@@ -1898,7 +1898,7 @@ reduced linear model score: 0.4388</code></pre>
 \]</span> (Convince yourself that the result is the same whether the mean or the median is used.) Thus, for instance, <span class="math inline">\(\hat{f}(2 \cdot 0.6)=\hat{f}(1.2)=1\)</span>, while <span class="math inline">\(2\cdot \hat{f}(0.6) = 0\)</span>.</p>
 </div>
 <p>kNN regression can produce a function that conforms itself to the training data much more closely than a linear regressor does. This can both decrease bias and increase variance, especially for small values of <span class="math inline">\(k\)</span>. As illustrated in the following video, increasing <span class="math inline">\(k\)</span> flattens out the approximation, decreasing variance while increasing bias.</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video20" width="600" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_regression.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video24" width="600" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_regression.mp4"></video></div>
 <p>As with classification, we can choose the norm to use and whether to weight the neighbors equally or by inverse distance. As a reminder, it is usually advisable to work with z-scores for the features rather than raw data.</p>
 <div id="exm-regression-knn-demo" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.14 </strong></span>We return again to the dataset of cars and their fuel efficiency. A linear regression on four quantitative features is only OK:</p>
@@ -1969,30 +1969,35 @@ Q = |S| H(S) + |T| H(T),
 </ol>
 <div id="exm-regression-split" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.15 </strong></span>Suppose we are given the observations <span class="math inline">\(x_i=i\)</span>, <span class="math inline">\(i=1,\ldots,4\)</span>, where <span class="math inline">\(y_1=2\)</span>, <span class="math inline">\(y_2=-1\)</span>, <span class="math inline">\(y_3=1\)</span>, <span class="math inline">\(y_4=0\)</span>. Let’s find the decision tree regressor using medians/MAD.</p>
-<p>The original value set has median <span class="math inline">\(\frac{1}{2}\)</span> and gets a weighted dispersion of <span class="math inline">\(\frac{5}{2}(3+3+1+1)=20\)</span>. There are three ways to split the data, depending on where the partition falls in relation to the <span class="math inline">\(x_i\)</span>:</p>
+<p>The original value set has median <span class="math inline">\(\frac{1}{2}\)</span>, so its MAD is <span class="math display">\[
+\frac{1}{4} \left( \abs{2-\tfrac{1}{2}} +  \abs{{-1}-\tfrac{1}{2}} + \abs{1-\tfrac{1}{2}} + \abs{0-\tfrac{1}{2}}  \right) = \frac{1}{4}\cdot \frac{8}{2} = 1.
+\]</span> Thus, the <span class="math inline">\(Q\)</span>-score of the full set is 4.</p>
+<p>There are three allowable ways to split the data, as it is ordered from left to right:</p>
 <ul>
-<li><span class="math inline">\(S=\{2\},\,T=\{-1,1,0\}\)</span> <span class="math display">\[
+<li><span class="math inline">\(S=\{2\},\,T=\{-1,1,0\}\)</span></li>
+</ul>
+<p>Note that <span class="math inline">\(\abs{S}=1\)</span> and <span class="math inline">\(\abs{T}=3\)</span>, so <span class="math display">\[
 \begin{split}
 Q &amp;= 1\left[ \frac{1}{1} |2-2|  \right] +  3 \left[ \frac{1}{3}\bigl( | -1-0 | + |1-0| + |0-0|  \bigr)  \right]\\
 &amp;=  0 + 2 = 2.
 \end{split}
-\]</span></li>
-<li><span class="math inline">\(S=\{2,-1\},\, T=\{1,0\}\)</span> <span class="math display">\[
+\]</span> * <span class="math inline">\(S=\{2,-1\},\, T=\{1,0\}\)</span> <span class="math display">\[
 \begin{split}
-  Q &amp;= 2\left[ \frac{1}{2}\bigl( \left| 2-\tfrac{1}{2} \right| + \left| -1-\tfrac{1}{2} \right| \bigr)  \right] +  2 \left[ \frac{1}{2}\bigl( \left|1-\tfrac{1}{2} \right| + \left|0-\tfrac{1}{2} \right|  \bigr)  \right]\\
-  &amp;=  3 + 1 = 4.
+    Q &amp;= 2\left[ \frac{1}{2}\bigl( \left| 2-\tfrac{1}{2} \right| + \left| -1-\tfrac{1}{2} \right| \bigr)  \right] +  2 \left[ \frac{1}{2}\bigl( \left|1-\tfrac{1}{2} \right| + \left|0-\tfrac{1}{2} \right|  \bigr)  \right]\\
+    &amp;=  3 + 1 = 4.
 \end{split}
-\]</span></li>
-<li><span class="math inline">\(S=\{2,-1,1\},\, T=\{0\}\)</span> <span class="math display">\[
+\]</span> * <span class="math inline">\(S=\{2,-1,1\},\, T=\{0\}\)</span> <span class="math display">\[
 \begin{split}
-  Q &amp;= 3\left[ \frac{1}{3}\bigl( \left| 2-1 \right| + \left| -1-1 \right|+ |1-1| \bigr)  \right] +  1 \left[ \frac{1}{1} \left|0-0 \right|  \right]\\
-  &amp;=  3 + 0 = 3.
+    Q &amp;= 3\left[ \frac{1}{3}\bigl( \left| 2-1 \right| + \left| -1-1 \right|+ |1-1| \bigr)  \right] +  1 \left[ \frac{1}{1} \left|0-0 \right|  \right]\\
+    &amp;=  3 + 0 = 3.
 \end{split}
-\]</span></li>
-</ul>
-<p>Thus, the first split above produces the smallest total dispersion.</p>
+\]</span></p>
+<p>Thus, the first split above produces the smallest weighted dispersion, and it improves on the orignal set.</p>
 </div>
-<p>To predict a value for a query <span class="math inline">\(x\)</span>, we follow the tree until ending at a leaf, where we use the mean (if dispersion is STD) or median (if dispersion is MAD) of the examples in the leaf.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video18" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/vb4dmpbq358dxwl/Example5_15.mp4?raw=1"></video></div>
+</div></div><p>To predict a value for a query <span class="math inline">\(x\)</span>, we follow the tree until ending at a leaf, where we use the mean (if dispersion is STD) or median (if dispersion is MAD) of the examples in the leaf.</p>
 <div id="exm-regression-tree" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.16 </strong></span>Here is some simple 2D data:</p>
 <div class="cell" data-execution_count="48">
@@ -2067,7 +2072,7 @@ Name: y, dtype: float64</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video18" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wf0djkbbadjtytx/Example5_16.mp4?raw=1"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video19" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wf0djkbbadjtytx/Example5_16.mp4?raw=1"></video></div>
 </div></div><div id="exm-regression-tree-demo" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.17 </strong></span>Continuing with the data from <a href="#exm-regression-knn-demo">Example&nbsp;<span>5.14</span></a>, we find that we can do even better with a random forest of decision tree regressors:</p>
 <div class="cell" data-execution_count="54">
@@ -2096,7 +2101,7 @@ Name: y, dtype: float64</code></pre>
 <span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best forest CoD: </span><span class="sc">{</span>optim<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>best forest CoD: 0.7626</code></pre>
+<pre><code>best forest CoD: 0.7235</code></pre>
 </div>
 </div>
 </div>
@@ -2111,7 +2116,10 @@ Name: y, dtype: float64</code></pre>
 \sigma(x) = \frac{1}{1+e^{-x}},
 \]</span> defined for all real values of <span class="math inline">\(x\)</span>.</p>
 </div>
-<p>The logistic function takes the form of a smoothed step increasing from 0 to 1:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video20" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/c5xsfxyw2ie4hkl/Section5_5.mp4?raw=1"></video></div>
+</div></div><p>The logistic function takes the form of a smoothed step increasing from 0 to 1:</p>
 <div class="cell" data-execution_count="55">
 <div class="cell-output cell-output-display">
 <p><img src="regression_files/figure-html/cell-55-output-1.png" width="493" height="324"></p>
@@ -2128,8 +2136,8 @@ p \approx \sigma(\bfx^T\bfw).
 \]</span></p>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video19" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wdnqanl9ny5h9p7/Section5_5_1.mp4?raw=1"></video></div>
-</div></div><p>For binary classification, however, it’s more common to use the <strong>cross-entropy</strong> loss function <span id="eq-regression-cross-entropy"><span class="math display">\[
+<div class="quarto-video"><video id="video_shortcode_videojs_video21" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wdnqanl9ny5h9p7/Section5_5_1.mp4?raw=1"></video></div>
+</div></div><p>However, it’s more common to use the <strong>cross-entropy</strong> loss function <span id="eq-regression-cross-entropy"><span class="math display">\[
 L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \right].
 \tag{5.8}\]</span></span> (The logarithms in <a href="#eq-regression-cross-entropy">Equation&nbsp;<span>5.8</span></a> can be in any base, since that choice only affects <span class="math inline">\(L\)</span> by a constant factor.) In cross-entropy loss, sample <span class="math inline">\(i\)</span> contributes <span class="math display">\[
 -\log(1-\hat{p}_i)
@@ -2150,28 +2158,7 @@ y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
 \]</span> Using the natural log, this is about <span class="math inline">\(2.043\)</span>.</p>
 </div>
 <p>Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does <em>not</em> lead to a linear problem for the weight vector <span class="math inline">\(\bfw\)</span>. The difference in practice is usually not a concern, though.</p>
-</section>
-<section id="regularization-1" class="level3" data-number="5.5.2">
-<h3 data-number="5.5.2" class="anchored" data-anchor-id="regularization-1"><span class="header-section-number">5.5.2</span> Regularization</h3>
-<p>As with other forms of regression, the loss function may be regularized using the ridge or LASSO penalty. The standard formulation is</p>
-<p><span class="math display">\[
-\widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
-\]</span></p>
-<p>where <span class="math inline">\(C\)</span> is a positive hyperparameter and the vector norm is either the 2-norm (ridge) or 1-norm (LASSO).</p>
-<div class="callout callout-style-default callout-important callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The parameter <span class="math inline">\(C\)</span> functions like the inverse of the regularization parameter <span class="math inline">\(\alpha\)</span> we used in the linear regressor. It’s just a different convention chosen historically. As <span class="math inline">\(C\)</span> <em>decreases</em>, the regularization strength <em>increases</em>.</p>
-</div>
-</div>
-<p>For binary classification, it’s natural to let the labels all be 0 or 1 and interpret a logistic regression as the probability of being in class 1, as shown in <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>.</p>
+<p>Cross-entropy is the default loss function for a <code>LogisticRegression</code> in scikit-learn. In <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.</p>
 <div id="exm-regression-spam" class="theorem example">
 <p><span class="theorem-title"><strong>Example 5.19 </strong></span>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
 <div class="cell" data-execution_count="56">
@@ -2347,16 +2334,14 @@ Important
 <span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">19716</span></span>
 <span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When using norm-based regularization, it’s good practice to standardize the variables, so we will use scaling pipelines. First we use a large value of <span class="math inline">\(C\)</span> to emphasize the regressive loss over the regularization penalty:</p>
+<p>We fit a logistic regression just like any other learner. (The meaning of the argument <code>C</code> in the call below is explained in <a href="#sec-regression-logistic-regular"><span>Section&nbsp;5.5.2</span></a>.)</p>
 <div class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>logr <span class="op">=</span> LogisticRegression(C<span class="op">=</span><span class="dv">100</span>, solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logr)</span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"accuracy:"</span>, pipe.score(X_test, y_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>accuracy: 0.9359391965255157</code></pre>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression(C<span class="op">=</span><span class="dv">10000</span>, solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<style>#sk-container-id-3 {color: black;background-color: white;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression(C=10000, solver='liblinear')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked=""><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">LogisticRegression</label><div class="sk-toggleable__content"><pre>LogisticRegression(C=10000, solver='liblinear')</pre></div></div></div></div></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-captioned">
@@ -2369,79 +2354,156 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The use of the <code>solver</code> keyword is optional, but the solver used above seems to be far faster and more reliable for small datasets than the default.</p>
+<p>The use of the <code>solver</code> keyword argument in <code>LogisticRegression</code> is optional, but the choice used above seems to be far faster and more reliable than the default, for small datasets at least.</p>
 </div>
 </div>
-<p>Let’s look at the most extreme regression coefficients, associating them with the feature names and then sorting the results:</p>
+<p>Despite the name, though, scikit-learn treats a <code>LogisticRegression</code> object like a classifier, and its preductions are true/false:</p>
 <div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>coef <span class="op">=</span> pd.Series(logr.coef_[<span class="dv">0</span>], index<span class="op">=</span>X.columns).sort_values()</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"most hammy features:"</span>)</span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coef[:<span class="dv">4</span>])</span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"most spammy features:"</span>)</span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(coef[<span class="op">-</span><span class="dv">4</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>logreg.predict( X_test.iloc[:<span class="dv">5</span>,:] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<pre><code>array([0, 0, 1, 0, 0])</code></pre>
+</div>
+</div>
+<p>The default scoring function is classification accuracy:</p>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> logreg.score(X_test, y_test)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"spam classification accuracy is </span><span class="sc">{</span>acc<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spam classification accuracy is 93.70%</code></pre>
+</div>
+</div>
+<p>The actual logistic outputs are the <em>probabilistic</em> predictions:</p>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>logreg.predict_proba( X_test.iloc[:<span class="dv">5</span>,:] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<pre><code>array([[7.93327906e-01, 2.06672094e-01],
+       [9.99998727e-01, 1.27297340e-06],
+       [6.80526109e-02, 9.31947389e-01],
+       [6.48118258e-01, 3.51881742e-01],
+       [1.00000000e+00, 6.91220834e-17]])</code></pre>
+</div>
+</div>
+<p>From these, we could use ROC and AUC metrics as we did in <a href="classification.html#sec-class-probabilistic"><span>Section&nbsp;3.5</span></a>.</p>
+<p>Let’s repeat the computation with a standardization pipeline, so that we can easily compare the magnitudes of the weights:</p>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logreg)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> pd.Series( logreg.coef_[<span class="dv">0</span>], index<span class="op">=</span>X.columns) </span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> weights.sort_values()</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"most hammy features:"</span>)</span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(weights[:<span class="dv">4</span>])</span>
+<span id="cb90-9"><a href="#cb90-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb90-10"><a href="#cb90-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"most spammy features:"</span>)</span>
+<span id="cb90-11"><a href="#cb90-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(weights[<span class="op">-</span><span class="dv">4</span>:])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>most hammy features:
-word_freq_george    -24.205793
-word_freq_cs         -9.163199
-word_freq_hp         -3.575454
-word_freq_meeting    -1.603756
+word_freq_george    -34.067382
+word_freq_cs        -14.553428
+word_freq_hp         -3.575223
+word_freq_meeting    -1.640587
 dtype: float64
 
 most spammy features:
-word_freq_remove              0.870418
-char_freq_%24                 1.106541
-capital_run_length_longest    1.741175
-word_freq_3d                  2.911420
+word_freq_remove              0.861761
+char_freq_%24                 1.104799
+capital_run_length_longest    1.860658
+word_freq_3d                  3.032664
 dtype: float64</code></pre>
 </div>
 </div>
 <p>We see above that the word “george” is a strong counter-indicator for spam; remember that this data set comes from an individual’s inbox. Its presence makes the inner product <span class="math inline">\(\bfx^T\bfw\)</span> more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability of spam closer to 1.</p>
-<p>The ultimate predictions by the regressor are all either 0 or 1. But we can also see the forecasted probabilities before thresholding:</p>
-<div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"predicted classes:"</span>)</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pipe.predict(X_train.iloc[:<span class="dv">5</span>,:]) )</span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">probabilities:"</span>)</span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pipe.predict_proba(X_train.iloc[:<span class="dv">5</span>,:]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>predicted classes:
-[0 0 1 1 0]
+</div>
 
-probabilities:
-[[5.11803554e-01 4.88196446e-01]
- [5.52648438e-01 4.47351562e-01]
- [8.73264383e-02 9.12673562e-01]
- [1.74032582e-01 8.25967418e-01]
- [9.99717900e-01 2.82099664e-04]]</code></pre>
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video22" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/zpu18qxdgzkwskn/Example5_19.mp4?raw=1"></video></div>
+</div></div></section>
+<section id="sec-regression-logistic-regular" class="level3 page-columns page-full" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-regression-logistic-regular"><span class="header-section-number">5.5.2</span> Regularization</h3>
+<p>As with other forms of regression, the loss function may be regularized using the ridge or LASSO penalty. The standard formulation is</p>
+<p><span id="eq-regression-logistic-regular"><span class="math display">\[
+\widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
+\tag{5.9}\]</span></span></p>
+<p>where the vector norm is either the 1-norm (LASSO style) or 2-norm (ridge style). In either case, <span class="math inline">\(C\)</span> is a positive hyperparameter. For <span class="math inline">\(C\)</span> close to zero, the regression is mainly concerned with the penalty term, and as <span class="math inline">\(C\)</span> increases, the regression gradually pays more and more attention to the data, at the expense of the penalty term.</p>
+<div class="callout callout-style-default callout-important callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
 </div>
 </div>
-<p>The probabilities might be useful for making decisions based on the results. For example, the first instance above was much less certain about the classification than the second. A more skeptical threshold greater than <span class="math inline">\(0.54\)</span> would change the class to 1. As in <a href="classification.html#sec-class-quant"><span>Section&nbsp;3.5</span></a>, the probability matrix can be used to create an ROC curve showing the tradeoffs over all thresholds.</p>
-<p>For a validation-based selection of the best regularization parameter value, we can use <code>LogisticRegressionCV</code>, which is a convenience method for a grid search. You can specify which values of <span class="math inline">\(C\)</span> to search over, or just say how many, as we do here:</p>
-<div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegressionCV</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>logr <span class="op">=</span> LogisticRegressionCV(</span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>    Cs<span class="op">=</span><span class="dv">40</span>,    <span class="co"># 40 automatically chosen values of C</span></span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>, </span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>    solver<span class="op">=</span><span class="st">"liblinear"</span>, </span>
-<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logr)</span>
-<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
-<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best C value: </span><span class="sc">{</span>logr<span class="sc">.</span>C_[<span class="dv">0</span>]<span class="sc">:.3g}</span><span class="ss">"</span>)</span>
-<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy score: </span><span class="sc">{</span>pipe<span class="sc">.</span>score(X_test,y_test)<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-body-container callout-body">
+<p>The parameter <span class="math inline">\(C\)</span> functions like the inverse of the regularization parameter <span class="math inline">\(\alpha\)</span> we used in the linear regressor. It’s because of a different convention chosen historically.</p>
+</div>
+</div>
+<div id="exm-regression-spam-regular" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.20 </strong></span>We will continue <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a> with an exploration of regularization. When using norm-based regularization, it’s good practice to standardize the variables, so we will use a standardization pipeline:</p>
+<p>In <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>, we used <span class="math inline">\(C=10000\)</span>, which puts so much weight on the cross-entropy part of the loss function that the regularization is essentially ignored. The default standardization uses the 2-norm with <span class="math inline">\(C=1\)</span>, which, in this case, improves the accuracy a bit:</p>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train, y_train)</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> logreg.score(X_test, y_test)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy with default regularization is </span><span class="sc">{</span>acc<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>best C value: 367
-accuracy score: 0.93594</code></pre>
+<pre><code>accuracy with default regularization is 93.81%</code></pre>
 </div>
 </div>
+<p>A validation-based grid search is one way to look for the optimal regularization. Usually, we want the grid values of <span class="math inline">\(C\)</span> to be spaced exponentially, not equally. For example,</p>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">**</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
+<pre><code>array([1.00000000e-02, 2.15443469e-02, 4.64158883e-02, 1.00000000e-01,
+       2.15443469e-01, 4.64158883e-01, 1.00000000e+00, 2.15443469e+00,
+       4.64158883e+00, 1.00000000e+01, 2.15443469e+01, 4.64158883e+01,
+       1.00000000e+02])</code></pre>
 </div>
-</section>
+</div>
+<p>We use that strategy along with a search over both the 2-norm and the 1-norm for the regularization penalty term:</p>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"logisticregression__C"</span>: <span class="dv">10</span> <span class="op">**</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">40</span>), </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>         <span class="co"># ridge and LASSO cases:</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"logisticregression__penalty"</span>: [<span class="st">"l2"</span>, <span class="st">"l1"</span>]   </span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(</span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>    StandardScaler(),</span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a>    LogisticRegression( solver<span class="op">=</span><span class="st">"liblinear"</span> )</span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb96-10"><a href="#cb96-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-11"><a href="#cb96-11" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span>)</span>
+<span id="cb96-12"><a href="#cb96-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-13"><a href="#cb96-13" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb96-14"><a href="#cb96-14" aria-hidden="true" tabindex="-1"></a>    learner, grid, </span>
+<span id="cb96-15"><a href="#cb96-15" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb96-16"><a href="#cb96-16" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb96-17"><a href="#cb96-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb96-18"><a href="#cb96-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-19"><a href="#cb96-19" aria-hidden="true" tabindex="-1"></a>search.fit(X_train, y_train)</span>
+<span id="cb96-20"><a href="#cb96-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-21"><a href="#cb96-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
+<span id="cb96-22"><a href="#cb96-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(search.best_params_)</span>
+<span id="cb96-23"><a href="#cb96-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb96-24"><a href="#cb96-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best score is </span><span class="sc">{</span>search<span class="sc">.</span>best_score_<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best parameters:
+{'logisticregression__C': 1.0608183551394483, 'logisticregression__penalty': 'l1'}
+
+Best score is 92.55%</code></pre>
+</div>
+</div>
+<p>In this case, we failed to improve on the default regularization. (Recall that cross-validation means that each learner is trained on less data, so the grid metrics might not be completely accurate.)</p>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video23" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/yr4mi1zo8nh0jf8/Example5_20.mp4?raw=1"></video></div>
+</div></div></section>
 <section id="multiclass-classification" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3" class="anchored" data-anchor-id="multiclass-classification"><span class="header-section-number">5.5.3</span> Multiclass classification</h3>
-<p>When there are more than two unique labels possible in a classification, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously.</p>
-<p>Given <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> binary regressors fit for the outcomes “class 1/not class 1,” “class 2/not class 2,” and so on. These giving <span class="math inline">\(K\)</span> different weight vectors, <span class="math inline">\(\bfw_1,\ldots,\bfw_K\)</span>. For a query point <span class="math inline">\(\bfx\)</span>, we can predict the probabilities for it being in each class:</p>
+<p>When there are more than two unique labels possible in a classification, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously. Given <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> binary regressors fit for the outcomes “class 1/not class 1,” “class 2/not class 2,” and so on. These give <span class="math inline">\(K\)</span> different weight vectors, <span class="math inline">\(\bfw_1,\ldots,\bfw_K\)</span>.</p>
+<p>For a query vector <span class="math inline">\(\bfx\)</span>, we can predict the probabilities for it being in each class:</p>
 <p><span class="math display">\[
 \hat{q}_{k}(\bfx) = \sigma(\bfx^T \bfw_k), \qquad k=1,\ldots,K.
 \]</span></p>
@@ -2451,14 +2513,14 @@ accuracy score: 0.93594</code></pre>
 \]</span></p>
 <p>Now we can interpret <span class="math inline">\(\hat{p}_{k}(\bfx)\)</span> as the probability of <span class="math inline">\(\bfx\)</span> belonging to class <span class="math inline">\(k\)</span>.</p>
 <div id="exm-regression-logistic-ovr" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.20 </strong></span>Suppose we have <span class="math inline">\(d=2\)</span> features and three classes, and that the three logistic regressions gave the weight vectors <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.21 </strong></span>Suppose we have <span class="math inline">\(d=2\)</span> features and three classes, and that the three logistic regressions gave the weight vectors <span class="math display">\[
 \bfw_1 = [-2,0], \qquad \bfw_2=[1,1], \qquad \bfw_3=[0,1].
 \]</span></p>
 <p>For the query <span class="math inline">\(\bfx=[1,0]\)</span>, we get the predictions <span class="math display">\[
 \begin{split}
-\hat{q}_1 &amp;= \sigma\bigl((1)(-2)+(0)(0)\bigr) \approx 0.11920, \\
-\hat{q}_2 &amp;= \sigma\bigl((1)(1)+(0)(1)\bigr) \approx 0.73106, \\
-\hat{q}_3 &amp;= \sigma\bigl((1)(0)+(0)(1)\bigr) = 0.5.
+\hat{q}_1 &amp;= \sigma(\bfx^T\bfw_1) =  \sigma\bigl((1)(-2)+(0)(0)\bigr) \approx 0.11920, \\
+\hat{q}_2 &amp;= \sigma(\bfx^T\bfw_2) = \sigma\bigl((1)(1)+(0)(1)\bigr) \approx 0.73106, \\
+\hat{q}_3 &amp;= \sigma(\bfx^T\bfw_3) = \sigma\bigl((1)(0)+(0)(1)\bigr) = 0.5.
 \end{split}
 \]</span></p>
 <p>So, if we ask, “How much does this <span class="math inline">\(\bfx\)</span> look like class 1?” the answer is, “11.9%”, for “How much like class 2?” it’s “73.1%”, and so on. Since there are three exclusive options for the class of <span class="math inline">\(\bfx\)</span>, the probabilities assigned to the classes are <span class="math display">\[
@@ -2469,32 +2531,32 @@ accuracy score: 0.93594</code></pre>
 \end{split}
 \]</span> These probabilities, in exact arithmetic, add up to 100%.</p>
 </div>
-<p>The situation is now the same as for probabilistic classification in <a href="classification.html#sec-class-quant"><span>Section&nbsp;3.5</span></a>. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.</p>
+<p>The situation is now the same as for probabilistic classification in <a href="classification.html#sec-class-probabilistic"><span>Section&nbsp;3.5</span></a>. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.</p>
 <div id="exm-regression-logistic-gas" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.21 </strong></span>As a multiclass example, we return to the dataset for classifying forest cover:</p>
-<div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">12</span>]   <span class="co"># 250,000 samples, 12 features</span></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>][:<span class="dv">250000</span>]</span>
-<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
-<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
-<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
-<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-10"><a href="#cb91-10" aria-hidden="true" tabindex="-1"></a>logr <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
-<span id="cb91-11"><a href="#cb91-11" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logr)</span>
-<span id="cb91-12"><a href="#cb91-12" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
-<span id="cb91-13"><a href="#cb91-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy score is </span><span class="sc">{</span>pipe<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="theorem-title"><strong>Example 5.22 </strong></span>As a multiclass example, we return to the dataset for classifying forest cover:</p>
+<div class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">12</span>]   <span class="co"># 250,000 samples, 12 features</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>][:<span class="dv">250000</span>]</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a>logr <span class="op">=</span> LogisticRegression(solver<span class="op">=</span><span class="st">"liblinear"</span>)</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), logr)</span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
+<span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy score is </span><span class="sc">{</span>pipe<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>accuracy score is 72.74%</code></pre>
 </div>
 </div>
 <p>We can now look at probabilistic predictions for each class:</p>
-<div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>p_hat[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>p_hat[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="66">
 <pre><code>array([[3.27753115e-01, 6.71344154e-01, 8.83821740e-06, 1.47289531e-05,
         6.20692039e-04, 2.57492056e-04, 9.79562864e-07],
        [4.20545770e-01, 5.66374061e-01, 2.90422085e-06, 4.50982065e-07,
@@ -2504,21 +2566,21 @@ accuracy score: 0.93594</code></pre>
 </div>
 </div>
 <p>The ROC curves show that the performance is much worse for 3 of the classes than for the others:</p>
-<div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
-<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(pipe.classes_):</span>
-<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> (y_test<span class="op">==</span>label)</span>
-<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>    fp, tp, theta <span class="op">=</span> roc_curve(actual, p_hat[:,i])</span>
-<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>    results.extend( [ (label,fp,tp) <span class="cf">for</span> fp,tp <span class="kw">in</span> <span class="bu">zip</span>(fp,tp) ] )</span>
-<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a>roc <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"label"</span>, <span class="st">"FP rate"</span>, <span class="st">"TP rate"</span>] )</span>
-<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>roc, </span>
-<span id="cb95-9"><a href="#cb95-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
-<span id="cb95-10"><a href="#cb95-10" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb95-11"><a href="#cb95-11" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"Dark2"</span></span>
-<span id="cb95-12"><a href="#cb95-12" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(pipe.classes_):</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>    actual <span class="op">=</span> (y_test<span class="op">==</span>label)</span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>    fp, tp, theta <span class="op">=</span> roc_curve(actual, p_hat[:,i])</span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>    results.extend( [ (label,fp,tp) <span class="cf">for</span> fp,tp <span class="kw">in</span> <span class="bu">zip</span>(fp,tp) ] )</span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>roc <span class="op">=</span> pd.DataFrame( results, columns<span class="op">=</span>[<span class="st">"label"</span>, <span class="st">"FP rate"</span>, <span class="st">"TP rate"</span>] )</span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>roc, </span>
+<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
+<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"Dark2"</span></span>
+<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="regression_files/figure-html/cell-64-output-1.png" width="526" height="468"></p>
+<p><img src="regression_files/figure-html/cell-68-output-1.png" width="526" height="468"></p>
 </div>
 </div>
 </div>
@@ -2894,6 +2956,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video18);</script>
 <script>videojs(video_shortcode_videojs_video19);</script>
 <script>videojs(video_shortcode_videojs_video20);</script>
+<script>videojs(video_shortcode_videojs_video21);</script>
+<script>videojs(video_shortcode_videojs_video22);</script>
+<script>videojs(video_shortcode_videojs_video23);</script>
+<script>videojs(video_shortcode_videojs_video24);</script>
 
 
 

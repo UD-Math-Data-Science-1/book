@@ -264,7 +264,7 @@ MathJax = {
   <li><a href="#algorithm" id="toc-algorithm" class="nav-link" data-scroll-target="#algorithm"><span class="toc-section-number">3.4.2</span>  Algorithm</a></li>
   <li><a href="#standardization" id="toc-standardization" class="nav-link" data-scroll-target="#standardization"><span class="toc-section-number">3.4.3</span>  Standardization</a></li>
   </ul></li>
-  <li><a href="#sec-class-quant" id="toc-sec-class-quant" class="nav-link" data-scroll-target="#sec-class-quant"><span class="toc-section-number">3.5</span>  Probabilistic interpretation</a>
+  <li><a href="#sec-class-probabilistic" id="toc-sec-class-probabilistic" class="nav-link" data-scroll-target="#sec-class-probabilistic"><span class="toc-section-number">3.5</span>  Probabilistic interpretation</a>
   <ul class="collapse">
   <li><a href="#roc-curve" id="toc-roc-curve" class="nav-link" data-scroll-target="#roc-curve"><span class="toc-section-number">3.5.1</span>  ROC curve</a></li>
   <li><a href="#auc" id="toc-auc" class="nav-link" data-scroll-target="#auc"><span class="toc-section-number">3.5.2</span>  AUC</a></li>
@@ -1808,8 +1808,8 @@ weighted avg       1.00      1.00      1.00        67
 <div class="quarto-video"><video id="video_shortcode_videojs_video16" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/x7br8qha5gcfsz4/Example3_13.mp4?raw=1"></video></div>
 </div></div></section>
 </section>
-<section id="sec-class-quant" class="level2 page-columns page-full" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="sec-class-quant"><span class="header-section-number">3.5</span> Probabilistic interpretation</h2>
+<section id="sec-class-probabilistic" class="level2 page-columns page-full" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-class-probabilistic"><span class="header-section-number">3.5</span> Probabilistic interpretation</h2>
 <p>Both kNN and decision trees base classification on a voting procedure—for kNN, the <span class="math inline">\(k\)</span> nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information.</p>
 <div id="def-class-phat" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.10 </strong></span>Let <span class="math inline">\(\bfx\)</span> be a query vector in a vote-based classification method. The <strong>probability vector</strong> <span class="math inline">\(\hat{p}(\bfx)\)</span> is the vector of vote fractions received by each class.</p>
