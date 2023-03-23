@@ -1056,7 +1056,7 @@ However, we don't need to access that data just to use the pipeline. That's take
 {{< video https://www.dropbox.com/s/x7br8qha5gcfsz4/Example3_13.mp4?raw=1 >}}
 :::
 
-## Probabilistic interpretation {#sec-class-quant}
+## Probabilistic interpretation {#sec-class-probabilistic}
 
 Both kNN and decision trees base classification on a voting procedure---for kNN, the $k$ nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information. 
 
