@@ -28,6 +28,10 @@ from sklearn.model_selection import GridSearchCV
 **Regression** is the task of approximating the value of a dependent quantitative variable as a function of independent variables, sometimes called *predictors*. 
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/a1h989lg4xe3ak4/Section5_0.mp4?raw=1 >}}
+:::
+
 Regression and classification are distinct but not altogether different. Abstractly, both are concerned with reproducing a function $f$ whose domain is feature space. In classification, the range of $f$ is a finite set of class labels, while in regression, the range is the real number line (or an interval in it). We can always take the output of a regression and round or bin it to get a finite set of classes; therefore, any regression method can also be used for classification. Likewise, most classification methods have a generalization to regression.
 
 In addition to prediction tasks, some regression methods can be used to identify the relative significance of each feature and whether is has a direct or inverse relationship to the function value. Unimportant features can then be removed to help minimize overfitting. 
@@ -36,10 +40,13 @@ In addition to prediction tasks, some regression methods can be used to identify
 
 You have likely previously encountered the most basic form of regression: fitting a straight line to data points $(x_i,y_i)$ in the $xy$-plane. In **linear regression**, we have a one-dimensional feature $x$ and assume a relation
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/3u136kizgj4qd15/Section5_1.mp4?raw=1 >}}
+:::
+
 $$
 y \approx \hat{f}(x) = ax + b.
 $$
-
 
 We also define a **loss function** or *misfit function* that adds up how far predictions are from the data. The standard choice is a sum of squared differences between the predictions and the true values:
 
@@ -96,7 +103,7 @@ The regression function is $\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}$.
 
 ### Linear algebra
 
-Before moving on, we want to adopt a vector-oriented description of the process. If we define 
+Before moving on, we want to examine a vector-oriented description of the process. If we define 
 $$
 \bfe = [1,1,\ldots,1] \in \real^n,
 $$
@@ -105,6 +112,10 @@ $$
 L(a,b) =  \twonorm{a\, \bfx + b \,\bfe - \bfy}^2,
 $$
 Minimizing $L$ over all values of $a$ and $b$ is called the **least squares** problem. (More specifically, this setup is called *simple least squares* or *ordinary least squares*.)
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/pqr1b4yjjdbk9t5/Section5_1_1.mp4?raw=1 >}}
+:::
 
 We can write out the equations for $a$ and $b$ using another important idea from linear algebra.
 
@@ -178,23 +189,25 @@ a \\ b
 \bfx^T\bfy \\  \bfe^T\bfy
 \end{bmatrix}.
 $$ 
-This is referred to as a *linear system* of equations for the unknown vector $[a,b]$. Linear systems and their solutions are the central topic of linear algebra. In the background, it is this linear system that is being solved when you perform a linear regression fit.
+This takes the form of the equation $\bfA \bfw = \bfv$, where $\bfA$ is a known $2\times 2$ matrix, $\bfv$ is a known 2-vector, and $\bfw$ is the 2-vector of the unknowns $a$ and $b$. This equation   is referred to as a *linear system* for the unknown vector. Linear systems and their solutions are the central topic of linear algebra. In the background, it is this linear system that is being solved when you perform a linear regression fit.
 
 ### Performance metrics
 
-We need to establish ways to measure regression performance. Unlike with binary classification, in regression it's not just a matter of right and wrong answers---the amount of wrongness matters, too.
+We need ways to measure regression performance. Unlike with binary classification, in regression it's not just a matter of right and wrong answers---the amount of wrongness matters, too.
 
-In this section, we will use $x_i$ for $i=1,\ldots,n$ to mean the training set features, $y_i$ to mean the corresponding training values, and $\hat{y}_i$ to mean the values predicted on the training set by the regressor.
+A quirk of linear regression is that it's an older and broader idea than most of machine learning, and it's often presented as though the training and testing sets are identical. We follow that convention for the definitions in this section. The same quantities can also be calculated for a set of labels and predictions obtained from a separate testing set, although a few of the properties stated here don't apply in that case.
 
 ::::{#def-regression-residual-error}
 The **residuals** of the regression are
 $$
-y_i - \hat{y}_i, \qquad i=1,\ldots,n. 
+y_i - \hat{y}_i, \qquad i=1,\ldots,n,
 $$ {#eq-regression-residual}
-We can express them as the vector $\bfy-\hat{\bfy}$.
+where the $y_i$ are the true labels and the $\hat{y}_i$ are the values predicted by the regressor. We can express them compactly as the **residual vector** $\bfy-\hat{\bfy}$.
 ::::
 
-A quirk of linear regression is that it's an older idea than most of machine learning, and it's often presented as though the training and testing sets are identical. We therefore give the following definitions in terms of $\bfy$ and $\hat{\bfy}$ arising from the training data. The same quantities can also be calculated for a set of labels and predictions obtained from a separate testing set, though a few of the properties stated here don't apply in that case.
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/pl9jy2qtqpk8zr2/Section5_1_2.mp4?raw=1 >}}
+:::
 
 ::: {.callout-caution}
 The terms *error* and *residual* are frequently used interchangeably and even inconsistently.  I try to follow the most common practices here, even though the names can be confusing if you think about them too hard.
@@ -203,59 +216,83 @@ The terms *error* and *residual* are frequently used interchangeably and even in
 ::::{#def-regression-mse}
 The **mean squared error** (MSE) is 
 $$
-\text{MSE} = \frac{1}{m} \sum_{i=1}^m \, \left( y_i - \hat{y}_i \right)^2 = \frac{1}{m} \twonorm{\bfy - \hat{\bfy}}^2.
+\text{MSE} = \frac{1}{n} \sum_{i=1}^n \, \left( y_i - \hat{y}_i \right)^2 = \frac{1}{n} \twonorm{\bfy - \hat{\bfy}}^2.
 $$
 The **mean absolute error** (MAE) is
 $$
-\text{MAE} = \frac{1}{m} \sum_{i=1}^m \abs{y_i - \hat{y}_i }= \frac{1}{m} \onenorm{\bfy - \hat{\bfy}}.
+\text{MAE} = \frac{1}{n} \sum_{i=1}^n \abs{y_i - \hat{y}_i }= \frac{1}{n} \onenorm{\bfy - \hat{\bfy}}.
 $$
 ::::
 
-MAE is less sensitive than MSE to large outliers. Both quantities are dimensional and therefore depend on how the variables are scaled, but at least the units of MAE are the same as of the data.
+The MSE is simply $1/n$ times the loss function of a linear regression. MAE is less sensitive than MSE to large outliers. Both quantities are dimensional and therefore depend on how the variables are scaled, but only the units of MAE are the same as of the data.
+
+::::{#exm-regression-mse-mae}
+In @exm-regression-linear the points  $(-1,0)$, $(0,2)$, $(1,3)$ were found to have the least-squares regressor $\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}$. Hence
+$$
+\begin{split}
+y_1 &= 0,\; \hat{y}_1 = \hat{f}(-1)=\tfrac{1}{6} \\ 
+y_2 &=2,\; \hat{y}_2=\hat{f}(0) = \tfrac{5}{3}, \\ 
+y_3 &=3; \; \hat{y}_3=\hat{f}(1)=\tfrac{19}{6}.
+\end{split}
+$$
+
+This implies
+$$
+\begin{split}
+\text{MSE} &= \frac{1}{3} \left[ \left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{19}{6}\right)^2 \right]= \frac{1}{18}, \\ 
+\text{MAE} &= \frac{1}{3} \left( \abs{0-\tfrac{1}{6}} + \abs{2-\tfrac{5}{3}} + \abs{3-\tfrac{19}{6}} \right) = \frac{2}{9}. \\ 
+\end{split}
+$$
+::::
 
 ::::{#def-regression-cod}
 The **coefficient of determination** (CoD) is denoted $R^2$ and defined as
 $$
 R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\displaystyle\sum_{i=1}^n \, \left(y_i - \bar{y}\right)^2},
 $$
-where $\bar{y}$ is the mean of $y_1,\ldots,y_n$. 
+where $\bar{y}$ is the sample mean of $y_1,\ldots,y_n$. 
 ::::
 
 Here are important things to know about the coefficient of determination. 
 
 ::::{#thm-regression-cod}
-1. The CoD is dimensionless and therefore independent of scaling. 
-2. If the $\hat{y}_i$ are found from a linear regression, then $R^2$ is the square of the Pearson correlation coefficient between $\bfy$ and $\hat{\bfy}$.
-3. If $\hat{y}_i=y_i$ for all $i$ (i.e., perfect predictions), then $R^2=1$. 
-4. If $\hat{y}_i=\bar{y}$ for all $i$ (i.e., always predict the sample mean), then $R^2=0$.
+Given sample values $y_1,\ldots,y_n$ with mean $\bar{y}$ and the predictions $\hat{y}_1,\ldots, \hat{y}_n$,
+
+1. $R^2$ is dimensionless and therefore independent of scaling. 
+2. If $\hat{y}_i=y_i$ for all $i$ (i.e., perfect predictions), then $R^2=1$. 
+3. If $\hat{y}_i=\bar{y}$ for all $i$ (i.e., always predict the sample mean), then $R^2=0$.
+4. If the $\hat{y}_i$ are found from a linear regression, then $R^2$ is the square of the Pearson correlation coefficient between $\bfy$ and $\hat{\bfy}$.
 ::::
 
 ::: {.callout-warning}
-The notation $R^2$ is *highly* unfortunate, because for other regression methods, $R^2$ can actually be negative! Such a result indicates that the predictor is doing worse than just predicting the mean value every time. It has nothing to do with imaginary numbers.
+The notation $R^2$ is *highly* unfortunate. While it is the square of the Pearson coefficient in linear regression, $R^2$ can actually be negative for other regression methods! Such a result indicates that the predictor is doing worse than just predicting the mean value every time. It has nothing to do with imaginary numbers.
 :::
 
 ::::{#exm-regression-cod}
-Let's find the coefficient of determination for the fit in @exm-regression-linear, where we found the regressor $\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}$.  Now $\bar{y} = \frac{1}{3}(0+2+3)=\frac{5}{3}$, and 
+Continuing with @exm-regression-linear and @exm-regression-mse-mae, we find that $\bar{y}=(0+2+3)/3=\tfrac{5}{3}$, and 
 
 $$
 \begin{split}
-    \sum_{i=1}^m \sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2 &= \left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{19}{6}\right)^2 = \frac{1}{6}, \\ 
-    \sum_{i=1}^m \left(y_i - \bar{y}\right)^2 &= \left(0-\tfrac{5}{3}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{5}{3}\right)^2 = \frac{14}{3}. 
+    \sum_{i=1}^n \left(y_i - \bar{y}\right)^2 &= \left(0-\tfrac{5}{3}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{5}{3}\right)^2 = \frac{14}{3}. 
 \end{split}
 $$
 
-This yields $R^2 = 1 - (1/6)(3/14) = 27/28$.
-
-If we instead use the arbitrary regressor $\hat{f}(x)=x$, then
-
+This gives the coefficient of determination
 $$
 \begin{split}
-    \sum_{i=1}^m \sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2 &= \left(0+1\right)^2 + \left(2-0\right)^2 + \left(3-1\right)^2 = 9, \\ 
-    \sum_{i=1}^m \left(y_i - \bar{y}\right)^2 &= \frac{14}{3}. 
+R^2 &= 1 - \frac{\left(0-\tfrac{1}{6}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{19}{6}\right)^2}{14/3} \\ 
+ &= 1 - \frac{1/6}{14/3} = \frac{27}{28}. 
 \end{split}
 $$
 
-This yields $R^2 = 1 - (9)(3/14) = -13/14$. Since the result is negative, we would be better off always predicting $5/3$. 
+This is quite close to 1, indicating a good fit. Compare that to the arbitrary predictor $\hat{f}(x)=x$, which has $\hat{y}_1=-1$, $\hat{y}_2=0$, $\hat{y}_3=1$:
+$$
+\begin{split}
+    R^2 & = 1 - \frac{\left(y_i - \hat{y}_i \right)^2 = \left(0+1\right)^2 + \left(2-0\right)^2 + \left(3-1\right)^2}{14/3}  \\ 
+    &= 1 - \frac{9}{14/3} = -\frac{13}{14}.
+\end{split}
+$$
+Since this result is negative, we would be better off always predicting $5/3$ rather than using $\hat{f}(x)=x$.
 ::::
 
 ::::{#exm-regression-ice-linear}
@@ -361,6 +398,10 @@ print(f"R-squared: {R2:.3f}")
 An $R^2$ value this close to 1 would usually be considered a sign of a good fit, although we have not tested for generalization to new data.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/wtlrgm8m8yzhge7/Example5_4.mp4?raw=1 >}}
+:::
+
 
 ## Multilinear regression
 
@@ -369,6 +410,10 @@ We can extend linear regression to $d$ predictor variables $x_1,\ldots,x_d$:
 $$
     y \approx \hat{f}(\bfx) = b + w_1 x_1 + w_2x_2 + \cdots w_d x_d. 
 $$
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/6tschaluumjq65e/Section5_2.mp4?raw=1 >}}
+:::
 
 First, observe that we can actually drop the intercept term $b$ from the discussion, because we could always define an additional constant feature $x_0=1$ and get the same effect in one higher dimension. So we will use the following.
 
@@ -381,24 +426,45 @@ for a constant vector $\bfw$ known as the **weight vector**.
 ::::
 
 ::: {.callout-note}
-Multilinear regression is also simply called *linear regression* most of the time. What we previously called linear regression is just a special case. The `LinearRegression` learner class does both types of fits.
+Multilinear regression is also simply called *linear regression* most of the time. What we previously called linear regression is just a special case. The `LinearRegression` learner class does both types of fits. It has a keyword option `fit_intercept` that determines whether or not the $b$ term above is used.
 :::
 
-As before, we find the unknown weight vector $\bfw$ by minimizing a loss function. To create the least-squares loss function, we use $\bfx_i$ to denote the $i$th row of an $n\times d$ feature matrix $\bfX$. Then
+As before, we find the unknown weight vector $\bfw$ by minimizing a loss function. To create the least-squares loss function, we use $\bfX_i$ to denote the $i$th row of an $n\times d$ feature matrix $\bfX$. Then
 
 $$
-L(\bfw) = \sum_{i=1}^n (y_i - \hat{f}(\bfx_i))^2 = \sum_{i=1}^n (y_i - \bfx_i^T\bfw)^2.
+L(\bfw) = \sum_{i=1}^n (y_i - \hat{f}(\bfX_i))^2 = \sum_{i=1}^n (y_i - \bfX_i^T\bfw)^2.
 $$
 
-We encountered a matrix-vector product earlier. It turns out that the following definition is equivalent. 
+We encountered a matrix-vector product earlier. It turns out that the following definition is equivalent to that earlier one.
 
 ::::{#def-regression-matvec}
-Given an $n\times d$ matrix $\bfX$ with rows $\bfx_1,\ldots,\bfx_n$ and a $d$-vector $\bfw$, the product $\bfX\bfw$ is defined by
+Given an $n\times d$ matrix $\bfX$ with rows $\bfX_1,\ldots,\bfX_n$ and a $d$-vector $\bfw$, the product $\bfX\bfw$ is defined by
 $$
 \bfX \bfw = 
 \begin{bmatrix} 
-    \bfx_1^T\bfw \\ \bfx_2^T\bfw \\ \vdots \\ \bfx_n^T\bfw
+    \bfX_1^T\bfw \\ \bfX_2^T\bfw \\ \vdots \\ \bfX_n^T\bfw
 \end{bmatrix}.
+$$
+::::
+
+::::{#exm-regression-matvec}
+Suppose that 
+$$
+\bfX = \begin{bmatrix}
+3 & -1 \\ 0 & 2 \\ 1 & 4
+\end{bmatrix}, 
+\qquad 
+\bfw = [5,-2]. 
+$$
+Then $\bfX_1=[3,-1]$, $\bfX_2=[0,2]$, $\bfX_3=[1,4]$, and
+$$
+\bfX \bfw = \begin{bmatrix}
+(3)(5)+(-1)(-2) \\ (0)(5) + (2)(-2) \\ (1)(5) + (4)(-2) 
+\end{bmatrix}
+= 
+\begin{bmatrix}
+17 \\ -4 \\ -3
+\end{bmatrix}. 
 $$
 ::::
 
@@ -408,10 +474,10 @@ $$
 L(\bfw) = \twonorm{\bfX \bfw- \bfy}^2.
 $$ {#eq-regression-multilinear-loss}
 
-As in the $d=1$ case, minimizing the loss is equivalent to solving a linear system of equations known as the *normal equations* for $\bfw$. We do not present them here.
+As in the $d=1$ case, minimizing the loss is equivalent to solving a linear system of equations known as the *normal equations* for the weight vector $\bfw$. We do not present the details here.
 
 ::: {.callout-caution}
-Be careful interpreting the magnitudes of regression coefficients. These are sensitive to the units and scales of the features. For example, distances expressed in meters would have a coefficient that is 1000 times larger than the same distances expressed in kilometers. For quantitative comparisons, it helps to standardize the features first, which does not affect the quality of the fit.
+Be careful interpreting the magnitudes of regression coefficients (i.e., entries of the weight vector). These are sensitive to the units and scales of the features. For example, distances expressed in meters would have a coefficient that is 1000 times larger than the same distances expressed in kilometers. For quantitative comparisons, it helps to standardize the features first, which does not affect the quality of the fit.
 :::
 
 ::::{#exm-regression-cars-multi}
@@ -483,7 +549,7 @@ pd.Series(pipe[1].coef_, index=features)
 We now have evidence that *weight* is the most significant negative factor for MPG, by a wide margin.
 ::::
 
-In the next example, we will see that we can create new features from the ones that are initially given. Sometimes these new features add a lot to the quality of the regression. 
+In the next example we will see that we can create new features out of the ones that are initially given. Sometimes these new features add a lot to the quality of the regression. 
 
 ::::{#exm-regression-sales-multi}
 Here we load data about advertising spending on different media in many markets:
@@ -496,11 +562,10 @@ ads.head(6)
 Pairwise scatter plots yield some hints about what to expect from this dataset:
 
 ```{python}
-#| column: body-outset
-sns.pairplot(data=ads, height=1.8);
+sns.pairplot(data=ads, height=1.5);
 ```
 
-The clearest association between *Sales* and spending is with *TV*. So we first try a univariate linear fit of sales against TV spending alone:
+The last column, which shows relationships with *Sales*, is of greatest interest. From it we see that the clearest association between *Sales* and spending is with *TV*. So we first try a univariate linear fit of sales against TV spending alone:
 
 ```{python}
 X = ads[ ["TV"] ]    # has to be a frame, so ["TV"] not "TV"
@@ -545,22 +610,27 @@ regress(lm, ads, y, ["TV", "Radio"])
 
 While we have a very good $R^2$ score now, we can try to improve it. We can add an additional feature that is the product of *TV* and *Radio*, representing the possibility that these media reinforce one another's effects: 
 
+::: {.callout-tip}
+In order to modify a frame, it has to be an independent copy, not just a subset of another frame.
+:::
+
 ```{python}
 X = ads[ ["Radio", "TV"] ].copy()
 X["Radio*TV"] = X["Radio"]*X["TV"]
 regress(lm, X, y, X.columns)
 ```
 
-::: {.callout-tip}
-In order to modify a frame, it has to be an independent copy, not just a subset of another frame.
+We did see a small increase in the $R^2$ score, and the combination of both types of spending does have a positive effect on *Sales*. 
+::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/armvar96hf03sta/Example5_6.mp4?raw=1 >}}
 :::
 
-We did see some increase in the $R^2$ score, and therefore the combination of both types of spending does have a positive effect on *Sales*. 
-::::
 
 It's not uncommon to introduce a product term as done in @exm-regression-sales-multi, and more exotic choices are also possible. Keep in mind, though, that additional variables usually add variance to the model, even if they don't seriously affect the bias.
 
-Interpreting linear regression is a major topic in statistics. There are tests that can lend much more precision and rigor to the brief discussion above.
+Interpreting linear regression is a major topic in statistics. There are tests that can lend much more precision and rigor to the brief discussion in this section.
 
 ### Polynomial regression
 
@@ -569,6 +639,10 @@ A special case of multilinear regression is when there is initially a single pre
 $$
 x_1 = t^0, \, x_2 = t^1, \ldots, x_d = t^{d-1}.
 $$
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/ghqex9s63odohja/Section5_2_1.mp4?raw=1 >}}
+:::
 
 This makes the regressive approximation into
 
@@ -594,13 +668,15 @@ As we would expect, horsepower and miles per gallon are negatively correlated. H
 sns.lmplot(data=cars, x="horsepower", y="mpg");
 ```
 
-A cubic polynomial produces a much more plausible fit, especially on the right half of the plot:
+Seaborn can show us how a cubic polynomial regression would look: 
 
 ```{python}
 sns.lmplot(data=cars, x="horsepower", y="mpg", order=3);
 ```
 
-In order to produce the cubic fit within sklearn, we use the `PolynomialFeatures` preprocessor in a pipeline. If the original predictor variable is $t$, then the preprocessor will create features for $1$, $t$, $t^2$, and $t^3$. (Since the constant feature is added in, we don't need to fit the intercept with the linear regressor.)
+The figure above suggests that the cubic regression produces a better fit---that is, lower bias over the full range of horsepower. 
+
+In order to obtain the cubic fit within sklearn, we use the `PolynomialFeatures` preprocessor in a pipeline. If the original predictor variable is $t$, then the preprocessor will create features for $1$, $t$, $t^2$, and $t^3$. (Since the constant feature is added in by the preprocessor, we don't need it again within the regression, so we set `fit_intercept=False` in `LinearRegression`.)
 
 ```{python}
 from sklearn.preprocessing import PolynomialFeatures
@@ -611,49 +687,61 @@ lm = LinearRegression( fit_intercept=False )
 cubic = make_pipeline(PolynomialFeatures(degree=3), lm)
 cubic.fit(X, y)
 
+# Predict MPG at horsepower=200:
 query = pd.DataFrame([200], columns=X.columns)
 print("prediction at hp=200:", cubic.predict(query))
 ```
 
-The prediction above is consistent with the earlier figure. 
-
-We can get the coefficients of the cubic polynomial from the trained regressor:
-
+Let's compare the coefficients of determination for the linear and cubic fits:
 ```{python}
-cubic[1].coef_
+linscore = LinearRegression().fit(X,y).score(X,y)
+print(f"CoD for linear fit: {linscore:4f}")
+print(f"CoD for cubic fit: {cubic.score(X,y):4f}")
 ```
-
-The coefficients go in order of increasing degree.
 ::::
 
-If a cubic polynomial can fit better than a line, it's plausible that increasing the degree more will lead to even better fits. In fact, the training error can only go down, because a lower-degree polynomial case is a subset of a higher-degree case.
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/69fdzj8sn2rgdza/Example5_7.mp4?raw=1 >}}
+:::
+
+
+If a cubic polynomial can fit better than a line, it seems reasonable that increasing the degree more will lead to even better fits. In fact, the training error can only go down, because a lower-degree polynomial case is a subset of a higher-degree case. But there is a major catch, in the form of overfitting.
 
 ::::{#exm-regression-polynomial-high}
-Continuing with @exm-regression-polynomial, we explore the effect of polynomial degree, we split into train and test sets:
+Continuing with @exm-regression-polynomial, we explore the effect of polynomial degree after splitting into training and test sets:
 
 ```{python}
+#| code-fold: true
 from sklearn.metrics import mean_squared_error
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.2, random_state=0
+    test_size=0.2, 
+    shuffle=True, random_state=302
     )
 
-for deg in range(2,11):
-    poly = make_pipeline( PolynomialFeatures(degree=deg), lm )
+results = []
+for deg in range(1,9):
+    poly = make_pipeline( 
+        StandardScaler(), 
+        PolynomialFeatures(degree=deg), 
+        lm 
+        )
     poly.fit(X_train, y_train)
-    MSE = mean_squared_error(y_test, poly.predict(X_test))
-    print(f"MSE for degree {deg:2}: {MSE:.3f}")
+    MSE_tr = mean_squared_error(y_train, poly.predict(X_train))
+    MSE_te = mean_squared_error(y_test, poly.predict(X_test))
+    results.append((deg, "train", MSE_tr))
+    results.append((deg, "test", MSE_te))
+
+results = pd.DataFrame(results, columns=["degree","measuring set","MSE"])
+sns.relplot(data=results,
+    x="degree", y="MSE",
+    kind="line", hue="measuring set"
+    );
 ```
 
-The results above are a clear example of overfitting and the bias–variance tradeoff. A plot of the degree-10 fit shows that the polynomial becomes more oscillatory:
-
-```{python}
-sns.lmplot(data=cars, x="horsepower", y="mpg", order=10);
-```
-
-In the above plot, note the widening of the confidence intervals near the ends of the domain, indicating increased variance in the predictions. 
-
+The results above demonstrate that increasing the polynomial degree eventually leads to overfitting. In fact, in this case it seems that we don't want to go beyond the cubic fit.
+<!-- 
 
 Finally, we can combine the use of multiple features and higher degree:
 
@@ -666,12 +754,26 @@ pipe = make_pipeline(
 fitcars(pipe, features)
 ```
 
-This is our best regression fit so far, by a mile.
+This is our best regression fit so far, by a mile. -->
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/mgkf1r9wlrxeqxl/Example5_8.mp4?raw=1 >}}
+:::
+
+Let's summarize the situation:
+
+::: {.callout-caution}
+Adding polynomial features improves the expressive power of a regression model, which can decrease bias but also increase overfitting.
+:::
 
 ## Regularization
 
-As a general term, *regularization* refers to modifying something that is difficult to compute accurately with something more tractable. For learning models, regularization is a common way to combat overfitting.
+As a general term, *regularization* refers to modifying something that is difficult to compute accurately with something more tractable. For learning models, regularization is a useful way to combat overfitting.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/lq2mydwh1z5074b/Section5_3.mp4?raw=1 >}}
+:::
 
 Suppose we had an $\real^{n\times 4}$ feature matrix in which the features are identical; that is, the predictor variables satisfy $x_1=x_2=x_3=x_4$, and suppose the target $y$ also equals $x_1$. Clearly, we get a perfect regression if we use
 
@@ -776,25 +878,21 @@ for alpha in [0.25, 0.5, 1, 2]:
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/20da7wu8istuoud/Example5_11.mp4?raw=1 >}}
+:::
+
 ::::{#exm-regression-lasso-diabetes}
-Here's a LASSO regression fit on the diabetes data:
+We continue with the diabetes data from @exm-regression-ridge-diabetes, but this time, we try LASSO regularization. A validation curve suggests initial gains in the $R^2$ score as the regularization parameter $\alpha$ is varied, followed by a decrease:
 
 ```{python}
 from sklearn.linear_model import Lasso
-lass = Lasso(alpha=0.1)
-lass.fit(X_train, y_train)
-R2 = lass.score(X_test, y_test)
-print(f"LASSO model CoD score: {R2:.4f}")
-```
 
-A validation curve suggests modest gains in the $R^2$ score as the regularization parameter is varied:
-
-```{python}
 kf = KFold(n_splits=4, shuffle=True, random_state=302)
-alpha = np.linspace(0, 0.1, 80)[1:]  # exclude alpha=0
+alpha = np.linspace(0, 0.1, 60)[1:]  # exclude alpha=0
 
 _,scores = validation_curve(
-    lass,
+    Lasso(),
     X_train, y_train,
     cv=kf,
     n_jobs=-1,
@@ -816,38 +914,37 @@ pd.DataFrame( {
     } )
 ```
 
-We can rank the relative importance of the features by ordering them in terms of decreasing coefficient magnitude:
+We can isolate the coefficients that were (within small rounding errors) zeroed out:
 
 ```{python}
-# Get the permutation that sorts values in increasing order.
-order = np.argsort( np.abs(lass.coef_) )  
-order = order[::-1]    # reverse the order
-pd.Series( order, index=X.columns )
-```
-
-The last three features were dropped by LASSO:
-
-```{python}
-zeroed = X.columns[order[-3:]]
-print(zeroed)
+# Get the locations (indices) of the very small weights:
+zeroed = np.nonzero( np.abs(lass.coef_) < 1e-5 )
+# Names of the corresponding columns:
+X.columns[zeroed]  
 ```
 
 Now we can drop these features from the dataset:
 
 ```{python}
-X_train_reduced = X_train.drop(zeroed, axis=1)
-X_test_reduced = X_test.drop(zeroed, axis=1)
+X_train_reduced = X_train.drop(X.columns[zeroed], axis=1)
+X_test_reduced = X_test.drop(X.columns[zeroed], axis=1)
 ```
 
 Returning to a fit with no regularization, we find that little is lost by using the reduced feature set:
 
 ```{python}
 print(f"original linear model score: {lm.score(X_test, y_test):.4f}")
+
 lm.fit(X_train_reduced, y_train)
-R2 = lm.score(X_test_reduced, y_test)
-print(f"reduced linear model score: {R2:.4f}")
+Rsq = lm.score(X_test_reduced, y_test)
+print(f"reduced linear model score: {Rsq:.4f}")
 ```
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/hismymdgpbddy0e/Example5_12.mp4?raw=1 >}}
+:::
+
 
 ## Nonlinear regression
 
@@ -856,6 +953,10 @@ $$
 \hat{f}(\bfx) = \bfw^T \bfx. 
 $$
 This is a **linear** function, meaning that two key properties are satisfied. For all possible vectors $\bfu,\bfv$ and numbers $c$,
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/6ajvo8twg3ouj1d/Section5_4.mp4?raw=1 >}}
+:::
 
 1. $\hat{f}(\bfu + \bfv) = \hat{f}(\bfu) + \hat{f}(\bfv)$,
 2. $\hat{f}(c\bfu) = c \hat{f}(\bfu)$.
@@ -867,13 +968,17 @@ $$
 
 One benefit of the linear approach is that the dependence of the weight vector $\bfw$ on the regressed data is also linear, which makes solving for it relatively straightforward. 
 
-As the simplest type of multidimensional function, linear relationships are a good first resort. Furthermore, we can augment the features with powers in order to get polynomial relationships. However, that approach becomes infeasible for more than 2 or 3 dimensions, because the number of polynomial terms needed explodes. While there is a way around this restriction known as the *kernel trick*, that's beyond our mathematical scope here.
+As the simplest type of multidimensional function, linear relationships are a good first resort. Furthermore, we can augment the features with powers in order to get polynomial relationships. However, that approach becomes infeasible for more than 2 or 3 dimensions, because the number of polynomial terms needed explodes. (While there is a way around this restriction known as the *kernel trick*, that's beyond our mathematical scope here.)
 
 Alternatively, we can resort to fully nonlinear regression methods. Two of them come from generalizations of our staple classifiers.
 
 ### Nearest neighbors
 
 To use kNN for regression, we find the $k$ nearest examples as with classification, but replace voting on classes with the mean or median of the neighboring values. A simple example confirms that the resulting approximation is not linear.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/762plrk0qqw501w/Section5_4_1.mp4?raw=1 >}}
+:::
 
 ::::{#exm-regression-knn}
 Suppose we have just two samples with one-dimensional features: $x_1=0$ and $x_2=2$, and let the corresponding sample values be $y_1=0$ and $y_2=1$. Using kNN with $k=1$, the resulting approximation $\hat{f}(x)$ is
@@ -885,7 +990,7 @@ $$
     1, & x > 1.
 \end{cases}
 $$
-(Convince yourself that the result is the same whether the mean or the median is used.) Thus, for instance, $\hat{f}(1.2)=1$, while $2\hat{f}(0.6) = 0$, which is not equal to $\hat{f}(2 \cdot 0.6)$.
+(Convince yourself that the result is the same whether the mean or the median is used.) Thus, for instance, $\hat{f}(2 \cdot 0.6)=\hat{f}(1.2)=1$, while $2\cdot \hat{f}(0.6) = 0$.
 ::::
 
 kNN regression can produce a function that conforms itself to the training data much more closely than a linear regressor does. This can both decrease bias and increase variance, especially for small values of $k$. As illustrated in the following video, increasing $k$ flattens out the approximation, decreasing variance while increasing bias.
@@ -905,7 +1010,7 @@ y = cars["mpg"]
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.2, random_state=302
+    test_size=0.2, random_state=0
     )
 
 lm = LinearRegression()
@@ -937,32 +1042,50 @@ print(f"best kNN CoD: {optim.score(X_test, y_test):.4f}")
 As you can see above, we got some improvement over the linear regressor.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/2v4wgkm8r2915aq/Example5_14.mp4?raw=1 >}}
+:::
 
 ### Decision tree
 
 Recall that a decision tree recursively divides the examples into subsets. As with kNN, we can replace taking a classification vote over a leaf subset with taking a mean or median of the values. But the method of determining splits needs to be changed as well.
 
-Instead of using a measure of subset impurities to determine the best split, the split is chosen to cause the greatest reduction in dispersion within the two subsets. The most common choices for the dispersion measure $H$ are:
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/741v6g7skp3a9ct/Section5_4_2.mp4?raw=1 >}}
+:::
 
-1. If using the mean of subset values, then let $H$ be standard deviation.
-2. If using the median of subset values, then let $H$ be mean absolute deviation (MAD), defined as
-$$
-\text{MAD} = \frac{1}{m} \sum_{i=1}^m | t_i - t_\text{med} |
-$$
-for any list of values $t_1,\ldots,t_m$ and $t_\text{med}$ equal to the median value. 
+Instead of using a measure of subset impurities to determine the best split, the split is chosen to cause the greatest reduction in dispersion within the two subsets. We introduce a new dispersion measure here for this purpose.
 
-As with classification, a proposal to split into subsets $S$ and $T$ is assigned the weighted score
+::::{#def-regression-mad}
+If $x_1,\ldots,x_n$ are a sample with median equal to $m$, the **mean absolute deviation (MAD)** of the sample is
 $$
-Q = |S| H(S) + |T| H(T).
+\frac{1}{n} \sum_{i=1}^n | x_i - m |.
 $$
-The split location is chosen to minimize $Q$.
+::::
+
+As with classification, a decision tree regressor seeks the best possible split of samples along coordinate planes. A proposal to split into subsets $S$ and $T$ is assigned the weighted score
+$$
+Q = |S| H(S) + |T| H(T),
+$$
+where $H$ is a dispersion measure. The split location is chosen to minimize $Q$. After the process is applied recursively, each leaf of the decision tree contains a subset of the training samples. There are two distinct variations:
+
+1. The mean of the leaf labels is the regression value, and $H$ is the standard deviation.
+2. The median of the leaf labels is the regression value, and $H$ is the MAD.
 
 ::::{#exm-regression-split}
 Suppose we are given the observations $x_i=i$, $i=1,\ldots,4$, where $y_1=2$, $y_2=-1$, $y_3=1$, $y_4=0$. Let's find the decision tree regressor using medians/MAD.
 
-The original value set has median $\frac{1}{2}$ and gets a weighted dispersion of $\frac{5}{2}(3+3+1+1)=20$. There are three ways to split the data, depending on where the partition falls in relation to the $x_i$:
+The original value set has median $\frac{1}{2}$, so its MAD is 
+$$ 
+\frac{1}{4} \left( \abs{2-\tfrac{1}{2}} +  \abs{{-1}-\tfrac{1}{2}} + \abs{1-\tfrac{1}{2}} + \abs{0-\tfrac{1}{2}}  \right) = \frac{1}{4}\cdot \frac{8}{2} = 1. 
+$$
+Thus, the $Q$-score of the full set is 4. 
+
+There are three allowable ways to split the data, as it is ordered from left to right: 
 
 * $S=\{2\},\,T=\{-1,1,0\}$
+
+Note that $\abs{S}=1$ and $\abs{T}=3$, so
 $$ 
 \begin{split}
 Q &= 1\left[ \frac{1}{1} |2-2|  \right] +  3 \left[ \frac{1}{3}\bigl( | -1-0 | + |1-0| + |0-0|  \bigr)  \right]\\ 
@@ -984,8 +1107,12 @@ $$
 \end{split}
 $$
 
-Thus, the first split above produces the smallest total dispersion.
+Thus, the first split above produces the smallest weighted dispersion, and it improves on the orignal set.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/vb4dmpbq358dxwl/Example5_15.mp4?raw=1 >}}
+:::
 
 To predict a value for a query $x$, we follow the tree until ending at a leaf, where we use the mean (if dispersion is STD) or median (if dispersion is MAD) of the examples in the leaf.
 
@@ -1042,6 +1169,10 @@ print( dtree.predict(X) )
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/wf0djkbbadjtytx/Example5_16.mp4?raw=1 >}}
+:::
+
 ::::{#exm-regression-tree-demo}
 Continuing with the data from @exm-regression-knn-demo, we find that we can do even better with a random forest of decision tree regressors:
 
@@ -1077,13 +1208,21 @@ print(f"best forest CoD: {optim.score(X_test, y_test):.4f}")
 
 Sometimes a regressed value is subject to certain known bounds or other conditions. A major example is probability, which has to be between 0 and 1 (inclusive). 
 
-A linear regressor, $\hat{f}(\bfx) = \bfw^T \bfx$ for a constant vector $\bfw$, typically ranges over all of $(-\infty,\infty)$. In order to get a result that must lie within $[0,1]$, we can transform its output using the **logistic function**, defined as
+A linear regressor, $\hat{f}(\bfx) = \bfw^T \bfx$ for a constant vector $\bfw$, typically ranges over all of $(-\infty,\infty)$. In order to get a result that must lie within $[0,1]$, we can transform its output. 
 
+::::{#def-regression-logistic}
+The **logistic function** is
 $$
-\sigma(x) = \frac{1}{1+e^{-x}}.
+\sigma(x) = \frac{1}{1+e^{-x}},
 $$
+defined for all real values of $x$.
+::::
 
-The logistic function has the real line as its domain and takes the form of a smoothed step increasing from 0 to 1:
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/c5xsfxyw2ie4hkl/Section5_5.mp4?raw=1 >}}
+:::
+
+The logistic function takes the form of a smoothed step increasing from 0 to 1:
 
 ```{python}
 #| echo: false
@@ -1106,7 +1245,12 @@ Defining $\hat{p}_i = \sigma(\bfx_i^T\bfw)$ at all the training points, a straig
 $$
 \sum_{i=1}^n \left( \hat{p}_i - y_i \right)^2.
 $$
-For binary classification, however, it's more common to use the **cross-entropy** loss function
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/wdnqanl9ny5h9p7/Section5_5_1.mp4?raw=1 >}}
+:::
+
+However, it's more common to use the **cross-entropy** loss function
 $$
 L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \right].
 $$ {#eq-regression-cross-entropy}
@@ -1118,23 +1262,29 @@ if $y_i=0$, which becomes infinite as $\hat{p}_i\to 1^-$, and
 $$
 -\log(\hat{p}_i)
 $$
-if $y_i=1$, which becomes infinite as $\hat{p}_i\to 0^+$. In words, there is a steep penalty for being almost completely wrong about an observation. 
+if $y_i=1$, which becomes infinite as $\hat{p}_i\to 0^+$. Thus, there is a steep penalty for being almost completely wrong about an observation. 
+
+::::{#exm-regression-cross-entropy}
+Suppose we have true labels $\bfy=[0,0,0,1]$ and predicted probabilities $\hat{\mathbf{p}} = [0.1,0.4,0.2,0.3].$ This gives the following terms in the cross-entropy sum:
+$$
+\begin{split}
+\cancel{y_1 \log(\hat{p}_1)} + (1-y_1) \log(1-\hat{p}_1) &= \log(0.9), \\ 
+\cancel{y_2 \log(\hat{p}_2)} + (1-y_2) \log(1-\hat{p}_2) &= \log(0.6), \\ 
+\cancel{y_3 \log(\hat{p}_3)} + (1-y_3) \log(1-\hat{p}_3) &= \log(0.8), \\ 
+y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &= \log(0.3).\\ 
+\end{split}
+$$
+
+Hence the total cross-entropy is 
+$$
+-\log\bigl[ (0.9)(0.6)(0.8)(0.3)\bigr] = -\log(0.1296). 
+$$
+Using the natural log, this is about $2.043$. 
+::::
 
 Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does *not* lead to a linear problem for the weight vector $\bfw$. The difference in practice is usually not a concern, though.
 
-### Regularization
-
-As with other forms of regression, the loss function may be regularized using the ridge or LASSO penalty. The standard formulation is 
-
-$$
-\widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
-$$
-
-where $C$ is a positive hyperparameter and the vector norm is either the 2-norm (ridge) or 1-norm (LASSO). 
-
-::: {.callout-important}
-The parameter $C$ functions like the inverse of the regularization parameter $\alpha$ we used in the linear regressor. It's just a different convention chosen historically. As $C$ decreases, the regularization strength increases.
-:::
+Cross-entropy is the default loss function for a `LogisticRegression` in scikit-learn. In @exm-regression-spam, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.
 
 ::::{#exm-regression-spam}
 We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.
@@ -1144,7 +1294,7 @@ spam = pd.read_csv("_datasets/spambase.csv")
 spam.head()
 ```
 
-We create a feature matrix and label vector, and split into train/test sets:
+The labels in this case are 0 for "ham" (not spam) and 1 for "spam". We create a feature matrix and label vector, and split into train/test sets:
 
 ```{python}
 X = spam.drop("class", axis="columns")
@@ -1157,111 +1307,201 @@ X_train, X_test, y_train, y_test = train_test_split(
     )
 ```
 
-When using norm-based regularization, it's good practice to standardize the variables, so we will use scaling pipelines. First we use a large value of $C$ to emphasize the regressive loss over the regularization penalty: 
+We fit a logistic regression just like any other learner. (The meaning of the argument `C` in the call below is explained in @sec-regression-logistic-regular.)
 
 ```{python}
 from sklearn.linear_model import LogisticRegression
 
-logr = LogisticRegression(C=100, solver="liblinear")
-pipe = make_pipeline(StandardScaler(), logr)
-pipe.fit(X_train, y_train)
-print("accuracy:", pipe.score(X_test, y_test))
+logreg = LogisticRegression(C=10000, solver="liblinear")
+logreg.fit(X_train, y_train)
 ```
 
 ::: {.callout-tip}
-The use of the `solver` keyword is optional, but the solver used above seems to be far faster and more reliable for small datasets than the default.
+The use of the `solver` keyword argument in `LogisticRegression` is optional, but the choice used above seems to be far faster and more reliable than the default, for small datasets at least.
 :::
 
-Let's look at the most extreme regression coefficients, associating them with the feature names and then sorting the results:
-
+Despite the name, though, scikit-learn treats a `LogisticRegression` object like a classifier, and its preductions are true/false:
 ```{python}
-coef = pd.Series(logr.coef_[0], index=X.columns).sort_values()
-print("most hammy features:")
-print(coef[:4])
-print()
-print("most spammy features:")
-print(coef[-4:])
+logreg.predict( X_test.iloc[:5,:] )
 ```
 
-The word "george" is a strong counter-indicator for spam; remember that this data set comes from an individual's inbox. Its presence makes the inner product $\bfx^T\bfw$ more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability closer to 1. 
-
-The ultimate predictions by the regressor are all either 0 or 1. But we can also see the forecasted probabilities before thresholding:
-
+The default scoring function is classification accuracy:
 ```{python}
-print("predicted classes:")
-print( pipe.predict(X_train.iloc[:5,:]) )
-print("\nprobabilities:")
-print( pipe.predict_proba(X_train.iloc[:5,:]) )
+acc = logreg.score(X_test, y_test)
+print(f"spam classification accuracy is {acc:.2%}")
 ```
 
-The probabilities might be useful for making decisions based on the results. For example, the first instance above was much less certain about the classification than the second. A more skeptical threshold greater than $0.54$ would change the class to 1. As in @sec-class-quant, the probability matrix can be used to create an ROC curve showing the tradeoffs over all thresholds.
-
-For a validation-based selection of the best regularization parameter value, we can use `LogisticRegressionCV`, which is a convenience method for a grid search. You can specify which values of $C$ to search over, or just say how many, as we do here:
+The actual logistic outputs are the *probabilistic* predictions:
 
 ```{python}
-from sklearn.linear_model import LogisticRegressionCV
+logreg.predict_proba( X_test.iloc[:5,:] )
+```
 
-logr = LogisticRegressionCV(
-    Cs=40,    # 40 automatically chosen values of C
-    cv=5, 
-    solver="liblinear", 
-    n_jobs=-1, random_state=0
-    )
-pipe = make_pipeline(StandardScaler(), logr)
+From these, we could use ROC and AUC metrics as we did in @sec-class-probabilistic. 
+
+Let's repeat the computation with a standardization pipeline, so that we can easily compare the magnitudes of the weights:
+```{python}
+pipe = make_pipeline(StandardScaler(), logreg)
 pipe.fit(X_train, y_train)
 
-print(f"best C value: {logr.C_[0]:.3g}")
-print(f"accuracy score: {pipe.score(X_test,y_test):.5f}")
+weights = pd.Series( logreg.coef_[0], index=X.columns) 
+weights = weights.sort_values()
+
+print("most hammy features:")
+print(weights[:4])
+print()
+print("most spammy features:")
+print(weights[-4:])
 ```
+
+We see above that the word "george" is a strong counter-indicator for spam; remember that this data set comes from an individual's inbox. Its presence makes the inner product $\bfx^T\bfw$ more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability of spam closer to 1. 
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/zpu18qxdgzkwskn/Example5_19.mp4?raw=1 >}}
+:::
 
-### Multiclass case
+### Regularization {#sec-regression-logistic-regular}
 
-When there are more than two unique labels possible, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously. 
+As with other forms of regression, the loss function may be regularized using the ridge or LASSO penalty. The standard formulation is 
 
-Given $K$ classes, there are $K$ binary regressors fit for the outcomes "class 1/not class 1," "class 2/not class 2," and so on, giving $K$ different coefficient vectors, $\bfw_k$. Now for a query point $\bfx$, we can predict probabilities for it being in each class:
+$$
+\widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
+$$ {#eq-regression-logistic-regular}
+
+where the vector norm is either the 1-norm (LASSO style) or 2-norm (ridge style). In either case, $C$ is a positive hyperparameter. For $C$ close to zero, the regression is mainly concerned with the penalty term, and as $C$ increases, the regression gradually pays more and more attention to the data, at the expense of the penalty term.
+
+::: {.callout-important}
+The parameter $C$ functions like the inverse of the regularization parameter $\alpha$ we used in the linear regressor. It's because of a different convention chosen historically.
+:::
+
+::::{#exm-regression-spam-regular}
+We will continue @exm-regression-spam with an exploration of regularization. When using norm-based regularization, it's good practice to standardize the variables, so we will use a standardization pipeline:
+
+In @exm-regression-spam, we used $C=10000$, which puts so much weight on the cross-entropy part of the loss function that the regularization is essentially ignored. The default standardization uses the 2-norm with $C=1$, which, in this case, improves the accuracy a bit:
+
+```{python}
+logreg = LogisticRegression(solver="liblinear")
+logreg.fit(X_train, y_train)
+acc = logreg.score(X_test, y_test)
+print(f"accuracy with default regularization is {acc:.2%}")
+```
+
+A validation-based grid search is one way to look for the optimal regularization. Usually, we want the grid values of $C$ to be spaced exponentially, not equally. For example,
+
+```{python}
+10 ** np.linspace(-2, 2, 13)
+```
+
+We use that strategy along with a search over both the 2-norm and the 1-norm for the regularization penalty term:
+
+```{python}
+grid = { "logisticregression__C": 10 ** np.linspace(-1, 4, 40), 
+         # ridge and LASSO cases:
+         "logisticregression__penalty": ["l2", "l1"]   
+        }
+
+learner = make_pipeline(
+    StandardScaler(),
+    LogisticRegression( solver="liblinear" )
+    )
+
+kf = StratifiedKFold(n_splits=6, shuffle=True, random_state=302)
+
+search = GridSearchCV(
+    learner, grid, 
+    cv=kf,
+    n_jobs=-1
+    )
+
+search.fit(X_train, y_train)
+
+print("Best parameters:")
+print(search.best_params_)
+print()
+print(f"Best score is {search.best_score_:.2%}")
+```
+
+In this case, we failed to improve on the default regularization. (Recall that cross-validation means that each learner is trained on less data, so the grid metrics might not be completely accurate.)
+::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/yr4mi1zo8nh0jf8/Example5_20.mp4?raw=1 >}}
+:::
+
+### Multiclass classification
+
+When there are more than two unique labels possible in a classification, logistic regression can be extended through the one-vs-rest (OVR) paradigm we have used previously. Given $K$ classes, there are $K$ binary regressors fit for the outcomes "class 1/not class 1," "class 2/not class 2," and so on. These give $K$ different weight vectors, $\bfw_1,\ldots,\bfw_K$. 
+
+For a query vector $\bfx$, we can predict the probabilities for it being in each class:
 
 $$
 \hat{q}_{k}(\bfx) = \sigma(\bfx^T \bfw_k), \qquad k=1,\ldots,K. 
 $$
 
-Since the $K$ OVR regressors are done independently, there is no reason to think these probabilities will sum to 1 over all the classes. So we must normalize them:
+However, since the regressions were performed separately, there is no reason to think the $q_k$ are probabilities that sum to 1 over all the classes. So we must normalize them:
 
 $$
 \hat{p}_{k}(\bfx) = \frac{\hat{q}_{k}(\bfx)}{\sum_{k=1}^K \hat{q}_{k}(\bfx)}.
 $$
 
-Computed over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point, and each of the $K$ columns gives the probability of one class at all the points.
+Now we can interpret $\hat{p}_{k}(\bfx)$ as the probability of $\bfx$ belonging to class $k$.
+
+::::{#exm-regression-logistic-ovr}
+Suppose we have $d=2$ features and three classes, and that the three logistic regressions gave the weight vectors 
+$$
+\bfw_1 = [-2,0], \qquad \bfw_2=[1,1], \qquad \bfw_3=[0,1]. 
+$$
+
+For the query $\bfx=[1,0]$, we get the predictions
+$$
+\begin{split}
+ \hat{q}_1 &= \sigma(\bfx^T\bfw_1) =  \sigma\bigl((1)(-2)+(0)(0)\bigr) \approx 0.11920, \\ 
+ \hat{q}_2 &= \sigma(\bfx^T\bfw_2) = \sigma\bigl((1)(1)+(0)(1)\bigr) \approx 0.73106, \\ 
+ \hat{q}_3 &= \sigma(\bfx^T\bfw_3) = \sigma\bigl((1)(0)+(0)(1)\bigr) = 0.5. 
+\end{split}
+$$
+
+So, if we ask, "How much does this $\bfx$ look like class 1?" the answer is, "11.9%", for "How much like class 2?" it's "73.1%", and so on. Since there are three exclusive options for the class of $\bfx$, the probabilities assigned to the classes are
+$$
+\begin{split}
+ \hat{p}_1 &= \frac{\hat{q}_1}{\hat{q}_1 + \hat{q_2} + \hat{q_3}}  \approx 0.08828, \\ 
+ \hat{p}_2 &= \frac{\hat{q}_2}{\hat{q}_1 + \hat{q_2} + \hat{q_3}}  \approx 0.54142, \\ 
+ \hat{p}_3 &= \frac{\hat{q}_3}{\hat{q}_1 + \hat{q_2} + \hat{q_3}} \approx 0.37030. 
+\end{split}
+$$
+These probabilities, in exact arithmetic, add up to 100%.
+::::
+
+The situation is now the same as for probabilistic classification in @sec-class-probabilistic. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.
 
 ::::{#exm-regression-logistic-gas}
-As a multiclass example, we use a data set about gas sensors recording values over long periods of time:
+As a multiclass example, we return to the dataset for classifying forest cover:
 
 ```{python}
-gas = pd.read_csv("_datasets/gas_drift.csv")
-y = gas["Class"]
-X = gas.drop("Class", axis="columns")
+forest = datasets.fetch_covtype()
+X = forest["data"][:250000,:12]   # 250,000 samples, 12 features
+y = forest["target"][:250000]
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
-    test_size=0.2,
+    test_size=0.15, 
     shuffle=True, random_state=302
-    )
+)
 
 logr = LogisticRegression(solver="liblinear")
 pipe = make_pipeline(StandardScaler(), logr)
 pipe.fit(X_train, y_train)
-print("accuracy score:", pipe.score(X_test, y_test))
+print(f"accuracy score is {pipe.score(X_test, y_test):.2%}")
 ```
 
 We can now look at probabilistic predictions for each class:
 
 ```{python}
 p_hat = pipe.predict_proba(X_test)
-cols = ["Class "+str(i) for i in range(1,7)]
-pd.DataFrame(p_hat, columns=cols).head(10)
+p_hat[:3]
 ```
 
-This allows us to see that the ROC curves are nearly perfect:
+The ROC curves show that the performance is much worse for 3 of the classes than for the others: 
 ```{python}
 results = []
 for i, label in enumerate(pipe.classes_):
@@ -1272,11 +1512,10 @@ for i, label in enumerate(pipe.classes_):
 roc = pd.DataFrame( results, columns=["label", "FP rate", "TP rate"] )
 sns.relplot(data=roc, 
     x="FP rate", y="TP rate", 
-    hue="label", kind="line", estimator=None
+    hue="label", kind="line", estimator=None,
+    palette="Dark2"
     );
 ```
-
-Based on the ROC curves, we could choose a high decision threshold to cut down on false positives without losing many true positives.
 ::::
 
 ## Exercises {.unnumbered}
