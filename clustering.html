@@ -1725,19 +1725,19 @@ Name: ward, dtype: int64</code></pre>
 </div>
 <div id="exr-cluster-performance" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 6.4 </strong></span>(6.2) Here are two clusterings on 6 samples. <span class="math display">\[
-\begin{align*}
+\begin{split}
 \text{A}:\: &amp; C_1 = \{\bfX_1,\bfX_4\}, \; C_2=\{\bfX_2,\bfX_3,\bfX_5,\bfX_6 \}  \\
 \text{B}:\: &amp; C_1 = \{\bfX_1,\bfX_2\}, \; C_2=\{\bfX_3,\bfX_4\}, \; C_3 = \{\bfX_5,\bfX_6 \}
-\end{align*}
+\end{split}
 \]</span></p>
 <p><strong>(a)</strong> Find the Rand index between these clusterings. <strong>(b)</strong> Find the silhouette values for all samples in clustering <span class="math inline">\(A\)</span>.</p>
 </div>
 <div id="exr-cluster-inertia" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 6.5 </strong></span>(6.3) Let <span class="math inline">\(z\)</span> be a positive number, and consider the 12 planar samples <span class="math display">\[
-\begin{gather*}
-[z,-3],\, [z,-2],\, [z,-1],\,[z,1],\,[z,2],\,[z,3],
-[-z,-3],\, [-z,-2],\, [-z,-1],\,[-z,1],\,[-z,2],\,[-z,3].
-\end{gather*}
+\begin{split}
+&amp; [z,-3],\, [z,-2],\, [z,-1],\,[z,1],\,[z,2],\,[z,3], \\
+&amp; [-z,-3],\, [-z,-2],\, [-z,-1],\,[-z,1],\,[-z,2],\,[-z,3].
+\end{split}
 \]</span></p>
 <p><strong>(a)</strong> Using the 2-norm, calculuate the inertia, as a function of <span class="math inline">\(z\)</span>, of the clustering <span class="math display">\[
 C_1 = \{ [z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}.
