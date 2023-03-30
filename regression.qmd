@@ -544,7 +544,8 @@ fitcars(pipe, features)
 We did not get much improvement in the fit this time. But by comparing the coefficients of the individual features, some interesting information emerges:
 
 ```{python}
-pd.Series(pipe[1].coef_, index=features)
+weights = pd.Series(pipe[1].coef_, index=features).sort_values()
+weights
 ```
 We now have evidence that *weight* is the most significant negative factor for MPG, by a wide margin.
 ::::
@@ -920,14 +921,14 @@ We can isolate the coefficients that were (within small rounding errors) zeroed 
 # Get the locations (indices) of the very small weights:
 zeroed = np.nonzero( np.abs(lass.coef_) < 1e-5 )
 # Names of the corresponding columns:
-X.columns[zeroed]  
+dropped = X.columns[zeroed].values
 ```
 
 Now we can drop these features from the dataset:
 
 ```{python}
-X_train_reduced = X_train.drop(X.columns[zeroed], axis=1)
-X_test_reduced = X_test.drop(X.columns[zeroed], axis=1)
+X_train_reduced = X_train.drop(dropped, axis=1)
+X_test_reduced = X_test.drop(dropped, axis=1)
 ```
 
 Returning to a fit with no regularization, we find that little is lost by using the reduced feature set:
@@ -1307,18 +1308,14 @@ X_train, X_test, y_train, y_test = train_test_split(
     )
 ```
 
-We fit a logistic regression just like any other learner. (The meaning of the argument `C` in the call below is explained in @sec-regression-logistic-regular.)
+We fit a logistic regression just like any other learner. (The meaning of the argument `penalty` in the call below is explained in @sec-regression-logistic-regular.)
 
 ```{python}
 from sklearn.linear_model import LogisticRegression
 
-logreg = LogisticRegression(C=10000, solver="liblinear")
+logreg = LogisticRegression(penalty="none")
 logreg.fit(X_train, y_train)
 ```
-
-::: {.callout-tip}
-The use of the `solver` keyword argument in `LogisticRegression` is optional, but the choice used above seems to be far faster and more reliable than the default, for small datasets at least.
-:::
 
 Despite the name, though, scikit-learn treats a `LogisticRegression` object like a classifier, and its preductions are true/false:
 ```{python}
@@ -1378,7 +1375,11 @@ The parameter $C$ functions like the inverse of the regularization parameter $\a
 ::::{#exm-regression-spam-regular}
 We will continue @exm-regression-spam with an exploration of regularization. When using norm-based regularization, it's good practice to standardize the variables, so we will use a standardization pipeline:
 
-In @exm-regression-spam, we used $C=10000$, which puts so much weight on the cross-entropy part of the loss function that the regularization is essentially ignored. The default standardization uses the 2-norm with $C=1$, which, in this case, improves the accuracy a bit:
+In @exm-regression-spam, we disabled regularization. The default call uses 2-norm regularization with $C=1$, which, in this case, improves the accuracy a bit:
+
+::: {.callout-tip}
+The use of the `solver` keyword argument in `LogisticRegression` is optional, but the default choice does not work with the LASSO-style penalty term.
+:::
 
 ```{python}
 logreg = LogisticRegression(solver="liblinear")
