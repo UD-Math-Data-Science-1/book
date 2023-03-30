@@ -26,11 +26,30 @@ from sklearn.model_selection import GridSearchCV
 
 In supervised learning, the data samples are supplied with labels, and the goal of the learner is to generalize the examples to new values. In unsupervised learning, there are no labels. Instead, the goal is to discover structure that is intrinsic to the feature matrix. Common problem types in unsupervised learning are
 
-* **Clustering**. Determine whether the samples roughly divide into a small number of classes.
-* **Dimension reduction**. Find a reduced set of features, or create a small set of new features, that describe the data well.
-* **Outlier detection**. Find anomalous values in the data set, and remove them or impute replacements.
+Clustering
+: Determine whether the samples roughly divide into a small number of classes.
 
-In this chapter we will look at clustering. In order to get a feeling for the algorithms, we will apply them to three illustrative datasets:
+Dimension reduction
+: Find a reduced set of features, or create a small set of new features, that describe the data well.
+
+Outlier detection
+: Find anomalous values in the data set and remove them or impute replacements.
+
+In this chapter we will look at clustering. The goal is to assign each feature vector a number from 1 to $k$, where $k$ is much smaller than the number of samples. More formally:
+
+::::{#def-cluster-clustering}
+Given an $n\times d$ feature matrix with rows $\bfX_1,\ldots,\bfX_n$, a **clustering** is a labelling function $c$ defined on the feature vectors such that
+$$
+c(\bfX_i) \in \{ 1,2,\ldots, k \} \text{ for all } i=1,\ldots,n,
+$$
+where $k$ is a positive integer. The **cluster** $C_j$ is the collection of all $\bfX_i$ such that $c(\bfX_i)=j$. 
+::::
+
+The clusters $C_1,\ldots,C_k$ divide the samples into $k$ dijoint subsets. Depending on the algorithm, the number of clusters $k$ may be imposed (i. e., as a hyperparameter) or determined automatically. 
+
+Intuitively, we want similar examples to be clustered together (that is, to receive the same label). The motivation for clustering is often to find a way to classify the samples by intrinsic properties when no such classification is known in advance. It is *not* necessary that the clustering function $c$ be defined for vectors $\bfx$ other than the feature vectors, although many clustering algorithms can be used to do that as well.
+ 
+In order to get a feeling for the algorithms, we will apply them to three illustrative datasets:
 
 * blobs
 : This dataset has one distinct blob, plus two that kind of overlap a bit:
@@ -45,12 +64,12 @@ def blobs_data():
         random_state = 19716
         )
 
-    return pd.DataFrame({"x1":X[:,0], "x2":X[:,1], "class":y})
+    return pd.DataFrame({"x1": X[:,0], "x2": X[:,1]}), pd.Series(y)
 ```
 
 ```{python}
-blobs = blobs_data()
-sns.relplot(data=blobs, x="x1", y="x2", hue="class");
+X, y = blobs_data()
+sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2");
 ```
 
 * stripes 
@@ -64,12 +83,12 @@ def stripes_data():
         x1.extend( rng.uniform(-10, 10, size=200) )
         x2.extend( 2.5*i+rng.uniform(0, 1, size=200) )
         cls.extend( [i]*200)
-    return pd.DataFrame({"x1": x1, "x2": x2, "class": cls})
+    return pd.DataFrame({"x1": x1, "x2": x2}), pd.Series(cls)
 ```
 
 ```{python}
-stripes = stripes_data()
-sns.relplot(data=stripes, x="x1", y="x2", hue="class");
+X, y = stripes_data()
+sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2");
 ```
 
 * bullseye 
@@ -85,142 +104,173 @@ def bullseye_data():
     r = rng.uniform(5,6,size=200)
     outer = np.vstack((r*np.cos(theta), r*np.sin(theta))).T
     cls = np.hstack( ([1]*100, [2]*200, [3]*200))
-    bullseye = pd.DataFrame( np.vstack((inner,middle,outer)), columns=["x1", "x2"] )
-    bullseye["class"] = cls 
-    return bullseye
+    X = pd.DataFrame( np.vstack((inner,middle,outer)), columns=["x1", "x2"] )
+    return X, pd.Series(cls)
 ```
 
 ```{python}
-bullseye = bullseye_data()
-p = sns.relplot(data=bullseye,
-        x="x1", y="x2", 
-        hue="class"
-        )
+X, y = bullseye_data()
+p = sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2")
 p.set(aspect=1);
 ```
 
-## Similarity and distance
+## Similarity
 
-Given an $n\times d$ feature matrix, we want to define disjoint subsets of the $\bfx_i$ such that the samples within a subset, or **cluster**, are more similar to one another than they are to members of other clusters.
+Ideally, samples within a cluster are more similar to each other than they are to samples in other clusters. The first decision we have to make is how to define *similarity* between an arbitrary pair.
 
-The first decision we have to make is how to measure *similarity*. When a distance metric is available, we consider similarity to be inversely related to distance. For example, if we have defined a distance function between pairs of vectors as $\dist(\bfx,\bfy)$, then we could define similarity as 
+When a distance metric is available, we intuitively expect similarity to be inversely related to distance. There are various ways to quantify the relationship, but we will not use them. Instead, we will take "maximize similarity" to be equivalent to "minimize distance."
 
+<!-- 
+Here is one of the most common ways to realize that ideal.
+
+::::{#def-cluster-gauss}
+Given a distance function between pairs of vectors as $\dist(\bfx,\bfy)$, we define the **Gaussian similarity** between two vectors as
 $$
 \simil(\bfx,\bfy) = \exp \left[ - \frac{\dist(\bfx,\bfy)^2}{2\sigma^2}  \right].
-$$
-
-Thus a distance of zero implies a similarity of 1, while the similarity tends to zero as distance increases. The scaling parameter $\sigma$ controls the rate of decrease; for instance, when the distance is $\sigma$, the similarity is $e^{-1/2}\approx 0.6$. 
-
-There are ways to define similarity without making use of a distance, but we won't be using them.
-
-### Distance metrics
-
-::::{#def-cluster-metric}
-A **distance metric** is a function $\dist$ on pairs of vectors that satisfies the following properties for all vectors:
-
-1. $\dist(\bfx,\bfy)=0$ if and only if $\bfx=\bfy$,
-2. $\dist(\bfx,\bfy) = \dist(\bfy,\bfx)$, and
-3. $\dist(\bfx,\bfy) \le \dist(\bfx,\bfz) + \dist(\bfz,\bfy)$, known as the triangle inequality.
+$$ {#eq-similar-similarity}
 ::::
 
-These are considered the essential axioms of a distance metric. From them, you can also deduce that the distance function is always nonnegative. 
-
-::: {.callout-caution}
-The term *distance metric* isn't always used carefully to mean a function satisfying the three axioms, however, and some applications use a metric that does not satisfy the triangle inequality. 
+::: {.callout-note}
+Up to a constant scaling factor, the function in the Gaussian similarity definition is the same as the PDF of the normal distribution with mean 0 and standard deviation $\sigma$. 
 :::
 
-We already have the distance metric defined by
-
+Thus, for any vector $\bfx$,
 $$
-\dist(\bfx,\bfy) = \norm{\bfx-\bfy}
+\simil(\bfx,\bfx) = 1.
 $$
+This is the largest possible value. The similarity tends to zero as distance increases. The scaling parameter $\sigma$ controls the rate of decrease; for instance, when the distance is $\sigma$, the similarity is $e^{-1/2}\approx 0.6$. 
 
-for any vector norm. 
-
-Another proper distance metric is **angular distance**. Generalizing from 2D and 3D vector geometry, we define the angle $\theta$ between vectors $\bfu$ and $\bfv$ in $\real^d$ by
-
-$$ 
-\cos(\theta) = \frac{\mathbf{u}^T\mathbf{v}}{\twonorm{\mathbf{u}} \, \twonorm{\mathbf{v}}}.
-$$ {#eq-clustering-angle}
-
-Then the quantity $\theta/\pi$ is a distance metric. Because arccos is a relatively expensive computational operation, though, it's common to use **cosine similarity**, defined as $\cos(\theta)$, and the related **cosine distance** $\tfrac{1}{2}[1-\cos(\theta)]$, even though the latter does not satisfy the triangle inequality.
-
-Categorical variables can be included in distance metrics. An ordinal variable is easily converted to equally spaced numerical values, which then may get a standard treatment. Nominal features are often compared using **Hamming distance**, which is just the total number of features that have different values in the two vectors.
-
-### Probability distributions
-
-::::{#def-cluster-probdist}
-A **discrete probability distribution** is a vector $\bfx$ whose components are nonnegative and satisfying $\onenorm{\bfx}=1$. 
-::::
-
-Such a vector can be interpreted as frequencies or probabilities of observing different classes, for example. We already encountered one way to measure the dissimilarity of two probability distributions, the *cross-entropy*:
-
-$$
-\operatorname{CE}(\bfx,\bfy) = -\sum_{i=1}^d x_i \log(y_i). 
-$$
-
-A related measure is the **Kullback–Leibler (KL) divergence** or *relative entropy*,
-
-$$
-\operatorname{KL}(\bfx,\bfy) = \sum_{i=1}^d x_i \log\left( \frac{x_i}{y_i} \right).
-$$
-
-Whenever $0\cdot \log(0)$ is encountered in the CE or KL definitions, it equals zero, in accordance with its limiting value from calculus.
-
-Neither cross-entropy nor KL divergence are symmetric in their arguments. But there is a related value called **information radius**, defined as
-
-$$
-\operatorname{IR}(\bfu,\bfv) = \frac{1}{2} \left[ \operatorname{KL}(\bfu,\bfz) + \operatorname{KL}(\bfv,\bfz) \right]
-$$
-
-where $\bfz=(\bfu+\bfv)/2$. Typically one uses a base-2 logarithm, in which case IR ranges between 0 and 1. The square root of IR is a distance metric.
-
-::::{#exm-cluster-IR}
-Let $\bfu=\frac{1}{4}[1,3]$ and $\bfv=\frac{1}{4}[3,1]$. Then $\bfz=(\bfu+\bfv)/2=[\tfrac{1}{2},\tfrac{1}{2}]$, and
-
-$$
-\begin{split}
-    \operatorname{KL}(\bfu,\bfz)  &= \tfrac{1}{4} \cdot \log \left( \frac{1/4}{1/2} \right) + \tfrac{3}{4} \cdot \log \left( \frac{3/4}{1/2} \right) \\ &= \tfrac{1}{4} \cdot \log \left( \frac{1}{2} \right) + \tfrac{3}{4} \cdot \log \left( \frac{3}{2} \right) = -\tfrac{1}{4} + \tfrac{3}{4} (\log(3)-1),\\
-    \operatorname{KL}(\bfv,\bfz)  &= \tfrac{3}{4} (\log(3)-1) -\tfrac{1}{4},\\
-    \operatorname{IR}(\bfu,\bfu)  &= \tfrac{3}{4} (\log(3)-1) -\tfrac{1}{4} \approx 0.1887.
-\end{split}
-$$
-::::
-
+::: {.callout-tip}
+When the distance function in Gaussian similarity is based on a vector norm, it's advisable to use standardization of the features, either by using z-scores or some other normalization.
+::: -->
 ### Distance matrix
 
 ::::{#def-cluster-distmat}
-Given the feature vectors $\bfx_1,\ldots,\bfx_n$, the pairwise distances between them are collected in the $n\times n$ **distance matrix**
+Given the feature vectors $\bfX_1,\ldots,\bfX_n$, the pairwise distances between them are collected in the $n\times n$ **distance matrix**
 
 $$
-D_{ij} = \text{dist}(\bfx_i,\bfx_j).
+D_{ij} = \text{dist}(\bfX_i,\bfX_j).
 $$
 ::::
 
-Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. Many clustering algorithms allow supplying $\mathbf{D}$ in lieu of the feature vectors.
+Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. 
 
-One can analogously define a *similarity matrix* using the Gaussian kernel. An advantage of similarity is that small values can be rounded down to zero. This has little effect on the results, but can create big gains in execution time and memory usage. 
+::: {.callout-tip}
+Many clustering algorithms allow supplying $\mathbf{D}$ in lieu of the feature vectors. When you consider that in many problems, $n$ is much larger than $d$, it can be faster and easier to work with.
+:::
+
+::: {.callout-note}
+A practical advantage of working with similarity rather than distance is that small values of similarity can be rounded down to zero. Such rounding has negligible effect on the results, but it can create big gains in execution time and memory usage. 
+:::
+
+The scikit-learn function `pairwise_distances` computes a distance matrix efficiently.
 
 ::::{#exm-cluster-distmat}
-The distance matrix of our bullseye dataset has some interesting structure:
+The distance matrix of our *bullseye* dataset has some interesting structure:
 ```{python}
 from sklearn.metrics import pairwise_distances
-X = bullseye_data()[["x1", "x2"]]
+X, y = bullseye_data()
 D2 = pairwise_distances(X, metric="euclidean")   # use 2-norm metric
 ax = sns.heatmap(D2)
 ax.set_aspect(1);
 ```
 Because we set up three geometrically distinct groups of points, the distances of pairs within and between groups are fairly homogeneous. The lower-right corner, for example, shows that points in the outermost ring tend to be separated by the greatest distance.
 
-In the 1-norm, the stripes dataset is also a little interesting:
+In the 1-norm, the *stripes* dataset is also interesting:
 ```{python}
-X = stripes_data()[["x1", "x2"]]
+X, y = stripes_data()
 D1 = pairwise_distances(X, metric="manhattan")   # use 1-norm metric
 ax = sns.heatmap(D1)
 ax.set_aspect(1);
 ```
 Points in different stripes are always separated by at least the inter-stripe distance, while points within the same stripe have a range of possible distances.
 ::::
+
+### Angular distance
+ 
+An alternative to vector norms for distances is **angular distance**. In three dimensions, imagine drawing a ray from the origin to each of the two given vectors. Those rays lie in a common plane, and we can let $\theta$ be the (smallest) angle between them. The general formula in any number of dimensions is
+$$ 
+\cos(\theta) = \frac{\mathbf{u}^T\mathbf{v}}{\twonorm{\mathbf{u}} \, \twonorm{\mathbf{v}}}.
+$$ {#eq-cluster-angle}
+
+We then let $\dist(\bfx,\bfy)=\theta \in [0,\pi]$, using the standard branch of arccos.  
+
+However, arccos is a relatively expensive computational operation, and sometimes we use the pseudodistance
+$$
+d(\bfx,\bfy) = \tfrac{1}{2}\left[ 1-\cos(\theta) \right]
+$$
+in place of $\theta$. This is not a true distance function, though, as $d$ fails to satisfy the triangle inequality in all cases (see @exr-cluster-cosine).
+
+Angular distance and cosine pseudodistance are useful when we want to ignore the magnitudes of vectors and consider only their directions. 
+
+::::{#exm-cluster-angular}
+We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as *happy*, *excited*, *sad*, *angry*, *confused*, and so on. For sake of argument, suppose three documents have the feature matrix
+$$
+\bfX = 
+\begin{bmatrix}
+6 & 1 & 10 & 2 & 5 \\  14 & 0 & 23 & 3 & 7 \\ 2 & 3 & 1 & 5 & 0
+\end{bmatrix}. 
+$$
+Using the 2-norm, we get the distances:
+```{python}
+X = np.array( [[6,1,10,2,5], [14,0,23,3,7], [2,3,1,5,0]] )
+pairwise_distances( X, metric="euclidean")
+```
+Accoding to this metric, the most similar documents are the first and the last. However, cosine distance tells a different story:
+```{python}
+pairwise_distances( X, metric="cosine")
+```
+Now the first two documents look most similar. Looking at the vectors, we see that these two have the most similar relative frequencies, which is related to what we want to measure. The apparent dissimilarity in the 2-norm arises solely because the total word counts are very different.
+::::
+
+
+<!-- Categorical variables can be included in distance metrics. An ordinal variable is easily converted to equally spaced numerical values, which then may get a standard treatment. Nominal features are often compared using **Hamming distance**, which is just the total number of features that have different values in the two vectors. -->
+<!-- 
+### Probability distributions
+
+::::{#def-cluster-probdist}
+A **discrete probability distribution** is a vector $\bfx$ whose components are nonnegative and satisfying $\onenorm{\bfx}=1$. 
+::::
+
+Such a vector can be interpreted as frequencies or probabilities of observing different classes. For example, when computing Gini impurity, we define $p_k$ as the observed frequency of label $k$ appearing in a given set.
+
+While we can treat probability vectors like any other vector and apply vector norms, doing so fails to take advantage of their special properties. There are alternatives suggested from information theory that are usually preferred.
+
+::::{#def-cluster-probdist}
+If $\bfx$ and $\bfy$ are probability vectors of length $d$, then the **Kullback–Leibler (KL) divergence** is defined as 
+$$
+\operatorname{KL}(\bfx,\bfy) = \sum_{i=1}^d x_i \log\left( \frac{x_i}{y_i} \right).
+$$
+Whenever $0\cdot \log(0)$ is encountered in the sum, it equals zero, in accordance with its limiting value from calculus. If, for some $i$, $x_i\neq 0$ and $y_i=0$, then $KL(\bfx,\bfy) = \infty$. 
+
+We define the **information radius** as 
+$$
+\operatorname{IR}(\bfx,\bfy) = \frac{1}{2} \bigl[ \operatorname{KL}(\bfx,\bfz) + \operatorname{KL}(\bfy,\bfz) \bigr],
+$$
+where $\bfz=(\bfx+\bfy)/2$.
+::::
+
+Of these, only IR is symmetric in the sense that $\operatorname{IR}(\bfx,\bfy)=\operatorname{IR}(\bfy,\bfx)$. The square root of IR is a distance metric. Typically one uses a base-2 logarithm, in which case IR ranges between 0 (for identical distributions) and 1. 
+
+::::{#exm-cluster-IR}
+Let $\bfx=\frac{1}{4}[1,3]$ and $\bfy=\frac{1}{4}[3,1]$. Using base-2 logs, find the IR between them.
+
+:::{.solution}
+We compute 
+$$
+\bfz=\tfrac{1}{2}(\bfx+\bfy) = [\tfrac{1}{2},\tfrac{1}{2}]. 
+$$
+Thus,
+$$
+\begin{split}
+    \operatorname{KL}(\bfx,\bfz)  &= \tfrac{1}{4} \cdot \log \left( \frac{1/4}{1/2} \right) + \tfrac{3}{4} \cdot \log \left( \frac{3/4}{1/2} \right) \\ &= \tfrac{1}{4} \cdot \log \left( \frac{1}{2} \right) + \tfrac{3}{4} \cdot \log \left( \frac{3}{2} \right) = -\tfrac{1}{4} + \tfrac{3}{4} (\log(3)-1),\\
+    \operatorname{KL}(\bfy,\bfz)  &= \tfrac{3}{4} (\log(3)-1) -\tfrac{1}{4},\\
+    \operatorname{IR}(\bfx,\bfy)  &= \tfrac{3}{4} (\log(3)-1) -\tfrac{1}{4} \approx 0.1887.
+\end{split}
+$$
+:::
+:::: -->
+
 
 ### Distance in high dimensions
 
@@ -236,15 +286,13 @@ $$
 
 where each $x_i$ is chosen randomly in $[-1,1]$, becomes ever harder to satisfy as the number of terms in the sum grows, and the relative occurrence of such points is increasingly rare.
 
-There are other, similar mathematical results demonstrating the unexpectedness of distances in high-dimensional space. These go under the colorful name *curse of dimensionality*, and the advice given in response to them is sometimes stated flatly as, "Don't use distance metrics in high-dimensional space." 
+There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These go under the colorful name *curse of dimensionality*, and the advice given in response to them is sometimes stated flatly as, "Don't use distance metrics in high-dimensional space." 
 
-But that advice is easy to overstate. The curse is essentially about *randomly* chosen points, and it is correct that dimensions of noisy or irrelevant features will make many learning algorithms less effective. But if features carry useful information, adding them usually makes matters better, not worse.
+But that form of the advice may be overstated. The curse is essentially about *randomly* chosen points, and it is correct that dimensions of noisy or irrelevant features will make most learning algorithms less effective. But when features carry useful information, adding them usually makes matters better, not worse.
 
 ## Performance measures
 
-Before we start generating clusterings, we need to decide how we will evaluate them. Recall that a clustering is simply a partitioning of the sample points into disjoint subsets. If a classification of the samples is available, then it automatically implies a clustering: divide the samples into subsets determined by class membership.
-
-We will use some nonstandard terminology that makes the definitions a bit easier to state and read.
+Before we start generating clusterings, we will discuss how to evaluate them. A clustering is essentially a partitioning of the samples into disjoint subsets. We will use some nonstandard terminology that makes the definitions a bit easier to state and read.
 
 ::::{#def-cluster-buddies}
 We say that two sample points in a clustering are **buddies** if they are in the same cluster, and **strangers** otherwise. 
@@ -252,30 +300,34 @@ We say that two sample points in a clustering are **buddies** if they are in the
 
 ### Rand index and ARI
 
-If a trusted or reference clustering is available, then we can compare it to any other clustering result. This allows us to use classification datasets as proving grounds for clustering, although the problems of classification and clustering have different goals (separation versus similarity).
+A clustering can be interpreted as a classification, and vice versa. If a reference classification is available, then we can compare any clustering result to it. This allows us to use classification datasets as proving grounds for clustering.
 
-Let $b$ be the number of pairs that are buddies in both clusterings, and let $s$ be the number of pairs that are strangers in both clusterings. Noting that there are $\binom{n}{2}$ distinct pairs of $n$ sample points, we define the **Rand index** by
+Let $b$ be the number of pairs that are buddies in both clusterings, and let $s$ be the number of pairs that are strangers in both clusterings. We define the **Rand index** by
 
 $$
 \text{RI} = \frac{b+s}{\binom{n}{2}}.
 $$
 
-One way to interpret the Rand index is through binary classification: if we define a positive result on a pair of samples to mean "in the same cluster" and a negative result to mean "in different clusters", then the Rand index is the accuracy of the classifier over all pairs of samples.
+The reason for the denominator is that there are $\binom{n}{2}$ distinct pairs of $n$ sample points, so we know that $0 \le \text{RI} \le 1$.
+
+One way to interpret the Rand index is through binary classification. If we define a positive result on a pair of samples to mean "in the same cluster" and a negative result to mean "in different clusters", then the Rand index is the accuracy of that classifier over all pairs of samples, taking the reference clustering as providing ground truth.
 
 ::::{#exm-cluster-rand}
-Suppose that samples $x_1,x_2,x_4$ are classified as blue, and $x_3,x_5$ are classified as red. Let's compute the Rand index relative to the reference classification for the clustering $A=\{x_1,x_2\}$ and $B=\{x_3,x_4,x_5\}$.
+Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are classified as blue, and $\bfX_3,\bfX_5$ are classified as red. Compute the Rand index relative to the reference classification for the clustering $A=\{\bfX_1,\bfX_2\}$ and $B=\{\bfX_3,\bfX_4,\bfX_5\}$. (Note that the actual feature vectors themselves are not important in this setting.)
 
+:::{.solution}
 Here is a table showing which pairs of samples are buddies in both clusterings (indicated as TP), strangers in both (TN), or neither (F).
 
-|       | $x_1$ | $x_2$ | $x_3$ | $x_4$ | $x_5$ |
+|       | $\bfX_1$ | $\bfX_2$ | $\bfX_3$ | $\bfX_4$ | $\bfX_5$ |
 |--|--|--|--|--|--|
-| $x_1$ |       |  TP   |  TN   |  F    |  TN   |
-| $x_2$ |       |       |  TN   |  F    |  TN   |
-| $x_3$ |       |       |       |  F    |  TP   |
-| $x_4$ |       |       |       |       |  F    |
-| $x_5$ |       |       |       |       |       |
+| $\bfX_1$ |       |  TP   |  TN   |  F    |  TN   |
+| $\bfX_2$ |       |       |  TN   |  F    |  TN   |
+| $\bfX_3$ |       |       |       |  F    |  TP   |
+| $\bfX_4$ |       |       |       |       |  F    |
+| $\bfX_5$ |       |       |       |       |       |
 
 Hence the Rand index is 6/10 = 0.6.
+:::
 ::::
 
 The Rand index has some attractive features:
@@ -284,28 +336,62 @@ The Rand index has some attractive features:
 * There is no need to find a correspondence between the clusters in the two clusterings. In fact, the clusterings need not even have the same number of clusters. 
 * The value is between 0 (complete disagreement) and 1 (complete agreement).
 
-A weakness of the Rand index is that it can be fairly close to 1 even for a random clustering. The **adjusted Rand index** is
+A weakness of the Rand index is that it can be fairly close to 1 even for a random clustering. The **adjusted Rand index** rescales the result by comparing it to how a random clustering would fare. It can be written as
 
 $$
-\text{ARI} = \frac{\text{RI} - E[\text{RI}]}{\text{max}(\text{RI})-E[\text{RI}]},
+\text{ARI} = \frac{\text{RI} - \E{\text{RI}}}{\text{max}(\text{RI}) - \E{\text{RI}}},
 $$
 
-where the mean and max operations are taken over all possible clusterings. (These values can be worked out exactly by combinatorics.) The value can be negative. An ARI of 0 indicates no better agreement than a random clustering, and an ARI of 1 is complete agreement. 
+where the expectation and max operations are performed over all possible clusterings. (These values can be worked out exactly using combinatorics, but we do not give them here.) 
+
+An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.
+
+::::{#exm-cluster-ARI-blobs}
+Our *blobs* dataset has a reference clustering that we take to be the gold standard. Let's create another clustering based entirely on the quadrants of the plane:
+
+```{python}
+X, y = blobs_data()
+
+def quad(x1, x2):
+    if x1 > 0:
+        if x2 > 0: return 1
+        else: return 4
+    else:
+        if x2 > 0: return 2
+        else: return 3
+
+q = pd.Series( [ quad(x1, x2) for (x1, x2) in zip(X["x1"], X["x2"]) ] )
+
+sns.relplot(data=X, x="x1", y="x2", hue=q, palette="Dark2");
+```
+The reference clustering has three classes, and there are four quadrants. Yet we can still compare them by adjusted Rand index:
+
+```{python}
+from sklearn.metrics import adjusted_rand_score
+
+adjusted_rand_score(y, q)
+```
+Not surprisingly, they are seen as fairly similar.
+::::
+
 
 ### Silhouettes
 
-If no reference clustering is available, then we must use an intrinsic measurement to assess quality. Suppose $\bfx_i$ is a sample point. Let $\bar{b}_i$ be the mean distance between $\bfx_i$ and its buddies, and let $\bar{r}_i$ be the mean distance between $\bfx_i$ and the members of the nearest cluster of strangers. Then the **silhouette value** of $\bfx_i$ is 
+If no reference clustering/classification is available, then the only way we can assess the quality of a clustering is to check how well it creates clusters whose members are more similar to their buddies than to strangers. 
+
+Suppose $\bfX_i$ is a sample point. Let $\bar{b}_i$ be the mean distance between $\bfX_i$ and its buddies, and let $\bar{r}_i$ be the mean distance between $\bfX_i$ and the members of the nearest cluster of strangers. Then the **silhouette value** of $\bfX_i$ is 
 
 $$
 s_i = \frac{\bar{r}_i-\bar{b}_i}{\max\{\bar{r}_i,\bar{b}_i\}}.
 $$
 
-This value is between $-1$ (bad) and $1$ (good) for every sample point. A **silhouette score** is derived by taking a mean of the silhouette values, either per cluster or overall depending on the usage.
+This value is between $-1$ (worst) and $1$ (best) for every sample point. A **silhouette score** is derived by taking a mean of the silhouette values, either per cluster or overall, depending on the usage.
 
 ::::{#exm-cluster-silhouette}
 Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B=\{2,6\}$. Find the silhouette values of all the samples, the silhouette scores of the clusters, and the overall silhouette score.
 
-|  $x_i$ | $\bar{b}_i$ | $\bar{r}_i$ | $s_i$  | 
+:::{.solution}
+|  $X_i$ | $\bar{b}_i$ | $\bar{r}_i$ | $s_i$  | 
 |:-------------:|:---------:|:----------:|:------:|
 | $-4$   | $\frac{3+5}{2}$  | $\frac{6+10}{2}$  |  $\frac{8-4}{8}=\frac{1}{2}$  | 
 | $-1$   | $\frac{3+2}{2}$  | $\frac{3+7}{2}$  |  $\frac{5-2.5}{5}=\frac{1}{2}$  | 
@@ -326,64 +412,46 @@ $$
 $$
 
 The overall score is the mean of the five values in the last column, which is about $0.229$.
+:::
 ::::
 
 The silhouette score is fairly easy to understand and use. However, it relies on distances and tends to favor convex, compact clusters.
 
-::::{#exm-cluster-perform-blobs}
+::::{#exm-cluster-sil-blobs}
 Let's use the predefined cluster assignments in our blobs dataset. We will add a column to the data frame that records the silhouette score for each point:
 
 ```{python}
 from sklearn.metrics import silhouette_samples
 
-blobs = blobs_data()
-X = blobs.drop("class", axis=1)
+X, y = blobs_data()
 
-blobs["sil"] = silhouette_samples(X, blobs["class"])
-sns.relplot(data=blobs,
+X["sil"] = silhouette_samples(X, y)
+sns.relplot(data=X,
     x="x1", y="x2",
-    hue="class",size="sil"
+    hue=y, size="sil", palette="Dark2"
     );
 ```
 
 In the plot above, the size of each dot shows its silhouette coefficient. Those points which don't belong comfortably with their cluster have negative scores and the smallest dots. We can find the average score in each cluster through a grouped mean:
 
 ```{python}
-blobs.groupby("class")["sil"].mean()
+X.groupby(y)["sil"].mean()
 ```
 
-These values are ordered as we would expect. Now let's create another clustering based on the quadrants of the plane:
+These values are ordered as we would expect. We can also compute the silhouette scores for the quadrant-based clustering defined in @exm-cluster-ARI-blobs:
 
 ```{python}
-def quad(x,y):
-    if x > 0:
-        if y > 0: return 1
-        else: return 4
-    else:
-        if y > 0: return 2
-        else: return 3
-
-blobs["quadrant"] = [quad(x,y) for (x,y) in zip(blobs.x1, blobs.x2)]
-blobs["sil"] = silhouette_samples(X, blobs["quadrant"])
-sns.relplot(data=blobs, 
+X["sil"] = silhouette_samples(X, q)
+sns.relplot(data=X, 
     x="x1", y="x2",
-    hue="quadrant",size="sil"
+    hue=q, size="sil", palette="Dark2"
     );
 ```
 
 ```{python}
-blobs.groupby("quadrant")["sil"].mean()
+X.groupby(q)["sil"].mean()
 ```
-
-Even though the original clustering had three classes, and there are four quadrants, we can still compare them by adjusted Rand index:
-
-```{python}
-from sklearn.metrics import adjusted_rand_score
-
-adjusted_rand_score(blobs["class"], blobs["quadrant"])
-```
-
-Not surprisingly, they are seen as fairly similar.
+The scores for clusters labelled as 1 and 2 are pretty good and almost the same as for the original reference clustering. But the other two clusters score much more poorly separately than they did when they were considered a single cluster. 
 ::::
 
 ::::{#exm-cluster-perform-digits}
@@ -391,14 +459,14 @@ Not surprisingly, they are seen as fairly similar.
 
 ```{python}
 digits = datasets.load_digits(as_frame=True)["frame"]
-keep = digits["target"].isin([4,5,6])
+keep = digits["target"].isin([4, 5, 6])
 digits = digits[keep]
 X = digits.drop("target", axis=1)
 y = digits.target
 y.value_counts()
 ```
 
-A clustering method won't be able to learn from the ground truth labels. In order to set expectations, we should see how well the originally labels cluster the samples. Here are the mean silhouette scores for the clusters.
+We can check the silhouette scores for the reference labelling in order to set expectations for how well a clustering method might do:
 
 ```{python}
 digits["sil"] = silhouette_samples(X,y)
@@ -414,26 +482,29 @@ sns.catplot(data=digits,
     );
 ```
 
-The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. The existence of values close to and below zero suggest that a clustering algorithm might reconstruct the classification to some extent, but the ground truth may represent something more than geometric distances in feature space.
+The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. However, the existence of scores close to and below zero suggest that a clustering algorithm ia unlikely to reproduce the true classification perfectly. To put it another way, the features chosen to represent the digits don't seem to create three clear, well-separated balls of points representing the three different types of digits.
 ::::
 
 ::: {.callout-important}
 The universe doesn't owe you a clustering. Not all phenomena are amenable to clustering in whatever features you happen to choose.
 :::
 
-While classification just requires us to separate different classes of examples, clustering is more specific and more demanding: examples in a cluster need to be more like each other, or the "average" cluster member, than they are like members of other clusters. We should expect that edge cases, even within the training data, will look ambiguous.
+While classification only requires us to separate different classes of examples, clustering is more specific and more demanding: samples in a cluster need to be more like each other, or the "average" cluster member, than they are like members of other clusters. We should expect that edge cases will look ambiguous.
 
 ## k-means
 
-The **$k$-means algorithm** is one of the best-known and most widely used clustering methods, although it has some serious limitations and drawbacks. 
+The **$k$-means algorithm** is one of the best-known and most widely used clustering methods, although it has some significant limitations. 
 
-Given a sample matrix $\bfX$ with $n$ rows $\bfx_i$, the algorithm divides the sample points into disjoint sets $C_1,\ldots,C_k$, where $k$ is a preselected hyperparameter. Cluster $j$ has a **centroid** $\bfmu_j$, which is the mean of the points in $C_j$. Define the **inertia** of $C_j$ as 
+Given a sample matrix $\bfX$ with $n$ rows $\bfX_i$, the algorithm divides the sample points into disjoint sets $C_1,\ldots,C_k$, where $k$ is a hyperparameter. We need a pair of key definitions.
 
+::::{#def-cluster-kmeans}
+The **centroid** of cluster $C_j$, denoted by $\bfmu_j$, is the mean of the vectors in $C_j$. The **inertia** of $C_j$ is 
 $$
 I_j = \sum_{\bfx\in C_j} \norm{ \bfx - \bfmu_j }_2^2.
-$$
+$$ {#eq-cluster-inertia}
+::::
 
-The goal of the algorithm is to choose the clusters in order to minimize the total inertia,
+The goal of the $k$-means algorithm is to choose the clusters in order to minimize the total inertia,
 
 $$
 I = \sum_{j=1}^k I_j.
@@ -449,99 +520,109 @@ $$
 We conclude that splitting a cluster will make the total inertia decrease. In fact, if each sample point is put into its own cluster, the inertia is 0.  -->
 
 ::::{#exm-cluster-inertia}
-Let $k=2$. Given the values $-3,-2,-1,2,5,7$, we might cluster $\{-3,-2,-1\}$ and $\{2,5,7\}$. The total inertia is then
+Given the samples $-3,-2,-1,2,5,7$, find the inertia of the clustering 
+$$
+C_1=\{-3,-2,-1\}, \qquad C_2=\{2,5,7\}, 
+$$ 
+and of the clustering
+$$
+C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.  
+$$ 
 
+:::{.solution}
+The total inertia of the first clustering is 
 $$
 \left[  (-3+2)^2 + (-2+2)^2 + (-1+2)^2   \right]  + \left[  \bigl(2-\tfrac{14}{3}\bigr)^2 + \bigl(5-\tfrac{14}{3}\bigr)^2 + \bigl(7-\tfrac{14}{3}\bigr)^2   \right] = 2 + \frac{124}{9} = 15.78.
 $$
 
-If we instead cluster as $\{-3,-2,-1,2\}$ and $\{5,7\}$, then the total inertia is 
+The total inertia of the second clustering is 
 
 $$
 \left[  (-3+1)^2 + (-2+1)^2 + (-1+1)^2  + (2+1)^2 \right]  + \left[   (5-6)^2 + (7-6)^2   \right] = 14 + 2 = 16.
 $$
+:::
 ::::
 
-Finding the minimum inertia among all possible $k$-clusterings is an infeasible problem to solve exactly at any practical size. Instead, the approach is to iteratively improve from a starting clustering.
+Finding the minimum inertia among all possible $k$-clusterings is an infeasible problem to solve exactly at any practical size. Instead, the approach is to iteratively improve on a starting clustering.
 
 ### Lloyd's algorithm
 
-The standard method is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, there is an iteration consisting of two steps:
+The most-used iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, each iteration consists of two steps:
 
-* **Assignment** Each sample point is assigned to the cluster whose centroid is the nearest. (Ties are broken randomly.)
-* **Update** Recalculate the centroids based on the cluster assignments:
-
+1. Each sample point is assigned to the cluster whose centroid is the nearest. (Ties are broken randomly.)
+2. Recalculate the centroids based on the cluster assignments:
 $$
 \bfmu_j^+ = \frac{1}{|C_j|} \sum_{\bfx\in C_j} \bfx.
 $$
 
-The algorithm stops when the assignment step does not change any of the clusters. In practice, this almost always happens quickly. Here is a demonstration:
+These steps are repeated alternately until the assignment step does not change any of the clusters. In practice, this almost always happens quickly. Here is a demonstration:
 
 {{< video _media/kmeans_demo.mp4 width="480" >}}
 
-While Lloyd's algorithm will find a local minimum of total inertia, in the sense that small changes cannot decrease it, there is no guarantee of converging to the global minimum.
+If Lloyd's algorithm converges, it finds a local minimum of total inertia, in the sense that small changes to the cluster assignments cannot decrease it. But there is no guarantee of converging to the global minimum, and often, this does not happen. 
 
 ### Practical issues
 
-* **Initialization**. The performance of $k$-means depends a great deal on the initial set of centroids. Traditionally, the centroids were chosen as random members of the sample set, but better/more reliable heuristics, such as *$k$-means++*, have since become more dominant. 
-* **Multiple runs**. All the initialization methods include an element of randomness, and since the Lloyd algorithm usually converges quickly, it is often run with multiple instances of the initialization, and the run with the lowest inertia is kept.
-* **Selection of $k$**. The algorithm treats $k$ as a hyperparameter. Occam's Razor dictates preferring smaller values to large ones. There are many suggestions on how to find the choice that gives the most "bang for the buck."
-* **Distance metric**. The Lloyd algorithm often fails to converge for norms other than the 2-norm, and must be modified if another norm is preferred.
-* **Shape effects**. Because of the dependence on the norm, the inertia criterion disfavors long, skinny clusters and clusters of unequal dispersion. Basically, it wants to find spherical blobs (as defined by the metric) of roughly equal size.
+* **Initialization**. The performance of $k$-means depends a great deal on the initial set of centroids. Traditionally, the centroids were chosen as random members of the sample set, but more reliable heuristics, such as *$k$-means++*, have since become dominant. 
+* **Multiple runs**. All the initialization methods include an element of randomness, and since the Lloyd algorithm usually converges quickly, it is often run with multiple instances of the initialization. The run with the lowest final inertia is kept.
+* **Distance metric**. The Lloyd algorithm often fails to converge for norms other than the 2-norm and must be modified if another norm is preferred.
+
+The algorithm treats $k$ as a hyperparameter. Increasing $k$ tends to lower the total inertia---at the extreme, taking $k=n$ puts each sample in its own cluster, with a total inertia of zero. Hence, one should use silhouette scores or some other measure in order to optimize $k$. Occam's Razor dictates preferring smaller values to large ones. There are many suggestions on how to find the choice that gives the most "bang for the buck," but none is foolproof.
+
+Because of its dependence on the norm, the inertia criterion of $k$-means disfavors long, skinny clusters and clusters of unequal dispersion. Essentially, it wants to find spherical blobs of roughly equal size.
 
 ::::{#exm-cluster-kmeans-blobs}
-Let's generate some test blobs:
-
-We start $k$-means with $k=2$ clusters, not presupposing prior knowledge of how the samples were created.
+We apply $k$-means to the *blobs* dataset that has 3 reference clusters, starting with $k=2$ clusters. For illustration, we instruct the algorithm to try 3 initializations and report on its progress:
 
 ```{python}
 from sklearn.cluster import KMeans
 
-X = blobs_data()[["x1", "x2"]]
-km2 = KMeans(n_clusters=2, n_init="auto")
+X, y = blobs_data()
+km2 = KMeans(n_clusters=2, n_init=3, verbose=1, random_state=302)
 km2.fit(X)
 ```
 
-The fitted clustering object can tell how many iterations were required, and what the final inertia and cluster centroids are:
+The fitted clustering object can tell us the final inertia and cluster centroids:
 
 ```{python}
-print("k=2 took",km2.n_iter_,"iterations")
 print(f"final inertia: {km2.inertia_:.5g}")
 print("cluster centroids:")
 print(km2.cluster_centers_)
 ```
 
-There is a `predict` method that can make cluster assignments for arbitrary points in feature space. In k-means, this just tells you which centroid is closest, i.e., the cluster membership:
+There is a `predict` method that can make cluster assignments for arbitrary points in feature space. In $k$-means, this prediction simply tells you which centroid is closest:
 
 ```{python}
 km2.predict([ [-2,-1], [1,2] ])
 ```
 
-For the training samples we don't need to call `predict`. Every fitted clustering object has a `labels_` property that lists the of cluster index values. We can use those labels to compute silhouette scores:
+For the training samples, we don't need to call `predict` to get the cluster assignments. Every fitted clustering object has a `labels_` property that lists the cluster index values. We can use those labels to compute silhouette scores:
 
 ```{python}
 def report(clustering):
-    blobs["cluster"] = clustering.labels_
-    blobs["sil"] = silhouette_samples(X, blobs["cluster"])
+    X["cluster"] = clustering.labels_
+    X["sil"] = silhouette_samples(X, X["cluster"])
     print(f"inertia: {clustering.inertia_:.5g}")
-    print(f"overall silhouette score: {blobs['sil'].mean():.5g}")
-    sns.catplot(data=blobs,
+    print("silhouette scores by cluster:")
+    print( X.groupby("cluster")["sil"].mean() )
+    sns.catplot(data=X,
         x="cluster", y="sil",
-        kind="violin", height=3.5
+        kind="violin", height=3
         );
-    sns.relplot(data=blobs,
+    sns.relplot(data=X,
         x="x1", y="x2",
-        hue="cluster", size=blobs["sil"], height=3.5
+        hue="cluster", size=X["sil"], 
+        height=3, palette="Dark2"
         );
-    return blobs 
+    return X 
 
 report(km2);
 ```
 
-It's clear in both plots that cluster 0 is more tightly packed than cluster 1. Let's repeat the computation for $k=3$ clusters:
+It's clear in both plots that one cluster is more tightly packed than the other. Let's repeat the computation for $k=3$ clusters:
 
 ```{python}
-km3 = KMeans(n_clusters=3, n_init="auto")
+km3 = KMeans(n_clusters=3)
 km3.fit(X)
 report(km3);
 ```
@@ -551,47 +632,51 @@ This result shows a modest reduction in silhouette scores for original good clus
 Moving on to $k=4$ clusters shows clear degradation of the silhouette scores:
 
 ```{python}
-km4 = KMeans(n_clusters=4, n_init="auto")
+km4 = KMeans(n_clusters=4)
 km4.fit(X)
 report(km4);
 ```
 
-Based on silhouette scores, then, we would probably stop at $k=3$ clusters. 
+Based on silhouette scores, we would be justified to stop at $k=3$ clusters. 
 ::::
 
 ::::{#exm-cluster-kmeans-stripes}
-K-means is expecting to find roughly spherical clusters. When the data do not conform to that model, it tends to perform poorly:
+The *stripes* dataset does not conform to compact clusters of equal size, and $k$-means performs poorly on it:
 
 ```{python}
-stripes = stripes_data()
-X = stripes[["x1", "x2"]]
+X, y = stripes_data()
 results = pd.DataFrame()
-for k in [2,3,4]:
-    km = KMeans(n_clusters=k, n_init="auto")
+for k in [2, 3, 4]:
+    km = KMeans(n_clusters=k, random_state=302)
     km.fit(X)
-    stripes["cluster"] = km.labels_
-    stripes["k"] = k
-    results = pd.concat( (results, stripes) )
+    X["cluster"] = km.labels_
+    X["k"] = k
+    results = pd.concat( (results, X) )
     
 sns.relplot(data=results,
     x="x1", y="x2",
-    hue="cluster", col="k", height=3.5
+    hue="cluster", col="k", 
+    height=3, palette="Dark2"
     );
 ```
 
-It's not a bad idea to standardize the data. But that's no panacea:
+It's generally a good idea to standardize the data. But that's no help here:
 ```{python}
 results = pd.DataFrame()
-for k in [2,3,4]:
-    km = make_pipeline(StandardScaler(), KMeans(n_clusters=k, n_init="auto"))
+for k in [2, 3, 4]:
+    km = make_pipeline(
+        StandardScaler(), 
+        KMeans(n_clusters=k, random_state=302)
+        )
     km.fit(X)
-    stripes["cluster"] = km[1].labels_
-    stripes["k"] = k
-    results = pd.concat( (results, stripes) )
+    X["cluster"] = km[1].labels_
+    X["k"] = k
+    results = pd.concat( (results, X) )
     
 sns.relplot(data=results,
     x="x1", y="x2",
-    hue="cluster", col="k", height=3.5
+    hue="cluster", col="k", 
+    height=3, palette="Dark2"
     );
 ```
 Clustering is hard!
@@ -625,12 +710,12 @@ ARI = adjusted_rand_score(y, digits["kmeans3"])
 print(f"ARI: {ARI:.4f}")
 ```
 
-However, that conclusion benefits from our prior knowledge. What if we did not know how many clusters to look for? Let's look over a range of $k$ values, recording the final total inertia and the mean silhouette score for each
+However, that conclusion benefits from our prior knowledge. What if we did not know how many clusters to look for? Let's look over a range of $k$ values, recording the mean silhouette score for each:
 
 ```{python}
 from sklearn.metrics import silhouette_score
 results = []
-for k in range(2,8):
+for k in range(2,7):
     km = KMeans(n_clusters=k, random_state=0)
     km.fit(X)
 
@@ -645,11 +730,11 @@ The silhouette score is maximized at $k=3$, which could be considered a reason t
 
 ## Hierarchical clustering
 
-The idea behind hierarchical clustering is to organize all the sample points into a tree structure called a **dendrogram**. At the root of the tree is the entire sample set, while each leaf of the tree is a single sample vector. Groups of similar samples are connected as nearby relatives in the tree, with less-similar groups located as more distant relatives.
+The idea behind hierarchical clustering is to organize all the sample points into a tree structure called a **dendrogram**. At the root of the tree is the entire sample set, while each leaf of the tree is a single sample. Groups of similar samples are connected as nearby relatives in the tree, with less-similar groups located as more distant relatives.
 
 Dendrograms can be found by starting with the root and recursively splitting, or by starting at the leaves and recursively merging. We will describe the latter approach, known as **agglomerative clustering**.
 
-The algorithm begins with $n$ singleton clusters, i.e., $C_i=\{\bfx_i\}$. Then, the similarity or distance between each pair of clusters is determined. The pair with the minimum distance is merged, and the process repeats. 
+The algorithm begins with $n$ singleton clusters, i.e., $C_i=\{\bfX_i\}$ for $i=1,\dots,n$. Then, the similarity or distance between each pair of clusters is determined. The pair with the minimum distance is merged, and the process repeats. Effectively, we end up with an entire family of clusterings; we can stop at any number of clusters between $n$ and 1. 
 
 Common ways to define the distance between two clusters $C_i$ and $C_j$ are:
 
@@ -672,20 +757,20 @@ $$
 $$ {#eq-cluster-linkage-average}
 
 * Ward linkage
-: The increase in inertia resulting from merging $C_i$ and $C_j$, equal to
-
+: The increase in inertia resulting from merging $C_i$ and $C_j$, which is equal to
 $$
 \frac{ |C_i|\,|C_j| }{|C_i| + |C_j|} \norm{\bfmu_i - \bfmu_j}_2^2,
 $$ {#eq-cluster-linkage-ward}
-
 where $\bfmu_i$ and $\bfmu_j$ are the centroids of $C_i$ and $C_j$.
 
-Agglomerative clustering with Ward linkage amounts to trying to minimize the increase of inertia with each merger. In that sense, it has the same objective as $k$-means, but it is usually not as successful at minimizing inertia.
+Single linkage only pays attention to the gaps between clusters, not the size or spread of them. Complete linkage, on the other hand, wants to keep every cluster packed tightly together. Average linkage is a compromise between these extremes. Agglomerative clustering with Ward linkage amounts to trying to minimize the increase of inertia with each merger. In that sense, it has the same objective as $k$-means, but it is usually not as successful at minimizing inertia.
 
-Single linkage only pays attention to the gaps between clusters, not the size or spread of them. Complete linkage, on the other hand, wants to keep clusters packed tightly together. Average linkage is a compromise between these extremes. All three of these options can work with a distance matrix in lieu of the original feature matrix.
+Unlike $k$-means, which has to be able to compute the distances between the samples and changing centroid locations, agglomerative clustering with single, complete, or average linkage needs only the pairwise distances between samples and can be found from a distance matrix in place of the samples themselves.
 
 ::::{#exm-cluster-linkage-tiny}
-Given clusters $C_1=\{-3,-2,-1\}$ and $C_2=\{3,4,5\}$, we find the different linkages between them:
+Given clusters $C_1=\{-3,-2,-1\}$ and $C_2=\{3,4,5\}$, find the different linkages between them. 
+
+:::{.solution}
 
 **Ward.** The centroids of the clusters are $-2$ and $4$. So the linkage is 
 
@@ -701,34 +786,31 @@ $$
 4 | 7 | 6 | 5 |
 5 | 8 | 7 | 6 |
 
-The single linkage is therefore 4.
+(Note that this is a submatrix of the full $6\times 6$ distance matrix.) The single linkage is therefore 4.
 
 **Complete.** The maximum of the matrix above is 8.
 
 **Average.** The average value of the matrix entries is $54/9$, which is 6.
+:::
 ::::
 
 ::::{#exm-cluster-hier-toy}
 Let's use 5 sample points in the plane, and agglomerate them by single linkage. The `pairwise_distances` function converts sample points into a distance matrix:
 
 ```{python}
-X = np.array( [[-2,-1] ,[2,-2], [1,0.5], [0,2], [-1,1]] )
+X = np.array( [[-2,-1] ,[-2,-2], [1,0.5], [0,2], [-1,1]] )
 D = pairwise_distances(X, metric="euclidean")
 D
 ```
 
-The minimum value in the upper triangle of the distance matrix is in row 3, column 4 (starting index at 0). So our first merge results in the cluster $C_1=\{\bfx_3,\bfx_4\}$. The next-smallest entry in the upper triangle is at position $(2,3)$, so we want to merge those samples together next, resulting in
-
+The minimum value in the upper triangle of the distance matrix is in row 0, column 1. So our first merge results in the cluster $C_1=\{\bfX_0,\bfX_1\}$. The next-smallest entry in the upper triangle is at position $(3,4)$, so we want to merge those samples together next, resulting in
 $$
-C_1=\{\bfx_2,\bfx_3,\bfx_4\},\, C_2 = \{\bfx_0\},\, C_3=\{\bfx_1\}.
+C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_3,\bfX_4\},\, C_3=\{\bfX_2\}.
 $$
-
-The next-smallest element in the matrix is at $(2,4)$, but those points are already merged, so we move on to position $(0,4)$. Now we have 
-
+The next-smallest element in the matrix is at $(2,3)$, resulting in
 $$
-C_1=\{\bfx_0,\bfx_2,\bfx_3,\bfx_4\},\, C_2 = \{\bfx_1\}. 
+C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}. 
 $$
-
 The final merge is to combine these. 
 
 The entire dendrogram can be visualized with seaborn:
@@ -736,101 +818,96 @@ The entire dendrogram can be visualized with seaborn:
 ```{python}
 sns.clustermap(X, 
     col_cluster=False,
-    dendrogram_ratio=(.75,.15)
+    dendrogram_ratio=(.75,.15),
+    figsize=(6,4)
     );
 ```
 
-The horizontal position in the dendrogram above indicates the linkage strength. Note on the right that the ordering of the samples has been changed (so that the lines won't cross each other). The two colored columns show a heatmap of the two features of the sample points. Working from right to left, we see the merger of samples 3 and 4, which are then merged with sample 2, etc. 
+The root of the tree above is at the left, with the leaves at the right. The leaves have been ordered so that the lines in the dendrogram don't ever cross. The two colored columns show the values of the features of the samples. 
 
-In effect, we get an entire family of clusterings by stopping at any linkage value we want. If we chose to stop at value 2.5, for instance, we would have two clusters of size 4 and 1. Or, if we predetermine that we want $k$ clusters, we can stop after $n-k$ merge steps.
+The horizontal position in the dendrogram indicates the linkage value, which is largest at the left. Working from right to left, we first see the merger of samples 0 and 1 at the minimum linkage in the entire distance matrix. The next merger is between $\bfX_3$ and $\bfX_4$, and so on. 
+
+We can choose to stop at any horizontal position (linkage value). Based on the distance matrix, if we stop at a linkage value of 2.0, then we perform only the first 2 merges and get 3 clusters. The largest gap between merges is in the merge from 2 clusters to 1, which could be used to justify $k=2$ as the best number of clusters.
 ::::
 
+The `AgglomerativeClustering` class in `sklearn.cluster` performs the clustering process to create a learner object.
+
 ::::{#exm-cluster-linkage}
-We define a function that allows us to run all three linkages for a dataset:
+We define a function that allows us to run all three linkages for a given feature matrix:
 ```{python}
 from sklearn.cluster import AgglomerativeClustering
 
-def run_experiment(data):
+def run_experiment(X):
     results = pd.DataFrame()
+    data = X.copy()
     for linkage in ["single", "complete", "ward"]:
         agg = AgglomerativeClustering(n_clusters=3, linkage=linkage)
-        agg.fit( data[["x1", "x2"]] )
+        agg.fit( X )
         data["cluster"] = agg.labels_
         data["linkage"] = linkage
         results = pd.concat( (results, data) )
     return results
 ```
 
-We first try the blobs seen previously:
+We first try the *blobs* dataset:
 
 ```{python}
-#| code-fold: true
-from sklearn.datasets import make_blobs
-X, y = make_blobs(
-    n_samples=[60, 50, 40],
-    centers=[ [-2,3], [3.5,1.5], [1,-3] ],
-    cluster_std=[0.5, 0.9, 1.2],
-    random_state=19716
-    )
-blobs = pd.DataFrame( {"x1": X[:,0], "x2": X[:,1], "class": y} )
-blobs.head()
-```
-
-```{python}
-#| column: body-outset
-results = run_experiment(blobs)
+X, y = blobs_data()
+results = run_experiment(X)
 sns.relplot(data=results,
         x="x1", y="x2", 
-        hue="cluster", col="linkage", height=4
-        )
+        hue="cluster", col="linkage", 
+        height=2.7, palette="Dark2"
+        );
 ```
 
-As you can see, the simple linkage was confused by the two blobs that nearly run together. 
+As you can see, the simple linkage was badly confused by the two blobs that nearly run together. The others are good at reproducing the ball-like clusters.
 
-Next, we try data points lying in three distinct stripes:
+Next, we try the *stripes* data:
 
 ```{python}
-#| column: body-outset
-stripes = stripes_data()
-results = run_experiment(stripes)
+X, y = stripes_data()
+results = run_experiment(X)
 sns.relplot(data=results,
         x="x1", y="x2", 
-        hue="cluster", col="linkage", height=4
-        )
+        hue="cluster", col="linkage", 
+        height=2.7, palette="Dark2"
+        );
 ```
 
-Both the complete and Ward linkages are committed to finding compact, roughly spherical clusters. They group together points across stripes rather than clusters extending lengthwise. The single linkage has more flexibility.
+Now the tendency of complete and Ward linkages to find compact, roughly spherical clusters is a bug, not a feature. They group together points across stripes rather than clusters extending lengthwise. The geometric flexibility of single linkage pays off here.
 
-Finally, we try the most demanding test, points that are arranged in rings:
+Finally, we try the most demanding test, *bullseye*:
 
 ```{python}
-#| column: body-outset
-bullseye = bullseye_data()
-results = run_experiment(bullseye)
+X ,y = bullseye_data()
+results = run_experiment(X)
 p = sns.relplot(data=results,
         x="x1", y="x2", 
-        hue="cluster", col="linkage", height=4
+        hue="cluster", col="linkage", 
+        height=2.7, palette="Dark2"
         )
 p.set(aspect=1);
 ```
 
-The single linkage is the only one with enough geometric flexibility to cluster the rings properly. However, it's a delicate situation, and it can be sensitive to individual samples. Here, we add just one point to the bullseye picture and get a big change:
+The single linkage is the only one to cluster the rings properly. However, it's a delicate situation, and it can be sensitive to individual samples. Here, for instance, we add just one sample to the dataset and get a major change:
 
 ```{python}
-#| column: body-outset
-bullseye = pd.concat( ( bullseye, pd.DataFrame({"x1": [0], "x2": [2.25]}) ) )
-results = run_experiment(bullseye)
+X = pd.concat( ( X, pd.DataFrame({"x1": [0], "x2": [2.25]}) ) )
+results = run_experiment(X)
 p = sns.relplot(data=results,
         x="x1", y="x2", 
-        hue="cluster", col="linkage", height=4
+        hue="cluster", col="linkage", 
+        height=2.7, palette="Dark2"
         )
 p.set(aspect=1);
 ```
+
+That instability can make single linkage difficult to work with.
 ::::
 
-### Case study: Penguins
-
-Let's try agglomerative clustering to discover the species of the penguins. First, let's recall how many of each species we have.
+::::{#exm-cluster-penguins}
+Let's try agglomerative clustering to "discover" the species of the penguins, pretending we don't know them in advance. First, let's recall how many of each species we actually do have:
 
 ```{python}
 penguins = sns.load_dataset("penguins").dropna()
@@ -839,7 +916,7 @@ X = penguins[features]
 penguins["species"].value_counts()
 ```
 
-Our first attempt is single linkage. Because 2-norm distances are involved, we will use standardization in a pipeline with the clustering method. After fitting, the `labels_` property of the cluster object is a vector of cluster assignments.
+Our first attempt is single linkage. Because 2-norm distances are involved, we use standardization in a pipeline with the clustering method. After fitting, the `labels_` property of the cluster object is a vector of cluster assignments.
 
 ```{python}
 from sklearn.cluster import AgglomerativeClustering
@@ -847,29 +924,29 @@ from sklearn.cluster import AgglomerativeClustering
 single = AgglomerativeClustering(n_clusters=3, linkage="single")
 pipe = make_pipeline(StandardScaler(),single)
 pipe.fit(X)
-penguins["single"] = single.labels_       # cluster assignments
-penguins.loc[::24,["species", "single"]]   # print out some rows
+penguins["single"] = single.labels_         # cluster assignments
+penguins.loc[::26, ["species", "single"]]   # print out some rows
 ```
 
-It seems that Gentoo is associated with cluster number 2, but the situation with the other species is less clear. Here are the value counts:
+Perhaps *Gentoo* is associated with cluster number 2, but the situation with the other species is less clear. Here are the value counts:
 
 ```{python}
 print("single linkage results:")
 penguins["single"].value_counts()
 ```
 
-As we saw with the toy datasets in @exm-cluster-linkage, the single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:
+As we saw with the *bullseye* dataset in @exm-cluster-linkage, single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:
 
 ```{python}
 from sklearn.metrics import adjusted_rand_score
-ARI = adjusted_rand_score(penguins["species"],penguins["single"])
+ARI = adjusted_rand_score(penguins["species"], penguins["single"])
 print(f"single linkage ARI: {ARI:.4f}")
 ```
 
-Now let's try it with Ward linkage (the default):
+Now let's try Ward linkage (which is the default):
 
 ```{python}
-ward = AgglomerativeClustering(n_clusters=2, linkage="ward")
+ward = AgglomerativeClustering(n_clusters=3, linkage="ward")
 pipe = make_pipeline(StandardScaler(), ward)
 pipe.fit(X)
 penguins["ward"] = ward.labels_
@@ -888,46 +965,106 @@ print(f"Ward linkage ARI: {ARI:.4f}")
 If we guess at the likely correspondence between the cluster numbers and the different species, then we can find the confusion matrix:
 
 ```{python}
-from sklearn.metrics import confusion_matrix,ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
 y = penguins["species"]
 # Convert cluster numbers into labels:
-y_hat = penguins["ward"].replace({1:"Adelie",0:"Gentoo",2:"Chinstrap"}) 
+replacements = {1: "Adelie", 0: "Gentoo", 2: "Chinstrap"}
+y_hat = penguins["ward"].replace(replacements) 
 
-ConfusionMatrixDisplay(confusion_matrix(y,y_hat),display_labels=y.unique()).plot();
+ConfusionMatrixDisplay(
+    confusion_matrix(y, y_hat),
+    display_labels=y.unique()
+    ).plot();
 ```
+::::
+
+While the performance of clustering as a classifier in @exm-cluster-penguins is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.
 
 ## Exercises {.unnumbered}
 
 ::::{#exr-cluster-angular}
-Prove that the angular distance between any nonzero vector and itself is zero.
+(6.1) Prove that the angular distance between any nonzero vector and itself is zero.
 ::::
 
 ::::{#exr-cluster-cosine}
-Find a counterexample showing that cosine distance does not satisfy the triangle inequality. (Hint: it's enough to consider some simple vectors in two dimensions.)
+(6.1) Find an example for which the cosine distance does not satisfy the triangle inequality. That is, find three vectors $\bfx$, $\bfy$, and $\bfz$ such that 
+$$
+\dist(\bfx,\bfy) > \dist(\bfx,\bfz) + \dist(\bfz,\bfy). 
+$$
+(Hint: it's enough to play around with some simple vectors in two dimensions. Use vectors for which the angle between is a multiple of $\pi/6$ or $\pi/4$.)
+::::
+
+::::{#exr-cluster-distmatrix}
+(6.1) Here is a feature matrix.
+$$
+\bfX = \begin{bmatrix}
+-1 & -1 & 0 \\ 1 & 1 & 1 \\ 2 & 0 & -2 \\ 1 & 3 & 1
+\end{bmatrix}.
+$$
+
+**(a)** Find the associated distance matrix using the 1-norm.
+
+**(b)** Find the associated distance matrix using the infinity-norm.
+::::
+
+::::{#exr-cluster-performance}
+(6.2) Here are two clusterings on 6 samples.
+$$
+\begin{align*}
+\text{A}:\: & C_1 = \{\bfX_1,\bfX_4\}, \; C_2=\{\bfX_2,\bfX_3,\bfX_5,\bfX_6 \}  \\ 
+\text{B}:\: & C_1 = \{\bfX_1,\bfX_2\}, \; C_2=\{\bfX_3,\bfX_4\}, \; C_3 = \{\bfX_5,\bfX_6 \}
+\end{align*}
+$$
+
+**(a)** Find the Rand index between these clusterings.
+**(b)** Find the silhouette values for all samples in clustering $A$.
 ::::
 
 ::::{#exr-cluster-inertia}
-Let $c$ be a positive number, and consider the 12 sample points $\{(\pm c,\pm j): j=1,2,3\}$. One way to cluster the sample points, which we designate as clustering $\alpha$, is to split according to the sign of $x_1$. Another way, which we designate as clustering $\beta$, is to split according to the sign of $x_2$. Compute the inertia of both clusterings. For which values of $c$, if any, does clustering $\alpha$ have less inertia than clustering $\beta$?
+(6.3) Let $z$ be a positive number, and consider the 12 planar samples 
+$$
+\begin{gather*}
+[z,-3],\, [z,-2],\, [z,-1],\,[z,1],\,[z,2],\,[z,3],
+[-z,-3],\, [-z,-2],\, [-z,-1],\,[-z,1],\,[-z,2],\,[-z,3]. 
+\end{gather*}
+$$
+
+**(a)** Using the 2-norm, calculuate the inertia, as a function of $z$, of the clustering 
+$$
+C_1 = \{ [z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}. 
+$$
+(This divides the sample points by the $x$-axis.)
+
+**(b)** Using the 2-norm, calculuate the inertia, as a function of $z$, of the clustering 
+$$
+C_1 = \{ [-z,j] \text{ and } [z,j]: j=-3,-2,-1\}, \qquad C_2 = \{ [-z,j] \text{ and } [z,j]: j=1,2,3\}.
+$$
+(This divides the sample points by the $y$-axis.)
+
+**(c)** For which values of $c$, if any, does clustering from part (a) have less inertia than the clustering from part (b)?
 ::::
 
 ::::{#exr-cluster-linkage}
-Here is a distance matrix for points $\bfx_1,\ldots,\bfx_5$. 
+(6.4) Here is a distance matrix for samples $\bfX_1,\ldots,\bfX_5$:
 
 $$
 \left[
 \begin{array}{ccccc}
-0 & 2 & 4 & 5 & 6 \\
-2 & 0 & 2 & 3 & 4 \\
-4 & 2 & 0 & 1 & 2 \\
+0 & 2 & 3.5 & 5 & 6 \\
+2 & 0 & 2.5 & 3 & 4 \\
+3.5 & 2.5 & 0 & 1 & 1.5 \\
 5 & 3 & 1 & 0 & 1 \\
-6 & 4 & 2 & 1 & 0 \\
+6 & 4 & 1.5 & 1 & 0 \\
 \end{array}
 \right]
 $$
 
-Compute the average linkage between the clusters with index sets $C_1=\{1,3\}$ and $C_2=\{2,4,5\}$. 
+**(a)** Compute the average linkage between the clusters $C_1=\{\bfX_1,\bfX_3\}$ and $C_2=\{\bfX_2,\bfX_4,\bfX_5\}$. 
+
+**(b)** Compute the simple linkage between the clusters $C_1=\{\bfX_1,\bfX_3,\bfX_4\}$ and $C_2=\{\bfX_2,\bfX_5\}$.
 ::::
 
 ::::{#exr-cluster-agglom}
-Perform by hand an agglomerative clustering for the values $2,4,5,8,12$ using single linkage. This means finding the four merge steps needed to convert five singleton clusters into one global cluster.
+(6.4) Find the agglomerative clustering, using complete linkage, for the samples given in @exr-cluster-linkage. (This means finding four individual merge steps based on the distance matrix.)
 ::::
