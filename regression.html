@@ -531,7 +531,7 @@ Caution
 </div>
 <p>The MSE is simply <span class="math inline">\(1/n\)</span> times the loss function of a linear regression. MAE is less sensitive than MSE to large outliers. Both quantities are dimensional and therefore depend on how the variables are scaled, but only the units of MAE are the same as of the data.</p>
 <div id="exm-regression-mse-mae" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.3 </strong></span>In <a href="#exm-regression-linear">Example&nbsp;<span>5.1</span></a> the points <span class="math inline">\((-1,0)\)</span>, <span class="math inline">\((0,2)\)</span>, <span class="math inline">\((1,3)\)</span> were found to have the least-squares regressor <span class="math inline">\(\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}\)</span>. Hence <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.3 </strong></span>In <a href="#exm-regression-linear">Example&nbsp;<span>5.13</span></a> the points <span class="math inline">\((-1,0)\)</span>, <span class="math inline">\((0,2)\)</span>, <span class="math inline">\((1,3)\)</span> were found to have the least-squares regressor <span class="math inline">\(\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}\)</span>. Hence <span class="math display">\[
 \begin{split}
 y_1 &amp;= 0,\; \hat{y}_1 = \hat{f}(-1)=\tfrac{1}{6} \\
 y_2 &amp;=2,\; \hat{y}_2=\hat{f}(0) = \tfrac{5}{3}, \\
@@ -574,7 +574,7 @@ Warning
 </div>
 </div>
 <div id="exm-regression-cod" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.4 </strong></span>Continuing with <a href="#exm-regression-linear">Example&nbsp;<span>5.1</span></a> and <a href="#exm-regression-mse-mae">Example&nbsp;<span>5.3</span></a>, we find that <span class="math inline">\(\bar{y}=(0+2+3)/3=\tfrac{5}{3}\)</span>, and</p>
+<p><span class="theorem-title"><strong>Example 5.4 </strong></span>Continuing with <a href="#exm-regression-linear">Example&nbsp;<span>5.13</span></a> and <a href="#exm-regression-mse-mae">Example&nbsp;<span>5.3</span></a>, we find that <span class="math inline">\(\bar{y}=(0+2+3)/3=\tfrac{5}{3}\)</span>, and</p>
 <p><span class="math display">\[
 \begin{split}
     \sum_{i=1}^n \left(y_i - \bar{y}\right)^2 &amp;= \left(0-\tfrac{5}{3}\right)^2 + \left(2-\tfrac{5}{3}\right)^2 + \left(3-\tfrac{5}{3}\right)^2 = \frac{14}{3}.
@@ -1851,9 +1851,9 @@ reduced linear model score: 0.4388</code></pre>
 </div></div></section>
 <section id="nonlinear-regression" class="level2 page-columns page-full" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="nonlinear-regression"><span class="header-section-number">5.4</span> Nonlinear regression</h2>
-<p>Multilinear regression limits the representation of the dataset to a function of the form <span class="math display">\[
+<p>Multilinear regression limits the representation of the dataset to a function of the form <span id="eq-regression-multilinear"><span class="math display">\[
 \hat{f}(\bfx) = \bfw^T \bfx.
-\]</span> This is a <strong>linear</strong> function, meaning that two key properties are satisfied. For all possible vectors <span class="math inline">\(\bfu,\bfv\)</span> and numbers <span class="math inline">\(c\)</span>,</p>
+\tag{5.8}\]</span></span> This is a <strong>linear</strong> function, meaning that two key properties are satisfied. For all possible vectors <span class="math inline">\(\bfu,\bfv\)</span> and numbers <span class="math inline">\(c\)</span>,</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video14" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/6ajvo8twg3ouj1d/Section5_4.mp4?raw=1"></video></div>
@@ -1861,10 +1861,42 @@ reduced linear model score: 0.4388</code></pre>
 <li><span class="math inline">\(\hat{f}(\bfu + \bfv) = \hat{f}(\bfu) + \hat{f}(\bfv)\)</span>,</li>
 <li><span class="math inline">\(\hat{f}(c\bfu) = c \hat{f}(\bfu)\)</span>.</li>
 </ol>
-<p>These properties are the essence of what makes a function easy to manipulate, solve for, and analyze. For our particular <span class="math inline">\(\hat{f}\)</span>, they follow easily from how the inner product is defined. For example, <span class="math display">\[
+<p>These properties are the essence of what makes a function easy to manipulate, solve for, and analyze.</p>
+<div id="exm-regression-linear" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.13 </strong></span>In two dimensions, the function <span class="math inline">\(\hat{f}(\bfx) = x_1 - x_2\)</span> is linear. To prove this, first suppose that <span class="math inline">\(\bfu\)</span> and <span class="math inline">\(\bfv\)</span> are any 2-vectors. Then <span class="math display">\[
+\begin{split}
+\hat{f}(\bfu + \bfv) &amp;= \hat{f}\bigl( [u_1+v_1,u_2+v_2] \bigr) \\
+    &amp;=  (u_1 + u_2) - (v_1 + v_2)  \\
+    &amp;= (u_1-v_1) + (u_2-v_2) \\
+    &amp;= \hat{f}(\bfu) + \hat{f}(\bfv).
+\end{split}
+\]</span> Now, suppose that <span class="math inline">\(\bfu\)</span> is a 2-vector and <span class="math inline">\(c\)</span> is any real number. Then <span class="math display">\[
+\begin{split}
+\hat{f}(c\bfu) &amp;= \hat{f}\bigl([cu_1, cu_2] \bigr) \\
+    &amp;= cu_1 - cu_2 \\
+    &amp;= c(u_1-u_2) \\
+    &amp;= c\cdot\hat{f}(\bfu).
+\end{split}
+\]</span></p>
+</div>
+<div id="exm-regression-nonlinear" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.14 </strong></span>In two dimensions, the function <span class="math inline">\(\hat{f}(\bfx) = |x_1 + x_2|\)</span> is not linear. Suppose <span class="math inline">\(\bfu\)</span> is any 2-vector and <span class="math inline">\(c\)</span> is any real number. If we try to prove the second property of linearity, we would start with: <span class="math display">\[
+\begin{split}
+\hat{f}(c\bfu) &amp;= \hat{f}\bigl([cu_1, cu_2] \bigr) \\
+    &amp;= |cu_1 + cu_2| \\
+    &amp;= |c| \cdot |u_1 + u_2|.
+\end{split}
+\]</span> We are trying to show that this equals <span class="math inline">\(c \cdot \hat{f}(\bfu)\)</span>, which is <span class="math inline">\(c\cdot |u_1+u_2|\)</span>. However, it doesn’t look as though this is equivalent to the last line above in all cases. In fact, they must be different if <span class="math inline">\(c &lt; 0\)</span> and <span class="math inline">\(|u_1+u_2|\)</span> is nonzero.</p>
+<p>To prove <em>nonlinearity</em>, we only have to find one counterexample where one of the properties of a linear function doesn’t hold. The attempt above suggests, for instance, <span class="math inline">\(\bfu=[1,1]\)</span> and the number <span class="math inline">\(c=-1\)</span>. Then <span class="math display">\[
+\hat{f}(c \bfu) = | -1 - 1| = 2,
+\]</span> but at the same time, <span class="math display">\[
+c\cdot \hat{f}(\bfu) = -1 \cdot |1+1| = -2.
+\]</span> Since these values are different, <span class="math inline">\(\hat{f}\)</span> can’t be linear.</p>
+</div>
+<p>For our regression function <a href="#eq-regression-multilinear">Equation&nbsp;<span>5.8</span></a>, the linearity properties follow easily from how the inner product is defined. For example, <span class="math display">\[
 \hat{f}(c\bfu) = (c\bfu)^T\bfw = \sum_{i=1}^d (cu_i) w_i = c \sum_{i=1}^d u_i w_i = c(\bfu^T\bfw) = c \hat{f}(\bfu).
 \]</span></p>
-<p>One benefit of the linear approach is that the dependence of the weight vector <span class="math inline">\(\bfw\)</span> on the regressed data is also linear, which makes solving for it relatively straightforward.</p>
+<p>One major benefit of the linear approach is that the dependence of the weight vector <span class="math inline">\(\bfw\)</span> on the regressed data is also linear, which makes solving for it straightforward.</p>
 <p>As the simplest type of multidimensional function, linear relationships are a good first resort. Furthermore, we can augment the features with powers in order to get polynomial relationships. However, that approach becomes infeasible for more than 2 or 3 dimensions, because the number of polynomial terms needed explodes. (While there is a way around this restriction known as the <em>kernel trick</em>, that’s beyond our mathematical scope here.)</p>
 <p>Alternatively, we can resort to fully nonlinear regression methods. Two of them come from generalizations of our staple classifiers.</p>
 <section id="nearest-neighbors" class="level3 page-columns page-full" data-number="5.4.1">
@@ -1874,7 +1906,7 @@ reduced linear model score: 0.4388</code></pre>
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video15" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/762plrk0qqw501w/Section5_4_1.mp4?raw=1"></video></div>
 </div></div><div id="exm-regression-knn" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.13 </strong></span>Suppose we have just two samples with one-dimensional features: <span class="math inline">\(x_1=0\)</span> and <span class="math inline">\(x_2=2\)</span>, and let the corresponding sample values be <span class="math inline">\(y_1=0\)</span> and <span class="math inline">\(y_2=1\)</span>. Using kNN with <span class="math inline">\(k=1\)</span>, the resulting approximation <span class="math inline">\(\hat{f}(x)\)</span> is <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.15 </strong></span>Suppose we have just two samples with one-dimensional features: <span class="math inline">\(x_1=0\)</span> and <span class="math inline">\(x_2=2\)</span>, and let the corresponding sample values be <span class="math inline">\(y_1=0\)</span> and <span class="math inline">\(y_2=1\)</span>. Using kNN with <span class="math inline">\(k=1\)</span>, the resulting approximation <span class="math inline">\(\hat{f}(x)\)</span> is <span class="math display">\[
 \hat{f}(x) =
 \begin{cases}
     0, &amp; x &lt; 1, \\
@@ -1887,7 +1919,7 @@ reduced linear model score: 0.4388</code></pre>
 <div class="quarto-video"><video id="video_shortcode_videojs_video24" width="600" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_regression.mp4"></video></div>
 <p>As with classification, we can choose the norm to use and whether to weight the neighbors equally or by inverse distance. As a reminder, it is usually advisable to work with z-scores for the features rather than raw data.</p>
 <div id="exm-regression-knn-demo" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.14 </strong></span>We return again to the dataset of cars and their fuel efficiency. A linear regression on four quantitative features is only OK:</p>
+<p><span class="theorem-title"><strong>Example 5.16 </strong></span>We return again to the dataset of cars and their fuel efficiency. A linear regression on four quantitative features is only OK:</p>
 <div class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna()</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">"displacement"</span>, <span class="st">"horsepower"</span>, <span class="st">"weight"</span>, <span class="st">"acceleration"</span>]</span>
@@ -1936,56 +1968,49 @@ reduced linear model score: 0.4388</code></pre>
 </div></div></section>
 <section id="decision-tree" class="level3 page-columns page-full" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="decision-tree"><span class="header-section-number">5.4.2</span> Decision tree</h3>
-<p>Recall that a decision tree recursively divides the examples into subsets. As with kNN, we can replace taking a classification vote over a leaf subset with taking a mean or median of the values. But the method of determining splits needs to be changed as well.</p>
+<p>Recall that a decision tree recursively divides the examples into subsets. As with kNN regression, we can replace taking a classification vote over a leaf subset with taking a mean or median of the values in the leaf. As in classification, a decision tree regressor seeks the best possible split of samples along coordinate planes. A proposal to split into subsets <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> is assigned the weighted score <span class="math display">\[
+Q = |S| H(S) + |T| H(T),
+\]</span> where <span class="math inline">\(H\)</span> is an empirical error measure. The split location is chosen to minimize <span class="math inline">\(Q\)</span>. After the process is applied recursively, each leaf of the decision tree contains a subset of the training samples. There are two common variations:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video17" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/741v6g7skp3a9ct/Section5_4_2.mp4?raw=1"></video></div>
-</div></div><p>Instead of using a measure of subset impurities to determine the best split, the split is chosen to cause the greatest reduction in dispersion within the two subsets. We introduce a new dispersion measure here for this purpose.</p>
-<div id="def-regression-mad" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.9 </strong></span>If <span class="math inline">\(x_1,\ldots,x_n\)</span> are a sample with median equal to <span class="math inline">\(m\)</span>, the <strong>mean absolute deviation (MAD)</strong> of the sample is <span class="math display">\[
-\frac{1}{n} \sum_{i=1}^n | x_i - m |.
-\]</span></p>
-</div>
-<p>As with classification, a decision tree regressor seeks the best possible split of samples along coordinate planes. A proposal to split into subsets <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span> is assigned the weighted score <span class="math display">\[
-Q = |S| H(S) + |T| H(T),
-\]</span> where <span class="math inline">\(H\)</span> is a dispersion measure. The split location is chosen to minimize <span class="math inline">\(Q\)</span>. After the process is applied recursively, each leaf of the decision tree contains a subset of the training samples. There are two distinct variations:</p>
-<ol type="1">
-<li>The mean of the leaf labels is the regression value, and <span class="math inline">\(H\)</span> is the standard deviation.</li>
-<li>The median of the leaf labels is the regression value, and <span class="math inline">\(H\)</span> is the MAD.</li>
+</div></div><ol type="1">
+<li>The mean of the leaf labels is the regression value, and <span class="math inline">\(H\)</span> is mean square error from the prediction.</li>
+<li>The median of the leaf labels is the regression value, and <span class="math inline">\(H\)</span> is the mean absolute error from the prediction.</li>
 </ol>
 <div id="exm-regression-split" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.15 </strong></span>Suppose we are given the observations <span class="math inline">\(x_i=i\)</span>, <span class="math inline">\(i=1,\ldots,4\)</span>, where <span class="math inline">\(y_1=2\)</span>, <span class="math inline">\(y_2=-1\)</span>, <span class="math inline">\(y_3=1\)</span>, <span class="math inline">\(y_4=0\)</span>. Let’s find the decision tree regressor using medians/MAD.</p>
-<p>The original value set has median <span class="math inline">\(\frac{1}{2}\)</span>, so its MAD is <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.17 </strong></span>Suppose we are given the observations <span class="math inline">\(x_i=i\)</span>, <span class="math inline">\(i=1,\ldots,4\)</span>, where <span class="math inline">\(y_1=2\)</span>, <span class="math inline">\(y_2=-1\)</span>, <span class="math inline">\(y_3=1\)</span>, <span class="math inline">\(y_4=0\)</span>. Let’s find the decision tree regressor using medians.</p>
+<p>The original value set has median <span class="math inline">\(\frac{1}{2}\)</span>, so its MAE is <span class="math display">\[
 \frac{1}{4} \left( \abs{2-\tfrac{1}{2}} +  \abs{{-1}-\tfrac{1}{2}} + \abs{1-\tfrac{1}{2}} + \abs{0-\tfrac{1}{2}}  \right) = \frac{1}{4}\cdot \frac{8}{2} = 1.
 \]</span> Thus, the <span class="math inline">\(Q\)</span>-score of the full set is 4.</p>
 <p>There are three allowable ways to split the data, as it is ordered from left to right:</p>
 <ul>
-<li><span class="math inline">\(S=\{2\},\,T=\{-1,1,0\}\)</span></li>
-</ul>
-<p>Note that <span class="math inline">\(\abs{S}=1\)</span> and <span class="math inline">\(\abs{T}=3\)</span>, so <span class="math display">\[
+<li><span class="math inline">\(S=\{2\},\,T=\{-1,1,0\}\)</span>. Note that <span class="math inline">\(\abs{S}=1\)</span> and <span class="math inline">\(\abs{T}=3\)</span>, so <span class="math display">\[
 \begin{split}
 Q &amp;= 1\left[ \frac{1}{1} |2-2|  \right] +  3 \left[ \frac{1}{3}\bigl( | -1-0 | + |1-0| + |0-0|  \bigr)  \right]\\
 &amp;=  0 + 2 = 2.
 \end{split}
-\]</span> * <span class="math inline">\(S=\{2,-1\},\, T=\{1,0\}\)</span> <span class="math display">\[
+\]</span></li>
+<li><span class="math inline">\(S=\{2,-1\},\, T=\{1,0\}\)</span> <span class="math display">\[
 \begin{split}
-    Q &amp;= 2\left[ \frac{1}{2}\bigl( \left| 2-\tfrac{1}{2} \right| + \left| -1-\tfrac{1}{2} \right| \bigr)  \right] +  2 \left[ \frac{1}{2}\bigl( \left|1-\tfrac{1}{2} \right| + \left|0-\tfrac{1}{2} \right|  \bigr)  \right]\\
-    &amp;=  3 + 1 = 4.
+  Q &amp;= 2\left[ \frac{1}{2}\bigl( \left| 2-\tfrac{1}{2} \right| + \left| -1-\tfrac{1}{2} \right| \bigr)  \right] +  2 \left[ \frac{1}{2}\bigl( \left|1-\tfrac{1}{2} \right| + \left|0-\tfrac{1}{2} \right|  \bigr)  \right]\\
+  &amp;=  3 + 1 = 4.
 \end{split}
-\]</span> * <span class="math inline">\(S=\{2,-1,1\},\, T=\{0\}\)</span> <span class="math display">\[
+\]</span></li>
+<li><span class="math inline">\(S=\{2,-1,1\},\, T=\{0\}\)</span> <span class="math display">\[
 \begin{split}
-    Q &amp;= 3\left[ \frac{1}{3}\bigl( \left| 2-1 \right| + \left| -1-1 \right|+ |1-1| \bigr)  \right] +  1 \left[ \frac{1}{1} \left|0-0 \right|  \right]\\
-    &amp;=  3 + 0 = 3.
+  Q &amp;= 3\left[ \frac{1}{3}\bigl( \left| 2-1 \right| + \left| -1-1 \right|+ |1-1| \bigr)  \right] +  1 \left[ \frac{1}{1} \left|0-0 \right|  \right]\\
+  &amp;=  3 + 0 = 3.
 \end{split}
-\]</span></p>
-<p>Thus, the first split above produces the smallest weighted dispersion, and it improves on the orignal set.</p>
+\]</span></li>
+</ul>
+<p>Thus, the first split above produces the smallest Q, and it improves on the orignal set.</p>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video18" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/vb4dmpbq358dxwl/Example5_15.mp4?raw=1"></video></div>
-</div></div><p>To predict a value for a query <span class="math inline">\(x\)</span>, we follow the tree until ending at a leaf, where we use the mean (if dispersion is STD) or median (if dispersion is MAD) of the examples in the leaf.</p>
-<div id="exm-regression-tree" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.16 </strong></span>Here is some simple 2D data:</p>
+</div></div><div id="exm-regression-tree" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.18 </strong></span>Here is some simple 2D data:</p>
 <div class="cell" data-execution_count="48">
 <details>
 <summary>Code</summary>
@@ -2004,7 +2029,7 @@ Q &amp;= 1\left[ \frac{1}{1} |2-2|  \right] +  3 \left[ \frac{1}{3}\bigl( | -1-0
 <p><img src="regression_files/figure-html/cell-48-output-1.png" width="589" height="429"></p>
 </div>
 </div>
-<p>The default in <code>sklearn</code> is to use STD as the dispersion measure (called <code>squared_error</code> in sklearn). Here is a shallow tree fitted to the data:</p>
+<p>The default in <code>sklearn</code> is to use means on leaves and MSE (called <code>squared_error</code> in sklearn) as the quality measure. Here is a shallow tree fitted to the data:</p>
 <div class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor, plot_tree</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>dtree <span class="op">=</span> DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">2</span>)</span>
@@ -2060,7 +2085,7 @@ Name: y, dtype: float64</code></pre>
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video19" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wf0djkbbadjtytx/Example5_16.mp4?raw=1"></video></div>
 </div></div><div id="exm-regression-tree-demo" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.17 </strong></span>Continuing with the data from <a href="#exm-regression-knn-demo">Example&nbsp;<span>5.14</span></a>, we find that we can do even better with a random forest of decision tree regressors:</p>
+<p><span class="theorem-title"><strong>Example 5.19 </strong></span>Continuing with the data from <a href="#exm-regression-knn-demo">Example&nbsp;<span>5.16</span></a>, we find that we can do even better with a random forest of decision tree regressors:</p>
 <div class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars[features]</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> cars[<span class="st">"mpg"</span>]</span>
@@ -2098,7 +2123,7 @@ Name: y, dtype: float64</code></pre>
 <p>Sometimes a regressed value is subject to certain known bounds or other conditions. A major example is probability, which has to be between 0 and 1 (inclusive).</p>
 <p>A linear regressor, <span class="math inline">\(\hat{f}(\bfx) = \bfw^T \bfx\)</span> for a constant vector <span class="math inline">\(\bfw\)</span>, typically ranges over all of <span class="math inline">\((-\infty,\infty)\)</span>. In order to get a result that must lie within <span class="math inline">\([0,1]\)</span>, we can transform its output.</p>
 <div id="def-regression-logistic" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5.10 </strong></span>The <strong>logistic function</strong> is <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 5.9 </strong></span>The <strong>logistic function</strong> is <span class="math display">\[
 \sigma(x) = \frac{1}{1+e^{-x}},
 \]</span> defined for all real values of <span class="math inline">\(x\)</span>.</p>
 </div>
@@ -2125,13 +2150,13 @@ p \approx \sigma(\bfx^T\bfw).
 <div class="quarto-video"><video id="video_shortcode_videojs_video21" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wdnqanl9ny5h9p7/Section5_5_1.mp4?raw=1"></video></div>
 </div></div><p>However, it’s more common to use the <strong>cross-entropy</strong> loss function <span id="eq-regression-cross-entropy"><span class="math display">\[
 L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \right].
-\tag{5.8}\]</span></span> (The logarithms in <a href="#eq-regression-cross-entropy">Equation&nbsp;<span>5.8</span></a> can be in any base, since that choice only affects <span class="math inline">\(L\)</span> by a constant factor.) In cross-entropy loss, sample <span class="math inline">\(i\)</span> contributes <span class="math display">\[
+\tag{5.9}\]</span></span> (The logarithms in <a href="#eq-regression-cross-entropy">Equation&nbsp;<span>5.9</span></a> can be in any base, since that choice only affects <span class="math inline">\(L\)</span> by a constant factor.) In cross-entropy loss, sample <span class="math inline">\(i\)</span> contributes <span class="math display">\[
 -\log(1-\hat{p}_i)
 \]</span> if <span class="math inline">\(y_i=0\)</span>, which becomes infinite as <span class="math inline">\(\hat{p}_i\to 1^-\)</span>, and <span class="math display">\[
 -\log(\hat{p}_i)
 \]</span> if <span class="math inline">\(y_i=1\)</span>, which becomes infinite as <span class="math inline">\(\hat{p}_i\to 0^+\)</span>. Thus, there is a steep penalty for being almost completely wrong about an observation.</p>
 <div id="exm-regression-cross-entropy" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.18 </strong></span>Suppose we have true labels <span class="math inline">\(\bfy=[0,0,0,1]\)</span> and predicted probabilities <span class="math inline">\(\hat{\mathbf{p}} = [0.1,0.4,0.2,0.3].\)</span> This gives the following terms in the cross-entropy sum: <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.20 </strong></span>Suppose we have true labels <span class="math inline">\(\bfy=[0,0,0,1]\)</span> and predicted probabilities <span class="math inline">\(\hat{\mathbf{p}} = [0.1,0.4,0.2,0.3].\)</span> This gives the following terms in the cross-entropy sum: <span class="math display">\[
 \begin{split}
 \cancel{y_1 \log(\hat{p}_1)} + (1-y_1) \log(1-\hat{p}_1) &amp;= \log(0.9), \\
 \cancel{y_2 \log(\hat{p}_2)} + (1-y_2) \log(1-\hat{p}_2) &amp;= \log(0.6), \\
@@ -2144,9 +2169,9 @@ y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
 \]</span> Using the natural log, this is about <span class="math inline">\(2.043\)</span>.</p>
 </div>
 <p>Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does <em>not</em> lead to a linear problem for the weight vector <span class="math inline">\(\bfw\)</span>. The difference in practice is usually not a concern, though.</p>
-<p>Cross-entropy is the default loss function for a <code>LogisticRegression</code> in scikit-learn. In <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.</p>
+<p>Cross-entropy is the default loss function for a <code>LogisticRegression</code> in scikit-learn. In <a href="#exm-regression-spam">Example&nbsp;<span>5.21</span></a>, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.</p>
 <div id="exm-regression-spam" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.19 </strong></span>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
+<p><span class="theorem-title"><strong>Example 5.21 </strong></span>We will try logistic regression for a simple spam filter. The data set is based on work and personal emails for one individual. The features are calculated word and character frequencies, as well as the appearance of capital letters.</p>
 <div class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/spambase.csv"</span>)</span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>spam.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2397,7 +2422,7 @@ dtype: float64</code></pre>
 <p>As with other forms of regression, the loss function may be regularized using the ridge or LASSO penalty. The standard formulation is</p>
 <p><span id="eq-regression-logistic-regular"><span class="math display">\[
 \widetilde{L}(\bfw) = C \, L(\bfw) + \norm{\bfw},
-\tag{5.9}\]</span></span></p>
+\tag{5.10}\]</span></span></p>
 <p>where the vector norm is either the 1-norm (LASSO style) or 2-norm (ridge style). In either case, <span class="math inline">\(C\)</span> is a positive hyperparameter. For <span class="math inline">\(C\)</span> close to zero, the regression is mainly concerned with the penalty term, and as <span class="math inline">\(C\)</span> increases, the regression gradually pays more and more attention to the data, at the expense of the penalty term.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2413,8 +2438,8 @@ Important
 </div>
 </div>
 <div id="exm-regression-spam-regular" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.20 </strong></span>We will continue <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a> with an exploration of regularization. When using norm-based regularization, it’s good practice to standardize the variables, so we will use a standardization pipeline:</p>
-<p>In <a href="#exm-regression-spam">Example&nbsp;<span>5.19</span></a>, we disabled regularization. The default call uses 2-norm regularization with <span class="math inline">\(C=1\)</span>, which, in this case, improves the accuracy a bit:</p>
+<p><span class="theorem-title"><strong>Example 5.22 </strong></span>We will continue <a href="#exm-regression-spam">Example&nbsp;<span>5.21</span></a> with an exploration of regularization. When using norm-based regularization, it’s good practice to standardize the variables, so we will use a standardization pipeline:</p>
+<p>In <a href="#exm-regression-spam">Example&nbsp;<span>5.21</span></a>, we disabled regularization. The default call uses 2-norm regularization with <span class="math inline">\(C=1\)</span>, which, in this case, improves the accuracy a bit:</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2499,7 +2524,7 @@ Best score is 92.55%</code></pre>
 \]</span></p>
 <p>Now we can interpret <span class="math inline">\(\hat{p}_{k}(\bfx)\)</span> as the probability of <span class="math inline">\(\bfx\)</span> belonging to class <span class="math inline">\(k\)</span>.</p>
 <div id="exm-regression-logistic-ovr" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.21 </strong></span>Suppose we have <span class="math inline">\(d=2\)</span> features and three classes, and that the three logistic regressions gave the weight vectors <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.23 </strong></span>Suppose we have <span class="math inline">\(d=2\)</span> features and three classes, and that the three logistic regressions gave the weight vectors <span class="math display">\[
 \bfw_1 = [-2,0], \qquad \bfw_2=[1,1], \qquad \bfw_3=[0,1].
 \]</span></p>
 <p>For the query <span class="math inline">\(\bfx=[1,0]\)</span>, we get the predictions <span class="math display">\[
@@ -2519,7 +2544,7 @@ Best score is 92.55%</code></pre>
 </div>
 <p>The situation is now the same as for probabilistic classification in <a href="classification.html#sec-class-probabilistic"><span>Section&nbsp;3.5</span></a>. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.</p>
 <div id="exm-regression-logistic-gas" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.22 </strong></span>As a multiclass example, we return to the dataset for classifying forest cover:</p>
+<p><span class="theorem-title"><strong>Example 5.24 </strong></span>As a multiclass example, we return to the dataset for classifying forest cover:</p>
 <div class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>][:<span class="dv">250000</span>,:<span class="dv">12</span>]   <span class="co"># 250,000 samples, 12 features</span></span>
@@ -2625,12 +2650,18 @@ $$
 \tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2. 
 $$
 :::: -->
+<div id="exr-regression-linearity" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.</p>
+<p><strong>(a)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_1 x_2\)</span></p>
+<p><strong>(b)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_2\)</span></p>
+<p><strong>(c)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_1 + x_2 + 1\)</span></p>
+</div>
 <div id="exr-regression-splits" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>(5.4) Given the data set <span class="math inline">\((x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}\)</span>, find the MAD-based <span class="math inline">\(Q\)</span> score for the following hypothetical decision tree splits.</p>
+<p><span class="theorem-title"><strong>Exercise 5.9 </strong></span>(5.4) Given the data set <span class="math inline">\((x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}\)</span>, find the MAD-based <span class="math inline">\(Q\)</span> score for the following hypothetical decision tree splits.</p>
 <p><strong>(a)</strong> <span class="math inline">\(x \le 0.5, \qquad\)</span> <strong>(b)</strong> <span class="math inline">\(x \le 1.5, \qquad\)</span> <strong>(c)</strong> <span class="math inline">\(x \le 2.5,\qquad\)</span> <strong>(d)</strong> <span class="math inline">\(x \le 3.5\)</span>.</p>
 </div>
 <div id="exr-regression-lattice-values" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.9 </strong></span>(5.4) Here are values (labels) on an integer lattice.</p>
+<p><span class="theorem-title"><strong>Exercise 5.10 </strong></span>(5.4) Here are values (labels) on an integer lattice.</p>
 <p><img src="_media/griddata.png" class="img-fluid" width="360"></p>
 <p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be the kNN regressor using <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging. In each case below, a function <span class="math inline">\(g(t)\)</span> is defined from values of <span class="math inline">\(\hat{f}\)</span> along a vertical or horizontal line. Carefully sketch a plot of <span class="math inline">\(g(t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span>.</p>
 <p><strong>(a)</strong> <span class="math inline">\(g(t) = \hat{f}(1.2,t)\)</span></p>
@@ -2639,7 +2670,7 @@ $$
 <p><strong>(d)</strong> <span class="math inline">\(g(t) = \hat{f}(-0.25,t)\)</span></p>
 </div>
 <div id="exr-regression-cross-entropy" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.10 </strong></span>(5.5) Here are some label values and probabilistic predictions by a logistic regressor: <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 5.11 </strong></span>(5.5) Here are some label values and probabilistic predictions by a logistic regressor: <span class="math display">\[
 \begin{split}
     \bfy  &amp;= [0,0,1,1], \\
     \hat{\mathbf{p}} &amp;= [\tfrac{3}{4},0,1,\tfrac{1}{2}].
@@ -2647,7 +2678,7 @@ $$
 \]</span> Using base-2 logarithms, calculate the cross-entropy loss for these predictions.</p>
 </div>
 <div id="exr-regression-cross-entropy-optim" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.11 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,0,1]\)</span> and <span class="math inline">\(\bfy=[0,1,0]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 5.12 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,0,1]\)</span> and <span class="math inline">\(\bfy=[0,1,0]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>.</p>
 <p><strong>(a)</strong> Let <span class="math inline">\(L(w)\)</span> be the cross-entropy loss function using natural logarithms. Show that <span class="math display">\[
 L'(w) = \frac{e^w-1}{e^w+1}.
 \]</span></p>
@@ -2655,7 +2686,7 @@ L'(w) = \frac{e^w-1}{e^w+1}.
 <p><strong>(c)</strong> Using the result of part (b), simplify the optimum predictor function <span class="math inline">\(\hat{p}(x)\)</span>.</p>
 </div>
 <div id="exr-regression-logistic-lasso" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.12 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,1]\)</span> and <span class="math inline">\(\bfy=[0,1]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>. Without regularization, the best fit takes <span class="math inline">\(w\to\infty\)</span>, which makes the predictor become infinitely steep at <span class="math inline">\(x=0\)</span>. To combat this behavior, let <span class="math inline">\(L\)</span> be the cross-entropy loss function with LASSO penalty, i.e.,</p>
+<p><span class="theorem-title"><strong>Exercise 5.13 </strong></span>(5.5) Let <span class="math inline">\(\bfx=[-1,1]\)</span> and <span class="math inline">\(\bfy=[0,1]\)</span>. This small dataset is fit to a probabilistic predictor <span class="math inline">\(\hat{p}(x) = \sigma(w x)\)</span> for weight <span class="math inline">\(w\)</span>. Without regularization, the best fit takes <span class="math inline">\(w\to\infty\)</span>, which makes the predictor become infinitely steep at <span class="math inline">\(x=0\)</span>. To combat this behavior, let <span class="math inline">\(L\)</span> be the cross-entropy loss function with LASSO penalty, i.e.,</p>
 <p><span class="math display">\[
 L(w) = \ln[1-\hat{p}(-1)] - \ln[\hat{p}(1)] + \alpha |w|,
 \]</span></p>
