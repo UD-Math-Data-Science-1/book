@@ -952,7 +952,7 @@ print(f"reduced linear model score: {Rsq:.4f}")
 Multilinear regression limits the representation of the dataset to a function of the form
 $$
 \hat{f}(\bfx) = \bfw^T \bfx. 
-$$
+$$ {#eq-regression-multilinear}
 This is a **linear** function, meaning that two key properties are satisfied. For all possible vectors $\bfu,\bfv$ and numbers $c$,
 
 :::{.column-margin}
@@ -962,12 +962,57 @@ This is a **linear** function, meaning that two key properties are satisfied. Fo
 1. $\hat{f}(\bfu + \bfv) = \hat{f}(\bfu) + \hat{f}(\bfv)$,
 2. $\hat{f}(c\bfu) = c \hat{f}(\bfu)$.
 
-These properties are the essence of what makes a function easy to manipulate, solve for, and analyze. For our particular $\hat{f}$, they follow easily from how the inner product is defined. For example,
+These properties are the essence of what makes a function easy to manipulate, solve for, and analyze. 
+
+::::{#exm-regression-linear}
+In two dimensions, the function $\hat{f}(\bfx) = x_1 - x_2$ is linear. To prove this, first suppose that $\bfu$ and $\bfv$ are any 2-vectors. Then 
+$$
+\begin{split}
+\hat{f}(\bfu + \bfv) &= \hat{f}\bigl( [u_1+v_1,u_2+v_2] \bigr) \\ 
+    &=  (u_1 + u_2) - (v_1 + v_2)  \\ 
+    &= (u_1-v_1) + (u_2-v_2) \\ 
+    &= \hat{f}(\bfu) + \hat{f}(\bfv). 
+\end{split}
+$$
+Now, suppose that $\bfu$ is a 2-vector and $c$ is any real number. Then
+$$
+\begin{split}
+\hat{f}(c\bfu) &= \hat{f}\bigl([cu_1, cu_2] \bigr) \\ 
+    &= cu_1 - cu_2 \\ 
+    &= c(u_1-u_2) \\ 
+    &= c\cdot\hat{f}(\bfu). 
+\end{split}
+$$
+::::
+
+::::{#exm-regression-nonlinear}
+In two dimensions, the function $\hat{f}(\bfx) = |x_1 + x_2|$ is not linear. Suppose $\bfu$ is any 2-vector and $c$ is any real number. If we try to prove the second property of linearity, we would start with:
+$$
+\begin{split}
+\hat{f}(c\bfu) &= \hat{f}\bigl([cu_1, cu_2] \bigr) \\ 
+    &= |cu_1 + cu_2| \\ 
+    &= |c| \cdot |u_1 + u_2|.
+\end{split}
+$$
+We are trying to show that this equals $c \cdot \hat{f}(\bfu)$, which is $c\cdot |u_1+u_2|$. However, it doesn't look as though this is equivalent to the last line above in all cases. In fact, they must be different if $c < 0$ and $|u_1+u_2|$ is nonzero.
+
+To prove *nonlinearity*, we only have to find one counterexample where one of the properties of a linear function doesn't hold. The attempt above suggests, for instance, $\bfu=[1,1]$ and the number $c=-1$. Then
+$$
+\hat{f}(c \bfu) = | -1 - 1| = 2, 
+$$
+but at the same time,
+$$
+c\cdot \hat{f}(\bfu) = -1 \cdot |1+1| = -2. 
+$$
+Since these values are different, $\hat{f}$ can't be linear.
+::::
+
+For our regression function @eq-regression-multilinear, the linearity properties follow easily from how the inner product is defined. For example,
 $$
 \hat{f}(c\bfu) = (c\bfu)^T\bfw = \sum_{i=1}^d (cu_i) w_i = c \sum_{i=1}^d u_i w_i = c(\bfu^T\bfw) = c \hat{f}(\bfu). 
 $$
 
-One benefit of the linear approach is that the dependence of the weight vector $\bfw$ on the regressed data is also linear, which makes solving for it relatively straightforward. 
+One major benefit of the linear approach is that the dependence of the weight vector $\bfw$ on the regressed data is also linear, which makes solving for it straightforward. 
 
 As the simplest type of multidimensional function, linear relationships are a good first resort. Furthermore, we can augment the features with powers in order to get polynomial relationships. However, that approach becomes infeasible for more than 2 or 3 dimensions, because the number of polynomial terms needed explodes. (While there is a way around this restriction known as the *kernel trick*, that's beyond our mathematical scope here.)
 
@@ -1049,34 +1094,23 @@ As you can see above, we got some improvement over the linear regressor.
 
 ### Decision tree
 
-Recall that a decision tree recursively divides the examples into subsets. As with kNN, we can replace taking a classification vote over a leaf subset with taking a mean or median of the values. But the method of determining splits needs to be changed as well.
+Recall that a decision tree recursively divides the examples into subsets. As with kNN regression, we can replace taking a classification vote over a leaf subset with taking a mean or median of the values in the leaf. As in classification, a decision tree regressor seeks the best possible split of samples along coordinate planes. A proposal to split into subsets $S$ and $T$ is assigned the weighted score
+$$
+Q = |S| H(S) + |T| H(T),
+$$
+where $H$ is an empirical error measure. The split location is chosen to minimize $Q$. After the process is applied recursively, each leaf of the decision tree contains a subset of the training samples. There are two common variations:
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/741v6g7skp3a9ct/Section5_4_2.mp4?raw=1 >}}
 :::
 
-Instead of using a measure of subset impurities to determine the best split, the split is chosen to cause the greatest reduction in dispersion within the two subsets. We introduce a new dispersion measure here for this purpose.
-
-::::{#def-regression-mad}
-If $x_1,\ldots,x_n$ are a sample with median equal to $m$, the **mean absolute deviation (MAD)** of the sample is
-$$
-\frac{1}{n} \sum_{i=1}^n | x_i - m |.
-$$
-::::
-
-As with classification, a decision tree regressor seeks the best possible split of samples along coordinate planes. A proposal to split into subsets $S$ and $T$ is assigned the weighted score
-$$
-Q = |S| H(S) + |T| H(T),
-$$
-where $H$ is a dispersion measure. The split location is chosen to minimize $Q$. After the process is applied recursively, each leaf of the decision tree contains a subset of the training samples. There are two distinct variations:
-
-1. The mean of the leaf labels is the regression value, and $H$ is the standard deviation.
-2. The median of the leaf labels is the regression value, and $H$ is the MAD.
+1. The mean of the leaf labels is the regression value, and $H$ is mean square error from the prediction.
+2. The median of the leaf labels is the regression value, and $H$ is the mean absolute error from the prediction.
 
 ::::{#exm-regression-split}
-Suppose we are given the observations $x_i=i$, $i=1,\ldots,4$, where $y_1=2$, $y_2=-1$, $y_3=1$, $y_4=0$. Let's find the decision tree regressor using medians/MAD.
+Suppose we are given the observations $x_i=i$, $i=1,\ldots,4$, where $y_1=2$, $y_2=-1$, $y_3=1$, $y_4=0$. Let's find the decision tree regressor using medians.
 
-The original value set has median $\frac{1}{2}$, so its MAD is 
+The original value set has median $\frac{1}{2}$, so its MAE is 
 $$ 
 \frac{1}{4} \left( \abs{2-\tfrac{1}{2}} +  \abs{{-1}-\tfrac{1}{2}} + \abs{1-\tfrac{1}{2}} + \abs{0-\tfrac{1}{2}}  \right) = \frac{1}{4}\cdot \frac{8}{2} = 1. 
 $$
@@ -1084,9 +1118,7 @@ Thus, the $Q$-score of the full set is 4.
 
 There are three allowable ways to split the data, as it is ordered from left to right: 
 
-* $S=\{2\},\,T=\{-1,1,0\}$
-
-Note that $\abs{S}=1$ and $\abs{T}=3$, so
+* $S=\{2\},\,T=\{-1,1,0\}$. Note that $\abs{S}=1$ and $\abs{T}=3$, so
 $$ 
 \begin{split}
 Q &= 1\left[ \frac{1}{1} |2-2|  \right] +  3 \left[ \frac{1}{3}\bigl( | -1-0 | + |1-0| + |0-0|  \bigr)  \right]\\ 
@@ -1108,14 +1140,12 @@ $$
 \end{split}
 $$
 
-Thus, the first split above produces the smallest weighted dispersion, and it improves on the orignal set.
+Thus, the first split above produces the smallest Q, and it improves on the orignal set.
 ::::
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/vb4dmpbq358dxwl/Example5_15.mp4?raw=1 >}}
 :::
-
-To predict a value for a query $x$, we follow the tree until ending at a leaf, where we use the mean (if dispersion is STD) or median (if dispersion is MAD) of the examples in the leaf.
 
 ::::{#exm-regression-tree}
 Here is some simple 2D data:
@@ -1134,7 +1164,7 @@ df = pd.DataFrame({"x₁": X[:,0], "x₂": X[:,1], "y": y})
 sns.scatterplot(data=df, x="x₁", y="x₂", hue="y");
 ```
 
-The default in `sklearn` is to use STD as the dispersion measure (called `squared_error` in sklearn). Here is a shallow tree fitted to the data:
+The default in `sklearn` is to use means on leaves and MSE (called `squared_error` in sklearn) as the quality measure. Here is a shallow tree fitted to the data:
 
 ```{python}
 from sklearn.tree import DecisionTreeRegressor, plot_tree
@@ -1595,6 +1625,17 @@ $$
 \tilde{r} = C (\alpha^2 + \beta^2) + \sum_{i=1}^n \bigl(\hat{f}(u_i,v_i)-y_i\bigr)^2. 
 $$
 :::: -->
+
+::::{#exr-regression-linearity}
+For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.
+
+**(a)** $\hat{f}(\bfx) = x_1 x_2$
+
+**(b)** $\hat{f}(\bfx) = x_2$
+
+**(c)** $\hat{f}(\bfx) = x_1 + x_2 + 1$
+::::
+
 
 ::::{#exr-regression-splits}
 (5.4) Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAD-based $Q$ score for the following hypothetical decision tree splits.
