@@ -1401,5 +1401,5 @@ is an eigenvector of the adjacency matrix, where the central node corresponds to
 ::::
 
 ::::{#exr-networks-friendship}
-Prove the friendship paradox, i.e., inequality @eq-networks-friendship-paradox. (Hint: Start with @eq-clustering-angle using $\bfu=\mathbf{d}$ and $\bfv$ equal to a vector of all ones. Convert from equality to inequality to get rid of the angle $\theta$. Simplify the inner product, square both sides, and show that it can be rearranged into @eq-networks-friendship-paradox.)
+Prove the friendship paradox, i.e., inequality @eq-networks-friendship-paradox. (Hint: Start with @eq-cluster-angle using $\bfu=\mathbf{d}$ and $\bfv$ equal to a vector of all ones. Convert from equality to inequality to get rid of the angle $\theta$. Simplify the inner product, square both sides, and show that it can be rearranged into @eq-networks-friendship-paradox.)
 ::::
