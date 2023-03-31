@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.3.298">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -138,6 +109,7 @@ MathJax = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -146,11 +118,16 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./stats.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -158,7 +135,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -169,65 +146,75 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
   </div>
 </li>
     </ul>
@@ -235,52 +222,53 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link active" data-scroll-target="#summary-statistics"><span class="toc-section-number">2.1</span>  Summary statistics</a>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link active" data-scroll-target="#summary-statistics"><span class="header-section-number">2.1</span> Summary statistics</a>
   <ul class="collapse">
-  <li><a href="#mean-and-spread" id="toc-mean-and-spread" class="nav-link" data-scroll-target="#mean-and-spread"><span class="toc-section-number">2.1.1</span>  Mean and spread</a></li>
-  <li><a href="#z-scores" id="toc-z-scores" class="nav-link" data-scroll-target="#z-scores"><span class="toc-section-number">2.1.2</span>  z-scores</a></li>
-  <li><a href="#populations-and-samples" id="toc-populations-and-samples" class="nav-link" data-scroll-target="#populations-and-samples"><span class="toc-section-number">2.1.3</span>  Populations and samples</a></li>
-  <li><a href="#median-and-quantiles" id="toc-median-and-quantiles" class="nav-link" data-scroll-target="#median-and-quantiles"><span class="toc-section-number">2.1.4</span>  Median and quantiles</a></li>
+  <li><a href="#mean-and-spread" id="toc-mean-and-spread" class="nav-link" data-scroll-target="#mean-and-spread"><span class="header-section-number">2.1.1</span> Mean and spread</a></li>
+  <li><a href="#z-scores" id="toc-z-scores" class="nav-link" data-scroll-target="#z-scores"><span class="header-section-number">2.1.2</span> z-scores</a></li>
+  <li><a href="#populations-and-samples" id="toc-populations-and-samples" class="nav-link" data-scroll-target="#populations-and-samples"><span class="header-section-number">2.1.3</span> Populations and samples</a></li>
+  <li><a href="#median-and-quantiles" id="toc-median-and-quantiles" class="nav-link" data-scroll-target="#median-and-quantiles"><span class="header-section-number">2.1.4</span> Median and quantiles</a></li>
   </ul></li>
-  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="toc-section-number">2.2</span>  Distributions</a>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">2.2</span> Distributions</a>
   <ul class="collapse">
-  <li><a href="#cdf" id="toc-cdf" class="nav-link" data-scroll-target="#cdf"><span class="toc-section-number">2.2.1</span>  CDF</a></li>
-  <li><a href="#empirical-cdf" id="toc-empirical-cdf" class="nav-link" data-scroll-target="#empirical-cdf"><span class="toc-section-number">2.2.2</span>  Empirical CDF</a></li>
-  <li><a href="#pdf" id="toc-pdf" class="nav-link" data-scroll-target="#pdf"><span class="toc-section-number">2.2.3</span>  PDF</a></li>
-  <li><a href="#mean-and-variance" id="toc-mean-and-variance" class="nav-link" data-scroll-target="#mean-and-variance"><span class="toc-section-number">2.2.4</span>  Mean and variance</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="toc-section-number">2.2.5</span>  Normal distribution</a></li>
+  <li><a href="#cdf" id="toc-cdf" class="nav-link" data-scroll-target="#cdf"><span class="header-section-number">2.2.1</span> CDF</a></li>
+  <li><a href="#empirical-cdf" id="toc-empirical-cdf" class="nav-link" data-scroll-target="#empirical-cdf"><span class="header-section-number">2.2.2</span> Empirical CDF</a></li>
+  <li><a href="#pdf" id="toc-pdf" class="nav-link" data-scroll-target="#pdf"><span class="header-section-number">2.2.3</span> PDF</a></li>
+  <li><a href="#mean-and-variance" id="toc-mean-and-variance" class="nav-link" data-scroll-target="#mean-and-variance"><span class="header-section-number">2.2.4</span> Mean and variance</a></li>
+  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">2.2.5</span> Normal distribution</a></li>
   </ul></li>
-  <li><a href="#grouping-data" id="toc-grouping-data" class="nav-link" data-scroll-target="#grouping-data"><span class="toc-section-number">2.3</span>  Grouping data</a>
+  <li><a href="#grouping-data" id="toc-grouping-data" class="nav-link" data-scroll-target="#grouping-data"><span class="header-section-number">2.3</span> Grouping data</a>
   <ul class="collapse">
-  <li><a href="#splitting" id="toc-splitting" class="nav-link" data-scroll-target="#splitting"><span class="toc-section-number">2.3.1</span>  Splitting</a></li>
-  <li><a href="#aggregation" id="toc-aggregation" class="nav-link" data-scroll-target="#aggregation"><span class="toc-section-number">2.3.2</span>  Aggregation</a></li>
-  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation"><span class="toc-section-number">2.3.3</span>  Transformation</a></li>
-  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="toc-section-number">2.3.4</span>  Filtering</a></li>
+  <li><a href="#splitting" id="toc-splitting" class="nav-link" data-scroll-target="#splitting"><span class="header-section-number">2.3.1</span> Splitting</a></li>
+  <li><a href="#aggregation" id="toc-aggregation" class="nav-link" data-scroll-target="#aggregation"><span class="header-section-number">2.3.2</span> Aggregation</a></li>
+  <li><a href="#transformation" id="toc-transformation" class="nav-link" data-scroll-target="#transformation"><span class="header-section-number">2.3.3</span> Transformation</a></li>
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering"><span class="header-section-number">2.3.4</span> Filtering</a></li>
   </ul></li>
-  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="toc-section-number">2.4</span>  Outliers</a>
+  <li><a href="#outliers" id="toc-outliers" class="nav-link" data-scroll-target="#outliers"><span class="header-section-number">2.4</span> Outliers</a>
   <ul class="collapse">
-  <li><a href="#iqr" id="toc-iqr" class="nav-link" data-scroll-target="#iqr"><span class="toc-section-number">2.4.1</span>  IQR</a></li>
-  <li><a href="#mean-and-std" id="toc-mean-and-std" class="nav-link" data-scroll-target="#mean-and-std"><span class="toc-section-number">2.4.2</span>  Mean and STD</a></li>
+  <li><a href="#iqr" id="toc-iqr" class="nav-link" data-scroll-target="#iqr"><span class="header-section-number">2.4.1</span> IQR</a></li>
+  <li><a href="#mean-and-std" id="toc-mean-and-std" class="nav-link" data-scroll-target="#mean-and-std"><span class="header-section-number">2.4.2</span> Mean and STD</a></li>
   </ul></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="toc-section-number">2.5</span>  Correlation</a>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">2.5</span> Correlation</a>
   <ul class="collapse">
-  <li><a href="#relational-plots" id="toc-relational-plots" class="nav-link" data-scroll-target="#relational-plots"><span class="toc-section-number">2.5.1</span>  Relational plots</a></li>
-  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="toc-section-number">2.5.2</span>  Covariance</a></li>
-  <li><a href="#pearson-coefficient" id="toc-pearson-coefficient" class="nav-link" data-scroll-target="#pearson-coefficient"><span class="toc-section-number">2.5.3</span>  Pearson coefficient</a></li>
-  <li><a href="#spearman-coefficient" id="toc-spearman-coefficient" class="nav-link" data-scroll-target="#spearman-coefficient"><span class="toc-section-number">2.5.4</span>  Spearman coefficient</a></li>
-  <li><a href="#categorical-correlation" id="toc-categorical-correlation" class="nav-link" data-scroll-target="#categorical-correlation"><span class="toc-section-number">2.5.5</span>  Categorical correlation</a></li>
+  <li><a href="#relational-plots" id="toc-relational-plots" class="nav-link" data-scroll-target="#relational-plots"><span class="header-section-number">2.5.1</span> Relational plots</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="header-section-number">2.5.2</span> Covariance</a></li>
+  <li><a href="#pearson-coefficient" id="toc-pearson-coefficient" class="nav-link" data-scroll-target="#pearson-coefficient"><span class="header-section-number">2.5.3</span> Pearson coefficient</a></li>
+  <li><a href="#spearman-coefficient" id="toc-spearman-coefficient" class="nav-link" data-scroll-target="#spearman-coefficient"><span class="header-section-number">2.5.4</span> Spearman coefficient</a></li>
+  <li><a href="#categorical-correlation" id="toc-categorical-correlation" class="nav-link" data-scroll-target="#categorical-correlation"><span class="header-section-number">2.5.5</span> Categorical correlation</a></li>
   </ul></li>
-  <li><a href="#cautionary-tales" id="toc-cautionary-tales" class="nav-link" data-scroll-target="#cautionary-tales"><span class="toc-section-number">2.6</span>  Cautionary tales</a>
+  <li><a href="#cautionary-tales" id="toc-cautionary-tales" class="nav-link" data-scroll-target="#cautionary-tales"><span class="header-section-number">2.6</span> Cautionary tales</a>
   <ul class="collapse">
-  <li><a href="#the-datasaurus" id="toc-the-datasaurus" class="nav-link" data-scroll-target="#the-datasaurus"><span class="toc-section-number">2.6.1</span>  The datasaurus</a></li>
-  <li><a href="#correlation-vs.-dependence" id="toc-correlation-vs.-dependence" class="nav-link" data-scroll-target="#correlation-vs.-dependence"><span class="toc-section-number">2.6.2</span>  Correlation vs.&nbsp;dependence</a></li>
-  <li><a href="#sec-stats-simpson" id="toc-sec-stats-simpson" class="nav-link" data-scroll-target="#sec-stats-simpson"><span class="toc-section-number">2.6.3</span>  Simpson’s paradox</a></li>
+  <li><a href="#the-datasaurus" id="toc-the-datasaurus" class="nav-link" data-scroll-target="#the-datasaurus"><span class="header-section-number">2.6.1</span> The datasaurus</a></li>
+  <li><a href="#correlation-vs.-dependence" id="toc-correlation-vs.-dependence" class="nav-link" data-scroll-target="#correlation-vs.-dependence"><span class="header-section-number">2.6.2</span> Correlation vs.&nbsp;dependence</a></li>
+  <li><a href="#sec-stats-simpson" id="toc-sec-stats-simpson" class="nav-link" data-scroll-target="#sec-stats-simpson"><span class="header-section-number">2.6.3</span> Simpson’s paradox</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
@@ -291,7 +279,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></h1>
 </div>
 
 
@@ -389,22 +377,22 @@ How values of two variables are related to each other.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>count</th>
+<td data-quarto-table-cell-role="th">count</td>
 <td>398.000000</td>
 <td>398.000000</td>
 <td>398.000000</td>
@@ -414,7 +402,7 @@ How values of two variables are related to each other.
 <td>398.000000</td>
 </tr>
 <tr class="even">
-<th>mean</th>
+<td data-quarto-table-cell-role="th">mean</td>
 <td>23.514573</td>
 <td>5.454774</td>
 <td>193.425879</td>
@@ -424,7 +412,7 @@ How values of two variables are related to each other.
 <td>76.010050</td>
 </tr>
 <tr class="odd">
-<th>std</th>
+<td data-quarto-table-cell-role="th">std</td>
 <td>7.815984</td>
 <td>1.701004</td>
 <td>104.269838</td>
@@ -434,7 +422,7 @@ How values of two variables are related to each other.
 <td>3.697627</td>
 </tr>
 <tr class="even">
-<th>min</th>
+<td data-quarto-table-cell-role="th">min</td>
 <td>9.000000</td>
 <td>3.000000</td>
 <td>68.000000</td>
@@ -444,7 +432,7 @@ How values of two variables are related to each other.
 <td>70.000000</td>
 </tr>
 <tr class="odd">
-<th>25%</th>
+<td data-quarto-table-cell-role="th">25%</td>
 <td>17.500000</td>
 <td>4.000000</td>
 <td>104.250000</td>
@@ -454,7 +442,7 @@ How values of two variables are related to each other.
 <td>73.000000</td>
 </tr>
 <tr class="even">
-<th>50%</th>
+<td data-quarto-table-cell-role="th">50%</td>
 <td>23.000000</td>
 <td>4.000000</td>
 <td>148.500000</td>
@@ -464,7 +452,7 @@ How values of two variables are related to each other.
 <td>76.000000</td>
 </tr>
 <tr class="odd">
-<th>75%</th>
+<td data-quarto-table-cell-role="th">75%</td>
 <td>29.000000</td>
 <td>8.000000</td>
 <td>262.000000</td>
@@ -474,7 +462,7 @@ How values of two variables are related to each other.
 <td>79.000000</td>
 </tr>
 <tr class="even">
-<th>max</th>
+<td data-quarto-table-cell-role="th">max</td>
 <td>46.600000</td>
 <td>8.000000</td>
 <td>455.000000</td>
@@ -517,12 +505,12 @@ How values of two variables are related to each other.
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/x9giiq35ix0kbwa/Example2_1.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-note callout-captioned">
+</div></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -560,52 +548,52 @@ z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>mpg_z</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">mpg_z</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>count</th>
+<td data-quarto-table-cell-role="th">count</td>
 <td>398.000000</td>
 <td>3.980000e+02</td>
 </tr>
 <tr class="even">
-<th>mean</th>
+<td data-quarto-table-cell-role="th">mean</td>
 <td>23.514573</td>
 <td>1.071170e-16</td>
 </tr>
 <tr class="odd">
-<th>std</th>
+<td data-quarto-table-cell-role="th">std</td>
 <td>7.815984</td>
 <td>1.000000e+00</td>
 </tr>
 <tr class="even">
-<th>min</th>
+<td data-quarto-table-cell-role="th">min</td>
 <td>9.000000</td>
 <td>-1.857037e+00</td>
 </tr>
 <tr class="odd">
-<th>25%</th>
+<td data-quarto-table-cell-role="th">25%</td>
 <td>17.500000</td>
 <td>-7.695221e-01</td>
 </tr>
 <tr class="even">
-<th>50%</th>
+<td data-quarto-table-cell-role="th">50%</td>
 <td>23.000000</td>
 <td>-6.583596e-02</td>
 </tr>
 <tr class="odd">
-<th>75%</th>
+<td data-quarto-table-cell-role="th">75%</td>
 <td>29.000000</td>
 <td>7.018217e-01</td>
 </tr>
 <tr class="even">
-<th>max</th>
+<td data-quarto-table-cell-role="th">max</td>
 <td>46.600000</td>
 <td>2.953617e+00</td>
 </tr>
@@ -618,13 +606,13 @@ z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/xm0zkquipg66kcy/Section2_1_2.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-caution callout-captioned">
+</div></div><div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Danger
+<div class="callout-title-container flex-fill">
+Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -661,12 +649,12 @@ s_{n-1}^2 = \frac{374}{4} = 93.5.
 \]</span></p>
 </div>
 <p>As you can see from the formulas and the example, the sample variance is always too large as an estimator, but the difference vanishes as the sample size <span class="math inline">\(n\)</span> increases.</p>
-<div class="callout callout-style-default callout-warning callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Warning
 </div>
 </div>
@@ -674,13 +662,13 @@ Warning
 <p>Sources are not always clear about this terminology. Some use <em>sample variance</em> to mean <span class="math inline">\(s_{n-1}^2\)</span>, not <span class="math inline">\(s_n^2\)</span>, and many even omit the subscripts. You always have to check each source.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Danger
+<div class="callout-title-container flex-fill">
+Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -703,12 +691,12 @@ In statistics, @eq-stats-t-score is referred to as a *t-score*, and the term *sa
 <p>The 50th percentile is known as the <strong>median</strong> of the population.</p>
 </div>
 <!-- In other words, percentiles are the inverse function of the CDF.  -->
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -787,52 +775,52 @@ dtype: float64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>normal</th>
-<th>uniform</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">normal</th>
+<th data-quarto-table-cell-role="th">uniform</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>count</th>
+<td data-quarto-table-cell-role="th">count</td>
 <td>10000.000000</td>
 <td>10000.000000</td>
 </tr>
 <tr class="even">
-<th>mean</th>
+<td data-quarto-table-cell-role="th">mean</td>
 <td>-0.012414</td>
 <td>0.503456</td>
 </tr>
 <tr class="odd">
-<th>std</th>
+<td data-quarto-table-cell-role="th">std</td>
 <td>0.993568</td>
 <td>0.285247</td>
 </tr>
 <tr class="even">
-<th>min</th>
+<td data-quarto-table-cell-role="th">min</td>
 <td>-3.436924</td>
 <td>0.000136</td>
 </tr>
 <tr class="odd">
-<th>25%</th>
+<td data-quarto-table-cell-role="th">25%</td>
 <td>-0.672352</td>
 <td>0.258355</td>
 </tr>
 <tr class="even">
-<th>50%</th>
+<td data-quarto-table-cell-role="th">50%</td>
 <td>-0.008374</td>
 <td>0.507225</td>
 </tr>
 <tr class="odd">
-<th>75%</th>
+<td data-quarto-table-cell-role="th">75%</td>
 <td>0.659730</td>
 <td>0.746851</td>
 </tr>
 <tr class="even">
-<th>max</th>
+<td data-quarto-table-cell-role="th">max</td>
 <td>4.044099</td>
 <td>0.999901</td>
 </tr>
@@ -1035,52 +1023,52 @@ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>x</th>
-<th>3x-10</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x</th>
+<th data-quarto-table-cell-role="th">3x-10</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>count</th>
+<td data-quarto-table-cell-role="th">count</td>
 <td>10000.000000</td>
 <td>10000.000000</td>
 </tr>
 <tr class="even">
-<th>mean</th>
+<td data-quarto-table-cell-role="th">mean</td>
 <td>-0.012414</td>
 <td>-10.037242</td>
 </tr>
 <tr class="odd">
-<th>std</th>
+<td data-quarto-table-cell-role="th">std</td>
 <td>0.993568</td>
 <td>2.980704</td>
 </tr>
 <tr class="even">
-<th>min</th>
+<td data-quarto-table-cell-role="th">min</td>
 <td>-3.436924</td>
 <td>-20.310773</td>
 </tr>
 <tr class="odd">
-<th>25%</th>
+<td data-quarto-table-cell-role="th">25%</td>
 <td>-0.672352</td>
 <td>-12.017056</td>
 </tr>
 <tr class="even">
-<th>50%</th>
+<td data-quarto-table-cell-role="th">50%</td>
 <td>-0.008374</td>
 <td>-10.025122</td>
 </tr>
 <tr class="odd">
-<th>75%</th>
+<td data-quarto-table-cell-role="th">75%</td>
 <td>0.659730</td>
 <td>-8.020809</td>
 </tr>
 <tr class="even">
-<th>max</th>
+<td data-quarto-table-cell-role="th">max</td>
 <td>4.044099</td>
 <td>2.132297</td>
 </tr>
@@ -1172,34 +1160,34 @@ Name: origin, dtype: int64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
 </tr>
 <tr class="odd">
-<th>origin</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>europe</th>
+<td data-quarto-table-cell-role="th">europe</td>
 <td>70.0</td>
 <td>27.891429</td>
 <td>6.723930</td>
@@ -1210,7 +1198,7 @@ Name: origin, dtype: int64</code></pre>
 <td>44.3</td>
 </tr>
 <tr class="even">
-<th>japan</th>
+<td data-quarto-table-cell-role="th">japan</td>
 <td>79.0</td>
 <td>30.450633</td>
 <td>6.090048</td>
@@ -1221,7 +1209,7 @@ Name: origin, dtype: int64</code></pre>
 <td>46.6</td>
 </tr>
 <tr class="odd">
-<th>usa</th>
+<td data-quarto-table-cell-role="th">usa</td>
 <td>249.0</td>
 <td>20.083534</td>
 <td>6.402892</td>
@@ -1250,26 +1238,26 @@ Name: origin, dtype: int64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
-<th>origin</th>
-<th>name</th>
-<th>mpg_z</th>
-<th>cuts</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">mpg_z</th>
+<th data-quarto-table-cell-role="th">cuts</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -1283,7 +1271,7 @@ Name: origin, dtype: int64</code></pre>
 <td>(3500, 4500]</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -1297,7 +1285,7 @@ Name: origin, dtype: int64</code></pre>
 <td>(3500, 4500]</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -1311,7 +1299,7 @@ Name: origin, dtype: int64</code></pre>
 <td>(2500, 3500]</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -1325,7 +1313,7 @@ Name: origin, dtype: int64</code></pre>
 <td>(2500, 3500]</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -1339,7 +1327,7 @@ Name: origin, dtype: int64</code></pre>
 <td>(2500, 3500]</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>15.0</td>
 <td>8</td>
 <td>429.0</td>
@@ -1512,28 +1500,28 @@ Name: mpg, dtype: int64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
-<th>origin</th>
-<th>name</th>
-<th>mpg_z</th>
-<th>cuts</th>
-<th>group_z</th>
-<th>global_z</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">mpg_z</th>
+<th data-quarto-table-cell-role="th">cuts</th>
+<th data-quarto-table-cell-role="th">group_z</th>
+<th data-quarto-table-cell-role="th">global_z</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -1549,7 +1537,7 @@ Name: mpg, dtype: int64</code></pre>
 <td>-0.705551</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -1565,7 +1553,7 @@ Name: mpg, dtype: int64</code></pre>
 <td>-0.961437</td>
 </tr>
 <tr class="odd">
-<th>11</th>
+<td data-quarto-table-cell-role="th">11</td>
 <td>14.0</td>
 <td>8</td>
 <td>340.0</td>
@@ -1581,7 +1569,7 @@ Name: mpg, dtype: int64</code></pre>
 <td>-1.217322</td>
 </tr>
 <tr class="even">
-<th>12</th>
+<td data-quarto-table-cell-role="th">12</td>
 <td>15.0</td>
 <td>8</td>
 <td>400.0</td>
@@ -1597,7 +1585,7 @@ Name: mpg, dtype: int64</code></pre>
 <td>-1.089379</td>
 </tr>
 <tr class="odd">
-<th>14</th>
+<td data-quarto-table-cell-role="th">14</td>
 <td>24.0</td>
 <td>4</td>
 <td>113.0</td>
@@ -1698,22 +1686,22 @@ penguins
     }
 </style>
 
-<table class="dataframe" data-border="1">
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
-<th></th>
-<th>species</th>
-<th>island</th>
-<th>bill_length_mm</th>
-<th>bill_depth_mm</th>
-<th>flipper_length_mm</th>
-<th>body_mass_g</th>
-<th>sex</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.1</td>
@@ -1723,7 +1711,7 @@ penguins
 <td>Male</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.5</td>
@@ -1733,7 +1721,7 @@ penguins
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>40.3</td>
@@ -1743,7 +1731,7 @@ penguins
 <td>Female</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>NaN</td>
@@ -1753,7 +1741,7 @@ penguins
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>36.7</td>
@@ -1763,7 +1751,7 @@ penguins
 <td>Female</td>
 </tr>
 <tr class="even">
-<th>...</th>
+<td data-quarto-table-cell-role="th">...</td>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -1773,7 +1761,7 @@ penguins
 <td>...</td>
 </tr>
 <tr class="odd">
-<th>339</th>
+<td data-quarto-table-cell-role="th">339</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>NaN</td>
@@ -1783,7 +1771,7 @@ penguins
 <td>NaN</td>
 </tr>
 <tr class="even">
-<th>340</th>
+<td data-quarto-table-cell-role="th">340</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>46.8</td>
@@ -1793,7 +1781,7 @@ penguins
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>341</th>
+<td data-quarto-table-cell-role="th">341</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>50.4</td>
@@ -1803,7 +1791,7 @@ penguins
 <td>Male</td>
 </tr>
 <tr class="even">
-<th>342</th>
+<td data-quarto-table-cell-role="th">342</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>45.2</td>
@@ -1813,7 +1801,7 @@ penguins
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>343</th>
+<td data-quarto-table-cell-role="th">343</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>49.9</td>
@@ -1918,20 +1906,20 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>subject</th>
-<th>timepoint</th>
-<th>event</th>
-<th>region</th>
-<th>signal</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">subject</th>
+<th data-quarto-table-cell-role="th">timepoint</th>
+<th data-quarto-table-cell-role="th">event</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">signal</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>s13</td>
 <td>18</td>
 <td>stim</td>
@@ -1939,7 +1927,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>-0.017552</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>s5</td>
 <td>14</td>
 <td>stim</td>
@@ -1947,7 +1935,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>-0.080883</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>s12</td>
 <td>18</td>
 <td>stim</td>
@@ -1955,7 +1943,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>-0.081033</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>s11</td>
 <td>18</td>
 <td>stim</td>
@@ -1963,7 +1951,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>-0.046134</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>s10</td>
 <td>18</td>
 <td>stim</td>
@@ -1984,34 +1972,34 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>count</th>
-<th>mean</th>
-<th>std</th>
-<th>min</th>
-<th>25%</th>
-<th>50%</th>
-<th>75%</th>
-<th>max</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
 </tr>
 <tr class="odd">
-<th>event</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">event</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>cue</th>
+<td data-quarto-table-cell-role="th">cue</td>
 <td>532.0</td>
 <td>-0.006669</td>
 <td>0.047752</td>
@@ -2022,7 +2010,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>0.215735</td>
 </tr>
 <tr class="even">
-<th>stim</th>
+<td data-quarto-table-cell-role="th">stim</td>
 <td>532.0</td>
 <td>0.013748</td>
 <td>0.123179</td>
@@ -2117,12 +2105,12 @@ Name: signal, dtype: float64</code></pre>
 <section id="mean-and-std" class="level3 page-columns page-full" data-number="2.4.2">
 <h3 data-number="2.4.2" class="anchored" data-anchor-id="mean-and-std"><span class="header-section-number">2.4.2</span> Mean and STD</h3>
 <p>For normal distributions, values more than twice the standard deviation <span class="math inline">\(\sigma\)</span> from the mean could be considered to be outliers; this would exclude 5% of the values, on average. A less aggressive criterion is to allow a distance of <span class="math inline">\(3\sigma\)</span>, which excludes only about 0.3% of the values. The IQR criterion above corresponds to about <span class="math inline">\(2.7\sigma\)</span> in the normal distribution case.</p>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -2205,32 +2193,32 @@ by_species[bills].median()
     }
 </style>
 
-<table class="dataframe" data-border="1">
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
-<th></th>
-<th>bill_length_mm</th>
-<th>bill_depth_mm</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
 <tr class="odd">
-<th>species</th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>Adelie</th>
+<td data-quarto-table-cell-role="th">Adelie</td>
 <td>38.80</td>
 <td>18.40</td>
 </tr>
 <tr class="even">
-<th>Chinstrap</th>
+<td data-quarto-table-cell-role="th">Chinstrap</td>
 <td>49.55</td>
 <td>18.45</td>
 </tr>
 <tr class="odd">
-<th>Gentoo</th>
+<td data-quarto-table-cell-role="th">Gentoo</td>
 <td>47.30</td>
 <td>15.00</td>
 </tr>
@@ -2238,67 +2226,67 @@ by_species[bills].median()
 </table>
 ``` ::: ::: In order to operate columnwise, we apply a custom transformation function using the `fillna` method to replace missing values. ::: {.cell execution_count=53} ``` {.python .cell-code} def impute(col): return col.fillna(col.median()) replaced = by_species[bills].transform(impute) replaced ``` ::: {.cell-output .cell-output-display execution_count=52} ```{=html}
 <div>
-<table class="dataframe" data-border="1">
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
-<th></th>
-<th>bill_length_mm</th>
-<th>bill_depth_mm</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>39.1</td>
 <td>18.7</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>39.5</td>
 <td>17.4</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>40.3</td>
 <td>18.0</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>38.8</td>
 <td>18.4</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>36.7</td>
 <td>19.3</td>
 </tr>
 <tr class="even">
-<th>...</th>
+<td data-quarto-table-cell-role="th">...</td>
 <td>...</td>
 <td>...</td>
 </tr>
 <tr class="odd">
-<th>339</th>
+<td data-quarto-table-cell-role="th">339</td>
 <td>47.3</td>
 <td>15.0</td>
 </tr>
 <tr class="even">
-<th>340</th>
+<td data-quarto-table-cell-role="th">340</td>
 <td>46.8</td>
 <td>14.3</td>
 </tr>
 <tr class="odd">
-<th>341</th>
+<td data-quarto-table-cell-role="th">341</td>
 <td>50.4</td>
 <td>15.7</td>
 </tr>
 <tr class="even">
-<th>342</th>
+<td data-quarto-table-cell-role="th">342</td>
 <td>45.2</td>
 <td>14.8</td>
 </tr>
 <tr class="odd">
-<th>343</th>
+<td data-quarto-table-cell-role="th">343</td>
 <td>49.9</td>
 <td>16.1</td>
 </tr>
@@ -2308,22 +2296,22 @@ by_species[bills].median()
 </div>
 ``` ::: ::: Replacement has happened in the row with index 3, for example. Finally, we can overwrite the columns of the original data frame, if we don't care to know in the future which values were imputed. All of the necessary steps can be compressed into one chain: ::: {.cell execution_count=54} ``` {.python .cell-code} penguins[bills] = penguins.groupby("species")[bills].transform(lambda x: x.fillna(x.median())) penguins ``` ::: {.cell-output .cell-output-display execution_count=53} ```{=html}
 <div>
-<table class="dataframe" data-border="1">
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header" style="text-align: right;">
-<th></th>
-<th>species</th>
-<th>island</th>
-<th>bill_length_mm</th>
-<th>bill_depth_mm</th>
-<th>flipper_length_mm</th>
-<th>body_mass_g</th>
-<th>sex</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.1</td>
@@ -2333,7 +2321,7 @@ by_species[bills].median()
 <td>Male</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>39.5</td>
@@ -2343,7 +2331,7 @@ by_species[bills].median()
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>40.3</td>
@@ -2353,7 +2341,7 @@ by_species[bills].median()
 <td>Female</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>38.8</td>
@@ -2363,7 +2351,7 @@ by_species[bills].median()
 <td>NaN</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>Adelie</td>
 <td>Torgersen</td>
 <td>36.7</td>
@@ -2373,7 +2361,7 @@ by_species[bills].median()
 <td>Female</td>
 </tr>
 <tr class="even">
-<th>...</th>
+<td data-quarto-table-cell-role="th">...</td>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -2383,7 +2371,7 @@ by_species[bills].median()
 <td>...</td>
 </tr>
 <tr class="odd">
-<th>339</th>
+<td data-quarto-table-cell-role="th">339</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>47.3</td>
@@ -2393,7 +2381,7 @@ by_species[bills].median()
 <td>NaN</td>
 </tr>
 <tr class="even">
-<th>340</th>
+<td data-quarto-table-cell-role="th">340</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>46.8</td>
@@ -2403,7 +2391,7 @@ by_species[bills].median()
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>341</th>
+<td data-quarto-table-cell-role="th">341</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>50.4</td>
@@ -2413,7 +2401,7 @@ by_species[bills].median()
 <td>Male</td>
 </tr>
 <tr class="even">
-<th>342</th>
+<td data-quarto-table-cell-role="th">342</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>45.2</td>
@@ -2423,7 +2411,7 @@ by_species[bills].median()
 <td>Female</td>
 </tr>
 <tr class="odd">
-<th>343</th>
+<td data-quarto-table-cell-role="th">343</td>
 <td>Gentoo</td>
 <td>Biscoe</td>
 <td>49.9</td>
@@ -2544,22 +2532,22 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>horsepower</th>
-<th>mpg</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">mpg</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>horsepower</th>
+<td data-quarto-table-cell-role="th">horsepower</td>
 <td>1481.569393</td>
 <td>-233.857926</td>
 </tr>
 <tr class="even">
-<th>mpg</th>
+<td data-quarto-table-cell-role="th">mpg</td>
 <td>-233.857926</td>
 <td>61.089611</td>
 </tr>
@@ -2576,22 +2564,22 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>horsepower</th>
-<th>mpg</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">mpg</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>horsepower</th>
+<td data-quarto-table-cell-role="th">horsepower</td>
 <td>1.000000</td>
 <td>-0.778427</td>
 </tr>
 <tr class="even">
-<th>mpg</th>
+<td data-quarto-table-cell-role="th">mpg</td>
 <td>-0.778427</td>
 <td>1.000000</td>
 </tr>
@@ -2688,30 +2676,30 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>cylinders</th>
-<th>displacement</th>
-<th>horsepower</th>
-<th>weight</th>
-<th>acceleration</th>
-<th>model_year</th>
-<th>name</th>
-<th>mpg_z</th>
-<th>cuts</th>
-<th>group_z</th>
-<th>global_z</th>
-<th>origin_europe</th>
-<th>origin_japan</th>
-<th>origin_usa</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model_year</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">mpg_z</th>
+<th data-quarto-table-cell-role="th">cuts</th>
+<th data-quarto-table-cell-role="th">group_z</th>
+<th data-quarto-table-cell-role="th">global_z</th>
+<th data-quarto-table-cell-role="th">origin_europe</th>
+<th data-quarto-table-cell-role="th">origin_japan</th>
+<th data-quarto-table-cell-role="th">origin_usa</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
 <td>307.0</td>
@@ -2729,7 +2717,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>1</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
 <td>350.0</td>
@@ -2747,7 +2735,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>1</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
 <td>318.0</td>
@@ -2765,7 +2753,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>1</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
 <td>304.0</td>
@@ -2783,7 +2771,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>1</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
 <td>302.0</td>
@@ -2819,40 +2807,40 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mpg</th>
-<th>origin_europe</th>
-<th>origin_japan</th>
-<th>origin_usa</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">origin_europe</th>
+<th data-quarto-table-cell-role="th">origin_japan</th>
+<th data-quarto-table-cell-role="th">origin_usa</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>mpg</th>
+<td data-quarto-table-cell-role="th">mpg</td>
 <td>1.000000</td>
 <td>0.259022</td>
 <td>0.442174</td>
 <td>-0.568192</td>
 </tr>
 <tr class="even">
-<th>origin_europe</th>
+<td data-quarto-table-cell-role="th">origin_europe</td>
 <td>0.259022</td>
 <td>1.000000</td>
 <td>-0.229895</td>
 <td>-0.597198</td>
 </tr>
 <tr class="odd">
-<th>origin_japan</th>
+<td data-quarto-table-cell-role="th">origin_japan</td>
 <td>0.442174</td>
 <td>-0.229895</td>
 <td>1.000000</td>
 <td>-0.643317</td>
 </tr>
 <tr class="even">
-<th>origin_usa</th>
+<td data-quarto-table-cell-role="th">origin_usa</td>
 <td>-0.568192</td>
 <td>-0.597198</td>
 <td>-0.643317</td>
@@ -2896,82 +2884,82 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>x</th>
-<th>y</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x</th>
+<th data-quarto-table-cell-role="th">y</th>
 </tr>
 <tr class="odd">
-<th>dataset</th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">dataset</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>away</th>
+<td data-quarto-table-cell-role="th">away</td>
 <td>54.266100</td>
 <td>47.834721</td>
 </tr>
 <tr class="even">
-<th>bullseye</th>
+<td data-quarto-table-cell-role="th">bullseye</td>
 <td>54.268730</td>
 <td>47.830823</td>
 </tr>
 <tr class="odd">
-<th>circle</th>
+<td data-quarto-table-cell-role="th">circle</td>
 <td>54.267320</td>
 <td>47.837717</td>
 </tr>
 <tr class="even">
-<th>dino</th>
+<td data-quarto-table-cell-role="th">dino</td>
 <td>54.263273</td>
 <td>47.832253</td>
 </tr>
 <tr class="odd">
-<th>dots</th>
+<td data-quarto-table-cell-role="th">dots</td>
 <td>54.260303</td>
 <td>47.839829</td>
 </tr>
 <tr class="even">
-<th>h_lines</th>
+<td data-quarto-table-cell-role="th">h_lines</td>
 <td>54.261442</td>
 <td>47.830252</td>
 </tr>
 <tr class="odd">
-<th>high_lines</th>
+<td data-quarto-table-cell-role="th">high_lines</td>
 <td>54.268805</td>
 <td>47.835450</td>
 </tr>
 <tr class="even">
-<th>slant_down</th>
+<td data-quarto-table-cell-role="th">slant_down</td>
 <td>54.267849</td>
 <td>47.835896</td>
 </tr>
 <tr class="odd">
-<th>slant_up</th>
+<td data-quarto-table-cell-role="th">slant_up</td>
 <td>54.265882</td>
 <td>47.831496</td>
 </tr>
 <tr class="even">
-<th>star</th>
+<td data-quarto-table-cell-role="th">star</td>
 <td>54.267341</td>
 <td>47.839545</td>
 </tr>
 <tr class="odd">
-<th>v_lines</th>
+<td data-quarto-table-cell-role="th">v_lines</td>
 <td>54.269927</td>
 <td>47.836988</td>
 </tr>
 <tr class="even">
-<th>wide_lines</th>
+<td data-quarto-table-cell-role="th">wide_lines</td>
 <td>54.266916</td>
 <td>47.831602</td>
 </tr>
 <tr class="odd">
-<th>x_shape</th>
+<td data-quarto-table-cell-role="th">x_shape</td>
 <td>54.260150</td>
 <td>47.839717</td>
 </tr>
@@ -2987,82 +2975,82 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>x</th>
-<th>y</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x</th>
+<th data-quarto-table-cell-role="th">y</th>
 </tr>
 <tr class="odd">
-<th>dataset</th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">dataset</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>away</th>
+<td data-quarto-table-cell-role="th">away</td>
 <td>16.769825</td>
 <td>26.939743</td>
 </tr>
 <tr class="even">
-<th>bullseye</th>
+<td data-quarto-table-cell-role="th">bullseye</td>
 <td>16.769239</td>
 <td>26.935727</td>
 </tr>
 <tr class="odd">
-<th>circle</th>
+<td data-quarto-table-cell-role="th">circle</td>
 <td>16.760013</td>
 <td>26.930036</td>
 </tr>
 <tr class="even">
-<th>dino</th>
+<td data-quarto-table-cell-role="th">dino</td>
 <td>16.765142</td>
 <td>26.935403</td>
 </tr>
 <tr class="odd">
-<th>dots</th>
+<td data-quarto-table-cell-role="th">dots</td>
 <td>16.767735</td>
 <td>26.930192</td>
 </tr>
 <tr class="even">
-<th>h_lines</th>
+<td data-quarto-table-cell-role="th">h_lines</td>
 <td>16.765898</td>
 <td>26.939876</td>
 </tr>
 <tr class="odd">
-<th>high_lines</th>
+<td data-quarto-table-cell-role="th">high_lines</td>
 <td>16.766704</td>
 <td>26.939998</td>
 </tr>
 <tr class="even">
-<th>slant_down</th>
+<td data-quarto-table-cell-role="th">slant_down</td>
 <td>16.766759</td>
 <td>26.936105</td>
 </tr>
 <tr class="odd">
-<th>slant_up</th>
+<td data-quarto-table-cell-role="th">slant_up</td>
 <td>16.768853</td>
 <td>26.938608</td>
 </tr>
 <tr class="even">
-<th>star</th>
+<td data-quarto-table-cell-role="th">star</td>
 <td>16.768959</td>
 <td>26.930275</td>
 </tr>
 <tr class="odd">
-<th>v_lines</th>
+<td data-quarto-table-cell-role="th">v_lines</td>
 <td>16.769959</td>
 <td>26.937684</td>
 </tr>
 <tr class="even">
-<th>wide_lines</th>
+<td data-quarto-table-cell-role="th">wide_lines</td>
 <td>16.770000</td>
 <td>26.937902</td>
 </tr>
 <tr class="odd">
-<th>x_shape</th>
+<td data-quarto-table-cell-role="th">x_shape</td>
 <td>16.769958</td>
 <td>26.930002</td>
 </tr>
@@ -3078,162 +3066,162 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th></th>
-<th>x</th>
-<th>y</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x</th>
+<th data-quarto-table-cell-role="th">y</th>
 </tr>
 <tr class="odd">
-<th>dataset</th>
-<th></th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">dataset</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th rowspan="2" data-valign="top">away</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">away</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.064128</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.064128</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">bullseye</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">bullseye</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068586</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.068586</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">circle</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">circle</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068343</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.068343</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">dino</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">dino</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.064472</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.064472</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">dots</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">dots</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.060341</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.060341</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">h_lines</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">h_lines</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.061715</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.061715</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">high_lines</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">high_lines</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068504</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.068504</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">slant_down</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">slant_down</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068980</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.068980</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">slant_up</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">slant_up</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068609</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.068609</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">star</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">star</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.062961</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.062961</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">v_lines</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">v_lines</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.069446</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.069446</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">wide_lines</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">wide_lines</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.066575</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.066575</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">x_shape</th>
-<th>x</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">x_shape</td>
+<td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.065583</td>
 </tr>
 <tr class="even">
-<th>y</th>
+<td data-quarto-table-cell-role="th">y</td>
 <td>-0.065583</td>
 <td>1.000000</td>
 </tr>
@@ -3254,12 +3242,12 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p><img src="stats_files/figure-html/cell-72-output-1.png" width="623" height="832"></p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -3301,22 +3289,22 @@ Important
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>body_mass_g</th>
-<th>bill_depth_mm</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>body_mass_g</th>
+<td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>-0.471916</td>
 </tr>
 <tr class="even">
-<th>bill_depth_mm</th>
+<td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>-0.471916</td>
 <td>1.000000</td>
 </tr>
@@ -3336,52 +3324,52 @@ Important
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th></th>
-<th>body_mass_g</th>
-<th>bill_depth_mm</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
 <tr class="odd">
-<th>species</th>
-<th></th>
-<th></th>
-<th></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th rowspan="2" data-valign="top">Adelie</th>
-<th>body_mass_g</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Adelie</td>
+<td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.576138</td>
 </tr>
 <tr class="even">
-<th>bill_depth_mm</th>
+<td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.576138</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">Chinstrap</th>
-<th>body_mass_g</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Chinstrap</td>
+<td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.604498</td>
 </tr>
 <tr class="even">
-<th>bill_depth_mm</th>
+<td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.604498</td>
 <td>1.000000</td>
 </tr>
 <tr class="odd">
-<th rowspan="2" data-valign="top">Gentoo</th>
-<th>body_mass_g</th>
+<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Gentoo</td>
+<td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.719085</td>
 </tr>
 <tr class="even">
-<th>bill_depth_mm</th>
+<td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.719085</td>
 <td>1.000000</td>
 </tr>
@@ -3501,9 +3489,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -3715,6 +3717,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

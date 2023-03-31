@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.3.298">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -138,6 +109,7 @@ MathJax = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -146,11 +118,16 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./clustering.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -158,7 +135,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -169,65 +146,75 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
   </div>
 </li>
     </ul>
@@ -235,29 +222,30 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#similarity" id="toc-similarity" class="nav-link active" data-scroll-target="#similarity"><span class="toc-section-number">6.1</span>  Similarity</a>
+  <li><a href="#similarity" id="toc-similarity" class="nav-link active" data-scroll-target="#similarity"><span class="header-section-number">6.1</span> Similarity</a>
   <ul class="collapse">
-  <li><a href="#distance-matrix" id="toc-distance-matrix" class="nav-link" data-scroll-target="#distance-matrix"><span class="toc-section-number">6.1.1</span>  Distance matrix</a></li>
-  <li><a href="#angular-distance" id="toc-angular-distance" class="nav-link" data-scroll-target="#angular-distance"><span class="toc-section-number">6.1.2</span>  Angular distance</a></li>
-  <li><a href="#distance-in-high-dimensions" id="toc-distance-in-high-dimensions" class="nav-link" data-scroll-target="#distance-in-high-dimensions"><span class="toc-section-number">6.1.3</span>  Distance in high dimensions</a></li>
+  <li><a href="#distance-matrix" id="toc-distance-matrix" class="nav-link" data-scroll-target="#distance-matrix"><span class="header-section-number">6.1.1</span> Distance matrix</a></li>
+  <li><a href="#angular-distance" id="toc-angular-distance" class="nav-link" data-scroll-target="#angular-distance"><span class="header-section-number">6.1.2</span> Angular distance</a></li>
+  <li><a href="#distance-in-high-dimensions" id="toc-distance-in-high-dimensions" class="nav-link" data-scroll-target="#distance-in-high-dimensions"><span class="header-section-number">6.1.3</span> Distance in high dimensions</a></li>
   </ul></li>
-  <li><a href="#performance-measures" id="toc-performance-measures" class="nav-link" data-scroll-target="#performance-measures"><span class="toc-section-number">6.2</span>  Performance measures</a>
+  <li><a href="#performance-measures" id="toc-performance-measures" class="nav-link" data-scroll-target="#performance-measures"><span class="header-section-number">6.2</span> Performance measures</a>
   <ul class="collapse">
-  <li><a href="#rand-index-and-ari" id="toc-rand-index-and-ari" class="nav-link" data-scroll-target="#rand-index-and-ari"><span class="toc-section-number">6.2.1</span>  Rand index and ARI</a></li>
-  <li><a href="#silhouettes" id="toc-silhouettes" class="nav-link" data-scroll-target="#silhouettes"><span class="toc-section-number">6.2.2</span>  Silhouettes</a></li>
+  <li><a href="#rand-index-and-ari" id="toc-rand-index-and-ari" class="nav-link" data-scroll-target="#rand-index-and-ari"><span class="header-section-number">6.2.1</span> Rand index and ARI</a></li>
+  <li><a href="#silhouettes" id="toc-silhouettes" class="nav-link" data-scroll-target="#silhouettes"><span class="header-section-number">6.2.2</span> Silhouettes</a></li>
   </ul></li>
-  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="toc-section-number">6.3</span>  k-means</a>
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">6.3</span> k-means</a>
   <ul class="collapse">
-  <li><a href="#lloyds-algorithm" id="toc-lloyds-algorithm" class="nav-link" data-scroll-target="#lloyds-algorithm"><span class="toc-section-number">6.3.1</span>  Lloyd’s algorithm</a></li>
-  <li><a href="#practical-issues" id="toc-practical-issues" class="nav-link" data-scroll-target="#practical-issues"><span class="toc-section-number">6.3.2</span>  Practical issues</a></li>
+  <li><a href="#lloyds-algorithm" id="toc-lloyds-algorithm" class="nav-link" data-scroll-target="#lloyds-algorithm"><span class="header-section-number">6.3.1</span> Lloyd’s algorithm</a></li>
+  <li><a href="#practical-issues" id="toc-practical-issues" class="nav-link" data-scroll-target="#practical-issues"><span class="header-section-number">6.3.2</span> Practical issues</a></li>
   </ul></li>
-  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="toc-section-number">6.4</span>  Hierarchical clustering</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">6.4</span> Hierarchical clustering</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
@@ -267,7 +255,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></h1>
 </div>
 
 
@@ -503,12 +491,12 @@ D_{ij} = \text{dist}(\bfX_i,\bfX_j).
 \]</span></p>
 </div>
 <p>Note that <span class="math inline">\(D_{ii}=0\)</span> and <span class="math inline">\(D_{ji}=D_{ij}\)</span>.</p>
-<div class="callout callout-style-default callout-tip callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Tip
 </div>
 </div>
@@ -516,12 +504,12 @@ Tip
 <p>Many clustering algorithms allow supplying <span class="math inline">\(\mathbf{D}\)</span> in lieu of the feature vectors. When you consider that in many problems, <span class="math inline">\(n\)</span> is much larger than <span class="math inline">\(d\)</span>, it can be faster and easier to work with.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -563,8 +551,8 @@ Note
 \tag{6.1}\]</span></span></p>
 <p>We then let <span class="math inline">\(\dist(\bfx,\bfy)=\theta \in [0,\pi]\)</span>, using the standard branch of arccos.</p>
 <p>However, arccos is a relatively expensive computational operation, and sometimes we use the pseudodistance <span class="math display">\[
-d(\bfx,\bfy) = \tfrac{1}{2}\left[ 1-\cos(\theta) \right]
-\]</span> in place of <span class="math inline">\(\theta\)</span>. This is not a true distance function, though, as <span class="math inline">\(d\)</span> fails to satisfy the triangle inequality in all cases (see <a href="#exr-cluster-cosine">Exercise&nbsp;<span>6.2</span></a>).</p>
+d(\bfx,\bfy) = 1 - \cos(\theta)
+\]</span> in place of <span class="math inline">\(\theta\)</span>. This function (which ranges between 0 and 2) is not a true distance function, though, as <span class="math inline">\(d\)</span> fails to satisfy the triangle inequality in all cases (see <a href="#exr-cluster-cosine">Exercise&nbsp;<span>6.2</span></a>).</p>
 <p>Angular distance and cosine pseudodistance are useful when we want to ignore the magnitudes of vectors and consider only their directions.</p>
 <div id="exm-cluster-angular" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6.2 </strong></span>We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as <em>happy</em>, <em>excited</em>, <em>sad</em>, <em>angry</em>, <em>confused</em>, and so on. For sake of argument, suppose three documents have the feature matrix <span class="math display">\[
@@ -934,12 +922,12 @@ Name: sil, dtype: float64</code></pre>
 </div>
 <p>The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. However, the existence of scores close to and below zero suggest that a clustering algorithm ia unlikely to reproduce the true classification perfectly. To put it another way, the features chosen to represent the digits don’t seem to create three clear, well-separated balls of points representing the three different types of digits.</p>
 </div>
-<div class="callout callout-style-default callout-important callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -998,7 +986,7 @@ C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.
 \]</span></li>
 </ol>
 <p>These steps are repeated alternately until the assignment step does not change any of the clusters. In practice, this almost always happens quickly. Here is a demonstration:</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="_media/kmeans_demo.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="./_media/kmeans_demo.mp4"></video></div>
 <p>If Lloyd’s algorithm converges, it finds a local minimum of total inertia, in the sense that small changes to the cluster assignments cannot decrease it. But there is no guarantee of converging to the global minimum, and often, this does not happen.</p>
 </section>
 <section id="practical-issues" class="level3" data-number="6.3.2">
@@ -1207,57 +1195,57 @@ Name: sil, dtype: float64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>target</th>
-<th>kmeans3</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">target</th>
+<th data-quarto-table-cell-role="th">kmeans3</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>4</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>5</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<th>6</th>
+<td data-quarto-table-cell-role="th">6</td>
 <td>6</td>
 <td>1</td>
 </tr>
 <tr class="even">
-<th>14</th>
+<td data-quarto-table-cell-role="th">14</td>
 <td>4</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<th>15</th>
+<td data-quarto-table-cell-role="th">15</td>
 <td>5</td>
 <td>2</td>
 </tr>
 <tr class="even">
-<th>16</th>
+<td data-quarto-table-cell-role="th">16</td>
 <td>6</td>
 <td>1</td>
 </tr>
 <tr class="odd">
-<th>24</th>
+<td data-quarto-table-cell-role="th">24</td>
 <td>4</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>25</th>
+<td data-quarto-table-cell-role="th">25</td>
 <td>5</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<th>26</th>
+<td data-quarto-table-cell-role="th">26</td>
 <td>6</td>
 <td>1</td>
 </tr>
@@ -1291,37 +1279,37 @@ Name: sil, dtype: float64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>k</th>
-<th>mean silhouette</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">k</th>
+<th data-quarto-table-cell-role="th">mean silhouette</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>2</td>
 <td>0.226800</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>3</td>
 <td>0.251904</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>4</td>
 <td>0.245855</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>5</td>
 <td>0.235199</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>6</td>
 <td>0.188324</td>
 </tr>
@@ -1556,77 +1544,77 @@ Name: species, dtype: int64</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>species</th>
-<th>single</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">single</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>31</th>
+<td data-quarto-table-cell-role="th">31</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<th>58</th>
+<td data-quarto-table-cell-role="th">58</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>84</th>
+<td data-quarto-table-cell-role="th">84</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<th>110</th>
+<td data-quarto-table-cell-role="th">110</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>136</th>
+<td data-quarto-table-cell-role="th">136</td>
 <td>Adelie</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<th>162</th>
+<td data-quarto-table-cell-role="th">162</td>
 <td>Chinstrap</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>188</th>
+<td data-quarto-table-cell-role="th">188</td>
 <td>Chinstrap</td>
 <td>0</td>
 </tr>
 <tr class="odd">
-<th>214</th>
+<td data-quarto-table-cell-role="th">214</td>
 <td>Chinstrap</td>
 <td>0</td>
 </tr>
 <tr class="even">
-<th>240</th>
+<td data-quarto-table-cell-role="th">240</td>
 <td>Gentoo</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<th>267</th>
+<td data-quarto-table-cell-role="th">267</td>
 <td>Gentoo</td>
 <td>2</td>
 </tr>
 <tr class="even">
-<th>294</th>
+<td data-quarto-table-cell-role="th">294</td>
 <td>Gentoo</td>
 <td>2</td>
 </tr>
 <tr class="odd">
-<th>320</th>
+<td data-quarto-table-cell-role="th">320</td>
 <td>Gentoo</td>
 <td>2</td>
 </tr>
@@ -1798,9 +1786,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2012,6 +2014,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">

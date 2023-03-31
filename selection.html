@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-99.9.9">
+<meta name="generator" content="quarto-1.3.298">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -138,6 +109,7 @@ MathJax = {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -146,11 +118,16 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./selection.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -158,7 +135,7 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
@@ -169,65 +146,75 @@ MathJax = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science 1</a> 
         <div class="sidebar-tools-main">
-    <a href="./Data-Science-1.pdf" title="Download PDF" class="sidebar-tool px-1"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Data-Science-1.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./resources.html" class="sidebar-item-text sidebar-link">Resources</a>
+  <a href="./resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link">Getting started</a>
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></a>
+  <a href="./stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./classification.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a>
+  <a href="./classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./selection.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></a>
+  <a href="./selection.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></a>
+  <a href="./regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></a>
+  <a href="./clustering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Clustering</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./networks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></a>
+  <a href="./networks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Networks</span></span></a>
   </div>
 </li>
     </ul>
@@ -235,29 +222,30 @@ MathJax = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright 2023 by Toby Driscoll</p>
 </div></div></nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-select-learning-curves" id="toc-sec-select-learning-curves" class="nav-link active" data-scroll-target="#sec-select-learning-curves"><span class="toc-section-number">4.1</span>  Bias–variance tradeoff</a>
+  <li><a href="#sec-select-learning-curves" id="toc-sec-select-learning-curves" class="nav-link active" data-scroll-target="#sec-select-learning-curves"><span class="header-section-number">4.1</span> Bias–variance tradeoff</a>
   <ul class="collapse">
-  <li><a href="#learner-bias" id="toc-learner-bias" class="nav-link" data-scroll-target="#learner-bias"><span class="toc-section-number">4.1.1</span>  Learner bias</a></li>
-  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="toc-section-number">4.1.2</span>  Variance</a></li>
-  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves"><span class="toc-section-number">4.1.3</span>  Learning curves</a></li>
+  <li><a href="#learner-bias" id="toc-learner-bias" class="nav-link" data-scroll-target="#learner-bias"><span class="header-section-number">4.1.1</span> Learner bias</a></li>
+  <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">4.1.2</span> Variance</a></li>
+  <li><a href="#learning-curves" id="toc-learning-curves" class="nav-link" data-scroll-target="#learning-curves"><span class="header-section-number">4.1.3</span> Learning curves</a></li>
   </ul></li>
-  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="toc-section-number">4.2</span>  Overfitting</a>
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="header-section-number">4.2</span> Overfitting</a>
   <ul class="collapse">
-  <li><a href="#overfitting-in-knn" id="toc-overfitting-in-knn" class="nav-link" data-scroll-target="#overfitting-in-knn"><span class="toc-section-number">4.2.1</span>  Overfitting in kNN</a></li>
-  <li><a href="#overfitting-in-decision-trees" id="toc-overfitting-in-decision-trees" class="nav-link" data-scroll-target="#overfitting-in-decision-trees"><span class="toc-section-number">4.2.2</span>  Overfitting in decision trees</a></li>
-  <li><a href="#overfitting-and-variance" id="toc-overfitting-and-variance" class="nav-link" data-scroll-target="#overfitting-and-variance"><span class="toc-section-number">4.2.3</span>  Overfitting and variance</a></li>
+  <li><a href="#overfitting-in-knn" id="toc-overfitting-in-knn" class="nav-link" data-scroll-target="#overfitting-in-knn"><span class="header-section-number">4.2.1</span> Overfitting in kNN</a></li>
+  <li><a href="#overfitting-in-decision-trees" id="toc-overfitting-in-decision-trees" class="nav-link" data-scroll-target="#overfitting-in-decision-trees"><span class="header-section-number">4.2.2</span> Overfitting in decision trees</a></li>
+  <li><a href="#overfitting-and-variance" id="toc-overfitting-and-variance" class="nav-link" data-scroll-target="#overfitting-and-variance"><span class="header-section-number">4.2.3</span> Overfitting and variance</a></li>
   </ul></li>
-  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods"><span class="toc-section-number">4.3</span>  Ensemble methods</a></li>
-  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"><span class="toc-section-number">4.4</span>  Validation</a>
+  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods"><span class="header-section-number">4.3</span> Ensemble methods</a></li>
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation"><span class="header-section-number">4.4</span> Validation</a>
   <ul class="collapse">
-  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="toc-section-number">4.4.1</span>  Cross-validation</a></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="toc-section-number">4.4.2</span>  Hyperparameter tuning</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">4.4.1</span> Cross-validation</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">4.4.2</span> Hyperparameter tuning</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -267,7 +255,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></h1>
 </div>
 
 
@@ -356,12 +344,12 @@ MathJax = {
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/zzly25dlcm5dg53/Section4_0.mp4?raw=1"></video></div>
-</div></div><div class="callout callout-style-default callout-note callout-captioned">
+</div></div><div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -386,12 +374,12 @@ Note
 \]</span> Then we define the <strong>expected value</strong> of the classifier as the average over all training sets: <span class="math display">\[
 \E{\hat{f}(x)} = \frac{1}{N} \sum_{i=1}^N \hat{f_i}(x).
 \]</span></p>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -579,13 +567,13 @@ How close to the average prediction is any one prediction likely to be?
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Danger
+<div class="callout-title-container flex-fill">
+Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -722,31 +710,31 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>Area</th>
-<th>Perimeter</th>
-<th>MajorAxisLength</th>
-<th>MinorAxisLength</th>
-<th>AspectRation</th>
-<th>Eccentricity</th>
-<th>ConvexArea</th>
-<th>EquivDiameter</th>
-<th>Extent</th>
-<th>Solidity</th>
-<th>roundness</th>
-<th>Compactness</th>
-<th>ShapeFactor1</th>
-<th>ShapeFactor2</th>
-<th>ShapeFactor3</th>
-<th>ShapeFactor4</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Area</th>
+<th data-quarto-table-cell-role="th">Perimeter</th>
+<th data-quarto-table-cell-role="th">MajorAxisLength</th>
+<th data-quarto-table-cell-role="th">MinorAxisLength</th>
+<th data-quarto-table-cell-role="th">AspectRation</th>
+<th data-quarto-table-cell-role="th">Eccentricity</th>
+<th data-quarto-table-cell-role="th">ConvexArea</th>
+<th data-quarto-table-cell-role="th">EquivDiameter</th>
+<th data-quarto-table-cell-role="th">Extent</th>
+<th data-quarto-table-cell-role="th">Solidity</th>
+<th data-quarto-table-cell-role="th">roundness</th>
+<th data-quarto-table-cell-role="th">Compactness</th>
+<th data-quarto-table-cell-role="th">ShapeFactor1</th>
+<th data-quarto-table-cell-role="th">ShapeFactor2</th>
+<th data-quarto-table-cell-role="th">ShapeFactor3</th>
+<th data-quarto-table-cell-role="th">ShapeFactor4</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>0</th>
+<td data-quarto-table-cell-role="th">0</td>
 <td>28395</td>
 <td>610.291</td>
 <td>208.178117</td>
@@ -765,7 +753,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <td>0.998724</td>
 </tr>
 <tr class="even">
-<th>1</th>
+<td data-quarto-table-cell-role="th">1</td>
 <td>28734</td>
 <td>638.018</td>
 <td>200.524796</td>
@@ -784,7 +772,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <td>0.998430</td>
 </tr>
 <tr class="odd">
-<th>2</th>
+<td data-quarto-table-cell-role="th">2</td>
 <td>29380</td>
 <td>624.110</td>
 <td>212.826130</td>
@@ -803,7 +791,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <td>0.999066</td>
 </tr>
 <tr class="even">
-<th>3</th>
+<td data-quarto-table-cell-role="th">3</td>
 <td>30008</td>
 <td>645.884</td>
 <td>210.557999</td>
@@ -822,7 +810,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <td>0.994199</td>
 </tr>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>30140</td>
 <td>620.134</td>
 <td>201.847882</td>
@@ -937,12 +925,12 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/55aiz2i5br6psok/Example4_4.mp4?raw=1"></video></div>
 </div></div><p>There is a significant catch in that the theory requires the constituent learners to be uncorrelated, which is less true as the size of the bagging sample grows relative to the original training set. This can somewhat counterintuitively lead to better results by training on <em>smaller</em> individual training sets.</p>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1173,64 +1161,64 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>error</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">error</th>
 </tr>
 <tr class="odd">
-<th>depth</th>
-<th></th>
+<th data-quarto-table-cell-role="th">depth</th>
+<th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>4</th>
+<td data-quarto-table-cell-role="th">4</td>
 <td>0.206700</td>
 </tr>
 <tr class="even">
-<th>5</th>
+<td data-quarto-table-cell-role="th">5</td>
 <td>0.118655</td>
 </tr>
 <tr class="odd">
-<th>6</th>
+<td data-quarto-table-cell-role="th">6</td>
 <td>0.097290</td>
 </tr>
 <tr class="even">
-<th>7</th>
+<td data-quarto-table-cell-role="th">7</td>
 <td>0.092586</td>
 </tr>
 <tr class="odd">
-<th>8</th>
+<td data-quarto-table-cell-role="th">8</td>
 <td>0.088454</td>
 </tr>
 <tr class="even">
-<th>9</th>
+<td data-quarto-table-cell-role="th">9</td>
 <td>0.083948</td>
 </tr>
 <tr class="odd">
-<th>10</th>
+<td data-quarto-table-cell-role="th">10</td>
 <td>0.082687</td>
 </tr>
 <tr class="even">
-<th>11</th>
+<td data-quarto-table-cell-role="th">11</td>
 <td>0.084315</td>
 </tr>
 <tr class="odd">
-<th>12</th>
+<td data-quarto-table-cell-role="th">12</td>
 <td>0.085555</td>
 </tr>
 <tr class="even">
-<th>13</th>
+<td data-quarto-table-cell-role="th">13</td>
 <td>0.087055</td>
 </tr>
 <tr class="odd">
-<th>14</th>
+<td data-quarto-table-cell-role="th">14</td>
 <td>0.087295</td>
 </tr>
 <tr class="even">
-<th>15</th>
+<td data-quarto-table-cell-role="th">15</td>
 <td>0.086693</td>
 </tr>
 </tbody>
@@ -1275,36 +1263,36 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped" data-border="1">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th></th>
-<th>mean radius</th>
-<th>mean texture</th>
-<th>mean perimeter</th>
-<th>mean area</th>
-<th>mean smoothness</th>
-<th>mean compactness</th>
-<th>mean concavity</th>
-<th>mean concave points</th>
-<th>mean symmetry</th>
-<th>mean fractal dimension</th>
-<th>...</th>
-<th>worst radius</th>
-<th>worst texture</th>
-<th>worst perimeter</th>
-<th>worst area</th>
-<th>worst smoothness</th>
-<th>worst compactness</th>
-<th>worst concavity</th>
-<th>worst concave points</th>
-<th>worst symmetry</th>
-<th>worst fractal dimension</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean radius</th>
+<th data-quarto-table-cell-role="th">mean texture</th>
+<th data-quarto-table-cell-role="th">mean perimeter</th>
+<th data-quarto-table-cell-role="th">mean area</th>
+<th data-quarto-table-cell-role="th">mean smoothness</th>
+<th data-quarto-table-cell-role="th">mean compactness</th>
+<th data-quarto-table-cell-role="th">mean concavity</th>
+<th data-quarto-table-cell-role="th">mean concave points</th>
+<th data-quarto-table-cell-role="th">mean symmetry</th>
+<th data-quarto-table-cell-role="th">mean fractal dimension</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">worst radius</th>
+<th data-quarto-table-cell-role="th">worst texture</th>
+<th data-quarto-table-cell-role="th">worst perimeter</th>
+<th data-quarto-table-cell-role="th">worst area</th>
+<th data-quarto-table-cell-role="th">worst smoothness</th>
+<th data-quarto-table-cell-role="th">worst compactness</th>
+<th data-quarto-table-cell-role="th">worst concavity</th>
+<th data-quarto-table-cell-role="th">worst concave points</th>
+<th data-quarto-table-cell-role="th">worst symmetry</th>
+<th data-quarto-table-cell-role="th">worst fractal dimension</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th>242</th>
+<td data-quarto-table-cell-role="th">242</td>
 <td>11.300</td>
 <td>18.19</td>
 <td>73.93</td>
@@ -1328,7 +1316,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <td>0.12970</td>
 </tr>
 <tr class="even">
-<th>375</th>
+<td data-quarto-table-cell-role="th">375</td>
 <td>16.170</td>
 <td>16.07</td>
 <td>106.30</td>
@@ -1352,7 +1340,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <td>0.08960</td>
 </tr>
 <tr class="odd">
-<th>446</th>
+<td data-quarto-table-cell-role="th">446</td>
 <td>17.750</td>
 <td>28.03</td>
 <td>117.30</td>
@@ -1376,7 +1364,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <td>0.09075</td>
 </tr>
 <tr class="even">
-<th>289</th>
+<td data-quarto-table-cell-role="th">289</td>
 <td>11.370</td>
 <td>18.89</td>
 <td>72.17</td>
@@ -1400,7 +1388,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <td>0.06994</td>
 </tr>
 <tr class="odd">
-<th>318</th>
+<td data-quarto-table-cell-role="th">318</td>
 <td>9.042</td>
 <td>18.90</td>
 <td>60.07</td>
@@ -1501,12 +1489,12 @@ Best score:
 best knn f1 score: 0.99187</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Note
 </div>
 </div>
@@ -1557,9 +1545,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1771,6 +1773,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </li>  
 </ul>
     </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
