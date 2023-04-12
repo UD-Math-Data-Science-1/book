@@ -194,6 +194,7 @@ $$
 A_{ij} = \begin{cases}
     1, & \text{if $(i,j)$ is an edge}, \\ 
     0, & \text{otherwise.}
+    \end{cases}
 $$
 ::::
 
@@ -587,31 +588,20 @@ W = nx.wheel_graph(7)
 nx.draw(W, with_labels=True, node_color="lightblue")
 ```
 
-No node is more than two hops away from another, so the diameter of this graph is 2. This graph has so few nodes that we can easily compute the entire matrix of pairwise distances. The matrix is symmetric, so it's only necessary to compute its upper triangle.
+No node is more than two hops away from another, so the diameter of this graph is 2. This graph has so few nodes that we can easily compute the entire matrix of pairwise distances:
 
 ```{python}
-nodes = list(W.nodes)
-n = len(nodes)
-D = np.zeros( (n,n), dtype=int )
-for i in range(n):
-    for j in range(i+1,n):
-        D[i,j] = nx.shortest_path_length(W, nodes[i], nodes[j]) 
-
+distance = dict( nx.all_pairs_shortest_path_length(W) )
+D = np.array( [ [distance[i][j] for j in W.nodes] for i in W.nodes] )
 print(D)
 ```
 
-To get the average distance, we sum over all the entries and divide by $\binom{n}{2}$:
-
+If all we want is the average distance, though, there is a convenience function for computing it directly:
 ```{python}
-nchoose2 = n * (n-1) / 2
-print(f"average distance is {2*D.sum() / nchoose2:.5f}")
+mean_dist = nx.average_shortest_path_length(W)
+print(f"The average distance is {mean_dist:.5f}" )
 ```
-
-There is a convenience function for computing this average directly:
-```{python}
-print(f"average distance is {nx.average_shortest_path_length(W):.5f}" )
-```
-It becomes quite slow as the number of nodes grows, though.
+It does become quite slow as the number of nodes grows.
 ::::
 
 ### ER graphs
