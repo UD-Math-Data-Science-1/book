@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.298">
+<meta name="generator" content="quarto-1.3.306">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -114,7 +114,7 @@ MathJax = {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -251,7 +251,7 @@ MathJax = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -362,7 +362,10 @@ Find anomalous values in the data set and remove them or impute replacements.
 c(\bfX_i) \in \{ 1,2,\ldots, k \} \text{ for all } i=1,\ldots,n,
 \]</span> where <span class="math inline">\(k\)</span> is a positive integer. The <strong>cluster</strong> <span class="math inline">\(C_j\)</span> is the collection of all <span class="math inline">\(\bfX_i\)</span> such that <span class="math inline">\(c(\bfX_i)=j\)</span>.</p>
 </div>
-<p>The clusters <span class="math inline">\(C_1,\ldots,C_k\)</span> divide the samples into <span class="math inline">\(k\)</span> dijoint subsets. Depending on the algorithm, the number of clusters <span class="math inline">\(k\)</span> may be imposed (i. e., as a hyperparameter) or determined automatically.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/9qhqcz08ugcoobq/Section6_0.mp4?raw=1"></video></div>
+</div></div><p>The clusters <span class="math inline">\(C_1,\ldots,C_k\)</span> divide the samples into <span class="math inline">\(k\)</span> dijoint subsets. Depending on the algorithm, the number of clusters <span class="math inline">\(k\)</span> may be imposed (i. e., as a hyperparameter) or determined automatically.</p>
 <p>Intuitively, we want similar examples to be clustered together (that is, to receive the same label). The motivation for clustering is often to find a way to classify the samples by intrinsic properties when no such classification is known in advance. It is <em>not</em> necessary that the clustering function <span class="math inline">\(c\)</span> be defined for vectors <span class="math inline">\(\bfx\)</span> other than the feature vectors, although many clustering algorithms can be used to do that as well.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -469,7 +472,7 @@ This is the most challenging dataset, because the clusters can’t be separated 
 <p><img src="clustering_files/figure-html/cell-8-output-1.png" width="524" height="468"></p>
 </div>
 </div>
-<section id="similarity" class="level2" data-number="6.1">
+<section id="similarity" class="level2 page-columns page-full" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="similarity"><span class="header-section-number">6.1</span> Similarity</h2>
 <p>Ideally, samples within a cluster are more similar to each other than they are to samples in other clusters. The first decision we have to make is how to define <em>similarity</em> between an arbitrary pair.</p>
 <p>When a distance metric is available, we intuitively expect similarity to be inversely related to distance. There are various ways to quantify the relationship, but we will not use them. Instead, we will take “maximize similarity” to be equivalent to “minimize distance.”</p>
@@ -496,7 +499,7 @@ This is the largest possible value. The similarity tends to zero as distance inc
 ::: {.callout-tip}
 When the distance function in Gaussian similarity is based on a vector norm, it's advisable to use standardization of the features, either by using z-scores or some other normalization.
 ::: -->
-<section id="distance-matrix" class="level3" data-number="6.1.1">
+<section id="distance-matrix" class="level3 page-columns page-full" data-number="6.1.1">
 <h3 data-number="6.1.1" class="anchored" data-anchor-id="distance-matrix"><span class="header-section-number">6.1.1</span> Distance matrix</h3>
 <div id="def-cluster-distmat" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6.2 </strong></span>Given the feature vectors <span class="math inline">\(\bfX_1,\ldots,\bfX_n\)</span>, the pairwise distances between them are collected in the <span class="math inline">\(n\times n\)</span> <strong>distance matrix</strong></p>
@@ -504,7 +507,30 @@ When the distance function in Gaussian similarity is based on a vector norm, it'
 D_{ij} = \text{dist}(\bfX_i,\bfX_j).
 \]</span></p>
 </div>
-<p>Note that <span class="math inline">\(D_{ii}=0\)</span> and <span class="math inline">\(D_{ji}=D_{ij}\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/lp98e4bn5drn5r8/Section6_1_1.mp4?raw=1"></video></div>
+</div></div><p>Note that <span class="math inline">\(D_{ii}=0\)</span> and <span class="math inline">\(D_{ji}=D_{ij}\)</span>.</p>
+<div id="exm-cluster-distmat-small" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6.1 </strong></span>Using 1-norm for distance, find the distance matrix for the feature matrix <span class="math display">\[
+\bfX = \begin{bmatrix}
+1 &amp; 2 &amp; 1 &amp; -2 \\ 0 &amp; 3 &amp; 3 &amp; 1 \\ 1 &amp; -1 &amp; 0 &amp; 4
+\end{bmatrix}.
+\]</span></p>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span>There are <span class="math inline">\(n=3\)</span> feature vectors. <span class="math display">\[
+\begin{split}
+D_{12} &amp;=  \abs{1} + \abs{-1} + \abs{-2} + \abs{-3} = 7 \\
+D_{13} &amp;=  \abs{0} + \abs{3} + \abs{1} + \abs{-6}  = 10 \\
+D_{23} &amp;=  \abs{-1} + \abs{4} + \abs{3} + \abs{-3}  = 11.
+\end{split}
+\]</span> Hence, <span class="math display">\[
+\mathbf{D} = \begin{bmatrix}
+0 &amp; 7 &amp; 10 \\ 7 &amp; 0 &amp; 11 \\ 10 &amp; 11 &amp; 0
+\end{bmatrix}.
+\]</span></p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -533,7 +559,7 @@ Note
 </div>
 <p>The scikit-learn function <code>pairwise_distances</code> computes a distance matrix efficiently.</p>
 <div id="exm-cluster-distmat" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.1 </strong></span>The distance matrix of our <em>bullseye</em> dataset has some interesting structure:</p>
+<p><span class="theorem-title"><strong>Example 6.2 </strong></span>The distance matrix of our <em>bullseye</em> dataset has some interesting structure:</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> bullseye_data()</span>
@@ -558,18 +584,21 @@ Note
 <p>Points in different stripes are always separated by at least the inter-stripe distance, while points within the same stripe have a range of possible distances.</p>
 </div>
 </section>
-<section id="angular-distance" class="level3" data-number="6.1.2">
+<section id="angular-distance" class="level3 page-columns page-full" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="angular-distance"><span class="header-section-number">6.1.2</span> Angular distance</h3>
 <p>An alternative to vector norms for distances is <strong>angular distance</strong>. In three dimensions, imagine drawing a ray from the origin to each of the two given vectors. Those rays lie in a common plane, and we can let <span class="math inline">\(\theta\)</span> be the (smallest) angle between them. The general formula in any number of dimensions is <span id="eq-cluster-angle"><span class="math display">\[
 \cos(\theta) = \frac{\mathbf{u}^T\mathbf{v}}{\twonorm{\mathbf{u}} \, \twonorm{\mathbf{v}}}.
 \tag{6.1}\]</span></span></p>
-<p>We then let <span class="math inline">\(\dist(\bfx,\bfy)=\theta \in [0,\pi]\)</span>, using the standard branch of arccos.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video3" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/7lfw96r67olltnu/Section6_1_2.mp4?raw=1"></video></div>
+</div></div><p>We then let <span class="math inline">\(\dist(\bfx,\bfy)=\theta \in [0,\pi]\)</span>, using the standard branch of arccos.</p>
 <p>However, arccos is a relatively expensive computational operation, and sometimes we use the pseudodistance <span class="math display">\[
 d(\bfx,\bfy) = 1 - \cos(\theta)
 \]</span> in place of <span class="math inline">\(\theta\)</span>. This function (which ranges between 0 and 2) is not a true distance function, though, as <span class="math inline">\(d\)</span> fails to satisfy the triangle inequality in all cases (see <a href="#exr-cluster-cosine">Exercise&nbsp;<span>6.2</span></a>).</p>
 <p>Angular distance and cosine pseudodistance are useful when we want to ignore the magnitudes of vectors and consider only their directions.</p>
 <div id="exm-cluster-angular" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.2 </strong></span>We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as <em>happy</em>, <em>excited</em>, <em>sad</em>, <em>angry</em>, <em>confused</em>, and so on. For sake of argument, suppose three documents have the feature matrix <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 6.3 </strong></span>We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as <em>happy</em>, <em>excited</em>, <em>sad</em>, <em>angry</em>, <em>confused</em>, and so on. For sake of argument, suppose three documents have the feature matrix <span class="math display">\[
 \bfX =
 \begin{bmatrix}
 6 &amp; 1 &amp; 10 &amp; 2 &amp; 5 \\  14 &amp; 0 &amp; 23 &amp; 3 &amp; 7 \\ 2 &amp; 3 &amp; 1 &amp; 5 &amp; 0
@@ -642,10 +671,13 @@ $$
 :::
 :::: -->
 </section>
-<section id="distance-in-high-dimensions" class="level3" data-number="6.1.3">
+<section id="distance-in-high-dimensions" class="level3 page-columns page-full" data-number="6.1.3">
 <h3 data-number="6.1.3" class="anchored" data-anchor-id="distance-in-high-dimensions"><span class="header-section-number">6.1.3</span> Distance in high dimensions</h3>
 <p>High-dimensional space <a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf">does not conform to some intuitions</a> formed by our experiences in 2D and 3D.</p>
-<p>For example, consider the unit hyperball <span class="math inline">\(\twonorm{\bfx}\le 1\)</span> in <span class="math inline">\(d\)</span> dimensions. We’ll take it as given that scaling a <span class="math inline">\(d\)</span>-dimensional object by a number <span class="math inline">\(r\)</span> will scale the volume by <span class="math inline">\(r^d\)</span>. Then for any <span class="math inline">\(r&lt;1\)</span>, the fraction of the unit hyperball’s volume lying <em>outside</em> the smaller hyperball of fixed radius <span class="math inline">\(r\)</span> is <span class="math inline">\(1-r^d\)</span>, which approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(d\to \infty\)</span>. That is, <em>if we choose points randomly within a hyperball, almost all of them will be near the outer boundary</em>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video4" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/hxdmolatua15skd/Section6_1_3.mp4?raw=1"></video></div>
+</div></div><p>For example, consider the unit hyperball <span class="math inline">\(\twonorm{\bfx}\le 1\)</span> in <span class="math inline">\(d\)</span> dimensions. We’ll take it as given that scaling a <span class="math inline">\(d\)</span>-dimensional object by a number <span class="math inline">\(r\)</span> will scale the volume by <span class="math inline">\(r^d\)</span>. Then for any <span class="math inline">\(r&lt;1\)</span>, the fraction of the unit hyperball’s volume lying <em>outside</em> the smaller hyperball of fixed radius <span class="math inline">\(r\)</span> is <span class="math inline">\(1-r^d\)</span>, which approaches <span class="math inline">\(1\)</span> as <span class="math inline">\(d\to \infty\)</span>. That is, <em>if we choose points randomly within a hyperball, almost all of them will be near the outer boundary</em>.</p>
 <p>The volume of the unit hyperball also vanishes as <span class="math inline">\(d\to \infty\)</span>. This is because the inequality</p>
 <p><span class="math display">\[
 x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
@@ -655,25 +687,28 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 <p>But that form of the advice may be overstated. The curse is essentially about <em>randomly</em> chosen points, and it is correct that dimensions of noisy or irrelevant features will make most learning algorithms less effective. But when features carry useful information, adding them usually makes matters better, not worse.</p>
 </section>
 </section>
-<section id="performance-measures" class="level2" data-number="6.2">
+<section id="performance-measures" class="level2 page-columns page-full" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="performance-measures"><span class="header-section-number">6.2</span> Performance measures</h2>
 <p>Before we start generating clusterings, we will discuss how to evaluate them. A clustering is essentially a partitioning of the samples into disjoint subsets. We will use some nonstandard terminology that makes the definitions a bit easier to state and read.</p>
 <div id="def-cluster-buddies" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 6.3 </strong></span>We say that two sample points in a clustering are <strong>buddies</strong> if they are in the same cluster, and <strong>strangers</strong> otherwise.</p>
 </div>
-<section id="rand-index-and-ari" class="level3" data-number="6.2.1">
+<section id="rand-index-and-ari" class="level3 page-columns page-full" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="rand-index-and-ari"><span class="header-section-number">6.2.1</span> Rand index and ARI</h3>
 <p>A clustering can be interpreted as a classification, and vice versa. If a reference classification is available, then we can compare any clustering result to it. This allows us to use classification datasets as proving grounds for clustering.</p>
 <p>Let <span class="math inline">\(b\)</span> be the number of pairs that are buddies in both clusterings, and let <span class="math inline">\(s\)</span> be the number of pairs that are strangers in both clusterings. We define the <strong>Rand index</strong> by</p>
 <p><span class="math display">\[
 \text{RI} = \frac{b+s}{\binom{n}{2}}.
 \]</span></p>
-<p>The reason for the denominator is that there are <span class="math inline">\(\binom{n}{2}\)</span> distinct pairs of <span class="math inline">\(n\)</span> sample points, so we know that <span class="math inline">\(0 \le \text{RI} \le 1\)</span>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/gd2nfz5oxxgqduf/Section6_2_1.mp4?raw=1"></video></div>
+</div></div><p>The reason for the denominator is that there are <span class="math inline">\(\binom{n}{2}\)</span> distinct pairs of <span class="math inline">\(n\)</span> sample points, so we know that <span class="math inline">\(0 \le \text{RI} \le 1\)</span>.</p>
 <p>One way to interpret the Rand index is through binary classification. If we define a positive result on a pair of samples to mean “in the same cluster” and a negative result to mean “in different clusters”, then the Rand index is the accuracy of that classifier over all pairs of samples, taking the reference clustering as providing ground truth.</p>
 <div id="exm-cluster-rand" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.3 </strong></span>Suppose that samples <span class="math inline">\(\bfX_1,\bfX_2,\bfX_4\)</span> are classified as blue, and <span class="math inline">\(\bfX_3,\bfX_5\)</span> are classified as red. Compute the Rand index relative to the reference classification for the clustering <span class="math inline">\(A=\{\bfX_1,\bfX_2\}\)</span> and <span class="math inline">\(B=\{\bfX_3,\bfX_4,\bfX_5\}\)</span>. (Note that the actual feature vectors themselves are not important in this setting.)</p>
+<p><span class="theorem-title"><strong>Example 6.4 </strong></span>Suppose that samples <span class="math inline">\(\bfX_1,\bfX_2,\bfX_4\)</span> are classified as blue, and <span class="math inline">\(\bfX_3,\bfX_5\)</span> are classified as red. Compute the Rand index relative to the reference classification for the clustering <span class="math inline">\(C_1=\{\bfX_1,\bfX_2\}\)</span> and <span class="math inline">\(C_2=\{\bfX_3,\bfX_4,\bfX_5\}\)</span>. (Note that the actual feature vectors themselves are not important in this setting.)</p>
 <div class="solution proof">
-<p><span class="proof-title"><em>Solution</em>. </span>Here is a table showing which pairs of samples are buddies in both clusterings (indicated as TP), strangers in both (TN), or neither (F).</p>
+<p><span class="proof-title"><em>Solution</em>. </span>Here is a table showing the buddy–stranger status for every pair in the coloring and clustering:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -689,26 +724,26 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 <tr class="odd">
 <td><span class="math inline">\(\bfX_1\)</span></td>
 <td></td>
-<td>TP</td>
-<td>TN</td>
-<td>F</td>
-<td>TN</td>
+<td>B/B</td>
+<td>S/S</td>
+<td>B/S</td>
+<td>S/S</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\bfX_2\)</span></td>
 <td></td>
 <td></td>
-<td>TN</td>
-<td>F</td>
-<td>TN</td>
+<td>S/S</td>
+<td>B/S</td>
+<td>S/S</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\bfX_3\)</span></td>
 <td></td>
 <td></td>
 <td></td>
-<td>F</td>
-<td>TP</td>
+<td>S/B</td>
+<td>B/B</td>
 </tr>
 <tr class="even">
 <td><span class="math inline">\(\bfX_4\)</span></td>
@@ -716,7 +751,7 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 <td></td>
 <td></td>
 <td></td>
-<td>F</td>
+<td>S/B</td>
 </tr>
 <tr class="odd">
 <td><span class="math inline">\(\bfX_5\)</span></td>
@@ -728,14 +763,14 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 </tr>
 </tbody>
 </table>
-<p>Hence the Rand index is 6/10 = 0.6.</p>
+<p>Hence, the Rand index is (2+4)/10 = 0.6.</p>
 </div>
 </div>
 <p>The Rand index has some attractive features:</p>
 <ul>
+<li>The value is between 0 (complete disagreement) and 1 (complete agreement).</li>
 <li>It is symmetric in the two clusterings; it doesn’t matter which is considered the reference.</li>
 <li>There is no need to find a correspondence between the clusters in the two clusterings. In fact, the clusterings need not even have the same number of clusters.</li>
-<li>The value is between 0 (complete disagreement) and 1 (complete agreement).</li>
 </ul>
 <p>A weakness of the Rand index is that it can be fairly close to 1 even for a random clustering. The <strong>adjusted Rand index</strong> rescales the result by comparing it to how a random clustering would fare. It can be written as</p>
 <p><span class="math display">\[
@@ -744,7 +779,7 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 <p>where the expectation and max operations are performed over all possible clusterings. (These values can be worked out exactly using combinatorics, but we do not give them here.)</p>
 <p>An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.</p>
 <div id="exm-cluster-ARI-blobs" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.4 </strong></span>Our <em>blobs</em> dataset has a reference clustering that we take to be the gold standard. Let’s create another clustering based entirely on the quadrants of the plane:</p>
+<p><span class="theorem-title"><strong>Example 6.5 </strong></span>Our <em>blobs</em> dataset has a reference clustering that we take to be the gold standard. Let’s create another clustering based entirely on the quadrants of the plane:</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> blobs_data()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -774,8 +809,11 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 </div>
 <p>Not surprisingly, they are seen as fairly similar.</p>
 </div>
-</section>
-<section id="silhouettes" class="level3" data-number="6.2.2">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video6" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/fj759qpo8j38wei/Example6_5.mp4?raw=1"></video></div>
+</div></div></section>
+<section id="silhouettes" class="level3 page-columns page-full" data-number="6.2.2">
 <h3 data-number="6.2.2" class="anchored" data-anchor-id="silhouettes"><span class="header-section-number">6.2.2</span> Silhouettes</h3>
 <p>If no reference clustering/classification is available, then the only way we can assess the quality of a clustering is to check how well it creates clusters whose members are more similar to their buddies than to strangers.</p>
 <div id="def-cluster-silhouette" class="theorem definition">
@@ -784,7 +822,10 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 s_i = \frac{\bar{r}_i-\bar{b}_i}{\max\{\bar{r}_i,\bar{b}_i\}}.
 \]</span></p>
 </div>
-<p>The value <span class="math inline">\(s_i\)</span> is always in the interval <span class="math inline">\([-1,1]\)</span>. A negative value indicates that the sample seems to be more similar to a cluster other than its own.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video7" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/yxjf804d2ugayp7/Section6_2_2.mp4?raw=1"></video></div>
+</div></div><p>The value <span class="math inline">\(s_i\)</span> is always in the interval <span class="math inline">\([-1,1]\)</span>. A negative value indicates that the sample seems to be more similar to a cluster other than its own.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -799,15 +840,15 @@ Important
 </div>
 </div>
 <div id="exm-cluster-silhouette" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.5 </strong></span>Suppose that two clusters in one dimension are defined as <span class="math inline">\(A=\{-4,-1,1\}\)</span> and <span class="math inline">\(B=\{2,6\}\)</span>. Find the silhouette values of all the samples.</p>
+<p><span class="theorem-title"><strong>Example 6.6 </strong></span>Suppose that two clusters in one dimension are defined as <span class="math inline">\(A=\{-4,-1,1\}\)</span> and <span class="math inline">\(B=\{2,6\}\)</span>. Find the silhouette values of all the samples.</p>
 <div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span></p>
 <table class="table">
 <colgroup>
-<col style="width: 32%">
-<col style="width: 23%">
-<col style="width: 26%">
-<col style="width: 17%">
+<col style="width: 15%">
+<col style="width: 34%">
+<col style="width: 34%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -820,31 +861,31 @@ Important
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(-4\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\frac{|-4-1|+|-4+1|}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{ | -4-1 | + |-4+1|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{|-4-2|+|-4-6|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{8-4}{8}=\frac{1}{2}\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(-1\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\frac{|-1+4|+|-1-1|}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{ | -1+4 | + |-1-1|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{|-1-2|+|-1-6|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{5-2.5}{5}=\frac{1}{2}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(1\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\frac{|1+4|+|1+1|}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{ | 1+4 | + |1+1|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{|1-2|+|1-6|}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{3-3.5}{3.5}=-\frac{1}{7}\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(2\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\frac{|2-6|}{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{ | 2-6 | }{1}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{|2+6|+|2+1|+|2-1|}{3}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{(10/3)-4}{4}=-\frac{1}{6}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(6\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\frac{|6-2|}{1}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{ | 6-2 | }{1}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{|6+4|+|6+1|+|6-1|}{3}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\frac{(22/3)-4}{(22/3)}=\frac{5}{11}\)</span></td>
 </tr>
@@ -853,7 +894,7 @@ Important
 </div>
 </div>
 <div id="exm-cluster-sil-blobs" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.6 </strong></span>Let’s use the predefined cluster assignments in our blobs dataset. We will add a column to the data frame that records the silhouette score for each point:</p>
+<p><span class="theorem-title"><strong>Example 6.7 </strong></span>Let’s use the predefined cluster assignments in our blobs dataset. We will add a column to the data frame that records the silhouette score for each point:</p>
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_samples</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -878,7 +919,7 @@ Important
 Name: sil, dtype: float64</code></pre>
 </div>
 </div>
-<p>These values are ordered as we would expect. We can also compute the silhouette scores for the quadrant-based clustering defined in <a href="#exm-cluster-ARI-blobs">Example&nbsp;<span>6.4</span></a>:</p>
+<p>These values are ordered as we would expect. We can also compute the silhouette scores for the quadrant-based clustering defined in <a href="#exm-cluster-ARI-blobs">Example&nbsp;<span>6.5</span></a>:</p>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>X[<span class="st">"sil"</span>] <span class="op">=</span> silhouette_samples(X, q)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>X, </span>
@@ -901,8 +942,11 @@ Name: sil, dtype: float64</code></pre>
 </div>
 <p>The scores for clusters labelled as 1 and 2 are pretty good and almost the same as for the original reference clustering. But the other two clusters score much more poorly separately than they did when they were considered a single cluster.</p>
 </div>
-<div id="exm-cluster-perform-digits" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.7 </strong></span><code>sklearn</code> has a well-known dataset that contains labeled handwritten digits. Let’s extract the examples for just the numerals 4, 5, and 6:</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video8" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/icu3cmmi38cuzz7/Example6_7.mp4?raw=1"></video></div>
+</div></div><div id="exm-cluster-perform-digits" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6.8 </strong></span><code>sklearn</code> has a well-known dataset that contains labeled handwritten digits. Let’s extract the examples for just the numerals 4, 5, and 6:</p>
 <div class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>keep <span class="op">=</span> digits[<span class="st">"target"</span>].isin([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
@@ -941,9 +985,12 @@ Name: sil, dtype: float64</code></pre>
 </div>
 <p>The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. However, the existence of scores close to and below zero suggest that a clustering algorithm ia unlikely to reproduce the true classification perfectly. To put it another way, the features chosen to represent the digits don’t seem to create three clear, well-separated balls of points representing the three different types of digits.</p>
 </div>
-<p>Silhouette values are fairly easy to use. However, while we might consider a cluster to comprise points that are close only to other members of the cluster, silhouette values demand that the members of a cluster all be mutually close to one another. As a result, they favor compact, roughly spherical clusters.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video9" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/sn7gaapl6gc7sea/Example6_8.mp4?raw=1"></video></div>
+</div></div><p>Silhouette values are fairly easy to use. However, while we might consider a cluster to comprise points that are close only to other members of the cluster, silhouette values demand that the members of a cluster all be mutually close to one another. As a result, they favor compact, roughly spherical clusters.</p>
 <div id="exm-cluster-sil-bullseye" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.8 </strong></span>The bullseye dataset has only one “cluster” that silhouette values approve of:</p>
+<p><span class="theorem-title"><strong>Example 6.9 </strong></span>The bullseye dataset has only one “cluster” that silhouette values approve of:</p>
 <div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> bullseye_data()</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> silhouette_samples(X, y)</span>
@@ -958,7 +1005,10 @@ Name: sil, dtype: float64</code></pre>
 </div>
 <p>The central blob is considered OK, but the rings score poorly.</p>
 </div>
-</section>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/f171zxlpriccdvq/Example6_9.mp4?raw=1"></video></div>
+</div></div></section>
 </section>
 <section id="k-means" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="k-means"><span class="header-section-number">6.3</span> k-means</h2>
@@ -982,7 +1032,7 @@ $$
 
 We conclude that splitting a cluster will make the total inertia decrease. In fact, if each sample point is put into its own cluster, the inertia is 0.  -->
 <div id="exm-cluster-inertia" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.9 </strong></span>Given the samples <span class="math inline">\(-3,-2,-1,2,5,7\)</span>, find the inertia of the clustering <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 6.10 </strong></span>Given the samples <span class="math inline">\(-3,-2,-1,2,5,7\)</span>, find the inertia of the clustering <span class="math display">\[
 C_1=\{-3,-2,-1\}, \qquad C_2=\{2,5,7\},
 \]</span> and of the clustering <span class="math display">\[
 C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.  
@@ -1008,7 +1058,7 @@ C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.
 \]</span></li>
 </ol>
 <p>These steps are repeated alternately until the assignment step does not change any of the clusters. In practice, this almost always happens quickly. Here is a demonstration:</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="./_media/kmeans_demo.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video11" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="./_media/kmeans_demo.mp4"></video></div>
 <p>If Lloyd’s algorithm converges, it finds a local minimum of total inertia, in the sense that small changes to the cluster assignments cannot decrease it. But there is no guarantee of converging to the global minimum, and often, this does not happen.</p>
 </section>
 <section id="practical-issues" class="level3" data-number="6.3.2">
@@ -1021,7 +1071,7 @@ C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.
 <p>The algorithm treats <span class="math inline">\(k\)</span> as a hyperparameter. Increasing <span class="math inline">\(k\)</span> tends to lower the total inertia—at the extreme, taking <span class="math inline">\(k=n\)</span> puts each sample in its own cluster, with a total inertia of zero. Hence, one should use silhouette scores or some other measure in order to optimize <span class="math inline">\(k\)</span>. Occam’s Razor dictates preferring smaller values to large ones. There are many suggestions on how to find the choice that gives the most “bang for the buck,” but none is foolproof.</p>
 <p>Because of its dependence on the norm, the inertia criterion of <span class="math inline">\(k\)</span>-means disfavors long, skinny clusters and clusters of unequal dispersion. Essentially, it wants to find spherical blobs of roughly equal size.</p>
 <div id="exm-cluster-kmeans-blobs" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.10 </strong></span>We apply <span class="math inline">\(k\)</span>-means to the <em>blobs</em> dataset that has 3 reference clusters, starting with <span class="math inline">\(k=2\)</span> clusters. For illustration, we instruct the algorithm to try 3 initializations and report on its progress:</p>
+<p><span class="theorem-title"><strong>Example 6.11 </strong></span>We apply <span class="math inline">\(k\)</span>-means to the <em>blobs</em> dataset that has 3 reference clusters, starting with <span class="math inline">\(k=2\)</span> clusters. For illustration, we instruct the algorithm to try 3 initializations and report on its progress:</p>
 <div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1158,7 +1208,7 @@ Name: sil, dtype: float64</code></pre>
 <p>Based on silhouette scores, we would be justified to stop at <span class="math inline">\(k=3\)</span> clusters.</p>
 </div>
 <div id="exm-cluster-kmeans-stripes" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.11 </strong></span>The <em>stripes</em> dataset does not conform to compact clusters of equal size, and <span class="math inline">\(k\)</span>-means performs poorly on it:</p>
+<p><span class="theorem-title"><strong>Example 6.12 </strong></span>The <em>stripes</em> dataset does not conform to compact clusters of equal size, and <span class="math inline">\(k\)</span>-means performs poorly on it:</p>
 <div class="cell" data-execution_count="29">
 <details>
 <summary>Code</summary>
@@ -1219,7 +1269,7 @@ Name: sil, dtype: float64</code></pre>
 <p>Clustering is hard!</p>
 </div>
 <div id="exm-cluster-kmeans-digits" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.12 </strong></span>We return to the handwriting recognition dataset. Again we keep only the samples labeled 4, 5, or 6:</p>
+<p><span class="theorem-title"><strong>Example 6.13 </strong></span>We return to the handwriting recognition dataset. Again we keep only the samples labeled 4, 5, or 6:</p>
 <div class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>digits <span class="op">=</span> datasets.load_digits(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>keep <span class="op">=</span> digits[<span class="st">"target"</span>].isin([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
@@ -1376,7 +1426,7 @@ The increase in inertia resulting from merging <span class="math inline">\(C_i\)
 <p>Single linkage only pays attention to the gaps between clusters, not the size or spread of them. Complete linkage, on the other hand, wants to keep every cluster packed tightly together. Average linkage is a compromise between these extremes. Agglomerative clustering with Ward linkage amounts to trying to minimize the increase of inertia with each merger. In that sense, it has the same objective as <span class="math inline">\(k\)</span>-means, but it is usually not as successful at minimizing inertia.</p>
 <p>Unlike <span class="math inline">\(k\)</span>-means, which has to be able to compute the distances between the samples and changing centroid locations, agglomerative clustering with single, complete, or average linkage needs only the pairwise distances between samples and can be found from a distance matrix in place of the samples themselves.</p>
 <div id="exm-cluster-linkage-tiny" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.13 </strong></span>Given clusters <span class="math inline">\(C_1=\{-3,-2,-1\}\)</span> and <span class="math inline">\(C_2=\{3,4,5\}\)</span>, find the different linkages between them.</p>
+<p><span class="theorem-title"><strong>Example 6.14 </strong></span>Given clusters <span class="math inline">\(C_1=\{-3,-2,-1\}\)</span> and <span class="math inline">\(C_2=\{3,4,5\}\)</span>, find the different linkages between them.</p>
 <div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span><strong>Ward.</strong> The centroids of the clusters are <span class="math inline">\(-2\)</span> and <span class="math inline">\(4\)</span>. So the linkage is</p>
 <p><span class="math display">\[
@@ -1419,7 +1469,7 @@ The increase in inertia resulting from merging <span class="math inline">\(C_i\)
 </div>
 </div>
 <div id="exm-cluster-hier-toy" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.14 </strong></span>Let’s use 5 sample points in the plane, and agglomerate them by single linkage. The <code>pairwise_distances</code> function converts sample points into a distance matrix:</p>
+<p><span class="theorem-title"><strong>Example 6.15 </strong></span>Let’s use 5 sample points in the plane, and agglomerate them by single linkage. The <code>pairwise_distances</code> function converts sample points into a distance matrix:</p>
 <div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array( [[<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>] ,[<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">2</span>], [<span class="dv">1</span>,<span class="fl">0.5</span>], [<span class="dv">0</span>,<span class="dv">2</span>], [<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>]] )</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> pairwise_distances(X, metric<span class="op">=</span><span class="st">"euclidean"</span>)</span>
@@ -1454,7 +1504,7 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 </div>
 <p>The <code>AgglomerativeClustering</code> class in <code>sklearn.cluster</code> performs the clustering process to create a learner object.</p>
 <div id="exm-cluster-linkage" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.15 </strong></span>We define a function that allows us to run all three linkages for a given feature matrix:</p>
+<p><span class="theorem-title"><strong>Example 6.16 </strong></span>We define a function that allows us to run all three linkages for a given feature matrix:</p>
 <div class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1528,7 +1578,7 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 <p>That instability can make single linkage difficult to work with.</p>
 </div>
 <div id="exm-cluster-penguins" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6.16 </strong></span>Let’s try agglomerative clustering to “discover” the species of the penguins, pretending we don’t know them in advance. First, let’s recall how many of each species we actually do have:</p>
+<p><span class="theorem-title"><strong>Example 6.17 </strong></span>Let’s try agglomerative clustering to “discover” the species of the penguins, pretending we don’t know them in advance. First, let’s recall how many of each species we actually do have:</p>
 <div class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>).dropna()</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>, <span class="st">"flipper_length_mm"</span>, <span class="st">"body_mass_g"</span>]</span>
@@ -1650,7 +1700,7 @@ Name: species, dtype: int64</code></pre>
 Name: single, dtype: int64</code></pre>
 </div>
 </div>
-<p>As we saw with the <em>bullseye</em> dataset in <a href="#exm-cluster-linkage">Example&nbsp;<span>6.15</span></a>, single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
+<p>As we saw with the <em>bullseye</em> dataset in <a href="#exm-cluster-linkage">Example&nbsp;<span>6.16</span></a>, single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
 <div class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>ARI <span class="op">=</span> adjusted_rand_score(y, y_hat)</span>
@@ -1700,7 +1750,7 @@ Name: ward, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins">Example&nbsp;<span>6.16</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
+<p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins">Example&nbsp;<span>6.17</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
 </section>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
@@ -2038,6 +2088,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
+<script>videojs(video_shortcode_videojs_video3);</script>
+<script>videojs(video_shortcode_videojs_video4);</script>
+<script>videojs(video_shortcode_videojs_video5);</script>
+<script>videojs(video_shortcode_videojs_video6);</script>
+<script>videojs(video_shortcode_videojs_video7);</script>
+<script>videojs(video_shortcode_videojs_video8);</script>
+<script>videojs(video_shortcode_videojs_video9);</script>
+<script>videojs(video_shortcode_videojs_video10);</script>
+<script>videojs(video_shortcode_videojs_video11);</script>
 
 
 

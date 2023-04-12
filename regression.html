@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.298">
+<meta name="generator" content="quarto-1.3.306">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -2634,7 +2634,7 @@ r = \sum_{i=1}^n \bigl(y_i - \hat{f}(\bfx_i)\bigr)^2.
 <div id="exr-regression-ridge" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.6 </strong></span>(5.3) If we fit the model <span class="math inline">\(\hat{f}(x)=w x\)</span> to the single data point <span class="math inline">\((2,6)\)</span>, then the ridge loss is <span class="math display">\[
 r(w) = (2w-6)^2 + \alpha w^2,
-\]</span> where <span class="math inline">\(\alpha\)</span> is a nonnegative constant. When <span class="math inline">\(\alpha = 0\)</span>, it’s clear that <span class="math inline">\(w=3\)</span> is the minimizer of <span class="math inline">\(r(w)\)</span>. Show that if <span class="math inline">\(\alpha&gt;0\)</span>, then <span class="math inline">\(r'(w)\)</span> is zero at at most two values of <span class="math inline">\(w\)</span>, both of which are less than 3.</p>
+\]</span> where <span class="math inline">\(\alpha\)</span> is a nonnegative constant. When <span class="math inline">\(\alpha = 0\)</span>, it’s clear that <span class="math inline">\(w=3\)</span> is the minimizer of <span class="math inline">\(r(w)\)</span>. Show that if <span class="math inline">\(\alpha&gt;0\)</span>, then <span class="math inline">\(r'(w)\)</span> is zero at a value of <span class="math inline">\(w\)</span> in the interval <span class="math inline">\((0,3)\)</span>. (This shows that the weight decreases in the presence of the regularization penalty.)</p>
 </div>
 <div id="exr-regression-lasso" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.7 </strong></span>(5.3) If we fit the model <span class="math inline">\(\hat{f}(x)=w x\)</span> to the single data point <span class="math inline">\((2,6)\)</span>, then the LASSO loss is <span class="math display">\[
@@ -2651,7 +2651,7 @@ $$
 $$
 :::: -->
 <div id="exr-regression-linearity" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.</p>
+<p><span class="theorem-title"><strong>Exercise 5.8 </strong></span>(5.4) For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.</p>
 <p><strong>(a)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_1 x_2\)</span></p>
 <p><strong>(b)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_2\)</span></p>
 <p><strong>(c)</strong> <span class="math inline">\(\hat{f}(\bfx) = x_1 + x_2 + 1\)</span></p>
