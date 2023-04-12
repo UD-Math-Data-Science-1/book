@@ -45,6 +45,10 @@ $$
 where $k$ is a positive integer. The **cluster** $C_j$ is the collection of all $\bfX_i$ such that $c(\bfX_i)=j$. 
 ::::
 
+:::{.column-margin}
+{{< video  https://www.dropbox.com/s/9qhqcz08ugcoobq/Section6_0.mp4?raw=1 >}}
+:::
+
 The clusters $C_1,\ldots,C_k$ divide the samples into $k$ dijoint subsets. Depending on the algorithm, the number of clusters $k$ may be imposed (i. e., as a hyperparameter) or determined automatically. 
 
 Intuitively, we want similar examples to be clustered together (that is, to receive the same label). The motivation for clustering is often to find a way to classify the samples by intrinsic properties when no such classification is known in advance. It is *not* necessary that the clustering function $c$ be defined for vectors $\bfx$ other than the feature vectors, although many clustering algorithms can be used to do that as well.
@@ -160,7 +164,39 @@ D_{ij} = \text{dist}(\bfX_i,\bfX_j).
 $$
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/lp98e4bn5drn5r8/Section6_1_1.mp4?raw=1 >}}
+:::
+
 Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. 
+
+::::{#exm-cluster-distmat-small}
+Using 1-norm for distance, find the distance matrix for the feature matrix 
+$$
+\bfX = \begin{bmatrix}
+1 & 2 & 1 & -2 \\ 0 & 3 & 3 & 1 \\ 1 & -1 & 0 & 4 
+\end{bmatrix}. 
+$$
+
+:::{.solution}
+There are $n=3$ feature vectors. 
+$$
+\begin{split}
+D_{12} &=  \abs{1} + \abs{-1} + \abs{-2} + \abs{-3} = 7 \\ 
+D_{13} &=  \abs{0} + \abs{3} + \abs{1} + \abs{-6}  = 10 \\ 
+D_{23} &=  \abs{-1} + \abs{4} + \abs{3} + \abs{-3}  = 11. 
+\end{split}
+$$
+Hence, 
+$$
+\mathbf{D} = \begin{bmatrix}
+0 & 7 & 10 \\ 7 & 0 & 11 \\ 10 & 11 & 0
+\end{bmatrix}. 
+$$
+:::
+::::
+
+
 
 ::: {.callout-tip}
 Many clustering algorithms allow supplying $\mathbf{D}$ in lieu of the feature vectors. When you consider that in many problems, $n$ is much larger than $d$, it can be faster and easier to work with.
@@ -199,6 +235,10 @@ An alternative to vector norms for distances is **angular distance**. In three d
 $$ 
 \cos(\theta) = \frac{\mathbf{u}^T\mathbf{v}}{\twonorm{\mathbf{u}} \, \twonorm{\mathbf{v}}}.
 $$ {#eq-cluster-angle}
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/7lfw96r67olltnu/Section6_1_2.mp4?raw=1 >}}
+:::
 
 We then let $\dist(\bfx,\bfy)=\theta \in [0,\pi]$, using the standard branch of arccos.  
 
@@ -283,6 +323,10 @@ $$
 
 High-dimensional space [does not conform to some intuitions](https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf) formed by our experiences in 2D and 3D. 
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/hxdmolatua15skd/Section6_1_3.mp4?raw=1 >}}
+:::
+
 For example, consider the unit hyperball $\twonorm{\bfx}\le 1$ in $d$ dimensions. We'll take it as given that scaling a $d$-dimensional object by a number $r$ will scale the volume by $r^d$. Then for any $r<1$, the fraction of the unit hyperball's volume lying *outside* the smaller hyperball of fixed radius $r$ is $1-r^d$, which approaches $1$ as $d\to \infty$. That is, *if we choose points randomly within a hyperball, almost all of them will be near the outer boundary*. 
 
 The volume of the unit hyperball also vanishes as $d\to \infty$. This is because the inequality
@@ -315,33 +359,37 @@ $$
 \text{RI} = \frac{b+s}{\binom{n}{2}}.
 $$
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/gd2nfz5oxxgqduf/Section6_2_1.mp4?raw=1 >}}
+:::
+
 The reason for the denominator is that there are $\binom{n}{2}$ distinct pairs of $n$ sample points, so we know that $0 \le \text{RI} \le 1$.
 
 One way to interpret the Rand index is through binary classification. If we define a positive result on a pair of samples to mean "in the same cluster" and a negative result to mean "in different clusters", then the Rand index is the accuracy of that classifier over all pairs of samples, taking the reference clustering as providing ground truth.
 
 ::::{#exm-cluster-rand}
-Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are classified as blue, and $\bfX_3,\bfX_5$ are classified as red. Compute the Rand index relative to the reference classification for the clustering $A=\{\bfX_1,\bfX_2\}$ and $B=\{\bfX_3,\bfX_4,\bfX_5\}$. (Note that the actual feature vectors themselves are not important in this setting.)
+Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are classified as blue, and $\bfX_3,\bfX_5$ are classified as red. Compute the Rand index relative to the reference classification for the clustering $C_1=\{\bfX_1,\bfX_2\}$ and $C_2=\{\bfX_3,\bfX_4,\bfX_5\}$. (Note that the actual feature vectors themselves are not important in this setting.)
 
 :::{.solution}
-Here is a table showing which pairs of samples are buddies in both clusterings (indicated as TP), strangers in both (TN), or neither (F).
+Here is a table showing the buddy--stranger status for every pair in the coloring and clustering:
 
-|       | $\bfX_1$ | $\bfX_2$ | $\bfX_3$ | $\bfX_4$ | $\bfX_5$ |
-|--|--|--|--|--|--|
-| $\bfX_1$ |       |  TP   |  TN   |  F    |  TN   |
-| $\bfX_2$ |       |       |  TN   |  F    |  TN   |
-| $\bfX_3$ |       |       |       |  F    |  TP   |
-| $\bfX_4$ |       |       |       |       |  F    |
-| $\bfX_5$ |       |       |       |       |       |
+|          | $\bfX_1$ | $\bfX_2$ | $\bfX_3$ | $\bfX_4$ | $\bfX_5$ |
+| -------- | -------- | -------- | -------- | -------- | -------- |
+| $\bfX_1$ |          | B/B      | S/S      | B/S      | S/S      |
+| $\bfX_2$ |          |          | S/S      | B/S      | S/S      |
+| $\bfX_3$ |          |          |          | S/B      | B/B      |
+| $\bfX_4$ |          |          |          |          | S/B      |
+| $\bfX_5$ |          |          |          |          |          |
 
-Hence the Rand index is 6/10 = 0.6.
+Hence, the Rand index is (2+4)/10 = 0.6.
 :::
 ::::
 
 The Rand index has some attractive features:
 
+* The value is between 0 (complete disagreement) and 1 (complete agreement).
 * It is symmetric in the two clusterings; it doesn't matter which is considered the reference.
 * There is no need to find a correspondence between the clusters in the two clusterings. In fact, the clusterings need not even have the same number of clusters. 
-* The value is between 0 (complete disagreement) and 1 (complete agreement).
 
 A weakness of the Rand index is that it can be fairly close to 1 even for a random clustering. The **adjusted Rand index** rescales the result by comparing it to how a random clustering would fare. It can be written as
 
@@ -381,6 +429,9 @@ adjusted_rand_score(y, q)
 Not surprisingly, they are seen as fairly similar.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/fj759qpo8j38wei/Example6_5.mp4?raw=1 >}}
+:::
 
 ### Silhouettes
 
@@ -394,6 +445,10 @@ s_i = \frac{\bar{r}_i-\bar{b}_i}{\max\{\bar{r}_i,\bar{b}_i\}}.
 $$
 ::::
  
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/yxjf804d2ugayp7/Section6_2_2.mp4?raw=1 >}}
+:::
+ 
 The value $s_i$ is always in the interval $[-1,1]$. A negative value indicates that the sample seems to be more similar to a cluster other than its own. 
 
 ::: {.callout-important}
@@ -404,13 +459,13 @@ Most sources, and scikit-learn, define an overall *silhouette score* as the mean
 Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B=\{2,6\}$. Find the silhouette values of all the samples.
 
 :::{.solution}
-|  $X_i$ | $\bar{b}_i$ | $\bar{r}_i$ | $s_i$  | 
-|:-------------:|:---------:|:----------:|:------:|
-| $-4$   | $\frac{|-4-1|+|-4+1|}{2}$  | $\frac{|-4-2|+|-4-6|}{2}$  |  $\frac{8-4}{8}=\frac{1}{2}$  | 
-| $-1$   | $\frac{|-1+4|+|-1-1|}{2}$  | $\frac{|-1-2|+|-1-6|}{2}$  |  $\frac{5-2.5}{5}=\frac{1}{2}$  | 
-| $1$   | $\frac{|1+4|+|1+1|}{2}$  | $\frac{|1-2|+|1-6|}{2}$  |  $\frac{3-3.5}{3.5}=-\frac{1}{7}$  | 
-| $2$   | $\frac{|2-6|}{1}$  | $\frac{|2+6|+|2+1|+|2-1|}{3}$  |  $\frac{(10/3)-4}{4}=-\frac{1}{6}$  | 
-| $6$   | $\frac{|6-2|}{1}$  | $\frac{|6+4|+|6+1|+|6-1|}{3}$  |  $\frac{(22/3)-4}{(22/3)}=\frac{5}{11}$  | 
+| $X_i$ | $\bar{b}_i$ | $\bar{r}_i$ | $s_i$ |
+| :---: | :---------: | :---------: | :---: |
+| $-4$  |   $\frac{   |    -4-1     |   +   |-4+1|}{2}$  | $\frac{|-4-2|+|-4-6|}{2}$  |  $\frac{8-4}{8}=\frac{1}{2}$  
+| $-1$  |   $\frac{   |    -1+4     |   +   |-1-1|}{2}$  | $\frac{|-1-2|+|-1-6|}{2}$  |  $\frac{5-2.5}{5}=\frac{1}{2}$  
+|  $1$  |   $\frac{   |     1+4     |   +   |1+1|}{2}$  | $\frac{|1-2|+|1-6|}{2}$  |  $\frac{3-3.5}{3.5}=-\frac{1}{7}$  
+|  $2$  |   $\frac{   |     2-6     | }{1}$ | $\frac{|2+6|+|2+1|+|2-1|}{3}$  |  $\frac{(10/3)-4}{4}=-\frac{1}{6}$  
+|  $6$  |   $\frac{   |     6-2     | }{1}$ | $\frac{|6+4|+|6+1|+|6-1|}{3}$  |  $\frac{(22/3)-4}{(22/3)}=\frac{5}{11}$  
 :::
 ::::
 
@@ -451,6 +506,10 @@ X.groupby(q)["sil"].median()
 The scores for clusters labelled as 1 and 2 are pretty good and almost the same as for the original reference clustering. But the other two clusters score much more poorly separately than they did when they were considered a single cluster. 
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/icu3cmmi38cuzz7/Example6_7.mp4?raw=1 >}}
+:::
+
 ::::{#exm-cluster-perform-digits}
 `sklearn` has a well-known dataset that contains labeled handwritten digits. Let's extract the examples for just the numerals 4, 5, and 6:
 
@@ -482,6 +541,10 @@ sns.catplot(data=digits,
 The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. However, the existence of scores close to and below zero suggest that a clustering algorithm ia unlikely to reproduce the true classification perfectly. To put it another way, the features chosen to represent the digits don't seem to create three clear, well-separated balls of points representing the three different types of digits.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/sn7gaapl6gc7sea/Example6_8.mp4?raw=1 >}}
+:::
+
 Silhouette values are fairly easy to use. However, while we might consider a cluster to comprise points that are close only to other members of the cluster, silhouette values demand that the members of a cluster all be mutually close to one another. As a result, they favor compact, roughly spherical clusters.
 
 ::::{#exm-cluster-sil-bullseye}
@@ -498,6 +561,9 @@ sns.catplot(data=clusters,
 The central blob is considered OK, but the rings score poorly. 
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/f171zxlpriccdvq/Example6_9.mp4?raw=1 >}}
+:::
 
 ## k-means
 
@@ -807,8 +873,8 @@ $$
 
 **Single.** The pairwise distances between members of $C_1$ and $C_2$ form a $3\times 3$ matrix:
 
-|   | -3 | -2 | -1 |
-|--|--|--|--|
+|     | -3  | -2  | -1  |
+| --- | --- | --- | --- |
 3 | 6 | 5 | 4 |
 4 | 7 | 6 | 5 |
 5 | 8 | 7 | 6 |
