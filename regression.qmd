@@ -1603,7 +1603,7 @@ where $X_{i,1}$ and $X_{i,2}$ are the entries in the $i$th row of the feature ma
 $$
 r(w) = (2w-6)^2 + \alpha w^2,
 $$
-where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Show that if $\alpha>0$, then $r'(w)$ is zero at at most two values of $w$, both of which are less than 3. 
+where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Show that if $\alpha>0$, then $r'(w)$ is zero at a value of $w$ in the interval $(0,3)$. (This shows that the weight decreases in the presence of the regularization penalty.) 
 ::::
 
 ::::{#exr-regression-lasso}
@@ -1627,7 +1627,7 @@ $$
 :::: -->
 
 ::::{#exr-regression-linearity}
-For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.
+(5.4) For each function on two-dimensional vectors, either prove that it is linear or produce a counterexample that shows it cannot be linear.
 
 **(a)** $\hat{f}(\bfx) = x_1 x_2$
 
