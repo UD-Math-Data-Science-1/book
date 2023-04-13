@@ -1010,16 +1010,21 @@ Name: sil, dtype: float64</code></pre>
 <div class="quarto-video"><video id="video_shortcode_videojs_video10" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/f171zxlpriccdvq/Example6_9.mp4?raw=1"></video></div>
 </div></div></section>
 </section>
-<section id="k-means" class="level2" data-number="6.3">
+<section id="k-means" class="level2 page-columns page-full" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="k-means"><span class="header-section-number">6.3</span> k-means</h2>
 <p>The <strong><span class="math inline">\(k\)</span>-means algorithm</strong> is one of the best-known and most widely used clustering methods, although it has some significant limitations.</p>
 <p>Given a sample matrix <span class="math inline">\(\bfX\)</span> with <span class="math inline">\(n\)</span> rows <span class="math inline">\(\bfX_i\)</span>, the algorithm divides the sample points into disjoint sets <span class="math inline">\(C_1,\ldots,C_k\)</span>, where <span class="math inline">\(k\)</span> is a hyperparameter. We need a pair of key definitions.</p>
 <div id="def-cluster-kmeans" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6.5 </strong></span>The <strong>centroid</strong> of cluster <span class="math inline">\(C_j\)</span>, denoted by <span class="math inline">\(\bfmu_j\)</span>, is the mean of the vectors in <span class="math inline">\(C_j\)</span>. The <strong>inertia</strong> of <span class="math inline">\(C_j\)</span> is <span id="eq-cluster-inertia"><span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 6.5 </strong></span>The <strong>centroid</strong> of cluster <span class="math inline">\(C_j\)</span>, denoted by <span class="math inline">\(\bfmu_j\)</span>, is the mean of the vectors in <span class="math inline">\(C_j\)</span>: <span class="math display">\[
+\bfmu_j = \frac{1}{\abs{C_j}} \sum_{\bfx\in C_j} \bfx.
+\]</span> The <strong>inertia</strong> of <span class="math inline">\(C_j\)</span> is <span id="eq-cluster-inertia"><span class="math display">\[
 I_j = \sum_{\bfx\in C_j} \norm{ \bfx - \bfmu_j }_2^2.
 \tag{6.2}\]</span></span></p>
 </div>
-<p>The goal of the <span class="math inline">\(k\)</span>-means algorithm is to choose the clusters in order to minimize the total inertia,</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video11" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/9ay1njua14zlibj/Section6_3.mp4?raw=1"></video></div>
+</div></div><p>The goal of the <span class="math inline">\(k\)</span>-means algorithm is to choose the clusters in order to minimize the total inertia,</p>
 <p><span class="math display">\[
 I = \sum_{j=1}^k I_j.
 \]</span></p>
@@ -1048,20 +1053,23 @@ C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.
 </div>
 </div>
 <p>Finding the minimum inertia among all possible <span class="math inline">\(k\)</span>-clusterings is an infeasible problem to solve exactly at any practical size. Instead, the approach is to iteratively improve on a starting clustering.</p>
-<section id="lloyds-algorithm" class="level3" data-number="6.3.1">
+<section id="lloyds-algorithm" class="level3 page-columns page-full" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="lloyds-algorithm"><span class="header-section-number">6.3.1</span> Lloyd’s algorithm</h3>
 <p>The most-used iteration is known as <strong>Lloyd’s algorithm</strong>. Starting with values for the <span class="math inline">\(k\)</span> centroids, each iteration consists of two steps:</p>
-<ol type="1">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video12" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/d3l4ouuu6i4byxl/Section6_3_1.mp4?raw=1"></video></div>
+</div></div><ol type="1">
 <li>Each sample point is assigned to the cluster whose centroid is the nearest. (Ties are broken randomly.)</li>
 <li>Recalculate the centroids based on the cluster assignments: <span class="math display">\[
 \bfmu_j^+ = \frac{1}{|C_j|} \sum_{\bfx\in C_j} \bfx.
 \]</span></li>
 </ol>
 <p>These steps are repeated alternately until the assignment step does not change any of the clusters. In practice, this almost always happens quickly. Here is a demonstration:</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video11" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="./_media/kmeans_demo.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video21" width="480" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="./_media/kmeans_demo.mp4"></video></div>
 <p>If Lloyd’s algorithm converges, it finds a local minimum of total inertia, in the sense that small changes to the cluster assignments cannot decrease it. But there is no guarantee of converging to the global minimum, and often, this does not happen.</p>
 </section>
-<section id="practical-issues" class="level3" data-number="6.3.2">
+<section id="practical-issues" class="level3 page-columns page-full" data-number="6.3.2">
 <h3 data-number="6.3.2" class="anchored" data-anchor-id="practical-issues"><span class="header-section-number">6.3.2</span> Practical issues</h3>
 <ul>
 <li><strong>Initialization</strong>. The performance of <span class="math inline">\(k\)</span>-means depends a great deal on the initial set of centroids. Traditionally, the centroids were chosen as random members of the sample set, but more reliable heuristics, such as <em><span class="math inline">\(k\)</span>-means++</em>, have since become dominant.</li>
@@ -1207,7 +1215,10 @@ Name: sil, dtype: float64</code></pre>
 </div>
 <p>Based on silhouette scores, we would be justified to stop at <span class="math inline">\(k=3\)</span> clusters.</p>
 </div>
-<div id="exm-cluster-kmeans-stripes" class="theorem example">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/fw3had5030zediv/Example6_11.mp4?raw=1"></video></div>
+</div></div><div id="exm-cluster-kmeans-stripes" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6.12 </strong></span>The <em>stripes</em> dataset does not conform to compact clusters of equal size, and <span class="math inline">\(k\)</span>-means performs poorly on it:</p>
 <div class="cell" data-execution_count="29">
 <details>
@@ -1381,15 +1392,24 @@ dtype: float64</code></pre>
 </div>
 <p>The silhouette score is maximized at <span class="math inline">\(k=3\)</span>, which could be considered a reason to choose 3 clusters. While the score for 4 clusters is close to it, we should prefer the less complex model.</p>
 </div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video14" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/kvppujcih39j8xa/Example6_13.mp4?raw=1"></video></div>
+</div></div></section>
 </section>
-</section>
-<section id="hierarchical-clustering" class="level2" data-number="6.4">
+<section id="hierarchical-clustering" class="level2 page-columns page-full" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">6.4</span> Hierarchical clustering</h2>
 <p>The idea behind hierarchical clustering is to organize all the sample points into a tree structure called a <strong>dendrogram</strong>. At the root of the tree is the entire sample set, while each leaf of the tree is a single sample. Groups of similar samples are connected as nearby relatives in the tree, with less-similar groups located as more distant relatives.</p>
-<p>Dendrograms can be found by starting with the root and recursively splitting, or by starting at the leaves and recursively merging. We will describe the latter approach, known as <strong>agglomerative clustering</strong>.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video15" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/kybi7xus8j9b3le/Section6_4a.mp4?raw=1"></video></div>
+</div></div><p>Dendrograms can be found by starting with the root and recursively splitting, or by starting at the leaves and recursively merging. We will describe the latter approach, known as <strong>agglomerative clustering</strong>.</p>
 <p>The algorithm begins with <span class="math inline">\(n\)</span> singleton clusters, i.e., <span class="math inline">\(C_i=\{\bfX_i\}\)</span> for <span class="math inline">\(i=1,\dots,n\)</span>. Then, the similarity or distance between each pair of clusters is determined. The pair with the minimum distance is merged, and the process repeats. Effectively, we end up with an entire family of clusterings; we can stop at any number of clusters between <span class="math inline">\(n\)</span> and 1.</p>
 <p>Common ways to define the distance between two clusters <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span> are:</p>
-<ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video16" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/c75mj4898gfmu4o/Section6_4b.mp4?raw=1"></video></div>
+</div></div><ul>
 <li><dl>
 <dt>single linkage</dt>
 <dd>
@@ -1468,7 +1488,11 @@ The increase in inertia resulting from merging <span class="math inline">\(C_i\)
 <p><strong>Average.</strong> The average value of the matrix entries is <span class="math inline">\(54/9\)</span>, which is 6.</p>
 </div>
 </div>
-<div id="exm-cluster-hier-toy" class="theorem example">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video17" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/wn5rfrbym4g9j1m/Example6_14b.mp4?raw=1"></video></div>
+<p>(video example is different from the text)</p>
+</div></div><div id="exm-cluster-hier-toy" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6.15 </strong></span>Let’s use 5 sample points in the plane, and agglomerate them by single linkage. The <code>pairwise_distances</code> function converts sample points into a distance matrix:</p>
 <div class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array( [[<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">1</span>] ,[<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">2</span>], [<span class="dv">1</span>,<span class="fl">0.5</span>], [<span class="dv">0</span>,<span class="dv">2</span>], [<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>]] )</span>
@@ -1502,7 +1526,10 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 <p>The horizontal position in the dendrogram indicates the linkage value, which is largest at the left. Working from right to left, we first see the merger of samples 0 and 1 at the minimum linkage in the entire distance matrix. The next merger is between <span class="math inline">\(\bfX_3\)</span> and <span class="math inline">\(\bfX_4\)</span>, and so on.</p>
 <p>We can choose to stop at any horizontal position (linkage value). Based on the distance matrix, if we stop at a linkage value of 2.0, then we perform only the first 2 merges and get 3 clusters. The largest gap between merges is in the merge from 2 clusters to 1, which could be used to justify <span class="math inline">\(k=2\)</span> as the best number of clusters.</p>
 </div>
-<p>The <code>AgglomerativeClustering</code> class in <code>sklearn.cluster</code> performs the clustering process to create a learner object.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video18" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/edu4as9fwwozedo/Example6_15.mp4?raw=1"></video></div>
+</div></div><p>The <code>AgglomerativeClustering</code> class in <code>sklearn.cluster</code> performs the clustering process to create a learner object.</p>
 <div id="exm-cluster-linkage" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6.16 </strong></span>We define a function that allows us to run all three linkages for a given feature matrix:</p>
 <div class="cell" data-execution_count="37">
@@ -1577,7 +1604,10 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 </div>
 <p>That instability can make single linkage difficult to work with.</p>
 </div>
-<div id="exm-cluster-penguins" class="theorem example">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video19" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/h4as5ck4sufn45a/Example6_16.mp4?raw=1"></video></div>
+</div></div><div id="exm-cluster-penguins" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6.17 </strong></span>Let’s try agglomerative clustering to “discover” the species of the penguins, pretending we don’t know them in advance. First, let’s recall how many of each species we actually do have:</p>
 <div class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>).dropna()</span>
@@ -1750,7 +1780,10 @@ Name: ward, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins">Example&nbsp;<span>6.17</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video20" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/uzu954euu5twqxh/Example6_17.mp4?raw=1"></video></div>
+</div></div><p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins">Example&nbsp;<span>6.17</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
 </section>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
@@ -2098,6 +2131,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video9);</script>
 <script>videojs(video_shortcode_videojs_video10);</script>
 <script>videojs(video_shortcode_videojs_video11);</script>
+<script>videojs(video_shortcode_videojs_video12);</script>
+<script>videojs(video_shortcode_videojs_video13);</script>
+<script>videojs(video_shortcode_videojs_video14);</script>
+<script>videojs(video_shortcode_videojs_video15);</script>
+<script>videojs(video_shortcode_videojs_video16);</script>
+<script>videojs(video_shortcode_videojs_video17);</script>
+<script>videojs(video_shortcode_videojs_video18);</script>
+<script>videojs(video_shortcode_videojs_video19);</script>
+<script>videojs(video_shortcode_videojs_video20);</script>
+<script>videojs(video_shortcode_videojs_video21);</script>
 
 
 
