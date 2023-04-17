@@ -1366,7 +1366,7 @@ logreg.predict_proba( X_test.iloc[:5,:] )
 
 From these, we could use ROC and AUC metrics as we did in @sec-class-probabilistic. 
 
-Let's repeat the computation with a standardization pipeline, so that we can easily compare the magnitudes of the weights:
+Let's repeat the computation with a standardization pipeline, so that we can easily compare the magnitudes of the weights in the coefficient vector:
 ```{python}
 pipe = make_pipeline(StandardScaler(), logreg)
 pipe.fit(X_train, y_train)
@@ -1380,6 +1380,10 @@ print()
 print("most spammy features:")
 print(weights[-4:])
 ```
+
+::: {.callout-caution}
+For a `LinearRegression` and its regularized siblings, the `coef_` property of a trained learner is a vector of coefficients, while for `LogisticRegression`, it is a matrix with one row. The reason is that logistic regression is often applied to a multiclass problem, and there is one row for each version of the one-vs-rest fit.
+:::
 
 We see above that the word "george" is a strong counter-indicator for spam; remember that this data set comes from an individual's inbox. Its presence makes the inner product $\bfx^T\bfw$ more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability of spam closer to 1. 
 ::::
@@ -1416,6 +1420,14 @@ logreg = LogisticRegression(solver="liblinear")
 logreg.fit(X_train, y_train)
 acc = logreg.score(X_test, y_test)
 print(f"accuracy with default regularization is {acc:.2%}")
+```
+
+The regularization parameter in a `LogisticRegression` can be set using the `C=` keyword:
+```{python}
+logreg = LogisticRegression(solver="liblinear", C=0.5)
+logreg.fit(X_train, y_train)
+acc = logreg.score(X_test, y_test)
+print(f"accuracy with C=0.5 is {acc:.2%}")
 ```
 
 A validation-based grid search is one way to look for the optimal regularization. Usually, we want the grid values of $C$ to be spaced exponentially, not equally. For example,
@@ -1638,7 +1650,7 @@ $$
 
 
 ::::{#exr-regression-splits}
-(5.4) Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAD-based $Q$ score for the following hypothetical decision tree splits.
+(5.4) Given the data set $(x_i,y_i)=\{(0,-1),(1,1),(2,3),(3,0),(4,3)\}$, find the MAE-based $Q$ score for the following hypothetical decision tree splits.
 
 **(a)** $x \le 0.5, \qquad$ **(b)** $x \le 1.5, \qquad$ **(c)** $x \le 2.5,\qquad$ **(d)** $x \le 3.5$.
 ::::
@@ -1648,7 +1660,7 @@ $$
 
 ![](_media/griddata.png){width="360"}
 
-Let $\hat{f}(x_1,x_2)$ be the kNN regressor using $k=4$, Euclidean metric, and mean averaging. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $2\le t \le 2$.
+Let $\hat{f}(x_1,x_2)$ be the kNN regressor using $k=4$, Euclidean metric, and mean averaging. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $-2\le t \le 2$.
 
 **(a)** $g(t) = \hat{f}(1.2,t)$ 
 
