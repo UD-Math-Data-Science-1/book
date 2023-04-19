@@ -572,11 +572,19 @@ The **$k$-means algorithm** is one of the best-known and most widely used cluste
 Given a sample matrix $\bfX$ with $n$ rows $\bfX_i$, the algorithm divides the sample points into disjoint sets $C_1,\ldots,C_k$, where $k$ is a hyperparameter. We need a pair of key definitions.
 
 ::::{#def-cluster-kmeans}
-The **centroid** of cluster $C_j$, denoted by $\bfmu_j$, is the mean of the vectors in $C_j$. The **inertia** of $C_j$ is 
+The **centroid** of cluster $C_j$, denoted by $\bfmu_j$, is the mean of the vectors in $C_j$:
+$$
+\bfmu_j = \frac{1}{\abs{C_j}} \sum_{\bfx\in C_j} \bfx.
+$$
+The **inertia** of $C_j$ is 
 $$
 I_j = \sum_{\bfx\in C_j} \norm{ \bfx - \bfmu_j }_2^2.
 $$ {#eq-cluster-inertia}
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/9ay1njua14zlibj/Section6_3.mp4?raw=1 >}}
+:::
 
 The goal of the $k$-means algorithm is to choose the clusters in order to minimize the total inertia,
 
@@ -622,6 +630,10 @@ Finding the minimum inertia among all possible $k$-clusterings is an infeasible 
 ### Lloyd's algorithm
 
 The most-used iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, each iteration consists of two steps:
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/d3l4ouuu6i4byxl/Section6_3_1.mp4?raw=1 >}}
+:::
 
 1. Each sample point is assigned to the cluster whose centroid is the nearest. (Ties are broken randomly.)
 2. Recalculate the centroids based on the cluster assignments:
@@ -718,6 +730,10 @@ report(km4);
 
 Based on silhouette scores, we would be justified to stop at $k=3$ clusters. 
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/fw3had5030zediv/Example6_11.mp4?raw=1 >}}
+:::
 
 ::::{#exm-cluster-kmeans-stripes}
 The *stripes* dataset does not conform to compact clusters of equal size, and $k$-means performs poorly on it:
@@ -821,15 +837,27 @@ pd.Series(results, index=kvals)
 The silhouette score is maximized at $k=3$, which could be considered a reason to choose 3 clusters. While the score for 4 clusters is close to it, we should prefer the less complex model.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/kvppujcih39j8xa/Example6_13.mp4?raw=1 >}}
+:::
+
 ## Hierarchical clustering
 
 The idea behind hierarchical clustering is to organize all the sample points into a tree structure called a **dendrogram**. At the root of the tree is the entire sample set, while each leaf of the tree is a single sample. Groups of similar samples are connected as nearby relatives in the tree, with less-similar groups located as more distant relatives.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/kybi7xus8j9b3le/Section6_4a.mp4?raw=1 >}}
+:::
 
 Dendrograms can be found by starting with the root and recursively splitting, or by starting at the leaves and recursively merging. We will describe the latter approach, known as **agglomerative clustering**.
 
 The algorithm begins with $n$ singleton clusters, i.e., $C_i=\{\bfX_i\}$ for $i=1,\dots,n$. Then, the similarity or distance between each pair of clusters is determined. The pair with the minimum distance is merged, and the process repeats. Effectively, we end up with an entire family of clusterings; we can stop at any number of clusters between $n$ and 1. 
 
 Common ways to define the distance between two clusters $C_i$ and $C_j$ are:
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/c75mj4898gfmu4o/Section6_4b.mp4?raw=1 >}}
+:::
 
 * single linkage
 : (also called *minimum linkage*)
@@ -887,6 +915,13 @@ $$
 :::
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/wn5rfrbym4g9j1m/Example6_14b.mp4?raw=1 >}}
+
+(video example is different from the text)
+:::
+
+
 ::::{#exm-cluster-hier-toy}
 Let's use 5 sample points in the plane, and agglomerate them by single linkage. The `pairwise_distances` function converts sample points into a distance matrix:
 
@@ -922,6 +957,10 @@ The horizontal position in the dendrogram indicates the linkage value, which is 
 
 We can choose to stop at any horizontal position (linkage value). Based on the distance matrix, if we stop at a linkage value of 2.0, then we perform only the first 2 merges and get 3 clusters. The largest gap between merges is in the merge from 2 clusters to 1, which could be used to justify $k=2$ as the best number of clusters.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/edu4as9fwwozedo/Example6_15.mp4?raw=1 >}}
+:::
 
 The `AgglomerativeClustering` class in `sklearn.cluster` performs the clustering process to create a learner object.
 
@@ -999,6 +1038,10 @@ fig.set(aspect=1);
 That instability can make single linkage difficult to work with.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/h4as5ck4sufn45a/Example6_16.mp4?raw=1 >}}
+:::
+
 ::::{#exm-cluster-penguins}
 Let's try agglomerative clustering to "discover" the species of the penguins, pretending we don't know them in advance. First, let's recall how many of each species we actually do have:
 
@@ -1071,6 +1114,10 @@ C = confusion_matrix(y, y_hat)
 ConfusionMatrixDisplay(C, display_labels=y.unique()).plot();
 ```
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/uzu954euu5twqxh/Example6_17.mp4?raw=1 >}}
+:::
 
 While the performance of clustering as a classifier in @exm-cluster-penguins is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.
 
