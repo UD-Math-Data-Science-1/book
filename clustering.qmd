@@ -1149,12 +1149,19 @@ $$
 ::::
 
 ::::{#exr-cluster-performance}
-(6.2) Here are two clusterings on 6 samples.
+(6.2) Here are two clusterings on 6 samples:
 $$
 \begin{split}
 \text{A}:\: & C_1 = \{\bfX_1,\bfX_4\}, \; C_2=\{\bfX_2,\bfX_3,\bfX_5,\bfX_6 \}  \\ 
 \text{B}:\: & C_1 = \{\bfX_1,\bfX_2\}, \; C_2=\{\bfX_3,\bfX_4\}, \; C_3 = \{\bfX_5,\bfX_6 \}
 \end{split}
+$$
+
+Here is a distance matrix for these samples: 
+$$
+\begin{bmatrix}
+0 & 2 & 2 & 1 & 4 & 1 \\ 2 & 0 & 3 & 5& 1  & 2 \\ 2 & 3 & 0 & 6 & 2 & 1 \\ 1 & 5 & 6 & 0 & 8 & 4 \\ 4 & 1 & 2 & 8 & 0 & 3 \\ 1 & 2 & 1 & 4 & 3 & 0 
+\end{bmatrix}
 $$
 
 **(a)** Find the Rand index between these clusterings.
