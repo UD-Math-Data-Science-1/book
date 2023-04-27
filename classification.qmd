@@ -51,9 +51,9 @@ In math, we usually start the row and column indexes at 1, but Python starts the
 
 Each row of the feature matrix is a single feature vector, while each column is the value for a single feature over the entire training set.
 
-::: {#exm-class-basketball}
+::::{#exm-class-basketball}
 Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a $200\times 9$ feature matrix.
-:::
+::::
 
 We can also collect the associated training labels into the **label vector**
 
@@ -396,7 +396,7 @@ print( f"accuracy = {(7570 + 26) / np.sum(C):.1%}" )
 (In practice, of course, we can use the `accuracy` function we imported earlier.) Here are the other primary scores:
 
 ```{python}
-TP,FN,FP,TN = C.ravel()    # grab the 4 values in the confusion matrix
+TP, FN, FP, TN = C.ravel()    # grab the 4 values in the confusion matrix
 print( f"recall = {TP/(TP+FN):.1%}" )
 print( f"specificity = {TN/(TN+FP):.1%}" )
 print( f"precision = {TP/(TP+FP):.1%}" )
@@ -435,7 +435,7 @@ The loan classifier has excellent recall, respectable precision, and terrible sp
 :::
 
 
-:::{#exm-class-scores-simple}
+::::{#exm-class-scores-simple}
 If $k$ of the $n$ testing samples were funded loans, then the fund-them-all loan classifier has
 
 $$
@@ -457,7 +457,7 @@ $$
 $$
 
 independently of $a$. This quantity is sensitive to the low specificity.
-:::
+::::
 
 ### Multiclass classifiers
 

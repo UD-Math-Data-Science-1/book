@@ -207,9 +207,9 @@ Some sources reserve the term *quantile* for another meaning, but since pandas o
 
 The unbiased sample median of $x_1,\ldots,x_n$ can be computed by sorting the values into $y_1,\ldots,y_n$. If $n$ is odd, then $y_{(n+1)/2}$ is the sample median; otherwise, the average of $y_{n/2}$ and $y_{1+(n/2)}$ is the sample median. 
 
-:::{#exm-stats-median}
+::::{#exm-stats-median}
 If the sorted values are $1,3,3,4,5,5,5$, then $n=7$ and the sample median is $y_4=4$. If the sample values are $1,3,3,4,5,5,5,9$, then $n=8$ and the sample median is $(4+5)/2=4.5$.
-:::
+::::
 
 Computing unbiased sample estimates of percentiles other than the median is complicated, and we won't go into the details. For large datasets, the sample values are good estimators in practice.
 
@@ -259,7 +259,7 @@ Sometimes the definition above is extended to the *zeroth quartile*, which is th
 
 IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.
 
-::::{#exm-data-describe}
+::::{#exm-stats-describe}
 The dataframe `describe` method includes mean, standard deviation, and the quartiles:
 
 ```{python}
@@ -287,7 +287,7 @@ Mean and STD, or median and IQR, attempt to summarize quantitative data with a c
 
 ### CDF
 
-::::{#def-data-cdf}
+::::{#def-stats-cdf}
 The **cumulative distribution function** (CDF) of a population is the function 
 $$
 F(t) = \text{fraction of the population that is $\le t$},
@@ -297,7 +297,7 @@ where $t$ ranges over all possible values.
 
 Note that by its definition, $F$ ranges between 0 and 1 (inclusive) and is a nondecreasing function.
 
-::::{#exm-data-uniform-discrete}
+::::{#exm-stats-uniform-discrete}
 If a population is $x_i=i$ for $i=1,\ldots,n$, then $F(k)=k/n$ at each $k=1,\ldots,n$. We could, however, also regard $F$ as a function of a continuous variable $t$, in which case
 $$
 F(t) = \frac{\lfloor t \rfloor}{n},
@@ -309,18 +309,18 @@ where $\lfloor\cdot\rfloor$ is the *floor function* that rounds leftward to the 
 {{< video https://www.dropbox.com/s/z8di9mumdeyb4u5/Example2_7.mp4?raw=1 >}}
 :::
 
-@exm-data-uniform-discrete becomes interesting as a template for generalizing to infinite populations. If we take not $x_i=i$ but $x_i=i/n$ and then let $n\to \infty$, then the graph of $F$ converges to
+@exm-stats-uniform-discrete becomes interesting as a template for generalizing to infinite populations. If we take not $x_i=i$ but $x_i=i/n$ and then let $n\to \infty$, then the graph of $F$ converges to
 $$
 F(t) = \begin{cases} 
 0, & t < 0, \\ 
 t,& 0 \le t \le 1, \\ 
 1,& t > 1.
 \end{cases}
-$$  {#eq-data-uniform-cdf}
+$$  {#eq-stats-uniform-cdf}
 While it doesn't make sense to think about a fraction of the number of values in the infinite case, we can interpret $F(t)$ as the *probability of observing a value less than or equal to the real number $t$. 
 
-::::{#def-data-uniform-cdf}
-A **uniform distribution** gives an equal probability to every value. In particular, the uniform distribution over the interval $[0,1]$ has the CDF given in @eq-data-uniform-cdf.
+::::{#def-stats-uniform-cdf}
+A **uniform distribution** gives an equal probability to every value. In particular, the uniform distribution over the interval $[0,1]$ has the CDF given in @eq-stats-uniform-cdf.
 ::::
 
 ### Empirical CDF
@@ -356,7 +356,7 @@ sns.displot(x, kind="ecdf");
 
 By definition, we know that if $a<b$, $\hat{F}(b) - \hat{F}(a)$ is the number of observations in the half-open interval $(a,b]$. This leads into the next definition.
 
-::::{#def-data-histogram}
+::::{#def-stats-histogram}
 Select the ordered values $t_1 < t_2 < \cdots < t_m$, called **edges**, and define **bins** as the intervals
 $$
 B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
@@ -366,7 +366,7 @@ where we adopt the convention that $t_0=-\infty$ and  $t_{m+1}=\infty$. Let $c_k
 
 The default for a seaborn `displot` is to show a histogram.
 
-::::{#exm-data-uniform-hist}
+::::{#exm-stats-uniform-hist}
 Continuing with the uniform distribution over $[0,1]$:
 
 ```{python}
@@ -387,14 +387,14 @@ sns.displot(x, bins=40);
 Again something interesting happens in a limiting case. If we normalize the count in a bin by the length of that bin, we get
 $$
 \frac{c_k}{t_{k+1}-t_k} = \frac{\hat{F}(t_{k+1})-\hat{F}(t_k)}{t_{k+1}-t_k}. 
-$$  {#eq-data-pdf}
-If we let the number of observations tend to infinity, then $\hat{F}$ will converge to $F$, and if we also let the number of bins go to infinity, then the fraction in @eq-data-pdf converges to $F'(t_k)$. 
+$$  {#eq-stats-pdf}
+If we let the number of observations tend to infinity, then $\hat{F}$ will converge to $F$, and if we also let the number of bins go to infinity, then the fraction in @eq-stats-pdf converges to $F'(t_k)$. 
 
-::::{#def-data-pdf}
+::::{#def-stats-pdf}
 The **probability density function** or PDF of a distribution is the derivative of the CDF.
 ::::
 
-::::{#exm-data-uniform-pdf}
+::::{#exm-stats-uniform-pdf}
 If we have many samples, then we can use a normalized histogram to give an approximation of the PDF:
 ```{python}
 x = rng.uniform( size=(20000,) )
@@ -755,9 +755,9 @@ Informally, an **outlier** is a data value that is considered to be far from typ
 
 It is well known, for instance, that the mean is more sensitive to outliers than the median is. 
 
-:::{#exm-stats-median-mean}
+::::{#exm-stats-median-mean}
 The values $1,2,3,4,5$ have a mean and median both equal to 3. If we change the largest value to be a lot larger, say $1,2,3,4,1000$, then the mean changes to 202. But the median is still 3!
-:::
+::::
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/jyo9ziubt09kgrj/Section2_4.mp4?raw=1 >}}

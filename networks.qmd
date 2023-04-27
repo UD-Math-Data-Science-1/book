@@ -9,7 +9,6 @@ import numpy as np
 from numpy.random import default_rng
 import pandas as pd
 import seaborn as sns
-from numpy.random import default_rng
 import matplotlib as mpl
 mpl.rcParams["figure.figsize"] = [4.8, 3.6]
 ```
@@ -27,6 +26,10 @@ In an **undirected graph**, the edge $(a,b)$ is identical to $(b,a)$, while in a
 
 In either type of graph, each edge might be labeled with a numerical value, which results in a **weighted graph**.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/mnyibemjcyg9rvq/Section7_1.mp4?raw=1 >}}
+:::
 
 Undirected, unweighted graphs will give us plenty to handle, and we will not go beyond them. We also will not allow graphs that have an edge from a node to itself.
 
@@ -54,24 +57,30 @@ print(network)
 H = nx.from_pandas_edgelist(network, 'from', 'to')
 nx.draw(H, with_labels=True, node_color="lightblue")
 ```
-::::
 
-::::{#exm-networks-deconstruct}
-We can deconstruct a graph object into its constituent nodes and edges. The results have special types that can be converted into sets, lists, or other objects.
+We can deconstruct a graph object into its constituent nodes and edges, as they are properties of the graph object. The results have special types that can be converted into sets, lists, or other objects.
 
 ```{python}
 print("Nodes as a list:")
 print( list(star.nodes) )
 print("\nNodes as an Index:")
 print( pd.Index(star.nodes) )
+print("\nEdges as a list:")
+print( list(star.edges) )
 ```
 
-It's also easy to get a list of any node's neighbors using bracket indexing:
-
+We can change the labels of the nodes to be whatever we want:
 ```{python}
-print( "Neighbors of node 3 in graph H:", list(H[3]) )
+relabel = pd.Series( ["a","b","c","d","e","f"], index=range(1,7) )
+star_letter = nx.relabel_nodes(star, relabel )
+print("Edges as a list:")
+print( list(star_letter.edges) )
 ```
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/yoz9nt127g6gss9/Example7_1.mp4?raw=1 >}}
+:::
 
 ::::{#exm-networks-import}
 There are many ways to read graphs from, and write them to, files. For example, here is a friend network among Twitch users:
@@ -97,26 +106,7 @@ print("Twitch network has",
     )
 ```
 
-Due to its large size, this graph is difficult to draw in its entirety. We can zoom in on a subset by selecting a node and its **ego graph**, which includes its neighbors along with all edges between the captured nodes:
-
-```{python}
-ego = nx.ego_graph(twitch, 400)
-nx.draw(ego, with_labels=True, node_size=800, node_color="yellow")
-```
-
-Notice that the nodes of the ego network have the same labels as they did in the graph that it was taken from. We can widen the ego graph to include the ego graphs of all the neighbors:
-
-```{python}
-big_ego = nx.ego_graph(twitch, 400, radius=2)
-print(big_ego.number_of_nodes(), "nodes and", 
-    big_ego.number_of_edges(), "edges")
-
-pos = nx.spring_layout(big_ego, iterations=60)
-nx.draw(big_ego, 
-    pos=pos, width=0.2, node_size=10, node_color="purple")
-```
-
-The reason for the two-step process in making the drawing above is that computing the node positions via springs takes a hidden computational iteration. By calling that iteration explicitly, we were able to stop it early and save time.
+Due to its large size, this graph is difficult to draw in its entirety. 
 ::::
 
 ::: {.callout-note}
@@ -130,6 +120,10 @@ There are functions that generate different well-studied types of graphs. The fi
 ```{python}
 nx.draw(nx.cycle_graph(9))
 ```
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/1v4q24xjva1uzn0/Section7_1_1.mp4?raw=1 >}}
+:::
 
 A cross between the star and the cycle is a **wheel graph**.
 
@@ -177,14 +171,50 @@ nx.draw_circular(lat, node_size=100)
 
 As you can see, it's not easy to tell how similar two graphs are by comparing renderings of them.
 
-### Adjacency
+### Neighbors
 
-The most salient feature of a graph is how each node connects to others.
+The essence of a graph is how each node connects to others.
 
 ::::{#def-networks-adjacency}
-Nodes are said to be **adjacent** if they share an edge. 
-The **neighbors** of a node are the nodes that are adjacent to it.
+Nodes are said to be **adjacent** if they share an edge. The **neighbors** of a node are the nodes that are adjacent to it.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/duq4do3avuxsw63/Section7_1_2.mp4?raw=1 >}}
+:::
+
+::::{#exm-networks-neighbors}
+We get the neighbors of a node by using it as an index on the graph object. As with nodes and edges, we usually need to convert the result into a more convenient form:
+```{python}
+print( "Neighbors of node 1 in the star graph:", list(star[1]) )
+print( "Neighbors of node 6 in the star graph:", list(star[6]) )
+```
+::::
+
+::::{#exm-networks-ego}
+We can zoom in on a subset of the Twitch graph by selecting a node and its **ego graph**, which includes its neighbors along with all edges between the captured nodes:
+
+```{python}
+ego = nx.ego_graph(twitch, 400)
+nx.draw(ego, with_labels=True, node_size=800, node_color="yellow")
+```
+
+Notice that the nodes of the ego network have the same labels as they did in the graph that it was taken from. We can widen the ego graph to include the ego graphs of all the neighbors:
+
+```{python}
+big_ego = nx.ego_graph(twitch, 400, radius=2)
+
+print(big_ego.number_of_nodes(), "nodes and", 
+    big_ego.number_of_edges(), "edges")
+
+nx.draw(big_ego, 
+    width=0.2, node_size=10, node_color="purple")
+```
+::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/p41spzy6y0un1lp/Example7_4.mp4?raw=1 >}}
+:::
 
 We can represent all the adjacency relationships at once using a matrix. 
 
@@ -197,6 +227,12 @@ A_{ij} = \begin{cases}
     \end{cases}
 $$
 ::::
+
+In an undirected graph, we have 
+$$
+A_{ij}=A_{ji}
+$$ 
+for all valid indices, and we say that $A$ is **symmetric**.
 
 ::::{#exm-networks-adjmatrix}
 The star graph defined in @sec-networks-zoo has the following adjacency matrix:
@@ -218,11 +254,9 @@ A.toarray()
 ```
 ::::
 
-In an undirected graph, we have 
-$$
-A_{ij}=A_{ji}
-$$ 
-for all valid indices, and we say that $A$ is **symmetric**.
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/mtrrgz1v14d0umi/Example7_5.mp4?raw=1 >}}
+:::
 
 ### Degree
 
@@ -230,37 +264,45 @@ for all valid indices, and we say that $A$ is **symmetric**.
 The **degree** of a node is the number of neighbors it has. The **average degree** of a graph is the mean of the degrees of all of its nodes. 
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/inj7xdfz4quhtws/Section7_1_3.mp4?raw=1 >}}
+:::
+
 It's common to use the notation $\bar{k}$ for the average degree of a graph.
 
-The `degree` property of a NetworkX graph gives a dictionary-style object of all nodes with their degrees.
+The `degree` property of a NetworkX graph gives an object of all nodes with their degrees.
 
 ::::{#exm-networks-degree}
-Continuing with the graphs from @exm-networks-import:
+Continuing with the graph from @exm-networks-ego:
 
 ```{python}
 ego.degree
 ```
 
-The result here can be a bit awkward to work with; it's actually a *generator* of a list, rather than the list itself. (This "lazy" attitude is useful when dealing with very large networks.) So, for instance, we can collect it into a list of ordered tuples:
+The result here can be a bit awkward to work with; it's actually a *generator* of a list, rather than the list itself. (This "lazy" attitude is useful when dealing with very large networks.) We can transform it into different forms, such as a dictionary:
 
 ```{python}
-list(ego.degree)
+dict(ego.degree)
 ```
 
-It can be convenient to use a series or frame to keep track of quantities like degree that are associated with nodes:
+Given our comfort level with pandas, it might be most convenient to use a series or frame to keep track of such quantities:
 
 ```{python}
-nodes = pd.Index(ego.nodes)
-degrees = pd.Series(dict(ego.degree), index=nodes)
-degrees.head()
+degrees = pd.Series( dict(ego.degree) )
+degrees
 ```
 
 We can then do familiar calculations:
 ```{python}
-print("average degree of ego graph:", degrees.mean())
+print("mean degree of ego graph:", degrees.mean())
+print("median degree of ego graph:", degrees.median())
 ```
 As we are about to see, though, there's an easier way to compute the average degree.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/z6dxtnb0nfyie11/Example7_6.mp4?raw=1 >}}
+:::
 
 Here is our first nontrivial fact about graphs. 
 
@@ -275,6 +317,14 @@ $$
 If we sum the degrees of all the nodes, we must get $2m$, because each edge will have been contributed twice to the summation. Dividing by $n$ gives the mean. 
 :::
 
+::::{#exm-networks-avgdegree}
+Just to check the theorem on the ego graph from @exm-networks-ego:
+
+```{python}
+2*ego.number_of_edges() / ego.number_of_nodes()
+```
+::::
+
 ## Random graphs
 
 One way of understanding a real-world network is by comparing it to ones that are constructed randomly, but according to relatively simple rules. The idea is that if the real network behaves similarly to members of some random family, then perhaps it is constructed according to similar principles.
@@ -284,6 +334,10 @@ One way of understanding a real-world network is by comparing it to ones that ar
 Our first construction gives every potential edge an equal chance to exist. 
 
 Start with $n$ nodes and no edges. Suppose you have a weighted coin that comes up heads (100p)% of the time. For each pair of nodes, you toss the coin, and if it comes up heads, you add the edge between those nodes. This is known as an *ER graph*.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/yp5bbj8m2extln0/Section7_2_1.mp4?raw=1 >}}
+:::
 
 ::::{#def-networks-ER}
 An **Erdős-Rényi graph** (ER graph) is a graph in which each potential edge occurs with a fixed probability $p$.
@@ -309,18 +363,18 @@ There are two senses of averaging going on in @thm-networks-degree-ER:. We take 
 ```{python}
 n, p = 50, 0.08
 ER = nx.erdos_renyi_graph(n, p, seed=2)
-print(ER.number_of_nodes(),"nodes,",ER.number_of_edges(),"edges")
-nx.draw_circular(ER,node_size=50,edge_color="gray")
+print(ER.number_of_nodes(), "nodes,", ER.number_of_edges(), "edges")
+nx.draw_circular(ER, node_size=50, edge_color="gray")
 ```
 
 Here is the distribution of $\bar{k}$ over 20000 ER instances:
 
 ```{python}
-n, p = 41, 0.1
 def average_degree(G):
     return 2*G.number_of_edges() / G.number_of_nodes()
 
 kbar = []
+n, p = 41, 0.1
 for iter in range(20000):
     ER = nx.erdos_renyi_graph(n, p, seed=iter + 302)
     kbar.append( average_degree(ER) )
@@ -329,6 +383,10 @@ sns.displot( x=kbar, bins=23 );
 ```
 The mean of this distribution converges to $p(n-1)=4$ as the number of random instances goes to infinity.
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/n6akh3dl2ii2vbt/Example7_8.mp4?raw=1 >}}
+:::
 
 @thm-networks-degree states that the average degree in a graph with $n$ nodes and $m$ edges is $2m/n$. According to  @thm-networks-degree-ER, an ER graph will have the same expected average degree if 
 $$
@@ -346,12 +404,16 @@ That is, if connections in the Twitch network were made completely at random, th
 
 A **Watts–Strogatz graph** (WS graph) is a crude model of human social relationships. A WS graph has three parameters: $n$, an even integer $k$, and a probability $q$.
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/0kxrbt4g3tcvhbs/Section7_2_2.mp4?raw=1 >}}
+:::
+
 Imagine $n$ nodes arranged in a circle. In the first phase, we connect each node with an edge to all of its $k/2$ left neighbors and $k/2$ right neighbors. This setup, called a **ring lattice**, represents the idea that people have a local network of friends.   
 
 In the next phase, we rewire some of the local relationships into far-flung ones. We visit each node $i$ in turn. For each edge from $i$ to a neighbor, with probability $q$ we replace it with an edge between $i$ and a node chosen at random from all the nodes $i$ currently not adjacent to $i$. 
 
 ::::{#exm-networks-WS}
-If we set $q=0$, we disable the rewiring phase and get a regular structure:
+If we set $q=0$, we disable the rewiring phase and get a regular ring lattice:
 ```{python}
 WS = nx.watts_strogatz_graph(13, 4, 0, seed=302)
 nx.draw_circular(WS, node_size=100)
@@ -368,6 +430,10 @@ nx.draw_circular(WS, node_size=100)
 ```
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/xlt08okg62cg1hf/Example7_9.mp4?raw=1 >}}
+:::
+
 In the initial setup phase, every node in the WS graph has degree equal to $k$. The rewiring phase only changes edges---it does not insert nor delete them---so the average degree remains $k$. 
 
 ::::{#thm-networks-WS}
@@ -383,7 +449,7 @@ to get a WS graph of the same average degree as any other graph with $n$ nodes a
 ## Clustering
 
 ::: {.callout-note}
-The term *clustering* has a meaning in network analysis that has virtually nothing to do with our earlier use of *clustering* for samples in a feature matrix.
+The term *clustering* has a meaning in network analysis that has little to do with our earlier use of *clustering* for samples in a feature matrix.
 :::
 
 In your own social networks, your friends are probably more likely to be friends with each other than pure randomness would imply. There are various ways to quantify this effect precisely, but here is one of the simplest.
@@ -393,16 +459,10 @@ The **local clustering coefficient** for node $i$ is
 $$
 C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 $$
-where $d_i$ is the degree of the node and $T(i)$ is the number of edges between node $i$'s neighbors. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
+where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
 ::::
 
-Equivalently, the value of $T(i)$ is the number of triangles in the graph that include node $i$. 
-
-Because the subgraph of the neighbors has
-$$
-\binom{d_i}{2}
-$$
-possible edges, the value of $C(i)$ is between 0 and 1.
+The value of $T(i)$ is the same as the number of edges between node $i$'s neighbors. Because there are $\binom{d_i}{2}$ unique pairs of neighbors, the value of $C(i)$ is between 0 and 1.
 
 ::::{#exm-networks-cluster-small-world}
 Let's find the clustering coefficient for each node in this wheel graph:
@@ -420,62 +480,53 @@ $$
 C(i) = \frac{2}{3 \cdot 2 / 2} = \frac{2}{3}, \quad i\neq 0.
 $$
 
-In NetworkX, we can manually count the number of edges among neighbors of node 0 by examining its ego subgraph:
-
+The `clustering` function in NetworkX computes $C(i)$ for any single node: or for all the nodes in a graph.
 ```{python}
-nbrhood = W.subgraph( W[0] )    # does not include node 0 itself
-print(nbrhood.number_of_edges(), "edges among neighbors of node 0")
-nx.draw(nbrhood, with_labels=True, node_color="pink")
+print(f"node 0 clustering is {nx.clustering(W, 0):.7f}")
 ```
-
-More directly, though, the `clustering` function in NetworkX computes $C(i)$ for any single node, or for all the nodes in a graph.
-
+If not given a node label, the `clustering` function returns a dictionary of the clustering coefficients for all of the nodes. As usual, we can convert that output to a series or data frame.
 ```{python}
-print("node 0 clustering =", nx.clustering(W,0))
 print("\nclustering at each node:")
-print( pd.Series(nx.clustering(W), index=W.nodes) )
-```
-
-In addition, the `average_clustering` function will take the average over all nodes of the local clustering values. This is just for convenience when you want a single summary value; if you already computed the clustering values of all the nodes, then there is little point in using this function to take their mean.
-
-```{python}
-print("average clustering =", nx.average_clustering(W))
+print( pd.Series(nx.clustering(W)) )
 ```
 ::::
 
 ::::{#exm-networks-cluster-twitch}
-Let's examine clustering within the Twitch network. Here is the distribution of the node cluster values:
-
+Let's examine clustering within the Twitch network:
 ```{python}
 #| code-fold: true
 twitch = nx.read_edgelist("_datasets/musae_edges.csv", delimiter=',', nodetype=int)
 
-n, m = twitch.number_of_nodes(), twitch.number_of_edges()
-kbar = 2 * m / n
-print(f"{n} nodes, {m} edges, and average degree {kbar:.3f}")
-
-cluster = pd.Series(
-    nx.clustering(twitch), 
-    index=twitch.nodes,
-    name="clustering coeff"
-    )
-sns.displot(data=cluster);
+cluster = pd.Series(nx.clustering(twitch))
+cluster.head()
 ```
-
-The average clustering coefficient is: 
-
+The average clustering coefficient is
 ```{python}
 print( f"average Twitch clustering is {cluster.mean():.4f}" )
 ```
 
-<!-- How does this value compare to an ER graph? If we set the number of nodes and average degree to be the same, then the expected average clustering for ER graphs is $p=\bar{k}/(n-1)$:
-
+Suppose we want to explore the relationship between clustering and degree in the network. It's most convenient to store both values as columns of a data frame:
 ```{python}
-print( "average equivalent ER clustering:", kbar/(n-1) )
+props = pd.DataFrame()
+props["clustering"] = nx.clustering(twitch)
+props["degree"] = dict(twitch.degree)   # degree view converted to dict
+props.head()
 ```
 
-This is too small by a factor of 100! Clearly, the Twitch graph is not equivalent to a random graph in the sense of ER. From a sociological perspective, of course, this is a "no duh" conclusion. -->
+Here's the distribution of clustering coefficients:
+```{python}
+sns.displot(data=props, x="clustering");
+```
+There is a huge number of clustering values at zero. A plot of both quantities clarifies that these are due to nodes of degree 1:
+```{python}
+sns.relplot(data=props, x="degree", y="clustering", kind="line");
+```
+Other than that massive group, there is a negative association between degree and clustering coefficient in this network. 
 ::::
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/1g8lm6od2zkf14e/Example7_11.mp4?raw=1 >}}
+:::
 
 ### ER graphs
 
@@ -501,6 +552,10 @@ sns.displot(x=results);
 The distribution above can't be normal, because there are hard bounds at 0 and 1, but it looks similar to a normal distribution. The peak is at the value of $p$ used in the simulation, in accordance with @thm-networks-clustering-ER.
 ::::
 
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/xlyebdxotamgiym/Example7_12.mp4?raw=1 >}}
+:::
+
 In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 10 times larger than what is actually observed! Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
 
 ### WS graphs
@@ -516,10 +571,9 @@ n, k = 60, 6
 results = []
 seed = 302
 for q in np.arange(0.05, 1.05, 0.05):
-    for iter in range(40):
-        WS = nx.watts_strogatz_graph(n, k, q, seed=seed)
+    for iter in range(60):
+        WS = nx.watts_strogatz_graph(n, k, q, seed=seed+10*iter)
         results.append( (q, nx.average_clustering(WS)) )
-        seed += 1
 
 results = pd.DataFrame( results, columns=["q", "mean clustering"] )
 
@@ -542,7 +596,7 @@ for q in np.arange(0.15, 0.51, 0.05):
     results.append( (q, nx.average_clustering(WS)) )
     seed += 1
 
-print( pd.DataFrame( results, columns=["q", "mean clustering"] )) 
+pd.DataFrame( results, columns=["q", "mean clustering"] )
 ```
 
 The mean clustering for the Twitch network was found to be about 0.131 in @exm-networks-cluster-twitch. From the above, it appears that the WS graphs will have a similar mean clustering at around $q=0.42$. Let's freeze $q$ there and try more WS realizations to check:
@@ -559,8 +613,11 @@ print( f"avg WS clustering at q = 0.42 is {np.mean(cbar):.4f}" )
 ```
 ::::
 
-So far, the WS construction gives a plausible way to reconstruct the clustering observed in the Twitch network. However, there are many other graph properties left to examine!
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/3jbg9urgp5udaho/Example7_13.mp4?raw=1 >}}
+:::
 
+So far, the WS construction gives a plausible way to reconstruct the clustering observed in the Twitch network. However, there are many other graph properties left to examine!
 
 ## Distance
 
@@ -718,7 +775,7 @@ def pairdist(G):
     n = nx.number_of_nodes(G)
     i = j = rng.integers(0,n)
     while i==j: j=rng.integers(0,n)   # get distinct nodes
-    return nx.shortest_path_length(G,source=i,target=j)
+    return nx.shortest_path_length(G, source=i, target=j)
 
 distances = [ pairdist(twitch) for _ in range(50000) ]
 print("Pairwise distances in Twitch graph:")
@@ -762,7 +819,7 @@ As we well know, means of distributions do not always tell the entire story. For
 
 ```{python}
 twitch = nx.read_edgelist("_datasets/musae_edges.csv", delimiter=',', nodetype=int)
-twitch_degrees = pd.Series( dict(twitch.degree), index=twitch.nodes )
+twitch_degrees = pd.Series( dict(twitch.degree) )
 twitch_degrees.describe()
 ```
 
@@ -868,7 +925,7 @@ Because of preferential attachment, there is a strong tendency to develop a hubs
 Here is a BA graph with 200 nodes and $m=3$ connections per new node:
 ```{python}
 BA = nx.barabasi_albert_graph(200, 3, seed=302)
-BA_degrees = pd.Series( dict(BA.degree), index=BA.nodes )
+BA_degrees = pd.Series( dict(BA.degree) )
 nx.draw(
     BA, 
     node_size=6 * BA_degrees, 
@@ -887,7 +944,7 @@ For the Twitch network, $\bar{k}$ is almost 10, so we use $m=5$ to get a compara
 ```{python}
 m = round(kbar/2)
 BA = nx.barabasi_albert_graph(n, m, seed=5)
-BA_degrees = pd.Series( dict(BA.degree), index=BA.nodes )
+BA_degrees = pd.Series( dict(BA.degree) )
 hist = sns.displot(data=BA_degrees, log_scale=True)
 hist.axes[0,0].set_yscale("log")
 ```
@@ -1018,7 +1075,7 @@ The `betweenness_centrality` function returns a dictionary with nodes as keys an
 Let's take a look at centrality measures for a power-law graph. Degree centrality points out a dominant hub:
 ```{python}
 P = nx.barabasi_albert_graph(60, 1, seed=2)
-cdeg = pd.Series( nx.degree_centrality(P), index=P.nodes )
+cdeg = pd.Series( nx.degree_centrality(P) )
 
 style = dict(edge_color="gray", node_color="pink", with_labels=True)
 style["pos"] = nx.spring_layout(P, seed=3)
@@ -1026,7 +1083,7 @@ nx.draw(P, node_size=1000*cdeg, **style)
 ```
 However, betweenness centrality also highlights some secondary hubs:
 ```{python}
-cbet = pd.Series(nx.betweenness_centrality(P), index=P.nodes)
+cbet = pd.Series( nx.betweenness_centrality(P) )
 nx.draw(P, node_size=600*cbet, **style)
 ```
 ::::
@@ -1044,9 +1101,9 @@ tcb = pd.Series(
 hist = sns.displot(x=tcb, bins=24);
 hist.axes[0,0].set_yscale("log");
 ```
-As you can see above, only a few nodes have a significant amount of betweenness centrality:
+As you can see above, only a few nodes stand out as having relatively large betweenness centrality:
 ```{python}
-tcb.sort_values().iloc[-10:]
+tcb.sort_values().tail(10)
 ```
 ::::
 
@@ -1108,7 +1165,7 @@ The **eigenvector centrality** of node $i$ is the value of $x_i$, where $\bfx$ i
 With a small tweak to avoid overestimating the neighbors of a major hub, eigenvector centrality becomes the *PageRank* algorithm, which launched Google.
 :::
 
-NetworkX has two functions for computing eigenvector centrality. One that relies on numpy to solve the eigenvalue problem and is called `eigenvector_centrality_numpy`. As with betweenness centrality, the return value is a dictionary with nodes as the keys.
+NetworkX has two functions for computing eigenvector centrality. One that relies on numpy to solve the eigenvalue problem tends to be the faster one and is called `eigenvector_centrality_numpy`. As with betweenness centrality, the return value is a dictionary with nodes as the keys.
 
 ::::{#exm-networks-centrality-smallworld}
 Continuing with the small-world graph `G` from @exm-networks-centrality-degree, we look at all three centrality measures side by side: 
@@ -1199,7 +1256,7 @@ You are asked to prove this inequality in the exercises. Here is a verification 
 
 ```{python}
 n = G.number_of_nodes()
-d = pd.Series(dict(G.degree), index=G.nodes)
+d = pd.Series(dict(G.degree))
 dbar = d.mean()
 dbar_friends = np.dot(d,d) / d.sum()
 
@@ -1341,7 +1398,7 @@ p = np.zeros(n)
 p[init] = 1
 p = W.dot(p)
 sz = 3000*p
-print( "Total probability after 1 hop:", p.sum() )
+print( f"Total probability after 1 hop: {p.sum():.6f}" )
 nx.draw(WS, node_size=sz, **style)
 ```
 
@@ -1349,7 +1406,7 @@ After the next hop, there will again be a substantial probability of being at no
 
 ```{python}
 p = W.dot(p)
-print( "Total probability after 2 hops:", p.sum() )
+print( f"Total probability after 2 hops: {p.sum():.6f}" )
 nx.draw(WS, node_size=3000*p, **style)
 ```
 
@@ -1358,7 +1415,7 @@ We'll take 3 more hops. That lets us penetrate a little into the distant nodes.
 ```{python}
 for k in range(3):
     p = W.dot(p)
-print( "Total probability after 5 hops:", p.sum() )
+print( f"Total probability after 5 hops: {p.sum():.6f}" )
 nx.draw(WS, node_size=3000*p, **style)
 ```
 

@@ -14,7 +14,7 @@ A **quantitative** value is one that is numerical and supports meaningful compar
 
  Quantitative data is further divided into **continuous** and **discrete** types. The difference is the same as between real numbers and integers.
 
-::: {#exm-data-quantitative}
+::::{#exm-data-quantitative}
 
 Some continuous quantitative data sources:
 
@@ -29,7 +29,7 @@ Examples of discrete quantitative data:
 * Score on an exam
 
 In each case, it makes sense, for example, to order different values and compute averages of them. However, averages of discrete quantities are continuous.
-:::
+::::
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/l9fs3fa43hup08l/Example1_1.mp4?raw=1 >}}
@@ -39,9 +39,9 @@ In each case, it makes sense, for example, to order different values and compute
 Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values.
 :::
 
-::: {#exm-data-zip}
+::::{#exm-data-zip}
 Not all numerical values represent truly quantitative data. ZIP codes (postal codes) in the U.S. are 5-digit numbers, and while there is some logic to how they were assigned, there is no clearly meaningful interpretation of averaging them, for instance.
-:::
+::::
 
 Mathematically, the real and integer number sets are infinite, but that is not possible in a computer. Integers are represented exactly within some range that is determined by how many binary bits are dedicated. The computational analog of real numbers are **floating-point numbers**, or more simply, **floats**. These are bounded in range as well as discretized. The details are complicated, but essentially, the floating-point numbers have about 16 significant digits by default, which is virtually always far more precision than real data offers.
 
@@ -488,7 +488,7 @@ A qualitative value is one that is not quantitative. However, in order to work w
 **Categorical** data has values drawn from a finite set $S$ of categories. If the members of $S$ support meaningful ordering comparisons, then the data is **ordinal**; otherwise, it is **nominal**.
 ::::
 
-:::{#exm-data-categorical}
+::::{#exm-data-categorical}
 Examples of ordinal categorical data:
 
 * Seat classes on a commercial airplane (e.g., economy, business, first)
@@ -501,7 +501,7 @@ Examples of nominal categorical data:
 * Make of a car
 
 There are nuanced cases. For instance, letter grades are themselves ordinal categorical data. However, schools convert them to discrete quantitative data and then compute a continuous quantitative GPA.
-:::
+::::
 
 One way to quantify ordinal categorical data is to assign integer values to the categories in a manner that preserves ordering. This approach can succeed, but it can be questionable when it comes to operations such as averaging or computing a distance between values. 
 

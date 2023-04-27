@@ -1,13 +1,29 @@
+---
+listing: 
+  - id: examples-listing
+    contents: 
+        - _datasets
+        - _examples.yml
+    type: table
+    sort: false
+    fields: [title, Type, Chapter, Link]
+---
+
 # Preface {.unnumbered}
 
 This book covers material for Math 219, Data Science 1, at the University of Delaware. It should be considered prepublication and may have errors. 
 
 See [license file](https://raw.githubusercontent.com/UD-Math-Data-Science-1/book/main/LICENSE) for rights information.
 
-This site was made with Quatro. To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-{{< video https://www.dropbox.com/s/v9rqof1j77i98x5/Book_intro.mp4?raw=1 >}}
+This site was made with [Quarto](https://quarto.org/docs/books).
+<!-- 
+{{< video https://www.dropbox.com/s/v9rqof1j77i98x5/Book_intro.mp4?raw=1 >}} -->
 
 ## Prerequisites
 
 Prior experience with single-variable calculus (basic differentiation and integration) and with base Python are expected.
+
+## List of examples
+
+::: {#examples-listing}
+:::
