@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.306">
+<meta name="generator" content="quarto-1.3.298">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -762,7 +762,7 @@ dtype: float64</code></pre>
 </div>
 <p>Sometimes the definition above is extended to the <em>zeroth quartile</em>, which is the minimum sample value, and the <em>fourth quartile</em>, which is the maximum sample value.</p>
 <p>IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.</p>
-<div id="exm-data-describe" class="theorem example">
+<div id="exm-stats-describe" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.6 </strong></span>The dataframe <code>describe</code> method includes mean, standard deviation, and the quartiles:</p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
@@ -849,13 +849,13 @@ dtype: float64</code></pre>
 <p>Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution of all values precisely using a function.</p>
 <section id="cdf" class="level3 page-columns page-full" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="cdf"><span class="header-section-number">2.2.1</span> CDF</h3>
-<div id="def-data-cdf" class="theorem definition">
+<div id="def-stats-cdf" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.4 </strong></span>The <strong>cumulative distribution function</strong> (CDF) of a population is the function <span class="math display">\[
 F(t) = \text{fraction of the population that is $\le t$},
 \]</span> where <span class="math inline">\(t\)</span> ranges over all possible values.</p>
 </div>
 <p>Note that by its definition, <span class="math inline">\(F\)</span> ranges between 0 and 1 (inclusive) and is a nondecreasing function.</p>
-<div id="exm-data-uniform-discrete" class="theorem example">
+<div id="exm-stats-uniform-discrete" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.7 </strong></span>If a population is <span class="math inline">\(x_i=i\)</span> for <span class="math inline">\(i=1,\ldots,n\)</span>, then <span class="math inline">\(F(k)=k/n\)</span> at each <span class="math inline">\(k=1,\ldots,n\)</span>. We could, however, also regard <span class="math inline">\(F\)</span> as a function of a continuous variable <span class="math inline">\(t\)</span>, in which case <span class="math display">\[
 F(t) = \frac{\lfloor t \rfloor}{n},
 \]</span> where <span class="math inline">\(\lfloor\cdot\rfloor\)</span> is the <em>floor function</em> that rounds leftward to the nearest integer. This produces a step function that looks like stairs going up from 0 to 1.</p>
@@ -863,15 +863,15 @@ F(t) = \frac{\lfloor t \rfloor}{n},
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video5" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/z8di9mumdeyb4u5/Example2_7.mp4?raw=1"></video></div>
-</div></div><p><a href="#exm-data-uniform-discrete">Example&nbsp;<span>2.7</span></a> becomes interesting as a template for generalizing to infinite populations. If we take not <span class="math inline">\(x_i=i\)</span> but <span class="math inline">\(x_i=i/n\)</span> and then let <span class="math inline">\(n\to \infty\)</span>, then the graph of <span class="math inline">\(F\)</span> converges to <span id="eq-data-uniform-cdf"><span class="math display">\[
+</div></div><p><a href="#exm-stats-uniform-discrete">Example&nbsp;<span>2.7</span></a> becomes interesting as a template for generalizing to infinite populations. If we take not <span class="math inline">\(x_i=i\)</span> but <span class="math inline">\(x_i=i/n\)</span> and then let <span class="math inline">\(n\to \infty\)</span>, then the graph of <span class="math inline">\(F\)</span> converges to <span id="eq-stats-uniform-cdf"><span class="math display">\[
 F(t) = \begin{cases}
 0, &amp; t &lt; 0, \\
 t,&amp; 0 \le t \le 1, \\
 1,&amp; t &gt; 1.
 \end{cases}
 \tag{2.6}\]</span></span> While it doesn’t make sense to think about a fraction of the number of values in the infinite case, we can interpret <span class="math inline">\(F(t)\)</span> as the *probability of observing a value less than or equal to the real number <span class="math inline">\(t\)</span>.</p>
-<div id="def-data-uniform-cdf" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2.5 </strong></span>A <strong>uniform distribution</strong> gives an equal probability to every value. In particular, the uniform distribution over the interval <span class="math inline">\([0,1]\)</span> has the CDF given in <a href="#eq-data-uniform-cdf">Equation&nbsp;<span>2.6</span></a>.</p>
+<div id="def-stats-uniform-cdf" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2.5 </strong></span>A <strong>uniform distribution</strong> gives an equal probability to every value. In particular, the uniform distribution over the interval <span class="math inline">\([0,1]\)</span> has the CDF given in <a href="#eq-stats-uniform-cdf">Equation&nbsp;<span>2.6</span></a>.</p>
 </div>
 </section>
 <section id="empirical-cdf" class="level3 page-columns page-full" data-number="2.2.2">
@@ -907,13 +907,13 @@ t,&amp; 0 \le t \le 1, \\
 <section id="pdf" class="level3 page-columns page-full" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="pdf"><span class="header-section-number">2.2.3</span> PDF</h3>
 <p>By definition, we know that if <span class="math inline">\(a&lt;b\)</span>, <span class="math inline">\(\hat{F}(b) - \hat{F}(a)\)</span> is the number of observations in the half-open interval <span class="math inline">\((a,b]\)</span>. This leads into the next definition.</p>
-<div id="def-data-histogram" class="theorem definition">
+<div id="def-stats-histogram" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.7 </strong></span>Select the ordered values <span class="math inline">\(t_1 &lt; t_2 &lt; \cdots &lt; t_m\)</span>, called <strong>edges</strong>, and define <strong>bins</strong> as the intervals <span class="math display">\[
 B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 \]</span> where we adopt the convention that <span class="math inline">\(t_0=-\infty\)</span> and <span class="math inline">\(t_{m+1}=\infty\)</span>. Let <span class="math inline">\(c_k\)</span> be the number of data values in <span class="math inline">\(B_k\)</span>. Then a <strong>histogram</strong> relative to the bins is the list of <span class="math inline">\((B_0,c_0),\ldots,(B_m,c_m)\)</span>.</p>
 </div>
 <p>The default for a seaborn <code>displot</code> is to show a histogram.</p>
-<div id="exm-data-uniform-hist" class="theorem example">
+<div id="exm-stats-uniform-hist" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.9 </strong></span>Continuing with the uniform distribution over <span class="math inline">\([0,1]\)</span>:</p>
 <div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">1000</span>,) )</span>
@@ -933,13 +933,13 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video7" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/jvevzl1ko3djwih/Example2_9.mp4?raw=1"></video></div>
-</div></div><p>Again something interesting happens in a limiting case. If we normalize the count in a bin by the length of that bin, we get <span id="eq-data-pdf"><span class="math display">\[
+</div></div><p>Again something interesting happens in a limiting case. If we normalize the count in a bin by the length of that bin, we get <span id="eq-stats-pdf"><span class="math display">\[
 \frac{c_k}{t_{k+1}-t_k} = \frac{\hat{F}(t_{k+1})-\hat{F}(t_k)}{t_{k+1}-t_k}.
-\tag{2.7}\]</span></span> If we let the number of observations tend to infinity, then <span class="math inline">\(\hat{F}\)</span> will converge to <span class="math inline">\(F\)</span>, and if we also let the number of bins go to infinity, then the fraction in <a href="#eq-data-pdf">Equation&nbsp;<span>2.7</span></a> converges to <span class="math inline">\(F'(t_k)\)</span>.</p>
-<div id="def-data-pdf" class="theorem definition">
+\tag{2.7}\]</span></span> If we let the number of observations tend to infinity, then <span class="math inline">\(\hat{F}\)</span> will converge to <span class="math inline">\(F\)</span>, and if we also let the number of bins go to infinity, then the fraction in <a href="#eq-stats-pdf">Equation&nbsp;<span>2.7</span></a> converges to <span class="math inline">\(F'(t_k)\)</span>.</p>
+<div id="def-stats-pdf" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 2.8 </strong></span>The <strong>probability density function</strong> or PDF of a distribution is the derivative of the CDF.</p>
 </div>
-<div id="exm-data-uniform-pdf" class="theorem example">
+<div id="exm-stats-uniform-pdf" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2.10 </strong></span>If we have many samples, then we can use a normalized histogram to give an approximation of the PDF:</p>
 <div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span>(<span class="dv">20000</span>,) )</span>
