@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.298">
+<meta name="generator" content="quarto-1.3.306">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -892,7 +892,10 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div id="exm-networks-cluster-twitch" class="theorem example">
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/jgim51fbuemp35i/Example7_10.mp4?raw=1"></video></div>
+</div></div><div id="exm-networks-cluster-twitch" class="theorem example">
 <p><span class="theorem-title"><strong>Example 7.11 </strong></span>Let’s examine clustering within the Twitch network:</p>
 <div class="cell" data-execution_count="34">
 <details>
@@ -986,7 +989,7 @@ dtype: float64</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video13" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1g8lm6od2zkf14e/Example7_11.mp4?raw=1"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video14" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/1g8lm6od2zkf14e/Example7_11.mp4?raw=1"></video></div>
 </div></div><section id="er-graphs" class="level3 page-columns page-full" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="er-graphs"><span class="header-section-number">7.3.1</span> ER graphs</h3>
 <div id="thm-networks-clustering-ER" class="theorem">
@@ -1011,7 +1014,7 @@ dtype: float64</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video14" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/xlyebdxotamgiym/Example7_12.mp4?raw=1"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video15" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/xlyebdxotamgiym/Example7_12.mp4?raw=1"></video></div>
 </div></div><p>In <a href="#exm-networks-cluster-twitch">Example&nbsp;<span>7.11</span></a>, we saw that the Twitch network has <span class="math inline">\(n=7126\)</span> and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take <span class="math inline">\(p=0.131\)</span>, according to <a href="#thm-networks-clustering-ER">Theorem&nbsp;<span>7.4</span></a>. But by <a href="#thm-networks-degree-ER">Theorem&nbsp;<span>7.2</span></a>, this would imply an average node degree of <span class="math inline">\(p(n-1)\approx 933\)</span>, which is almost 10 times larger than what is actually observed! Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.</p>
 </section>
 <section id="ws-graphs" class="level3 page-columns page-full" data-number="7.3.2">
@@ -1135,11 +1138,11 @@ dtype: float64</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<div class="quarto-video"><video id="video_shortcode_videojs_video15" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/3jbg9urgp5udaho/Example7_13.mp4?raw=1"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video16" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/3jbg9urgp5udaho/Example7_13.mp4?raw=1"></video></div>
 </div></div><p>So far, the WS construction gives a plausible way to reconstruct the clustering observed in the Twitch network. However, there are many other graph properties left to examine!</p>
 </section>
 </section>
-<section id="distance" class="level2" data-number="7.4">
+<section id="distance" class="level2 page-columns page-full" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="distance"><span class="header-section-number">7.4</span> Distance</h2>
 <p>The <em>small-world phenomenon</em> is, broadly speaking, the observation that any two people in a large group can be connected by a surprisingly short path of acquaintances. This concept appears, for instance, in the <em>Bacon number game</em>, where actors are nodes, appearing in the same movie creates an edge between them, and one tries to find the distance between Kevin Bacon and some other designated actor.</p>
 <div id="def-networks-distance" class="theorem definition">
@@ -1147,7 +1150,10 @@ dtype: float64</code></pre>
 (x,z_1),\, (z_1,z_2)\, (z_2,z_3)\, \ldots, (z_{t-1},z_t)\, (z_t,y),
 \]</span> for some <span class="math inline">\(t\ge 1\)</span>. The path above has <strong>length</strong> <span class="math inline">\(t+1\)</span>, which is the number of edges in the path. The <strong>distance</strong> between two nodes in a graph is the length of the shortest path between them. The maximum distance over all pairs of nodes in a graph is called its <strong>diameter</strong>.</p>
 </div>
-<p>For example, in a complete graph, the distance between any pair of distinct nodes is 1, since all possible pairs are connected by an edge.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<div class="quarto-video"><video id="video_shortcode_videojs_video17" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/5nue68tr24nwdon/Section7_4.mp4?raw=1"></video></div>
+</div></div><p>For example, in a complete graph, the distance between any pair of distinct nodes is 1, since all possible pairs are connected by an edge.</p>
 <p>Because the diameter depends on the extreme outlier of the distance distribution, it’s often more useful to consider the <strong>average distance</strong> by taking the mean. In practice, computing pairwise distances can be computationally expensive, so the average distance might be estimated by taking a sample of all possible pairs.</p>
 <p>It could happen that there is a pair of nodes that is not connected by any path of edges. In that case, the distance between them is either undefined or infinite, and we say the graph is <strong>disconnected</strong>.</p>
 <div id="exm-networks-distance-wheel" class="theorem example">
@@ -2682,6 +2688,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script>videojs(video_shortcode_videojs_video13);</script>
 <script>videojs(video_shortcode_videojs_video14);</script>
 <script>videojs(video_shortcode_videojs_video15);</script>
+<script>videojs(video_shortcode_videojs_video16);</script>
+<script>videojs(video_shortcode_videojs_video17);</script>
 
 
 
