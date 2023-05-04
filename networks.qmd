@@ -28,7 +28,7 @@ In either type of graph, each edge might be labeled with a numerical value, whic
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/mnyibemjcyg9rvq/Section7_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1vrlogst&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_23nhl7ne" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 Undirected, unweighted graphs will give us plenty to handle, and we will not go beyond them. We also will not allow graphs that have an edge from a node to itself.
@@ -79,7 +79,7 @@ print( list(star_letter.edges) )
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/yoz9nt127g6gss9/Example7_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_h5jslr5z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wa9lv9al" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 ::::{#exm-networks-import}
@@ -122,7 +122,7 @@ nx.draw(nx.cycle_graph(9))
 ```
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/1v4q24xjva1uzn0/Section7_1_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_7adqz4nu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_i0b3xbgb" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 A cross between the star and the cycle is a **wheel graph**.
@@ -180,7 +180,7 @@ Nodes are said to be **adjacent** if they share an edge. The **neighbors** of a 
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/duq4do3avuxsw63/Section7_1_2.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_itppnnq4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sxacabrk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 ::::{#exm-networks-neighbors}
@@ -213,7 +213,7 @@ nx.draw(big_ego,
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/p41spzy6y0un1lp/Example7_4.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y9tl9mt9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_w5s4ez33" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.4" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 We can represent all the adjacency relationships at once using a matrix. 
@@ -255,7 +255,7 @@ A.toarray()
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/mtrrgz1v14d0umi/Example7_5.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_vq62b96w&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1gcl0xu8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 ### Degree
@@ -265,7 +265,7 @@ The **degree** of a node is the number of neighbors it has. The **average degree
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/inj7xdfz4quhtws/Section7_1_3.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hjyyr0d6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_q6qiam9e" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 It's common to use the notation $\bar{k}$ for the average degree of a graph.
@@ -301,7 +301,7 @@ As we are about to see, though, there's an easier way to compute the average deg
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/z6dxtnb0nfyie11/Example7_6.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_0ho332qk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0szkxms6" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.6" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 Here is our first nontrivial fact about graphs. 
@@ -336,7 +336,7 @@ Our first construction gives every potential edge an equal chance to exist.
 Start with $n$ nodes and no edges. Suppose you have a weighted coin that comes up heads (100p)% of the time. For each pair of nodes, you toss the coin, and if it comes up heads, you add the edge between those nodes. This is known as an *ER graph*.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/yp5bbj8m2extln0/Section7_2_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5u0jo6x8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ud78lqic" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 ::::{#def-networks-ER}
@@ -385,7 +385,7 @@ The mean of this distribution converges to $p(n-1)=4$ as the number of random in
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/n6akh3dl2ii2vbt/Example7_8.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_olxptbyc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0288pbd0" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.8" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 @thm-networks-degree states that the average degree in a graph with $n$ nodes and $m$ edges is $2m/n$. According to  @thm-networks-degree-ER, an ER graph will have the same expected average degree if 
@@ -405,7 +405,7 @@ That is, if connections in the Twitch network were made completely at random, th
 A **Watts–Strogatz graph** (WS graph) is a crude model of human social relationships. A WS graph has three parameters: $n$, an even integer $k$, and a probability $q$.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/0kxrbt4g3tcvhbs/Section7_2_2.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_z6d36f0c&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_f9yo20e1" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.2.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 Imagine $n$ nodes arranged in a circle. In the first phase, we connect each node with an edge to all of its $k/2$ left neighbors and $k/2$ right neighbors. This setup, called a **ring lattice**, represents the idea that people have a local network of friends.   
@@ -431,7 +431,7 @@ nx.draw_circular(WS, node_size=100)
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/xlt08okg62cg1hf/Example7_9.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_0ljq2qqg&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ddhp5q6a" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 In the initial setup phase, every node in the WS graph has degree equal to $k$. The rewiring phase only changes edges---it does not insert nor delete them---so the average degree remains $k$. 
@@ -491,6 +491,10 @@ print( pd.Series(nx.clustering(W)) )
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zo6715v5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_m7eg10h2" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.10" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
+
 ::::{#exm-networks-cluster-twitch}
 Let's examine clustering within the Twitch network:
 ```{python}
@@ -525,7 +529,7 @@ Other than that massive group, there is a negative association between degree an
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/1g8lm6od2zkf14e/Example7_11.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_t0aghuno&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ev8aizw3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.11" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 ### ER graphs
@@ -553,7 +557,7 @@ The distribution above can't be normal, because there are hard bounds at 0 and 1
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/xlyebdxotamgiym/Example7_12.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_gtojpji6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_w1i5bvtd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.12" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 10 times larger than what is actually observed! Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
@@ -614,7 +618,7 @@ print( f"avg WS clustering at q = 0.42 is {np.mean(cbar):.4f}" )
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/3jbg9urgp5udaho/Example7_13.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_btoabd6z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_6p6b27l8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.13" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
 So far, the WS construction gives a plausible way to reconstruct the clustering observed in the Twitch network. However, there are many other graph properties left to examine!
@@ -631,11 +635,15 @@ $$
 for some $t\ge 1$. The path above has **length** $t+1$, which is the number of edges in the path. The **distance** between two nodes in a graph is the length of the shortest path between them. The maximum distance over all pairs of nodes in a graph is called its **diameter**.  
 ::::
 
-For example, in a complete graph, the distance between any pair of distinct nodes is 1, since all possible pairs are connected by an edge.
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/5nue68tr24nwdon/Section7_4.mp4?raw=1 >}}
+:::
 
-Because the diameter depends on the extreme outlier of the distance distribution, it's often more useful to consider the **average distance** by taking the mean. In practice, computing pairwise distances can be computationally expensive, so the average distance might be estimated by taking a sample of all possible pairs.
+::::{#exm-networks-distance-complete}
+In a complete graph, all possible pairs of nodes are directly connected by edges. Therefor, distance between any pair of distinct nodes is 1, and the graph has diameter 1.
+::::
 
-It could happen that there is a pair of nodes that is not connected by any path of edges. In that case, the distance between them is either undefined or infinite, and we say the graph is **disconnected**.
+Because the diameter depends on the extreme outlier of the distance distribution, it's often more useful to consider the **average distance** by taking the mean. 
 
 ::::{#exm-networks-distance-wheel}
 Here is a small wheel graph:
@@ -658,44 +666,60 @@ If all we want is the average distance, though, there is a convenience function 
 mean_dist = nx.average_shortest_path_length(W)
 print(f"The average distance is {mean_dist:.5f}" )
 ```
-It does become quite slow as the number of nodes grows.
+This function becomes quite slow as the number of nodes grows. In practice, the average distance might be estimated by taking a sample from the set of all possible pairs.
 ::::
+
+### Connectedness
+
+It could happen that there is a pair of nodes that is not connected by any path of edges. In that case, the distance between them is either undefined or infinite, and we say the graph is **disconnected**. In such a situation, it's common to decompose the graph into **connected components**, a separation of the nodes into connected subgraphs.
+
+::::{#exm-networks-connected}
+The following graph is clearly connected:
+```{python}
+G = nx.lollipop_graph(5,3)
+nx.draw(G, with_labels=True, node_color="yellow" )
+```
+NetworkX has a function to determine this for us:
+```{python}
+nx.is_connected(G)
+```
+If we remove the edge between nodes 4 and 5, then the graph is no longer connected:
+```{python}
+G.remove_edge(4,5)
+print("Is it connected?", nx.is_connected(G))
+nx.draw(G, with_labels=True, node_color="yellow" )
+```
+We get an error if we try to compute all the distances in a disconnected graph:
+```{python}
+#| error: true
+nx.average_shortest_path_length(G)
+```
+
+The `connected_components` function creates a generator of subgraphs that are the connected components. We can collect the components into a list, for example:
+```{python}
+list( nx.connected_components(G) )
+```
+Each element of the list above is a set of nodes.
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_pw4n4rxn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_n8zj89s9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.16" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 ### ER graphs
 
-If we want to compute distances within ER random graphs, we quickly run into a problem, because an ER graph may be disconnected. NetworkX gives an error if we try to compute the average distance in a disconnected graph.
-
-```{python}
-n, p = 101, 1/25
-ER = nx.erdos_renyi_graph(n, p, seed=0)
-nx.draw(ER, node_size=50)
-```
-
-```{python}
-#| error: true
-nx.average_shortest_path_length(ER)
-```
-
-One way to cope with this eventuality is to decompose the graph into **connected components**, a disjoint separation of the nodes into connected subgraphs. We can use `nx.connected_components` to get node sets for each component:
-
-```{python}
-[ len(cc) for cc in nx.connected_components(ER) ]
-```
-
-The result above tells us that removing the lone unconnected node in the ER graph leaves us with a connected component. We can always get the largest component with the following idiom:
-
-```{python}
-ER_sub = ER.subgraph( max(nx.connected_components(ER), key=len) )
-print(ER_sub.number_of_nodes(), "nodes in largest component")
-```
-
-We can then use this largest component as a proxy for the full graph:
-```{python}
-nx.average_shortest_path_length(ER_sub)
-```
+An ER graph may be disconnected. In order to study the statistics of distances for ER graphs, it's customary to use the largest connected component (often called the *big component*) of each instance.
 
 ::::{#exm-networks-distance-ER}
-Let's examine average distances within ER graphs of a fixed type.
+Let's examine average distances within ER graphs of a fixed type. First, we need to be able to extract the largest component of a disconnected graph. Here is the idiom (referring back to @exm-networks-connected):
+```{python}
+G = nx.lollipop_graph(5,3)
+G.remove_edge(4,5)
+G_sub = G.subgraph( max(nx.connected_components(G), key=len) )
+set( G_sub.nodes )
+```
+
+Using this idiom, we set up and run the experiment:
 ```{python}
 n, p = 121, 1/20
 dbar = []
@@ -707,9 +731,8 @@ for iter in range(100):
 print("average distance in the big component of ER graphs:")
 sns.displot(x=dbar, bins=13);
 ```
-The chances are good, therefore, that any message could be passed along in three hops or fewer within the big component. 
+The chances are good, therefore, that any message could be passed along in three hops or fewer within the big component of this type of ER graph. 
 ::::
-
 
 Theory states that as $n\to\infty$, the mean distance in ER graphs is expected to be approximately 
 $$
@@ -729,6 +752,10 @@ L0 = nx.average_shortest_path_length(G)
 print(f"Ring lattice has average clustering {C0:.4f}")
 print(f"and average shortest path length {L0:.2f}")
 ```
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_wmrg9usc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vgc4cctn" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.4.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 At the other extreme of $q=1$, we get small clustering and small average distance. The most interesting aspect of WS graphs is the transition between these extremes as $q$ varies.
 
@@ -782,13 +809,10 @@ print("Pairwise distances in Twitch graph:")
 sns.displot(x=distances, discrete=True)
 print( "estimated mean =", np.mean(distances) )
 ```
-<!-- 
-Let's compare these results to ER graphs with the same size and average degree, i.e., with $p=\bar{k}/(n-1)$. The theoretical estimate from @eq-networks-ER-distance gives
 
-```{python}
-print( "Comparable ER graphs expected mean distance:", np.log(n) / np.log(kbar) )
-```
-The Twitch network has a slightly smaller value than this, but the numbers are comparable. However, remember that the ER graphs have a negligible mean clustering. -->
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_69r73wf2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_a88i0hvd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.4.4" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 Next we explore WS graphs with the same $n$ as the Twitch network and $k=10$ to get a similar average degree.
 ```{python}
@@ -809,13 +833,16 @@ sns.relplot(data=results, x="q", y="mean distance", kind="line");
 ```
 The decrease with $q$ here is less pronounced that we saw for the smaller WS graphs in @sec-networks-distance-WS. 
 
-In @exm-networks-cluster-WS, we found that $q=0.42$ reproduces the same average clustering as in the Twitch network. In the graph above, that corresponds to a mean distance of about 4.5, which is a bit above the estimated Twitch mean distance of 3.7, but not dramatically so. Thus, Watts-Strogatz could still be considered a plausible model for the Twitch network. Or to put it another way, the Twitch network seems to be comparable to a small-world network model.
+In @exm-networks-cluster-WS, we found that $q=0.42$ reproduces the same average clustering as in the Twitch network. In the graph above, that corresponds to a mean distance of about 4.5, which is a bit above the estimated Twitch mean distance of 3.7. 
 
-In the next section, however, we will see that there are major differences in another respect.
+Thus, it's fair to say that our Twitch network has a mean distance comparable to that of a small-world network with the same size, average degree, and local clustering. 
 
 ## Degree distributions
 
-As we well know, means of distributions do not always tell the entire story. For example, the distribution of the degrees of all the nodes in our Twitch network has some surprising features:
+As we well know, the mean of a distribution does not tell the entire story about it.
+
+::::{#exm-networks-ddist-twitch}
+The distribution of the degrees of all the nodes in our Twitch network has some surprising features:
 
 ```{python}
 twitch = nx.read_edgelist("_datasets/musae_edges.csv", delimiter=',', nodetype=int)
@@ -830,20 +857,28 @@ print("Twitch network degree distribution:")
 sns.displot(twitch_degrees);
 ```
 
-A few nodes in the network have hundreds of friends:
+In fact, a few nodes in the network have hundreds of friends:
 
 ```{python}
-friend_counts = twitch_degrees.value_counts()  # histogram heights
-friend_counts.sort_index(ascending=False).head(10)
+friend_counts = twitch_degrees.value_counts()           # histogram bar heights
+friend_counts.sort_index(ascending=False).head(5)
 ```
 
 These "gregarious nodes" or *hubs* are characteristic of many social and other real-world networks.
+::::
 
-We can compare the above distribution to that in a collection of ER graphs with the same size and expected average degree:
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_l00fb9pz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sa3sxqne" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.18" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
+
+Neither ER nor WS graphs show degree distributions even remotely like that of the Twitch network.
+
+::::{#exm-networks-ddist-ERWS}
+We can compare the distribution from @exm-networks-ddist-twitch to that in a sample of ER graphs with the same size and expected average degree:
 
 ```{python}
-n, e = twitch.number_of_nodes(), twitch.number_of_edges()
-kbar = 2*e/n
+n, m = twitch.number_of_nodes(), twitch.number_of_edges()
+kbar = 2*m/n
 p = kbar/(n-1)
 degrees = []
 for iter in range(3):
@@ -854,10 +889,10 @@ print("ER graphs degree distribution:")
 sns.displot(degrees, discrete=True);
 ```
 
-Theory proves that the plot above converges to a *binomial distribution*. This is yet another indicator that the ER model does not explain the Twitch network well. A WS graph has a similar distribution:
+Theory proves that the plot above converges to a *binomial distribution*. A WS graph has a similar distribution:
 
 ```{python}
-k,q = 10, 0.42
+k, q = 10, 0.42
 degrees = []
 for iter in range(3):
     WS = nx.watts_strogatz_graph(n, k, q, seed=222+iter)
@@ -866,16 +901,24 @@ for iter in range(3):
 print("WS graphs degree distribution:")
 sns.displot(degrees, discrete=True);
 ```
-Neither ER nor WS graphs show degree distributions even remotely like that of the Twitch network.
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5u566a2l&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2bwv4r5y" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.19" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 ### Power-law distribution
 
-The behavior of the Twitch degree distribution gets very interesting when the axes are transformed to use log scales:
+The behavior of the Twitch degree distribution in @exm-networks-ddist-twitch gets very interesting when the axes are transformed to use log scales:
 
 ```{python}
 hist = sns.displot(data=twitch_degrees, log_scale=True)
 hist.axes[0,0].set_yscale("log")
 ```
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_yo0msaom&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_yfg860v3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.5.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 For degrees between 10 and several hundred, the counts lie nearly on a straight line. That is, if $x$ is degree and $y$ is the node count at that degree, then
 $$
@@ -885,8 +928,11 @@ i.e.,
 $$
 y \approx B x^{-a},
 $$
-for some $a > 0$. This relationship is known as a **power law**, a relationship often seen in physics. Many social networks seem to follow a power-law distribution of node degrees, to some extent. (The precise extent is a subject of heated debate.) The decay of $x^{-a}$ to zero as $x\to\infty$ is much slower than the normal distribution's $e^{-x^2/2}$, for example, and we could say that the power-law network has a *heavy-tailed distribution*. 
+for some $a > 0$. This relationship is known as a **power law**, a relationship often seen in physics. The decay of $x^{-a}$ to zero as $x\to\infty$ is much slower than the normal distribution's $e^{-x^2/2}$, for instance, and we often say that the power-law network has a *heavy-tailed distribution*. 
 
+Many social networks seem to follow a power-law distribution of node degrees, to some extent. The precise extent is a subject of heated debate.
+
+<!-- ::::{#exm-networks-ddist-powerlaw}
 We can get a fair estimate of the constants $B$ and $a$ in the power law by doing a least-squares fit on the logs of $x$ and $y$. First, we need the counts:
 
 ```{python}
@@ -897,29 +943,30 @@ counts.head(6)
 ```
 
 Now we will get additional columns by log transformations. (Note: the `np.log` function is the natural logarithm.)
-
 ```{python}
 logcounts = counts.transform(np.log)
 ```
-
-Now we use `sklearn` for a linear regression.
-
+Then we use `sklearn` for a linear regression:
 ```{python}
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
 lm.fit(logcounts[["degree"]], logcounts["count"])
 lm.coef_[0], lm.intercept_
 ```
-
-The first value, which is both the slope of the line and the exponent of $x$ in the power law, is the most interesting part. Hence, we conclude that the degree counts vary like $Bx^{-2}$ over a wide range of degrees. 
+The first value, which is both the slope of the line and the exponent of $x$ in the power law, is the most interesting part: we conclude that the degree counts varies like $x^{-2}$ over a wide range of degrees. 
+:::: -->
 
 ### Barabási--Albert graphs
 
-A random **Barabási--Albert** graph (BA graph) is a standard way to model power-law networks.
+Neither the ER nor the WS model can reproduce a power-law degree distribution. A random **Barabási--Albert graph** (BA graph) is a better approach.
 
-The construction starts with a small seed graph. One by one, new nodes are added with $m$ edges connecting it to existing nodes. The new edges are chosen randomly, but higher probability is given for connections to nodes that already have higher degree (i.e., are more "popular"). This is a the-rich-get-richer concept known as *preferential attachment*. 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_dqgp9119&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2spquyx9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.5.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
-Because of preferential attachment, there is a strong tendency to develop a hubs of very high degree. 
+The construction starts with a small seed graph. One by one, new nodes are added with $m$ edges connecting it to existing nodes. The new edges are chosen randomly, but higher probability is given for connections to nodes that already have higher degree (i.e., are more popular). This is a rich-get-richer concept known as *preferential attachment*. 
+
+Because of preferential attachment, there is a strong tendency to develop some hubs of very high degree, as is required for a power-law degree distribution.
 
 ::::{#exm-networks-BA}
 Here is a BA graph with 200 nodes and $m=3$ connections per new node:
@@ -928,11 +975,11 @@ BA = nx.barabasi_albert_graph(200, 3, seed=302)
 BA_degrees = pd.Series( dict(BA.degree) )
 nx.draw(
     BA, 
-    node_size=6 * BA_degrees, 
+    node_size=6*BA_degrees, 
     node_color="red", edge_color="gray"
     )
 ```
-The size of each node is proportional to its degree. In the default rendering, the large hubs crowd into the center of the picture, while the lowest-degree nodes are pushed to the periphery.
+The size of each node in the drawing above is proportional to its degree. In the default rendering, the large hubs crowd into the center of the picture, while the lowest-degree nodes are pushed to the periphery.
 ::::
 
 Probability theory predicts that a BA graph has a power-law degree distribution with exponent $-3$ as $n\to \infty$.
@@ -942,13 +989,14 @@ Except fot the initial seed stage, each node of a BA graph introduces $m$ new ed
 ::::{#exm-networks-powerlaw-ba}
 For the Twitch network, $\bar{k}$ is almost 10, so we use $m=5$ to get a comparable BA graph. Here we construct such a graph with the same number of nodes as the Twitch network.
 ```{python}
+n = twitch.number_of_nodes()
 m = round(kbar/2)
 BA = nx.barabasi_albert_graph(n, m, seed=5)
 BA_degrees = pd.Series( dict(BA.degree) )
 hist = sns.displot(data=BA_degrees, log_scale=True)
 hist.axes[0,0].set_yscale("log")
 ```
-
+<!-- 
 The straight-line relationship on log-log scales is the hallmark of a power law. As with the Twitch network, we can estimate the exponent by a linear regression:
 
 ```{python}
@@ -959,8 +1007,7 @@ counts = counts[ (counts["degree"] > 5) & (counts["degree"] < 80) ]
 logcounts = counts.transform(np.log)
 lm.fit( logcounts[["degree"]], logcounts["count"] )
 print( "exponent of power law:", lm.coef_[0] )
-```
-::::
+``` -->
 <!-- 
 Let's check distances and clustering, too. As a reminder, the mean distance in the Twitch network is approximately:
 
@@ -994,19 +1041,24 @@ print( "Mean distance in BA graphs:", np.mean(dbar) )
 
 While BA graphs capture the heavy-tailed degree distribution of the Twitch network rather well, they are way off when it comes to clustering. For the Twitch network, we have:
 ```{python}
-print( "Mean clustering in Twitch graph:", nx.average_clustering(twitch) )
+print(f"Mean clustering in Twitch: {nx.average_clustering(twitch):.5f}")
 ```
 And for BA, we get:
 ```{python}
 cbar = []
-seed = 59
-for iter in range(20):
+seed = 3383
+for iter in range(40):
     BA = nx.barabasi_albert_graph(n, m, seed=seed)
     cbar.append( nx.average_clustering(BA) )
     seed += 1
     
-print( "Mean clustering in BA graphs:", np.mean(cbar) )
+print(f"Mean clustering in BA graphs: {np.mean(cbar):.5f}")
 ```
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_omh94v1c&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_98bgqima" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.21" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 The Twitch network has characteristics of both small-world (high clustering with small distance) and power-law (superstar hub nodes) networks. Possibly, some combination of the WS and BA constructions would get closer to the Twitch network than either one does alone.
 
