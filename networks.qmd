@@ -1071,23 +1071,42 @@ In some applications, we want to know which nodes of a network are the most impo
 A clear candidate for measuring the centrality of a node is its degree. 
 
 ::::{#def-networks-centrality-degree}
-The **degree centrality** of a node is its degree, divided by the maximum degree over all nodes in the graph.
+The **degree centrality** of a node is its degree, divided by the maximum possible degree for a node in the graph.
 ::::
 
-NetworkX has a function `degree_centrality` to compute this quantity. 
+For an undirected graph without self-links, the maximum degree of a node in a graph with $n$ nodes is just $n-1$. NetworkX has a function `degree_centrality` to compute this quantity. 
 
 While degree centrality yields useful information in some networks, it is not always a reliable measuring stick. For example, a search engine for the Web that uses degree centrality would be easily fooled by creating a large collection of sites that all link to each other, even if few outside sources also link to the collection. Other aspects of network layout also argue against relying on degree centrality.
 
 ::::{#exm-networks-centrality-degree}
-Consider the following Watts–Strogatz graph:
+We start with a small graph:
+```{python}
+G = nx.lollipop_graph(4,2)
+nx.draw(G, with_labels=True, node_color="pink")
+```
+Since this graph has 6 nodes, the degree centrality is equal to the degree divided by 5:
+```{python}
+values = pd.DataFrame( index=G.nodes )
+values["degree"] = dict(G.degree)
+values["degree centrality"] = nx.degree_centrality(G)
+values
+```
+
+Now consider the following Watts–Strogatz graph:
 ```{python}
 G = nx.watts_strogatz_graph(60, 2, .1, seed=6)
+deg_cen = pd.Series( nx.degree_centrality(G) )
+
 pos = nx.spring_layout(G, seed=1)
 style = dict(pos=pos, edge_color="gray", node_color="pink", with_labels=True)
-nx.draw(G, **style, node_size=120)
+nx.draw(G, **style, node_size=3000*deg_cen.values)
 ```
 There is little variation in the degrees of the nodes. In fact, there are only 3 unique values of the degree centrality. From the rendering of the graph, though, it's clear that the nodes with degree equal to 2 are not all roughly equivalent. If we remove node 6, for instance, then node 5 is the only other node that will be affected. But if we remove node 22, we cut off a large branch from the rest of the network.
 ::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_02qlksln&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hkis5o1w" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.22" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 ### Betweenness centrality
 
@@ -1097,31 +1116,62 @@ A different way to measure centrality is to consider the paths between nodes. If
 For a graph on $n$ nodes, let $\sigma(i,j)$ denote the number of shortest paths between nodes $i$ and $j$. For any other node $k$, let $\sigma(i,j|k)$ be the number of such shortest paths that pass through node $k$. Then the **betweenness centrality** of node $k$ is
 $$
 c_B(k) = \frac{1}{\binom{n-1}{2}}\, \displaystyle\sum_{\substack{\text{all pairs }i,j\\[1mm]i\neq k,\,j\neq k}} \frac{\sigma(i,j|k)}{\sigma(i,j)}.
-$$
+$$ {#eq-networks-betweenness}
 ::::
 
-Each term in the sum is less than or equal to 1, and the number of terms in the sum is $\binom{n-1}{2}$, so $0\le c_B(k) \le 1$ for any node, and $c_B(k)=0$ only if node $k$ has degree zero; i. e., is disconnected from the graph. 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5bfyctir&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qzlpcn0m" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.6.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
+
+In the sum above, node $k$ remains fixed while $i$ and $j$ range over all the other possible pairings. If no shortest path between a particular $i$ and $j$ passes through node $k$, then that term is zero. Otherwise, it equals the fraction of shortest paths that do pass through $k$. Finally, the binomial coefficient $\binom{n-1}{2}$ is the number of terms in the sum.
+
+It's easy to prove that $0\le c_B(k) \le 1$ for any node, and $c_B(k)=0$ if only if node $k$ has degree zero. 
 
 ::::{#exm-networks-between-barbell}
 We will find the betweenness centrality of the following *barbell graph*:
 
 ![Barbell graph](_media/barbell.png){width="350"}
 
-Let's begin with node $k=3$, in the middle. We can divide the nodes into the right-side triangle $\{0,1,2\}$ and the left-side triangle $\{4,5,6\}$. If we take both $i$ and $j$ from a single triangle, then no shortest paths between $i$ and $j$ go through node $3$. Thus, these pairs contribute nothing to the sum in the formula for $c_B(3)$. On the other hand, if $i$ and $j$ are in different triangles, then there is a unique shortest path between them that does pass through node 3, and $\sigma(i,j)=\sigma(i,j|3)=1$. We count $3 \cdot 3=9$ such pairings. Finally, since $n=7$, we obtain
+Let's begin with node $k=3$, in the middle. It might help to see a matrix for the terms of the sum in @eq-networks-betweenness:
+$$
+\begin{array}{r|cccccc}
+& 0 & 1 & 2 & 4 & 5 & 6 \\ 
+0 &  & & & 1/1 & 1/1 & 1/1 \\
+1 & & & & 1/1  & 1/1  & 1/1 \\
+2 & & & & 1/1 & 1/1 & 1/1 \\
+4 & 1/1 & 1/1 & 1/1 & & & \\
+5 & 1/1 & 1/1 & 1/1 & & & \\
+6 & 1/1 & 1/1 & 1/1 & & & \\
+\end{array}
+$$
+How was this filled in? Note that we can divide the nodes into the right-side triangle $\{0,1,2\}$ and the left-side triangle $\{4,5,6\}$. If we take both $i$ and $j$ from the same triangle, then no shortest paths between $i$ and $j$ ever go through node $3$. This explains the empty entries. On the other hand, if $i$ and $j$ are in different triangles, then there is a unique shortest path between them, and it does pass through node 3. Therefore, $\sigma(i,j)=\sigma(i,j|3)=1$ for those pairs. As usual, we sum over only the upper triangle of the matrix to avoid counting both $(i,j)$ and $(j,i)$, and since $n=7$, we divide by $(6)(5)/2=15$ to obtain
 $$
 c_B(3) = \frac{9}{15} = \frac{3}{5}.
 $$
 
-Next, consider node $k=2$. The reasoning is similar to the above if we divide the other nodes into the sets $\{0,1\}$ and $\{3,4,5,6\}$. Hence,
+Next, consider node $k=2$. The reasoning is similar to the above if we divide the other nodes into the sets $\{0,1\}$ and $\{3,4,5,6\}$. Hence their betweenness matrix looks like 
 $$
-c_B(2) = \frac{1}{15} \cdot (2\cdot 4) = \frac{8}{15}.
+\begin{array}{r|cccccc}
+& 0 & 1 & 3 & 4 & 5 & 6 \\ 
+0 & & & 1/1 & 1/1 & 1/1 & 1/1 \\
+1 & & & 1/1 & 1/1  & 1/1  & 1/1 \\
+3 & 1/1 & 1/1 & & & & \\
+4 & 1/1 & 1/1 & & & & \\
+5 & 1/1 & 1/1 & & & & \\
+6 & 1/1 & 1/1 & & & & \\
+\end{array}
 $$
-We get the same value for $c_B(4)$.
+This gives $c_B(2)=8/15$. By symmetry, we get the same value for $c_B(4)$.
 
-All the other nodes appear in no shortest paths. For instance, any path passing through node 0 can be replaced with a shorter one that follows the edge between nodes 1 and 2. Hence $c_B$ is zero on these nodes.
+Finally, all the other nodes appear in no shortest paths. For instance, any path passing through node 0 can be replaced with a shorter one that follows the edge between nodes 1 and 2. Hence $c_B$ is zero on nodes 0, 1, 5, and 6.
 ::::
 
-The `betweenness_centrality` function returns a dictionary with nodes as keys and $c_B$ as values. (However, look at both of the next two examples.)
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ocuse3u7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2bkk1nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.23" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+(video example is slightly different)
+:::
+
+The `betweenness_centrality` function returns a dictionary with nodes as keys and $c_B$ as values. (However, look at *both* of the next two examples.)
 
 ::::{#exm-networks-centrality-btw-power}
 Let's take a look at centrality measures for a power-law graph. Degree centrality points out a dominant hub:
@@ -1140,7 +1190,11 @@ nx.draw(P, node_size=600*cbet, **style)
 ```
 ::::
 
-The definition of $c_B$ requires an expensive computation if the number of nodes is more than a few hundred. In practice, the $\sigma$ values are often estimated by sampling, which is also offered by the `betweenness_centrality` function.
+:::{.callout-caution}
+The exact computation of betweenness centrality takes a very long time in a graph with a large number of nodes.
+:::
+
+In practice, the $\sigma$ values in the definition of $c_B$ are often estimated by sampling. This capability is also offered by the `betweenness_centrality` function.
 
 ::::{#exm-networks-centrality-btw-big}
 With $n>7000$, the Twitch network is much too large for calculating betweenness centrality exactly. So we provide a parameter `k` to use estimation by sampling:
@@ -1159,9 +1213,17 @@ tcb.sort_values().tail(10)
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y890gng6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_x79gcyog" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.25" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
+
 ### Eigenvector centrality
 
 A different way of distinguishing nodes of high degree is to suppose that not all links are equally valuable. By analogy with ranking sports teams, where wins over good teams should count for more than wins over bad teams, we should assign more importance to nodes that link to other important nodes. 
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_pmopyffq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_o8a9igyg" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.6.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
 
 We can try to turn this idea into an algorithm as follows. Suppose we initially assign uniform centrality scores $x_1,\ldots,x_n$ to all of the nodes. Now we can update the scores by looking at the current scores for all the neighbors. Specifically, the new scores are
 
@@ -1189,7 +1251,18 @@ $$
 
 for a number $\lambda$. This is an **eigenvalue equation**, one of the fundamental problems in linear algebra. 
 
-::::{#exm-networks-eigenvector}
+::::{#exm-networks-centrality-eigvector}
+Eigenvectors!
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3jy3eyyq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1g86dy28" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.26" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+::::
+
+Every $n\times n$ matrix has at least one nonzero solution to the eigenvalue equation, although complex numbers might be involved. For an adjacency matrix, the *Perron–Frobenius theorem* guarantees a real solution for some $\lambda > 0$ and for which the $x_i$ all have the same sign. That last property allows us to interpret the $x_i$ as relative importance or centrality of the nodes. 
+
+::::{#def-networks-centrality-eig}
+The **eigenvector centrality** of node $i$ is the value of $x_i$, where $\bfx$ is a positive eigenvector of the adjacency matrix. 
+::::
+
+::::{#exm-networks-centrality-eig}
 Consider the complete graph $K_3$, which is just a triangle. Its adjacency matrix is
 $$
 \bfA = \begin{bmatrix} 
@@ -1200,18 +1273,16 @@ We would expect to discover that all three vertices are ranked equally. In fact,
 $$
 \bfA \bfx = \bigl[\tfrac{2}{3},\tfrac{2}{3},\tfrac{2}{3} \bigr] = 2 \bfx,
 $$
-da=2$ is an eigenvalue to go with eigenvector $\bfx$. Note that any (nonzero) multiple of $\bfx$ would work just as well:
+is an eigenvalue to go with eigenvector $\bfx$. Note that any (nonzero) multiple of $\bfx$ would work just as well:
 $$
 \bfA (c \bfx) =  \bigl[\tfrac{2}{3}c,\tfrac{2}{3}c,\tfrac{2}{3}c \bigr] = 2 (c\bfx),
 $$
-so that $c\bfx$ is also an eigenvector. All that the eigenvector gives us, then, is *relative* centrality of the nodes, though it would be natural to normalize it so that its elements sum to 1.
+so that $c\bfx$ is also an eigenvector. All that the eigenvector gives us, in other words, is the *relative* centrality of the nodes.
 ::::
-
-Every $n\times n$ matrix has at least one nonzero solution to the eigenvalue equation, although complex numbers might be involved. For an adjacency matrix, the *Perron–Frobenius theorem* guarantees a real solution for some $\lambda > 0$ and for which the $x_i$ all have the same sign. That last property allows us to interpret the $x_i$ as relative importance or centrality of the nodes. 
-
-::::{#def-networks-centrality-eig}
-The **eigenvector centrality** of node $i$ is the value of $x_i$, where $\bfx$ is a positive eigenvector of the adjacency matrix. 
-::::
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1vnsvxd5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_53cuyvsh" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.27" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+(video example is slightly different)
+:::
 
 ::: {.callout-note}
 With a small tweak to avoid overestimating the neighbors of a major hub, eigenvector centrality becomes the *PageRank* algorithm, which launched Google.
