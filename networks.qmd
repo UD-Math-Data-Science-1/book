@@ -1125,7 +1125,7 @@ $$ {#eq-networks-betweenness}
 
 In the sum above, node $k$ remains fixed while $i$ and $j$ range over all the other possible pairings. If no shortest path between a particular $i$ and $j$ passes through node $k$, then that term is zero. Otherwise, it equals the fraction of shortest paths that do pass through $k$. Finally, the binomial coefficient $\binom{n-1}{2}$ is the number of terms in the sum.
 
-It's easy to prove that $0\le c_B(k) \le 1$ for any node, and $c_B(k)=0$ if only if node $k$ has degree zero. 
+It's easy to prove that $0\le c_B(k) \le 1$ for any node and that $c_B(k)=0$ if node $k$ has degree zero or one. 
 
 ::::{#exm-networks-between-barbell}
 We will find the betweenness centrality of the following *barbell graph*:
