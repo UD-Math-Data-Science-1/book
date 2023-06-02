@@ -170,7 +170,7 @@ $$
 
 Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. 
 
-::::{#exm-cluster-distmat-small}
+::::{#exm-cluster-distmat-small chapter=6 type=✍️ description="Distance matrix"}
 Using 1-norm for distance, find the distance matrix for the feature matrix 
 $$
 \bfX = \begin{bmatrix}
@@ -208,7 +208,7 @@ A practical advantage of working with similarity rather than distance is that sm
 
 The scikit-learn function `pairwise_distances` computes a distance matrix efficiently.
 
-::::{#exm-cluster-distmat}
+::::{#exm-cluster-distmat chapter=6 type=💻 description="Usage of `pairwise_distances`"}
 The distance matrix of our *bullseye* dataset has some interesting structure:
 ```{python}
 from sklearn.metrics import pairwise_distances
@@ -250,7 +250,7 @@ in place of $\theta$. This function (which ranges between 0 and 2) is not a true
 
 Angular distance and cosine pseudodistance are useful when we want to ignore the magnitudes of vectors and consider only their directions. 
 
-::::{#exm-cluster-angular}
+::::{#exm-cluster-angular chapter=6 type=💻 description="Angular distance"}
 We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as *happy*, *excited*, *sad*, *angry*, *confused*, and so on. For sake of argument, suppose three documents have the feature matrix
 $$
 \bfX = 
@@ -367,7 +367,7 @@ The reason for the denominator is that there are $\binom{n}{2}$ distinct pairs o
 
 One way to interpret the Rand index is through binary classification. If we define a positive result on a pair of samples to mean "in the same cluster" and a negative result to mean "in different clusters", then the Rand index is the accuracy of that classifier over all pairs of samples, taking the reference clustering as providing ground truth.
 
-::::{#exm-cluster-rand}
+::::{#exm-cluster-rand chapter=6 type=✍️ description="Rand index by hand"}
 Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are classified as blue, and $\bfX_3,\bfX_5$ are classified as red. Compute the Rand index relative to the reference classification for the clustering $C_1=\{\bfX_1,\bfX_2\}$ and $C_2=\{\bfX_3,\bfX_4,\bfX_5\}$. (Note that the actual feature vectors themselves are not important in this setting.)
 
 :::{.solution}
@@ -401,7 +401,7 @@ where the expectation and max operations are performed over all possible cluster
 
 An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.
 
-::::{#exm-cluster-ARI-blobs}
+::::{#exm-cluster-ARI-blobs chapter=6 type=💻 description="Adjusted Rand index"}
 Our *blobs* dataset has a reference clustering that we take to be the gold standard. Let's create another clustering based entirely on the quadrants of the plane:
 
 ```{python}
@@ -454,7 +454,7 @@ The value $s_i$ is always in the interval $[-1,1]$. A negative value indicates t
 Most sources, and scikit-learn, define an overall *silhouette score* as the mean of the $s_i$. However, because the distributions of these values are often asymmetric and have significant outliers, I am taking the view that medians are preferred when a summary score is needed.
 :::
 
-::::{#exm-cluster-silhouette}
+::::{#exm-cluster-silhouette chapter=6 type=✍️ description="Silhouette values"}
 Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B=\{2,6\}$. Find the silhouette values of all the samples.
 
 :::{.solution}
@@ -468,7 +468,7 @@ Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B
 :::
 ::::
 
-::::{#exm-cluster-sil-blobs}
+::::{#exm-cluster-sil-blobs chapter=6 type=💻 description="Silhouette values calculation"}
 Let's use the predefined cluster assignments in our blobs dataset. We will add a column to the data frame that records the silhouette score for each point:
 
 ```{python}
@@ -509,7 +509,7 @@ The scores for clusters labelled as 1 and 2 are pretty good and almost the same 
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_o43p6lb3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4h7o3i1m" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.7" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-cluster-perform-digits}
+::::{#exm-cluster-perform-digits chapter=6 type=💻 description="Silhouettes as performance metric"}
 `sklearn` has a well-known dataset that contains labeled handwritten digits. Let's extract the examples for just the numerals 4, 5, and 6:
 
 ```{python}
@@ -546,7 +546,7 @@ The values are mostly positive, which indicates nearly all of the samples for a 
 
 Silhouette values are fairly easy to use. However, while we might consider a cluster to comprise points that are close only to other members of the cluster, silhouette values demand that the members of a cluster all be mutually close to one another. As a result, they favor compact, roughly spherical clusters.
 
-::::{#exm-cluster-sil-bullseye}
+::::{#exm-cluster-sil-bullseye chapter=6 type=💻 description="Limitation of silhouettes"}
 The bullseye dataset has only one "cluster" that silhouette values approve of:
 ```{python}
 X, y = bullseye_data()
@@ -600,7 +600,7 @@ $$
 
 We conclude that splitting a cluster will make the total inertia decrease. In fact, if each sample point is put into its own cluster, the inertia is 0.  -->
 
-::::{#exm-cluster-inertia}
+::::{#exm-cluster-inertia chapter=6 type=✍️ description="Inertia"}
 Given the samples $-3,-2,-1,2,5,7$, find the inertia of the clustering 
 $$
 C_1=\{-3,-2,-1\}, \qquad C_2=\{2,5,7\}, 
@@ -656,7 +656,7 @@ The algorithm treats $k$ as a hyperparameter. Increasing $k$ tends to lower the 
 
 Because of its dependence on the norm, the inertia criterion of $k$-means disfavors long, skinny clusters and clusters of unequal dispersion. Essentially, it wants to find spherical blobs of roughly equal size.
 
-::::{#exm-cluster-kmeans-blobs}
+::::{#exm-cluster-kmeans-blobs chapter=6 type=💻 description="k-means on *blobs* dataset"}
 We apply $k$-means to the *blobs* dataset that has 3 reference clusters, starting with $k=2$ clusters. For illustration, we instruct the algorithm to try 3 initializations and report on its progress:
 
 ```{python}
@@ -734,7 +734,7 @@ Based on silhouette scores, we would be justified to stop at $k=3$ clusters.
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2vl75uac&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1uhuj1qk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.11" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-cluster-kmeans-stripes}
+::::{#exm-cluster-kmeans-stripes chapter=6 type=💻 description="k-means on *stripes* dataset"}
 The *stripes* dataset does not conform to compact clusters of equal size, and $k$-means performs poorly on it:
 
 ```{python}
@@ -788,7 +788,7 @@ sns.relplot(data=results,
 Clustering is hard!
 ::::
 
-::::{#exm-cluster-kmeans-digits}
+::::{#exm-cluster-kmeans-digits chapter=6 type=💻 description="k-means on digits dataset"}
 We return to the handwriting recognition dataset. Again we keep only the samples labeled 4, 5, or 6:
 
 ```{python}
@@ -887,7 +887,7 @@ Single linkage only pays attention to the gaps between clusters, not the size or
 
 Unlike $k$-means, which has to be able to compute the distances between the samples and changing centroid locations, agglomerative clustering with single, complete, or average linkage needs only the pairwise distances between samples and can be found from a distance matrix in place of the samples themselves.
 
-::::{#exm-cluster-linkage-tiny}
+::::{#exm-cluster-linkage-tiny chapter=6 type=✍️ description="Linkage"}
 Given clusters $C_1=\{-3,-2,-1\}$ and $C_2=\{3,4,5\}$, find the different linkages between them. 
 
 :::{.solution}
@@ -920,7 +920,7 @@ $$
 :::
 
 
-::::{#exm-cluster-hier-toy}
+::::{#exm-cluster-hier-toy chapter=6 type=💻 description="Agglomerative for toy example"}
 Let's use 5 sample points in the plane, and agglomerate them by single linkage. The `pairwise_distances` function converts sample points into a distance matrix:
 
 ```{python}
@@ -962,7 +962,7 @@ We can choose to stop at any horizontal position (linkage value). Based on the d
 
 The `AgglomerativeClustering` class in `sklearn.cluster` performs the clustering process to create a learner object.
 
-::::{#exm-cluster-linkage}
+::::{#exm-cluster-linkage chapter=6 type=💻 description="Comparing linkages on simple datasets"}
 We define a function that allows us to run all three linkages for a given feature matrix:
 ```{python}
 from sklearn.cluster import AgglomerativeClustering
@@ -1040,7 +1040,7 @@ That instability can make single linkage difficult to work with.
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5zsztoyl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_53kpvohg" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.16" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-cluster-penguins}
+::::{#exm-cluster-penguins chapter=6 type=💻 description="Agglomerative for penguins dataset"}
 Let's try agglomerative clustering to "discover" the species of the penguins, pretending we don't know them in advance. First, let's recall how many of each species we actually do have:
 
 ```{python}

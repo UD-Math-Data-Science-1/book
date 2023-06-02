@@ -3,10 +3,16 @@ listing:
   - id: examples-listing
     contents: 
         - _datasets
-        - _examples.yml
+        - _crossrefs/exm.yml
     type: table
     sort: false
-    fields: [title, Type, Chapter, Link]
+    fields: [description, type, chapter, link]
+    page-size: 50
+    field-display-names: 
+      description: Description
+      type: Type
+      chapter: Chap
+      link: Link
 ---
 
 # Preface {.unnumbered}

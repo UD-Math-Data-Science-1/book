@@ -37,7 +37,7 @@ In ML, a *parameter* is a value that is adjusted during training; i.e., it is le
 
 Some hyperparameters, such as the choice of norm in the nearest-neighbors algorithm, have an influence that is not easy to characterize. But others clearly affect the potential expressive power of the algorithm. 
 
-::::{#exm-select-hyper}
+::::{#exm-select-hyper chapter=4 type=✍️ description="Hyperparameters"}
 The maximum depth $r$ of a decision tree limits the complexity that the tree can attain. When $r=1$, the tree can divide the data only once and assign different values to the different sides. In general, though, a tree can assign up to $2^r$ unique values, which grows exponentially with $r$; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.
 
 For a kNN classifier, when $k$ is as large as the number of samples, the classifier can only take one value on the entire set---all the samples have a vote everywhere. The other extreme is $k=1$, where each sample rules within its own neighborhood, and again we achieve 100% training accuracy.
@@ -151,7 +151,7 @@ This tension is known as the *bias--variance tradeoff*. Perhaps we can view this
 
 We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets. 
 
-::::{#exm-select-learning-curves}
+::::{#exm-select-learning-curves chapter=4 type=💻 description="Learning curves"}
 We will use a subset of a realistic data set used to predict the dominant type of tree in patches of forest. We train a decision tree classifier with fixed depth throughout. (Don't confuse the forest data for the tree classifier, haha.)
 
 ```{python}
@@ -326,7 +326,7 @@ overfit(40,DecisionTreeClassifier(max_depth=2),3)
 
 The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see @fig-select-knn-1-noisy, and @fig-select-tree-6-noisy, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in @sec-select-learning-curves. 
 
-::::{#exm-select-overfit-forest}
+::::{#exm-select-overfit-forest chapter=4 type=💻 description="Overfitting"}
 Returning to the forest data from @exm-select-learning-curves, we try decision trees of maximum depth $r=12$ on 100 random training subsets of size 5000:
 
 ```{python}
@@ -409,7 +409,7 @@ We should expect bagging to work best with highly expressive classifiers that ha
 
 Scikit-learn has a `BaggingClassifier` that automates the process of generating an ensemble from just one basic type of estimator. 
 
-::::{#exm-select-ensemble-knn}
+::::{#exm-select-ensemble-knn chapter=4 type=💻 description="Bagging ensemble classifier"}
 Here is a dataset collected from images of dried beans:
 
 ```{python}
@@ -498,7 +498,7 @@ An ensemble of decision trees is known as a **random forest**. We can use a `Ran
 :::
 
 
-::::{#exm-select-ensemble-knn-better}
+::::{#exm-select-ensemble-knn-better chapter=4 type=💻 description="Bagging ensemble (better)"}
 If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:
 ```{python}
 ensemble = BaggingClassifier( 
@@ -517,7 +517,7 @@ print(f"AUC for the new ensemble is {auc:.4f}")
 We may get better results by increasing the size of the ensemble, too, though in this case there isn't much room left for improvement.
 ::::
 
-::::{#exm-select-ensemble-forest}
+::::{#exm-select-ensemble-forest chapter=4 type=💻 description="Random forest classifier"}
 Let's work again with the forest cover dataset. It's got over 500,000 samples and 54 features:
 ```{python}
 forest = datasets.fetch_covtype()
@@ -631,7 +631,7 @@ The steps for **$k$-fold cross-validation** are as follows:
 
 A different variation is **stratified** $k$-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.
 
-::::{#exm-select-folds}
+::::{#exm-select-folds chapter=4 type=✍️ description="Folds for validation"}
 Here is how 16 elements can be split into 4 folds:
 
 ```{python}
@@ -643,7 +643,7 @@ for train,test in kf.split(range(16)):
 ```
 ::::
 
-::::{#exm-select-cv-beans}
+::::{#exm-select-cv-beans chapter=4 type=💻 description="Cross-validation"}
 Let's apply cross-validation to the beans dataset. 
 
 ```{python}
@@ -685,7 +685,7 @@ The low variance across the folds that we see above is reassurance that they are
 
 If we perform cross-validations as we vary a hyperparameter, we get a **validation curve**. 
 
-::::{#exm-select-vc-beans}
+::::{#exm-select-vc-beans chapter=4 type=💻 description="Validation curve"}
 Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:
 
 ```{python}
@@ -736,7 +736,7 @@ print( "score is", balanced_accuracy_score(y_test, yhat) )
 #### Grid search 
 When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it's common to perform a *grid search*, in which we try cross-validated fitting using every specified combination of parameter values. 
 
-::::{#exm-select-grid-cancer}
+::::{#exm-select-grid-cancer chapter=4 type=💻 description="Cross-validation grid search"}
 Let's work with a dataset on breast cancer detection:
 
 ```{python}

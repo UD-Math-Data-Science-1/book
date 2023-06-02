@@ -39,7 +39,7 @@ We will use the NetworkX package to work with graphs.
 import networkx as nx
 ```
 
-::::{#exm-networks-construct}
+::::{#exm-networks-construct chapter=7 type=💻 description="Constructing networks/graphs"}
 One way to create a graph is from a list of edges:
 
 ```{python}
@@ -82,7 +82,7 @@ print( list(star_letter.edges) )
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_h5jslr5z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wa9lv9al" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-networks-import}
+::::{#exm-networks-import chapter=7 type=💻 description="Importing networks"}
 There are many ways to read graphs from, and write them to, files. For example, here is a friend network among Twitch users:
 
 ```{python}
@@ -183,7 +183,7 @@ Nodes are said to be **adjacent** if they share an edge. The **neighbors** of a 
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_itppnnq4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sxacabrk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-networks-neighbors}
+::::{#exm-networks-neighbors chapter=7 type=💻 description="Neighbors of a node"}
 We get the neighbors of a node by using it as an index on the graph object. As with nodes and edges, we usually need to convert the result into a more convenient form:
 ```{python}
 print( "Neighbors of node 1 in the star graph:", list(star[1]) )
@@ -191,7 +191,7 @@ print( "Neighbors of node 6 in the star graph:", list(star[6]) )
 ```
 ::::
 
-::::{#exm-networks-ego}
+::::{#exm-networks-ego chapter=7 type=💻 description="Ego graph"}
 We can zoom in on a subset of the Twitch graph by selecting a node and its **ego graph**, which includes its neighbors along with all edges between the captured nodes:
 
 ```{python}
@@ -234,7 +234,7 @@ A_{ij}=A_{ji}
 $$ 
 for all valid indices, and we say that $A$ is **symmetric**.
 
-::::{#exm-networks-adjmatrix}
+::::{#exm-networks-adjmatrix chapter=7 type=💻 description="Adjacency matrix"}
 The star graph defined in @sec-networks-zoo has the following adjacency matrix:
 ```{python}
 A = nx.adjacency_matrix(star)
@@ -272,7 +272,7 @@ It's common to use the notation $\bar{k}$ for the average degree of a graph.
 
 The `degree` property of a NetworkX graph gives an object of all nodes with their degrees.
 
-::::{#exm-networks-degree}
+::::{#exm-networks-degree chapter=7 type=💻 description="Node degrees"}
 Continuing with the graph from @exm-networks-ego:
 
 ```{python}
@@ -317,7 +317,7 @@ $$
 If we sum the degrees of all the nodes, we must get $2m$, because each edge will have been contributed twice to the summation. Dividing by $n$ gives the mean. 
 :::
 
-::::{#exm-networks-avgdegree}
+::::{#exm-networks-avgdegree chapter=7 type=💻 description="Average degree"}
 Just to check the theorem on the ego graph from @exm-networks-ego:
 
 ```{python}
@@ -359,7 +359,7 @@ where the expectation operation is taken over all realizations of ER graphs on $
  
 There are two senses of averaging going on in @thm-networks-degree-ER:. We take the average (expectation operation) over all random instances of the average degree over all nodes within the instance.
 
-::::{#exm-networks-degree-ER}
+::::{#exm-networks-degree-ER chapter=7 type=💻 description="ER graphs"}
 ```{python}
 n, p = 50, 0.08
 ER = nx.erdos_renyi_graph(n, p, seed=2)
@@ -412,7 +412,7 @@ Imagine $n$ nodes arranged in a circle. In the first phase, we connect each node
 
 In the next phase, we rewire some of the local relationships into far-flung ones. We visit each node $i$ in turn. For each edge from $i$ to a neighbor, with probability $q$ we replace it with an edge between $i$ and a node chosen at random from all the nodes $i$ currently not adjacent to $i$. 
 
-::::{#exm-networks-WS}
+::::{#exm-networks-WS chapter=7 type=💻 description="WS graphs"}
 If we set $q=0$, we disable the rewiring phase and get a regular ring lattice:
 ```{python}
 WS = nx.watts_strogatz_graph(13, 4, 0, seed=302)
@@ -464,7 +464,7 @@ where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in t
 
 The value of $T(i)$ is the same as the number of edges between node $i$'s neighbors. Because there are $\binom{d_i}{2}$ unique pairs of neighbors, the value of $C(i)$ is between 0 and 1.
 
-::::{#exm-networks-cluster-small-world}
+::::{#exm-networks-cluster-small-world chapter=7 type=✍️ description="Clustering coefficient"}
 Let's find the clustering coefficient for each node in this wheel graph:
 ```{python}
 W = nx.wheel_graph(7)
@@ -495,7 +495,7 @@ print( pd.Series(nx.clustering(W)) )
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zo6715v5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_m7eg10h2" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.10" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-networks-cluster-twitch}
+::::{#exm-networks-cluster-twitch chapter=7 type=💻 description="Clustering in the Twitch network"}
 Let's examine clustering within the Twitch network:
 ```{python}
 #| code-fold: true
@@ -540,7 +540,7 @@ The expected value of the average clustering coefficient in ER graphs of type $(
 
 A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability $p$ of inclusion, then $p$ is also the expected fraction of edges that appear within the neighborhood subgraph of any node. 
 
-::::{#exm-networks-cluster-er}
+::::{#exm-networks-cluster-er chapter=7 type=💻 description="Clustering in ER graphs"}
 Let's compute average clustering within multiple ER random graphs.
 
 ```{python}
@@ -566,7 +566,7 @@ In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and
 
 The initial setup of a WS graph of type $(n,k,q)$ is highly clustered by design (see @exr-networks-ring-lattice). If $q$ is close to zero, the final graph will retain much of this initial clustering. However, the average clustering coefficient tends to decrease as $q$ increases.
 
-::::{#exm-networks-cluster-WS}
+::::{#exm-networks-cluster-WS chapter=7 type=💻 description="Clustering of WS graphs"}
 Here is an experiment to observe how the average clustering in a WS graph depends on the rewiring probability $q$:
 
 ```{python}
@@ -639,13 +639,13 @@ for some $t\ge 1$. The path above has **length** $t+1$, which is the number of e
 {{< video https://www.dropbox.com/s/5nue68tr24nwdon/Section7_4.mp4?raw=1 >}}
 :::
 
-::::{#exm-networks-distance-complete}
+::::{#exm-networks-distance-complete chapter=7 type=✍️ description="Distances in a complete graph"}
 In a complete graph, all possible pairs of nodes are directly connected by edges. Therefor, distance between any pair of distinct nodes is 1, and the graph has diameter 1.
 ::::
 
 Because the diameter depends on the extreme outlier of the distance distribution, it's often more useful to consider the **average distance** by taking the mean. 
 
-::::{#exm-networks-distance-wheel}
+::::{#exm-networks-distance-wheel chapter=7 type=💻 description="Distances in a wheel graph"}
 Here is a small wheel graph:
 
 ```{python}
@@ -673,7 +673,7 @@ This function becomes quite slow as the number of nodes grows. In practice, the 
 
 It could happen that there is a pair of nodes that is not connected by any path of edges. In that case, the distance between them is either undefined or infinite, and we say the graph is **disconnected**. In such a situation, it's common to decompose the graph into **connected components**, a separation of the nodes into connected subgraphs.
 
-::::{#exm-networks-connected}
+::::{#exm-networks-connected chapter=7 type=✍️ description="Connectedness"}
 The following graph is clearly connected:
 ```{python}
 G = nx.lollipop_graph(5,3)
@@ -710,7 +710,7 @@ Each element of the list above is a set of nodes.
 
 An ER graph may be disconnected. In order to study the statistics of distances for ER graphs, it's customary to use the largest connected component (often called the *big component*) of each instance.
 
-::::{#exm-networks-distance-ER}
+::::{#exm-networks-distance-ER chapter=7 type=💻 description="Distances in ER graphs"}
 Let's examine average distances within ER graphs of a fixed type. First, we need to be able to extract the largest component of a disconnected graph. Here is the idiom (referring back to @exm-networks-connected):
 ```{python}
 G = nx.lollipop_graph(5,3)
@@ -841,7 +841,7 @@ Thus, it's fair to say that our Twitch network has a mean distance comparable to
 
 As we well know, the mean of a distribution does not tell the entire story about it.
 
-::::{#exm-networks-ddist-twitch}
+::::{#exm-networks-ddist-twitch chapter=7 type=💻 description="Degree distribution in the Twitch network"}
 The distribution of the degrees of all the nodes in our Twitch network has some surprising features:
 
 ```{python}
@@ -873,7 +873,7 @@ These "gregarious nodes" or *hubs* are characteristic of many social and other r
 
 Neither ER nor WS graphs show degree distributions even remotely like that of the Twitch network.
 
-::::{#exm-networks-ddist-ERWS}
+::::{#exm-networks-ddist-ERWS chapter=7 type=💻 description="Degree distribution in the Twitch network"}
 We can compare the distribution from @exm-networks-ddist-twitch to that in a sample of ER graphs with the same size and expected average degree:
 
 ```{python}
@@ -968,7 +968,7 @@ The construction starts with a small seed graph. One by one, new nodes are added
 
 Because of preferential attachment, there is a strong tendency to develop some hubs of very high degree, as is required for a power-law degree distribution.
 
-::::{#exm-networks-BA}
+::::{#exm-networks-BA chapter=7 type=💻 description="Barabási--Albert graphs"}
 Here is a BA graph with 200 nodes and $m=3$ connections per new node:
 ```{python}
 BA = nx.barabasi_albert_graph(200, 3, seed=302)
@@ -986,7 +986,7 @@ Probability theory predicts that a BA graph has a power-law degree distribution 
 
 Except fot the initial seed stage, each node of a BA graph introduces $m$ new edges, for a total edge count of about $mn$. By @thm-networks-degree, the average degree of the graph is roughly $\bar{k} = 2mn/n = 2m$.
 
-::::{#exm-networks-powerlaw-ba}
+::::{#exm-networks-powerlaw-ba chapter=7 type=💻 description="Power-law degrees in the Twitch network"}
 For the Twitch network, $\bar{k}$ is almost 10, so we use $m=5$ to get a comparable BA graph. Here we construct such a graph with the same number of nodes as the Twitch network.
 ```{python}
 n = twitch.number_of_nodes()
@@ -1078,7 +1078,7 @@ For an undirected graph without self-links, the maximum degree of a node in a gr
 
 While degree centrality yields useful information in some networks, it is not always a reliable measuring stick. For example, a search engine for the Web that uses degree centrality would be easily fooled by creating a large collection of sites that all link to each other, even if few outside sources also link to the collection. Other aspects of network layout also argue against relying on degree centrality.
 
-::::{#exm-networks-centrality-degree}
+::::{#exm-networks-centrality-degree chapter=7 type=💻 description="Degree centrality"}
 We start with a small graph:
 ```{python}
 G = nx.lollipop_graph(4,2)
@@ -1127,7 +1127,7 @@ In the sum above, node $k$ remains fixed while $i$ and $j$ range over all the ot
 
 It's easy to prove that $0\le c_B(k) \le 1$ for any node and that $c_B(k)=0$ if node $k$ has degree zero or one. 
 
-::::{#exm-networks-between-barbell}
+::::{#exm-networks-between-barbell chapter=7 type=✍️ description="Betweenness centrality"}
 We will find the betweenness centrality of the following *barbell graph*:
 
 ![Barbell graph](_media/barbell.png){width="350"}
@@ -1173,7 +1173,7 @@ Finally, all the other nodes appear in no shortest paths. For instance, any path
 
 The `betweenness_centrality` function returns a dictionary with nodes as keys and $c_B$ as values. (However, look at *both* of the next two examples.)
 
-::::{#exm-networks-centrality-btw-power}
+::::{#exm-networks-centrality-btw-power chapter=7 type=💻 description="Betweenness centrality in BA graphs"}
 Let's take a look at centrality measures for a power-law graph. Degree centrality points out a dominant hub:
 ```{python}
 P = nx.barabasi_albert_graph(60, 1, seed=2)
@@ -1196,7 +1196,7 @@ The exact computation of betweenness centrality takes a very long time in a grap
 
 In practice, the $\sigma$ values in the definition of $c_B$ are often estimated by sampling. This capability is also offered by the `betweenness_centrality` function.
 
-::::{#exm-networks-centrality-btw-big}
+::::{#exm-networks-centrality-btw-big chapter=7 type=💻 description="Betweenness centrality in the Twitch network"}
 With $n>7000$, the Twitch network is much too large for calculating betweenness centrality exactly. So we provide a parameter `k` to use estimation by sampling:
 ```{python}
 tcb = pd.Series( 
@@ -1251,7 +1251,7 @@ $$
 
 for a number $\lambda$. This is an **eigenvalue equation**, one of the fundamental problems in linear algebra. 
 
-::::{#exm-networks-centrality-eigvector}
+::::{#exm-networks-centrality-eigvector chapter=7 type=✍️ description="Eigenvectors"}
 Eigenvectors!
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3jy3eyyq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1g86dy28" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.26" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 ::::
@@ -1262,7 +1262,7 @@ Every $n\times n$ matrix has at least one nonzero solution to the eigenvalue equ
 The **eigenvector centrality** of node $i$ is the value of $x_i$, where $\bfx$ is a positive eigenvector of the adjacency matrix. 
 ::::
 
-::::{#exm-networks-centrality-eig}
+::::{#exm-networks-centrality-eig chapter=7 type=✍️ description="Eigenvector centrality"}
 Consider the complete graph $K_3$, which is just a triangle. Its adjacency matrix is
 $$
 \bfA = \begin{bmatrix} 
@@ -1290,7 +1290,7 @@ With a small tweak to avoid overestimating the neighbors of a major hub, eigenve
 
 NetworkX has two functions for computing eigenvector centrality. One that relies on numpy to solve the eigenvalue problem tends to be the faster one and is called `eigenvector_centrality_numpy`. As with betweenness centrality, the return value is a dictionary with nodes as the keys.
 
-::::{#exm-networks-centrality-smallworld}
+::::{#exm-networks-centrality-smallworld chapter=7 type=💻 description="Comparison of centrality metrics"}
 Continuing with the small-world graph `G` from @exm-networks-centrality-degree, we look at all three centrality measures side by side: 
 ```{python}
 #| code-fold: true

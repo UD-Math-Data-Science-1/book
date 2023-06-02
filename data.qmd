@@ -14,10 +14,8 @@ A **quantitative** value is one that is numerical and supports meaningful compar
 
  Quantitative data is further divided into **continuous** and **discrete** types. The difference is the same as between real numbers and integers.
 
-::::{#exm-data-quantitative}
-
+::::{#exm-data-quantitative chapter=1 description="Quantitative data" type=✍️}
 Some continuous quantitative data sources:
-
 * Temperature at noon at a given airport
 * Your height
 * Voltage across the terminals of a battery
@@ -39,7 +37,7 @@ In each case, it makes sense, for example, to order different values and compute
 Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values.
 :::
 
-::::{#exm-data-zip}
+::::{#exm-data-zip chapter=1 description="Numerical but not quantitative" type=✍️}
 Not all numerical values represent truly quantitative data. ZIP codes (postal codes) in the U.S. are 5-digit numbers, and while there is some logic to how they were assigned, there is no clearly meaningful interpretation of averaging them, for instance.
 ::::
 
@@ -148,7 +146,7 @@ for _ in range(5):
     print( rng.normal() )
 ```
 
-::::{#exm-data-normal}
+::::{#exm-data-normal chapter=1 description="Mean of a normal distribution" type=💻}
 In the long run, the average value of normally distributed numbers will be zero. Here is an experiment on 100,000 of them:
 
 ```{python}
@@ -488,7 +486,7 @@ A qualitative value is one that is not quantitative. However, in order to work w
 **Categorical** data has values drawn from a finite set $S$ of categories. If the members of $S$ support meaningful ordering comparisons, then the data is **ordinal**; otherwise, it is **nominal**.
 ::::
 
-::::{#exm-data-categorical}
+::::{#exm-data-categorical chapter=1 description="Ordinal data" type=✍️}
 Examples of ordinal categorical data:
 
 * Seat classes on a commercial airplane (e.g., economy, business, first)
@@ -511,7 +509,7 @@ x_i = \begin{cases} 1, & x=c_i, \\ 0, & x\neq c_i. \end{cases}
 $$
 At most one of the $x_i$ can be 1. If all of the $x_i$ are 0, then we know that $x=c_m$. 
 
-::::{#exm-data-dummy}
+::::{#exm-data-dummy chapter=1 description="Dummy variables" type=✍️}
 Suppose that the *stooge* variable can take the values `Moe`, `Larry`, `Curly`, or `Shemp`. Then the vector
 
 ```python
@@ -547,7 +545,7 @@ A **series** is a vector that is indexed by a finite ordered set. A **data frame
 
 We can conceptualize a series as a vector plus an index list, and a data frame as a 2D array with index sets for the rows and the columns. In that sense, they are simply syntactic sugar. However, since people are much better at remembering the meaning of words than arbitrarily assigned integers, data frames serve to prevent errors and misunderstandings.
 
-::::{#exm-data-frames}
+::::{#exm-data-frames chapter=1 description="Series and data frames" type=✍️}
 Some data that can be viewed as series:
 
 * The length, width, and height of a box can be expressed as a 3-vector of positive real numbers. If we index the vector by the names of the measurements, it becomes a series.
@@ -556,7 +554,7 @@ Some data that can be viewed as series:
 * The scores of gymnasts on multiple apparatus types can be represented as a data frame whose rows are indexed by the names of the gymnasts and whole columns are indexed by the names of the apparatuses. 
 ::::
 
-::::{#exm-data-colors}
+::::{#exm-data-colors chapter=1 description="Series in pandas" type=💻}
 Here is a pandas series for the wavelengths of light corresponding to rainbow colors:
 ```{python}
 import pandas as pd
@@ -663,7 +661,7 @@ letters
 
 Pandas has facilities for dealing with categorical variables.
 
-::::{#exm-data-chess}
+::::{#exm-data-chess chapter=1 description="Categorical data in pandas" type=💻}
 Here is a vector of chess pieces at the start of a game:
 
 ```{python}
@@ -737,7 +735,7 @@ As always in Python, you need to pay attention to the difference between applyin
 
 Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These can be read by pandas locally or over the web.
 
-::::{#exm-data-read}
+::::{#exm-data-read chapter=1 description="Importing data with pandas" type=💻}
 The pandas function we use to load a dataset is `read_csv`. Here we use it to read a file that is availble over the web:
 
 ```{python}
@@ -771,7 +769,7 @@ It's also possible to import data from most other general-purpose formats you mi
 
 Above we saw that you can use the `loc` property to access a frame's row by name, or `iloc` to access by position. It's more common, though, to select them by some criteria. 
 
-::::{#exm-data-selection}
+::::{#exm-data-selection chapter=1 description="Selecting rows in a frame" type=💻}
 Here's a local file that contains daily weather summaries from Newark, Delaware:
 ```{python}
 weather = pd.read_csv("_datasets/ghcn_newark.csv")
@@ -804,7 +802,7 @@ dry_cold.head(6)
 
 When a column of a dataset is a time stamp, it can be used as the index of the data frame, which makes some time-centric operations easier.
 
-::::{#exm-data-time-index}
+::::{#exm-data-time-index chapter=1 description="Using time as an index" type=💻}
 Let's reload the dataset using the *DATE* column (which is second in the file) as a `datetime` index:
 ```{python}
 weather = pd.read_csv("_datasets/ghcn_newark.csv", index_col=1, parse_dates=True)

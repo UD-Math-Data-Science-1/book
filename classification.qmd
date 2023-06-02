@@ -51,7 +51,7 @@ In math, we usually start the row and column indexes at 1, but Python starts the
 
 Each row of the feature matrix is a single feature vector, while each column is the value for a single feature over the entire training set.
 
-::::{#exm-class-basketball}
+::::{#exm-class-basketball chapter=3 type=✍️ description="Feature matrix"}
 Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a $200\times 9$ feature matrix.
 ::::
 
@@ -340,7 +340,7 @@ All of the primary metrics vary between 0 (worst) and 1 (best). Accuracy is self
 * **precision** How often are the "yes" predictions correct?
 * **NPV** How often are the "no" predictions correct?
 
-::::{#exm-class-confusion}
+::::{#exm-class-confusion chapter=3 type=✍️ description="Classifier performance metrics"}
 Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:
 
 |              |               |               |
@@ -367,7 +367,7 @@ The **balanced accuracy** is the arithmetic mean of recall and specificity.
 
 Like the primary metrics, $F_1$ and balanced accuracy range between 0 (worst) and 1 (best). The harmonic mean is small if either of its terms is small, so a high $F_1$ means both precision and recall are good.
 
-::::{#exm-class-metrics}
+::::{#exm-class-metrics chapter=3 type=💻 description="Binary classifier metrics"}
 Continuing with the loan classifier trained earlier in this section, we can find the confusion matrix:
 
 ```{python}
@@ -435,7 +435,7 @@ The loan classifier has excellent recall, respectable precision, and terrible sp
 :::
 
 
-::::{#exm-class-scores-simple}
+::::{#exm-class-scores-simple chapter=3 type=✍️ description="Combined metrics"}
 If $k$ of the $n$ testing samples were funded loans, then the fund-them-all loan classifier has
 
 $$
@@ -467,7 +467,7 @@ When there are more than two unique possible labels, these metrics can be applie
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hfixb8l6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eup2cbdf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-class-multiclass}
+::::{#exm-class-multiclass chapter=3 type=💻 description="Multiclass metrics"}
 We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:
 
 ```{python}
@@ -587,7 +587,7 @@ H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{
 $$
 In general, $H$ is always nonnegative and less than 1, and it only approaches 1 in the limit of a large number of equally distributed classes.
 
-::::{#exm-class-gini}
+::::{#exm-class-gini chapter=3 type=✍️ description="Gini impurity"}
 Suppose a set $S$ has $n$ members with label A, 1 member with label B, and 1 member with label C. What is the Gini impurity of $S$?
 
 ::: {.solution}
@@ -625,7 +625,7 @@ If $S_L$ and $S_R$ are both pure subsets, then $Q(S_L,S_R)=0$. Otherwise, $Q$ te
 
 Our goal is to choose a partition that minimizes $Q$. However, we constrain ourselves to allow only certain kinds of partitions. If feature space is $d$-dimensional, we select a dimension $1 \le j \le d$ and a real threshold value $\theta$. Then each feature vector $\bfx$ is placed in $S_L$ if $x_j \le \theta$ and in $S_R$ if $x_j > \theta$. Geometrically, we are dividing feature space by an axis-aligned line if $d=2$ or an axis-aligned plane if $d=3$. This splitting criterion can be evaluated extremely quickly, and we can find the best possible such partitioning in the sense of minimizing $Q(S_L,S_R)$ in a reasonable amount of time. 
 
-::::{#exm-class-tree-partition}
+::::{#exm-class-tree-partition chapter=3 type=✍️ description="Tree partitioning"}
 Suppose we have $d=1$ feature and are given the four samples $(X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}$. What is the optimal partition?
 
 ::: {.solution}
@@ -659,7 +659,7 @@ The above strategy is fast but can fail to get the best possible decision tree. 
 
 In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
 
-::::{#exm-class-tree-toy}
+::::{#exm-class-tree-toy chapter=3 type=💻 description="Inspecting a decision tree"}
 We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks: 
 
 ```{python}
@@ -717,7 +717,7 @@ Notice that the bottom right node has a nonzero final Gini impurity. This node c
 
 Because we can follow a decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.
 
-::::{#exm-class-tree-penguins}
+::::{#exm-class-tree-penguins chapter=3 type=💻 description="Tree classifier for the penguins dataset"}
 We return to the penguins and fit a decision tree to the quantitative features:
 
 ```{python}
@@ -850,7 +850,7 @@ $$
 \dist(\bfu,\bfv) = \norm{\bfu - \bfv}. 
 $$
 
-::::{#exm-class-distance}
+::::{#exm-class-distance chapter=3 type=✍️ description="Calculating distance"}
 Given $\bfu=[-1,1,0,4]$ and $\bfv=[-2,1,2,2]$, find the distance between them using all three common norms.
 
 :::{.solution}
@@ -883,7 +883,7 @@ Given a new query vector $\bfx$, the **kNN algorithm** finds the $k$ labeled sam
 The *nearest neighbor search* is a well-studied problem in computer science, and there are specialized data structures used for its efficient solution. 
 :::
 
-::::{#exm-class-knn-small}
+::::{#exm-class-knn-small chapter=3 type=✍️ description="kNN classifier"}
 Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:
 
 ![](_media/knn_example1.svg)
@@ -909,7 +909,7 @@ At $k=1$ neighbor, each sample point defines its own local domain of influence t
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5gh9td14&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eflwm15d" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.4.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-class-knn}
+::::{#exm-class-knn chapter=3 type=💻 description="kNN classifier for the penguins dataset"}
 Back to the penguins! We use `dropna` to drop any rows with missing values.
 ```{python}
 import seaborn as sns
@@ -1019,7 +1019,7 @@ Z = X.transform( lambda x: (x - x.mean()) / x.std() )
 
 We could then retrain the classifier using `Z` in place of `X`. A nuisance of doing so is that the standardization transformation must also be performed on every new query vector that comes along, requiring us to keep track of the mean and std of the original dataset. Scikit-learn allows us to automate this process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
 
-::::{#exm-class-knn-standard}
+::::{#exm-class-knn-standard chapter=3 type=💻 description="Pipeline for standardized columns"}
 Once created, a pipeline object can mostly be treated the same as any other learner:
 ```{python}
 from sklearn.pipeline import make_pipeline
@@ -1068,7 +1068,7 @@ Let $\bfx$ be a query vector in a vote-based classification method. The **probab
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_new5vjt4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_137v0vyn" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-::::{#exm-class-phat}
+::::{#exm-class-phat chapter=3 type="✍️, 💻" description="Probabilistic classifier"}
 Suppose we have trained a kNN classifier with $k=10$ for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:
 ```{python}
 #| echo: false
@@ -1092,7 +1092,7 @@ p_hat = np.array( [
 
 It's natural to interpret $\hat{p}$ as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given $\hat{p}$, we can still output a predicted class; it's just that we also get additional information about how the prediction was made. 
 
-::::{#exm-class-prob}
+::::{#exm-class-prob chapter=3 type=💻 description="Probabilistic classifier for the penguins dataset"}
 Consider the penguin species classification problem:
 
 ```{python}
@@ -1133,7 +1133,7 @@ In the binary label case, our assumption so far has been that a simple majority 
 Let $\theta$ be a number in the interval $[0,1]$. We say that a class $T$ **hits** at level $\theta$ at a query point if the fraction of votes that $T$ receives at that point is at least $\theta$. 
 ::::
 
-::::{#exm-class-hits}
+::::{#exm-class-hits chapter=3 type=💻 description="Varying decision threshold"}
 Continuing with the data in @exm-class-phat, we find that at $\theta=0$, everything always hits:
 ```{python}
 #| echo: false
@@ -1168,7 +1168,7 @@ The **ROC curve** is a way to visualize the hits as a function of $\theta$ over 
 The name of the ROC curve is a throwback to the early days of radar, when the idea was first developed.
 :::
 
-::::{#exm-class-roc-simple}
+::::{#exm-class-roc-simple chapter=3 type=💻 description="ROC curve, quasi-manually"}
 We continue with the data from @exm-class-phat, but now we add ground truth to the queries:
 
 ```{python}
@@ -1202,7 +1202,7 @@ As we're about to see, the step-by-step process above is just for illustration a
 
 Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for the identification of each class.
 
-::::{#exm-class-roc-penguin}
+::::{#exm-class-roc-penguin chapter=3 type=💻 description="ROC curve for the penguins dataset"}
 Continuing @exm-class-prob, we will plot ROC curves for the three species in the penguin data:
 ```{python}
 from sklearn.metrics import roc_curve
@@ -1257,7 +1257,7 @@ sns.relplot(data=roc,
 
 ROC curves lead to another classification performance metric known as **area under ROC curve (AUC)**. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range from credulous to skeptical. You might think of it as grading with partial credit.
 
-::::{#exm-class-auc}
+::::{#exm-class-auc chapter=3 type=💻 description="Area under ROC curve"}
 The AUC metric allows us to compare the standard and weighted kNN classifiers from @exm-class-roc-penguin. Note that the function for computing them, `roc_auc_score`, requires a keyword argument when there are more than two classes, to specify "one vs. rest" (our usual) or "one vs. one" matchups.
 
 ```{python}

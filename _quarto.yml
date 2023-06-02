@@ -2,6 +2,7 @@ project:
   type: book
   resources:
     - _media
+  pre-render: find_crossrefs.py
 
 book:
   title: "Data Science 1"
@@ -62,5 +63,5 @@ format:
       - bottom=1.25in
     #   documentclass: scrreprt
 
-
-
+# filters: 
+#   - crossref-listings
