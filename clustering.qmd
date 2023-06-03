@@ -79,6 +79,8 @@ def blobs_data():
 ```
 
 ```{python}
+#| label: fig-clustering-blobs
+#| fig-cap: "Blobs dataset with reference clustering shown by colors."
 X, y = blobs_data()
 sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2");
 ```
@@ -98,6 +100,8 @@ def stripes_data():
 ```
 
 ```{python}
+#| label: fig-clustering-stripes
+#| fig-cap: "Stripes dataset with reference clustering shown by colors."
 X, y = stripes_data()
 sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2");
 ```
@@ -120,6 +124,8 @@ def bullseye_data():
 ```
 
 ```{python}
+#| label: fig-clustering-bullseye
+#| fig-cap: "Bullseye dataset with reference clustering shown by colors."
 X, y = bullseye_data()
 p = sns.relplot(data=X, x="x1", y="x2", hue=y, palette="Dark2")
 p.set(aspect=1);
@@ -195,8 +201,6 @@ $$
 $$
 :::
 ::::
-
-
 
 ::: {.callout-tip}
 Many clustering algorithms allow supplying $\mathbf{D}$ in lieu of the feature vectors. When you consider that in many problems, $n$ is much larger than $d$, it can be faster and easier to work with.
@@ -402,35 +406,43 @@ where the expectation and max operations are performed over all possible cluster
 An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.
 
 ::::{#exm-cluster-ARI-blobs chapter=6 type=💻 description="Adjusted Rand index"}
-Our *blobs* dataset has a reference clustering that we take to be the gold standard. Let's create another clustering based entirely on the quadrants of the plane:
+Our *blobs* dataset has a reference clustering shown in @fig-clustering-blobs that we take to be the gold standard. Let's create another clustering based entirely on the quadrants of the plane:
 
 ```{python}
 X, y = blobs_data()
 
-def quad(x1, x2):
-    if x1 > 0:
-        if x2 > 0: return 1
+def quad(x):
+    if x[0] > 0:
+        if x[1] > 0: return 1
         else: return 4
     else:
-        if x2 > 0: return 2
+        if x[1] > 0: return 2
         else: return 3
 
-q = pd.Series( [ quad(x1, x2) for (x1, x2) in zip(X["x1"], X["x2"]) ] )
+# find the quadrant for every sample
+q = X.apply(quad, axis=1)
+q.head()
+```
 
+Because this toy dataset has only 2 features, it's easy to visualize the clusters by plotting all the samples:
+
+```{python}
 sns.relplot(data=X, x="x1", y="x2", hue=q, palette="Dark2");
 ```
-The reference clustering has three classes, and there are four quadrants. Yet we can still compare them by adjusted Rand index:
+
+As you see above, there are four clusters, divided along the coordinate axes. The reference clustering has only three classes, but we can still compare them with the adjusted Rand index:
 
 ```{python}
 from sklearn.metrics import adjusted_rand_score
-
 adjusted_rand_score(y, q)
 ```
-Not surprisingly, they are seen as fairly similar.
+Not surprisingly, the clusterings are found to be quite similar.
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ypfju76b&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_r2mmdh2s" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>:::
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ypfju76b&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_r2mmdh2s" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
+:::
 
 ### Silhouettes
 
@@ -446,6 +458,7 @@ $$
  
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_jpupxgag&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wy8zyaj1" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.2.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
  
 The value $s_i$ is always in the interval $[-1,1]$. A negative value indicates that the sample seems to be more similar to a cluster other than its own. 
@@ -469,44 +482,47 @@ Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B
 ::::
 
 ::::{#exm-cluster-sil-blobs chapter=6 type=💻 description="Silhouette values calculation"}
-Let's use the predefined cluster assignments in our blobs dataset. We will add a column to the data frame that records the silhouette score for each point:
+Let's compute the silhouette scores for the reference cluster assignments in our blobs dataset. 
 
 ```{python}
 from sklearn.metrics import silhouette_samples
-
 X, y = blobs_data()
+sil = pd.Series( silhouette_samples(X, y) )
+sil.head()
+```
 
-X["sil"] = silhouette_samples(X, y)
-sns.relplot(data=X,
-    x="x1", y="x2",
-    hue=y, size="sil", palette="Dark2"
+Because these samples are 2-dimensional, it's easy to visualize their scores by varying the size of the points used to plot them:
+
+```{python}
+sns.relplot(data=X, x="x1", y="x2",
+    hue=y, size=sil, palette="Dark2"
     );
 ```
 
-In the plot above, the size of each dot shows its silhouette coefficient. Those points which don't belong comfortably with their cluster have negative scores and the smallest dots. We can find the average score in each cluster through a grouped mean:
+The samples that don't belong comfortably with their cluster have negative scores and therefore the smallest dots. We can find the median score in each cluster through a grouping:
 
 ```{python}
-X.groupby(y)["sil"].median()
+sil.groupby(y).median()
 ```
 
-These values are ordered as we would expect. We can also compute the silhouette scores for the quadrant-based clustering defined in @exm-cluster-ARI-blobs:
+We can also compute the silhouette scores for the quadrant-based clustering defined in @exm-cluster-ARI-blobs:
 
 ```{python}
-X["sil"] = silhouette_samples(X, q)
-sns.relplot(data=X, 
-    x="x1", y="x2",
-    hue=q, size="sil", palette="Dark2"
+sil = pd.Series( silhouette_samples(X, q) )
+sns.relplot(data=X, x="x1", y="x2",
+    hue=q, size=sil, palette="Dark2"
     );
 ```
 
 ```{python}
-X.groupby(q)["sil"].median()
+sil.groupby(q).median()
 ```
-The scores for clusters labelled as 1 and 2 are pretty good and almost the same as for the original reference clustering. But the other two clusters score much more poorly separately than they did when they were considered a single cluster. 
+The scores for clusters labelled as 1 and 2 are pretty good and almost the same as for the original reference clustering. But the other two clusters score much more poorly separately than they did when they are considered a single cluster. 
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_o43p6lb3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4h7o3i1m" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.7" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::::{#exm-cluster-perform-digits chapter=6 type=💻 description="Silhouettes as performance metric"}
@@ -514,7 +530,7 @@ The scores for clusters labelled as 1 and 2 are pretty good and almost the same 
 
 ```{python}
 digits = datasets.load_digits(as_frame=True)["frame"]
-keep = digits["target"].isin([4, 5, 6])
+keep = digits["target"].isin([4, 5, 6])  # keep these samples
 digits = digits[keep]
 X = digits.drop("target", axis=1)
 y = digits.target
@@ -528,11 +544,10 @@ digits["sil"] = silhouette_samples(X,y)
 digits.groupby("target")["sil"].median()
 ```
 
-As usual, means can tell us only so much. A look at the distributions of the values reveals more details:
+A look at the distributions of the silhouette values reveals more details:
 
 ```{python}
-sns.catplot(data=digits,
-    x="target", y="sil",
+sns.catplot(data=digits, x="target", y="sil",
     kind="violin"
     );
 ```
@@ -552,12 +567,11 @@ The bullseye dataset has only one "cluster" that silhouette values approve of:
 X, y = bullseye_data()
 s = silhouette_samples(X, y)
 clusters = pd.DataFrame({"cluster": y, "s value": s})
-sns.catplot(data=clusters,
-    x="cluster", y="s value", 
+sns.catplot(data=clusters, x="cluster", y="s value", 
     kind="violin"
     )
 ```
-The central blob is considered OK, but the rings score poorly. 
+The central blob scores well, but the rings score poorly because they are not compact and ball-shaped.
 ::::
 
 :::{.column-margin}
@@ -675,14 +689,14 @@ print("cluster centroids:")
 print(km2.cluster_centers_)
 ```
 
-There is a `predict` method that can make cluster assignments for arbitrary points in feature space. In $k$-means, this prediction simply tells you which centroid is closest:
+There is a `predict` method that can make cluster assignments for arbitrary points in feature space. But to get the cluster assignments for the samples, it's easier to use the `labels_` property of the fitted clustering object. 
 
 ```{python}
-Q = pd.DataFrame([ [-2,-1], [1,2] ], columns=X.columns)
-km2.predict(Q)
+c = pd.Series( km2.labels_ )
+c.value_counts()
 ```
 
-For the training samples, we don't need to call `predict` to get the cluster assignments. Every fitted clustering object has a `labels_` property that lists the cluster index values. We can use those labels to compute silhouette values:
+Here, we encapsulate using those values to compute and then show the silhouette values. Again, since we only have 2 features, it's easy to visualize the clusters directly.
 
 ```{python}
 def report(clustering):
@@ -694,22 +708,22 @@ def report(clustering):
     print("silhouette medians by cluster:")
     print( result.groupby("cluster")["sil"].median() )
     
-    sns.catplot(data=result,
-        x="cluster", y="sil",
+    sns.catplot(data=result, x="cluster", y="sil",
         kind="violin", height=3
         );
     
-    sns.relplot(data=result,
-        x="x1", y="x2",
+    sns.relplot(data=result, x="x1", y="x2",
         hue="cluster", size="sil",
         height=3, palette="Dark2"
         );
     return result
+```
 
+```{python}
 report(km2);
 ```
 
-It's clear in both plots that one cluster is more tightly packed than the other. Let's repeat the computation for $k=3$ clusters:
+It's clear from both plots above that one cluster is more tightly packed than the other. Now let's repeat the computation for $k=3$ clusters:
 
 ```{python}
 km3 = KMeans(n_clusters=3, n_init=1, random_state=302)
@@ -717,9 +731,9 @@ km3.fit(X)
 report(km3);
 ```
 
-This result shows a modest reduction in silhouette scores for original good cluster, but improvement for the problematic one.
+This result shows a modest reduction in silhouette scores for the original good cluster, but improvement for the problematic one.
 
-Moving on to $k=4$ clusters shows clear degradation of the silhouette scores:
+Moving on to $k=4$ clusters shows clear degradation of the silhouette values:
 
 ```{python}
 km4 = KMeans(n_clusters=4, n_init=1, random_state=302)
@@ -727,7 +741,7 @@ km4.fit(X)
 report(km4);
 ```
 
-Based on silhouette scores, we would be justified to stop at $k=3$ clusters. 
+Based on silhouette values, we would be justified to stop at $k=3$ clusters. 
 ::::
 
 :::{.column-margin}
@@ -852,11 +866,14 @@ Dendrograms can be found by starting with the root and recursively splitting, or
 
 The algorithm begins with $n$ singleton clusters, i.e., $C_i=\{\bfX_i\}$ for $i=1,\dots,n$. Then, the similarity or distance between each pair of clusters is determined. The pair with the minimum distance is merged, and the process repeats. Effectively, we end up with an entire family of clusterings; we can stop at any number of clusters between $n$ and 1. 
 
-Common ways to define the distance between two clusters $C_i$ and $C_j$ are:
-
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ftn4hgyr&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_9w182z23" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.4(b)" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
+
+We now need to specify how to compute the distance between clusters, a quantity called their **linkage**.
+
+::::{#def-cluster-linkage}
+Various ways to define the distance between clusters $C_i$ and $C_j$ are:
 
 * single linkage
 : (also called *minimum linkage*)
@@ -877,21 +894,21 @@ $$
 $$ {#eq-cluster-linkage-average}
 
 * Ward linkage
-: The increase in inertia resulting from merging $C_i$ and $C_j$, which is equal to
+: Defined as the increase in inertia resulting from merging $C_i$ and $C_j$, which is equal to
 $$
 \frac{ |C_i|\,|C_j| }{|C_i| + |C_j|} \norm{\bfmu_i - \bfmu_j}_2^2,
 $$ {#eq-cluster-linkage-ward}
 where $\bfmu_i$ and $\bfmu_j$ are the centroids of $C_i$ and $C_j$.
+::::
 
-Single linkage only pays attention to the gaps between clusters, not the size or spread of them. Complete linkage, on the other hand, wants to keep every cluster packed tightly together. Average linkage is a compromise between these extremes. Agglomerative clustering with Ward linkage amounts to trying to minimize the increase of inertia with each merger. In that sense, it has the same objective as $k$-means, but it is usually not as successful at minimizing inertia.
+Single linkage only pays attention to the gaps between clusters, not the size or spread of them. Complete linkage, on the other hand, wants to keep every cluster packed tightly together. Average linkage is a compromise between these extremes. Agglomerative clustering with Ward linkage amounts to trying to minimize the increase of inertia with each merger. In that sense, it has a similar objective to $k$-means, but it is usually not as successful at minimizing inertia.
 
-Unlike $k$-means, which has to be able to compute the distances between the samples and changing centroid locations, agglomerative clustering with single, complete, or average linkage needs only the pairwise distances between samples and can be found from a distance matrix in place of the samples themselves.
+Both $k$-means and Ward linkage require the ability to compute changing centroid locations, which in turn requires knowing all the sample locations. By contrast, agglomerative clustering with single, complete, or average linkage needs only the pairwise distances between samples and can be found from just a distance matrix in place of the samples themselves.
 
 ::::{#exm-cluster-linkage-tiny chapter=6 type=✍️ description="Linkage"}
 Given clusters $C_1=\{-3,-2,-1\}$ and $C_2=\{3,4,5\}$, find the different linkages between them. 
 
 :::{.solution}
-
 **Ward.** The centroids of the clusters are $-2$ and $4$. So the linkage is 
 
 $$
@@ -972,7 +989,7 @@ def run_experiment(X):
     data = X.copy()
     for linkage in ["single", "complete", "ward"]:
         agg = AgglomerativeClustering(n_clusters=3, linkage=linkage)
-        agg.fit( X )
+        agg.fit(X)
         data["cluster"] = agg.labels_
         data["linkage"] = linkage
         results = pd.concat( (results, data) )
@@ -984,8 +1001,7 @@ We first try the *blobs* dataset:
 ```{python}
 X, y = blobs_data()
 results = run_experiment(X)
-sns.relplot(data=results,
-        x="x1", y="x2", 
+sns.relplot(data=results, x="x1", y="x2", 
         hue="cluster", col="linkage", 
         height=2.5, palette="Dark2"
         );
@@ -998,8 +1014,7 @@ Next, we try the *stripes* data:
 ```{python}
 X, y = stripes_data()
 results = run_experiment(X)
-sns.relplot(data=results,
-        x="x1", y="x2", 
+sns.relplot(data=results, x="x1", y="x2", 
         hue="cluster", col="linkage", 
         height=2.5, palette="Dark2"
         );
@@ -1010,10 +1025,9 @@ Now the tendency of complete and Ward linkages to find compact, roughly spherica
 Finally, we try the most demanding test, *bullseye*:
 
 ```{python}
-X ,y = bullseye_data()
+X, y = bullseye_data()
 results = run_experiment(X)
-fig = sns.relplot(data=results,
-        x="x1", y="x2", 
+fig = sns.relplot(data=results, x="x1", y="x2", 
         hue="cluster", col="linkage", 
         height=2.5, palette="Dark2"
         )
@@ -1025,8 +1039,7 @@ The single linkage is the only one to cluster the rings properly. However, it's 
 ```{python}
 X = pd.concat( ( X, pd.DataFrame({"x1": [0], "x2": [2.25]}) ) )
 results = run_experiment(X)
-fig = sns.relplot(data=results,
-        x="x1", y="x2", 
+fig = sns.relplot(data=results, x="x1", y="x2", 
         hue="cluster", col="linkage", 
         height=2.5, palette="Dark2"
         )
