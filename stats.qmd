@@ -473,7 +473,7 @@ The `normal` method of a NumPy RNG simulates a standard normal distribution.
 ```{python}
 rng = default_rng(19716)
 x = rng.normal( size=(10000,) )
-sns.displot(x, bins=np.linspace(-4,4,28), stat="probability");
+sns.displot(x, bins=np.linspace(-4, 4, 28), stat="probability");
 ```
 
 We can change the variance by multiplication by $\sigma$ and change the mean by adding $\mu$:
@@ -492,50 +492,53 @@ sns.displot(data=df, x="3x-10", kind="kde");
 
 ## Grouping data
 
-Sometimes we are interested in breaking down data by categorical values or other criteria. Both seaborn and pandas make this relatively straightforward.
-
-Here is the distribution of the *mpg* variable over the entire dataset:
+Here is the distribution of the *mpg* variable in `cars` over the entire dataset:
 ```{python}
 sns.displot(data=cars, x="mpg", bins=20);
 ```
-We now look at ways to group the samples within this dataset.
 
-### Splitting
+It's often useful to analyze the data in groups defined by categorical values or other criteria. For instance, does the distribution of the *mpg* variable look the same regardless of where the cars were made? Both seaborn and pandas make investigating this kind of question much more easily and efficiently than hand-written code can do.
 
-We can use categorical variables to define groups within the data set. Suppose we want to separate by the *origin* column:
 
-```{python}
-cars["origin"].value_counts()
-```
+### Facet, box, and violin plots
+
+In a **facet plot**, a distribution plot is repeated across columns or rows for each group. 
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/eco3xmlp7jp0o8l/Section2_3_1.mp4?raw=1 >}}
 :::
 
-When we plot the distributions in the regions individually using different colors, we see that one is quite different:
+::::{#exm-stats-groups-facet chapter=2 type=💻 description="Facet plots"}
+Suppose we want to separate the `cars` data by the *origin* categorical column, which has 3 unique values:
+
+```{python}
+cars["origin"].value_counts()
+```
+
+We can tell seaborn to group by *origin* and apply different colors to each group using the `hue` keyword in a `displot`, or distribution plot:
 
 ```{python}
 sns.displot(data=cars, x="mpg", hue="origin");
 ```
 
-That graph might be hard to read because of the overlaps. We can instead plot the groups in separate columns in what is often called a *facet plot*:
+The above graph is a little hard to interpret because of the overlaps. We can instead plot the groups in separate columns in a facet plot:
 
 ```{python}
-#| column: body-outset
 sns.displot(data=cars, 
-    x="mpg", 
-    col="origin", height=2.2
+    x="mpg", col="origin", height=2.2
     );
 ```
+From the facet plot it is clear that the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.
+::::
 
-Clearly, the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.
+Other ways to visualize grouped data are offered by the `catplot` function in seaborn, including the well-known **box plot** and **violin plot**.
 
-Another way to visualize grouped data is with a **box plot**:
+::::{#exm-stats-groups-box-violin chapter=2 type=💻 description="Box and violin plots"}
+Here is a grouped **box plot** for *mpg*:
 
 ```{python}
 sns.catplot(data=cars, 
-    x="origin", y="mpg", 
-    kind="box"
+    x="origin", y="mpg", kind="box"
     );
 ```
 
@@ -550,13 +553,7 @@ sns.catplot(data=cars,
 
 In a violin plot, the inner lines show the same information as the box plot, with the thick part showing the IQR, while the sides of the "violins" are KDE estimates of the density functions.
 
-In pandas, the `groupby` method splits a data frame into groups based on categorical values in a designated column. So to split based on *origin* and then look at the statistics of the *mpg* column within each group, we say:
-
-```{python}
-cars.groupby("origin")["mpg"].describe()
-```
-
-It's also possible to split using a quantitative variable. The `cut` method will put the values into bins that define the groups:
+It's also possible to make groups using a quantitative variable. The pandas `cut` method lets you define ranges that serve as bins:
 
 ```{python}
 cuts = pd.cut( 
@@ -574,10 +571,11 @@ sns.catplot(data=cars,
     kind="violin"
     );
 ```
+::::
 
 ### Aggregation
 
-Groups defined by `groupby` can then be passed through *aggregators* that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in @tbl-stats-agg. 
+In pandas, the `groupby` method splits a data frame into groups based on values in a designated column. These groups can then be passed through *aggregators* that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in @tbl-stats-agg. 
 
 | method | effect | 
 |---------|--------|
@@ -591,162 +589,126 @@ Groups defined by `groupby` can then be passed through *aggregators* that reduce
 
 : Aggregation functions. All ignore `NaN` values. {#tbl-stats-agg}
 
-Here, for example, we group the rows by weight bins and find the max of *mpg* within each bin:
-
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/p1hvt4cojjpoo5a/Section2_3_2.mp4?raw=1 >}}
 :::
 
+::::{#exm-stats-groups-aggregation chapter=2 type=💻 description="Aggregating data in groups"}
+Here is how we can define groups based on the categorical *origin* column:
+
 ```{python}
+cars.groupby("origin")
+```
+
+As you can see from the output above, a grouped data frame isn't of much value until you apply some operation to it. For instance, we can find the mean of each quantitative column:
+
+```{python}
+cars.groupby("origin").mean()
+```
+
+The result is a frame indexed by *origin* and whose columns contain the group means. If we want to focus on just *mpg* from the dataset, we can extract that column *after* the grouping (which needs to know *origin*) but *before* operating on the groups:
+
+```{python}
+cars.groupby("origin")["mpg"].mean()
+```
+
+A lot of pandas expressions end up as compound statements like the one above. It's equivalent to a sequence of assignments to temporary names:
+
+```{python}
+by_origin = cars.groupby("origin")
+mpg_by_origin = by_origin["mpg"]
+mpg_by_origin.mean()
+```
+
+When you encounter a compound statement in pandas, just interpret it step by step, from left to right. 
+
+Here we define bins for the weights and find the max of *mpg* within each bin:
+
+```{python}
+cuts = pd.cut(cars["weight"], range(1500, 5800, 1000))
 by_weight = cars.groupby(cuts)
 by_weight["mpg"].max()
 ```
 
-If you want a more exotic operation, you can call `agg` with your own function:
+If you want an aggregator other than those in @tbl-stats-agg, you can call `agg` with your own function:
 
 ```{python}
 def iqr(x):
-    q1,q3 = x.quantile( [.25, .75] )
+    q1, q3 = x.quantile( [.25, .75] )
     return q3 - q1
 
 by_weight["mpg"].agg(iqr)
 ```
+::::
 
 ### Transformation
 
-A transformation applies a function to each element of a column, producing a result of the same length that can be indexed the same way. This transformation can be applied group by group.
-
-For example, we can standardize to z-scores within each group separately:
+A **transformation** applies a function to each element of a column, producing a result of the same length that can be indexed the same way. This transformation is applied group by group.
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/jf2nkthnf4xygig/Section2_3_3.mp4?raw=1 >}}
 :::
 
+::::{#exm-stats-groups-transformation chapter=2 type=💻 description="Transforming data in groups"}
+We can convert the *mpg* values to z-scores using the population mean and variance:
+
 ```{python}
-#| column: body-outset
 def standardize(x):
     return (x - x.mean()) / x.std()
 
-cars["group_z"] = by_weight["mpg"].transform(standardize)
-
+cars["mpg_z"] = standardize(cars["mpg"])
 sns.displot(data=cars, 
-    x="group_z", 
+    x="mpg_z", 
     col="origin", height=2.3
     );
 ```
 
-Note how this differs from computing z-scores based on global statistics: 
+Above, each of the distributions is shifted and scaled identically. The result is identical to the facet plot in @exm-stats-groups-facet except for relabeled $x$-axes. Instead, we could standardize *mpg* to z-scores within groups separately, so that each group is shifted and scaled independently:
 
 ```{python}
-#| column: body-outset
-cars["global_z"] = standardize( cars["mpg"] )
-
+cars["group_mpg_z"] = by_weight["mpg"].transform(standardize)
 sns.displot(data=cars, 
-    x="global_z", 
+    x="group_mpg_z", 
     col="origin", height=2.3
     );
 ```
+
+(Another reason the second set of plots looks different is that the histogram bins are chosen differently.)
+::::
 
 ### Filtering
 
-To apply a filter, provide a function that operates on a column and returns either `True`, meaning to keep the column, or `False`, meaning to reject it. This filter is applied groupwise.
-
-For example, suppose we want to group cars by horsepower:
+A **filter** is a function that operates on a column and returns either `True`, meaning to keep the column, or `False`, meaning to reject it. This filter may be applied to a grouped frame.
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/8htwbb8mj8xxmri/Section2_3_4.mp4?raw=1 >}}
 :::
 
-```{python}
-cuts = pd.cut(cars["horsepower"], range(40,220,20))
+::::{#exm-stats-groups-filtering chapter=2 type=💻 description="Filtering data in groups"}
+Suppose we want to group cars by horsepower, but we find out that some of the groups don't have a lot of members:
 
+```{python}
+cuts = pd.cut(cars["horsepower"], range(40, 220, 20))
 by_hp = cars.groupby(cuts)
 by_hp["mpg"].count()
 ```
-
-Say we want to drop the cars belonging to groups having fewer than 30 members:
+Since small groups can give misleading statistics, we can filter out the groups with fewer than, say, 30 members:
 
 ```{python}
-hp_30 = by_hp.filter( lambda x: len(x) > 29 )
+def keeper(x):
+    return len(x) > 29
+hp_30 = by_hp.filter(keeper)
 hp_30.head()
 ```
 
-The result is a single frame in which the members of all groups that failed the filter were removed. Thus, the *horsepower* column has no values left less than 60 or greater than 160:
+The result is a single, ungrouped frame in which the members of all groups that failed the filter were removed. Thus, the *horsepower* column has no values left less than 60 or greater than 160:
 
 ```{python}
 hp_30["horsepower"].describe()
 ```
+::::
 
 ![](_media/memes/groupby.jpg){height="240"}
-
-<!-- 
-
-You can simultaneously use columns for one category with colors for another:
-
-```{python}
-#| column: body-outset
-sns.displot(data=cars, x="mpg", col="origin",
-    hue="cylinders", multiple="stack", height=2.5
-    );
-```
-
-Also note in the above that we asked to stack bars rather than overlap them. Other options to designate different groups are `size` and `style` (marker type). -->
-<!-- 
-::: {.callout-tip}
-There is a balance to strike between a plot that is information-poor versus one that is too busy to read clearly. But you can probably fit more information comfortably than you have been accustomed to. Great data visualizations reward time spent by the reader to examine them. [Edward Tufte](https://www.edwardtufte.com/tufte/) has written several great books on this subject.
-:::
- -->
-
-<!-- ## Split–apply–combine
-
-One of the most important workflows in data analysis is called **split–apply–combine**:
-
-1. Split the data into groups based on a criterion (e.g., species, marital status).
-2. Apply operations to the data within each group.
-3. Combine the results from the groups.
-
-Of these, the *apply* step is typically the most complex. In fact, in pandas you rarely need to perform step 3 explicitly, as it's usually automatic.
-
-### Split
-
-For illustrations, we will load a dataset supplied with seaborn. 
-
-```{python}
-import pandas as pd
-import seaborn as sns
-
-penguins = sns.load_dataset("penguins")
-penguins
-```
-
-```{python}
-by_species = penguins.groupby("species")
-```
-
-In computer science, this is what is called a *lazy* operation: nothing is actually done yet to the data frame. It's just set up for applying future operations to each group.
-
-```{python}
-for name,group in by_species:
-    print(name)
-    print(group.iloc[:3,:4])
-    print()
-```
-
-
-### Apply
-
-The most complex step is applying operations to each group of data. There are three types of operations in pandas:
-
-Aggregation
-: Summarizing data by a single value, such as a sum or mean, or by a few values, such as value counts or quintiles.
-
-Transformation
-: Application of a mathematical operation to every data value, resulting in data indexed the same way as the original. For example, quantitative data might be transformed to lie in the interval $[0,1]$.
-
-Filtration
-: Inclusion/removal of a group based on a criterion, such as rejection of a group with too few members.
-
-As a rule of thumb, aggregation produces a single numerical result from a series, transformation changes the series to another one of the same length, and filtering extracts a subset of a series. -->
 
 
 ## Outliers
@@ -880,41 +842,6 @@ For asymmetric distributions, or those with a heavy tail, these criteria might s
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/4j52cut7dyomqaf/Example2_15.mp4?raw=1 >}}
 :::
-
-<!-- 
-## Combine
-
-It's common to form chains of operations that can be written separately or in one line. For example, consider the task of **imputation**, which is the replacement of missing values by a standard value such as the mean or median. In the penguin dataset, there are two rows with missing numerical values:
-
-```{python}
-bills = ["bill_length_mm","bill_depth_mm"]
-penguins[bills].isna().sum()
-```
-
-Given variations between species, we probably want to compute values aggregated by species. 
-
-```{python}
-by_species = penguins.groupby("species")
-by_species[bills].median()
-```
-
-In order to operate columnwise, we apply a custom transformation function using the `fillna` method to replace missing values. 
-
-```{python}
-def impute(col):
-    return col.fillna(col.median())
-
-replaced = by_species[bills].transform(impute)
-replaced
-```
-
-Replacement has happened in the row with index 3, for example. Finally, we can overwrite the columns of the original data frame, if we don't care to know in the future which values were imputed. All of the necessary steps can be compressed into one chain:
-
-```{python}
-penguins[bills] = penguins.groupby("species")[bills].transform(lambda x: x.fillna(x.median()))
-penguins
-```
- -->
 
 ![](_media/memes/outlier.jpg){height="240"}
 
@@ -1252,34 +1179,40 @@ As often happens in statistics, the precise framing of the question can strongly
 
 ## Exercises {.unnumbered}
 
-For these exercises, you may of course use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).
+For these exercises, you may use computer help to work on a problem, but your submitted solution should be self-contained without reference to computer output (unless stated otherwise).
 
 :::{#exr-stats-summary}
-The following parts are about the sample set of $n$ values $x_1,\ldots,x_n$, where $n>2$, $x_i=0$ for $i=1,\ldots,n-1$, and $x_n=M$ for a positive number $M$. 
+The following parts are about the sample set of $n$ values ($n>2$) 
 
-**(a)** Show that the sample mean is $M/n$.
+$$
+0, 0, 0, \ldots, 0, 1000.
+$$
 
-**(b)** Find the sample median. (You will have to describe multiple cases for $n$, even if they give the same result.)
+(That is, there are $n-1$ copies of 0 and one copy of 1000.)
 
-**(c)** Show that the corrected sample variance $s_{n-1}^2$ is $M^2/n$.
+**(a)** Show that the sample mean is $1000/n$.
 
-**(d)** Find the sample z-scores of all the $x_i$ in terms of $M$ and $n$.
+**(b)** Find the sample median when $n$ is odd. 
+
+**(c)** Show that the corrected sample variance $s_{n-1}^2$ is $10^6/n$.
+
+**(d)** Find the sample z-scores of all the values.
+:::
+
+:::{#exr-stats-outlier}
+This exercise is about the same set of sample values as @exr-stats-summary. Suppose the 2σ-outlier criterion is applied using the sample mean and sample variance. 
+
+**(a)** Show that regardless of $n$, the value 0 is never an outlier.
+
+**(b)** Show that the value 1000 is an outlier if $n \ge 6$.
 :::
 
 :::{#exr-stats-z-scores}
 Suppose the samples $x_1,\ldots,x_n$ have the z-scores $z_1,\ldots,z_n$. 
 
-**(a)** Show that the sample z-scores satsify $\displaystyle \sum_{i=1}^n z_i = 0.$
+**(a)** Show that the sample z-scores satisfy $\displaystyle \sum_{i=1}^n z_i = 0.$
 
-**(b)** Show that the sample z-scores satsify $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
-:::
-
-:::{#exr-stats-outlier}
-For this exercise, apply the 2σ outlier criterion the sample set given in @exr-stats-summary using the sample mean and sample variance. (Again assume that $n>2$ and $M>0$.)
-
-**(a)** Show that regardless of $n$ and $M$, the value 0 is never an outlier.
-
-**(b)** Show that the value $M$ is an outlier if $n \ge 6$, regardless of $M$.
+**(b)** Show that the sample z-scores satisfy $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
 :::
 
 :::{#exr-stats-outlier-iqr}
@@ -1294,19 +1227,15 @@ x_i = \begin{cases}
 \end{cases}
 $$
 
+(That is, there are 11 values of 1, 3 values of 2, 8 values of 4, and 10 values of 6.)
+
 **(a)** Find the median of the population.
 
 **(b)** Find the smallest interval containing all non-outlier values according to the 1.5 IQR criterion.
-
-**(b)** (old version) Which of the following values are outliers ?
-
-$$
--10,-5,0,5,10,15,20
-$$
 :::
 
 :::{#exr-stats-least-squares}
-Suppose that a population has values $x_1,x_2,\ldots,x_n$. Define the function 
+Given a population of values $x_1,x_2,\ldots,x_n$, define the function 
 
 $$
 r_2(x) = \sum_{i=1}^n (x_i-x)^2.
@@ -1336,10 +1265,10 @@ $$
 :::
 
 :::{#exr-stats-pearson-z}
-Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: See @exr-stats-z-scores.)
+Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: Use the results of @exr-stats-z-scores.)
 :::
 
 :::{#exr-stats-pearson-anti}
-Suppose that two sample sets satisfy $y_i=-x_i$ for all $i$. Prove that the Pearson correlation coefficient between $x$ and $y$ equals $-1$.
+Suppose that two sample sets satisfy $y_i=-x_i$ for all $i$. Prove that the Pearson correlation coefficient between the sets equals $-1$.
 :::
 
