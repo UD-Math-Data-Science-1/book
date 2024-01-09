@@ -804,7 +804,7 @@ def pairdist(G):
     while i==j: j=rng.integers(0,n)   # get distinct nodes
     return nx.shortest_path_length(G, source=i, target=j)
 
-distances = [ pairdist(twitch) for _ in range(50000) ]
+distances = [ pairdist(twitch) for i in range(50000) ]
 print("Pairwise distances in Twitch graph:")
 sns.displot(x=distances, discrete=True)
 print( "estimated mean =", np.mean(distances) )
@@ -996,48 +996,6 @@ BA_degrees = pd.Series( dict(BA.degree) )
 hist = sns.displot(data=BA_degrees, log_scale=True)
 hist.axes[0,0].set_yscale("log")
 ```
-<!-- 
-The straight-line relationship on log-log scales is the hallmark of a power law. As with the Twitch network, we can estimate the exponent by a linear regression:
-
-```{python}
-#| code-fold: true
-y = BA_degrees.value_counts()
-counts = pd.DataFrame( {"degree":y.index, "count":y.values} )
-counts = counts[ (counts["degree"] > 5) & (counts["degree"] < 80) ]
-logcounts = counts.transform(np.log)
-lm.fit( logcounts[["degree"]], logcounts["count"] )
-print( "exponent of power law:", lm.coef_[0] )
-``` -->
-<!-- 
-Let's check distances and clustering, too. As a reminder, the mean distance in the Twitch network is approximately:
-
-```{python}
-from numpy.random import default_rng
-rng = default_rng(1)
-
-def pairdist(G):
-    n = nx.number_of_nodes(G)
-    i = j = rng.integers(0, n)
-    while i==j: j=rng.integers(0, n)   # get distinct nodes
-    return nx.shortest_path_length(G, source=i, target=j)
-
-print("Mean distance in Twitch graph:",
-    sum(pairdist(twitch) for _ in range(4000)) / 4000 )
-```
-
-Now we repeat that for some BA graphs.
-
-```{python}
-dbar = []
-seed = 911
-for iter in range(10):
-    BA = nx.barabasi_albert_graph(n, m, seed=seed)
-    d = sum(pairdist(BA) for _ in range(200)) / 200
-    dbar.append(d)
-    seed += 1
-
-print( "Mean distance in BA graphs:", np.mean(dbar) )
-``` -->
 
 While BA graphs capture the heavy-tailed degree distribution of the Twitch network rather well, they are way off when it comes to clustering. For the Twitch network, we have:
 ```{python}
