@@ -733,10 +733,10 @@ As always in Python, you need to pay attention to the difference between applyin
 
 ### Loading from files 
 
-Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These can be read by pandas locally or over the web.
+Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These files can be read by pandas locally or over the web.
 
 ::::{#exm-data-read chapter=1 description="Importing data with pandas" type=💻}
-The pandas function we use to load a dataset is `read_csv`. Here we use it to read a file that is availble over the web:
+The pandas function we use to load a dataset is `read_csv`. Here we use it to read a file that is available over the web:
 
 ```{python}
 ads = pd.read_csv("https://raw.githubusercontent.com/tobydriscoll/ds1book/master/advertising.csv")
@@ -765,34 +765,99 @@ ads.dtypes    # data types of the columns
 
 It's also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with `pd.read_` showing the formats pandas understands.
 
-### Selecting rows
+## Selecting rows and columns
 
-Above we saw that you can use the `loc` property to access a frame's row by name, or `iloc` to access by position. It's more common, though, to select them by some criteria. 
+In a dataframe, we access columns by giving a string name, or a list of names, in square brackets. We can access a row by the `loc` property with an index value, or `iloc` with an absolute row number starting from zero. 
 
-::::{#exm-data-selection chapter=1 description="Selecting rows in a frame" type=💻}
+::::{#exm-data-row-iloc chapter=1 description="iloc for rows in a frame" type=💻}
 Here's a local file that contains daily weather summaries from Newark, Delaware:
 ```{python}
 weather = pd.read_csv("_datasets/ghcn_newark.csv")
 weather.head()
 ```
 
-If we apply a relational operator to a column of a frame, we get a series of Boolean values:
+There are lots of columns here. We will work with a small subset of them:
+
 ```{python}
-isprecip = (weather["PRCP"] > 10)
-isprecip.head()
+columns = ["DATE", "PRCP", "SNOW", "TMAX", "TMIN"]
+weather = weather[columns]
+weather.head()
 ```
 
-This kind of series can then be used to select the rows that have value `True`:
+The first row has absolute position zero:
+
 ```{python}
-precip = weather[isprecip]
-precip.head()
+weather.iloc[0]
 ```
 
-You can use logical operators `&` (and), `|` (or), and `~` (not) on these Boolean series:
+The result above is a series, with the column names of the original data frame serving as the index. The following result is subtly different:
+
 ```{python}
-iscold = (weather["TMAX"] < 0)
-dry_cold = weather[ iscold & ~isprecip ]
-dry_cold.head(6)
+weather.iloc[:1]
+```
+
+The slicing syntax `[:1]` means "the first 1 rows". The result is a one-row data frame---*not* a series. To access the last 4 rows, we can use a negative index:
+
+```{python}
+weather.iloc[-4:]
+```
+::::
+
+In @exm-data-row-iloc, we did not specify an index for the data frame, so the row numbers were the index. If we do give the data frame an index, we can use `loc` to access rows by the index value.
+
+::::{#exm-data-row-loc chapter=1 description="loc for rows in a frame" type=💻}
+A natural candidate for an index in the weather data is the *DATE* column. This can be specified when the file is read, but here we do it after the fact:
+
+```{python}
+dated_weather = weather.set_index("DATE")
+dated_weather.head()
+```
+
+Notice above that the leftmost column of `dated_weather` is the index, which still has the column name *DATE*. We can access a row by giving a date string to `loc`:
+
+```{python}
+dated_weather.loc["1979-03-28"]
+```
+
+We can extract a row and column simultaneously by giving both to `loc`:
+
+```{python}
+dated_weather.loc["1979-03-28", "TMAX"]
+```
+
+When the index is a date, as is the case here, we can even use a range of dates:
+
+```{python}
+dated_weather.loc["1979-03-01":"1979-03-06"]
+```
+::::
+
+Frequently we want to select rows from a data frame based on criteria applied to the data itself. We can use relational operators such as `>`, `<`, `==`, etc. to select rows based on the values in a column.
+
+::::{#exm-data-row-select chapter=1 description="Selecting rows in a frame" type=💻}
+Here is how we can select all the rows in which the value of *PRCP* is greater than 1200:
+
+```{python}
+weather.loc[weather["PRCP"] > 1200]
+```
+
+There are two steps above. The expression inside the square brackets produces a series of Boolean values:
+
+```{python}
+is_prcp = (weather["PRCP"] > 1200)
+is_prcp.head()
+```
+
+This series can be used to select rows with `loc`. Actually, it works without `loc` as well, because pandas knows it is a row selector:
+
+```{python}
+print("There are",is_prcp.sum(),"rows with PRCP > 1200.")
+weather[is_prcp]
+```
+
+We can use logical operators `&` (AND), `|` (OR), and `~` (NOT) on these Boolean series in order to combine criteria:
+```{python}
+weather[(weather["TMAX"] < 0) & (weather["SNOW"] > 0)]
 ```
 ::::
 
@@ -800,25 +865,6 @@ dry_cold.head(6)
 {{< video https://www.dropbox.com/s/uwrmgpz15mm5aj9/Example1_10.mp4?raw=1 >}}
 :::
 
-When a column of a dataset is a time stamp, it can be used as the index of the data frame, which makes some time-centric operations easier.
-
-::::{#exm-data-time-index chapter=1 description="Using time as an index" type=💻}
-Let's reload the dataset using the *DATE* column (which is second in the file) as a `datetime` index:
-```{python}
-weather = pd.read_csv("_datasets/ghcn_newark.csv", index_col=1, parse_dates=True)
-weather.head()
-```
-
-We can extract a row by referencing the date in the index with `loc`:
-```{python}
-weather.loc["1979-03-28"]
-```
-
-But we can also easily select all the rows from a particular month or year:
-```{python}
-weather.loc["1979-03"].head()
-```
-::::
 
 :::{.column-margin}
 {{< video https://www.dropbox.com/s/h3ezvnpyn8xe5ch/Section1_4_c.mp4?raw=1 >}}
