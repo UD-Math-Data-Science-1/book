@@ -16,6 +16,7 @@ A **quantitative** value is one that is numerical and supports meaningful compar
 
 ::::{#exm-data-quantitative chapter=1 description="Quantitative data" type=✍️}
 Some continuous quantitative data sources:
+
 * Temperature at noon at a given airport
 * Your height
 * Voltage across the terminals of a battery
@@ -25,8 +26,6 @@ Examples of discrete quantitative data:
 * The number of shoes you own
 * Number of people at a restaurant table
 * Score on an exam
-
-In each case, it makes sense, for example, to order different values and compute averages of them. However, averages of discrete quantities are continuous.
 ::::
 
 :::{.column-margin}
@@ -34,14 +33,16 @@ In each case, it makes sense, for example, to order different values and compute
 :::
 
 :::{.callout-note}
-Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values.
+Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values. As a rule of thumb, if there are many possible values, or the values are the result of a measurement, the continuous interpretation is usually more appropriate.
 :::
 
-::::{#exm-data-zip chapter=1 description="Numerical but not quantitative" type=✍️}
+::::{.callout-caution}
 Not all numerical values represent truly quantitative data. ZIP codes (postal codes) in the U.S. are 5-digit numbers, and while there is some logic to how they were assigned, there is no clearly meaningful interpretation of averaging them, for instance.
 ::::
 
-Mathematically, the real and integer number sets are infinite, but that is not possible in a computer. Integers are represented exactly within some range that is determined by how many binary bits are dedicated. The computational analog of real numbers are **floating-point numbers**, or more simply, **floats**. These are bounded in range as well as discretized. The details are complicated, but essentially, the floating-point numbers have about 16 significant digits by default, which is virtually always far more precision than real data offers.
+For both continuous and discrete quantities, it makes sense to order different values, compute averages of them, etc. (However, averages of discrete quantities are continuous.)
+
+Mathematically, the real and integer number sets are infinite, but computers are finite machines. Integers are represented exactly within some range that is determined by how many binary bits are dedicated. The computational analog of real numbers are **floating-point numbers**, or more simply, **floats**. These are bounded in range as well as discretized. The details are complicated, but essentially, the floating-point numbers have about 16 significant decimal digits by default—which is virtually always far more precision than real data offers.
 
 ```{python}
 # This is an integer (int type)
@@ -57,7 +58,7 @@ print( "float(3) creates",float(3) )
 print( "int(3.14) creates", int(3.14) )
 ```
 
-### Special values
+### Inf and NaN
 
 There are two additional quasi-numerical `float` values to be aware of as well.
 
@@ -80,17 +81,16 @@ However, in calculus you learned that some expressions with infinity are conside
 print( "np.inf / np.inf is", np.inf / np.inf )
 ```
 
-The result `nan` stands for *Not a Number*. It is the result of indeterminate arithmetic operations, like $\infty/\infty$ and $\infty - \infty$. It is also used sometimes as a placeholder for missing data, i.e. to mean, "unknown value".
+The result `nan` stands for *Not a Number*. It is the result of indeterminate arithmetic operations, like $\infty/\infty$ and $\infty - \infty$. It is also used sometimes as a placeholder for missing data.
 
 :::{.callout-warning}
-By definition, every operation that involves a `NaN` value results in a `NaN`.
+By definition, every operation that involves a `NaN` value results in a `NaN`. One notorious consequence of this behavior is that `nan==nan` is `nan`, not `True`!
 :::
 
-One notorious consequence of this behavior is that `nan==nan` is `nan`, not `True`!
 
 ### Dates and times
 
-Handling times and dates can be tricky. Aside from headaches such as time zones and leap years, there are many different ways people and machine represent dates, and with varying amounts of precision. Python has its own inbuilt system for handling dates and times, but we will show the facilities provided by NumPy instead.
+Handling times and dates can be tricky. Aside from headaches such as time zones and leap years, there are many different ways people and machines represent dates, and with varying amounts of precision. Python has its own inbuilt system for handling dates and times, but we will show the facilities provided by the NumPy package, which is more comprehensive.
 
 There are two basic types:
 
@@ -103,6 +103,7 @@ Native Python uses a `datetime` type, while NumPy uses `datetime64`.
 :::
 
 ```{python}
+import numpy as np
 np.datetime64("2020-01-17")    # YYYY-MM-DD 
 ```
 
@@ -139,7 +140,7 @@ for _ in range(5):
     print( rng.uniform( -1, 1 ) )
 ```
 
-Another common type of random value is generated by `normal`, which produces real values distributed according to the normal or Gaussian distribution, which we'll get into with more detail later.
+Another common type of random value is generated by `normal`, which produces real values distributed according to the normal or Gaussian distribution. We'll get into that in more detail later.
 
 ```{python}
 for _ in range(5):
@@ -160,7 +161,7 @@ s/100000
 
 ## Arrays
 
-Most interesting phenomena are characterized and influenced by more than one factor. Collections of values therefore play a huge role in data science. The workhorse type for collections in base Python is the list. However, we're going to need some more powerful metaphors and tools as well. 
+Most interesting phenomena are characterized and influenced by more than one factor. Collections of values therefore play a central role in data science. The workhorse type for collections in base Python is the list. However, we're going to need some more powerful metaphors and tools as well. 
 
 ### Vectors
 
@@ -252,7 +253,7 @@ x[-3]
 x[-len(x)]
 ```
 
-Element references can also be on the left side of an assigment:
+Element references can also be on the left side of an assignment:
 
 ```{python}
 x[2] = -3
@@ -263,16 +264,27 @@ Note, however, that once the data type of a vector is set, it can't be changed:
 
 ```{python}
 x[0] = 1.234
-x    # float was truncated to int, without warning!
+x    # float was truncated to int, without warning!!!
 ```
 
 You can also use a list in square brackets to access multiple elements at once:
 
 ```{python}
-x[ [0,2,4] ]
+x[ [0, 2, 4] ]
 ```
 
-Accessing elements via a range is known as **slicing**:
+::: {.callout-important}
+The result of a list reference is a new vector, not a number. Note the difference here:
+```{python}
+x[0]
+```
+
+```{python}
+x[ [0] ]
+```
+:::
+
+Accessing multiple elements via a range is known as **slicing**:
 
 ```{python}
 x[0:3]
@@ -348,10 +360,10 @@ There is no difference between a vector and a 1D array:
 x.shape
 ```
 
-There is also no difference between a 2D array and a vector of vectors that give the rows of the array.
+There is also no difference between a 2D array and a vector of vectors giving the rows of the array.
 
 ```{python}
-R = np.array( [ [1,2,3], [4,5,6] ])
+R = np.array( [ [1, 2, 3], [4, 5, 6] ])
 R
 ```
 
@@ -362,12 +374,12 @@ np.ones(5)
 ```
 
 ```{python}
-np.zeros( (3,6) )
+np.zeros( (3, 6) )
 ```
 
 ```{python}
 # See earlier section for definition of rng
-rng.normal( size=(3,4) )
+rng.normal( size=(3, 4) )
 ```
 
 ```{python}
@@ -377,11 +389,11 @@ np.repeat(np.pi, 3)
 You can also stack arrays vertically or horizontally to create new arrays.
 
 ```{python}
-np.hstack( ( np.ones((2,2)), np.zeros((2,3)) ) )
+np.hstack( ( np.ones((2, 2)), np.zeros((2, 3)) ) )
 ```
 
 ```{python}
-np.vstack( (range(5), range(5,0,-1)) )
+np.vstack( (range(5), range(5, 0, -1)) )
 ```
 
 #### Indexing and slicing
@@ -433,16 +445,16 @@ np.sum(A, axis=0)    # sum along the rows
 ```
 
 ```{python}
-np.sum(A,axis=1)    # sum along the columns
+np.sum(A, axis=1)    # sum along the columns
 ```
 
-If you don't give an axis, the reduction occurs over all directions at once, resulting in a single number.
+If you don't specify an axis, the reduction occurs over all directions at once, resulting in a single number.
 
 ```{python}
 np.sum(A)
 ```
 
-You can also do reductions with maximum, minimum, mean, etc.
+You can also do reductions with `np.max`, `np.min`, `np.mean`, etc.
 
 <!-- #### Broadcasting
 
@@ -477,7 +489,7 @@ A - np.mean(A, axis=0)
 
 ## Qualitative data
 
-A qualitative value is one that is not quantitative. However, in order to work with such data, we usually have to encode it in some numerical form,
+A qualitative value is one that is not quantitative. There are numerous types, but we will consider only a few of them here. Ultimately, we need to be able to represent qualitative data in a quantitative way for use in algorithms.
 
 ### Categorical
 
@@ -501,31 +513,39 @@ Examples of nominal categorical data:
 There are nuanced cases. For instance, letter grades are themselves ordinal categorical data. However, schools convert them to discrete quantitative data and then compute a continuous quantitative GPA.
 ::::
 
-One way to quantify ordinal categorical data is to assign integer values to the categories in a manner that preserves ordering. This approach can succeed, but it can be questionable when it comes to operations such as averaging or computing a distance between values. 
+One way to quantify ordinal categorical data is to assign integer values to the categories in a manner that preserves ordering. This approach can be suspect, though, when it comes to operations such as averaging or computing a distance between values. 
 
-Another means of quantifying categorical data is called **dummy variables** in classical statistics and **one-hot encoding** in much of machine learning. Suppose a variable $x$ has values in a category set that has $m$ members we label $c_1,\ldots,c_m$. Then we can replace $x$ with introduce $m-1$ new variables $x_1,\ldots,x_{m-1}$, where
+#### Dummy variables 
+
+Another means of quantifying categorical data is called **dummy variables** in classical statistics and **one-hot encoding** in much of machine learning. Suppose a variable $x$ has values in a category set that has $m$ members, i. e., $S = \{c_1,\ldots,c_m\}$. There are two ways to replace the values with dummy variables.
+
+1. Introduce $m$ variables $x_1,\ldots,x_m$, where for a given categorical value $v$ we have 
+
 $$
-x_i = \begin{cases} 1, & x=c_i, \\ 0, & x\neq c_i. \end{cases}
+x_i = \begin{cases} 1, & v = c_i, \\ 0, & v \neq c_i. \end{cases}
 $$
-At most one of the $x_i$ can be 1. If all of the $x_i$ are 0, then we know that $x=c_m$. 
+
+2. Introduce only $m-1$ variables, leaving out $x_m$. If $x_1=x_2=\ldots=x_{m-1}=0$, then we know that the value is $c_m$. (This variant is important in statistics because otherwise, $x_m$ has to be correlated with the other $x_i$.) 
 
 ::::{#exm-data-dummy chapter=1 description="Dummy variables" type=✍️}
-Suppose that the *stooge* variable can take the values `Moe`, `Larry`, `Curly`, or `Shemp`. Then the vector
+Suppose that the *stooge* variable can take the values `Moe`, `Larry`, `Curly`, or `Shemp`, and we have the dataset
 
 ```python
 [Curly, Moe, Curly, Shemp]
 ```
 
-would be replaced by the array
+If we use 4 dummy variables, the data would be replaced by the array
 
 ```python
-[ [0,0,1], [1,0,0], [0,0,1], [0,0,0] ]
+[ [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1] ]
+```
+
+If we use only 3 dummy variables, we would get
+
+```python
+[ [0, 0, 1], [1, 0, 0], [0, 0, 1], [0, 0, 0] ]
 ```
 ::::
-
-::: {.callout-note}
-Sometimes an $m$-fold categorical variable is replaced by $m$ indicator (dummy) variables, rather than just $m-1$. 
-:::
 
 ### Text 
 
@@ -554,7 +574,7 @@ Some data that can be viewed as series:
 * The scores of gymnasts on multiple apparatus types can be represented as a data frame whose rows are indexed by the names of the gymnasts and whole columns are indexed by the names of the apparatuses. 
 ::::
 
-::::{#exm-data-colors chapter=1 description="Series in pandas" type=💻}
+::::{#exm-data-colors chapter=1 description="Series and frames in pandas" type=💻}
 Here is a pandas series for the wavelengths of light corresponding to rainbow colors:
 ```{python}
 import pandas as pd
@@ -639,48 +659,96 @@ rainbow.loc["red"].to_numpy()
 {{< video https://www.dropbox.com/s/t74l0mltts3s9vz/Section1_4_a.mp4?raw=1 >}}
 :::
 
-Here is another way to construct a data frame in pandas. We give a list of rows, plus (optionally) the index and the names of the columns:
-```{python}
-letters = pd.DataFrame( 
-    [ ("a", "A"), ("b", "B"), ("c", "C") ], 
-    columns=["lowercase", "uppercase"] 
-    )
+::::{#exm-data-create-frame chapter=1 description="Creating a data frame" type=💻}
+Here are some more direct ways to construct a data frame in pandas. 
 
-letters
+In this case, we give a list of rows, plus (optionally) the index and the names of the columns:
+```{python}
+pd.DataFrame( 
+    [ ("white", 4), ("brown", 8), ("pink", 7) ], 
+    columns=["Color", "Rating"],
+    index=["vanilla", "chocolate", "strawberry"]
+    )
 ```
 
-When we specify data by column, the columns can be just lists or vectors, not necessarily series:
+We can also specify data as columns by using a dictionary:
 
 ```{python}
-letters = pd.DataFrame( 
-    { "lowercase": ["a","b","c"], "uppercase": ["A","B","C"] }, 
+pd.DataFrame( 
+    { "Color": ["white", "brown", "pink"], "Rating": [4, 8, 7] }, 
+    index=["vanilla", "chocolate", "strawberry"]
     )
+```
+::::
 
-letters
+### Categorical data in pandas
+
+Pandas has many facilities for dealing with categorical variables.
+
+:::{.column-margin}
+{{< video https://www.dropbox.com/s/fjf4gj8bj5hwvwm/Section1_5_c.mp4?raw=1 >}}
+:::
+
+::::{#exm-data-ordinal chapter=1 description="Ordinal data" type=💻}
+Here is a [dataset](https://ggplot2.tidyverse.org/reference/diamonds.html) about features and prices of diamonds:
+
+```{python}
+import seaborn as sns
+diamonds = sns.load_dataset("diamonds")
+diamonds.head()
 ```
 
-Pandas has facilities for dealing with categorical variables.
+As you can see above, some of the features (cut, color, clarity) have string designations. We could convert *clarity*, for example, to a categorical variable like so: 
+
+```{python}
+pd.Categorical(diamonds["clarity"])
+```
+
+However, these values actually have a specific ordering in this context, and that is lost in the nominal variable above. We can fix that by specifying the ordering when we create the categorical variable:
+
+```{python}
+clarities = ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"]
+pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
+```
+
+You often want to simply replace the ordered categories with integers:
+
+```{python}
+cl_num = pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
+diamonds["clarity"] = cl_num.codes
+diamonds.head()
+```
+
+In such cases, it's more direct to use string replacement:
+
+```{python}
+cuts = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
+diamonds["cut"] = diamonds["cut"].replace(
+    cuts,              # to be replaced
+    range(1, 6),       # replacements
+)
+diamonds.head()
+```
+::::
 
 ::::{#exm-data-chess chapter=1 description="Categorical data in pandas" type=💻}
 Here is a vector of chess pieces at the start of a game:
 
 ```{python}
-pieces = np.hstack( [
-    np.repeat("pawn", 8),
-    np.repeat(["knight","bishop","rook"], 2),
-    "queen",
-    "king"
+pieces = pd.Series( [
+    "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn",
+    "knight", "bishop", "rook", "knight", "bishop", "rook",
+    "queen", "king"
 ] )
-
-pieces
 ```
 
-We can tell pandas to regard these strings as elements of a category set:
+We can use pandas to convert this variable to dummy variables:
+
 ```{python}
-pd.Categorical(pieces)
+pd.get_dummies(pieces)
 ```
 
-Notice above that the unique categories were found automatically. 
+If we wanted to use a specific ordering in the dummy variables, then we would first have to create an ordinal variable as in @exm-data-ordinal.
 ::::
 
 ### Common operations
@@ -698,13 +766,13 @@ Notice above that the unique categories were found automatically.
 | Extreme values               | `s.min()`, `s.max()`     | number         |
 | Sum                          | `s.sum()`                | number         |
 | Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
-| Locate missing               | `s.isna()`, `s.isnull()` | boolean Series |
+| Locate missing               | `s.isna()`               | boolean Series |
 | Arithmetic                   | `s + 1`,  `s * t`        | Series         |
 | Delete one or more rows      | `s.drop(0)`              | Series         |
 
 : Operations on pandas series {#tbl-data-series}
 
-Pandas offers many methods for manipulating series and dataframes. @tbl-data-series shows common operations that can be applied to a series. Since a column of a dataframe is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
+Pandas offers many methods for manipulating series and data frames. @tbl-data-series shows common operations that can be applied to a series. Since a column of a data frame is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
 
 ::: {.callout-caution}
 As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
@@ -727,9 +795,9 @@ As always in Python, you need to pay attention to the difference between applyin
 | Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
 | Apply columnwise           | `df.apply(myfun)`        | (varies)            |
 
-: Operations on pandas dataframes {#tbl-data-frames}
+: Operations on pandas data frames {#tbl-data-frames}
 
-@tbl-data-frames shows additional operations that can be applied to an entire dataframe (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
+@tbl-data-frames shows additional operations that can be applied to an entire data frame (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
 
 ### Loading from files 
 
@@ -767,7 +835,7 @@ It's also possible to import data from most other general-purpose formats you mi
 
 ## Selecting rows and columns
 
-In a dataframe, we access columns by giving a string name, or a list of names, in square brackets. We can access a row by the `loc` property with an index value, or `iloc` with an absolute row number starting from zero. 
+In a data frame, we access columns by giving a string name, or a list of names, in square brackets. We can access a row by the `loc` property with an index value, or `iloc` with an absolute row number starting from zero. 
 
 ::::{#exm-data-row-iloc chapter=1 description="iloc for rows in a frame" type=💻}
 Here's a local file that contains daily weather summaries from Newark, Delaware:
@@ -890,7 +958,11 @@ In real data sets, we often must cope with data series that have missing values.
 {{< video https://www.dropbox.com/s/wz9vpncyyyw2xex/Section1_5_a.mp4?raw=1 >}}
 :::
 
-Formally, the most natural way to represent missing data in Python is as `nan` or `NaN`, and pandas makes it easy to find and manipulate such values. Here is another well-known data set, this time about penguins:
+Formally, the most natural way to represent missing data in Python is as `nan` or `NaN`, and pandas makes it easy to find and manipulate such values. 
+
+::::{#exm-data-missing chapter=1 description="Handling missing values in pandas" type=💻}
+
+Here is a well-known data set about penguins:
 
 ```{python}
 import seaborn as sns
@@ -901,10 +973,14 @@ penguins.head()
 Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using `isna`:
 
 ```{python}
+penguins.isna()
+```
+
+```{python}
 penguins.isna().sum()
 ```
 
-Sometimes one replaces missing values with average or other representative values, a process called *imputation*. It's often prudent to simply toss them out, as follows:
+Sometimes one replaces missing values with average or other representative values, a process called *imputation*. But it's often prudent to simply toss them out, as follows:
 
 ```{python}
 print("original counts:")
@@ -916,12 +992,12 @@ print( penguins.count() )
 ```
 
 ::: {.callout-tip}
-Operations that make changes to or retrieve subsets from a data frame work on copies of the frame. When `inplace=True` is given, though, the operation changes the original frame.
+Operations that make changes to or retrieve subsets from a data frame work on copies of the frame. When `inplace=True` is given, though, the operation changes the original frame. The difference is important when dealing with very large datasets that you want to avoid copying within memory, even temporarily.
 :::
 
 ### Loans example
 
-To demonstrate algortihms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. First, we load the raw data from a CSV (comma separated values) file.
+To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
 
 :::{.callout-tip}
 It's possible to import datasets from the Web directly into pandas. However, web sources and links change and disappear frequently, so if storing the dataset is not a problem, you may want to download your own copy before working on it.
@@ -931,6 +1007,10 @@ It's possible to import datasets from the Web directly into pandas. However, web
 {{< video https://www.dropbox.com/s/t56b2blgzn6s9a6/Section1_5_b.mp4?raw=1 >}}
 :::
 
+
+::::{#exm-data-loans chapter=1 description="Cleaning a data frame" type=💻}
+
+First, we load the raw data from a CSV (comma separated values) file.
 ```{python}
 import pandas as pd
 loans = pd.read_csv("_datasets/loan.csv")
@@ -940,92 +1020,39 @@ loans.head()
 The `int_rate` column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We'll strip out those percent signs and convert them to floats.
 
 :::{.callout-tip}
-As you see below, we often end up with chains of methods separated by dots. Python works from left to right, evaluating a subexpression and then replacing it with the object for the next segment in the chain. We could write these as a sequence of separate lines having intermediate results assigned to variable names, but it's often considered better style to chain them.
+As you see below, we often end up with chains of methods separated by dots. Python works from left to right, evaluating a sub-expression and then replacing it with the object for the next segment in the chain. We could write these as a sequence of separate lines having intermediate results assigned to variable names, but it's often considered better style to chain them.
 :::
 
 ```{python}
-loans["int_rate"] = loans["int_rate"].str.strip('%').astype(float)
-loans.head()
+num_rate = loans["int_rate"].str.strip('%').astype(float)
+print(num_rate.head())
+loans["int_rate"] = num_rate
 ```
-
 Let's add a column for the percentage of the loan request that was eventually funded. This will be a target for some of our learning methods.
 
 ```{python}
 loans["percent_funded"] = 100 * loans["funded_amnt"] / loans["loan_amnt"]
-target = ["percent_funded"]
 ```
 
-We will only use a small subset of the numerical columns as features. Let's verify that there are no missing values in those columns:
+We will only use a small subset of the numerical columns: 
 
 ```{python}
-features = [ "loan_amnt", "int_rate", "installment", "annual_inc",
+columns = [ "percent_funded", "loan_amnt", "int_rate", "installment", "annual_inc",
     "dti", "delinq_2yrs", "delinq_amnt" ]
-loans = loans[features + target]
+loans = loans[columns]
+```
+
+Let's verify that there are no missing values in those columns:
+```{python}
 loans.isna().sum()
 ```
 
-:::{.callout-note}
-Given lists of columns names (or any strings), you can use `+` to concatenate them into a single list.
-:::
-
-Finally, we'll output this cleaned data frame to its own CSV file. The index row is an ID number that is meaningless to classification, so we will instruct pandas to exclude it from the new file:
+Finally, we'll output this cleaned data frame to its own CSV file. The index row is an ID number with no inherent meaning, so we instruct pandas to exclude it from the new file:
 
 ```{python}
 loans.to_csv("loan_clean.csv", index=False)
 ```
-
-### Diamonds example
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/fjf4gj8bj5hwvwm/Section1_5_c.mp4?raw=1 >}}
-:::
-
-We will also be using a seaborn [dataset comprising features of diamonds and their prices](https://ggplot2.tidyverse.org/reference/diamonds.html):
-
-```{python}
-import seaborn as sns
-diamonds = sns.load_dataset("diamonds")
-diamonds.head()
-```
-
-As you can see above, some of the features (cut, color, clarity) have string designations. However, these do have a specific ordering in this context. So we will replace the strings with the correct ordinal values.
-
-We start with the *cut* column:
-
-```{python}
-cuts = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
-diamonds["cut"].replace(
-    cuts,           # to be replaced
-    range(5),       # replacements
-    inplace=True    # change the original frame, not a copy
-    )
-
-diamonds.head()
-```
-
-Above, you see that the *cut* strings have been replaced by integers. Now we do the same for the other categories:
-
-```{python}
-diamonds["clarity"].replace(
-    ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"],
-    range(8),
-    inplace=True
-    )
-
-diamonds["color"].replace(
-    list("DEFGHIJ"),
-    range(7),
-    inplace=True
-    )
-
-diamonds.head()
-```
-
-We'll save this modified dataset to its own file for our future use:
-
-```{python}
-diamonds.to_csv("diamonds.csv", index=False)
-```
+::::
 
 ## Exercises {.unnumbered}
 
