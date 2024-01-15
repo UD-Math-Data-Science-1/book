@@ -44,19 +44,57 @@ For both continuous and discrete quantities, it makes sense to order different v
 
 Mathematically, the real and integer number sets are infinite, but computers are finite machines. Integers are represented exactly within some range that is determined by how many binary bits are dedicated. The computational analog of real numbers are **floating-point numbers**, or more simply, **floats**. These are bounded in range as well as discretized. The details are complicated, but essentially, the floating-point numbers have about 16 significant decimal digits by default—which is virtually always far more precision than real data offers.
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1ksfwja3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_k1vhj9q5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
+::::{#exm-data-float chapter=1 description="Floating-point numbers" type=💻}
+if you enter an integer, it is interpreted as an `int`:
 ```{python}
 # This is an integer (int type)
 print(3, "is a", type(3))
+```
 
+To get the floating-point version, you add a decimal point:
+```{python}
 # This is a real number (float type)
 print(3.0, "is a", type(3.0))
+```
 
+You can also use scientific notation:
+```{python}
+print(6.02e23, "is Avogadro's number")
+print(6.62607e-34, "is Planck's constant in Joule-seconds")
+```
+
+There are also explicit converter functions. The conversion of an `int` to a `float` is generally exact:
+```{python}
 # Convert int to float (generally no change to numerical value)
 print( "float(3) creates",float(3) )
+```
 
+But the conversion of `int` to `float` truncates the number, which can cause subtle bugs:
+```{python}
 # Truncate float to int
 print( "int(3.14) creates", int(3.14) )
 ```
+
+::: {.callout-warning}
+Be careful about comparing floating-point values.
+:::
+
+Because operations on floats are not exact, results can be surprising:
+```{python}
+print(0.2 - 0.1 == 0.1)    # as expected
+print(3.1 - 3.0 == 0.1)    # uh-oh
+```
+
+The Numpy function `isclose` is a safer way to compare floats:
+```{python}
+import numpy as np
+print( np.isclose(3.1 - 3.0, 0.1) )
+```
+::::
 
 ### Inf and NaN
 
@@ -66,27 +104,44 @@ There are two additional quasi-numerical `float` values to be aware of as well.
 For numerical work in Python, the NumPy package indispensible. We will use it often, and it is also loaded and used by most other scientifically oriented packages.
 :::
 
-The value `inf` stands for infinity. It's greater than every finite number. Some arithmetic with infinity is well-defined:
+The value `inf` in NumPy stands for infinity. 
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nyqbc6h9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8zmeafud" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
+::::{#exm-data-inf-nan chapter=1 description="Infinity and NaN" type=💻}
+Infinity is greater than every number, and some arithmetic operations with infinity are well defined:
 
 ```{python}
 import numpy as np
-print( "np.inf + 5 is", np.inf + 5 )
-print( "np.inf + np.inf is", np.inf + np.inf )
-print( "5 - np.inf is", 5 - np.inf )
+print( "(np.inf + 5) is", np.inf + 5 )
+print( "(np.inf + np.inf) is", np.inf + np.inf )
+print( "(5 - np.inf) is", 5 - np.inf )
 ```
 
-However, in calculus you learned that some expressions with infinity are considered to be undefined without additional information to apply (e.g., L'Hôpital's Rule):
+However, in calculus you learned that some expressions with infinity are considered to be undefined without additional information (e.g., L'Hôpital's Rule):
 
 ```{python}
 print( "np.inf / np.inf is", np.inf / np.inf )
 ```
 
-The result `nan` stands for *Not a Number*. It is the result of indeterminate arithmetic operations, like $\infty/\infty$ and $\infty - \infty$. It is also used sometimes as a placeholder for missing data.
+The result `nan` above stands for *Not a Number*. It is the result of indeterminate arithmetic operations, like $\infty/\infty$ and $\infty - \infty$. It is also used sometimes as a placeholder for missing data.
 
 :::{.callout-warning}
-By definition, every operation that involves a `NaN` value results in a `NaN`. One notorious consequence of this behavior is that `nan==nan` is `nan`, not `True`!
+By definition, every operation that involves a `NaN` value results in a `NaN`. 
 :::
 
+One notorious trap of using NaN is that `nan==nan` is not `True`!
+```{python}
+print( "np.nan == np.nan is", np.nan == np.nan )
+```
+
+Instead, you should use `np.isnan` to check for `NaN` values:
+```{python}
+print( "np.isnan(np.nan) is", np.isnan(np.nan) )
+```
+::::
 
 ### Dates and times
 
@@ -102,12 +157,11 @@ A **datetime** is a representation of an instant in time. A **time delta** is a 
 Native Python uses a `datetime` type, while NumPy uses `datetime64`.
 :::
 
+::::{#exm-data-datetime chapter=1 description="Dates and times in NumPy" type=💻}
+You can use many natural date formats within strings:
 ```{python}
 import numpy as np
 np.datetime64("2020-01-17")    # YYYY-MM-DD 
-```
-
-```{python}
 np.datetime64("1969-07-20T20:17")    # YYYY-MM-DDThh:mm
 ```
 
@@ -116,54 +170,16 @@ np.datetime64("1969-07-20T20:17")    # YYYY-MM-DDThh:mm
 np.datetime64("now")
 ```
 
-A time delta in NumPy indicates its units (granularity).
+A time delta in NumPy indicates its units (i. e., its granularity).
 
 ```{python}
 np.datetime64("1969-07-20T20:17") - np.datetime64("today")
 ```
-
-### Random numbers
-
-Generating truly random numbers on a computer is not simple. Mostly we rely on *pseudorandom* numbers, which are generated by deterministic functions called **random number generators** (RNGs) that have extremely long periods. One nice consequence is repeatability. By specifying the starting state of the RNG, you can get exactly the same pseudorandom sequence every time.
-
-We will rely on pseudorandom numbers in two ways. First, many algorithms in data science have at least one random aspect (dividing data into subsets, for example). The library routines we will be using allow you to specify the random state and get repeatable results. Occasionally, though, we might want to generate random values for our own use.
-
-```{python}
-from numpy.random import default_rng
-rng = default_rng(19716)    # giving an initial state
-```
-
-The `uniform` generator method produces numbers distributed uniformly (i.e., every value is equally likely) between two limits you specify.
-
-```{python}
-for _ in range(5):
-    print( rng.uniform( -1, 1 ) )
-```
-
-Another common type of random value is generated by `normal`, which produces real values distributed according to the normal or Gaussian distribution. We'll get into that in more detail later.
-
-```{python}
-for _ in range(5):
-    print( rng.normal() )
-```
-
-::::{#exm-data-normal chapter=1 description="Mean of a normal distribution" type=💻}
-In the long run, the average value of normally distributed numbers will be zero. Here is an experiment on 100,000 of them:
-
-```{python}
-s = 0
-for _ in range(100000):
-    s += rng.normal()
-
-s/100000
-```
 ::::
 
-## Arrays
+## Vectors
 
-Most interesting phenomena are characterized and influenced by more than one factor. Collections of values therefore play a central role in data science. The workhorse type for collections in base Python is the list. However, we're going to need some more powerful metaphors and tools as well. 
-
-### Vectors
+Most interesting phenomena are characterized and influenced by more than one factor. Collections of values therefore play a central role in data science. The workhorse type for collections in base Python is the list. However, we're going to need some more powerful metaphors and tools as well, beginning with vectors.
 
 ::::{#def-data-vector}
 A **vector** is a collection of values called **elements**, all of the same type, indexed by consecutive integers.
@@ -175,18 +191,20 @@ In math, vector indexes usually begin with 1. In Python, they begin with 0.
 
 A vector with $n$ elements is often referred to as an $n$-vector, and we say that $n$ is the **length** of the vector. In math we often use $\real^n$ to denote the set of all $n$-vectors with real-valued elements.
 
-The usual way to work with arrays in Python is through NumPy:
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_g0hda6xi&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_tryruqu5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
+::::{#exm-data-vector chapter=1 description="Vectors in Python" type=💻}
+The usual way to work with vectors in Python is through NumPy:
 
 ```{python}
 import numpy as np
 
-x = np.array( [1,2,3,4,5] )
+x = np.array( [1, 2, 3, 4, 5] )
 x
 ```
 
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/eq4n2508uhtwjir/Section1_2_a.mp4?raw=1 >}}
-:::
 
 A vector has a data type for its elements:
 
@@ -197,7 +215,7 @@ x.dtype
 Any float values in the vector cause the data type of the entire vector to be `float`:
 
 ```{python}
-y = np.array( [1.0,2,3,4,5] )
+y = np.array( [1.0, 2, 3, 4, 5] )
 y.dtype
 ```
 
@@ -210,26 +228,36 @@ len(x)
 You can create a special type of vector called a *range* that has equally spaced elements:
 
 ```{python}
-np.arange(0,5)
+np.arange(0, 5)
 ```
 
 ```{python}
-np.arange(1,3,0.5)
+np.arange(1, 3, 0.5)
 ```
 
-The syntax here is `(start,stop,step)`. Note something critical and counterintuitive from the above results:
+The syntax here is `(start,stop,step)`. 
 
 ::: {.callout-caution}
 In base Python and in NumPy, the last element of a range is omitted. This is guaranteed to cause confusion if you are used to just about any other computer language.
 :::
 
-#### Access and slicing
+There are functions for creating vectors of ones and zeros:
+
+```{python}
+print(np.ones(5))
+print(np.zeros(4))
+```
+::::
+
+### Element access
+The elements of a vector can be accessed directly using square brackets notation. 
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/adsliy9ncce8ivx/Section1_2_b.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f06t1pv6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lch4gsfq" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-Use square brackets to refer to an element of a vector:
+::::{#exm-data-access chapter=1 description="Accessing vector elements" type=💻}
+Use square brackets to refer to an element of a vector, remembering that the first element has index 0:
 
 ```{python}
 x[0]
@@ -274,7 +302,10 @@ x[ [0, 2, 4] ]
 ```
 
 ::: {.callout-important}
-The result of a list reference is a new vector, not a number. Note the difference here:
+The result of a list reference is a new vector, not a number. 
+:::
+
+Note the difference here:
 ```{python}
 x[0]
 ```
@@ -282,9 +313,22 @@ x[0]
 ```{python}
 x[ [0] ]
 ```
+::::
+
+### Slicing
+
+You can also access multiple elements of a vector by using a list or range as the index. In the latter case, this is called **slicing**.
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-Accessing multiple elements via a range is known as **slicing**:
+::::{#exm-data-slice chapter=1 description="Slicing vectors" type=💻}
+The syntax of a slice is `start:stop`. 
+
+::: {.callout-warning}
+As with ranges in base Python, the last element of a slice range is omitted. This causes many headaches and bugs.
+:::
 
 ```{python}
 x[0:3]
@@ -294,7 +338,11 @@ x[0:3]
 x[-3:-1]
 ```
 
-As with ranges, the syntax of a slice is `start:stop:step`, and the last element of the range is *not* included. This causes headaches and bugs, though it does imply that the range `i:j` has $j-i$ elements, not $j-i+1$. 
+If you want to use a range that skips over elements, you can use a third argument in the form `start:stop:step`:
+
+```{python}
+x[0:2:5]
+```
 
 When the `start` of the range is omitted, it means "from the beginning", and when `stop` is omitted, it means "through to the end." Hence, `[:k]` means "first $k$ elements" and `[-k:]` means "last $k$ elements":
 
@@ -312,16 +360,16 @@ And we also have this idiom:
 x[::-1]   # reverse the vector
 ```
 
-NumPy will happily allow you to reference invalid indexes. It will just return as much as is available without warning or error.
-:::
+NumPy will happily allow you to reference invalid indexes. It will just return as much as is available without warning or error:
 
 ```{python}
 x[:10]
 ```
+::::
 
-### Multiple dimensions
+## Arrays
 
-A vector is an important special case of a more general construct.
+A vector is a special case of a more general construct.
 
 ::::{#def-data-array}
 An **array** is a collection of values called **elements**, all of the same type, indexed by one or more sets of consecutive integers. The number of indexes needed to specify a value is the **dimension** of the array.
@@ -335,13 +383,14 @@ A dimension is called an `axis` in NumPy and related packages.
 The term **matrix** is often used simply to mean a 2D array. Technically, though, a matrix should have only numerical values, and matrices obey certain properties that make them important mathematical objects. These properties and their consequences are studied in linear algebra.
 :::
 
-#### Construction
+For us, arrays will mostly be the results of importing or working on data. But it's occasionally useful to know how to build them from scratch.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/xk5nyx52miba267/Section1_2_c.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xqgr0oc8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ugy7sg7t" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-One way to construct an array is by a list comprehension:
+::::{#exm-data-array chapter=1 description="Arrays in Python" type=💻}
+One way to construct an array is by a **list comprehension**:
 
 ```{python}
 A = np.array([ [j-i for j in range(6)] for i in range(4) ])
@@ -378,11 +427,6 @@ np.zeros( (3, 6) )
 ```
 
 ```{python}
-# See earlier section for definition of rng
-rng.normal( size=(3, 4) )
-```
-
-```{python}
 np.repeat(np.pi, 3)
 ```
 
@@ -395,26 +439,30 @@ np.hstack( ( np.ones((2, 2)), np.zeros((2, 3)) ) )
 ```{python}
 np.vstack( (range(5), range(5, 0, -1)) )
 ```
+::::
 
-#### Indexing and slicing
+### Indexing and slicing
+
+One way to think about a 2D array is a vector of vector rows of the same length. That idea is reflected in NumPy syntax.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/b8187f40a2vghjv/Section1_2_d.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nhk4pa65&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ns9347ku" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
+::::{#exm-data-array-index chapter=1 description="Indexing arrays" type=💻}
 We can use successive brackets to refer to an element, row then column:
 
 ```{python}
 R[1][2]    # second row, third column
 ```
 
-But it's more convenient to use a single bracket set with indexes separated by commas:
+It's equivalent, and typically more convenient, to use a single bracket set with indexes separated by commas:
 
 ```{python}
 R[1, 2]    # second row, third column
 ```
 
-You can slice in each dimension individually.
+You can use slicing ranges in each dimension individually.
 
 ```{python}
 R[:1, -2:]    # first row, last two columns
@@ -431,61 +479,41 @@ Because we accessed an individual row, not a slice, the result is one dimension 
 ```{python}
 A[:, :2]    # all rows, first 2 columns
 ```
+::::
 
-#### Reductions
+### Reductions
+
+A common task is to **reduce** an array along one dimension, called an *axis* in numpy, resulting in an array of one less dimension.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/nvt91p4okytb33e/Section1_2_e.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_sb1cwatu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vnc91q62" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.10" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-A common task is to *reduce* an array along one dimension, called an *axis* in numpy, resulting in an array of one less dimension. It's easiest to explain by some examples.
+::::{#exm-data-array-reduce chapter=1 description="Array reductions" type=💻}
+The first dimension of an array is axis number 0, the second is axis number 1, etc. 
+
+```{python}
+A
+```
 
 ```{python}
 np.sum(A, axis=0)    # sum along the rows
 ```
 
+Even when we sum along the column dimension, `axis=1`, the result is a vector that we would interpret as a row, not a column.
+
 ```{python}
 np.sum(A, axis=1)    # sum along the columns
 ```
 
-If you don't specify an axis, the reduction occurs over all directions at once, resulting in a single number.
+If you don't specify an axis, the reduction occurs over all dimensions at once, resulting in a single number.
 
 ```{python}
 np.sum(A)
 ```
+::::
 
 You can also do reductions with `np.max`, `np.min`, `np.mean`, etc.
-
-<!-- #### Broadcasting
-
-You can add together arrays of the same shape, element by element, just as you would expect:
-
-```{python}
-x = np.array( [1,2,3,4,5] )
-x + x
-```
-
-Generally, you cannot do this for arrays of different shapes:
-
-```{python}
-#| error: true
-y = np.array ( [10,20] )
-x+y
-```
-
-
-There is a major exception, though. When one of the operands can be repeated along an axis to become the same shape as the other, then that *broadcasting* is done automatically. This makes some common operations easy to express, such as adding a value to every element of an array:
-
-```{python}
-x+3
-```
-
-For a less trivial example, suppose that within each column of an array, we want to subtract off the average value in that column. This becomes easy to do via broadcasting:
-
-```{python}
-A - np.mean(A, axis=0)
-```
- -->
 
 ## Qualitative data
 
