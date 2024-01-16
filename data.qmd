@@ -684,7 +684,7 @@ rainbow.loc["red"].to_numpy()
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/t74l0mltts3s9vz/Section1_4_a.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_t6nb4pa3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_oqa2u2y8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.14" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ::::{#exm-data-create-frame chapter=1 description="Creating a data frame" type=💻}
@@ -708,6 +708,58 @@ pd.DataFrame(
     )
 ```
 ::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_44v37coz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e9add9y2" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
+### Common operations
+
+| Description                  | Syntax                   | Result         |
+| :--------------------------- | :----------------------- | :------------- |
+| First or last entries        | `s.head()`, `s.tail()`   | Series         |
+| Length                       | `len(s)`                 | integer        |
+| Number of entries            | `s.shape`                | tuple          |
+| All of the values            | `s.values`               | array          |
+| Convert to list              | `list(s)`                | list           |
+| Index                        | `s.index`                | Index          |
+| Unique values                | `s.unique()`             | array          |
+| Appearance counts for values | `s.value_counts()`       | Series         |
+| Extreme values               | `s.min()`, `s.max()`     | number         |
+| Sum                          | `s.sum()`                | number         |
+| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
+| Locate missing               | `s.isna()`               | boolean Series |
+| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
+| Delete one or more rows      | `s.drop(0)`              | Series         |
+
+: Operations on pandas series {#tbl-data-series}
+
+Pandas offers many methods for manipulating series and data frames. @tbl-data-series shows common operations that can be applied to a series. Since a column of a data frame is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
+
+::: {.callout-caution}
+As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
+:::
+
+| Description                | Syntax                   | Result              |
+| :------------------------- | :----------------------- | :------------------ |
+| First or last rows         | `df.head()`, `df.tail()` | DataFrame           |
+| Number of rows             | `len(df)`                | integer             |
+| Number of rows and columns | `df.shape`               | tuple               |
+| All of the values          | `df.values`              | array               |
+| Row index                  | `df.index`               | Index               |
+| Column names               | `list(df)`               | list                |
+| Column names               | `df.columns`             | Index               |
+| Access by column name(s)   | `df["name"]`             | Series or DataFrame |
+| Access by name             | `df.loc[rows, "name"]`   | (varies)            |
+| Access by position         | `df.iloc[i, j]`          | (varies)            |
+| Sum                        | `df.sum()`               | Series              |
+| Comparison                 | `s > 1`, `s=="foo"`      | boolean DataFrame   |
+| Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
+| Apply columnwise           | `df.apply(myfun)`        | (varies)            |
+
+: Operations on pandas data frames {#tbl-data-frames}
+
+@tbl-data-frames shows additional operations that can be applied to an entire data frame (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
 
 ### Categorical data in pandas
 
@@ -759,6 +811,12 @@ diamonds.head()
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_wh19lhvn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_z05q0byw" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
+A common need is to convert a categorical variable to dummy variables. Pandas makes that a one-liner.
+
 ::::{#exm-data-chess chapter=1 description="Categorical data in pandas" type=💻}
 Here is a vector of chess pieces at the start of a game:
 
@@ -773,59 +831,15 @@ pieces = pd.Series( [
 We can use pandas to convert this variable to dummy variables:
 
 ```{python}
-pd.get_dummies(pieces)
+pd.get_dummies(pieces).head(9)
 ```
 
-If we wanted to use a specific ordering in the dummy variables, then we would first have to create an ordinal variable as in @exm-data-ordinal.
+We can also use the encoding variant in which one of the categories is left out:
+
+```{python}
+pd.get_dummies(pieces, drop_first=True).head(6)
+```
 ::::
-
-### Common operations
-
-| Description                  | Syntax                   | Result         |
-| :--------------------------- | :----------------------- | :------------- |
-| First or last entries        | `s.head()`, `s.tail()`   | Series         |
-| Length                       | `len(s)`                 | integer        |
-| Number of entries            | `s.shape`                | tuple          |
-| All of the values            | `s.values`               | array          |
-| Convert to list              | `list(s)`                | list           |
-| Index                        | `s.index`                | Index          |
-| Unique values                | `s.unique()`             | array          |
-| Appearance counts for values | `s.value_counts()`       | Series         |
-| Extreme values               | `s.min()`, `s.max()`     | number         |
-| Sum                          | `s.sum()`                | number         |
-| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
-| Locate missing               | `s.isna()`               | boolean Series |
-| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
-| Delete one or more rows      | `s.drop(0)`              | Series         |
-
-: Operations on pandas series {#tbl-data-series}
-
-Pandas offers many methods for manipulating series and data frames. @tbl-data-series shows common operations that can be applied to a series. Since a column of a data frame is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
-
-::: {.callout-caution}
-As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
-:::
-
-| Description                | Syntax                   | Result              |
-| :------------------------- | :----------------------- | :------------------ |
-| First or last rows         | `df.head()`, `df.tail()` | DataFrame           |
-| Number of rows             | `len(df)`                | integer             |
-| Number of rows and columns | `df.shape`               | tuple               |
-| All of the values          | `df.values`              | array               |
-| Row index                  | `df.index`               | Index               |
-| Column names               | `list(df)`               | list                |
-| Column names               | `df.columns`             | Index               |
-| Access by column name(s)   | `df["name"]`             | Series or DataFrame |
-| Access by name             | `df.loc[rows, "name"]`   | (varies)            |
-| Access by position         | `df.iloc[i, j]`          | (varies)            |
-| Sum                        | `df.sum()`               | Series              |
-| Comparison                 | `s > 1`, `s=="foo"`      | boolean DataFrame   |
-| Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
-| Apply columnwise           | `df.apply(myfun)`        | (varies)            |
-
-: Operations on pandas data frames {#tbl-data-frames}
-
-@tbl-data-frames shows additional operations that can be applied to an entire data frame (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
 
 ### Loading from files 
 
@@ -856,7 +870,7 @@ ads.dtypes    # data types of the columns
 ::::
 
 :::{.column-margin}
-{{< video  https://www.dropbox.com/s/1r9is5thcryuarl/Section1_4_b.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_mrq75g07&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dc029nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 It's also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with `pd.read_` showing the formats pandas understands.
@@ -899,6 +913,10 @@ weather.iloc[-4:]
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_q2pr26id&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_oflglmwo" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
 In @exm-data-row-iloc, we did not specify an index for the data frame, so the row numbers were the index. If we do give the data frame an index, we can use `loc` to access rows by the index value.
 
 ::::{#exm-data-row-loc chapter=1 description="loc for rows in a frame" type=💻}
@@ -927,6 +945,10 @@ When the index is a date, as is the case here, we can even use a range of dates:
 dated_weather.loc["1979-03-01":"1979-03-06"]
 ```
 ::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_19xrcnne&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_3xgggkkf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.20" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 Frequently we want to select rows from a data frame based on criteria applied to the data itself. We can use relational operators such as `>`, `<`, `==`, etc. to select rows based on the values in a column.
 
@@ -958,12 +980,7 @@ weather[(weather["TMAX"] < 0) & (weather["SNOW"] > 0)]
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/uwrmgpz15mm5aj9/Example1_10.mp4?raw=1 >}}
-:::
-
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/h3ezvnpyn8xe5ch/Section1_4_c.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_k1lb9pe7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hs13e0f9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.21" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ::: {.callout-tip}
