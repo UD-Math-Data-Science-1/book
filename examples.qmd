@@ -1,0 +1,24 @@
+---
+listing: 
+  - id: examples-listing
+    contents: 
+        - _datasets
+        - _crossrefs/exm.yml
+    type: table
+    sort: false
+    fields: [description, type, chapter, link]
+    page-size: 50
+    field-display-names: 
+      description: Description
+      type: Type
+      chapter: Chap
+      link: Link
+---
+
+# List of examples {.unnumbered}
+
+
+## List of examples
+
+::: {#examples-listing}
+:::
