@@ -873,6 +873,10 @@ ads.dtypes    # data types of the columns
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_mrq75g07&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dc029nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
+:::{.callout-tip}
+While it's possible to import datasets directly from the web, links change and disappear frequently. If storing the dataset locally is not a problem, you may want to download your own copy before working on it.
+:::
+
 It's also possible to import data from most other general-purpose formats you might encounter, such as Excel spreadsheets (though possibly requiring one-time installation of additional libraries). There are many functions starting with `pd.read_` showing the formats pandas understands.
 
 ## Selecting rows and columns
@@ -993,20 +997,84 @@ For practice with pandas fundamentals, try the [Kaggle course](https://www.kaggl
 
 ## Data preparation
 
-Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling** or **data munging**. A related process is **data cleaning**, where missing and anomalous values are removed or replaced.
+Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling** or **data munging**. 
+
+### Preprocessing
+
+I'm impossible to prepare for every future situation when it comes to preprocessing data. You might find the `replace()` method or `str.` methods handy to tidy up strings, or to replace strings with numerical values. You can parse a string that represents one or more numbers using the `to_numeric()` or extractall There are built-in ways to parse and manipulate dates and times. 
+
+To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
+
+::::{#exm-data-loans chapter=1 description="Cleaning a data frame" type=💻}
+First, we load the raw data from a CSV (comma separated values) file.
+```{python}
+import pandas as pd
+loans = pd.read_csv("_datasets/loans.csv")
+loans.head()
+```
+
+The `int_rate` column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We'd like to strip out those percent signs and convert the rest to numeric types. We can use the `str` property of the column to access string methods:
+
+```{python}
+loans["int_rate"].str.strip('%')
+```
+
+Then, we can convert the result to numeric:
+
+```{python}
+loans["int_rate"] = pd.to_numeric( loans["int_rate"].str.strip('%') )
+loans.head()
+```
+
+:::{.callout-tip}
+As you see above, we often end up with chains of methods separated by dots. Python works from the inside out, left to right, evaluating a sub-expression and then replacing it with the output for the next segment in the chain. We could write these as a sequence of separate lines having intermediate results assigned to variable names, but it's considered better style to chain them.
+:::
+
+The *title* column contains strings that haphazardly formatted:
+
+```{python}
+loans["title"]
+```
+
+We might improve matters by converting everything in that column to lowercase. We can use the `str.lower()` method for that:
+
+```{python}
+loans["title"] = loans["title"].str.lower()
+loans["title"]
+```
+Let's add a column for the percentage of the loan request that was eventually funded. This will be a target for some of our learning methods.
+
+```{python}
+loans["percent_funded"] = 100 * loans["funded_amnt"] / loans["loan_amnt"]
+```
+
+In future chapters, we will only use a small subset of the numerical columns: 
+
+```{python}
+columns = [ "percent_funded", "loan_amnt", "int_rate", "installment", "annual_inc",
+    "dti", "delinq_2yrs", "delinq_amnt" ]
+loans = loans[columns]
+```
+
+Finally, we'll output this cleaned data frame to its own CSV file. By default, saving will include the index, which in this case is a meaningless row number, so we suppress that with a keyword: 
+
+```{python}
+loans.to_csv("loan_clean.csv", index=False)
+```
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_atu5pvx5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e6fttwyk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.22" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
 
 ### Missing values
 
-In real data sets, we often must cope with data series that have missing values. This is a common source of mistakes and confusion, especially because there is no universal practice. Sometimes zero is used to represent a missing number. It's also common to use an impossible value, such as $-999$ to represent weight, to signify missing data. 
+In real data sets we often must cope with rows that have missing values. There is no universal way that such values are presented. A missing value may be indicated by a zero or nonsensical value, or with a string such as "n/a", or just an empty spot. Within Python, it might be natural to represent missing values as `None`, but that is not a valid value for a NumPy array. It's more flexible within pandas to use `np.nan`, for "not a number". 
 
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/wz9vpncyyyw2xex/Section1_5_a.mp4?raw=1 >}}
-:::
-
-Formally, the most natural way to represent missing data in Python is as `nan` or `NaN`, and pandas makes it easy to find and manipulate such values. 
+The best practice for locating missing values in pandas is to use the `isna()` method. But you have to do something about them before you can apply algorithms. It's simplest to remove all rows that contain missing values, which is the job of the pandas `dropna()` method. But if that leads to too much data loss, you can try **imputation**, which means replacing the missing values with a representative value, such as the mean or median of the non-missing values. In that case you should use the `fillna()` method.
 
 ::::{#exm-data-missing chapter=1 description="Handling missing values in pandas" type=💻}
-
 Here is a well-known data set about penguins:
 
 ```{python}
@@ -1015,7 +1083,7 @@ penguins = sns.load_dataset("penguins")
 penguins.head()
 ```
 
-Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using `isna`:
+Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using `isna`, which creates a Boolean series:
 
 ```{python}
 penguins.isna()
@@ -1025,79 +1093,28 @@ penguins.isna()
 penguins.isna().sum()
 ```
 
-Sometimes one replaces missing values with average or other representative values, a process called *imputation*. But it's often prudent to simply toss them out, as follows:
+If all you want to do is drop the rows with missing values, you can use `dropna`:
 
 ```{python}
-print("original counts:")
-print( penguins.count() )
-penguins.dropna( inplace=True )
-print()
-print("after removals:")
-print( penguins.count() )
+print("Original has", len(penguins), "rows.")
+print("After removals, there are", len(penguins.dropna()), "rows.")
 ```
 
-::: {.callout-tip}
-Operations that make changes to or retrieve subsets from a data frame work on copies of the frame. When `inplace=True` is given, though, the operation changes the original frame. The difference is important when dealing with very large datasets that you want to avoid copying within memory, even temporarily.
-:::
+If you want to impute missing values, you can use `fillna`. Here, for example, we replace missing values in any column with the mean of the column:
 
-### Loans example
+```{python}
+new_penguins = penguins.fillna(penguins.mean())
+new_penguins.head()
+```
 
-To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
+Note that only the numerical data columns were affected. The categorical column for *sex* was left alone.
 
-:::{.callout-tip}
-It's possible to import datasets from the Web directly into pandas. However, web sources and links change and disappear frequently, so if storing the dataset is not a problem, you may want to download your own copy before working on it.
-:::
+Think carefully before you impute missing values, because doing so can easily misrepresent the underlying data. At the very least, you need to document how many values have been changed.
+::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/t56b2blgzn6s9a6/Section1_5_b.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uumcim3n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cs0thbt3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
-
-
-::::{#exm-data-loans chapter=1 description="Cleaning a data frame" type=💻}
-
-First, we load the raw data from a CSV (comma separated values) file.
-```{python}
-import pandas as pd
-loans = pd.read_csv("_datasets/loan.csv")
-loans.head()
-```
-
-The `int_rate` column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We'll strip out those percent signs and convert them to floats.
-
-:::{.callout-tip}
-As you see below, we often end up with chains of methods separated by dots. Python works from left to right, evaluating a sub-expression and then replacing it with the object for the next segment in the chain. We could write these as a sequence of separate lines having intermediate results assigned to variable names, but it's often considered better style to chain them.
-:::
-
-```{python}
-num_rate = loans["int_rate"].str.strip('%').astype(float)
-print(num_rate.head())
-loans["int_rate"] = num_rate
-```
-Let's add a column for the percentage of the loan request that was eventually funded. This will be a target for some of our learning methods.
-
-```{python}
-loans["percent_funded"] = 100 * loans["funded_amnt"] / loans["loan_amnt"]
-```
-
-We will only use a small subset of the numerical columns: 
-
-```{python}
-columns = [ "percent_funded", "loan_amnt", "int_rate", "installment", "annual_inc",
-    "dti", "delinq_2yrs", "delinq_amnt" ]
-loans = loans[columns]
-```
-
-Let's verify that there are no missing values in those columns:
-```{python}
-loans.isna().sum()
-```
-
-Finally, we'll output this cleaned data frame to its own CSV file. The index row is an ID number with no inherent meaning, so we instruct pandas to exclude it from the new file:
-
-```{python}
-loans.to_csv("loan_clean.csv", index=False)
-```
-::::
 
 ## Exercises {.unnumbered}
 
