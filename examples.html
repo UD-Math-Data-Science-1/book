@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.306">
+<meta name="generator" content="quarto-1.4.534">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -50,7 +50,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -59,55 +65,30 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-examples-listing1 .list');
+    const listingTargetEl = window.document.querySelector('#listing-examples-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-Link',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-title","listing-Link"],
+      valueNames: ['listing-description','listing-type','listing-chapter','listing-link',{ data: ['index'] },{ data: ['categories'] }],
+      page: 50,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-chapter","listing-description","listing-link","listing-type"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-examples-listing1'] = new List('listing-examples-listing1', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-examples-listing2 .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-title","listing-Link"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-examples-listing2'] = new List('listing-examples-listing2', options);
+    window['quarto-listings']['listing-examples-listing'] = new List('listing-examples-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -121,6 +102,11 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 <script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
 <script> 
 MathJax = {
   chtml: {
@@ -132,6 +118,33 @@ MathJax = {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-sidebar floating">
@@ -140,13 +153,13 @@ MathJax = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./examples.html">List of examples</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./examples.html">List of examples</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -155,10 +168,10 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
+<p><img src="_media/logo_small.png" class="quarto-figure quarto-figure-center figure-img" height="120"></p>
 </figure>
 </div>
 </div></div>
@@ -246,16 +259,16 @@ MathJax = {
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
-<p>Copyright 2023 by Toby Driscoll</p>
+<p>Copyright (c) 2024 by <a href="https://tobydriscoll.net">Toby Driscoll</a></p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#test" id="toc-test" class="nav-link active" data-scroll-target="#test">test</a></li>
+  <li><a href="#list-of-examples" id="toc-list-of-examples" class="nav-link active" data-scroll-target="#list-of-examples">List of examples</a></li>
   </ul>
 </nav>
     </div>
@@ -277,195 +290,30 @@ MathJax = {
   </div>
   
 
+
 </header>
 
-<div id="listing-examples-listing1" class="quarto-listing quarto-listing-container-table">
+
+<section id="list-of-examples" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-examples">List of examples</h2>
+<div id="listing-examples-listing" class="quarto-listing quarto-listing-container-table">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
      <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-examples-listing1-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-examples-listing1'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+     <select id="listing-examples-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-examples-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
        <option value="" disabled="" selected="" hidden="">Order By</option>
        <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
+         <option value="listing-chapter" data-direction="asc">
+          Chap
         </option>
-         <option value="listing-Link" data-direction="asc">
+         <option value="listing-description" data-direction="asc">
+          Description
+        </option>
+         <option value="listing-link" data-direction="asc">
           Link
         </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-Link" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Link</a>
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-title-sort="Distance matrix by hand">
-<td>
-<span class="listing-title">Distance matrix by hand</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-distmat-small">Example&nbsp;<span>7.1</span></a></span>
-</td>
-</tr>
-<tr data-index="1" data-listing-title-sort="Usage of `pairwise_distances`">
-<td>
-<span class="listing-title">Usage of <code>pairwise_distances</code></span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-distmat">Example&nbsp;<span>7.2</span></a></span>
-</td>
-</tr>
-<tr data-index="2" data-listing-title-sort="Angular distance">
-<td>
-<span class="listing-title">Angular distance</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-angular">Example&nbsp;<span>7.3</span></a></span>
-</td>
-</tr>
-<tr data-index="3" data-listing-title-sort="Rand index by hand">
-<td>
-<span class="listing-title">Rand index by hand</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-rand">Example&nbsp;<span>7.4</span></a></span>
-</td>
-</tr>
-<tr data-index="4" data-listing-title-sort="Adjusted Rand index">
-<td>
-<span class="listing-title">Adjusted Rand index</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-ARI-blobs">Example&nbsp;<span>7.5</span></a></span>
-</td>
-</tr>
-<tr data-index="5" data-listing-title-sort="Silhouette values by hand">
-<td>
-<span class="listing-title">Silhouette values by hand</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-silhouette">Example&nbsp;<span>7.6</span></a></span>
-</td>
-</tr>
-<tr data-index="6" data-listing-title-sort="Silhouette values calculation">
-<td>
-<span class="listing-title">Silhouette values calculation</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-sil-blobs">Example&nbsp;<span>7.7</span></a></span>
-</td>
-</tr>
-<tr data-index="7" data-listing-title-sort="Silhouettes as performance metric">
-<td>
-<span class="listing-title">Silhouettes as performance metric</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-perform-digits">Example&nbsp;<span>7.8</span></a></span>
-</td>
-</tr>
-<tr data-index="8" data-listing-title-sort="Limitation of silhouettes">
-<td>
-<span class="listing-title">Limitation of silhouettes</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-sil-bullseye">Example&nbsp;<span>7.9</span></a></span>
-</td>
-</tr>
-<tr data-index="9" data-listing-title-sort="Inertia by hand">
-<td>
-<span class="listing-title">Inertia by hand</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-inertia">Example&nbsp;<span>7.10</span></a></span>
-</td>
-</tr>
-<tr data-index="10" data-listing-title-sort="k-means on *blobs* dataset">
-<td>
-<span class="listing-title">k-means on <em>blobs</em> dataset</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-kmeans-blobs">Example&nbsp;<span>7.11</span></a></span>
-</td>
-</tr>
-<tr data-index="11" data-listing-title-sort="k-means on *stripes* dataset">
-<td>
-<span class="listing-title">k-means on <em>stripes</em> dataset</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-kmeans-stripes">Example&nbsp;<span>7.12</span></a></span>
-</td>
-</tr>
-<tr data-index="12" data-listing-title-sort="k-means on digits dataset">
-<td>
-<span class="listing-title">k-means on digits dataset</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-kmeans-digits">Example&nbsp;<span>7.13</span></a></span>
-</td>
-</tr>
-<tr data-index="13" data-listing-title-sort="Linkage by hand">
-<td>
-<span class="listing-title">Linkage by hand</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-linkage-tiny">Example&nbsp;<span>7.14</span></a></span>
-</td>
-</tr>
-<tr data-index="14" data-listing-title-sort="Agglomerative for toy example">
-<td>
-<span class="listing-title">Agglomerative for toy example</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-hier-toy">Example&nbsp;<span>7.15</span></a></span>
-</td>
-</tr>
-<tr data-index="15" data-listing-title-sort="Comparing linkages on simple datasets">
-<td>
-<span class="listing-title">Comparing linkages on simple datasets</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-linkage">Example&nbsp;<span>7.16</span></a></span>
-</td>
-</tr>
-<tr data-index="16" data-listing-title-sort="Agglomerative for penguins dataset">
-<td>
-<span class="listing-title">Agglomerative for penguins dataset</span>
-</td>
-<td>
-<span class="listing-Link"><a href="clustering.html#exm-cluster-penguins">Example&nbsp;<span>7.17</span></a></span>
-</td>
-</tr>
-</tbody>
-
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-<section id="test" class="level2">
-<h2 class="anchored" data-anchor-id="test">test</h2>
-<div id="listing-examples-listing2" class="quarto-listing quarto-listing-container-table">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-examples-listing2-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-examples-listing2'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
+         <option value="listing-type" data-direction="asc">
+          Type
         </option>
      </select>
   </div>
@@ -474,107 +322,2146 @@ No matching items
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
-
 <table class="quarto-listing-table table">
 <thead>
 <tr>
 <th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
+<a class="sort" data-sort="listing-description" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Description</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-type" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Type</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-chapter" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Chap</a>
+</th>
+<th>
+<a class="sort" data-sort="listing-link" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Link</a>
 </th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-title-sort="Distance matrix by hand">
+<tr data-index="0">
 <td>
-<span class="listing-title">Distance matrix by hand</span>
+<span class="listing-description">Quantitative data</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-quantitative" class="quarto-xref">Example&nbsp;<span>exm-data-quantitative</span></a></span>
 </td>
 </tr>
-<tr data-index="1" data-listing-title-sort="Usage of `pairwise_distances`">
+<tr data-index="1">
 <td>
-<span class="listing-title">Usage of <code>pairwise_distances</code></span>
+<span class="listing-description">Floating-point numbers</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-float" class="quarto-xref">Example&nbsp;<span>exm-data-float</span></a></span>
 </td>
 </tr>
-<tr data-index="2" data-listing-title-sort="Angular distance">
+<tr data-index="2">
 <td>
-<span class="listing-title">Angular distance</span>
+<span class="listing-description">Infinity and NaN</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-inf-nan" class="quarto-xref">Example&nbsp;<span>exm-data-inf-nan</span></a></span>
 </td>
 </tr>
-<tr data-index="3" data-listing-title-sort="Rand index by hand">
+<tr data-index="3">
 <td>
-<span class="listing-title">Rand index by hand</span>
+<span class="listing-description">Dates and times in NumPy</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-datetime" class="quarto-xref">Example&nbsp;<span>exm-data-datetime</span></a></span>
 </td>
 </tr>
-<tr data-index="4" data-listing-title-sort="Adjusted Rand index">
+<tr data-index="4">
 <td>
-<span class="listing-title">Adjusted Rand index</span>
+<span class="listing-description">Vectors in Python</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-vector" class="quarto-xref">Example&nbsp;<span>exm-data-vector</span></a></span>
 </td>
 </tr>
-<tr data-index="5" data-listing-title-sort="Silhouette values by hand">
+<tr data-index="5">
 <td>
-<span class="listing-title">Silhouette values by hand</span>
+<span class="listing-description">Accessing vector elements</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-access" class="quarto-xref">Example&nbsp;<span>exm-data-access</span></a></span>
 </td>
 </tr>
-<tr data-index="6" data-listing-title-sort="Silhouette values calculation">
+<tr data-index="6">
 <td>
-<span class="listing-title">Silhouette values calculation</span>
+<span class="listing-description">Slicing vectors</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-slice" class="quarto-xref">Example&nbsp;<span>exm-data-slice</span></a></span>
 </td>
 </tr>
-<tr data-index="7" data-listing-title-sort="Silhouettes as performance metric">
+<tr data-index="7">
 <td>
-<span class="listing-title">Silhouettes as performance metric</span>
+<span class="listing-description">Arrays in Python</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-array" class="quarto-xref">Example&nbsp;<span>exm-data-array</span></a></span>
 </td>
 </tr>
-<tr data-index="8" data-listing-title-sort="Limitation of silhouettes">
+<tr data-index="8">
 <td>
-<span class="listing-title">Limitation of silhouettes</span>
+<span class="listing-description">Indexing arrays</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-array-index" class="quarto-xref">Example&nbsp;<span>exm-data-array-index</span></a></span>
 </td>
 </tr>
-<tr data-index="9" data-listing-title-sort="Inertia by hand">
+<tr data-index="9">
 <td>
-<span class="listing-title">Inertia by hand</span>
+<span class="listing-description">Array reductions</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-array-reduce" class="quarto-xref">Example&nbsp;<span>exm-data-array-reduce</span></a></span>
 </td>
 </tr>
-<tr data-index="10" data-listing-title-sort="k-means on *blobs* dataset">
+<tr data-index="10">
 <td>
-<span class="listing-title">k-means on <em>blobs</em> dataset</span>
+<span class="listing-description">Ordinal data</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-categorical" class="quarto-xref">Example&nbsp;<span>exm-data-categorical</span></a></span>
 </td>
 </tr>
-<tr data-index="11" data-listing-title-sort="k-means on *stripes* dataset">
+<tr data-index="11">
 <td>
-<span class="listing-title">k-means on <em>stripes</em> dataset</span>
+<span class="listing-description">Dummy variables</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-dummy" class="quarto-xref">Example&nbsp;<span>exm-data-dummy</span></a></span>
 </td>
 </tr>
-<tr data-index="12" data-listing-title-sort="k-means on digits dataset">
+<tr data-index="12">
 <td>
-<span class="listing-title">k-means on digits dataset</span>
+<span class="listing-description">Series and data frames</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-frames" class="quarto-xref">Example&nbsp;<span>exm-data-frames</span></a></span>
 </td>
 </tr>
-<tr data-index="13" data-listing-title-sort="Linkage by hand">
+<tr data-index="13">
 <td>
-<span class="listing-title">Linkage by hand</span>
+<span class="listing-description">Series and frames in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-colors" class="quarto-xref">Example&nbsp;<span>exm-data-colors</span></a></span>
 </td>
 </tr>
-<tr data-index="14" data-listing-title-sort="Agglomerative for toy example">
+<tr data-index="14">
 <td>
-<span class="listing-title">Agglomerative for toy example</span>
+<span class="listing-description">Creating a data frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-create-frame" class="quarto-xref">Example&nbsp;<span>exm-data-create-frame</span></a></span>
 </td>
 </tr>
-<tr data-index="15" data-listing-title-sort="Comparing linkages on simple datasets">
+<tr data-index="15">
 <td>
-<span class="listing-title">Comparing linkages on simple datasets</span>
+<span class="listing-description">Ordinal data</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-ordinal" class="quarto-xref">Example&nbsp;<span>exm-data-ordinal</span></a></span>
 </td>
 </tr>
-<tr data-index="16" data-listing-title-sort="Agglomerative for penguins dataset">
+<tr data-index="16">
 <td>
-<span class="listing-title">Agglomerative for penguins dataset</span>
+<span class="listing-description">Categorical data in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-chess" class="quarto-xref">Example&nbsp;<span>exm-data-chess</span></a></span>
+</td>
+</tr>
+<tr data-index="17">
+<td>
+<span class="listing-description">Importing data with pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-read" class="quarto-xref">Example&nbsp;<span>exm-data-read</span></a></span>
+</td>
+</tr>
+<tr data-index="18">
+<td>
+<span class="listing-description">iloc for rows in a frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-row-iloc" class="quarto-xref">Example&nbsp;<span>exm-data-row-iloc</span></a></span>
+</td>
+</tr>
+<tr data-index="19">
+<td>
+<span class="listing-description">loc for rows in a frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-row-loc" class="quarto-xref">Example&nbsp;<span>exm-data-row-loc</span></a></span>
+</td>
+</tr>
+<tr data-index="20">
+<td>
+<span class="listing-description">Selecting rows in a frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-row-select" class="quarto-xref">Example&nbsp;<span>exm-data-row-select</span></a></span>
+</td>
+</tr>
+<tr data-index="21">
+<td>
+<span class="listing-description">Cleaning a data frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-loans" class="quarto-xref">Example&nbsp;<span>exm-data-loans</span></a></span>
+</td>
+</tr>
+<tr data-index="22">
+<td>
+<span class="listing-description">Handling missing values in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-missing" class="quarto-xref">Example&nbsp;<span>exm-data-missing</span></a></span>
+</td>
+</tr>
+<tr data-index="23">
+<td>
+<span class="listing-description">Standard deviation by hand</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-maxvar" class="quarto-xref">Example&nbsp;<span>exm-stats-maxvar</span></a></span>
+</td>
+</tr>
+<tr data-index="24">
+<td>
+<span class="listing-description">Z scores</span>
+</td>
+<td>
+<span class="listing-type">✍️, 💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-zscores" class="quarto-xref">Example&nbsp;<span>exm-stats-zscores</span></a></span>
+</td>
+</tr>
+<tr data-index="25">
+<td>
+<span class="listing-description">Z scores in Python</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-zscores-py" class="quarto-xref">Example&nbsp;<span>exm-stats-zscores-py</span></a></span>
+</td>
+</tr>
+<tr data-index="26">
+<td>
+<span class="listing-description">Sample variance</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-sample" class="quarto-xref">Example&nbsp;<span>exm-stats-sample</span></a></span>
+</td>
+</tr>
+<tr data-index="27">
+<td>
+<span class="listing-description">Median</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-median" class="quarto-xref">Example&nbsp;<span>exm-stats-median</span></a></span>
+</td>
+</tr>
+<tr data-index="28">
+<td>
+<span class="listing-description">Quantiles</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-quantiles" class="quarto-xref">Example&nbsp;<span>exm-stats-quantiles</span></a></span>
+</td>
+</tr>
+<tr data-index="29">
+<td>
+<span class="listing-description">Quartiles and IQR</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-describe" class="quarto-xref">Example&nbsp;<span>exm-stats-describe</span></a></span>
+</td>
+</tr>
+<tr data-index="30">
+<td>
+<span class="listing-description">CDF of a uniform distribution</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-discrete" class="quarto-xref">Example&nbsp;<span>exm-stats-uniform-discrete</span></a></span>
+</td>
+</tr>
+<tr data-index="31">
+<td>
+<span class="listing-description">Uniform random numbers in NumPy</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-numpy-uniform" class="quarto-xref">Example&nbsp;<span>exm-stats-numpy-uniform</span></a></span>
+</td>
+</tr>
+<tr data-index="32">
+<td>
+<span class="listing-description">Empirical CDF</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-ecdf-uniform" class="quarto-xref">Example&nbsp;<span>exm-stats-ecdf-uniform</span></a></span>
+</td>
+</tr>
+<tr data-index="33">
+<td>
+<span class="listing-description">Histogram of a uniform distribution</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-hist" class="quarto-xref">Example&nbsp;<span>exm-stats-uniform-hist</span></a></span>
+</td>
+</tr>
+<tr data-index="34">
+<td>
+<span class="listing-description">PDF of a uniform distribution</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-pdf" class="quarto-xref">Example&nbsp;<span>exm-stats-uniform-pdf</span></a></span>
+</td>
+</tr>
+<tr data-index="35">
+<td>
+<span class="listing-description">Mean of a uniform distribution</span>
+</td>
+<td>
+<span class="listing-type">✍️, 💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-mean" class="quarto-xref">Example&nbsp;<span>exm-stats-uniform-mean</span></a></span>
+</td>
+</tr>
+<tr data-index="36">
+<td>
+<span class="listing-description">Normal distribution in NumPy</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-normal" class="quarto-xref">Example&nbsp;<span>exm-stats-normal</span></a></span>
+</td>
+</tr>
+<tr data-index="37">
+<td>
+<span class="listing-description">Facet plots</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-facet" class="quarto-xref">Example&nbsp;<span>exm-stats-groups-facet</span></a></span>
+</td>
+</tr>
+<tr data-index="38">
+<td>
+<span class="listing-description">Box and violin plots</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-box-violin" class="quarto-xref">Example&nbsp;<span>exm-stats-groups-box-violin</span></a></span>
+</td>
+</tr>
+<tr data-index="39">
+<td>
+<span class="listing-description">Aggregating data in groups</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-aggregation" class="quarto-xref">Example&nbsp;<span>exm-stats-groups-aggregation</span></a></span>
+</td>
+</tr>
+<tr data-index="40">
+<td>
+<span class="listing-description">Transforming data in groups</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-transformation" class="quarto-xref">Example&nbsp;<span>exm-stats-groups-transformation</span></a></span>
+</td>
+</tr>
+<tr data-index="41">
+<td>
+<span class="listing-description">Filtering data in groups</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-filtering" class="quarto-xref">Example&nbsp;<span>exm-stats-groups-filtering</span></a></span>
+</td>
+</tr>
+<tr data-index="42">
+<td>
+<span class="listing-description">Outliers for mean and median</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-median-mean" class="quarto-xref">Example&nbsp;<span>exm-stats-median-mean</span></a></span>
+</td>
+</tr>
+<tr data-index="43">
+<td>
+<span class="listing-description">Interquartile range</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-outlier-iqr" class="quarto-xref">Example&nbsp;<span>exm-stats-outlier-iqr</span></a></span>
+</td>
+</tr>
+<tr data-index="44">
+<td>
+<span class="listing-description">Outliers</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-outlier-std" class="quarto-xref">Example&nbsp;<span>exm-stats-outlier-std</span></a></span>
+</td>
+</tr>
+<tr data-index="45">
+<td>
+<span class="listing-description">Relational plots</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-relational" class="quarto-xref">Example&nbsp;<span>exm-stats-relational</span></a></span>
+</td>
+</tr>
+<tr data-index="46">
+<td>
+<span class="listing-description">Pearson correlation coefficient</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-pearson-cars" class="quarto-xref">Example&nbsp;<span>exm-stats-pearson-cars</span></a></span>
+</td>
+</tr>
+<tr data-index="47">
+<td>
+<span class="listing-description">Outliers and the Pearson coefficient</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span>exm-stats-pearson-outlier</span></a></span>
+</td>
+</tr>
+<tr data-index="48">
+<td>
+<span class="listing-description">Spearman correlation coefficient</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-spearman-outlier" class="quarto-xref">Example&nbsp;<span>exm-stats-spearman-outlier</span></a></span>
+</td>
+</tr>
+<tr data-index="49">
+<td>
+<span class="listing-description">Categorical correlation</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-catcorr" class="quarto-xref">Example&nbsp;<span>exm-stats-catcorr</span></a></span>
+</td>
+</tr>
+<tr data-index="50">
+<td>
+<span class="listing-description">The Datasaurus</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-datasaurus" class="quarto-xref">Example&nbsp;<span>exm-stats-datasaurus</span></a></span>
+</td>
+</tr>
+<tr data-index="51">
+<td>
+<span class="listing-description">Correlation vs.&nbsp;dependence</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-correlation" class="quarto-xref">Example&nbsp;<span>exm-stats-correlation</span></a></span>
+</td>
+</tr>
+<tr data-index="52">
+<td>
+<span class="listing-description">Simpson’s paradox</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-simpson" class="quarto-xref">Example&nbsp;<span>exm-stats-simpson</span></a></span>
+</td>
+</tr>
+<tr data-index="53">
+<td>
+<span class="listing-description">Feature matrix</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-basketball" class="quarto-xref">Example&nbsp;<span>exm-class-basketball</span></a></span>
+</td>
+</tr>
+<tr data-index="54">
+<td>
+<span class="listing-description">Classifier performance metrics</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-confusion" class="quarto-xref">Example&nbsp;<span>exm-class-confusion</span></a></span>
+</td>
+</tr>
+<tr data-index="55">
+<td>
+<span class="listing-description">Binary classifier metrics</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-metrics" class="quarto-xref">Example&nbsp;<span>exm-class-metrics</span></a></span>
+</td>
+</tr>
+<tr data-index="56">
+<td>
+<span class="listing-description">Combined metrics</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-scores-simple" class="quarto-xref">Example&nbsp;<span>exm-class-scores-simple</span></a></span>
+</td>
+</tr>
+<tr data-index="57">
+<td>
+<span class="listing-description">Multiclass metrics</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-multiclass" class="quarto-xref">Example&nbsp;<span>exm-class-multiclass</span></a></span>
+</td>
+</tr>
+<tr data-index="58">
+<td>
+<span class="listing-description">Gini impurity</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-gini" class="quarto-xref">Example&nbsp;<span>exm-class-gini</span></a></span>
+</td>
+</tr>
+<tr data-index="59">
+<td>
+<span class="listing-description">Tree partitioning</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-tree-partition" class="quarto-xref">Example&nbsp;<span>exm-class-tree-partition</span></a></span>
+</td>
+</tr>
+<tr data-index="60">
+<td>
+<span class="listing-description">Inspecting a decision tree</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-tree-toy" class="quarto-xref">Example&nbsp;<span>exm-class-tree-toy</span></a></span>
+</td>
+</tr>
+<tr data-index="61">
+<td>
+<span class="listing-description">Tree classifier for the penguins dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span>exm-class-tree-penguins</span></a></span>
+</td>
+</tr>
+<tr data-index="62">
+<td>
+<span class="listing-description">Calculating distance</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-distance" class="quarto-xref">Example&nbsp;<span>exm-class-distance</span></a></span>
+</td>
+</tr>
+<tr data-index="63">
+<td>
+<span class="listing-description">kNN classifier</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-knn-small" class="quarto-xref">Example&nbsp;<span>exm-class-knn-small</span></a></span>
+</td>
+</tr>
+<tr data-index="64">
+<td>
+<span class="listing-description">kNN classifier for the penguins dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-knn" class="quarto-xref">Example&nbsp;<span>exm-class-knn</span></a></span>
+</td>
+</tr>
+<tr data-index="65">
+<td>
+<span class="listing-description">Pipeline for standardized columns</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-knn-standard" class="quarto-xref">Example&nbsp;<span>exm-class-knn-standard</span></a></span>
+</td>
+</tr>
+<tr data-index="66">
+<td>
+<span class="listing-description">Probabilistic classifier</span>
+</td>
+<td>
+<span class="listing-type">✍️, 💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-phat" class="quarto-xref">Example&nbsp;<span>exm-class-phat</span></a></span>
+</td>
+</tr>
+<tr data-index="67">
+<td>
+<span class="listing-description">Probabilistic classifier for the penguins dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-prob" class="quarto-xref">Example&nbsp;<span>exm-class-prob</span></a></span>
+</td>
+</tr>
+<tr data-index="68">
+<td>
+<span class="listing-description">Varying decision threshold</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-hits" class="quarto-xref">Example&nbsp;<span>exm-class-hits</span></a></span>
+</td>
+</tr>
+<tr data-index="69">
+<td>
+<span class="listing-description">ROC curve, quasi-manually</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-roc-simple" class="quarto-xref">Example&nbsp;<span>exm-class-roc-simple</span></a></span>
+</td>
+</tr>
+<tr data-index="70">
+<td>
+<span class="listing-description">ROC curve for the penguins dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-roc-penguin" class="quarto-xref">Example&nbsp;<span>exm-class-roc-penguin</span></a></span>
+</td>
+</tr>
+<tr data-index="71">
+<td>
+<span class="listing-description">Area under ROC curve</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-auc" class="quarto-xref">Example&nbsp;<span>exm-class-auc</span></a></span>
+</td>
+</tr>
+<tr data-index="72">
+<td>
+<span class="listing-description">Hyperparameters</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-hyper" class="quarto-xref">Example&nbsp;<span>exm-select-hyper</span></a></span>
+</td>
+</tr>
+<tr data-index="73">
+<td>
+<span class="listing-description">Learning curves</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>exm-select-learning-curves</span></a></span>
+</td>
+</tr>
+<tr data-index="74">
+<td>
+<span class="listing-description">Overfitting</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-overfit-forest" class="quarto-xref">Example&nbsp;<span>exm-select-overfit-forest</span></a></span>
+</td>
+</tr>
+<tr data-index="75">
+<td>
+<span class="listing-description">Bagging ensemble classifier</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-ensemble-knn" class="quarto-xref">Example&nbsp;<span>exm-select-ensemble-knn</span></a></span>
+</td>
+</tr>
+<tr data-index="76">
+<td>
+<span class="listing-description">Bagging ensemble (better)</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-ensemble-knn-better" class="quarto-xref">Example&nbsp;<span>exm-select-ensemble-knn-better</span></a></span>
+</td>
+</tr>
+<tr data-index="77">
+<td>
+<span class="listing-description">Random forest classifier</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-ensemble-forest" class="quarto-xref">Example&nbsp;<span>exm-select-ensemble-forest</span></a></span>
+</td>
+</tr>
+<tr data-index="78">
+<td>
+<span class="listing-description">Folds for validation</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-folds" class="quarto-xref">Example&nbsp;<span>exm-select-folds</span></a></span>
+</td>
+</tr>
+<tr data-index="79">
+<td>
+<span class="listing-description">Cross-validation</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-cv-beans" class="quarto-xref">Example&nbsp;<span>exm-select-cv-beans</span></a></span>
+</td>
+</tr>
+<tr data-index="80">
+<td>
+<span class="listing-description">Validation curve</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-vc-beans" class="quarto-xref">Example&nbsp;<span>exm-select-vc-beans</span></a></span>
+</td>
+</tr>
+<tr data-index="81">
+<td>
+<span class="listing-description">Cross-validation grid search</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">4</span>
+</td>
+<td>
+<span class="listing-link"><a href="selection.html#exm-select-grid-cancer" class="quarto-xref">Example&nbsp;<span>exm-select-grid-cancer</span></a></span>
+</td>
+</tr>
+<tr data-index="82">
+<td>
+<span class="listing-description">Linear regression</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-linear" class="quarto-xref">Example&nbsp;<span>exm-regression-linear</span></a></span>
+</td>
+</tr>
+<tr data-index="83">
+<td>
+<span class="listing-description">Inner product</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-dot" class="quarto-xref">Example&nbsp;<span>exm-regression-dot</span></a></span>
+</td>
+</tr>
+<tr data-index="84">
+<td>
+<span class="listing-description">Mean squared and mean absolute error</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-mse-mae" class="quarto-xref">Example&nbsp;<span>exm-regression-mse-mae</span></a></span>
+</td>
+</tr>
+<tr data-index="85">
+<td>
+<span class="listing-description">Coefficient of determination</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-cod" class="quarto-xref">Example&nbsp;<span>exm-regression-cod</span></a></span>
+</td>
+</tr>
+<tr data-index="86">
+<td>
+<span class="listing-description">Linear regression for sea ice dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-ice-linear" class="quarto-xref">Example&nbsp;<span>exm-regression-ice-linear</span></a></span>
+</td>
+</tr>
+<tr data-index="87">
+<td>
+<span class="listing-description">Matrix times vector</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-matvec" class="quarto-xref">Example&nbsp;<span>exm-regression-matvec</span></a></span>
+</td>
+</tr>
+<tr data-index="88">
+<td>
+<span class="listing-description">Multilinear regression for MPG dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-cars-multi" class="quarto-xref">Example&nbsp;<span>exm-regression-cars-multi</span></a></span>
+</td>
+</tr>
+<tr data-index="89">
+<td>
+<span class="listing-description">Multilinear regression for sales dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-sales-multi" class="quarto-xref">Example&nbsp;<span>exm-regression-sales-multi</span></a></span>
+</td>
+</tr>
+<tr data-index="90">
+<td>
+<span class="listing-description">Polynomial regression for the MPG dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-polynomial" class="quarto-xref">Example&nbsp;<span>exm-regression-polynomial</span></a></span>
+</td>
+</tr>
+<tr data-index="91">
+<td>
+<span class="listing-description">Overfitting in polynomial regression</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-polynomial-high" class="quarto-xref">Example&nbsp;<span>exm-regression-polynomial-high</span></a></span>
+</td>
+</tr>
+<tr data-index="92">
+<td>
+<span class="listing-description">Ridge regression for diabetes dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-ridge-diabetes" class="quarto-xref">Example&nbsp;<span>exm-regression-ridge-diabetes</span></a></span>
+</td>
+</tr>
+<tr data-index="93">
+<td>
+<span class="listing-description">LASSO regression for diabetes dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-lasso-diabetes" class="quarto-xref">Example&nbsp;<span>exm-regression-lasso-diabetes</span></a></span>
+</td>
+</tr>
+<tr data-index="94">
+<td>
+<span class="listing-description">Proving linearity</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-linear" class="quarto-xref">Example&nbsp;<span>exm-regression-linear</span></a></span>
+</td>
+</tr>
+<tr data-index="95">
+<td>
+<span class="listing-description">Proving nonlinearity</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-nonlinear" class="quarto-xref">Example&nbsp;<span>exm-regression-nonlinear</span></a></span>
+</td>
+</tr>
+<tr data-index="96">
+<td>
+<span class="listing-description">Nonlinearity of kNN regression</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-knn" class="quarto-xref">Example&nbsp;<span>exm-regression-knn</span></a></span>
+</td>
+</tr>
+<tr data-index="97">
+<td>
+<span class="listing-description">kNN regression for MPG dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-knn-demo" class="quarto-xref">Example&nbsp;<span>exm-regression-knn-demo</span></a></span>
+</td>
+</tr>
+<tr data-index="98">
+<td>
+<span class="listing-description">Creating a decision tree regressor</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-split" class="quarto-xref">Example&nbsp;<span>exm-regression-split</span></a></span>
+</td>
+</tr>
+<tr data-index="99">
+<td>
+<span class="listing-description">Tree regression on a small dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-tree" class="quarto-xref">Example&nbsp;<span>exm-regression-tree</span></a></span>
+</td>
+</tr>
+<tr data-index="100">
+<td>
+<span class="listing-description">Random forest for regression</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-tree-demo" class="quarto-xref">Example&nbsp;<span>exm-regression-tree-demo</span></a></span>
+</td>
+</tr>
+<tr data-index="101">
+<td>
+<span class="listing-description">Cross-entropy</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-cross-entropy" class="quarto-xref">Example&nbsp;<span>exm-regression-cross-entropy</span></a></span>
+</td>
+</tr>
+<tr data-index="102">
+<td>
+<span class="listing-description">Logistic regression as a spam filter</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-spam" class="quarto-xref">Example&nbsp;<span>exm-regression-spam</span></a></span>
+</td>
+</tr>
+<tr data-index="103">
+<td>
+<span class="listing-description">Regularization for the spam filter regressor</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-spam-regular" class="quarto-xref">Example&nbsp;<span>exm-regression-spam-regular</span></a></span>
+</td>
+</tr>
+<tr data-index="104">
+<td>
+<span class="listing-description">Multiclass logistic regression</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-logistic-ovr" class="quarto-xref">Example&nbsp;<span>exm-regression-logistic-ovr</span></a></span>
+</td>
+</tr>
+<tr data-index="105">
+<td>
+<span class="listing-description">Multiclass logistic regression for forest cover dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">5</span>
+</td>
+<td>
+<span class="listing-link"><a href="regression.html#exm-regression-logistic-gas" class="quarto-xref">Example&nbsp;<span>exm-regression-logistic-gas</span></a></span>
+</td>
+</tr>
+<tr data-index="106">
+<td>
+<span class="listing-description">Distance matrix</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-distmat-small" class="quarto-xref">Example&nbsp;<span>exm-cluster-distmat-small</span></a></span>
+</td>
+</tr>
+<tr data-index="107">
+<td>
+<span class="listing-description">Usage of <code>pairwise_distances</code></span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-distmat" class="quarto-xref">Example&nbsp;<span>exm-cluster-distmat</span></a></span>
+</td>
+</tr>
+<tr data-index="108">
+<td>
+<span class="listing-description">Angular distance</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-angular" class="quarto-xref">Example&nbsp;<span>exm-cluster-angular</span></a></span>
+</td>
+</tr>
+<tr data-index="109">
+<td>
+<span class="listing-description">Rand index by hand</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-rand" class="quarto-xref">Example&nbsp;<span>exm-cluster-rand</span></a></span>
+</td>
+</tr>
+<tr data-index="110">
+<td>
+<span class="listing-description">Adjusted Rand index</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span>exm-cluster-ARI-blobs</span></a></span>
+</td>
+</tr>
+<tr data-index="111">
+<td>
+<span class="listing-description">Silhouette values</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-silhouette" class="quarto-xref">Example&nbsp;<span>exm-cluster-silhouette</span></a></span>
+</td>
+</tr>
+<tr data-index="112">
+<td>
+<span class="listing-description">Silhouette values calculation</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-sil-blobs" class="quarto-xref">Example&nbsp;<span>exm-cluster-sil-blobs</span></a></span>
+</td>
+</tr>
+<tr data-index="113">
+<td>
+<span class="listing-description">Silhouettes as performance metric</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-perform-digits" class="quarto-xref">Example&nbsp;<span>exm-cluster-perform-digits</span></a></span>
+</td>
+</tr>
+<tr data-index="114">
+<td>
+<span class="listing-description">Limitation of silhouettes</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-sil-bullseye" class="quarto-xref">Example&nbsp;<span>exm-cluster-sil-bullseye</span></a></span>
+</td>
+</tr>
+<tr data-index="115">
+<td>
+<span class="listing-description">Inertia</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-inertia" class="quarto-xref">Example&nbsp;<span>exm-cluster-inertia</span></a></span>
+</td>
+</tr>
+<tr data-index="116">
+<td>
+<span class="listing-description">k-means on <em>blobs</em> dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span>exm-cluster-kmeans-blobs</span></a></span>
+</td>
+</tr>
+<tr data-index="117">
+<td>
+<span class="listing-description">k-means on <em>stripes</em> dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-stripes" class="quarto-xref">Example&nbsp;<span>exm-cluster-kmeans-stripes</span></a></span>
+</td>
+</tr>
+<tr data-index="118">
+<td>
+<span class="listing-description">k-means on digits dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-digits" class="quarto-xref">Example&nbsp;<span>exm-cluster-kmeans-digits</span></a></span>
+</td>
+</tr>
+<tr data-index="119">
+<td>
+<span class="listing-description">Linkage</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-linkage-tiny" class="quarto-xref">Example&nbsp;<span>exm-cluster-linkage-tiny</span></a></span>
+</td>
+</tr>
+<tr data-index="120">
+<td>
+<span class="listing-description">Agglomerative for toy example</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-hier-toy" class="quarto-xref">Example&nbsp;<span>exm-cluster-hier-toy</span></a></span>
+</td>
+</tr>
+<tr data-index="121">
+<td>
+<span class="listing-description">Comparing linkages on simple datasets</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span>exm-cluster-linkage</span></a></span>
+</td>
+</tr>
+<tr data-index="122">
+<td>
+<span class="listing-description">Agglomerative for penguins dataset</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">6</span>
+</td>
+<td>
+<span class="listing-link"><a href="clustering.html#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span>exm-cluster-penguins</span></a></span>
+</td>
+</tr>
+<tr data-index="123">
+<td>
+<span class="listing-description">Constructing networks/graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-construct" class="quarto-xref">Example&nbsp;<span>exm-networks-construct</span></a></span>
+</td>
+</tr>
+<tr data-index="124">
+<td>
+<span class="listing-description">Importing networks</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-import" class="quarto-xref">Example&nbsp;<span>exm-networks-import</span></a></span>
+</td>
+</tr>
+<tr data-index="125">
+<td>
+<span class="listing-description">Neighbors of a node</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-neighbors" class="quarto-xref">Example&nbsp;<span>exm-networks-neighbors</span></a></span>
+</td>
+</tr>
+<tr data-index="126">
+<td>
+<span class="listing-description">Ego graph</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-ego" class="quarto-xref">Example&nbsp;<span>exm-networks-ego</span></a></span>
+</td>
+</tr>
+<tr data-index="127">
+<td>
+<span class="listing-description">Adjacency matrix</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-adjmatrix" class="quarto-xref">Example&nbsp;<span>exm-networks-adjmatrix</span></a></span>
+</td>
+</tr>
+<tr data-index="128">
+<td>
+<span class="listing-description">Node degrees</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-degree" class="quarto-xref">Example&nbsp;<span>exm-networks-degree</span></a></span>
+</td>
+</tr>
+<tr data-index="129">
+<td>
+<span class="listing-description">Average degree</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-avgdegree" class="quarto-xref">Example&nbsp;<span>exm-networks-avgdegree</span></a></span>
+</td>
+</tr>
+<tr data-index="130">
+<td>
+<span class="listing-description">ER graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-degree-ER" class="quarto-xref">Example&nbsp;<span>exm-networks-degree-ER</span></a></span>
+</td>
+</tr>
+<tr data-index="131">
+<td>
+<span class="listing-description">WS graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-WS" class="quarto-xref">Example&nbsp;<span>exm-networks-WS</span></a></span>
+</td>
+</tr>
+<tr data-index="132">
+<td>
+<span class="listing-description">Clustering coefficient</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-cluster-small-world" class="quarto-xref">Example&nbsp;<span>exm-networks-cluster-small-world</span></a></span>
+</td>
+</tr>
+<tr data-index="133">
+<td>
+<span class="listing-description">Clustering in the Twitch network</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>exm-networks-cluster-twitch</span></a></span>
+</td>
+</tr>
+<tr data-index="134">
+<td>
+<span class="listing-description">Clustering in ER graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-cluster-er" class="quarto-xref">Example&nbsp;<span>exm-networks-cluster-er</span></a></span>
+</td>
+</tr>
+<tr data-index="135">
+<td>
+<span class="listing-description">Clustering of WS graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-cluster-WS" class="quarto-xref">Example&nbsp;<span>exm-networks-cluster-WS</span></a></span>
+</td>
+</tr>
+<tr data-index="136">
+<td>
+<span class="listing-description">Distances in a complete graph</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-distance-complete" class="quarto-xref">Example&nbsp;<span>exm-networks-distance-complete</span></a></span>
+</td>
+</tr>
+<tr data-index="137">
+<td>
+<span class="listing-description">Distances in a wheel graph</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-distance-wheel" class="quarto-xref">Example&nbsp;<span>exm-networks-distance-wheel</span></a></span>
+</td>
+</tr>
+<tr data-index="138">
+<td>
+<span class="listing-description">Connectedness</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-connected" class="quarto-xref">Example&nbsp;<span>exm-networks-connected</span></a></span>
+</td>
+</tr>
+<tr data-index="139">
+<td>
+<span class="listing-description">Distances in ER graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-distance-ER" class="quarto-xref">Example&nbsp;<span>exm-networks-distance-ER</span></a></span>
+</td>
+</tr>
+<tr data-index="140">
+<td>
+<span class="listing-description">Degree distribution in the Twitch network</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span>exm-networks-ddist-twitch</span></a></span>
+</td>
+</tr>
+<tr data-index="141">
+<td>
+<span class="listing-description">Degree distribution in the Twitch network</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-ddist-ERWS" class="quarto-xref">Example&nbsp;<span>exm-networks-ddist-ERWS</span></a></span>
+</td>
+</tr>
+<tr data-index="142">
+<td>
+<span class="listing-description">Barabási–Albert graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-BA" class="quarto-xref">Example&nbsp;<span>exm-networks-BA</span></a></span>
+</td>
+</tr>
+<tr data-index="143">
+<td>
+<span class="listing-description">Power-law degrees in the Twitch network</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-powerlaw-ba" class="quarto-xref">Example&nbsp;<span>exm-networks-powerlaw-ba</span></a></span>
+</td>
+</tr>
+<tr data-index="144">
+<td>
+<span class="listing-description">Degree centrality</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-degree" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-degree</span></a></span>
+</td>
+</tr>
+<tr data-index="145">
+<td>
+<span class="listing-description">Betweenness centrality</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-between-barbell" class="quarto-xref">Example&nbsp;<span>exm-networks-between-barbell</span></a></span>
+</td>
+</tr>
+<tr data-index="146">
+<td>
+<span class="listing-description">Betweenness centrality in BA graphs</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-btw-power" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-btw-power</span></a></span>
+</td>
+</tr>
+<tr data-index="147">
+<td>
+<span class="listing-description">Betweenness centrality in the Twitch network</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-btw-big" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-btw-big</span></a></span>
+</td>
+</tr>
+<tr data-index="148">
+<td>
+<span class="listing-description">Eigenvectors</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-eigvector" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-eigvector</span></a></span>
+</td>
+</tr>
+<tr data-index="149">
+<td>
+<span class="listing-description">Eigenvector centrality</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-eig" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-eig</span></a></span>
+</td>
+</tr>
+<tr data-index="150">
+<td>
+<span class="listing-description">Comparison of centrality metrics</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">7</span>
+</td>
+<td>
+<span class="listing-link"><a href="networks.html#exm-networks-centrality-smallworld" class="quarto-xref">Example&nbsp;<span>exm-networks-centrality-smallworld</span></a></span>
 </td>
 </tr>
 </tbody>
-
 </table>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="examples-listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
 
 
@@ -661,10 +2548,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -674,8 +2560,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -688,6 +2583,120 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -731,6 +2740,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -756,6 +2766,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -817,12 +2853,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
+      <a href="./index.html" class="pagination-link  aria-label=" preface"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./resources.html" class="pagination-link">
+      <a href="./resources.html" class="pagination-link" aria-label="Resources">
         <span class="nav-page-text">Resources</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -849,6 +2885,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+
 
 
 
