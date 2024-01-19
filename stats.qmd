@@ -56,7 +56,7 @@ and their **standard deviation** (STD) is $\sigma$, the square root of the varia
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/enctb5vhk94b1mr/Section2_1_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_geff87ds&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_d2z5o00p" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 2.1.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 Mean is a measurement of central tendency. Variance and STD are measures of spread or *dispersion* in the data.
@@ -78,7 +78,7 @@ Given that $0 \le |t| \le 6$, we see that the minimum value of $\sigma$ is 0 and
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/x9giiq35ix0kbwa/Example2_1.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_o10wj99b&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_bfaq5nru" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ::: {.callout-note}
@@ -111,6 +111,7 @@ $$
 These are independent of $t$, which just scales the original values. 
 ::::
 
+::::{#exm-stats-zscores-py chapter=2 type=💻 description="Z scores in Python"}
 We can write a little function to compute z-scores in Python:
 ```{python}
 def standardize(x):
@@ -119,9 +120,10 @@ def standardize(x):
 cars["mpg_z"] = standardize( cars["mpg"] )
 cars[ ["mpg", "mpg_z"] ].describe()
 ```
+::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/xm0zkquipg66kcy/Section2_1_2.mp4?raw=1 >}}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xe53cr77&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ujxp7si5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 :::{.callout-caution}
@@ -214,42 +216,27 @@ If the sorted values are $1,3,3,4,5,5,5$, then $n=7$ and the sample median is $y
 Computing unbiased sample estimates of percentiles other than the median is complicated, and we won't go into the details. For large datasets, the sample values are good estimators in practice.
 
 ::::{#exm-stats-quantiles chapter=2 type=💻 description="Quantiles"}
-Let's create a vector of 101 random numbers drawn uniformly from $[0,1]$:
+Here we find the 90th percentile of the *loan_amnt* variable in the `loans` dataset:
+
 ```{python}
-from numpy.random import default_rng
 import pandas as pd
-
-rng = default_rng(19716)
-x = rng.uniform( size=(101) )
+loans = pd.read_csv("_datasets/loan.csv")
+x = loans["loan_amnt"]
+pct90 = x.quantile(0.9)
+print(pct90)
 ```
 
-We can turn the vector into a pandas series and then find the 20th percentile:
+Equivalently, 90 percent of the values are no greater than that value: 
 ```{python}
-data = pd.Series(x)
-data.quantile(0.2)
+sum(x <= pct90) / len(x)
 ```
 
-This is equivalent to looking at the 21st element of the sorted values:
-```{python}
-x.sort()
-x[20]
-```
-
-As we increase the length of the random vector, in theory the $100p$th percentile should be at $x=p$:
-```{python}
-rng = default_rng(19716)
-data = pd.Series( rng.uniform(size=(200000)) )
-data.quantile( [0.2, 0.5, 0.8] )
-```
 The 50th percentile is the same thing as the median:
 ```{python}
-data.median()
+print(x.median())
+print(x.quantile(0.50))
 ```
 ::::
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/9wov44dazmiyg64/Example2_5.mp4?raw=1 >}}
-:::
 
 ::::{#def-stats-quartile}
 The 25th, 50th, and 75th percentiles are the first, second, and third **quartiles** of the distribution. The **interquartile range** (IQR) is the difference between the 75th percentile and the 25th percentile.
@@ -259,16 +246,11 @@ Sometimes the definition above is extended to the *zeroth quartile*, which is th
 
 IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.
 
-::::{#exm-stats-describe chapter=2 type=💻 description="Describe a data frame"}
+::::{#exm-stats-describe chapter=2 type=💻 description="Quartiles and IQR"}
 The dataframe `describe` method includes mean, standard deviation, and the quartiles:
 
 ```{python}
-rng = default_rng(19716)
-df = pd.DataFrame( {
-    "normal" : rng.normal( size=(10000,) ),
-    "uniform" : rng.uniform( size=(10000,) )
-    } )
-df.describe()
+x.describe()
 ```
 
 It's easy to write a function to compute the IQR of a series:
@@ -277,7 +259,7 @@ def IQR(x):
     Q25, Q75 = x.quantile( [0.25, 0.75] )
     return Q75 - Q25 
 
-IQR(df.normal)
+IQR(x)
 ```
 ::::
 
@@ -306,7 +288,7 @@ where $\lfloor\cdot\rfloor$ is the *floor function* that rounds leftward to the 
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/z8di9mumdeyb4u5/Example2_7.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_w41hr5us&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ci20taew" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 @exm-stats-uniform-discrete becomes interesting as a template for generalizing to infinite populations. If we take not $x_i=i$ but $x_i=i/n$ and then let $n\to \infty$, then the graph of $F$ converges to
@@ -321,6 +303,31 @@ While it doesn't make sense to think about a fraction of the number of values in
 
 ::::{#def-stats-uniform-cdf}
 A **uniform distribution** gives an equal probability to every value. In particular, the uniform distribution over the interval $[0,1]$ has the CDF given in @eq-stats-uniform-cdf.
+::::
+
+
+### Random numbers in Python
+
+Generating truly random numbers on a computer is not simple. We rely on *pseudorandom* numbers, which are generated by deterministic functions called **random number generators** (RNGs) that have extremely long periods. One consequence is repeatability: by specifying the starting state of the RNG, you can get exactly the same pseudorandom sequence every time.
+
+::: {.callout-caution}
+There is an older way to use random numbers in NumPy than the one presented here. You'll still find it on the web and in some books, but the newer way is recommended.
+:::
+
+::::{#exm-stats-numpy-uniform chapter=2 type=💻 description="Uniform random numbers in NumPy"}
+We start by creating an RNG with a specific state. Every time this code is run, the same sequence of numbers will be generated from it.
+
+```{python}
+from numpy.random import default_rng
+rng = default_rng(19716)    # setting an initial state
+```
+
+The `uniform` generator method produces numbers distributed uniformly between two limits you specify.
+
+```{python}
+for _ in range(5):
+    print( rng.uniform( -1, 1 ) )
+```
 ::::
 
 ### Empirical CDF
@@ -349,7 +356,7 @@ sns.displot(x, kind="ecdf");
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/3o8rx1k3qozldc3/Example2_8.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ksxfliwz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_z6swe1lg" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.10" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ### PDF
@@ -381,8 +388,10 @@ sns.displot(x, bins=40);
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/jvevzl1ko3djwih/Example2_9.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zcbcjzcd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gz582maa" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.11" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
+
+![](_media/memes/cat-distributon.jpg){width=60%}
 
 Again something interesting happens in a limiting case. If we normalize the count in a bin by the length of that bin, we get
 $$
@@ -410,7 +419,7 @@ In this case we did not obtain a particularly good approximation of the true PDF
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/f8mmgnxqe988lul/Example2_10.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3wdjax7z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_pd3wko0x" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.12" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ### Mean and variance
@@ -446,7 +455,7 @@ print(f"µ = {np.mean(x):.5f}, 12σ² = {12*np.var(x):.5f}")
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/sf9esiixeugop8g/Example2_11.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xym85fqe&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e3k4sp4q" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.13" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ### Normal distribution
@@ -462,12 +471,12 @@ The **standard normal** distribution uses $\mu=0$ and $\sigma=1$.
 :::: 
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/1ir47qpdrycjqim/Section2_2_5.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_68mq0j28&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_9o924icz" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 2.2.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 For data that are distributed normally, about 68% of the values lie within one standard deviation of the mean, and 95% lie within two standard deviations.
 
-::::{#exm-stats-normal chapter=2 type=💻 description="Normal distribution"}
+::::{#exm-stats-normal chapter=2 type=💻 description="Normal distribution in NumPy"}
 The `normal` method of a NumPy RNG simulates a standard normal distribution.
 
 ```{python}
@@ -476,7 +485,7 @@ x = rng.normal( size=(10000,) )
 sns.displot(x, bins=np.linspace(-4, 4, 28), stat="probability");
 ```
 
-We can change the variance by multiplication by $\sigma$ and change the mean by adding $\mu$:
+We can change the variance by multiplying by $\sigma$ and change the mean by adding $\mu$:
 
 ```{python}
 df = pd.DataFrame( {"x": x, "3x-10": 3*x-10} )
@@ -489,6 +498,8 @@ The KDE density estimator works pretty well for normally distributed data, excep
 sns.displot(data=df, x="3x-10", kind="kde");
 ```
 ::::
+
+![](_media/memes/cant-be-normal.jpg){width=60%}
 
 ## Grouping data
 
@@ -503,10 +514,6 @@ It's often useful to analyze the data in groups defined by categorical values or
 ### Facet, box, and violin plots
 
 In a **facet plot**, a distribution plot is repeated across columns or rows for each group. 
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/eco3xmlp7jp0o8l/Section2_3_1.mp4?raw=1 >}}
-:::
 
 ::::{#exm-stats-groups-facet chapter=2 type=💻 description="Facet plots"}
 Suppose we want to separate the `cars` data by the *origin* categorical column, which has 3 unique values:
@@ -530,6 +537,10 @@ sns.displot(data=cars,
 ```
 From the facet plot it is clear that the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.
 ::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_oiy1q1d4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_xoupeo8n" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 Other ways to visualize grouped data are offered by the `catplot` function in seaborn, including the well-known **box plot** and **violin plot**.
 
@@ -573,6 +584,10 @@ sns.catplot(data=cars,
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6r6e5426&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_mlmkmtz3" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
 ### Aggregation
 
 In pandas, the `groupby` method splits a data frame into groups based on values in a designated column. These groups can then be passed through *aggregators* that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in @tbl-stats-agg. 
@@ -588,10 +603,6 @@ In pandas, the `groupby` method splits a data frame into groups based on values 
 | `first`, `last` | First or last of group values |
 
 : Aggregation functions. All ignore `NaN` values. {#tbl-stats-agg}
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/p1hvt4cojjpoo5a/Section2_3_2.mp4?raw=1 >}}
-:::
 
 ::::{#exm-stats-groups-aggregation chapter=2 type=💻 description="Aggregating data in groups"}
 Here is how we can define groups based on the categorical *origin* column:
@@ -641,13 +652,13 @@ by_weight["mpg"].agg(iqr)
 ```
 ::::
 
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hs871th4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_teg5s1li" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.17" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
 ### Transformation
 
 A **transformation** applies a function to each element of a column, producing a result of the same length that can be indexed the same way. This transformation is applied group by group.
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/jf2nkthnf4xygig/Section2_3_3.mp4?raw=1 >}}
-:::
 
 ::::{#exm-stats-groups-transformation chapter=2 type=💻 description="Transforming data in groups"}
 We can convert the *mpg* values to z-scores using the population mean and variance:
@@ -676,13 +687,13 @@ sns.displot(data=cars,
 (Another reason the second set of plots looks different is that the histogram bins are chosen differently.)
 ::::
 
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_sw7wa3t5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fig9mph5" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
+
 ### Filtering
 
 A **filter** is a function that operates on a column and returns either `True`, meaning to keep the column, or `False`, meaning to reject it. This filter may be applied to a grouped frame.
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/8htwbb8mj8xxmri/Section2_3_4.mp4?raw=1 >}}
-:::
 
 ::::{#exm-stats-groups-filtering chapter=2 type=💻 description="Filtering data in groups"}
 Suppose we want to group cars by horsepower, but we find out that some of the groups don't have a lot of members:
@@ -708,12 +719,19 @@ hp_30["horsepower"].describe()
 ```
 ::::
 
-![](_media/memes/groupby.jpg){height="240"}
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_p15atvyr&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_iimonnmm" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
+![](_media/memes/groupby.jpg){height="240" alt-text="Blue Men Group-ing"}
 
 ## Outliers
 
 Informally, an **outlier** is a data value that is considered to be far from typical. In some applications, such as detecting earthquakes or cancer, outliers are the cases of real interest. But we will be thinking of them as unwelcome values that might result from equipment failure, confounding effects, mistyping a value, using an extreme value to represent missing data, and so on. In such cases we want to minimize the effect of the outliers on the statistics. 
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_fdm9u5cu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wqj1o7yr" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 2.4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 It is well known, for instance, that the mean is more sensitive to outliers than the median is. 
 
@@ -721,9 +739,7 @@ It is well known, for instance, that the mean is more sensitive to outliers than
 The values $1,2,3,4,5$ have a mean and median both equal to 3. If we change the largest value to be a lot larger, say $1,2,3,4,1000$, then the mean changes to 202. But the median is still 3!
 ::::
 
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/jyo9ziubt09kgrj/Section2_4.mp4?raw=1 >}}
-:::
+![](_media/memes/outlier.jpg){height="240"}
 
 If you want to use a method that is vulnerable to outliers, it's typical to remove such values early on. There are various ways of deciding what qualifies as an outlier, with no one-size recommendation for all applications.
 
@@ -803,7 +819,7 @@ For the *stim* case in particular, the mean value changes by almost 200%, includ
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/t2ndktsuxnmp5pt/Example2_14.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_op8fm8cw&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_w7afoyvz" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.21" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 ### Mean and STD
@@ -840,10 +856,9 @@ For asymmetric distributions, or those with a heavy tail, these criteria might s
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/4j52cut7dyomqaf/Example2_15.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_03pilhbt&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jhmbquqc" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.22" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-![](_media/memes/outlier.jpg){height="240"}
 
 ## Correlation
 
@@ -853,21 +868,25 @@ There are several ways to measure correlation. It's good practice to look at the
 
 ### Relational plots
 
-We can use `relplot` to make a scatter plot of two different columns in a frame:
+Thus far, we have used `displot`, or "distribution plot", to make histograms, and `catplot`, or "categorical plot", to make box and violin plots. The third major plot type in seaborn is `relplot`, or "relational plot", to show the relationships between variables.
+
+::::{#exm-stats-relational chapter=2 type=💻 description="Relational plots"}
+By default, `relplot` makes a scatter plot of two different variables:
+
+```{python}
+sns.relplot(data=cars, x="model_year", y="mpg");
+```
+
+Like in the other plot types, we can use hue (color) and marker size to indicate groups within the data:
 
 ```{python}
 sns.relplot(data=cars, 
-    x="model_year", y="mpg"
+    x="model_year", y="mpg",
+    hue="origin", size="weight",
     );
 ```
 
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/htm7sso6p51n9pd/Section2_5_1.mp4?raw=1 >}}
-:::
-
-Like the other plot types above, we can use color, column, marker size, etc. to separate the dots into groups.
-
-If we want to emphasize a trend, we can instead plot the average value at each $x$ with error bars:
+If we want to emphasize a trend rather than the individual data values, we can instead plot the average value at each $x$ with error bars:
 
 ```{python}
 sns.relplot(data=cars, 
@@ -878,10 +897,9 @@ sns.relplot(data=cars,
 
 The error ribbon above is drawn at one standard deviation around the mean.
 
-In order to see multiple pairwise scatter plots, we can use `pairplot` in seaborn:
+In order to see multiple pairwise scatter plots in one shot, we can use `pairplot` in seaborn:
 
 ```{python}
-#| column: body-outset
 columns = [ "mpg", "horsepower", 
             "displacement", "origin" ]
 
@@ -891,6 +909,11 @@ sns.pairplot(data=cars[columns],
 ```
 
 The panels along the diagonal show each quantitative variable's PDF. The other panels show scatter plots putting one pair at a time of the variables on the coordinate axes. 
+::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_4v5nh9ki&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_5n5zc3ch" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 ### Covariance
 
@@ -942,21 +965,19 @@ $$ {#eq-stats-pearson-alt}
 where the quantities in parentheses are z-scores.
 
 ::::{#exm-stats-pearson-cars chapter=2 type=💻 description="Pearson correlation coefficient"}
-We might reasonably expect horsepower and miles per gallon to be inversely correlated:
+We might reasonably expect horsepower and miles per gallon to be negatively correlated:
 
 ```{python}
-sns.relplot( data=cars,
-    x="horsepower",y="mpg"
-    );
+sns.relplot(data=cars, x="horsepower", y="mpg");
 ```
 
-Covariance allows us to confirm the relationship:
+Covariance allows us to quantify the relationship:
 
 ```{python}
 cars[ ["horsepower", "mpg"] ].cov()
 ```
 
-But should these numbers considered big? The Pearson coefficient is more helpful:
+But should these numbers considered big? The Pearson coefficient is more easily interpreted:
 
 ```{python}
 cars[ ["horsepower", "mpg"] ].corr()
@@ -966,9 +987,8 @@ The value of about $-0.79$ suggests that knowing one of the values would allow u
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/0jpbrckf2lu25zd/Example2_16.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_vdwfrkpk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dpu1nain" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.24" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
-
 
 As usual when dealing with means, however, the Pearson coefficient can be sensitive to outlier values. 
 
@@ -1031,7 +1051,7 @@ x.corr(y,"spearman")
 ::::
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/xzq46nce6vv12oc/Section2_5_4.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xemkvgjk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4q0yq5vd" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.26" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
 Since real data almost always features outlying or anomalous values, it's important to think about the robustness of the statistics you choose.
@@ -1071,27 +1091,26 @@ As you can see from the above, `europe` and `japan` are positively associated wi
 :::: 
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/9yc5jw2x0scjyer/Example2_19.mp4?raw=1 >}}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_lt0xli2d&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vgpi7ufk" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.27" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-![](https://imgs.xkcd.com/comics/correlation.png)
+![xckd by [Randall Munroe](https://xkcd.com/license.html)](https://imgs.xkcd.com/comics/correlation.png)
 
 ## Cautionary tales
 
-Attaching theorem-supported numbers to real data feels precise and infallible. The theorems do what they say, of course---they're theorems---but our intuition can be a little too ready to attach significance to the numbers, causing misconceptions or mistakes. Proper visualizations can help us see through such issues.
+Attaching theorem-supported numbers to real data feels precise and infallible. The theorems do what they say, of course---they're theorems!---but our intuition can be a little too ready to attach significance to the numbers, causing misconceptions or mistakes. Proper visualizations can help us see through such issues.
 
-### The datasaurus
+### The Datasaurus
 
-The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. The Datasaurus is a set of 142 points making a handsome portrait:
+The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics. 
+
+::::{#exm-stats-datasaurus chapter=2 type=💻 description="The Datasaurus"}
+The Datasaurus is a set of 142 points making a handsome portrait:
 
 ```{python}
 dozen = pd.read_csv("_datasets/DatasaurusDozen.tsv", delimiter="\t")
 sns.relplot(data=dozen[dozen["dataset"]=="dino"], x="x", y="y");
 ```
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/qmnh7s2w58oim7n/Section2_6_1.mp4?raw=1 >}}
-:::
 
 However, there are 12 other datasets that all have roughly the same mean and variance for $x$ and $y$, and the same correlations between them:
 
@@ -1117,16 +1136,24 @@ sns.relplot(data=others,
     col="dataset", col_wrap=3, height=2.2
     );
 ```
+::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_kiug6i2v&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_a55arc2f" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.28" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 ::: {.callout-important}
 Always plot your data.
 :::
 
-Always. Plot. Your. Data!
+Always 👏 plot 👏 your 👏 data!
 
 ### Correlation vs. dependence
 
-In casual speech, you might expect two variables that are uncorrelated to be unrelated. But that is not at all how the mathematical definitions play out. For example, here are $x$ and $y$ variables that both depend on a hidden variable $\theta$:
+In casual speech, you might expect two variables that are uncorrelated to be unrelated. But that is not at all how the mathematical definitions play out. 
+
+::::{#exm-stats-correlation chapter=2 type=💻 description="Correlation vs. dependence"}
+For example, here are $x$ and $y$ variables that both depend on a hidden variable $\theta$:
 
 ```{python}
 theta = np.linspace(0,2*np.pi,50)
@@ -1141,20 +1168,20 @@ x.corr(y)
 ```
 
 Correlation can only measure the extent of the relationship that is *linear*; $x$ and $y$ lying on a straight line means perfect correlation. In this case, every line you can draw that passes through $(0,0)$ is essentially equally bad at representing the data, and correlation cannot express the relationship.
+::::
 
 ### Simpson's paradox {#sec-stats-simpson}
 
-The penguin dataset contains a common paradox---or a counterintuitive phenomenon, at least. Two of the variables show a fairly strong negative correlation:
+The penguin dataset contains a common paradox---or a counterintuitive phenomenon, at least. 
+
+::::{#exm-stats-simpson chapter=2 type=💻 description="Simpson's paradox"}
+Two of the variables show a fairly strong negative correlation:
 
 ```{python}
 penguins = sns.load_dataset("penguins")
 columns = [ "body_mass_g", "bill_depth_mm" ]
 penguins[columns].corr()
 ```
-
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/1zlkjz3642u3tyo/Sectioon2_6_2.mp4?raw=1 >}}
-:::
 
 But something surprising happens if we compute correlations *after* grouping by species.
 
@@ -1174,6 +1201,13 @@ sns.relplot(data=penguins,
 ```
 
 Within each color, the positive association is clear. But what dominates the combination of all three species is the large difference between Gentoo and the others. Because the Gentoo are both larger and have shallower bills, the dominant relationship is negative. 
+::::
+
+![](_media/memes/simpson.gif)
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ocuuaffk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cj8ha4z2" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.30" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::
 
 As often happens in statistics, the precise framing of the question can strongly affect its answer. This can lead to honest mistakes by the naive as well as outright deception by the unscrupulous.
 
