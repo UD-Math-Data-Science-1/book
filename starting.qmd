@@ -7,27 +7,27 @@ We will be using Python extensively. There are choices for two major aspects of 
 
 ## Back end
 
-Here is a rundown of somes pros and cons of the usual options:
+Here are some pros and cons of the usual options:
 
 | Your own machine | Cloud  | 
 |----------------------|---------------------|
 | Available offline 😄 | Use any device 👍 |
 | Total control 😎/😕 | No installations 😌 | 
-| Choose the front end | Browser only   |  
+| Choose the font end | Browser only   |  
 | Yours forever 😁  | Permanence is an illusion ⛄️ |
-| Your hardware 💵 | You get what you get ¯\_(ツ)_/¯ |
+| Your hardware 💵 | You get what you get ¯\\_(ツ)_/¯ |
 
 ::: {.callout-tip}
-You want to use Python 3.x, not Python 2.x. These coexisted for a while, during a dark time for Python. If you see guidance based on Python 2, it is either outdated or the product of a disordered mind.
+You want to use Python 3.x, not Python 2.x. These coexisted for a while during a dark time for Python. If you see guidance based on Python 2 now, it is either terribly outdated or the product of a disordered mind.
 :::
 
 ### Run on your own computer
 
-The recommended option is to download [Anaconda](https://www.anaconda.com). It's a big download, but it comes with just about everything ready to go, and you can manage things by point-and-click. 
+My recommended option is to download [Anaconda](https://www.anaconda.com). It's a big download, but it comes with just about everything ready to go, and you can manage most things easily by point-and-click. 
 
 ### Run on the cloud
 
-There are many choices, but a popular one is [Google Colab](https://colab.research.google.com). It's free and saves you from having to install anything. The hardware is basic but most likely fine for our purposes. You will need to download your results for submissions. 
+There are many choices, but a popular one is [Google Colab](https://colab.research.google.com). It's free and saves you from having to install anything. The hardware is basic but most likely fine for our purposes. You will need to download your results for assignment submissions. 
 
 ## Front end
 
@@ -39,13 +39,13 @@ The name *IPython* refers to the direct ancestor of Jupyter. The older name cont
 
 A notebook is a self-contained collection of text, math, code, output, and graphics grouped into *cells*. The front end manages the cells and communicates with a back end called the *kernel*.
 
-If you are using Colab, then you are using a Jupyter notebook, though in an interface customized by Google. 
+If you are using Google Colab, then you are using a Jupyter notebook, though within an interface customized by Google. 
 
 ### On your own machine
 
-Jupyter splits into "classic" Jupyter and the newer Jupyter Lab. Either is fine for us, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.
+Jupyter splits into "classic" Jupyter and the newer Jupyter Lab. Either is fine for this book, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.
 
-A worthwhile alternative is to edit the notebook within [VS Code](https://code.visualstudio.com), which is a powerful and popular editor for Python and other languages. 
+A worthwhile alternative is to edit the notebook within [VS Code](https://code.visualstudio.com), which is a free, powerful editor for Python and many other languages. It integrates with [Copilot](https://github.com/features/copilot), which is an AI-powered code assistance tool. Copilot is [free for students and teachers](https://docs.github.com/en/copilot/quickstart). 
 
 ## Tips on Jupyter success
 

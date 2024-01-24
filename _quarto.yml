@@ -27,7 +27,7 @@ book:
     hypothesis: true
   sidebar: 
     header: "![](_media/logo_small.png){height=120 fig-align='center'}"
-    footer: "Copyright 2023 by Toby Driscoll"
+    footer: "Copyright (c) 2024 by [Toby Driscoll](https://tobydriscoll.net)"
   page-footer:
     left: 
       - text: "Data Science 1"
@@ -54,15 +54,15 @@ format:
     # css: tweaks.css
     code-copy: true
     include-in-header: header.html
-  pdf:
-    papersize: letter
-    include-in-header: _macros.tex
-    geometry: 
-      - top=1.5in
-      - left=1.25in
-      - right=1.25in
-      - bottom=1.25in
-    #   documentclass: scrreprt
+  # pdf:
+  #   papersize: letter
+  #   include-in-header: _macros.tex
+  #   geometry: 
+  #     - top=1.5in
+  #     - left=1.25in
+  #     - right=1.25in
+  #     - bottom=1.25in
+  #   #   documentclass: scrreprt
 
 # filters: 
 #   - crossref-listings
