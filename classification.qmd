@@ -349,7 +349,7 @@ Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied
 | Actually $+$ |      22       |       4       |
 | Actually $-$ |      12       |      62       |
 
-From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that had the antigen, the test identified 22, for a recall of $20/26=84.6$\%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of $62/74=83.8$\%. Finally, the precision is $22/34=64.7$\% and the NPV is $62/66=93.9$\%. 
+From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that had the antigen, the test identified 22, for a recall of $22/26=84.6$\%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of $62/74=83.8$\%. Finally, the precision is $22/34=64.7$\% and the NPV is $62/66=93.9$\%. 
 ::::
 
 The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and seek a high precision.
@@ -1017,7 +1017,7 @@ Consequently, the mass feature will dominate the distance calculations. To remed
 Z = X.transform( lambda x: (x - x.mean()) / x.std() )
 ```
 
-We could then retrain the classifier using `Z` in place of `X`. A nuisance of doing so is that the standardization transformation must also be performed on every new query vector that comes along, requiring us to keep track of the mean and std of the original dataset. Scikit-learn allows us to automate this process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
+We could then retrain the classifier using `Z` in place of `X`. Scikit-learn allows us to automate this process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
 
 ::::{#exm-class-knn-standard chapter=3 type=💻 description="Pipeline for standardized columns"}
 Once created, a pipeline object can mostly be treated the same as any other learner:
