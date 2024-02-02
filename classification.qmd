@@ -667,7 +667,17 @@ If the condition is satisfied, then $S$ is not split and becomes a leaf of the d
 
 The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
 
-### Usage
+### Decision boundary
+
+One way to think about a classifier is that it divides all of feature space into zones belonging to the different classes. The boundary between two zones is the set of points where the classifier is indifferent between the two classes; together, the boundary points form the **decision boundary**. 
+
+For a decision tree, the decision boundary is always perpendicular to the feature axes, as illustrated in this animation:
+
+{{< video _media/dtree_demo.mp4 >}}
+
+Initially, when the tree has a depth of 1, all of feature space is divided into two zones. At each new depth the tree is able to add more zones, and the decision boundary gradually becomes more complex.
+
+### Usage and interpretation
 
 In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
 
@@ -911,7 +921,7 @@ Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the
 :::
 ::::
 
-kNN effectively divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called **decision boundaries**, are usually fairly complicated, as shown in the animation below for 2-norm distance.
+kNN effectively divides up the feature space into domains that are dominated by nearby instances. The evolution of the decision boundary is illustrated here for two features using 2-norm distance:
 
 {{< video _media/knn_demo.mp4 >}}
 
