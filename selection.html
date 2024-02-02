@@ -511,7 +511,7 @@ How close to the average prediction is any one prediction likely to be?
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fig.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-select-biasvar" class="quarto-figure quarto-figure-center quarto-float anchored" height="563" width="565">
+<div id="fig-select-biasvar" class="quarto-figure quarto-figure-center quarto-float anchored" width="565" height="563">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-biasvar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-biasvar-output-1.png" width="565" height="563" class="figure-img">
@@ -598,7 +598,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 </div></div><p>Consider first a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Here are the results for four different training sets, each of size 40:</p>
 <div id="cell-fig-select-knn-1-clean" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
-<div id="fig-select-knn-1-clean" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-knn-1-clean" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-knn-1-clean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-knn-1-clean-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -614,7 +614,7 @@ Figure&nbsp;4.2: kNN with k=1 and perfect data
 <p>Now suppose we use training sets that have just 3 mislabeled examples each. Here are some resulting classifiers:</p>
 <div id="cell-fig-select-knn-1-noisy" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
-<div id="fig-select-knn-1-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-knn-1-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-knn-1-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-knn-1-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -630,7 +630,7 @@ Figure&nbsp;4.3: kNN with k=1 and noisy data
 <p>Now let’s bump up to <span class="math inline">\(k=3\)</span>. The results are more like we want, even with noisy data:</p>
 <div id="cell-fig-select-knn-3-noisy" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
-<div id="fig-select-knn-3-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-knn-3-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-knn-3-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-knn-3-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -645,7 +645,7 @@ Figure&nbsp;4.4: kNN with k=3 and noisy data
 <p>The voting mechanism of kNN allows the classifier to ignore isolated bad examples. If we continue to <span class="math inline">\(k=7\)</span>, then the 3 outliers will never be able to outvote the correct values:</p>
 <div id="cell-fig-select-knn-7-noisy" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div id="fig-select-knn-7-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-knn-7-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-knn-7-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-knn-7-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -684,7 +684,7 @@ Caution
 </div>
 </div></div><div id="cell-fig-select-tree-6-noisy" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-tree-6-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-tree-6-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -699,7 +699,7 @@ Figure&nbsp;4.6: Decision tree with depth=6 and noisy data
 <p>Using a shallower tree reduces the extent of overfitting:</p>
 <div id="cell-fig-select-tree-3-noisy" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div id="fig-select-tree-3-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-tree-3-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-tree-3-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-tree-3-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -714,7 +714,7 @@ Figure&nbsp;4.7: Decision tree with depth=3 and noisy data
 <p>We can eliminate the overfitting completely and get a single point as the decision boundary, although its location still might not be ideal:</p>
 <div id="cell-fig-select-tree-2-noisy" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
-<div id="fig-select-tree-2-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" height="411" width="569" data-fig-align="center">
+<div id="fig-select-tree-2-noisy" class="quarto-figure quarto-figure-center quarto-float anchored" width="569" data-fig-align="center" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-tree-2-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-tree-2-noisy-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="569" height="411">
@@ -764,7 +764,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>experiment(tree, X, y, <span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="fig-select-overfit-forest" class="quarto-figure quarto-figure-center quarto-float anchored" height="468" width="556">
+<div id="fig-select-overfit-forest" class="quarto-figure quarto-figure-center quarto-float anchored" width="556" height="468">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-select-overfit-forest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="selection_files/figure-html/fig-select-overfit-forest-output-1.png" width="556" height="468" class="figure-img">

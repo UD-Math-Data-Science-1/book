@@ -786,8 +786,8 @@ $$
 x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 \]</span></p>
 <p>where each <span class="math inline">\(x_i\)</span> is chosen randomly in <span class="math inline">\([-1,1]\)</span>, becomes ever harder to satisfy as the number of terms in the sum grows, and the relative occurrence of such points is increasingly rare.</p>
-<p>There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These go under the colorful name <em>curse of dimensionality</em>, and the advice given in response to them is sometimes stated flatly as, “Don’t use distance metrics in high-dimensional space.”</p>
-<p>But that form of the advice may be overstated. The curse is essentially about <em>randomly</em> chosen points, and it is correct that dimensions of noisy or irrelevant features will make most learning algorithms less effective. But when features carry useful information, adding them usually makes matters better, not worse.</p>
+<p>There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These results and their implications go under the colorful name of <strong>the curse of dimensionality</strong>. Using distances in high-dimensional space is difficult not just for clustering but in nearest-neighbor and other algorithms as well.</p>
+<p>It turns out that in most practical problems, there is a way out of the mess: the data points are usually not uniformly or randomly distributed. That means that distance-based approaches can be made to work. Often, though, a first step is to find a way to reduce the dimensionality without changing the essential structure of the data, a step that is beyond what we go into here.</p>
 </section>
 </section>
 <section id="performance-measures" class="level2 page-columns page-full" data-number="6.2">

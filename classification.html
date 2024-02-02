@@ -290,7 +290,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#gini-impurity" id="toc-gini-impurity" class="nav-link" data-scroll-target="#gini-impurity"><span class="header-section-number">3.3.1</span> Gini impurity</a></li>
   <li><a href="#partitioning" id="toc-partitioning" class="nav-link" data-scroll-target="#partitioning"><span class="header-section-number">3.3.2</span> Partitioning</a></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage"><span class="header-section-number">3.3.3</span> Usage</a></li>
+  <li><a href="#decision-boundary" id="toc-decision-boundary" class="nav-link" data-scroll-target="#decision-boundary"><span class="header-section-number">3.3.3</span> Decision boundary</a></li>
+  <li><a href="#usage-and-interpretation" id="toc-usage-and-interpretation" class="nav-link" data-scroll-target="#usage-and-interpretation"><span class="header-section-number">3.3.4</span> Usage and interpretation</a></li>
   </ul></li>
   <li><a href="#nearest-neighbors" id="toc-nearest-neighbors" class="nav-link" data-scroll-target="#nearest-neighbors"><span class="header-section-number">3.4</span> Nearest neighbors</a>
   <ul class="collapse">
@@ -824,7 +825,7 @@ Name: percent_funded, dtype: object</code></pre>
 <li>False negatives (FN): Predicts “no”, actually is “yes”</li>
 </ul>
 <p>We often display these in a 2×2 table according to the states of the prediction and <em>ground truth</em> (i.e., the given label in the dataset). The table can be filled with counts or percentages of tested instances to create a <strong>confusion matrix</strong>, as illustrated in <a href="#fig-class-confusion" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
-<div id="fig-class-confusion" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A binary confusion matrix." height="240">
+<div id="fig-class-confusion" class="quarto-figure quarto-figure-center quarto-float anchored" height="240" alt="A binary confusion matrix.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-class-confusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="_media/confusion.png" alt="A binary confusion matrix." height="240" class="figure-img">
@@ -1389,8 +1390,15 @@ Q(S_L,S_R) + \alpha &lt; Q(S,\varnothing) = |S| H(S),
 \]</span> where <span class="math inline">\(\alpha\)</span> is an optional nonnegative number that requires a certain minimum amount of decrease. If the condition is satisfied, then <span class="math inline">\(S\)</span> is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> for partitioning.</p>
 <p>The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a <em>greedy</em> approach.</p>
 </section>
-<section id="usage" class="level3 page-columns page-full" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="usage"><span class="header-section-number">3.3.3</span> Usage</h3>
+<section id="decision-boundary" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="decision-boundary"><span class="header-section-number">3.3.3</span> Decision boundary</h3>
+<p>One way to think about a classifier is that it divides all of feature space into zones belonging to the different classes. The boundary between two zones is the set of points where the classifier is indifferent between the two classes; together, the boundary points form the <strong>decision boundary</strong>.</p>
+<p>For a decision tree, the decision boundary is always perpendicular to the feature axes, as illustrated in this animation:</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/dtree_demo.mp4"></video></div>
+<p>Initially, when the tree has a depth of 1, all of feature space is divided into two zones. At each new depth the tree is able to add more zones, and the decision boundary gradually becomes more complex.</p>
+</section>
+<section id="usage-and-interpretation" class="level3 page-columns page-full" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="usage-and-interpretation"><span class="header-section-number">3.3.4</span> Usage and interpretation</h3>
 <p>In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.</p>
 <div id="exm-class-tree-toy" class="theorem example" data-chapter="3" type="💻" data-description="Inspecting a decision tree">
 <p><span class="theorem-title"><strong>Example 3.8</strong></span> We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks:</p>
@@ -1710,8 +1718,8 @@ Note
 <p>Note that the blue sample point at <span class="math inline">\((0,-2)\)</span> is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with <span class="math inline">\(k=3\)</span>, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.</p>
 </div>
 </div>
-<p>kNN effectively divides up the feature space into domains that are dominated by nearby instances. The boundaries between those domains, called <strong>decision boundaries</strong>, are usually fairly complicated, as shown in the animation below for 2-norm distance.</p>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_demo.mp4"></video></div>
+<p>kNN effectively divides up the feature space into domains that are dominated by nearby instances. The evolution of the decision boundary is illustrated here for two features using 2-norm distance:</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_demo.mp4"></video></div>
 <p>At <span class="math inline">\(k=1\)</span> neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with <span class="math inline">\(k=n\)</span> neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers).</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -2021,7 +2029,8 @@ weighted avg       1.00      1.00      1.00        67
 </iframe>
 </div>
 </div>
-</div></div></section>
+</div></div><p>The <code>StandardScaler</code>, which converts each column (feature) into z-scores, is appropriate for data that is roughly normally distributed. For other distributions, or if there are many outliers, it may be better to use the <code>RobustScaler</code>, which instead centers on the median and scales using the IQR. Finally, if you just want to force all the data to fit within a fixed interval, you can use the <code>MinMaxScaler</code>.</p>
+</section>
 </section>
 <section id="sec-class-probabilistic" class="level2 page-columns page-full" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-class-probabilistic"><span class="header-section-number">3.5</span> Probabilistic interpretation</h2>
@@ -3251,6 +3260,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
+<script>videojs(video_shortcode_videojs_video2);</script>
 
 
 
