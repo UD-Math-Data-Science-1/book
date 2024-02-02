@@ -341,9 +341,9 @@ $$
 
 where each $x_i$ is chosen randomly in $[-1,1]$, becomes ever harder to satisfy as the number of terms in the sum grows, and the relative occurrence of such points is increasingly rare.
 
-There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These go under the colorful name *curse of dimensionality*, and the advice given in response to them is sometimes stated flatly as, "Don't use distance metrics in high-dimensional space." 
+There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These results and their implications go under the colorful name of **the curse of dimensionality**. Using distances in high-dimensional space is difficult not just for clustering but in nearest-neighbor and other algorithms as well.
 
-But that form of the advice may be overstated. The curse is essentially about *randomly* chosen points, and it is correct that dimensions of noisy or irrelevant features will make most learning algorithms less effective. But when features carry useful information, adding them usually makes matters better, not worse.
+It turns out that in most practical problems, there is a way out of the mess: the data points are usually not uniformly or randomly distributed. That means that distance-based approaches can be made to work. Often, though, a first step is to find a way to reduce the dimensionality without changing the essential structure of the data, a step that is beyond what we go into here.
 
 ## Performance measures
 
