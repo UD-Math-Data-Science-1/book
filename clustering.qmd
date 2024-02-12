@@ -357,45 +357,54 @@ We say that two sample points in a clustering are **buddies** if they are in the
 
 A clustering can be interpreted as a classification, and vice versa. If a reference classification is available, then we can compare any clustering result to it. This allows us to use classification datasets as proving grounds for clustering.
 
-Let $b$ be the number of pairs that are buddies in both clusterings, and let $s$ be the number of pairs that are strangers in both clusterings. We define the **Rand index** by
+::::{#def-cluster-rand}
+We define the **Rand index** between two clusterings of $n$ samples as 
 
 $$
-\text{RI} = \frac{b+s}{\binom{n}{2}}.
-$$
+\text{RI} = \frac{b+s}{\binom{n}{2}},
+$$ {#eq-cluster-RI}
+
+where $b$ is the number of pairs that are buddies in both clusterings and $s$ is the number of pairs that are strangers in both clusterings.
+::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_7ods82y2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_kkgr0ber" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
-The reason for the denominator is that there are $\binom{n}{2}$ distinct pairs of $n$ sample points, so we know that $0 \le \text{RI} \le 1$.
+The reason for the denominator in @eq-cluster-RI is that there are $\binom{n}{2}$ distinct pairs of $n$ sample points, so we know that $0 \le \text{RI} \le 1$.
 
-One way to interpret the Rand index is through binary classification. If we define a positive result on a pair of samples to mean "in the same cluster" and a negative result to mean "in different clusters", then the Rand index is the accuracy of that classifier over all pairs of samples, taking the reference clustering as providing ground truth.
+The Rand index has some attractive features:
+
+* The value is between 0 (complete disagreement) and 1 (complete agreement).
+* It is symmetric in the two clusterings; i. e., it doesn't matter which is considered the reference.
+* There is no need to find a correspondence between the clusters in the two clusterings. In fact, the clusterings need not even have the same number of clusters. 
 
 ::::{#exm-cluster-rand chapter=6 type=✍️ description="Rand index by hand"}
-Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are classified as blue, and $\bfX_3,\bfX_5$ are classified as red. Compute the Rand index relative to the reference classification for the clustering $C_1=\{\bfX_1,\bfX_2\}$ and $C_2=\{\bfX_3,\bfX_4,\bfX_5\}$. (Note that the actual feature vectors themselves are not important in this setting.)
+Suppose that samples $\bfX_1,\bfX_2,\bfX_4$ are truly classified as positive, and $\bfX_3,\bfX_5$ are truly classified as negative. This implies the reference clustering $C_1=\{\bfX_1,\bfX_2,\bfX_4\}$ and $C_2=\{\bfX_3,\bfX_5\}$.
+
+Compute the Rand index relative to the reference of another clustering given by 
+
+$$
+\widetilde{C}_1=\{\bfX_1,\bfX_2\}, \quad \widetilde{C}_2=\{\bfX_3\}, \quad \widetilde{C}_3=\{\bfX_4,\bfX_5\}
+$$
 
 :::{.solution}
-Here is a table showing the buddy--stranger status for every pair in the coloring and clustering:
+Here is a table showing, for every pair of samples, the buddy--stranger status in the reference and in the new clustering:
 
 |          | $\bfX_1$ | $\bfX_2$ | $\bfX_3$ | $\bfX_4$ | $\bfX_5$ |
 | -------- | -------- | -------- | -------- | -------- | -------- |
 | $\bfX_1$ |          | B/B      | S/S      | B/S      | S/S      |
 | $\bfX_2$ |          |          | S/S      | B/S      | S/S      |
-| $\bfX_3$ |          |          |          | S/B      | B/B      |
+| $\bfX_3$ |          |          |          | S/S      | B/S      |
 | $\bfX_4$ |          |          |          |          | S/B      |
 | $\bfX_5$ |          |          |          |          |          |
 
-Hence, the Rand index is (2+4)/10 = 0.6.
+Hence, we have $b=1$ and $s=5$, and the Rand index is 6/10 = 0.6.
 :::
 ::::
 
-The Rand index has some attractive features:
-
-* The value is between 0 (complete disagreement) and 1 (complete agreement).
-* It is symmetric in the two clusterings; it doesn't matter which is considered the reference.
-* There is no need to find a correspondence between the clusters in the two clusterings. In fact, the clusterings need not even have the same number of clusters. 
-
-A weakness of the Rand index is that it can be fairly close to 1 even for a random clustering. The **adjusted Rand index** rescales the result by comparing it to how a random clustering would fare. It can be written as
+A weakness of the Rand index is that it can be fairly close to 1 even when samples are assigned to clusters randomly. The **adjusted Rand index** rescales the result by comparing it to how a random clustering would fare. It can be written as
 
 $$
 \text{ARI} = \frac{\text{RI} - \E{\text{RI}}}{\text{max}(\text{RI}) - \E{\text{RI}}},
@@ -406,7 +415,7 @@ where the expectation and max operations are performed over all possible cluster
 An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.
 
 ::::{#exm-cluster-ARI-blobs chapter=6 type=💻 description="Adjusted Rand index"}
-Our *blobs* dataset has a reference clustering shown in @fig-clustering-blobs that we take to be the gold standard. Let's create another clustering based entirely on the quadrants of the plane:
+Our *blobs* dataset has a reference clustering shown in @fig-clustering-blobs that we take to be the ground truth. Let's create another clustering based entirely on the quadrants of the plane:
 
 ```{python}
 X, y = blobs_data()
@@ -463,23 +472,49 @@ $$
  
 The value $s_i$ is always in the interval $[-1,1]$. A negative value indicates that the sample seems to be more similar to a cluster other than its own. 
 
-::: {.callout-important}
-Most sources, and scikit-learn, define an overall *silhouette score* as the mean of the $s_i$. However, because the distributions of these values are often asymmetric and have significant outliers, I am taking the view that medians are preferred when a summary score is needed.
-:::
-
 ::::{#exm-cluster-silhouette chapter=6 type=✍️ description="Silhouette values"}
-Suppose that two clusters in one dimension are defined as $A=\{-4,-1,1\}$ and $B=\{2,6\}$. Find the silhouette values of all the samples.
+Suppose we have one-dimensional features, and they are divided into three clusters as follows:
 
-:::{.solution}
-| $X_i$ | $\bar{b}_i$ | $\bar{r}_i$ | $s_i$ |
-| :---: | :---------: | :---------: | :---: |
-| $-4$  |   $\frac{   |    -4-1     |   +   |-4+1|}{2}$  | $\frac{|-4-2|+|-4-6|}{2}$  |  $\frac{8-4}{8}=\frac{1}{2}$  
-| $-1$  |   $\frac{   |    -1+4     |   +   |-1-1|}{2}$  | $\frac{|-1-2|+|-1-6|}{2}$  |  $\frac{5-2.5}{5}=\frac{1}{2}$  
-|  $1$  |   $\frac{   |     1+4     |   +   |1+1|}{2}$  | $\frac{|1-2|+|1-6|}{2}$  |  $\frac{3-3.5}{3.5}=-\frac{1}{7}$  
-|  $2$  |   $\frac{   |     2-6     | }{1}$ | $\frac{|2+6|+|2+1|+|2-1|}{3}$  |  $\frac{(10/3)-4}{4}=-\frac{1}{6}$  
-|  $6$  |   $\frac{   |     6-2     | }{1}$ | $\frac{|6+4|+|6+1|+|6-1|}{3}$  |  $\frac{(22/3)-4}{(22/3)}=\frac{5}{11}$  
-:::
+$$
+A=\{-4,-1,1\}, \quad B=\{2,6\}, \quad C=\{8,10\}
+$$
+
+To compute the silhouette score for the sample $X_1=-4$, we first find the mean distance between it and its buddies:
+
+$$
+\bar{b}_1 = \frac{1}{2} \bigl( \abs{-4+1} + \abs{-4-1} \bigr) = 4. 
+$$
+
+Now we need to find the mean distance between $X_1$ and the two stranger clusters:
+
+$$
+\bar{r}_{1,B} = \frac{1}{2} \bigl( \abs{-4-2} + \abs{-4-6} \bigr) = 8, \quad \bar{r}_{1,C} = \frac{1}{2} \bigl( \abs{-4-8} + \abs{-4-10} \bigr) = 13.
+$$
+
+The closest group of strangers is therefore cluster B, and $\bar{r}_1 = 8$. Hence, the silhouette value for $X_1$ is 
+
+$$
+s_1 = \frac{8-4}{8} = \frac{1}{2}.
+$$
+
+Let's also compute the silhouette value for $X_5=6$. We have
+
+$$
+\bar{b}_5 = \frac{1}{1} \abs{6-2} = 4,
+$$
+
+and
+
+$$
+\bar{r}_{5,A} = \frac{1}{3} \bigl( \abs{6+4} + \abs{6+1} + \abs{6-1} \bigr) = \frac{22}{3}, \quad \bar{r}_{5,C} = \frac{1}{2} \bigl( \abs{6-8} + \abs{6-10} \bigr) = 3.
+$$
+
+Hence $\bar{r}_5 = 3$ and $s_5 = (3 - 4) / 3 = -1/3$. A negative silhouette value indicates that the sample may be in the wrong cluster; here it seems that $X_5$ would be a better fit in cluster C. 
 ::::
+
+::: {.callout-important}
+Most sources define an overall *silhouette score* as the mean of the $s_i$. However, because the distributions of these values are often asymmetric and have significant outliers, I happen to think that medians are preferred when a summary score is needed. It's hard to fight tradition, though, and `silhouette_score` in scikit-learn reports the mean values.
+:::
 
 ::::{#exm-cluster-sil-blobs chapter=6 type=💻 description="Silhouette values calculation"}
 Let's compute the silhouette scores for the reference cluster assignments in our blobs dataset. 
@@ -559,10 +594,10 @@ The values are mostly positive, which indicates nearly all of the samples for a 
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_o43p6lb3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4h7o3i1m" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.7" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-Silhouette values are fairly easy to use. However, while we might consider a cluster to comprise points that are close only to other members of the cluster, silhouette values demand that the members of a cluster all be mutually close to one another. As a result, they favor compact, roughly spherical clusters.
+Silhouette values are fairly easy to use, but they are an imperfect tool. They favor clusters that have a compact, roughly spherical shape, in which all the members of the cluster are mutually close to one another.  
 
 ::::{#exm-cluster-sil-bullseye chapter=6 type=💻 description="Limitation of silhouettes"}
-The bullseye dataset has only one "cluster" that silhouette values approve of:
+The bullseye dataset shown in @fig-clustering-bullseye has only one central cluster that silhouette values approve of:
 ```{python}
 X, y = bullseye_data()
 s = silhouette_samples(X, y)
@@ -571,16 +606,21 @@ sns.catplot(data=clusters, x="cluster", y="s value",
     kind="violin"
     )
 ```
-The central blob scores well, but the rings score poorly because they are not compact and ball-shaped.
+The central cluster scores well, but the rings score poorly because they are not compact and ball-shaped.
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y47kfwrc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hfq0mpjd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
+:::
+
+::: {.callout-note}
+While we have no trouble validating good clusterings by eye in two dimensions in cases such as @fig-clustering-stripes and @fig-clustering-bullseye, it can be challenging to assess such nonspherical clusters in higher dimensions if there is no reference or validation available.
 :::
 
 ## k-means
 
-The **$k$-means algorithm** is one of the best-known and most widely used clustering methods, although it has some significant limitations. 
+The **$k$-means algorithm** is one of the best-known clustering methods. It is often the method of first resort, even though it has some significant limitations. 
 
 Given a sample matrix $\bfX$ with $n$ rows $\bfX_i$, the algorithm divides the sample points into disjoint sets $C_1,\ldots,C_k$, where $k$ is a hyperparameter. We need a pair of key definitions.
 
@@ -615,7 +655,7 @@ $$
 We conclude that splitting a cluster will make the total inertia decrease. In fact, if each sample point is put into its own cluster, the inertia is 0.  -->
 
 ::::{#exm-cluster-inertia chapter=6 type=✍️ description="Inertia"}
-Given the samples $-3,-2,-1,2,5,7$, find the inertia of the clustering 
+Given the one-dimensional samples $-3,-2,-1,2,5,7$, find the inertia of the clustering 
 $$
 C_1=\{-3,-2,-1\}, \qquad C_2=\{2,5,7\}, 
 $$ 
@@ -625,24 +665,51 @@ C_1=\{-3,-2,-1,2\}, \qquad C_2=\{5,7\}.
 $$ 
 
 :::{.solution}
-The first clustering has centroids $\mu_1=-2$, $\mu_2=14/3$. Thus, the total inertia of the first clustering is 
-$$
-\left[  (-3+2)^2 + (-2+2)^2 + (-1+2)^2   \right]  + \left[  \bigl(2-\tfrac{14}{3}\bigr)^2 + \bigl(5-\tfrac{14}{3}\bigr)^2 + \bigl(7-\tfrac{14}{3}\bigr)^2   \right] = 2 + \frac{124}{9} = 15.78.
-$$
-
-The second clustering has centroids $\mu_1=-1$, $\mu_2=6$. Its total inertia is 
+The first clustering has centroids 
 
 $$
-\left[  (-3+1)^2 + (-2+1)^2 + (-1+1)^2  + (2+1)^2 \right]  + \left[   (5-6)^2 + (7-6)^2   \right] = 14 + 2 = 16.
+\mu_1= \frac{1}{3}\bigl( -3 -2 -1 \bigr) = -2, \quad \mu_2= \frac{1}{3}\bigl(2+5 +7 \bigr) =14/3. 
 $$
+
+This gives inertia
+
+$$
+\begin{split}
+I_1 &= (-3+2)^2 + (-2+2)^2 + (-1+2)^2 = 2, \\
+I_2 &= \bigl(2-\tfrac{14}{3}\bigr)^2 + \bigl(5-\tfrac{14}{3}\bigr)^2 + \bigl(7-\tfrac{14}{3}\bigr)^2 = 13.78,
+\end{split}
+$$
+
+for a total inertia of 15.78.
+
+The second clustering has centroids 
+
+$$
+\mu_1= \frac{1}{4}\bigl( -3 -2 -1 + 2\bigr) = -1, \quad \mu_2= \frac{1}{2}\bigl(5 +7 \bigr) =6,
+$$
+
+with cluster inertias
+
+$$
+\left[   \right]  + \left[   \right] = 14 + 2 = 16.
+$$
+
+$$
+\begin{split}
+I_1 &= (-3+1)^2 + (-2+1)^2 + (-1+1)^2  + (2+1)^2 = 14, \\
+I_2 &=  (5-6)^2 + (7-6)^2  = 2,
+\end{split}
+$$
+
+for a total inertia of 16. The first clustering would be considered better because it has lower total inertia.
 :::
 ::::
 
-Finding the minimum inertia among all possible $k$-clusterings is an infeasible problem to solve exactly at any practical size. Instead, the approach is to iteratively improve on a starting clustering.
+Finding the minimum inertia among all possible $k$-clusterings is an infeasible problem to solve exactly at any practical size. Instead, the computational approach is to iteratively improve on a starting clustering.
 
 ### Lloyd's algorithm
 
-The most-used iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, each iteration consists of two steps:
+The standard iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, each iteration consists of two steps:
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zyb6uloq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0heo7jnf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.3.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
