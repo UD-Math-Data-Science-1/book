@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science 1 - Getting started</title>
+<title>Data Science 1 - Generative AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./genAI.html" rel="next">
-<link href="./resources.html" rel="prev">
+<link href="./data.html" rel="next">
+<link href="./starting.html" rel="prev">
 <link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -93,7 +93,7 @@ MathJax = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./starting.html">Getting started</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./genAI.html">Generative AI</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -147,13 +147,13 @@ MathJax = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./starting.html" class="sidebar-item-text sidebar-link active">
+  <a href="./starting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./genAI.html" class="sidebar-item-text sidebar-link">
+  <a href="./genAI.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Generative AI</span></a>
   </div>
 </li>
@@ -211,16 +211,8 @@ MathJax = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#back-end" id="toc-back-end" class="nav-link active" data-scroll-target="#back-end">Back end</a>
-  <ul class="collapse">
-  <li><a href="#run-on-your-own-computer" id="toc-run-on-your-own-computer" class="nav-link" data-scroll-target="#run-on-your-own-computer">Run on your own computer</a></li>
-  <li><a href="#run-on-the-cloud" id="toc-run-on-the-cloud" class="nav-link" data-scroll-target="#run-on-the-cloud">Run on the cloud</a></li>
-  </ul></li>
-  <li><a href="#front-end" id="toc-front-end" class="nav-link" data-scroll-target="#front-end">Front end</a>
-  <ul class="collapse">
-  <li><a href="#on-your-own-machine" id="toc-on-your-own-machine" class="nav-link" data-scroll-target="#on-your-own-machine">On your own machine</a></li>
-  </ul></li>
-  <li><a href="#tips-on-jupyter-success" id="toc-tips-on-jupyter-success" class="nav-link" data-scroll-target="#tips-on-jupyter-success">Tips on Jupyter success</a></li>
+  <li><a href="#getting-started-with-github-copilot" id="toc-getting-started-with-github-copilot" class="nav-link active" data-scroll-target="#getting-started-with-github-copilot">Getting started with GitHub Copilot</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
   </ul>
 </nav>
     </div>
@@ -229,7 +221,7 @@ MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Getting started</h1>
+<h1 class="title">Generative AI</h1>
 </div>
 
 
@@ -245,120 +237,28 @@ MathJax = {
 
 </header>
 
-<p>We will be using Python extensively. There are choices for two major aspects of using Python:</p>
+<p>Generative AI is a catchall term for models that can produce output similar to data they were trained on. Most notoriously of late, these include the large language models such as Chat GPT that can simulate conversation.</p>
+<p>The ultimate utility of these models is yet to be realized in most domains. However, they are already quite useful for generating computer code, given careful use and supervision. If nothing else, they offer a sort of intelligent autocomplete that can assist you when you have forgotten the names of functions and the orders of their arguments.</p>
+<p>For students, there is a sophisticated code-oriented AI that you can use for free: <a href="https://copilot.github.com/">GitHub Copilot</a>. It is a plugin for the free <a href="https://code.visualstudio.com">Visual Studio Code editor</a> that is well-developed for use with most computer programming languages, including Python, Matlab, and Julia, and it can work with Jupyter notebooks natively.</p>
+<section id="getting-started-with-github-copilot" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started-with-github-copilot">Getting started with GitHub Copilot</h2>
+<ol type="1">
+<li>Sign up for a free <a href="https://github.com">GitHub account</a>.</li>
+<li>Apply for <a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student">GitHub Global Campus</a> as a student. This requires uploading some validation of your student status, such as a student ID or bursar’s receipt. <strong>It may take some time for your status to be verified.</strong></li>
+<li>Download and install <a href="https://code.visualstudio.com">Visual Studio Code</a>.</li>
+<li>Install the <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot">GitHub Copilot</a> and the <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat">GitHub Copilot chat</a> extensions for Visual Studio Code.</li>
+<li><a href="https://itsfoss.com/vs-code-github/">Sign in to your GitHib account</a> in Visual Studio Code. You won’t need the technical information on how to use Git or GitHub itself, but this is what unlocks access to GitHub Copilot.</li>
+</ol>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<p>There are now several ways you can interact with Copilot:</p>
 <ul>
-<li>How the code runs (the <em>back end</em>), and</li>
-<li>How you create and edit code and use the output (the <em>front end</em>).</li>
+<li>Open or create a code file and start typing. You will soon start to see grayed-out suggestions from Copilot. You can accept these suggestions by pressing <code>Tab</code> or <code>Enter</code>. If you continue typing, the suggestions will change to match. Note that Copilot will use the open file as context for its suggestions, including comments and variable names.</li>
+<li>Within your code file, you can type <code>Ctrl</code>+<code>i</code>, or <code>Cmd</code>+<code>i</code> on a Mac, to open the Copilot panel. You can type in the panel to ask questions or create a prompt for it to respond to.</li>
+<li>Along the left side of the VS Code window are icons representing the extensions you have installed. The Copilot Chat icon is a pair of speech bubbles (though this can change). Clicking on this icon will open a chat window.</li>
+<li>You can use <code>Ctrl</code>+<code>Shift</code>+<code>P</code>, or <code>Cmd</code>+<code>Shift</code>+<code>P</code> on a Mac, to open the command palette and type “Copilot” to see a list of commands you can use to interact with Copilot. For example, you can ask Copilot to generate a function definition or a class definition, or to complete a line of code.</li>
 </ul>
-<section id="back-end" class="level2">
-<h2 class="anchored" data-anchor-id="back-end">Back end</h2>
-<p>Here are some pros and cons of the usual options:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Your own machine</th>
-<th>Cloud</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Available offline 😄</td>
-<td>Use any device 👍</td>
-</tr>
-<tr class="even">
-<td>Total control 😎/😕</td>
-<td>No installations 😌</td>
-</tr>
-<tr class="odd">
-<td>Choose the font end</td>
-<td>Browser only</td>
-</tr>
-<tr class="even">
-<td>Yours forever 😁</td>
-<td>Permanence is an illusion ⛄️</td>
-</tr>
-<tr class="odd">
-<td>Your hardware 💵</td>
-<td>You get what you get ¯\<em>(ツ)</em>/¯</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You want to use Python 3.x, not Python 2.x. These coexisted for a while during a dark time for Python. If you see guidance based on Python 2 now, it is either terribly outdated or the product of a disordered mind.</p>
-</div>
-</div>
-<section id="run-on-your-own-computer" class="level3">
-<h3 class="anchored" data-anchor-id="run-on-your-own-computer">Run on your own computer</h3>
-<p>My recommended option is to download <a href="https://www.anaconda.com">Anaconda</a>. It’s a big download, but it comes with just about everything ready to go, and you can manage most things easily by point-and-click.</p>
-</section>
-<section id="run-on-the-cloud" class="level3">
-<h3 class="anchored" data-anchor-id="run-on-the-cloud">Run on the cloud</h3>
-<p>There are many choices, but a popular one is <a href="https://colab.research.google.com">Google Colab</a>. It’s free and saves you from having to install anything. The hardware is basic but most likely fine for our purposes. You will need to download your results for assignment submissions.</p>
-</section>
-</section>
-<section id="front-end" class="level2">
-<h2 class="anchored" data-anchor-id="front-end">Front end</h2>
-<p>Much of data science is expressed using <em>notebooks</em>, which we will use exclusively. Specifically, you will use <em>Jupyter</em> notebooks.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The name <em>IPython</em> refers to the direct ancestor of Jupyter. The older name continues to stick to a few of the tools, though.</p>
-</div>
-</div>
-<p>A notebook is a self-contained collection of text, math, code, output, and graphics grouped into <em>cells</em>. The front end manages the cells and communicates with a back end called the <em>kernel</em>.</p>
-<p>If you are using Google Colab, then you are using a Jupyter notebook, though within an interface customized by Google.</p>
-<section id="on-your-own-machine" class="level3">
-<h3 class="anchored" data-anchor-id="on-your-own-machine">On your own machine</h3>
-<p>Jupyter splits into “classic” Jupyter and the newer Jupyter Lab. Either is fine for this book, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.</p>
-<p>A worthwhile alternative is to edit the notebook within <a href="https://code.visualstudio.com">VS Code</a>, which is a free, powerful editor for Python and many other languages. It integrates with <a href="https://github.com/features/copilot">Copilot</a>, which is an AI-powered code assistance tool. Copilot is <a href="https://docs.github.com/en/copilot/quickstart">free for students and teachers</a>.</p>
-</section>
-</section>
-<section id="tips-on-jupyter-success" class="level2">
-<h2 class="anchored" data-anchor-id="tips-on-jupyter-success">Tips on Jupyter success</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The order of cells that you see in a notebook is not necessarily the order in which they were executed.</p>
-</div>
-</div>
-<p><em>By far</em> the greatest source of confusion and subtle problems in a notebook is the freedom it gives you to execute the cells in whatever order you want. As you experiment and add and delete cells to try things out, you will reach a point at which the code on the screen is no longer a recipe for reaching the current state of your workspace.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Before submitting a notebook, it’s <em>highly advisable</em> to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.</p>
-</div>
-</div>
-<p>Make use of the code completion tools. If you start typing the name of a variable, data column, or python method, you can either pause or hit TAB to see a list of possible completions. This can (a) save you typing time and (b) remind you of function names that are on the tip of your tongue.</p>
 
 
 </section>
@@ -710,13 +610,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./resources.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Resources</span>
+      <a href="./starting.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting started</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./genAI.html" class="pagination-link">
-        <span class="nav-page-text">Generative AI</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
