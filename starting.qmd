@@ -23,7 +23,7 @@ You want to use Python 3.x, not Python 2.x. These coexisted for a while during a
 
 ### Run on your own computer
 
-My recommended option is to download [Anaconda](https://www.anaconda.com). It's a big download, but it comes with just about everything ready to go, and you can manage most things easily by point-and-click. 
+My recommended option is to download [Anaconda](https://www.anaconda.com). It's a big download and a long installation, but it comes with just about everything ready to go. 
 
 ### Run on the cloud
 
@@ -45,7 +45,22 @@ If you are using Google Colab, then you are using a Jupyter notebook, though wit
 
 Jupyter splits into "classic" Jupyter and the newer Jupyter Lab. Either is fine for this book, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.
 
-A worthwhile alternative is to edit the notebook within [VS Code](https://code.visualstudio.com), which is a free, powerful editor for Python and many other languages. It integrates with [Copilot](https://github.com/features/copilot), which is an AI-powered code assistance tool. Copilot is [free for students and teachers](https://docs.github.com/en/copilot/quickstart). 
+## Setting up VS Code 
+
+If you use the free Visual Studio Code editor, you can take advantage of its [AI assistant](genAI.qmd).
+
+1. First install [Anaconda Python](https://www.anaconda.com). (Be patient! It's a big download and a long installation.)
+2. Download and install [Visual Studio Code](https://code.visualstudio.com).
+3. Start VS Code and look for the "Extensions" icon on the left. (For me, it looks like 4 building blocks.) Search for "Jupyter" and install the [extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
+4. You may also want to install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) by Microsoft.
+
+A notebook file has the extension `.ipynb`. When you open or create such a file, you will see "Choose Kernel" button in the top right. The kernel is the background computing process that produces output for the notebook. If you click that, button, select "Python environments..." and then select the one called "base" or "anaconda3" or something similar. 
+
+::: {.callout-important}
+You may have other Python environments installed on your computer. Use the one associated with Anaconda to access the packages we will use in this course.
+:::
+
+Once the kernel is selected for a notebook file, that selection will be remembered the next time you open the file.
 
 ## Tips on Jupyter success
 
@@ -56,7 +71,5 @@ The order of cells that you see in a notebook is not necessarily the order in wh
 *By far* the greatest source of confusion and subtle problems in a notebook is the freedom it gives you to execute the cells in whatever order you want. As you experiment and add and delete cells to try things out, you will reach a point at which the code on the screen is no longer a recipe for reaching the current state of your workspace. 
 
 ::: {.callout-tip}
-Before submitting a notebook, it's *highly advisable* to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.
+Before submitting a notebook, it's *highly recommended* to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.
 :::
-
-Make use of the code completion tools. If you start typing the name of a variable, data column, or python method, you can either pause or hit TAB to see a list of possible completions. This can (a) save you typing time and (b) remind you of function names that are on the tip of your tongue.
