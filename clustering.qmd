@@ -1255,18 +1255,22 @@ $$
 & [-z,-3],\, [-z,-2],\, [-z,-1],\,[-z,1],\,[-z,2],\,[-z,3]. 
 \end{split}
 $$
+See @fig-exercise6_5.
 
-**(a)** Using the 2-norm, calculuate the inertia, as a function of $z$, of the clustering 
+![Samples for @exr-cluster-inertia.](_media/exer6_5.png){#fig-exercise6_5}
+
+
+**(a)** Using the 2-norm, calculate the inertia, which may depend on $z$, of the clustering 
 $$
 C_1 = \{ [z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}. 
 $$
-(This divides the sample points by the $x$-axis.)
+(This divides the sample points by the $y$-axis.)
 
-**(b)** Using the 2-norm, calculuate the inertia, as a function of $z$, of the clustering 
+**(b)** Using the 2-norm, calculate the inertia, which may depend on $z$, of the clustering 
 $$
 C_1 = \{ [-z,j] \text{ and } [z,j]: j=-3,-2,-1\}, \qquad C_2 = \{ [-z,j] \text{ and } [z,j]: j=1,2,3\}.
 $$
-(This divides the sample points by the $y$-axis.)
+(This divides the sample points by the $x$-axis.)
 
 **(c)** For which values of $z$, if any, does clustering from part (a) have less inertia than the clustering from part (b)?
 ::::
@@ -1280,8 +1284,8 @@ $$
 0 & 2 & 3.5 & 5 & 6 \\
 2 & 0 & 2.5 & 3 & 4 \\
 3.5 & 2.5 & 0 & 1 & 1.5 \\
-5 & 3 & 1 & 0 & 1 \\
-6 & 4 & 1.5 & 1 & 0 \\
+5 & 3 & 1 & 0 & 5.5 \\
+6 & 4 & 1.5 & 5.5 & 0 \\
 \end{array}
 \right]
 $$
