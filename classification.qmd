@@ -41,6 +41,7 @@ $$
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_k80zm74i&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_waoitbmv" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 :::{.callout-important}
@@ -358,6 +359,9 @@ From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that 
 
 The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and seek a high precision.
 
+![](_media/memes/no%20fp.jpg){height="420"}
+
+
 There are ways of combining the primary metrics in order to account for two at once.
 
 ::::{#def-class-metrics-2nd}
@@ -465,7 +469,9 @@ independently of $a$. This quantity is sensitive to the low specificity.
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ef7mli52&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_pch0h80o" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
+
 
 ### Multiclass classifiers
 
@@ -498,6 +504,7 @@ It's not necessary to convert a vector of strings into a `Categorical` vector of
 :::
 
 Next, we split into training and testing subsets:
+
 ```{python}
 X_train, X_test, y_train, y_test = train_test_split(
   X, y, 
@@ -508,6 +515,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 ```
 
 Now we perform the fit and measure the accuracy:
+
 ```{python}
 knn = KNeighborsClassifier(n_neighbors=8)
 knn.fit(X_train, y_train)
@@ -543,6 +551,7 @@ print(mac)
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1qocbyij&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_3uoamfln" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 There are other ways to average performance scores over the classes, depending on whether poorly represented classes should be weighted more weakly than others.
@@ -666,6 +675,8 @@ where $\alpha$ is an optional nonnegative number that requires a certain minimum
 If the condition is satisfied, then $S$ is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both $S_L$ and $S_R$ for partitioning. 
 
 The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
+
+![](_media/memes/decision%20tree.jpeg){height=420}
 
 ### Decision boundary
 
@@ -920,6 +931,9 @@ At point B, the nearest samples are at $(0,0)$ with distance 1, $(-2,-1)$ with d
 Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with $k=3$, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.
 :::
 ::::
+
+![](_media/memes/neighbors.jpeg)
+
 
 kNN effectively divides up the feature space into domains that are dominated by nearby instances. The evolution of the decision boundary is illustrated here for two features using 2-norm distance:
 
@@ -1225,6 +1239,9 @@ sns.relplot(data=data,
 As we're about to see, the step-by-step process above is just for illustration and is completely automated in practice.
 ::::
 
+![](_media/memes/ROC.jpeg){height=380}
+
+
 Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for the identification of each class.
 
 ::::{#exm-class-roc-penguin chapter=3 type=💻 description="ROC curve for the penguins dataset"}
@@ -1305,6 +1322,8 @@ pd.DataFrame(
 
 Based on the above scores, the weighted classifier seems to be better at identifying all three species.
 ::::
+
+![](_media/memes/AUC.jpg){height=360}
 
 ## Exercises {.unnumbered}
 
