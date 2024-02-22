@@ -67,12 +67,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-<script>
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    document.body.classList.add('hypothesis-enabled');
-  });
-</script>
 <script> 
 MathJax = {
   chtml: {
@@ -220,6 +214,7 @@ MathJax = {
   <ul class="collapse">
   <li><a href="#on-your-own-machine" id="toc-on-your-own-machine" class="nav-link" data-scroll-target="#on-your-own-machine">On your own machine</a></li>
   </ul></li>
+  <li><a href="#setting-up-vs-code" id="toc-setting-up-vs-code" class="nav-link" data-scroll-target="#setting-up-vs-code">Setting up VS Code</a></li>
   <li><a href="#tips-on-jupyter-success" id="toc-tips-on-jupyter-success" class="nav-link" data-scroll-target="#tips-on-jupyter-success">Tips on Jupyter success</a></li>
   </ul>
 </nav>
@@ -298,7 +293,7 @@ Tip
 </div>
 <section id="run-on-your-own-computer" class="level3">
 <h3 class="anchored" data-anchor-id="run-on-your-own-computer">Run on your own computer</h3>
-<p>My recommended option is to download <a href="https://www.anaconda.com">Anaconda</a>. It’s a big download, but it comes with just about everything ready to go, and you can manage most things easily by point-and-click.</p>
+<p>My recommended option is to download <a href="https://www.anaconda.com">Anaconda</a>. It’s a big download and a long installation, but it comes with just about everything ready to go.</p>
 </section>
 <section id="run-on-the-cloud" class="level3">
 <h3 class="anchored" data-anchor-id="run-on-the-cloud">Run on the cloud</h3>
@@ -326,8 +321,32 @@ Tip
 <section id="on-your-own-machine" class="level3">
 <h3 class="anchored" data-anchor-id="on-your-own-machine">On your own machine</h3>
 <p>Jupyter splits into “classic” Jupyter and the newer Jupyter Lab. Either is fine for this book, but there is no reason to prefer the older variant. Just start it up from the Anaconda dashboard, and it will open your web browser to the front-end server.</p>
-<p>A worthwhile alternative is to edit the notebook within <a href="https://code.visualstudio.com">VS Code</a>, which is a free, powerful editor for Python and many other languages. It integrates with <a href="https://github.com/features/copilot">Copilot</a>, which is an AI-powered code assistance tool. Copilot is <a href="https://docs.github.com/en/copilot/quickstart">free for students and teachers</a>.</p>
 </section>
+</section>
+<section id="setting-up-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-vs-code">Setting up VS Code</h2>
+<p>If you use the free Visual Studio Code editor, you can take advantage of its <a href="./genAI.html">AI assistant</a>.</p>
+<ol type="1">
+<li>First install <a href="https://www.anaconda.com">Anaconda Python</a>. (Be patient! It’s a big download and a long installation.)</li>
+<li>Download and install <a href="https://code.visualstudio.com">Visual Studio Code</a>.</li>
+<li>Start VS Code and look for the “Extensions” icon on the left. (For me, it looks like 4 building blocks.) Search for “Jupyter” and install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter">extension by Microsoft</a>.</li>
+<li>You may also want to install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a> by Microsoft.</li>
+</ol>
+<p>A notebook file has the extension <code>.ipynb</code>. When you open or create such a file, you will see “Choose Kernel” button in the top right. The kernel is the background computing process that produces output for the notebook. If you click that, button, select “Python environments…” and then select the one called “base” or “anaconda3” or something similar.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may have other Python environments installed on your computer. Use the one associated with Anaconda to access the packages we will use in this course.</p>
+</div>
+</div>
+<p>Once the kernel is selected for a notebook file, that selection will be remembered the next time you open the file.</p>
 </section>
 <section id="tips-on-jupyter-success" class="level2">
 <h2 class="anchored" data-anchor-id="tips-on-jupyter-success">Tips on Jupyter success</h2>
@@ -355,10 +374,9 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before submitting a notebook, it’s <em>highly advisable</em> to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.</p>
+<p>Before submitting a notebook, it’s <em>highly recommended</em> to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.</p>
 </div>
 </div>
-<p>Make use of the code completion tools. If you start typing the name of a variable, data column, or python method, you can either pause or hit TAB to see a list of possible completions. This can (a) save you typing time and (b) remind you of function names that are on the tip of your tongue.</p>
 
 
 </section>

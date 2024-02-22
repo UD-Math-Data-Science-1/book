@@ -103,12 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-<script>
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    document.body.classList.add('hypothesis-enabled');
-  });
-</script>
 <script> 
 MathJax = {
   chtml: {
@@ -886,6 +880,7 @@ Note
 </div>
 </div>
 </div></div><p>The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e.&nbsp;a low false positive rate, and seek a high precision.</p>
+<p><img src="_media/memes/no fp.jpg" height="420"></p>
 <p>There are ways of combining the primary metrics in order to account for two at once.</p>
 <div id="def-class-metrics-2nd" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.3 </strong></span>The <strong><em>F</em>₁ score</strong> is the harmonic mean of the precision and the recall, i.e., <span class="math display">\[
@@ -1349,6 +1344,7 @@ Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 Q(S_L,S_R) + \alpha &lt; Q(S,\varnothing) = |S| H(S),
 \]</span> where <span class="math inline">\(\alpha\)</span> is an optional nonnegative number that requires a certain minimum amount of decrease. If the condition is satisfied, then <span class="math inline">\(S\)</span> is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> for partitioning.</p>
 <p>The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a <em>greedy</em> approach.</p>
+<p><img src="_media/memes/decision tree.jpeg" height="420"></p>
 </section>
 <section id="decision-boundary" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="decision-boundary"><span class="header-section-number">3.3.3</span> Decision boundary</h3>
@@ -1666,6 +1662,7 @@ Note
 <p>Note that the blue sample point at <span class="math inline">\((0,-2)\)</span> is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with <span class="math inline">\(k=3\)</span>, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.</p>
 </div>
 </div>
+<p><img src="_media/memes/neighbors.jpeg" class="img-fluid"></p>
 <p>kNN effectively divides up the feature space into domains that are dominated by nearby instances. The evolution of the decision boundary is illustrated here for two features using 2-norm distance:</p>
 <div class="quarto-video"><video id="video_shortcode_videojs_video2" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="_media/knn_demo.mp4"></video></div>
 <p>At <span class="math inline">\(k=1\)</span> neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with <span class="math inline">\(k=n\)</span> neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers).</p>
@@ -2471,6 +2468,7 @@ Note
 </div>
 <p>As we’re about to see, the step-by-step process above is just for illustration and is completely automated in practice.</p>
 </div>
+<p><img src="_media/memes/ROC.jpeg" height="380"></p>
 <p>Unsurprisingly, <code>sklearn</code> can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> implied binary classificiation versions of one-vs-rest, so there are <span class="math inline">\(K\)</span> curves to draw, one for the identification of each class.</p>
 <div id="exm-class-roc-penguin" class="theorem example" data-chapter="3" type="💻" data-description="ROC curve for the penguins dataset">
 <p><span class="theorem-title"><strong>Example 3.18 </strong></span>Continuing <a href="#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.15</span></a>, we will plot ROC curves for the three species in the penguin data:</p>
@@ -2717,6 +2715,7 @@ Note
 </div>
 <p>Based on the above scores, the weighted classifier seems to be better at identifying all three species.</p>
 </div>
+<p><img src="_media/memes/AUC.jpg" height="360"></p>
 </section>
 </section>
 <section id="exercises" class="level2 unnumbered">
