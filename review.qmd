@@ -1,0 +1,78 @@
+# Review questions by section {.unnumbered}
+### Section 2.1: Summary statistics
+
+- Define mean, variance, and standard deviation. How do variance and standard deviation differ in terms of units?
+- What is a z-score, and how is it calculated?
+- Why are z-scores considered to be dimensionless, and what advantage does this provide when comparing datasets?
+- Explain the difference between a population and a sample in statistics.
+- What is an unbiased estimator?
+- Describe the key conceptual difference between $s_n$ and $s_{n-1}$ for estimating population variance.
+- Define percentile (i. e., quantile), quartiles, and median.
+- Explain the difference between the sample median calculation for odd and even numbers of observations.
+- What does the interquartile range represent, and how is it calculated?
+- Discuss the potential advantage of using the median and IQR over the mean and standard deviation for summarizing a dataset.
+
+### Section 2.2: Distributions
+
+- Define the cumulative distribution function (CDF) for a population. Explain why it is a nondecreasing function ranging between 0 and 1.
+- What is the CDF of a uniform distribution? How does it differ for discrete and continuous cases?
+- What is an empirical cumulative distribution function (ECDF)?
+- How does the shape of the ECDF change as the sample size increases?
+- Define the probability density function (PDF) and explain its relationship to the CDF.
+- Discuss the concept of a histogram and its normalization.
+- Describe formulas for computing the mean and variance of a continuous distribution from its PDF.
+- What are the mean and variance for a continuous uniform distribution over $[0, 1]$?
+- What are the characteristics of a standard normal distribution?
+- How do the mean and variance of a normal distribution affect its PDF?
+- Discuss the 68-95-99.7 (empirical) rule in the context of the normal distribution.
+- What does kernel density estimation (KDE) do?
+
+### Section 2.3: Grouping
+
+- Why might it be useful to analyze data in groups defined by categorical values or other criteria?
+- What is a facet plot?
+- Describe the information conveyed by a box plot and a violin plot. 
+- Describe how aggregation works with grouping in data analysis. What are some common aggregation functions?
+- Describe how transformation works with grouping in data analysis. What are some common aggregation functions?
+- What is the purpose of filtering in grouped data analysis?
+- Discuss the impact of standardizing data within groups versus across the entire dataset. 
+
+
+### Section 2.4: Outliers
+
+- What is an informal definition of an outlier?
+- Why might outliers be of real interest in certain applications?
+- List some common reasons why outliers might appear in a dataset.
+- Provide an example where changing a single value in a dataset significantly affects the mean but not the median.
+- What is the Interquartile Range (IQR), and how is it calculated?
+- Describe how outliers are identified using the IQR method.
+- How are outliers represented in a box plot?
+- What are the criteria for considering values as outliers in a normal distribution based on standard deviation?
+- Discuss the potential impact of removing outliers on the analysis of a dataset. When might it be appropriate to remove outliers, and when might it be important to investigate them further?
+
+### Section 2.5: Correlation
+
+- Define correlation in the context of statistical analysis.
+- Why is it important to visually inspect data before calculating correlation coefficients?
+- Define covariance and explain its significance in measuring the relationship between two variables.
+- Why is covariance not always easy to interpret?
+- Explain the Pearson correlation coefficient and how it is calculated for both populations and samples.
+- What does a Pearson coefficient of -1, 0, and 1 signify?
+- How does the Pearson coefficient address the limitations of covariance?
+- Discuss how outliers can affect the Pearson correlation coefficient.
+- Provide an example where a single outlier significantly impacts the Pearson coefficient.
+- What is the Spearman correlation coefficient, and how does it differ from the Pearson coefficient?
+- How does the Spearman coefficient mitigate the impact of outliers?
+- Provide an example demonstrating the robustness of the Spearman coefficient against outliers.
+- Explain how correlation can be assessed when dealing with categorical variables.
+
+### Section 2.6: Cautionary tales
+
+- What is the main lesson from the Datasaurus Dozen example?
+- How can relying solely on summary statistics be misleading?
+- Explain the difference between correlation and dependence.
+- Describe an example where two variables are dependent but not correlated.
+- What is Simpson's paradox, and how does it manifest in the penguin dataset example?
+- Can you create a hypothetical example where Simpson's paradox might lead to incorrect conclusions if not properly understood?
+- Why is it important to consider both linear and nonlinear relationships when analyzing data?
+- How can the misuse of statistical methods lead to misconceptions or mistakes?
