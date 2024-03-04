@@ -460,6 +460,16 @@
     ]
   },
   {
+    "objectID": "selection.html#exercises",
+    "href": "selection.html#exercises",
+    "title": "4  Model selection",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercise 4.1 Suppose that for a binary classification problem, you always choose a classifier that returns the positive outcome for every input. Would you expect this classifier to have a high training variance, high testing bias, or both? Give reasons for your answer.\n\n\nExercise 4.2 Suppose you are training to fit the ground-truth one-dimensional classifier\n\\[\ny = f(x) =\n\\begin{cases}\n+1, & \\text{if } |x| \\leq 2, \\\\\n-1, & \\text{otherwise}.\n\\end{cases}\n\\]\nHere is a table of training data:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(x_i\\)\n\\(-5\\)\n\\(-4\\)\n\\(-3\\)\n\\(-2\\)\n\\(-1\\)\n\\(0\\)\n\\(1\\)\n\\(2\\)\n\\(3\\)\n\\(4\\)\n\\(5\\)\n\n\n\n\n\\(y_i\\)\n\\(-1\\)\n\\(-1\\)\n\\(+1\\)\n\\(-1\\)\n\\(+1\\)\n\\(+1\\)\n\\(-1\\)\n\\(+1\\)\n\\(-1\\)\n\\(-1\\)\n\\(-1\\)\n\n\n\nYour test set consists of the values \\(-4.75,-3.75,\\ldots,-0.75,0.25,\\ldots,4.25\\).\n(a) Find the recall of a kNN classifier with \\(k=1\\). (The positive outcome is \\(+1\\).)\n(b) Find the recall of a kNN classifier with \\(k=3\\).\n(c) Find the recall of a kNN classifier with \\(k=9\\).\n(d) Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Model selection</span>"
+    ]
+  },
+  {
     "objectID": "regression.html",
     "href": "regression.html",
     "title": "5  Regression",

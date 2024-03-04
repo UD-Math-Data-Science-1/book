@@ -294,6 +294,7 @@ window.Quarto = {
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">4.4.1</span> Cross-validation</a></li>
   <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">4.4.2</span> Hyperparameter tuning</a></li>
   </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -1673,10 +1674,80 @@ Note
 <h4 data-number="4.4.2.2" class="anchored" data-anchor-id="alternatives-to-grid-search"><span class="header-section-number">4.4.2.2</span> Alternatives to grid search</h4>
 <p>Grid search is a brute-force approach. It is <em>embarrassingly parallel</em>, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.</p>
 <p><img src="_media/memes/validation.jpg" height="300"></p>
-
-
 </section>
 </section>
+</section>
+<section id="exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+<div id="exr-select-always" class="theorem exercise" data-chapter="4">
+<p><span class="theorem-title"><strong>Exercise 4.1</strong></span> Suppose that for a binary classification problem, you always choose a classifier that returns the positive outcome for every input. Would you expect this classifier to have a high training variance, high testing bias, or both? Give reasons for your answer.</p>
+</div>
+<div id="exr-select-knn1" class="theorem exercise" data-chapter="4">
+<p><span class="theorem-title"><strong>Exercise 4.2</strong></span> Suppose you are training to fit the ground-truth one-dimensional classifier</p>
+<p><span class="math display">\[
+y = f(x) =
+\begin{cases}
++1, &amp; \text{if } |x| \leq 2, \\
+-1, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>Here is a table of training data:</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x_i\)</span></th>
+<th><span class="math inline">\(-5\)</span></th>
+<th><span class="math inline">\(-4\)</span></th>
+<th><span class="math inline">\(-3\)</span></th>
+<th><span class="math inline">\(-2\)</span></th>
+<th><span class="math inline">\(-1\)</span></th>
+<th><span class="math inline">\(0\)</span></th>
+<th><span class="math inline">\(1\)</span></th>
+<th><span class="math inline">\(2\)</span></th>
+<th><span class="math inline">\(3\)</span></th>
+<th><span class="math inline">\(4\)</span></th>
+<th><span class="math inline">\(5\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y_i\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(+1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(+1\)</span></td>
+<td><span class="math inline">\(+1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(+1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+<td><span class="math inline">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Your test set consists of the values <span class="math inline">\(-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25\)</span>.</p>
+<p><strong>(a)</strong> Find the recall of a kNN classifier with <span class="math inline">\(k=1\)</span>. (The positive outcome is <span class="math inline">\(+1\)</span>.)</p>
+<p><strong>(b)</strong> Find the recall of a kNN classifier with <span class="math inline">\(k=3\)</span>.</p>
+<p><strong>(c)</strong> Find the recall of a kNN classifier with <span class="math inline">\(k=9\)</span>.</p>
+<p><strong>(d)</strong> Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?</p>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
