@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.339">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -84,13 +84,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
+  "limit": 20,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -99,7 +98,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -113,38 +111,11 @@ MathJax = {
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -154,11 +125,11 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./classification.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -169,10 +140,10 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="_media/logo_small.png" class="quarto-figure quarto-figure-center figure-img" height="120"></p>
+<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
 </figure>
 </div>
 </div></div>
@@ -216,6 +187,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./genAI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Generative AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./math.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Math notation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -271,7 +248,7 @@ window.Quarto = {
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright (c) 2024 by <a href="https://tobydriscoll.net">Toby Driscoll</a></p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -331,7 +308,6 @@ window.Quarto = {
 
 
 </header>
-
 
 <div class="hidden">
 <p><span class="math display">\[
@@ -440,7 +416,7 @@ Important
 </div>
 <p>Each row of the feature matrix is a single feature vector, while each column is the value for a single feature over the entire training set.</p>
 <div id="exm-class-basketball" class="theorem example" data-chapter="3" type="✍️" data-description="Feature matrix">
-<p><span class="theorem-title"><strong>Example 3.1</strong></span> Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a <span class="math inline">\(200\times 9\)</span> feature matrix.</p>
+<p><span class="theorem-title"><strong>Example 3.1 </strong></span>Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a <span class="math inline">\(200\times 9\)</span> feature matrix.</p>
 </div>
 <p>We can also collect the associated training labels into the <strong>label vector</strong></p>
 <p><span class="math display">\[
@@ -494,7 +470,7 @@ for each $k=1,2,\ldots,m$.  -->
 </iframe>
 </div>
 </div>
-</div></div><div id="faf4c462" class="cell" data-execution_count="2">
+</div></div><div id="087c6267" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> datasets </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        <span class="co"># loads a well-known dataset</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X, digits <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]      <span class="co"># assign feature matrix and label vector</span></span>
@@ -509,7 +485,7 @@ there are 64 features and 1797 samples</code></pre>
 </div>
 </div>
 <p>The entries of <code>digits</code> are integer values 0 through 9, indicating the true value of the corresponding handwritten digit. Let’s consider the binary problem, “is this digit a 6?” That implies the following Boolean label vector:</p>
-<div id="c60f9b55" class="cell" data-execution_count="3">
+<div id="753b524d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> (digits <span class="op">==</span> <span class="dv">6</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Number of sixes in dataset:"</span>, <span class="bu">sum</span>(y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -517,8 +493,8 @@ there are 64 features and 1797 samples</code></pre>
 </div>
 </div>
 <p>It so happens that the 64 features in the dataset are the pixel grayscale values from an <span class="math inline">\(8\times 8\)</span> bitmap of a handwritten digit. We can visualize the raw data. Here are some of the 6s, for example:</p>
-<div id="3a6b1a90" class="cell" data-execution_count="4">
-<details class="code-fold">
+<div id="f7896019" class="cell" data-execution_count="4">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -537,20 +513,16 @@ there are 64 features and 1797 samples</code></pre>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plot_digits(X[y])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-4-output-1.png" width="507" height="389" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-4-output-1.png" width="507" height="389"></p>
 </div>
 </div>
 <p>The process of training a classifier is called <strong>fitting</strong>. We first have to import a particular classifier type, then create an instance of that type. Here, we choose one that we will study in a future section:</p>
-<div id="ba2a450c" class="cell" data-execution_count="5">
+<div id="7020d599" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">20</span>)    <span class="co"># specification of the model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can fit the learner to the training data:</p>
-<div id="f13e5744" class="cell" data-execution_count="6">
+<div id="afe3a986" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knn.fit(X, y)                                 <span class="co"># training of the model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsClassifier(n_neighbors=20)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsClassifier</label><div class="sk-toggleable__content"><pre>KNeighborsClassifier(n_neighbors=20)</pre></div></div></div></div></div>
@@ -558,15 +530,15 @@ there are 64 features and 1797 samples</code></pre>
 </div>
 <p>At this point, the classifier object <code>knn</code> has figured out what it needs from the training data. It has methods we can now call to make predictions and evaluate the quality of the results.</p>
 <p>Each new prediction is for a <strong>query vector</strong> with 64 features. In practice, we can use a list in place of a vector for the query.</p>
-<div id="3ee6f81c" class="cell" data-execution_count="7">
+<div id="c48f7c91" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> [<span class="dv">20</span>]<span class="op">*</span>d    <span class="co"># list with d copies of 20  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>predict</code> method of the classifier allows specifying multiple query vectors as rows of an array. In fact, it expects a 2D array in all cases, even if there is just one row.</p>
-<div id="b1514d45" class="cell" data-execution_count="8">
+<div id="767e62c0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Xq <span class="op">=</span> [ query ]    <span class="co"># 2D array with a single row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The result of the prediction will be a vector of labels, one per row of the query.</p>
-<div id="ecdb781f" class="cell" data-execution_count="9">
+<div id="22716c78" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get vector of predictions:</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>knn.predict(Xq)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -587,12 +559,12 @@ Important
 </div>
 </div>
 <p>At the moment, we don’t have any realistic query data at hand other than the training data. But we can investigate the question of how well the classifier does on that data, simply by using the feature matrix as the query:</p>
-<div id="8ce5476a" class="cell" data-execution_count="10">
+<div id="36893d3a" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get vector of predictions for the training set:</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> knn.predict(X)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we simply count up the number of correctly predicted labels and divide by the total number of samples to get the <strong>accuracy</strong> of the classifier.</p>
-<div id="763fa088" class="cell" data-execution_count="11">
+<div id="8d08a46f" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> <span class="bu">sum</span>(yhat <span class="op">==</span> y) <span class="op">/</span> n    <span class="co"># fraction of correct predictions</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"accuracy is </span><span class="sc">{</span>acc<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -600,7 +572,7 @@ Important
 </div>
 </div>
 <p>Not surprisingly, sklearn has functions for doing this measurement in fewer steps. The <code>metrics</code> module has functions that can compare true labels with predictions. In addition, each classifier object has a <code>score</code> method that allows you to skip finding the predictions vector yourself.</p>
-<div id="05106788" class="cell" data-execution_count="12">
+<div id="01d6b5f2" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare original labels to predictions:</span></span>
@@ -622,7 +594,7 @@ knn score is 99.9%</code></pre>
 <section id="classifier-performance" class="level2 page-columns page-full" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="classifier-performance"><span class="header-section-number">3.2</span> Classifier performance</h2>
 <p>Let’s return to the (previously cleaned) loan applications dataset.</p>
-<div id="2c362a1d" class="cell" data-execution_count="13">
+<div id="a31903b4" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/loan_clean.csv"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>loans.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -707,7 +679,7 @@ knn score is 99.9%</code></pre>
 </div>
 </div>
 <p>We create a binary classification problem by labelling whether each loan was at least 95% funded. The other columns will form the features for the predictions.</p>
-<div id="5f12cb34" class="cell" data-execution_count="14">
+<div id="a702a821" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> loans.drop(<span class="st">"percent_funded"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> loans[<span class="st">"percent_funded"</span>] <span class="op">&gt;</span> <span class="dv">95</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -723,7 +695,7 @@ knn score is 99.9%</code></pre>
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="traintest-paradigm"><span class="header-section-number">3.2.1</span> Train–test paradigm</h3>
 <p>It seems desirable for a classifier to work well on the samples it was trained on. But we probably want to do more than that.</p>
 <div id="def-class-generalization" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.1</strong></span> The performance of a predictor on previously unseen data is known as the <strong>generalization</strong> of the predictor.</p>
+<p><span class="theorem-title"><strong>Definition 3.1 </strong></span>The performance of a predictor on previously unseen data is known as the <strong>generalization</strong> of the predictor.</p>
 </div>
 <p>In order to gauge generalization, we hold back some of the labeled data from training and use it only to test the performance. An <code>sklearn</code> helper function called <code>train_test_split</code> allows us to split off 20% of the data to use for testing. It’s usually recommended to shuffle the order of the samples before the split, and in order to make the results reproducible, we give a specific random seed to the RNG used for the shuffle.</p>
 
@@ -734,7 +706,7 @@ knn score is 99.9%</code></pre>
 </iframe>
 </div>
 </div>
-</div></div><div id="87fd15d1" class="cell" data-execution_count="15">
+</div></div><div id="d60f86bd" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y,</span>
@@ -751,7 +723,7 @@ There are 7944 testing samples.</code></pre>
 </div>
 </div>
 <p>We can check that the test and train labels have similar characteristics:</p>
-<div id="e5df2e41" class="cell" data-execution_count="16">
+<div id="41fd890c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"labels in the training set:"</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pd.Series(y_train).describe() )</span>
@@ -775,7 +747,7 @@ Name: percent_funded, dtype: object</code></pre>
 </div>
 </div>
 <p>Now we train on the training data…</p>
-<div id="6112aec0" class="cell" data-execution_count="17">
+<div id="5298c608" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)    <span class="co"># fit only to train set</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -783,7 +755,7 @@ Name: percent_funded, dtype: object</code></pre>
 </div>
 </div>
 <p>…and test on the rest.</p>
-<div id="43a993bf" class="cell" data-execution_count="18">
+<div id="40e11bdc" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> knn.score(X_test, y_test)    <span class="co"># score only on test set</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"test accuracy is </span><span class="sc">{</span>acc<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -791,7 +763,7 @@ Name: percent_funded, dtype: object</code></pre>
 </div>
 </div>
 <p>This seems like a high accuracy, perhaps. But consider that the vast majority of loans were funded:</p>
-<div id="e5332f94" class="cell" data-execution_count="19">
+<div id="fefb19f6" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>funded <span class="op">=</span> <span class="bu">sum</span>(y)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>funded<span class="op">/</span><span class="bu">len</span>(y)<span class="sc">:.1%}</span><span class="ss"> were funded"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -799,7 +771,7 @@ Name: percent_funded, dtype: object</code></pre>
 </div>
 </div>
 <p>Therefore, an algorithm that simply “predicts” funding every single loan could do as well as the trained classifier!</p>
-<div id="c4074990" class="cell" data-execution_count="20">
+<div id="3ed49941" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>generous <span class="op">=</span> [<span class="va">True</span>]<span class="op">*</span><span class="bu">len</span>(y_test)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> accuracy_score(y_test, generous)</span>
@@ -828,18 +800,14 @@ Name: percent_funded, dtype: object</code></pre>
 <li>False negatives (FN): Predicts “no”, actually is “yes”</li>
 </ul>
 <p>We often display these in a 2×2 table according to the states of the prediction and <em>ground truth</em> (i.e., the given label in the dataset). The table can be filled with counts or percentages of tested instances to create a <strong>confusion matrix</strong>, as illustrated in <a href="#fig-class-confusion" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
-<div id="fig-class-confusion" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A binary confusion matrix.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-class-confusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="_media/confusion.png" alt="A binary confusion matrix." height="240" class="figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-class-confusion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.1: A confusion matrix. Correct predictions are on the diagonal.
-</figcaption>
+<div id="fig-class-confusion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="_media/confusion.png" alt="A binary confusion matrix." height="240" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3.1: A confusion matrix. Correct predictions are on the diagonal.</figcaption>
 </figure>
 </div>
 <div id="def-class-metrics" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.2</strong></span> The following primary metrics are defined for a binary classifier:</p>
+<p><span class="theorem-title"><strong>Definition 3.2 </strong></span>The following primary metrics are defined for a binary classifier:</p>
 <table class="table">
 <colgroup>
 <col style="width: 45%">
@@ -890,7 +858,7 @@ Note
 <li><strong>NPV</strong> How often are the “no” predictions correct?</li>
 </ul>
 <div id="exm-class-confusion" class="theorem example" data-chapter="3" type="✍️" data-description="Classifier performance metrics">
-<p><span class="theorem-title"><strong>Example 3.2</strong></span> Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:</p>
+<p><span class="theorem-title"><strong>Example 3.2 </strong></span>Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:</p>
 <table class="table">
 <tbody>
 <tr class="odd">
@@ -924,15 +892,15 @@ Note
 <p><img src="_media/memes/no fp.jpg" height="420"></p>
 <p>There are ways of combining the primary metrics in order to account for two at once.</p>
 <div id="def-class-metrics-2nd" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.3</strong></span> The <strong><em>F</em>₁ score</strong> is the harmonic mean of the precision and the recall, i.e., <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.3 </strong></span>The <strong><em>F</em>₁ score</strong> is the harmonic mean of the precision and the recall, i.e., <span class="math display">\[
 F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recall}} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
 \]</span></p>
 <p>The <strong>balanced accuracy</strong> is the arithmetic mean of recall and specificity.</p>
 </div>
 <p>Like the primary metrics, <span class="math inline">\(F_1\)</span> and balanced accuracy range between 0 (worst) and 1 (best). The harmonic mean is small if either of its terms is small, so a high <span class="math inline">\(F_1\)</span> means both precision and recall are good.</p>
 <div id="exm-class-metrics" class="theorem example" data-chapter="3" type="💻" data-description="Binary classifier metrics">
-<p><span class="theorem-title"><strong>Example 3.3</strong></span> Continuing with the loan classifier trained earlier in this section, we can find the confusion matrix:</p>
-<div id="71645603" class="cell" data-execution_count="21">
+<p><span class="theorem-title"><strong>Example 3.3 </strong></span>Continuing with the loan classifier trained earlier in this section, we can find the confusion matrix:</p>
+<div id="2b36f02f" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> knn.predict(X_test)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> confusion_matrix(y_test, yhat, labels<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
@@ -956,27 +924,23 @@ Caution
 </div>
 </div>
 <p>In order order to help keep track of what the entries mean, we can also make a picture of the confusion matrix:</p>
-<div id="8c0626ec" class="cell" data-execution_count="22">
+<div id="c141f6a0" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> ConfusionMatrixDisplay</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>lbl <span class="op">=</span> [<span class="st">"fund"</span>, <span class="st">"reject"</span>]</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(C, display_labels<span class="op">=</span>lbl).plot()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-22-output-1.png" width="542" height="429" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-22-output-1.png" width="542" height="429"></p>
 </div>
 </div>
 <p>Hence, there are 7570 true positives. The accuracy is</p>
-<div id="e72b1ae5" class="cell" data-execution_count="23">
+<div id="da570e0d" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"accuracy = </span><span class="sc">{</span>(<span class="dv">7570</span> <span class="op">+</span> <span class="dv">26</span>) <span class="op">/</span> np<span class="sc">.</span><span class="bu">sum</span>(C)<span class="sc">:.1%}</span><span class="ss">"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>accuracy = 95.6%</code></pre>
 </div>
 </div>
 <p>(In practice, of course, we can use the <code>accuracy</code> function we imported earlier.) Here are the other primary scores:</p>
-<div id="60f6905d" class="cell" data-execution_count="24">
+<div id="a0a42d02" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>TP, FN, FP, TN <span class="op">=</span> C.ravel()    <span class="co"># grab the 4 values in the confusion matrix</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"recall = </span><span class="sc">{</span>TP<span class="op">/</span>(TP<span class="op">+</span>FN)<span class="sc">:.1%}</span><span class="ss">"</span> )</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"specificity = </span><span class="sc">{</span>TN<span class="op">/</span>(TN<span class="op">+</span>FP)<span class="sc">:.1%}</span><span class="ss">"</span> )</span>
@@ -991,7 +955,7 @@ NPV = 83.9%</code></pre>
 </div>
 <p>As noted above, few who ought to get a loan will go away disappointed, a loan officer might get nervous about the low specificity score that indicates bad loans.</p>
 <p>In <code>sklearn.metrics</code> there are functions to compute recall and precision without reference to the confusion matrix. You must put the ground-truth labels before the predicted labels, and you should also specify which label value corresponds to a “positive” result. Swapping the “positive” role effectively swaps recall with specificity and precision with NPV.</p>
-<div id="cdfddca6" class="cell" data-execution_count="25">
+<div id="fabd58c6" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score, recall_score</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos <span class="kw">in</span> [<span class="va">True</span>, <span class="va">False</span>]:</span>
@@ -1013,7 +977,7 @@ With False as positive:
 </div>
 </div>
 <p>There are also functions for the composite scores defined in <a href="#def-class-metrics-2nd" class="quarto-xref">Definition&nbsp;<span>3.3</span></a>:</p>
-<div id="36886271" class="cell" data-execution_count="26">
+<div id="22df9bef" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> f1_score, balanced_accuracy_score</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"F1 = </span><span class="sc">{</span>f1_score(y_test, yhat)<span class="sc">:.1%}</span><span class="ss">"</span> )</span>
@@ -1034,7 +998,7 @@ balanced accuracy = 53.5%</code></pre>
 </div>
 </div>
 </div></div><div id="exm-class-scores-simple" class="theorem example" data-chapter="3" type="✍️" data-description="Combined metrics">
-<p><span class="theorem-title"><strong>Example 3.4</strong></span> If <span class="math inline">\(k\)</span> of the <span class="math inline">\(n\)</span> testing samples were funded loans, then the fund-them-all loan classifier has</p>
+<p><span class="theorem-title"><strong>Example 3.4 </strong></span>If <span class="math inline">\(k\)</span> of the <span class="math inline">\(n\)</span> testing samples were funded loans, then the fund-them-all loan classifier has</p>
 <p><span class="math display">\[
 \TP = k,\, \TN = 0,\, \FP = n-k,\, \FN = 0.
 \]</span></p>
@@ -1070,8 +1034,8 @@ balanced accuracy = 53.5%</code></pre>
 </div>
 </div>
 </div></div><div id="exm-class-multiclass" class="theorem example" data-chapter="3" type="💻" data-description="Multiclass metrics">
-<p><span class="theorem-title"><strong>Example 3.5</strong></span> We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:</p>
-<div id="ad5fe811" class="cell" data-execution_count="27">
+<p><span class="theorem-title"><strong>Example 3.5 </strong></span>We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:</p>
+<div id="98fbbdb9" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna()</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>cars.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1162,7 +1126,7 @@ balanced accuracy = 53.5%</code></pre>
 </div>
 </div>
 <p>Now we extract the quantitative features and labels:</p>
-<div id="081777bf" class="cell" data-execution_count="28">
+<div id="1a8c09df" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">"cylinders"</span>, <span class="st">"horsepower"</span>, <span class="st">"weight"</span>, <span class="st">"acceleration"</span>, <span class="st">"mpg"</span>]</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cars[features]</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.Categorical(cars[<span class="st">"origin"</span>])</span>
@@ -1185,7 +1149,7 @@ Tip
 </div>
 </div>
 <p>Next, we split into training and testing subsets:</p>
-<div id="2d9e1924" class="cell" data-execution_count="29">
+<div id="9377072c" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  X, y, </span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>, </span>
@@ -1194,7 +1158,7 @@ Tip
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we perform the fit and measure the accuracy:</p>
-<div id="768f5971" class="cell" data-execution_count="30">
+<div id="a546a646" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">8</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> knn.predict(X_test)</span>
@@ -1204,21 +1168,17 @@ Tip
 </div>
 </div>
 <p>Here is the confusion matrix:</p>
-<div id="8d0d2eb2" class="cell" data-execution_count="31">
+<div id="570cf427" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> y.categories</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span> confusion_matrix(y_test, yhat, labels<span class="op">=</span>labels)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(C, display_labels<span class="op">=</span>labels).plot()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-31-output-1.png" width="534" height="429" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-31-output-1.png" width="534" height="429"></p>
 </div>
 </div>
 <p>From the confusion matrix above we can see that, for example, out of 54 predictions of “usa” on the test set, there are 8 total false positives, in the sense that the actual labels were otherwise.</p>
 <p>We also get <span class="math inline">\(K\)</span> versions of the metrics like accuracy, recall, <em>F</em>₁ score, and so on. We can get all the individual precision scores, say, automatically:</p>
-<div id="2a0fbc37" class="cell" data-execution_count="32">
+<div id="325d1a8f" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>precisions <span class="op">=</span> precision_score(y_test, yhat, average<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (label,p) <span class="kw">in</span> <span class="bu">zip</span>(labels,precisions): </span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>p<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1229,7 +1189,7 @@ usa: 85.2%</code></pre>
 </div>
 </div>
 <p>To get a composite precision score, we have to specify an averaging method. The <code>"macro"</code> option simply takes the mean of the vector above.</p>
-<div id="5933c3a9" class="cell" data-execution_count="33">
+<div id="04c5e9f2" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mac <span class="op">=</span> precision_score(y_test, yhat, average<span class="op">=</span><span class="st">"macro"</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mac)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1256,7 +1216,7 @@ usa: 85.2%</code></pre>
 <section id="gini-impurity" class="level3 page-columns page-full" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="gini-impurity"><span class="header-section-number">3.3.1</span> Gini impurity</h3>
 <div id="def-class-indicator" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.4</strong></span> Let <span class="math inline">\(k\)</span> be an integer. The <strong>indicator function</strong> <span class="math inline">\(\mathbb{1}_k\)</span> is the function on integers defined as <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.4 </strong></span>Let <span class="math inline">\(k\)</span> be an integer. The <strong>indicator function</strong> <span class="math inline">\(\mathbb{1}_k\)</span> is the function on integers defined as <span class="math display">\[
 \mathbb{1}_k(t) = \begin{cases}
   1, &amp; \text{if } t=k, \\
   0, &amp; \text{otherwise.}
@@ -1269,7 +1229,7 @@ p_k = \frac{1}{ |S| } \sum_{i\in S} \mathbb{1}_k(y_i), \qquad k=1,\ldots,K,
 \tag{3.1}\]</span></span></p>
 <p>where <span class="math inline">\(|S|\)</span> is the number of elements in <span class="math inline">\(S\)</span>. In words, <span class="math inline">\(p_k\)</span> is the proportion of samples in <span class="math inline">\(S\)</span> that have label <span class="math inline">\(k\)</span>. Note that the sum over all the <span class="math inline">\(p_k\)</span> equals 1.</p>
 <div id="def-class-gini" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.5</strong></span> The <strong>Gini impurity</strong> of sample set <span class="math inline">\(S\)</span> is defined as <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.5 </strong></span>The <strong>Gini impurity</strong> of sample set <span class="math inline">\(S\)</span> is defined as <span class="math display">\[
 H(S) = \sum_{k=1}^K p_k(1-p_k),
 \]</span> where <span class="math inline">\(p_k\)</span> is defined in <a href="#eq-class-prop-samples" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>.</p>
 </div>
@@ -1286,8 +1246,8 @@ H(S) = \sum_{k=1}^K p_k(1-p_k),
 H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{K}\cdot\frac{K-1}{K} = \frac{K-1}{K} &lt; 1.
 \]</span> In general, <span class="math inline">\(H\)</span> is always nonnegative and less than 1, and it only approaches 1 in the limit of a large number of equally distributed classes.</p>
 <div id="exm-class-gini" class="theorem example" data-chapter="3" type="✍️" data-description="Gini impurity">
-<p><span class="theorem-title"><strong>Example 3.6</strong></span> Suppose a set <span class="math inline">\(S\)</span> has <span class="math inline">\(n\)</span> members with label A, 1 member with label B, and 1 member with label C. What is the Gini impurity of <span class="math inline">\(S\)</span>?</p>
-<div class="proof solution">
+<p><span class="theorem-title"><strong>Example 3.6 </strong></span>Suppose a set <span class="math inline">\(S\)</span> has <span class="math inline">\(n\)</span> members with label A, 1 member with label B, and 1 member with label C. What is the Gini impurity of <span class="math inline">\(S\)</span>?</p>
+<div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span>We have <span class="math inline">\(p_A=n/(n+2)\)</span>, <span class="math inline">\(p_B=p_C=1/(n+2)\)</span>. Hence</p>
 <p><span class="math display">\[
 \begin{split}
@@ -1312,7 +1272,7 @@ H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="partitioning"><span class="header-section-number">3.3.2</span> Partitioning</h3>
 <p>Suppose we start with a sample set <span class="math inline">\(S\)</span> that we partition into disjoint (i.e., nonoverlapping) subsets <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span>. We want to assign a total impurity to the partitioning so that we can compare different scenarios. One pitfall we should avoid is to put just one sample into <span class="math inline">\(S_L\)</span> and all the rest into <span class="math inline">\(S_R\)</span>, which would make <span class="math inline">\(H(S_L)=0\)</span> automatically and give an advantage. So we will choose a formula that rewards more evenly divided subsets.</p>
 <div id="def-class-impurity" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.6</strong></span> The <strong>total impurity</strong> of the partition <span class="math inline">\((S_L,S_R)\)</span> is <span class="math display">\[
+<p><span class="theorem-title"><strong>Definition 3.6 </strong></span>The <strong>total impurity</strong> of the partition <span class="math inline">\((S_L,S_R)\)</span> is <span class="math display">\[
 Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 \]</span></p>
 </div>
@@ -1327,8 +1287,8 @@ Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 </div></div><p>If <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> are both pure subsets, then <span class="math inline">\(Q(S_L,S_R)=0\)</span>. Otherwise, <span class="math inline">\(Q\)</span> tends to be larger in response to less purity and greater size in the subsets.</p>
 <p>Our goal is to choose a partition that minimizes <span class="math inline">\(Q\)</span>. However, we constrain ourselves to allow only certain kinds of partitions. If feature space is <span class="math inline">\(d\)</span>-dimensional, we select a dimension <span class="math inline">\(1 \le j \le d\)</span> and a real threshold value <span class="math inline">\(\theta\)</span>. Then each feature vector <span class="math inline">\(\bfx\)</span> is placed in <span class="math inline">\(S_L\)</span> if <span class="math inline">\(x_j \le \theta\)</span> and in <span class="math inline">\(S_R\)</span> if <span class="math inline">\(x_j &gt; \theta\)</span>. Geometrically, we are dividing feature space by an axis-aligned line if <span class="math inline">\(d=2\)</span> or an axis-aligned plane if <span class="math inline">\(d=3\)</span>. This splitting criterion can be evaluated extremely quickly, and we can find the best possible such partitioning in the sense of minimizing <span class="math inline">\(Q(S_L,S_R)\)</span> in a reasonable amount of time.</p>
 <div id="exm-class-tree-partition" class="theorem example" data-chapter="3" type="✍️" data-description="Tree partitioning">
-<p><span class="theorem-title"><strong>Example 3.7</strong></span> Suppose we have <span class="math inline">\(d=1\)</span> feature and are given the four samples <span class="math inline">\((X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}\)</span>. What is the optimal partition?</p>
-<div class="proof solution">
+<p><span class="theorem-title"><strong>Example 3.7 </strong></span>Suppose we have <span class="math inline">\(d=1\)</span> feature and are given the four samples <span class="math inline">\((X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}\)</span>. What is the optimal partition?</p>
+<div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span>We can partition into two pieces based on a threshold value <span class="math inline">\(\theta\)</span>: <span class="math inline">\(\{x \le \theta\}\)</span> and <span class="math inline">\(\{x &gt; \theta\}\)</span>. But there are really only 5 different cases.</p>
 <table class="table">
 <colgroup>
@@ -1349,30 +1309,30 @@ Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
 <tr class="odd">
 <td style="text-align: right;"><span class="math inline">\(&lt; 0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\varnothing\)</span>, <span class="math inline">\(H=0\)</span></td>
-<td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} + \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0\cdot 0 + 4\cdot \tfrac{1}{2} = 2\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><span class="math inline">\([0,1)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A]\)</span>, <span class="math inline">\(H=0\)</span></td>
-<td style="text-align: center;"><span class="math inline">\([B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} + \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(1 \cdot 0 + 3 \cdot\tfrac{4}{9} = \tfrac{4}{3}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><span class="math inline">\([1,2)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\([A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} + \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(2 \cdot \tfrac{1}{2} + 2 \cdot\tfrac{1}{2} = 2\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;"><span class="math inline">\([2,3)\)</span></td>
-<td style="text-align: center;"><span class="math inline">\([A,B,A]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([A,B,A]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} + \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([B]\)</span>, <span class="math inline">\(H=0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(3 \cdot\tfrac{4}{9} + 1\cdot 0= \tfrac{4}{3}\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;"><span class="math inline">\(\ge 3\)</span></td>
-<td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} + \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\varnothing\)</span>, <span class="math inline">\(H=0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(4\cdot \tfrac{1}{2} + 0\cdot 0 = 2\)</span></td>
 </tr>
@@ -1406,9 +1366,9 @@ Q(S_L,S_R) + \alpha &lt; Q(S,\varnothing) = |S| H(S),
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="usage-and-interpretation"><span class="header-section-number">3.3.4</span> Usage and interpretation</h3>
 <p>In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.</p>
 <div id="exm-class-tree-toy" class="theorem example" data-chapter="3" type="💻" data-description="Inspecting a decision tree">
-<p><span class="theorem-title"><strong>Example 3.8</strong></span> We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks:</p>
-<div id="e471dbe0" class="cell" data-execution_count="34">
-<details class="code-fold">
+<p><span class="theorem-title"><strong>Example 3.8 </strong></span>We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks:</p>
+<div id="87365f69" class="cell" data-execution_count="34">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1454,20 +1414,16 @@ label vector y:
 </div>
 </div>
 <p>The features are the two point coordinates, giving a 20-by-2 feature matrix <code>X</code>, and the labels are a vector <code>y</code> of length 20. We will create a data frame for aiding in visualization:</p>
-<div id="1245e3cc" class="cell" data-execution_count="35">
+<div id="c8b12a62" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame( {<span class="st">"x₁"</span>:X[:,<span class="dv">0</span>], <span class="st">"x₂"</span>:X[:,<span class="dv">1</span>], <span class="st">"y"</span>:y} )</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"x₁"</span>, y<span class="op">=</span><span class="st">"x₂"</span>, hue<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-35-output-1.png" width="589" height="429" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-35-output-1.png" width="589" height="429"></p>
 </div>
 </div>
 <p>Now we create and fit a decision tree for these samples:</p>
-<div id="4100855d" class="cell" data-execution_count="36">
+<div id="b8bde660" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier, plot_tree</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>tree.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1476,19 +1432,15 @@ label vector y:
 </div>
 </div>
 <p>At this point, the <code>tree</code> object has created and stored all the information derived from the dataset that defines the decision tree. Since this is a small tree, we can easily look under the hood:</p>
-<div id="9f52131f" class="cell" data-execution_count="37">
-<details class="code-fold">
+<div id="44f5b5a8" class="cell" data-execution_count="37">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> figure</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>figure(figsize<span class="op">=</span>(<span class="dv">18</span>,<span class="dv">11</span>), dpi<span class="op">=</span><span class="dv">160</span>)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>plot_tree(tree, feature_names<span class="op">=</span>[<span class="st">"x₁"</span>, <span class="st">"x₂"</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-37-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The root of the tree at the top shows that the best initial split was found at the vertical line <span class="math inline">\(x_1=0.644\)</span>. To the right of that line is a Gini value of zero: 8 samples, all with label 2. That is, any future prediction by this tree will immediately return label 2 if its value for <span class="math inline">\(x_1\)</span> exceeds 0.644. Otherwise, it moves to the left child node and tests whether <span class="math inline">\(x_2\)</span> is greater than <span class="math inline">\(0.96\)</span>. As you can see from the scatterplot above, that horizontal line has a single sample with label 2 above it. And so on.</p>
@@ -1504,8 +1456,8 @@ label vector y:
 </div>
 </div></div><p>Because we can follow a decision tree’s logic step by step, we say it is highly <strong>interpretable</strong>. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.</p>
 <div id="exm-class-tree-penguins" class="theorem example" data-chapter="3" type="💻" data-description="Tree classifier for the penguins dataset">
-<p><span class="theorem-title"><strong>Example 3.9</strong></span> We return to the penguins and fit a decision tree to the quantitative features:</p>
-<div id="82baf35b" class="cell" data-execution_count="38">
+<p><span class="theorem-title"><strong>Example 3.9 </strong></span>We return to the penguins and fit a decision tree to the quantitative features:</p>
+<div id="107883a7" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>pen <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>pen <span class="op">=</span> pen.dropna()</span>
@@ -1525,29 +1477,25 @@ label vector y:
 </div>
 </div>
 <p>We get some interesting information from looking at the top levels of a decision tree trained on the full dataset:</p>
-<div id="59ecc4ad" class="cell" data-execution_count="39">
-<details class="code-fold">
+<div id="4bf6109d" class="cell" data-execution_count="39">
+<details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> figure</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>figure(figsize<span class="op">=</span>(<span class="dv">18</span>,<span class="dv">11</span>), dpi<span class="op">=</span><span class="dv">160</span>)</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>plot_tree(dt, max_depth<span class="op">=</span><span class="dv">2</span>, feature_names<span class="op">=</span>features)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-39-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-39-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The most determinative feature for identifying the species is apparently the flipper length. If it exceeds 206.5 mm, then the penguin is rather likely to be a Gentoo.</p>
 <p>We can measure the relative importance of each feature by comparing their total contributions to reducing the Gini index:</p>
-<div id="b0b97060" class="cell" data-execution_count="40">
+<div id="bf25f16c" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>pd.Series(dt.feature_importances_, index<span class="op">=</span>features)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>bill_length_mm       0.381063
-bill_depth_mm        0.075938
-flipper_length_mm    0.529362
+bill_depth_mm        0.051434
+flipper_length_mm    0.553866
 body_mass_g          0.013638
 dtype: float64</code></pre>
 </div>
@@ -1555,7 +1503,7 @@ dtype: float64</code></pre>
 <p>This ranking is known as <strong>Gini importance</strong>.</p>
 <p>Flipper length alone accounts for about half of the resolving power of the tree, followed in importance by the bill length. The other measurements apparently have little discriminative value.</p>
 <p>In order to assess the effectiveness of the tree, we use the train–test paradigm:</p>
-<div id="7120fb58" class="cell" data-execution_count="41">
+<div id="7d8d120b" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix,classification_report</span>
 <span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1579,23 +1527,23 @@ dtype: float64</code></pre>
 <pre><code>Confusion matrix:
 [[39  0  0]
  [ 2  8  0]
- [ 0  0 18]]
+ [ 1  0 17]]
 
 Performance metrics:
               precision    recall  f1-score   support
 
-      Adelie       0.95      1.00      0.97        39
+      Adelie       0.93      1.00      0.96        39
    Chinstrap       1.00      0.80      0.89        10
-      Gentoo       1.00      1.00      1.00        18
+      Gentoo       1.00      0.94      0.97        18
 
-    accuracy                           0.97        67
-   macro avg       0.98      0.93      0.95        67
-weighted avg       0.97      0.97      0.97        67
+    accuracy                           0.96        67
+   macro avg       0.98      0.91      0.94        67
+weighted avg       0.96      0.96      0.95        67
 </code></pre>
 </div>
 </div>
 <p>The performance is quite good, although the Chinstrap case is hindered by the relatively low number of training examples:</p>
-<div id="16bcc42a" class="cell" data-execution_count="42">
+<div id="f9e8fa03" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>y_train.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>Adelie       107
@@ -1623,7 +1571,7 @@ Name: species, dtype: int64</code></pre>
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="distances-and-norms"><span class="header-section-number">3.4.1</span> Distances and norms</h3>
 <p>The existence of “closest” examples means that we need to define a notion of distance in feature spaces of any dimension. Let <span class="math inline">\(\real^d\)</span> be the space of vectors with <span class="math inline">\(d\)</span> real components, and let <span class="math inline">\(\bfzero\)</span> be the vector of all zeros.</p>
 <div id="def-class-metric" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.7</strong></span> A <strong>distance metric</strong> is a function <span class="math inline">\(\dist\)</span> on pairs of vectors that satisfies the following properties for all vectors <span class="math inline">\(\bfu\)</span>, <span class="math inline">\(\bfv\)</span>, and <span class="math inline">\(\bfz\)</span>:</p>
+<p><span class="theorem-title"><strong>Definition 3.7 </strong></span>A <strong>distance metric</strong> is a function <span class="math inline">\(\dist\)</span> on pairs of vectors that satisfies the following properties for all vectors <span class="math inline">\(\bfu\)</span>, <span class="math inline">\(\bfv\)</span>, and <span class="math inline">\(\bfz\)</span>:</p>
 <ol type="1">
 <li><span class="math inline">\(\dist(\bfu,\bfv) \ge 0\)</span>,</li>
 <li><span class="math inline">\(\dist(\bfu,\bfv)=0\)</span> if and only if <span class="math inline">\(\bfu=\bfv\)</span>,</li>
@@ -1633,7 +1581,7 @@ Name: species, dtype: int64</code></pre>
 </div>
 <p>These are considered the essential properties desired of a distance metric. We will define a distance metric by using a function on vectors known as a <em>norm</em>.</p>
 <div id="def-class-norm" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.8</strong></span> For any vector <span class="math inline">\(\bfu \in \real^d\)</span>, we define the following norms.</p>
+<p><span class="theorem-title"><strong>Definition 3.8 </strong></span>For any vector <span class="math inline">\(\bfu \in \real^d\)</span>, we define the following norms.</p>
 <ul>
 <li>The <strong>2-norm</strong> or <em>Euclidean norm</em>: <span class="math display">\[
 \twonorm{\bfu} = \bigl(u_1^2 + u_2^2 + \cdots + u_d^2\bigr)^{1/2}.
@@ -1668,8 +1616,8 @@ $$ -->
 \dist(\bfu,\bfv) = \norm{\bfu - \bfv}.
 \]</span></p>
 <div id="exm-class-distance" class="theorem example" data-chapter="3" type="✍️" data-description="Calculating distance">
-<p><span class="theorem-title"><strong>Example 3.10</strong></span> Given <span class="math inline">\(\bfu=[-1,1,0,4]\)</span> and <span class="math inline">\(\bfv=[-2,1,2,2]\)</span>, find the distance between them using all three common norms.</p>
-<div class="proof solution">
+<p><span class="theorem-title"><strong>Example 3.10 </strong></span>Given <span class="math inline">\(\bfu=[-1,1,0,4]\)</span> and <span class="math inline">\(\bfv=[-2,1,2,2]\)</span>, find the distance between them using all three common norms.</p>
+<div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span>We first calculate <span class="math inline">\(\bfu - \bfv = [-3,0,-2,2]\)</span>. Then <span class="math display">\[
 \begin{split}
 \twonorm{\bfu-\bfv} &amp;= \bigl( 3^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{17}, \\
@@ -1698,7 +1646,7 @@ Note
 <h3 data-number="3.4.2" class="anchored" data-anchor-id="algorithm"><span class="header-section-number">3.4.2</span> Algorithm</h3>
 <p>As data, we are given labeled samples <span class="math inline">\(\bfx_1,\ldots,\bfx_n\)</span> in <span class="math inline">\(\real^d\)</span>.</p>
 <div id="def-class-knn" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.9</strong></span> Given a new query vector <span class="math inline">\(\bfx\)</span>, the <strong>kNN algorithm</strong> finds the <span class="math inline">\(k\)</span> labeled samples closest to <span class="math inline">\(\bfx\)</span> and chooses the most frequently occurring label among them. Ties are broken randomly.</p>
+<p><span class="theorem-title"><strong>Definition 3.9 </strong></span>Given a new query vector <span class="math inline">\(\bfx\)</span>, the <strong>kNN algorithm</strong> finds the <span class="math inline">\(k\)</span> labeled samples closest to <span class="math inline">\(\bfx\)</span> and chooses the most frequently occurring label among them. Ties are broken randomly.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1714,10 +1662,10 @@ Note
 </div>
 </div>
 <div id="exm-class-knn-small" class="theorem example" data-chapter="3" type="✍️" data-description="kNN classifier">
-<p><span class="theorem-title"><strong>Example 3.11</strong></span> Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:</p>
+<p><span class="theorem-title"><strong>Example 3.11 </strong></span>Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:</p>
 <p><img src="_media/knn_example1.svg" class="img-fluid"></p>
 <p>Using inf-norm distance and <span class="math inline">\(k=3\)</span>, find the kNN labels at the locations marked A and B.</p>
-<div class="proof solution">
+<div class="solution proof">
 <p><span class="proof-title"><em>Solution</em>. </span>At point A, the nearest samples are at <span class="math inline">\((0,2)\)</span> with distance <span class="math inline">\(1\)</span>, <span class="math inline">\((0,0)\)</span> with distance <span class="math inline">\(1\)</span>, and <span class="math inline">\((2,1)\)</span> with distance <span class="math inline">\(1.5\)</span>. By a 2-1 vote, the point should be labeled blue.</p>
 <p>At point B, the nearest samples are at <span class="math inline">\((0,0)\)</span> with distance 1, <span class="math inline">\((-2,-1)\)</span> with distance 1, and <span class="math inline">\((0,-2)\)</span> with distance <span class="math inline">\(1.5\)</span>. By a 2-1 vote, the point should be labeled red.</p>
 <p>Note that the blue sample point at <span class="math inline">\((0,-2)\)</span> is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with <span class="math inline">\(k=3\)</span>, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.</p>
@@ -1736,8 +1684,8 @@ Note
 </div>
 </div>
 </div></div><div id="exm-class-knn" class="theorem example" data-chapter="3" type="💻" data-description="kNN classifier for the penguins dataset">
-<p><span class="theorem-title"><strong>Example 3.12</strong></span> Back to the penguins! We use <code>dropna</code> to drop any rows with missing values.</p>
-<div id="c24582f9" class="cell" data-execution_count="43">
+<p><span class="theorem-title"><strong>Example 3.12 </strong></span>Back to the penguins! We use <code>dropna</code> to drop any rows with missing values.</p>
+<div id="781d9a3a" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
@@ -1828,7 +1776,7 @@ Note
 </div>
 </div>
 <p>The data set has four quantitative columns that we use as features, and the species name is the label.</p>
-<div id="22601673" class="cell" data-execution_count="44">
+<div id="2640e039" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bill_length_mm"</span>,</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"bill_depth_mm"</span>,</span>
@@ -1839,7 +1787,7 @@ Note
 <span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> penguins[<span class="st">"species"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Each type of classifier has to be imported before its first use in a session. (Importing more than once does no harm.)</p>
-<div id="3190ab1e" class="cell" data-execution_count="45">
+<div id="e69e347f" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>knn.fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1848,7 +1796,7 @@ Note
 </div>
 </div>
 <p>We can manually find the neighbors of a new vector. However, we have to make the query in the form of a data frame, since that is how the training data was provided. Here we make a query frame for values very close to the ones in the first row of the data.</p>
-<div id="50668b69" class="cell" data-execution_count="46">
+<div id="2cd7021c" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> [<span class="dv">39</span>, <span class="dv">19</span>, <span class="dv">180</span>, <span class="dv">3750</span>]</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> pd.DataFrame([vals], columns<span class="op">=</span>features)</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>dist, idx <span class="op">=</span> knn.kneighbors(query)</span>
@@ -1858,7 +1806,7 @@ Note
 </div>
 </div>
 <p>The result above indicates that the first sample (index 0) was the closest, followed by four others. We can look up the labels of these points:</p>
-<div id="c9a96ceb" class="cell" data-execution_count="47">
+<div id="75f897d8" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>y[ idx[<span class="dv">0</span>] ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>0         Adelie
@@ -1870,14 +1818,14 @@ Name: species, dtype: object</code></pre>
 </div>
 </div>
 <p>By a vote of 4–1, then, the classifier should choose Adelie as the result at this location.</p>
-<div id="155930ef" class="cell" data-execution_count="48">
+<div id="daf9ff93" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>knn.predict(query)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
 <pre><code>array(['Adelie'], dtype=object)</code></pre>
 </div>
 </div>
 <p>Note that points can be outvoted by their neighbors. In other words, the classifier won’t necessarily be correct on every training sample. For example:</p>
-<div id="755ae5b2" class="cell" data-execution_count="49">
+<div id="a30051de" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predicted:"</span>)</span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( knn.predict(X.iloc[:<span class="dv">5</span>,:]) )</span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
@@ -1892,7 +1840,7 @@ Data:
 </div>
 </div>
 <p>Next, we split into training and test sets to gauge the performance of the classifier. The <code>classification_report</code> function creates a summary of some of the important metrics.</p>
-<div id="7c054ff5" class="cell" data-execution_count="50">
+<div id="1bc2b55c" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report,confusion_matrix</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1956,7 +1904,7 @@ Tip
 <section id="standardization" class="level3 page-columns page-full" data-number="3.4.3">
 <h3 data-number="3.4.3" class="anchored" data-anchor-id="standardization"><span class="header-section-number">3.4.3</span> Standardization</h3>
 <p>The values in the columns of the penguin frame in <a href="#exm-class-knn" class="quarto-xref">Example&nbsp;<span>3.12</span></a> are scaled quite differently. In particular, the values in the body mass column are more than 20x larger than the other columns on average:</p>
-<div id="0ae5425e" class="cell" data-execution_count="51">
+<div id="21665bfb" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>X.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>bill_length_mm         43.992793
@@ -1967,13 +1915,13 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Consequently, the mass feature will dominate the distance calculations. To remedy this issue, we could transform the data into z-scores:</p>
-<div id="9450b9e4" class="cell" data-execution_count="52">
+<div id="7c590f95" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> X.transform( <span class="kw">lambda</span> x: (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std() )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We could then retrain the classifier using <code>Z</code> in place of <code>X</code>. Scikit-learn allows us to automate this process by creating a <strong>pipeline</strong>, which makes it easy to chain together a data transformation followed by a learner.</p>
 <div id="exm-class-knn-standard" class="theorem example" data-chapter="3" type="💻" data-description="Pipeline for standardized columns">
-<p><span class="theorem-title"><strong>Example 3.13</strong></span> Once created, a pipeline object can mostly be treated the same as any other learner:</p>
-<div id="7b1087bc" class="cell" data-execution_count="53">
+<p><span class="theorem-title"><strong>Example 3.13 </strong></span>Once created, a pipeline object can mostly be treated the same as any other learner:</p>
+<div id="6dd2e94a" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler   <span class="co"># converts to z-scores</span></span>
 <span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1987,7 +1935,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>In this case, standardization allows us to perform perfectly!</p>
-<div id="1681eb4f" class="cell" data-execution_count="54">
+<div id="71853d47" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> pipe.predict(X_test)</span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Confusion matrix:"</span>)</span>
@@ -2017,7 +1965,7 @@ weighted avg       1.00      1.00      1.00        67
 </div>
 </div>
 <p>We can look under the hood of the pipeline. For example, we can see that the mean and variance of each of the original data columns is stored in the first part of the pipeline:</p>
-<div id="0fbd30d3" class="cell" data-execution_count="55">
+<div id="743ee24a" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pipe[<span class="dv">0</span>].mean_ )</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pipe[<span class="dv">0</span>].var_ )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2042,7 +1990,7 @@ weighted avg       1.00      1.00      1.00        67
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-class-probabilistic"><span class="header-section-number">3.5</span> Probabilistic interpretation</h2>
 <p>Both kNN and decision trees base classification on a voting procedure—for kNN, the <span class="math inline">\(k\)</span> nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information.</p>
 <div id="def-class-phat" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.10</strong></span> Let <span class="math inline">\(\bfx\)</span> be a query vector in a vote-based classification method. The <strong>probability vector</strong> <span class="math inline">\(\hat{p}(\bfx)\)</span> is the vector of vote fractions received by each class.</p>
+<p><span class="theorem-title"><strong>Definition 3.10 </strong></span>Let <span class="math inline">\(\bfx\)</span> be a query vector in a vote-based classification method. The <strong>probability vector</strong> <span class="math inline">\(\hat{p}(\bfx)\)</span> is the vector of vote fractions received by each class.</p>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -2053,8 +2001,8 @@ weighted avg       1.00      1.00      1.00        67
 </div>
 </div>
 </div></div><div id="exm-class-phat" class="theorem example" data-chapter="3" type="✍️, 💻" data-description="Probabilistic classifier">
-<p><span class="theorem-title"><strong>Example 3.14</strong></span> Suppose we have trained a kNN classifier with <span class="math inline">\(k=10\)</span> for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:</p>
-<div id="d217bc09" class="cell" data-execution_count="56">
+<p><span class="theorem-title"><strong>Example 3.14 </strong></span>Suppose we have trained a kNN classifier with <span class="math inline">\(k=10\)</span> for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:</p>
+<div id="1246c52a" class="cell" data-execution_count="56">
 <div class="cell-output cell-output-display" data-execution_count="55">
 <div>
 
@@ -2108,7 +2056,7 @@ weighted avg       1.00      1.00      1.00        67
 <p>The values of <span class="math inline">\(\hat{p}\)</span> over the test set form a <span class="math inline">\(5\times 3\)</span> matrix: <!-- $$
 [0.9,0,0.1],\,[0.3,0.3,0.4],\,[0.6,0.1,0.3],\,[0.2,0,0.8],\,[0.4,0.5,0.1]. 
 $$ --></p>
-<div id="1f37af8a" class="cell" data-execution_count="57">
+<div id="5e402b36" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> np.array( [</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.9</span>, <span class="dv">0</span>, <span class="fl">0.1</span>],</span>
 <span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    [<span class="fl">0.5</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>],</span>
@@ -2120,8 +2068,8 @@ $$ --></p>
 </div>
 <p>It’s natural to interpret <span class="math inline">\(\hat{p}\)</span> as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given <span class="math inline">\(\hat{p}\)</span>, we can still output a predicted class; it’s just that we also get additional information about how the prediction was made.</p>
 <div id="exm-class-prob" class="theorem example" data-chapter="3" type="💻" data-description="Probabilistic classifier for the penguins dataset">
-<p><span class="theorem-title"><strong>Example 3.15</strong></span> Consider the penguin species classification problem:</p>
-<div id="6cc744c9" class="cell" data-execution_count="58">
+<p><span class="theorem-title"><strong>Example 3.15 </strong></span>Consider the penguin species classification problem:</p>
+<div id="97032eb5" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>).dropna()</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numeric columns for features:</span></span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> penguins.loc[:, penguins.dtypes<span class="op">==</span><span class="st">"float64"</span>]  </span>
@@ -2134,7 +2082,7 @@ $$ --></p>
 <span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can train a kNN classifier and then retrieve the probabilities via <code>predict_proba</code>:</p>
-<div id="f386ab43" class="cell" data-execution_count="59">
+<div id="b87f10b0" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)</span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> knn.predict_proba(X_test)</span>
@@ -2149,7 +2097,7 @@ $$ --></p>
 </div>
 </div>
 <p>From the output above we see that, for example, while the third and fourth test cases led to unanimous votes for <em>Gentoo</em>, the sixth case is deemed <em>Adelie</em> in a 3–2 squeaker (or is it a squawker?):</p>
-<div id="0883b794" class="cell" data-execution_count="60">
+<div id="784e1aba" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> knn.predict(X_test)</span>
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>yhat[:<span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
@@ -2162,11 +2110,11 @@ $$ --></p>
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="roc-curve"><span class="header-section-number">3.5.1</span> ROC curve</h3>
 <p>In the binary label case, our assumption so far has been that a simple majority vote determines a positive outcome. But we could choose a different threshold—a supermajority, for example, if we want to reduce false positives. This way of thinking leads us to a new way to fine-tune classification methods.</p>
 <div id="def-class-hits" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3.11</strong></span> Let <span class="math inline">\(\theta\)</span> be a number in the interval <span class="math inline">\([0,1]\)</span>. We say that a class <span class="math inline">\(T\)</span> <strong>hits</strong> at level <span class="math inline">\(\theta\)</span> at a query point if the fraction of votes that <span class="math inline">\(T\)</span> receives at that point is at least <span class="math inline">\(\theta\)</span>.</p>
+<p><span class="theorem-title"><strong>Definition 3.11 </strong></span>Let <span class="math inline">\(\theta\)</span> be a number in the interval <span class="math inline">\([0,1]\)</span>. We say that a class <span class="math inline">\(T\)</span> <strong>hits</strong> at level <span class="math inline">\(\theta\)</span> at a query point if the fraction of votes that <span class="math inline">\(T\)</span> receives at that point is at least <span class="math inline">\(\theta\)</span>.</p>
 </div>
 <div id="exm-class-hits" class="theorem example" data-chapter="3" type="💻" data-description="Varying decision threshold">
-<p><span class="theorem-title"><strong>Example 3.16</strong></span> Continuing with the data in <a href="#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.14</span></a>, we find that at <span class="math inline">\(\theta=0\)</span>, everything always hits:</p>
-<div id="2b9545d0" class="cell" data-execution_count="61">
+<p><span class="theorem-title"><strong>Example 3.16 </strong></span>Continuing with the data in <a href="#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.14</span></a>, we find that at <span class="math inline">\(\theta=0\)</span>, everything always hits:</p>
+<div id="b347ed83" class="cell" data-execution_count="61">
 <div class="cell-output cell-output-display" data-execution_count="60">
 <div>
 
@@ -2218,7 +2166,7 @@ $$ --></p>
 </div>
 </div>
 <p>At <span class="math inline">\(\theta=0.05\)</span>, say, we lose all the cases where no votes were received:</p>
-<div id="52133a0d" class="cell" data-execution_count="62">
+<div id="2f98694d" class="cell" data-execution_count="62">
 <div class="cell-output cell-output-display" data-execution_count="61">
 <div>
 
@@ -2270,7 +2218,7 @@ $$ --></p>
 </div>
 </div>
 <p>At <span class="math inline">\(\theta=0.15\)</span>, we have also lost all those receiving 1 out of 10 votes:</p>
-<div id="983a4fea" class="cell" data-execution_count="63">
+<div id="0420d16b" class="cell" data-execution_count="63">
 <div class="cell-output cell-output-display" data-execution_count="62">
 <div>
 
@@ -2322,7 +2270,7 @@ $$ --></p>
 </div>
 </div>
 <p>By the time we get to <span class="math inline">\(\theta=0.7\)</span>, there are only two hits left:</p>
-<div id="9b0e0492" class="cell" data-execution_count="64">
+<div id="5b501552" class="cell" data-execution_count="64">
 <div class="cell-output cell-output-display" data-execution_count="63">
 <div>
 
@@ -2398,8 +2346,8 @@ Note
 </div>
 </div>
 <div id="exm-class-roc-simple" class="theorem example" data-chapter="3" type="💻" data-description="ROC curve, quasi-manually">
-<p><span class="theorem-title"><strong>Example 3.17</strong></span> We continue with the data from <a href="#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.14</span></a>, but now we add ground truth to the queries:</p>
-<div id="0a006d21" class="cell" data-execution_count="65">
+<p><span class="theorem-title"><strong>Example 3.17 </strong></span>We continue with the data from <a href="#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.14</span></a>, but now we add ground truth to the queries:</p>
+<div id="cafed535" class="cell" data-execution_count="65">
 <div class="cell-output cell-output-display" data-execution_count="64">
 <div>
 
@@ -2457,7 +2405,7 @@ Note
 </div>
 </div>
 <p>Let’s look at class A. At <span class="math inline">\(\theta=0.05\)</span>, class A hits in every case, giving TP=3 and FP=2. At <span class="math inline">\(\theta=0.25\)</span>, the fourth query drops out; we still have TP=3, but now FP=1. Here is the table of all the unique values of TP and FP that we can achieve as <span class="math inline">\(\theta\)</span> varies between 0 and 1:</p>
-<div id="675b9a30" class="cell" data-execution_count="66">
+<div id="c0f35264" class="cell" data-execution_count="66">
 <div class="cell-output cell-output-display" data-execution_count="65">
 <div>
 
@@ -2517,18 +2465,14 @@ Note
 <p>In order to make a graph, we convert the raw TP and FP numbers to rates. Since there are 2 positive and 3 negative over the entire test set, we can represent the rows above as the points <span class="math display">\[
 \left(\tfrac{2}{2},\tfrac{3}{3}\right), \, \left(\tfrac{1}{2},\tfrac{3}{3}\right), \, \left(\tfrac{1}{2},\tfrac{2}{3}\right), \, \left(\tfrac{0}{2},\tfrac{2}{3}\right), \, \left(\tfrac{0}{2},\tfrac{1}{3}\right)\, \left(\tfrac{0}{2},\tfrac{0}{3}\right).
 \]</span> The ROC curve for class A is just connect-the-dots for these points:</p>
-<div id="8222b1d5" class="cell" data-execution_count="67">
+<div id="ddf7ed16" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({<span class="st">"FP rate"</span>: [<span class="dv">1</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>], <span class="st">"TP rate"</span>: [<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">2</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>,<span class="dv">0</span>]})</span>
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>data, </span>
 <span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
 <span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span></span>
 <span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-67-output-1.png" width="469" height="468" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-67-output-1.png" width="469" height="468"></p>
 </div>
 </div>
 <p>As we’re about to see, the step-by-step process above is just for illustration and is completely automated in practice.</p>
@@ -2536,8 +2480,8 @@ Note
 <p><img src="_media/memes/ROC.jpeg" height="380"></p>
 <p>Unsurprisingly, <code>sklearn</code> can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with <span class="math inline">\(K\)</span> classes, there are <span class="math inline">\(K\)</span> implied binary classificiation versions of one-vs-rest, so there are <span class="math inline">\(K\)</span> curves to draw, one for the identification of each class.</p>
 <div id="exm-class-roc-penguin" class="theorem example" data-chapter="3" type="💻" data-description="ROC curve for the penguins dataset">
-<p><span class="theorem-title"><strong>Example 3.18</strong></span> Continuing <a href="#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.15</span></a>, we will plot ROC curves for the three species in the penguin data:</p>
-<div id="2c0f50ce" class="cell" data-execution_count="68">
+<p><span class="theorem-title"><strong>Example 3.18 </strong></span>Continuing <a href="#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.15</span></a>, we will plot ROC curves for the three species in the penguin data:</p>
+<div id="d82d0bbd" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> knn.predict_proba(X_test)</span>
@@ -2683,22 +2627,18 @@ Note
 </div>
 </div>
 <p>The table above holds all of the key points on the ROC curves:</p>
-<div id="f910a99a" class="cell" data-execution_count="69">
+<div id="3669f7e2" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>roc, </span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"FP rate"</span>, y<span class="op">=</span><span class="st">"TP rate"</span>, </span>
 <span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span></span>
 <span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-69-output-1.png" width="574" height="468" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-69-output-1.png" width="574" height="468"></p>
 </div>
 </div>
 <p>Each curve starts in the lower left corner and ends at the upper right corner. The ideal situation is in the top left corner of the plot, corresponding to perfect recall and specificity. All of the curves explicitly show the tradeoff between recall and specificity as the decision threshold is varied. The <em>Gentoo</em> curve comes closest to the ideal.</p>
 <p>If we weight neighbors’ votes inversely to their distances from the query point, then the thresholds aren’t restricted to multiples of <span class="math inline">\(\tfrac{1}{5}\)</span>:</p>
-<div id="665e11a6" class="cell" data-execution_count="70">
+<div id="5b48c8d8" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>knnw <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>, weights<span class="op">=</span><span class="st">"distance"</span>)</span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>knnw.fit(X_train, y_train)</span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> knnw.predict_proba(X_test)</span>
@@ -2714,11 +2654,7 @@ Note
 <span id="cb95-13"><a href="#cb95-13" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"label"</span>, kind<span class="op">=</span><span class="st">"line"</span>, estimator<span class="op">=</span><span class="va">None</span></span>
 <span id="cb95-14"><a href="#cb95-14" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="classification_files/figure-html/cell-70-output-1.png" width="574" height="468" class="figure-img"></p>
-</figure>
-</div>
+<p><img src="classification_files/figure-html/cell-70-output-1.png" width="574" height="468"></p>
 </div>
 </div>
 </div>
@@ -2735,8 +2671,8 @@ Note
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="auc"><span class="header-section-number">3.5.2</span> AUC</h3>
 <p>ROC curves lead to another classification performance metric known as <strong>area under ROC curve (AUC)</strong>. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range from credulous to skeptical. You might think of it as grading with partial credit.</p>
 <div id="exm-class-auc" class="theorem example" data-chapter="3" type="💻" data-description="Area under ROC curve">
-<p><span class="theorem-title"><strong>Example 3.19</strong></span> The AUC metric allows us to compare the standard and weighted kNN classifiers from <a href="#exm-class-roc-penguin" class="quarto-xref">Example&nbsp;<span>3.18</span></a>. Note that the function for computing them, <code>roc_auc_score</code>, requires a keyword argument when there are more than two classes, to specify “one vs.&nbsp;rest” (our usual) or “one vs.&nbsp;one” matchups.</p>
-<div id="e75ab913" class="cell" data-execution_count="71">
+<p><span class="theorem-title"><strong>Example 3.19 </strong></span>The AUC metric allows us to compare the standard and weighted kNN classifiers from <a href="#exm-class-roc-penguin" class="quarto-xref">Example&nbsp;<span>3.18</span></a>. Note that the function for computing them, <code>roc_auc_score</code>, requires a keyword argument when there are more than two classes, to specify “one vs.&nbsp;rest” (our usual) or “one vs.&nbsp;one” matchups.</p>
+<div id="d74e314d" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> roc_auc_score(</span>
 <span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>    y_test, knn.predict_proba(X_test), </span>
@@ -2795,50 +2731,50 @@ Note
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
 <p>For these exercises, you may use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).</p>
 <div id="exr-class-dankness" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.1</strong></span> Here is a confusion matrix for a classifier of meme dankness.</p>
+<p><span class="theorem-title"><strong>Exercise 3.1 </strong></span>Here is a confusion matrix for a classifier of meme dankness.</p>
 <p><img src="./_media/dankness.png" class="img-fluid" width="360"></p>
 <p>Considering <em>dank</em> to be the positive outcome, calculate the <strong>(a)</strong> recall, <strong>(b)</strong> precision, <strong>(c)</strong> specificity, <strong>(d)</strong> accuracy, and <strong>(e)</strong> <span class="math inline">\(F_1\)</span> score of the classifier.</p>
 </div>
 <div id="exr-class-flavors" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.2</strong></span> Here is a confusion matrix for a classifier of ice cream flavors.</p>
+<p><span class="theorem-title"><strong>Exercise 3.2 </strong></span>Here is a confusion matrix for a classifier of ice cream flavors.</p>
 <p><img src="./_media/flavors.png" class="img-fluid" width="500"></p>
 <p><strong>(a)</strong> Calculate the recall rate for <em>chocolate</em>.</p>
 <p><strong>(b)</strong> Find the precision for <em>vanilla</em>.</p>
 <p><strong>(c)</strong> Find the accuracy for <em>strawberry</em>.</p>
 </div>
 <div id="exr-class-gini" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.3</strong></span> Find the Gini impurity of this set: <span class="math display">\[ \{ A, B, B, C, C, C \}.\]</span></p>
+<p><span class="theorem-title"><strong>Exercise 3.3 </strong></span>Find the Gini impurity of this set: <span class="math display">\[ \{ A, B, B, C, C, C \}.\]</span></p>
 </div>
 <div id="exr-class-gini-bounds" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.4</strong></span> <del>Use the definition of Gini impurity to prove that it is never negative and always less than 1.</del></p>
+<p><span class="theorem-title"><strong>Exercise 3.4 </strong></span><del>Use the definition of Gini impurity to prove that it is never negative and always less than 1.</del></p>
 </div>
 <div id="exr-class-partition" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.5</strong></span> Given <span class="math inline">\(x_i=i\)</span> for <span class="math inline">\(i=0,\ldots,5\)</span>, with labels <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 3.5 </strong></span>Given <span class="math inline">\(x_i=i\)</span> for <span class="math inline">\(i=0,\ldots,5\)</span>, with labels <span class="math display">\[
 y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 \]</span> find an optimal partition threshold using Gini impurity.</p>
 </div>
 <div id="exr-class-distance" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.6</strong></span> Using 1-norm, 2-norm, and <span class="math inline">\(\infty\)</span>-norm, find the distance between the given vectors.</p>
+<p><span class="theorem-title"><strong>Exercise 3.6 </strong></span>Using 1-norm, 2-norm, and <span class="math inline">\(\infty\)</span>-norm, find the distance between the given vectors.</p>
 <p><strong>(a)</strong> <span class="math inline">\(\bfu=[2,3,0]\)</span>, <span class="math inline">\(\;\bfv=[-2,2,1]\)</span></p>
 <p><strong>(b)</strong> <span class="math inline">\(\bfu=[0,1,0,1,0]\)</span>, <span class="math inline">\(\;\bfv=[1,1,1,1,1]\)</span></p>
 </div>
 <div id="exr-class-norm" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.7</strong></span> <strong>(a)</strong> Prove that for any <span class="math inline">\(\bfu \in \real^d\)</span>, <span class="math inline">\(\infnorm{\bfu} \le \twonorm{\bfu}\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 3.7 </strong></span><strong>(a)</strong> Prove that for any <span class="math inline">\(\bfu \in \real^d\)</span>, <span class="math inline">\(\infnorm{\bfu} \le \twonorm{\bfu}\)</span>.</p>
 <p><strong>(b)</strong> Prove that for any <span class="math inline">\(\bfu \in \real^d\)</span>, <span class="math inline">\(\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}\)</span>.</p>
 </div>
 <div id="exr-class-manhattan" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.8</strong></span> Carefully sketch the set of all points in <span class="math inline">\(\real^2\)</span> whose 1-norm distance from the origin equals 1. This is a <em>Manhattan unit circle</em>.</p>
+<p><span class="theorem-title"><strong>Exercise 3.8 </strong></span>Carefully sketch the set of all points in <span class="math inline">\(\real^2\)</span> whose 1-norm distance from the origin equals 1. This is a <em>Manhattan unit circle</em>.</p>
 </div>
 <div id="exr-class-triangle" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.9</strong></span> Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for <span class="math inline">\(k\)</span>-nearest neighbors with <span class="math inline">\(k=1\)</span>, using <strong>(a)</strong> the 2-norm <del>and <strong>(b)</strong> the infinity-norm.</del></p>
+<p><span class="theorem-title"><strong>Exercise 3.9 </strong></span>Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for <span class="math inline">\(k\)</span>-nearest neighbors with <span class="math inline">\(k=1\)</span>, using <strong>(a)</strong> the 2-norm <del>and <strong>(b)</strong> the infinity-norm.</del></p>
 </div>
 <div id="exr-class-ellipse" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.10</strong></span> Define 8 points on an ellipse by <span class="math inline">\(x_k=a\cos(\theta_k)\)</span> and <span class="math inline">\(y_k=b\sin(\theta_k)\)</span>, where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are positive and <span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 3.10 </strong></span>Define 8 points on an ellipse by <span class="math inline">\(x_k=a\cos(\theta_k)\)</span> and <span class="math inline">\(y_k=b\sin(\theta_k)\)</span>, where <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are positive and <span class="math display">\[
 \theta_1= \frac{\pi}{4}, \theta_2 = \frac{\pi}{2}, \theta_3 = \frac{3\pi}{4}, \ldots, \theta_8 = 2\pi.
 \]</span> Let <span class="math inline">\(u_1,\ldots,u_8\)</span> and <span class="math inline">\(v_1,\ldots,v_8\)</span> be the z-scores of the <span class="math inline">\(x_k\)</span> and the <span class="math inline">\(y_k\)</span>, respectively. Show that the points <span class="math inline">\((u_k,v_k)\)</span> all lie on a circle centered at the origin for all <span class="math inline">\(k=1,\ldots,8\)</span>. (By extension, standardizing points into z-scores is sometimes called <em>sphereing</em> them.)</p>
 </div>
 <div id="exr-class-lattice-colors" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.11</strong></span> Here are blue/orange labels on an integer lattice.</p>
+<p><span class="theorem-title"><strong>Exercise 3.11 </strong></span>Here are blue/orange labels on an integer lattice.</p>
 <p><img src="_media/gridlabels.png" class="img-fluid" width="360"></p>
 <p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be the kNN probabilistic classifier with <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function <span class="math inline">\(g(t)\)</span> is defined from values of <span class="math inline">\(\hat{f}\)</span> along a vertical or horizontal line. Carefully sketch a plot of <span class="math inline">\(g(t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span>.</p>
 <p><strong>(a)</strong> <span class="math inline">\(g(t) = \hat{f}(1.2,t)\)</span></p>
@@ -2979,28 +2915,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
+    if (id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
         }
         return container.innerHTML
       } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
         return note.innerHTML;
       }
     } else {
@@ -3009,15 +2932,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
+      return note.innerHTML;
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -3059,29 +2974,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
       }
     }, function(instance) {
     });
@@ -3157,6 +3049,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
+        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -3240,12 +3133,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./stats.html" class="pagination-link  aria-label=" &lt;span="" statistics&lt;="" span&gt;"="">
+      <a href="./stats.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./selection.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Model selection</span>">
+      <a href="./selection.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model selection</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
