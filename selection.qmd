@@ -828,3 +828,39 @@ It may be instructive to rerun the competition above using different random seed
 Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.
 
 ![](_media/memes/validation.jpg){height="300"}
+
+## Exercises {.unnumbered}
+
+::::{#exr-select-always chapter=4}
+Suppose that for a binary classification problem, you always choose a classifier that returns the positive outcome for every input. Would you expect this classifier to have a high training variance, high testing bias, or both? Give reasons for your answer.
+::::
+
+
+::::{#exr-select-knn1 chapter=4}
+Suppose you are training to fit the ground-truth one-dimensional classifier
+
+$$
+y = f(x) =
+\begin{cases}
++1, & \text{if } |x| \leq 2, \\
+-1, & \text{otherwise}.
+\end{cases}
+$$
+
+Here is a table of training data:
+
+| $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ |  $0$ |  $1$ |  $2$ |  $3$ |  $4$ |  $5$ |
+|-------|-----|-----|-----|-----|-----|----|----|----|----|----|----|
+| $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ | 
+
+Your test set consists of the values $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$.
+
+**(a)** Find the recall of a kNN classifier with $k=1$. (The positive outcome is $+1$.)
+
+**(b)** Find the recall of a kNN classifier with $k=3$.
+
+**(c)** Find the recall of a kNN classifier with $k=9$.
+
+**(d)** Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?
+
+::::
