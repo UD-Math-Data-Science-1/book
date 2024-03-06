@@ -1,0 +1,61 @@
+# Math notation {.unnumbered}
+
+To make good-looking math in Jupyter notebooks, you can use LaTeX notation. For example, to write the equation of a line as $y=mx+b$, you can use the following within the text of a markdown cell:
+
+```{markdown}
+For example, to write the equation of a line as $y=mx+b$, you can use the following
+```
+
+The example above produces **inline math**, which is shown as part of the text. You can also use **display math**, which is shown on its own line. 
+
+For example, to write the equation of a line on its own line as
+
+$$
+y=mx+b,
+$$
+
+you can use the following within the text of a markdown cell:
+
+```{markdown}
+For example, to write the equation of a line on its own line as
+
+$$
+y=mx+b,
+$$
+
+you can use the following
+```
+
+Use `_` for subscripts and `^` for superscripts. For example, to write $x_1^2$, use `$x_1^2$`. If you have more than one character in the sub/superscript, use curly braces. For example, to write $X_{i,j}=10^{100}$, use `$X_{i,j}=10^{100}$`.
+
+Function names and Greek letters are written with a backslash. For example, to write $\sin(\theta)$, use `$\sin(\theta)$`. To write $\alpha+\ln(\beta)$, use `$\alpha + \ln(\beta)$`. Note the difference between $\cos(\phi)$, which is written as `$\cos(\phi)$`, and $cos(\phi)$, which is written as `$cos(\phi)$`. All the functions you know work like this, plus square roots, like $\sqrt{2+z}$, which is written as `$\sqrt{2+z}$`. Occasionally you want a short bit of text to appear like function names (upright) rather than multiplied variables (italic). For instance, to get $x_\text{init}$, use `$x_\text{init}$`.
+
+You've seen that curly braces are used to indicate groupings. If you actually want curly braces to appear, you have to escape them with a backslash. For example, to write $\{2, 3, 5, 7\}$, use `$\{2, 3, 5, 7\}$`.
+
+To write a fraction, use `\frac{numerator}{denominator}`. For example, to write $\frac{1}{2}$, use `$\frac{1}{2}$`. Derivatives are written as fractions, so to write $f'(x) = \frac{dy}{dx}$, use `$f'(x) = \frac{dy}{dx}$`.
+
+If you want to put fractions inside of parentheses, use `\left(` and `\right)` to make the parentheses the right size. For example, to write 
+
+$$
+\left( x - \frac{1}{2} \right)^3,
+$$
+
+use `$\left(x - \frac{1}{2}\right)^3$`. The same applies to `\left[` and `\right]` for square brackets. 
+
+For the most part, the spaces you put in don't matter. For example, `$x+1$` and `$x  + 1$` both produce $x+1$. Usually, the automatic spacing makes the best-looking result. But if you want to put a space in manually, you can use `\,` for a small space, `\:` for a medium space, `\;` for a large space, and `\quad` for a really large space. 
+
+Integrals and sums are produced using `\int` and `\sum`, with subscripts and superscripts put where you would expect them to go. For example, to write 
+
+$$
+\int_0^1 x^2 \, dx,
+$$ 
+
+use `$$\int_0^1 x^2 \, dx$$`. (Here is one legitimate use for a manual space!) To write 
+
+$$
+\sum_{i=1}^n i^2,
+$$
+
+use `$$\sum_{i=1}^n i^2$$`.
+
+There are seventeen squijillion web pages and blogs giving quick introductions to LaTeX, if you need to do something more complex than the above. Beware: it can be a deep rabbit hole to fall into.

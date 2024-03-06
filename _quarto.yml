@@ -16,6 +16,7 @@ book:
     - resources.qmd
     - starting.qmd
     - genAI.qmd
+    - math.qmd
     - data.qmd
     - stats.qmd
     - classification.qmd
@@ -24,6 +25,7 @@ book:
     - clustering.qmd
     - networks.qmd
     - review.qmd
+    - merge.qmd
     # - references.qmd
   comments:
     hypothesis: false
@@ -35,7 +37,7 @@ book:
       - text: "Data Science 1"
     right: 
       - text: "Toby Driscoll"
-  downloads: [pdf]
+  # downloads: [pdf]
 # number-depth: 3
 
 bibliography: references.bib

@@ -1,0 +1,152 @@
+# Joining and merging {.unnumbered}
+
+```{python}
+import pandas as pd
+```
+
+Sometimes you want to combine data from different sources. There are multiple ways to do this in pandas, depending on the structure of the data you want to combine and the result you want to receive.
+
+## Concatenating data
+
+The `concat` function is used to concatenate data along a particular axis (rows or columns). It can be used to concatenate Series or DataFrames.
+
+```{python}
+df1 = pd.DataFrame(
+    {
+        "A": ["A0", "A1", "A2", "A3"],
+        "B": ["B0", "B1", "B2", "B3"],
+        "C": ["C0", "C1", "C2", "C3"],
+        "D": ["D0", "D1", "D2", "D3"],
+    },
+    index=[0, 1, 2, 3],
+)
+
+df2 = pd.DataFrame(
+    {
+        "A": ["A4", "A5", "A6", "A7"],
+        "B": ["B4", "B5", "B6", "B7"],
+        "C": ["C4", "C5", "C6", "C7"],
+        "D": ["D4", "D5", "D6", "D7"],
+    },
+    index=[4, 5, 6, 7],
+)
+
+print("df1:")
+print(df1)
+print("\ndf2:")
+print(df2)
+```
+
+```{python}
+print("Vertical stacking (the default):")
+pd.concat([df1, df2])
+```
+
+```{python}
+print("Horizontal stacking:")
+pd.concat([df1, df2], axis=1)
+```
+
+If the indexes of the two frames overlap, then rows with the same index are aligned:
+
+```{python}
+df3 = pd.DataFrame(
+    {
+        "a": ["a2", "a3", "a4", "a5"],
+        "b": ["b2", "b3", "b4", "b5"],
+        "c": ["c2", "c3", "c4", "c5"],
+        "d": ["d2", "d3", "d4", "d5"],
+    },
+    index=[2, 3, 4, 5],
+)
+
+pd.concat([df1, df3], axis=1)
+```
+
+The results above create `NaN` values where the indexes (horizontal) or columns (vertical) do not overlap. This is called an **outer join**. You can instead request an **inner join**:
+
+```{python}
+df4 = df2[["B", "D"]]
+print("outer (the default):")
+print(pd.concat([df1, df4]))
+print("\ninner:")
+print(pd.concat([df1, df4], join="inner"))
+```
+
+```{python}
+print("outer (the default):")
+print(pd.concat([df1, df3], axis=1))
+print("\ninner:")
+print(pd.concat([df1, df3], axis=1, join="inner"))
+```
+
+The difference between outer join and inner join is the same as the union and intersection of sets, the sets being indexes or columns.
+
+## Merging data
+
+The `merge` function is used to merge frames based on the values within the columns. For example, here we load in weather data for Newark, DE, being sure that the column representing the date is parsed as such:
+
+```{python}
+weather = pd.read_csv("_datasets/ghcn_newark.csv", parse_dates=["DATE"])[["DATE", "PRCP", "SNOW", "TMAX", "TMIN"]]
+weather.head()
+```
+
+Here is data for the S&P 500 index:
+```{python}
+sp500 = pd.read_csv("_datasets/SP500_daily.csv", parse_dates=["Date"])
+sp500["Gain"] = sp500["Close/Last"] - sp500["Open"]
+sp500.head()
+```
+
+Let's say we want to add the weather data to the S&P 500 data. We can do this by merging the two DataFrames on each's respective date column:
+```{python}
+merged = pd.merge(sp500, weather, left_on="Date", right_on="DATE")
+merged.head()
+```
+
+If the name of the key column is the same in both frames, you can specify it more simply, and it will end up just once in the merged frame:
+
+```{python}
+weather = weather.rename(columns={"DATE": "Date"})
+merged = pd.merge(sp500, weather, on="Date")
+merged.head()
+```
+
+The default merge type is an inner merge, which means that only rows with matching keys in both frames are included in the result:
+
+```{python}
+print("There are", len(sp500), "rows in the S&P 500 data.")
+print("There are", len(weather), "rows in the weather data.")
+print("There are", len(merged), "rows in the inner merged data.")
+```
+
+You can instead specify an outer merge:
+
+```{python}
+merged = pd.merge(sp500, weather, on="Date", how="outer")
+print("There are", len(merged), "rows in the outer merged data.")
+merged.head()
+```
+
+You also can make a left or right merge, which will include only all rows from the left or right frame, respectively:
+
+```{python}
+lefty = pd.merge(sp500, weather, on="Date", how="left")
+righty = pd.merge(sp500, weather, on="Date", how="right")
+print("There are", len(lefty), "rows in the left merge and", len(righty), "rows in the right merge.")
+```
+
+## Joining data
+
+The `join` method is a shortcut for `merge` when a key column is the index of one or both frames. Continuing with the above data:
+
+```{python}
+sp500 = sp500.set_index("Date")
+weather = weather.set_index("Date")
+joined = sp500.join(weather)
+joined.head()
+```
+
+A join is always "initiated" by the left member frame. The default is a left join, but you can specify an inner, outer, or right join as well, with the same meaning as for merges. 
+
+The provision of `join` is mainly a convenience for those who know the SQL language. The `merge` method is more general and can be used in more situations.
