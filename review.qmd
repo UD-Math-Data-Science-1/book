@@ -1,4 +1,7 @@
 # Review questions by section {.unnumbered}
+
+## Chapter 2
+
 ### Section 2.1: Summary statistics
 
 - Define mean, variance, and standard deviation. How do variance and standard deviation differ in terms of units?
@@ -76,3 +79,60 @@
 - Can you create a hypothetical example where Simpson's paradox might lead to incorrect conclusions if not properly understood?
 - Why is it important to consider both linear and nonlinear relationships when analyzing data?
 - How can the misuse of statistical methods lead to misconceptions or mistakes?
+
+## Chapter 3
+
+### Section 3.1
+
+- Define a feature vector and label in the context of classification problems. 
+- What distinguishes a binary classification problem from a multiclass problem?
+- Describe the structure of a feature matrix and a label vector.
+- Discuss the limitations of assigning arbitrary numerical values to qualitative data. Why is one-hot or dummy encoding considered a better strategy?
+- Outline the basic steps involved in training and applying a machine learning classifier.
+- What is a query vector? How is it used in the context of a classifier?
+Evaluating Classifier Performance:
+- How can the accuracy of a classifier be determined? 
+- Besides accuracy, what other metrics or considerations might be important in evaluating the effectiveness of a classifier?
+
+### Section 3.2
+
+- Define the concept of generalization in the context of machine learning classifiers. 
+- Explain the purpose of splitting a dataset into training and testing sets. How does this practice help in evaluating the generalization of a classifier?
+- Describe the significance of true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN) in assessing classifier performance.
+- Define accuracy, recall (sensitivity), specificity, precision, and negative predictive value (NPV). 
+- What information does a confusion matrix convey about a classifier's performance? 
+- Explain the F₁ score and balanced accuracy. How do they provide a more nuanced view of classifier performance compared to using accuracy alone?
+- How do the concepts of binary classification metrics extend to multiclass classification problems? 
+- Discuss the difference between macro averaging and other methods of averaging precision scores across multiple classes. Why might one averaging method be preferred over another?
+- Describe a hypothetical situation where a high recall is more important than high precision. 
+- Describe a hypothetical situation where a high precision is more important than high recall.
+
+### Section 3.3
+
+- Describe the process of building a decision tree for classification. 
+- Define Gini impurity and explain its significance in the context of decision trees. 
+- Describe the criteria for partitioning samples in a decision tree. 
+- What is an indicator function, and how is it utilized in expressing Gini impurity?
+- Explain the concept of a decision boundary in relation to decision trees. 
+- In general terms, how does the depth of a decision tree affect its decision boundary?
+- What is a greedy algorithm, and how does it apply to the context of finding a decision tree? 
+- What does it mean to say a classifier is interpretable?
+- Besides Gini impurity, are there other metrics or considerations that might be important in evaluating the partitioning in a decision tree?
+
+### Section 3.4
+
+- Describe the basic principle behind the k-nearest neighbors algorithm. How does it determine the class of a query point?
+- What role do distance metrics play in the kNN algorithm? Explain the properties that a distance metric must satisfy.
+- Define the 2-norm, 1-norm, and infinity-norm. How are these norms used to calculate distances between feature vectors?
+- How does the choice of $k$ in the kNN algorithm influence the algorithm's decision boundary and predictions?
+- Why is standardization or scaling of features important in kNN? 
+- How is kNN applied to multiclass classification problems? 
+
+### Section 3.5
+
+- Explain how a probability vector arises from vote-based classification methods. How does it provide more information than a winner-takes-all approach?
+- Define the ROC curve and explain its significance in evaluating binary classifiers. 
+- What is a decision threshold in the context of probabilistic classifiers? How does changing the threshold affect classification outcomes?
+- What is the AUC metric?
+- How can ROC curves and AUC scores be used to compare different classifiers or different settings of the same classifier?
+- Explain how the concepts of ROC curves and AUC scores extend to multiclass classification problems. 
