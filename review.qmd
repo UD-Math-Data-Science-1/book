@@ -136,3 +136,211 @@ Evaluating Classifier Performance:
 - What is the AUC metric?
 - How can ROC curves and AUC scores be used to compare different classifiers or different settings of the same classifier?
 - Explain how the concepts of ROC curves and AUC scores extend to multiclass classification problems. 
+
+## Chapter 4 
+
+### Section 4.1
+
+- How is the bias of a classifier defined in the context of expected prediction error? 
+- Explain the concept of variance in the context of machine learning models. How does variance affect a model's performance on unseen data?
+- Explain how bias and variance contribute to the total prediction error of a model. Why do we refer to a "tradeoff" between bias and variance? 
+- How does the size of the training set impact the bias and variance of a machine learning model? Answer using sketches of learning curves.
+- Discuss how a learner's capacity to capture complex behavior influences both its bias and variance. 
+- What might a large gap between training and test errors suggest about a model's ability to generalize? What steps could be taken to reduce the gap?
+
+### Section 4.2
+
+- Define overfitting in the context of machine learning and explain why it is problematic for model generalization.
+- Why does a model that perfectly fits the training data not necessarily perform well on new, unseen data?
+- How does the choice of $k$ in kNN affect the likelihood of overfitting, particularly with noisy data? 
+- Explain how the depth of a decision tree can contribute to overfitting. 
+- Compare and contrast overfitting and underfitting. How can one identify these issues based on the model's performance?
+- How is overfitting related to the concept of variance in a model's predictions? Discuss the relationship between overfitting and the gap between training and testing performance.
+- What strategies can be employed to reduce the risk of overfitting in machine learning models? 
+- How does overfitting fit into the broader discussion of the bias-variance tradeoff? 
+- Describe how learning curves can be used to diagnose overfitting. 
+
+### Section 4.3
+
+- Define ensemble methods in machine learning and explain why they are used to improve model performance.
+- What is bootstrap aggregation (bagging), and how does it help in reducing the variance of a machine learning model? 
+- Precisely how does bagging affect the bias and variance of a collection of $n$ learners?
+- Is bagging better with constituent classifiers that have small bias and large variance, or that have large bias and small variance?
+- What is a random forest? 
+- Which is more likely to improve bagging results: smaller individual training sets, or larger ones? Why?
+- How does selecting random subsets of features for each tree in n ensemble improve the ensemble performance?
+- What are the two chief disadvantages of using ensemble methods?
+
+### Section 4.4
+
+- Why is validation important in the process of selecting optimal hyperparameters and models?
+- Describe the steps involved in $k$-fold cross-validation. 
+- Explain stratified $k$-fold cross-validation and when it might be preferred over standard $k$-fold cross-validation.
+- How can cross-validation be used to tune hyperparameters? Describe the process of creating a validation curve and interpreting its results.
+- Discuss how the variance of cross-validation scores across folds can inform us about a model's reliability.
+- What is a grid search for hyperparameter optimization? When does it become impractical?
+
+## Chapter 5
+
+### Section 5.1
+
+- What is the mathematical form of a linear regression model? Use vector notation.
+- Using vector notation, define the loss function used in linear regression. How is it related to the selection of model coefficients?
+- What are the mathematical criteria that determine the coefficients of a linear regression model?
+- What is the inner product between two vectors, and why is it important in the context of linear regression?
+- What does the coefficient of determination measure, and what do its values indicate about a model's performance?
+- Define residuals in the context of regression and discuss their significance in evaluating model fit.
+- Compare and contrast MSE and MAE as measures of regression model performance. In what situations might one be preferred over the other?
+
+### Section 5.2
+
+- Define multilinear regression and explain how it extends the concept of (single) linear regression.
+- What is the role of the weight vector in multilinear regression?
+- Describe the loss function used in multilinear regression and explain how it defines the optimal weight vector.
+- Use a matrix-vector product to express the loss function of multilinear regression.
+- Explain how feature scaling affects the interpretation of regression coefficients in multilinear regression.
+- Explain the polynomial regression method. How does it relate to linear regression?
+- Which is more likely to produce overfitting, and why: increasing the degree of a polynomial regression model, or decreasing it?
+
+### Section 5.3
+
+- What is regularization in the context of machine learning? How does it help in addressing overfitting?
+- Explain what ill-posed and ill-conditioned problems are. How does regularization address them in machine learning models?
+- Explain Ridge and LASSO regression in terms of their effects on the loss function. 
+- How does the regularization parameter influence the behavior of Ridge and LASSO regression models?
+- How does one determine the optimal value of the regularization parameter?
+- Discuss the particular advantages of LASSO regression in terms of feature selection.
+
+### Section 5.4
+
+- Describe the two mathematical properties that define linearity.
+- Why are nonlinear regression methods necessary/useful?
+- Describe how the k-nearest neighbors classification algorithm can be adapted for regression. 
+- Describe how decision trees can be used for regression. 
+- Discuss the difference between using mean square error and mean absolute error as quality measures.
+- Describe the concept of a random forest regressor. How does it improve upon decision tree regression?
+- Discuss the bias-variance tradeoff in the context of kNN and decision tree regression.
+
+### Section 5.5
+
+- Define the logistic function. Why is it particularly suitable for modeling probabilities?
+- Explain mathematically how logistic regression models the probability of a binary outcome. 
+- What is cross-entropy loss, and why is it preferred over mean squared error in logistic regression?
+- Discuss the advantages and disadvantages of logistic regression compared to linear regression.
+- Explain mathematically how LASSO and ridge regularization modify logistic regression.
+- Describe how logistic regression can be extended to handle multiclass classification problems.
+- Explain the concept of a decision threshold in the context of logistic regression. How does the ROC curve help to evaluate the effect of the decision threshold?
+- What is the AUC metric? What would be considered poor and excellent values for it?
+
+## Chapter 6 
+
+### Section 6.1
+
+- Explain the relationship between similarity and distance in the context of clustering. How is similarity typically quantified when a distance metric is available?
+- Define a distance matrix and describe its properties. 
+- Define angular distance and its significance in comparing the similarity between data points. 
+- Explain the concept of cosine pseudodistance and how it differs from true distance metrics. Why might one choose to use cosine pseudodistance over angular distance?
+- Discuss some counterintuitive properties of high-dimensional spaces that affect the use of distance-based methods in data analysis.
+- What is the curse of dimensionality, and how does it impact the effectiveness of clustering and nearest-neighbor algorithms in high-dimensional data?
+- Discuss factors to consider when choosing a distance metric for clustering analysis. How do the characteristics of the data influence this choice?
+- Describe how distance and similarity measures can be applied in text analysis, such as sentiment analysis or document clustering. What challenges arise in this context, and how are they addressed?
+
+### Section 6.2
+
+- Define the Rand index and explain how it is used to compare two clusterings of the same dataset.
+- What is the adjusted Rand index, and how does it improve upon the Rand index for evaluating clustering performance?
+- Describe the silhouette value for a sample within a clustering. What is its maximum possible value, and what does that value indicate about the sample's placement?
+- What do negative silhouette values signify?
+- Identify the limitations of silhouette scores in evaluating clusterings. Why might they favor certain types of cluster shapes?
+
+### Section 6.3
+
+- What is the k-means algorithm, and what is its primary goal?
+- Define the terms "centroid" and "inertia" as they relate to the k-means clustering algorithm. How do these concepts contribute to the formation of clusters?
+- Describe Lloyd's algorithm. What does convergence mean in this context?
+- Discuss the significance of initialization in the k-means algorithm. 
+- Explain how the number of clusters, $k$, is determined in k-means clustering. What are some strategies or metrics used to select an optimal $k$?
+- Identify and explain some significant limitations of the k-means clustering algorithm. 
+
+### Section 6.4
+
+- What is hierarchical clustering? 
+- Describe the process of agglomerative clustering. 
+- Describe the different types of linkage criteria: single, complete, average, and Ward. 
+- How is a dendrogram interpreted in the context of hierarchical clustering? How can it be used to determine the optimal number of clusters?
+- Discuss the advantages of using hierarchical clustering over k-means.
+- Identify and explain some significant limitations of hierarchical clustering.
+- How does the choice of linkage type affect the clustering result?
+- Explain why hierarchical clustering can be performed using only a distance matrix, without access to the original feature vectors.
+
+## Chapter 7
+
+### Section 7.1
+
+- Define a graph. What is the difference between an undirected graph and a directed graph?
+- Explain how a graph can be represented by its adjacency matrix.
+- Explain the differences between star graphs, cycle graphs, wheel graphs, complete graphs, and lattice graphs. Provide examples of each.
+- What does it mean for two nodes to be neighbors in a graph? Define the degree of a node.
+- Define an ego graph. How can ego graphs be useful in analyzing networks?
+- How can the degree of nodes and the average degree of a graph be used to analyze the structure of a network?
+- Provide examples of practical applications where graphs are effectively used. 
+
+### Section 7.2
+
+- What is an Erdős-Rényi graph, and how is it constructed?
+- How does the probability parameter $p$ affect the structure of an Erdős-Rényi graph?
+- Quote the formula for the expected number of edges in an Erdős-Rényi graph with $n$ nodes and edge probability $p$.
+- Describe the process of constructing a Watts-Strogatz graph. What are its key parameters?
+- Explain how a Watts-Strogatz graph models human social relationships.
+- Compare and contrast Erdős-Rényi and Watts-Strogatz graphs in terms of their structure.
+- Discuss potential applications of random graph models in understanding real-world networks.
+
+### Section 7.3
+
+- What does the local clustering coefficient of a node in a network represent? How is it calculated?
+- How can the clustering coefficient be used to analyze real-world networks, such as social networks or biological networks? 
+- Explain why the expected value of the average clustering coefficient in Erdős-Rényi graphs is equal to the probability $p$. How does this property compare to most real-world networks?
+- Discuss how the structure of a network (e.g., the number of nodes, average degree, presence of community structures) can impact its clustering coefficient. Provide examples to illustrate your points.
+- What are some practical applications of analyzing clustering in networks? 
+
+### Section 7.4
+
+- How is the distance between two nodes in a graph determined?
+- Explain the concept of the diameter of a graph. How does it relate to the average distance between nodes?
+- What does it mean for a graph to be connected? 
+- Explain how the Watts-Strogatz model illustrates the small-world phenomenon.
+- In the Watts-Strogatz model, how does the rewiring probability $q$ affect the average distance and clustering coefficient of the graph?
+
+### Section 7.5
+
+- What does the degree distribution of a network tell us about its structure? 
+- Describe the typical characteristics of degree distributions observed in real-world networks, such as the Twitch network. What are "hubs," and why are they significant?
+- Compare and contrast the degree distributions of Erdős-Rényi (ER), Watts-Strogatz (WS), and Barabási-Albert (BA) graphs. Which model is likely to produce a degree distribution similar to that observed in many real-world networks?
+- Explain the concept of a power-law distribution. How can you identify if a network's degree distribution follows a power-law?
+- What is preferential attachment, and how does it relate to the Barabási-Albert model of network growth?
+- Discuss the clustering characteristics of Barabási-Albert graphs. How well do BA graphs replicate the clustering observed in real-world networks like Twitch?
+- Considering the degree distributions and clustering coefficients of real-world networks, what challenges do researchers face in accurately modeling these networks? How do the ER, WS, and BA models address these challenges differently?
+
+### Section 7.6
+
+- What is centrality in the context of network analysis?
+- Define degree centrality. 
+- Define betweenness centrality. Describe how it differs from degree centrality and what it reveals about a node's role in a network.
+- What is eigenvector centrality, and how does it relate to the concept of nodes linking to other important nodes?
+- Discuss the differences between degree centrality, betweenness centrality, and eigenvector centrality. 
+- Given a small-world network, how might centrality measures help identify key nodes? 
+- Discuss practical applications of centrality measures in real-world scenarios.
+
+### Section 7.7
+
+- In plain terms, what is the friendship paradox?
+- Describe the mathematical inequality that represents the friendship paradox. 
+- How does the friendship paradox extend to eigenvector centrality? 
+- Discuss the implications of the friendship paradox for understanding social networks. How might this paradox affect individuals' perceptions of their social standing?
+
+### Section 7.8
+
+- What is the purpose of identifying communities within a network?
+- Describe the process of a random walk on a network. How does the probability distribution of the walker's location change with each hop?
+- Explain how the random-walk matrix $W$ is constructed from the adjacency matrix $A$. What does each element of $W$ represent?
+- Describe the label propagation algorithm and its purpose in community detection. How does the damping parameter $\lambda$ affect the identification of communities?
