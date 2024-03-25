@@ -887,12 +887,12 @@ $$
 Given $\bfu=[-1,1,0,4]$ and $\bfv=[-2,1,2,2]$, find the distance between them using all three common norms.
 
 :::{.solution}
-We first calculate $\bfu - \bfv = [-3,0,-2,2]$. Then 
+We first calculate $\bfu - \bfv = [1,0,-2,2]$. Then 
 $$
 \begin{split}
-\twonorm{\bfu-\bfv} &= \bigl( 3^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{17}, \\ 
-\onenorm{\bfu-\bfv} &= 3  + 0 + 2 + 2 = 7, \\ 
-\infnorm{\bfu-\bfv} &= \max\{ 3, 0, 2, 2 \} = 3.
+\twonorm{\bfu-\bfv} &= \bigl( 1^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{9} = 3, \\ 
+\onenorm{\bfu-\bfv} &= 1  + 0 + 2 + 2 = 5, \\ 
+\infnorm{\bfu-\bfv} &= \max\{ 1, 0, 2, 2 \} = 2.
 \end{split}
 $$
 :::
