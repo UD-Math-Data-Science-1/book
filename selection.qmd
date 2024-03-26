@@ -18,6 +18,7 @@ from sklearn.metrics import confusion_matrix, f1_score, balanced_accuracy_score
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.model_selection import LearningCurveDisplay, StratifiedShuffleSplit
 ```
 
 We have barely scratched the surface of the universe of classification algorithms. Even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through *hyperparameters*.
@@ -155,44 +156,30 @@ We can illustrate the tradeoff between bias and variance by running an artificia
 We will use a subset of a realistic data set used to predict the dominant type of tree in patches of forest. We train a decision tree classifier with fixed depth throughout. (Don't confuse the forest data for the tree classifier, haha.)
 
 ```{python}
-forest = datasets.fetch_covtype()
-X = forest["data"][:250000,:8]   # 250,000 samples, 8 dimensions
-y = forest["target"][:250000]
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.05, 
-    shuffle=True, random_state=0
-)
-
-alln = range(300, 6001, 300)       # sizes of the training subsets
-results = []                       # for tracking results
-tree = DecisionTreeClassifier(max_depth=3) 
-for n in alln:             # iterate over training set sizes
-    for i in range(100):        # iterate over training sets
-        X_train, y_train = shuffle(X_train, y_train, random_state=10*i)
-        XX, yy = X_train[:n,:], y_train[:n]       # training subset of size n
-        tree.fit(XX, yy)
-        results.append( ("train", n, 1-tree.score(XX, yy)) )
-        results.append( ("test", n, 1-tree.score(X_test, y_test)) )
-
-cols = [ "kind", "training set size", "error" ]
-results = pd.DataFrame(results, columns=cols)
-sns.relplot(data=results, 
-    x=cols[1], y=cols[2], 
-    kind="line", errorbar="sd", hue=cols[0]
-);
+ds = datasets.load_digits()        
+X, y = ds["data"], ds["target"]==8
+tree = DecisionTreeClassifier(max_depth=4)
+LearningCurveDisplay.from_estimator(
+    tree, X, y,
+    cv=StratifiedShuffleSplit(n_splits=100, test_size=0.2, random_state=19716),
+    score_name="Accuracy",
+    score_type="both",
+    n_jobs=-1,
+    random_state=302,
+    train_sizes=np.linspace(0.05, 1, 16)
+    )
 ```
 
-The plot above shows **learning curves**. The solid line is the mean result over all trials, and the ribbon has a width of one standard deviation. For each small training set, the tree has more than enough resolving power and adapts itself too well to the training data, leading to a large gap with the testing error (i.e., a failure to generalize past the training set). You can also see large variance (ribbon widths) in the results at the smaller sizes. As the training set size increases, we observe the training error increasing, because the task of reproducing the training set is now harder. The testing errors decrease, though, because the model has been fit to a more representative subset of the data. The gap between training and testing closes as more training data is used and the model is pushed to its limits.
+The plot above shows **learning curves** resulting from experiments over 100 different training sets at various sizes selected randomly from the full set. The solid lines and ribbons show the means and standard deviations, respectively, for each training set size. 
 
-Note that the curves seem to approach a horizontal asymptote at a nonzero level of error. This level indicates an unavoidable bias for this tree size, no matter how much of the data we throw at it. As a simple analogy, think about approximating curves in the plane by a parabola. You will be able to do a perfect job for linear and quadratic functions, but if you approximate one period of a cosine curve, you can't do a great job no matter how much information you have. 
+The model in the experiment is a decision tree of depth 4. When the training set is tiny, the model can represent it very well. But those results generalize poorly, and the testing score is much lower and shows a lot of variance. As the training set size increases, the model cannot fit it as well (bias increases), but both the testing scores and training scores show less variance due to better generalization. 
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_c67050r3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_51s7my5k" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-When you see a large gap between training and test errors, you should suspect that the learner will not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.
+When you see a large gap between training and test errors, you should suspect that the learner may not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.
 
 ![](_media/memes/learning-curve.jpg){height="240"}
 
@@ -324,60 +311,33 @@ overfit(40,DecisionTreeClassifier(max_depth=2),3)
 
 ### Overfitting and variance
 
-The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see @fig-select-knn-1-noisy, and @fig-select-tree-6-noisy, for example). Thus, overfitting is often associated with a large gap between training and testing variance, as observed in @sec-select-learning-curves. 
+The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see @fig-select-knn-1-noisy, and @fig-select-tree-6-noisy, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in @sec-select-learning-curves. 
 
-::::{#exm-select-overfit-forest chapter=4 type=💻 description="Overfitting"}
-Returning to the forest data from @exm-select-learning-curves, we try decision trees of maximum depth $r=12$ on 100 random training subsets of size 5000:
+::::{#exm-select-overfit-digits chapter=4 type=💻 description="Overfitting"}
+@exm-select-learning-curves showed that a decision tree of depth 3 had a closing gap between scores for training and testing sets as the training set size grew.  Now look at what happens for a much deeper decision tree:
 
 ```{python}
-#| code-fold: true
-forest = datasets.fetch_covtype()
-X = forest["data"][:50000,:8]
-y = (forest["target"][:50000] == 1)
-
-def experiment(learner, X, y, n):
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y,
-        test_size=0.2,
-        shuffle=True,
-        random_state=1
+ds = datasets.load_digits()        
+X, y = ds["data"], ds["target"]==8
+tree = DecisionTreeClassifier(max_depth=10)
+LearningCurveDisplay.from_estimator(
+    tree, X, y,
+    cv=StratifiedShuffleSplit(n_splits=100, test_size=0.2, random_state=19716),
+    score_name="Accuracy",
+    score_type="both",
+    n_jobs=-1,
+    random_state=302,
+    train_sizes=np.linspace(0.05, 1, 16)
     )
-    results = [] 
-    for i in range(100):
-        X_train, y_train = shuffle(X_train, y_train, random_state=i)
-        XX, yy = X_train[:n,:], y_train[:n]
-        learner.fit(XX, yy) 
-        err = 1 - balanced_accuracy_score(yy, learner.predict(XX))
-        results.append( ("train", err) )   # training error
-        err = 1 - balanced_accuracy_score(y_test, learner.predict(X_test))
-        results.append( ("test", err) )    # test error
-
-    results = pd.DataFrame( results, columns=["kind", "error"] )
-    sns.displot(data=results, x="error", hue="kind", bins=20);
 ```
 
-```{python}
-#| label: fig-select-overfit-forest
-#| fig-cap: Results from an overfit decision tree
-tree = DecisionTreeClassifier(max_depth=12)
-experiment(tree, X, y, 5000)
-```
-
-Since $2^{12}=4096$, this tree is probably overfit to the training data, and we also see the wide separation between training and testing that suggests the training does not generalize well. With a depth of $r=4$, the training and testing results completely overlap:
-
-```{python}
-tree = DecisionTreeClassifier(max_depth=4)
-experiment(tree, X, y, 5000)
-```
-
-However, notice above that the testing error increased substantially from the overfit case. 
+The testing scores increase with the training set size, which is good, but the training score remains stuck at 100% and the gap between training and test never fully closes. In effect, the model can perfectly reproduce its training set but never knows what it doesn't see. The final score of this more-complex tree is not appreciably better than that of the simpler tree in @exm-select-learning-curves. All of the extra resolving power went to fixing details that don't generalize.
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_7ujgs3cq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ny93d8sk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
-:::
 
-We could say that the last tree in @exm-select-overfit-forest is underfitting the data; the behavior of the labelling function is probably too complex to be replicated well by any tree that shallow. In short, the overfitting/underfitting dilemma is another manifestation of the bias--variance tradeoff.
+:::
 
 ![](_media/memes/overfit.jpg){height="240"}
 
