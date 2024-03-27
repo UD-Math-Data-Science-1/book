@@ -492,7 +492,8 @@ Note
 </div>
 </div>
 <p>(video example is different from the text)</p>
-</div></div><section id="linear-algebra" class="level3 page-columns page-full" data-number="5.1.1">
+</div></div><p><img src="_media/memes/slope-intercept.jpg" class="img-fluid" width="400"></p>
+<section id="linear-algebra" class="level3 page-columns page-full" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">5.1.1</span> Linear algebra</h3>
 <p>Before moving on, we want to examine a vector-oriented description of the process. If we define <span class="math display">\[
 \bfe = [1,1,\ldots,1] \in \real^n,
@@ -1152,6 +1153,7 @@ dtype: float64</code></pre>
 </div>
 <p>We now have evidence that <em>weight</em> is the most significant negative factor for MPG, by a wide margin.</p>
 </div>
+<p><img src="_media/memes/multiple-regression.jpg" class="img-fluid" width="400"></p>
 <p>In the next example we will see that we can create new features out of the ones that are initially given. Sometimes these new features add a lot to the quality of the regression.</p>
 <div id="exm-regression-sales-multi" class="theorem example" data-chapter="5" type="💻" data-description="Multilinear regression for sales dataset">
 <p><span class="theorem-title"><strong>Example 5.8</strong></span> Here we load data about advertising spending on different media in many markets:</p>
@@ -1624,7 +1626,8 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 \]</span></p>
 <p>again for a nonnegative value of <span class="math inline">\(\alpha\)</span>.</p>
 </div>
-<p>As <span class="math inline">\(\alpha\to 0\)</span>, both types of regularization revert to the usual least-squares loss, but as <span class="math inline">\(\alpha \to \infty\)</span>, the optimization becomes increasingly concerned with prioritizing a small result for <span class="math inline">\(\bfw\)</span>.</p>
+<p>The new terms in <a href="#eq-regression-ridge" class="quarto-xref">Equation&nbsp;<span>5.7</span></a> and <a href="#eq-regression-ridge" class="quarto-xref">Equation&nbsp;<span>5.7</span></a> based on norms of <span class="math inline">\(\bfw\)</span> are called <strong>penalty terms</strong>. As <span class="math inline">\(\alpha\to 0\)</span>, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as <span class="math inline">\(\alpha \to \infty\)</span>, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for <span class="math inline">\(\bfw\)</span>. In this limit, the model pays less and less attention to the data, which can reduce overfitting.</p>
+<p><img src="_media/memes/penalty.jpg" class="img-fluid" width="400"></p>
 <p>While ridge regression is an easier function to minimize quickly, LASSO has an interesting advantage, as illustrated in this figure.</p>
 <p><img src="_media/regularization.png" class="img-fluid"></p>
 <p>LASSO tends to produce <em>sparse</em> results, meaning that some of the regression coefficients are zero or negligible. These zeros indicate predictor variables that have minor predictive value, which can be valuable information in itself. Moreover, these variables can often be removed from the regression to reduce variance without noticeably affecting the bias.</p>
@@ -2081,6 +2084,7 @@ c\cdot \hat{f}(\bfu) = -1 \cdot |1+1| = -2.
 <p>One major benefit of the linear approach is that the dependence of the weight vector <span class="math inline">\(\bfw\)</span> on the regressed data is also linear, which makes solving for it straightforward.</p>
 <p>As the simplest type of multidimensional function, linear relationships are a good first resort. Furthermore, we can augment the features with powers in order to get polynomial relationships. However, that approach becomes infeasible for more than 2 or 3 dimensions, because the number of polynomial terms needed explodes. (While there is a way around this restriction known as the <em>kernel trick</em>, that’s beyond our mathematical scope here.)</p>
 <p>Alternatively, we can resort to fully nonlinear regression methods. Two of them come from generalizations of our staple classifiers.</p>
+<p><img src="_media/memes/not-a-classifier.jpg" class="img-fluid" width="400"></p>
 <section id="nearest-neighbors" class="level3 page-columns page-full" data-number="5.4.1">
 <h3 data-number="5.4.1" class="anchored" data-anchor-id="nearest-neighbors"><span class="header-section-number">5.4.1</span> Nearest neighbors</h3>
 <p>To use kNN for regression, we find the <span class="math inline">\(k\)</span> nearest examples as with classification, but replace voting on classes with the mean or median of the neighboring values. A simple example confirms that the resulting approximation is not linear.</p>
@@ -2397,6 +2401,7 @@ y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
 -\log\bigl[ (0.9)(0.6)(0.8)(0.3)\bigr] = -\log(0.1296).
 \]</span> Using the natural log, this is about <span class="math inline">\(2.043\)</span>.</p>
 </div>
+<p><img src="_media/memes/cross-entropy.jpeg" class="img-fluid" width="400"></p>
 <p>Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does <em>not</em> lead to a linear problem for the weight vector <span class="math inline">\(\bfw\)</span>. The difference in practice is usually not a concern, though.</p>
 <p>Cross-entropy is the default loss function for a <code>LogisticRegression</code> in scikit-learn. In <a href="#exm-regression-spam" class="quarto-xref">Example&nbsp;<span>5.21</span></a>, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.</p>
 <div id="exm-regression-spam" class="theorem example" data-chapter="5" type="💻" data-description="Logistic regression as a spam filter">
