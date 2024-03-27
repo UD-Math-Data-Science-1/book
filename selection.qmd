@@ -18,7 +18,6 @@ from sklearn.metrics import confusion_matrix, f1_score, balanced_accuracy_score
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, roc_auc_score
-from sklearn.model_selection import LearningCurveDisplay, StratifiedShuffleSplit
 ```
 
 We have barely scratched the surface of the universe of classification algorithms. Even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through *hyperparameters*.
@@ -156,17 +155,19 @@ We can illustrate the tradeoff between bias and variance by running an artificia
 We will use a subset of a realistic data set used to predict the dominant type of tree in patches of forest. We train a decision tree classifier with fixed depth throughout. (Don't confuse the forest data for the tree classifier, haha.)
 
 ```{python}
+from sklearn.model_selection import LearningCurveDisplay, StratifiedShuffleSplit
+
 ds = datasets.load_digits()        
 X, y = ds["data"], ds["target"]==8
 tree = DecisionTreeClassifier(max_depth=4)
 LearningCurveDisplay.from_estimator(
     tree, X, y,
-    cv=StratifiedShuffleSplit(n_splits=100, test_size=0.2, random_state=19716),
-    score_name="Accuracy",
-    score_type="both",
-    n_jobs=-1,
     random_state=302,
-    train_sizes=np.linspace(0.05, 1, 16)
+    cv=StratifiedShuffleSplit(n_splits=100, test_size=0.2, random_state=19716),
+    train_sizes=np.linspace(0.05, 1, 16),
+    score_name="Accuracy",
+    score_type="both",    # training and testing scores
+    n_jobs=-1             # use all processors
     )
 ```
 
@@ -314,7 +315,7 @@ overfit(40,DecisionTreeClassifier(max_depth=2),3)
 The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see @fig-select-knn-1-noisy, and @fig-select-tree-6-noisy, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in @sec-select-learning-curves. 
 
 ::::{#exm-select-overfit-digits chapter=4 type=💻 description="Overfitting"}
-@exm-select-learning-curves showed that a decision tree of depth 3 had a closing gap between scores for training and testing sets as the training set size grew.  Now look at what happens for a much deeper decision tree:
+@exm-select-learning-curves showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew.  Now look at what happens for a much deeper decision tree:
 
 ```{python}
 ds = datasets.load_digits()        
@@ -589,8 +590,6 @@ The steps for **$k$-fold cross-validation** are as follows:
 5. Assess performance using the test set. 
 ::::
 
-A different variation is **stratified** $k$-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.
-
 ::::{#exm-select-folds chapter=4 type=✍️ description="Folds for validation"}
 Here is how 16 elements can be split into 4 folds:
 
@@ -603,6 +602,8 @@ for train,test in kf.split(range(16)):
 ```
 ::::
 
+A different variation is **stratified** $k$-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.
+
 ::::{#exm-select-cv-beans chapter=4 type=💻 description="Cross-validation"}
 Let's apply cross-validation to the beans dataset. 
 
@@ -610,12 +611,6 @@ Let's apply cross-validation to the beans dataset.
 beans = pd.read_excel("_datasets/Dry_Bean_Dataset.xlsx")
 X = beans.drop("Class", axis=1)
 y = beans["Class"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
-    test_size=0.15, 
-    shuffle=True, random_state=302
-    )
 ```
 
 A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:
@@ -629,9 +624,10 @@ learner = make_pipeline(StandardScaler(), knn)
 kf = KFold(n_splits=6, shuffle=True, random_state=18621)
 scores = cross_validate(
     learner, 
-    X_train, y_train, 
+    X, y, 
     cv=kf,
-    scoring="balanced_accuracy"
+    scoring="balanced_accuracy",
+    n_jobs=-1    # use all processors
     )
 
 print("Validation scores:")
@@ -641,6 +637,10 @@ print( scores["test_score"] )
 The low variance across the folds that we see above is reassurance that they are representative. Conversely, if the scores were spread more widely, we would be concerned that there was strong dependence on the training set, which might indicate overfitting.
 ::::
 
+::: {.callout-important}
+Note in @exm-select-cv-beans that the dataset was not split into fixed training and test sets. Instead, the cross-validation process itself was used to estimate the generalization error. 
+:::
+
 ### Hyperparameter tuning
 
 If we perform cross-validations as we vary a hyperparameter, we get a **validation curve**. 
@@ -649,49 +649,25 @@ If we perform cross-validations as we vary a hyperparameter, we get a **validati
 Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:
 
 ```{python}
+from sklearn.model_selection import ValidationCurveDisplay
 from sklearn.model_selection import StratifiedKFold
 
-depths = range(4, 16, 1)
-kf = StratifiedKFold(n_splits=8, shuffle=True, random_state=2)
-results = []    # for keeping results
-for d in depths:
-    tree = DecisionTreeClassifier(max_depth=d, random_state=1)
-    cv = cross_validate(tree, 
-        X_train, y_train, 
-        cv=kf, 
-        scoring="balanced_accuracy",
-        n_jobs=-1
-        )
-    for err in 1 - cv["test_score"]:
-      results.append( (d, err) )
-
-results = pd.DataFrame(results, columns=["depth", "error"] )
-sns.relplot(data=results, 
-    x="depth", y="error", 
-    kind="line", errorbar="sd"
-    );
+ValidationCurveDisplay.from_estimator(
+    DecisionTreeClassifier(random_state=302), X, y,
+    param_name="max_depth", 
+    param_range=range(3, 16),
+    cv=StratifiedKFold(n_splits=6, shuffle=True, random_state=19716),
+    scoring="balanced_accuracy",
+    n_jobs=-1
+    )
 ```
 
-Initially the error decreases because the shallowest decision trees are underfit. The minimum error is at max depth 9, after which overfitting seems to take over:
-
-```{python}
-results.groupby("depth").mean()
-```
-
-We can now train this optimal classifier on the entire training set and measure performance on the reserved testing data:
-
-```{python}
-tree = DecisionTreeClassifier(max_depth=9, random_state=1)
-tree.fit(X_train, y_train)
-yhat = tree.predict(X_test)
-print( "score is", balanced_accuracy_score(y_test, yhat) )
-```
+The score increases nicely until the depth is 6, after which it levels off, with an increasing gap between training and testing error, suggesting that overfitting settles in. We conclude that 6 or 7 is a good choice for the maximum depth.
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ivxpq2k3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_n3burva9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
-
 
 #### Grid search 
 When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it's common to perform a *grid search*, in which we try cross-validated fitting using every specified combination of parameter values. 
