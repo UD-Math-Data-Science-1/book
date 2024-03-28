@@ -575,16 +575,14 @@ y.value_counts()
 We can check the silhouette scores for the reference labelling in order to set expectations for how well a clustering method might do:
 
 ```{python}
-digits["sil"] = silhouette_samples(X,y)
-digits.groupby("target")["sil"].median()
+digits["sil value"] = silhouette_samples(X,y)
+digits.groupby("target")["sil value"].median()
 ```
 
 A look at the distributions of the silhouette values reveals more details:
 
 ```{python}
-sns.catplot(data=digits, x="target", y="sil",
-    kind="violin"
-    );
+sns.catplot(data=digits, x="target", y="sil value", kind="box");
 ```
 
 The values are mostly positive, which indicates nearly all of the samples for a digit are at least somewhat closer to each other than to the other samples. The 6s are the most distinct. However, the existence of scores close to and below zero suggest that a clustering algorithm ia unlikely to reproduce the true classification perfectly. To put it another way, the features chosen to represent the digits don't seem to create three clear, well-separated balls of points representing the three different types of digits.
@@ -601,10 +599,8 @@ The bullseye dataset shown in @fig-clustering-bullseye has only one central clus
 ```{python}
 X, y = bullseye_data()
 s = silhouette_samples(X, y)
-clusters = pd.DataFrame({"cluster": y, "s value": s})
-sns.catplot(data=clusters, x="cluster", y="s value", 
-    kind="violin"
-    )
+clusters = pd.DataFrame({"cluster": y, "silhouette value": s})
+sns.catplot(data=clusters, x="cluster", y="silhouette value", kind="box");
 ```
 The central cluster scores well, but the rings score poorly because they are not compact and ball-shaped.
 ::::
@@ -770,17 +766,15 @@ def report(clustering):
     result = X.copy()
     y_hat = clustering.labels_    # cluster assignments
     result["cluster"] = y_hat
-    result["sil"] = silhouette_samples(X, y_hat)
+    result["sil value"] = silhouette_samples(X, y_hat)
     print(f"inertia: {clustering.inertia_:.5g}")
     print("silhouette medians by cluster:")
-    print( result.groupby("cluster")["sil"].median() )
+    print( result.groupby("cluster")["sil value"].median() )
     
-    sns.catplot(data=result, x="cluster", y="sil",
-        kind="violin", height=3
-        );
+    sns.catplot(data=result, x="cluster", y="sil value", kind="box", height=3);
     
     sns.relplot(data=result, x="x1", y="x2",
-        hue="cluster", size="sil",
+        hue="cluster", size="sil value",
         height=3, palette="Dark2"
         );
     return result
