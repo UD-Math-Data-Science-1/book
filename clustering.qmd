@@ -35,7 +35,11 @@ Dimension reduction
 Outlier detection
 : Find anomalous values in the data set and remove them or impute replacements.
 
-In this chapter we will look at clustering. The goal is to assign each feature vector a number from 1 to $k$, where $k$ is much smaller than the number of samples. More formally:
+In this chapter we will look at clustering. 
+
+## Introduction {.unnumbered}
+
+The goal of clustering is to assign each feature vector a number from 1 to $k$, where $k$ is much smaller than the number of samples. More formally:
 
 ::::{#def-cluster-clustering}
 Given an $n\times d$ feature matrix with rows $\bfX_1,\ldots,\bfX_n$, a **clustering** is a labelling function $c$ defined on the feature vectors such that
@@ -49,18 +53,19 @@ where $k$ is a positive integer. The **cluster** $C_j$ is the collection of all 
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_g0aquvfp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_um654m1q" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.0" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-The clusters $C_1,\ldots,C_k$ divide the samples into $k$ dijoint subsets. Depending on the algorithm, the number of clusters $k$ may be imposed (i. e., as a hyperparameter) or determined automatically. 
+The clusters $C_1,\ldots,C_k$ divide the samples into $k$ nonoverlapping subsets. Depending on the algorithm, the number of clusters $k$ may be imposed (i.e., as a hyperparameter) or determined automatically. 
 
 Intuitively, we want similar examples to be clustered together (that is, to receive the same label). The motivation for clustering is often to find a way to classify the samples by intrinsic properties when no such classification is known in advance. It is *not* necessary that the clustering function $c$ be defined for vectors $\bfx$ other than the feature vectors, although many clustering algorithms can be used to do that as well.
-
 
 ::: {.callout-important}
 The universe doesn't owe you a clustering. Not all phenomena are amenable to clustering in whatever features you happen to choose.
 :::
 
-While classification only requires us to separate different classes of examples, clustering is more specific and more demanding: samples in a cluster need to be more like each other, or the "average" cluster member, than they are like members of other clusters. We should expect that edge cases will look ambiguous.
- 
-In order to get a feeling for the algorithms, we will apply them to three illustrative datasets:
+While classification only requires us to separate different classes of examples, clustering is more specific and more demanding: samples in a cluster need to be more like each other, or the "average" cluster member, than they are like members of other clusters. We should expect that edge cases will look ambiguous, and there may be isolated examples that don't fit well into any cluster.
+
+### Toy examples {.unnumbered}
+
+In order to get a feeling for the algorithms, we will apply them to three illustrative "toy" datasets in two dimensions. Working in two dimensions allows us to visualize the results easily, something that is its own challenge when working in higher dimensions.
 
 * blobs
 : This dataset has one distinct blob, plus two that kind of overlap a bit:
@@ -135,31 +140,12 @@ p.set(aspect=1);
 
 Ideally, samples within a cluster are more similar to each other than they are to samples in other clusters. The first decision we have to make is how to define *similarity* between an arbitrary pair.
 
-When a distance metric is available, we intuitively expect similarity to be inversely related to distance. There are various ways to quantify the relationship, but we will not use them. Instead, we will take "maximize similarity" to be equivalent to "minimize distance."
-
-<!-- 
-Here is one of the most common ways to realize that ideal.
-
-::::{#def-cluster-gauss}
-Given a distance function between pairs of vectors as $\dist(\bfx,\bfy)$, we define the **Gaussian similarity** between two vectors as
-$$
-\simil(\bfx,\bfy) = \exp \left[ - \frac{\dist(\bfx,\bfy)^2}{2\sigma^2}  \right].
-$$ {#eq-similar-similarity}
-::::
+When a distance metric is available, we intuitively expect similarity to be inversely related to distance. There are various precise ways to transform distance to similarity when needed, but we will not use them. Instead, we will take the proposition to "maximize similarity" as equivalent to "minimize distance."
 
 ::: {.callout-note}
-Up to a constant scaling factor, the function in the Gaussian similarity definition is the same as the PDF of the normal distribution with mean 0 and standard deviation $\sigma$. 
+A practical advantage of working with similarity rather than distance that we will *not* explore is that small values of similarity can be rounded down to zero. Such rounding has negligible effect on the results, but it can create big gains in execution time and memory usage. 
 :::
 
-Thus, for any vector $\bfx$,
-$$
-\simil(\bfx,\bfx) = 1.
-$$
-This is the largest possible value. The similarity tends to zero as distance increases. The scaling parameter $\sigma$ controls the rate of decrease; for instance, when the distance is $\sigma$, the similarity is $e^{-1/2}\approx 0.6$. 
-
-::: {.callout-tip}
-When the distance function in Gaussian similarity is based on a vector norm, it's advisable to use standardization of the features, either by using z-scores or some other normalization.
-::: -->
 ### Distance matrix
 
 ::::{#def-cluster-distmat}
@@ -174,7 +160,11 @@ $$
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ib6r7f6v&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_bnic1gqh" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.1.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
-Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. 
+Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. The latter property is important throughout linear algebra.
+
+::::{#def-cluster-symmetric}
+An $n\times n$ matrix $\bfA$ in which $\bfA_{ij}=\bfA_{ji}$ for all $i,j$ is called **symmetric**.
+::::
 
 ::::{#exm-cluster-distmat-small chapter=6 type=✍️ description="Distance matrix"}
 Using 1-norm for distance, find the distance matrix for the feature matrix 
@@ -203,14 +193,10 @@ $$
 ::::
 
 ::: {.callout-tip}
-Many clustering algorithms allow supplying $\mathbf{D}$ in lieu of the feature vectors. When you consider that in many problems, $n$ is much larger than $d$, it can be faster and easier to work with.
+In many problems, $n$ is much larger than $d$, so the distance matrix can be faster and easier to work with. Some clustering algorithms use only $\mathbf{D}$ and allow you to supply that in lieu of the feature vectors. 
 :::
 
-::: {.callout-note}
-A practical advantage of working with similarity rather than distance is that small values of similarity can be rounded down to zero. Such rounding has negligible effect on the results, but it can create big gains in execution time and memory usage. 
-:::
-
-The scikit-learn function `pairwise_distances` computes a distance matrix efficiently.
+The scikit-learn function `pairwise_distances` computes a distance matrix efficiently using any of the common vector norms.
 
 ::::{#exm-cluster-distmat chapter=6 type=💻 description="Usage of `pairwise_distances`"}
 The distance matrix of our *bullseye* dataset has some interesting structure:
@@ -221,6 +207,7 @@ D2 = pairwise_distances(X, metric="euclidean")   # use 2-norm metric
 ax = sns.heatmap(D2)
 ax.set_aspect(1);
 ```
+
 Because we set up three geometrically distinct groups of points, the distances of pairs within and between groups are fairly homogeneous. The lower-right corner, for example, shows that points in the outermost ring tend to be separated by the greatest distance.
 
 In the 1-norm, the *stripes* dataset is also interesting:
@@ -230,6 +217,7 @@ D1 = pairwise_distances(X, metric="manhattan")   # use 1-norm metric
 ax = sns.heatmap(D1)
 ax.set_aspect(1);
 ```
+
 Points in different stripes are always separated by at least the inter-stripe distance, while points within the same stripe have a range of possible distances.
 ::::
 
@@ -262,15 +250,18 @@ $$
 6 & 1 & 10 & 2 & 5 \\  14 & 0 & 23 & 3 & 7 \\ 2 & 3 & 1 & 5 & 0
 \end{bmatrix}. 
 $$
+
 Using the 2-norm, we get the distances:
 ```{python}
 X = np.array( [[6,1,10,2,5], [14,0,23,3,7], [2,3,1,5,0]] )
 pairwise_distances( X, metric="euclidean")
 ```
+
 Accoding to this metric, the most similar documents are the first and the last. However, cosine distance tells a different story:
 ```{python}
 pairwise_distances( X, metric="cosine")
 ```
+
 Now the first two documents look most similar. Looking at the vectors, we see that these two have the most similar relative frequencies, which is related to what we want to measure. The apparent dissimilarity in the 2-norm arises solely because the total word counts are very different.
 ::::
 
@@ -343,11 +334,11 @@ where each $x_i$ is chosen randomly in $[-1,1]$, becomes ever harder to satisfy 
 
 There are other, similar mathematical results demonstrating the weirdness of distances in high-dimensional space. These results and their implications go under the colorful name of **the curse of dimensionality**. Using distances in high-dimensional space is difficult not just for clustering but in nearest-neighbor and other algorithms as well.
 
-It turns out that in most practical problems, there is a way out of the mess: the data points are usually not uniformly or randomly distributed. That means that distance-based approaches can be made to work. Often, though, a first step is to find a way to reduce the dimensionality without changing the essential structure of the data, a step that is beyond what we go into here.
+It turns out that in most practical problems, there is a way out of the mess: the data points are usually not uniformly or randomly distributed. That means that distance-based approaches can be made to work. Often, though, a first step is to find a way to reduce the dimensionality without changing the essential structure of the data, a step that is beyond the scope of this course.
 
 ## Performance measures
 
-Before we start generating clusterings, we will discuss how to evaluate them. A clustering is essentially a partitioning of the samples into disjoint subsets. We will use some nonstandard terminology that makes the definitions a bit easier to state and read.
+Before we start generating clusterings, we will discuss how to evaluate them. A clustering is essentially a partitioning of the samples into disjoint subsets. I will use some nonstandard terminology that makes the definitions a bit easier to state and read.
 
 ::::{#def-cluster-buddies}
 We say that two sample points in a clustering are **buddies** if they are in the same cluster, and **strangers** otherwise. 
@@ -410,7 +401,7 @@ $$
 \text{ARI} = \frac{\text{RI} - \E{\text{RI}}}{\text{max}(\text{RI}) - \E{\text{RI}}},
 $$
 
-where the expectation and max operations are performed over all possible clusterings. (These values can be worked out exactly using combinatorics, but we do not give them here.) 
+where the expectation and max operations are performed over all possible clusterings. These values can be worked out exactly using combinatorics, but we do not give them here.
 
 An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.
 
@@ -455,7 +446,7 @@ Not surprisingly, the clusterings are found to be quite similar.
 
 ### Silhouettes
 
-If no reference clustering/classification is available, then the only way we can assess the quality of a clustering is to check how well it creates clusters whose members are more similar to their buddies than to strangers. 
+If no reference clustering/classification is available, then the only way we can assess the quality of a clustering is to measure whether samples are more similar to their buddies than to strangers. 
 
 ::::{#def-cluster-silhouette}
 Suppose $\bfX_i$ is a sample in a clustering. Let $\bar{b}_i$ be the mean distance between $\bfX_i$ and its buddies, and let $\bar{r}_i$ be the mean distance between $\bfX_i$ and the members of the nearest cluster of strangers. Then the **silhouette value** of $\bfX_i$ is 
@@ -705,7 +696,7 @@ Finding the minimum inertia among all possible $k$-clusterings is an infeasible 
 
 ### Lloyd's algorithm
 
-The standard iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, each iteration consists of two steps:
+The standard iteration is known as **Lloyd's algorithm**. Starting with values for the $k$ centroids, $\bfmu_1, \ldots, \bfmu_n$, each iteration consists of two steps:
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zyb6uloq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0heo7jnf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.3.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
@@ -722,6 +713,10 @@ These steps are repeated alternately until the assignment step does not change a
 {{< video ./_media/kmeans_demo.mp4 width="480" >}}
 
 If Lloyd's algorithm converges, it finds a local minimum of total inertia, in the sense that small changes to the cluster assignments cannot decrease it. But there is no guarantee of converging to the global minimum, and often, this does not happen. 
+
+::: {.callout-note}
+Two-phase iterations like Lloyd's algorithm are common in optimization: you start with an approximate answer, compute something based on it, and use that to improve your answer.
+:::
 
 ### Practical issues
 
