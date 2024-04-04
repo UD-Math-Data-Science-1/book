@@ -90,3 +90,21 @@ A much more exhaustive glossary can be found [here](https://www.analyticsvidhya.
 * **PyCharm** Feature-rich freemium development environment for Python, geared toward large, complex projects.
 * **Thonny** Bare-bones development environment intended to prioritize beginners.
 
+## Package versions
+
+Here are the Python and package versions used in this book.
+```{python}
+#| code-fold: true
+import sys
+print("Python:", sys.version)
+import pandas as pd
+print("Pandas:", pd.__version__)
+import numpy as np
+print("Numpy:", np.__version__)
+import seaborn as sns
+print("Seaborn:", sns.__version__)
+import sklearn
+print("Scikit-learn:", sklearn.__version__)
+import networkx as nx
+print("Networkx:", nx.__version__)
+```
