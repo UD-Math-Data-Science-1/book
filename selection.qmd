@@ -796,11 +796,11 @@ Here is a table of training data:
 
 Your test set consists of the values $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$.
 
-**(a)** Find the recall of a kNN classifier with $k=1$. (The positive outcome is $+1$.)
+**(a)** Find the testing recall of a kNN classifier with $k=1$. (The positive outcome is $+1$.)
 
-**(b)** Find the recall of a kNN classifier with $k=3$.
+**(b)** Find the testing recall of a kNN classifier with $k=3$.
 
-**(c)** Find the recall of a kNN classifier with $k=9$.
+**(c)** Find the testing recall of a kNN classifier with $k=9$.
 
 **(d)** Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?
 
