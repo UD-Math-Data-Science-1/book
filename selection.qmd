@@ -788,20 +788,21 @@ y = f(x) =
 \end{cases}
 $$
 
-Here is a table of training data:
+**(a)** Make a table of $x$ and $f(x)$ values on the testing set $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$. 
+
+Now, here is a table of training data:
 
 | $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ |  $0$ |  $1$ |  $2$ |  $3$ |  $4$ |  $5$ |
 |-------|-----|-----|-----|-----|-----|----|----|----|----|----|----|
 | $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ | 
 
-Your test set consists of the values $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$.
 
-**(a)** Find the testing recall of a kNN classifier with $k=1$. (The positive outcome is $+1$.)
+**(b)** Add a row to your table from part (a) showing the predictions of a kNN classifier with $k=1$.
 
-**(b)** Find the testing recall of a kNN classifier with $k=3$.
+**(c)** Add a row to your table showing the predictions of a kNN classifier with $k=3$. Then add another row for $k=9$.
 
-**(c)** Find the testing recall of a kNN classifier with $k=9$.
+**(e)** Find the recall for each of the cases $k=1$, $k=3$, and $k=9$.
 
-**(d)** Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?
+**(f)** Over all possible training subsets of the original training data, which of the classifiers above would you expect to have the largest training variance? Which would have the smallest?
 
 ::::
