@@ -166,6 +166,8 @@ Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. The latter property is important throu
 An $n\times n$ matrix $\bfA$ in which $\bfA_{ij}=\bfA_{ji}$ for all $i,j$ is called **symmetric**.
 ::::
 
+![](_media/memes/symmetry.jpg){height=240px fig-align="center"}
+
 ::::{#exm-cluster-distmat-small chapter=6 type=✍️ description="Distance matrix"}
 Using 1-norm for distance, find the distance matrix for the feature matrix 
 $$
@@ -265,6 +267,7 @@ pairwise_distances( X, metric="cosine")
 Now the first two documents look most similar. Looking at the vectors, we see that these two have the most similar relative frequencies, which is related to what we want to measure. The apparent dissimilarity in the 2-norm arises solely because the total word counts are very different.
 ::::
 
+![](_media/memes/angler_distance.jpg){height=240px fig-align="center"}
 
 <!-- Categorical variables can be included in distance metrics. An ordinal variable is easily converted to equally spaced numerical values, which then may get a standard treatment. Nominal features are often compared using **Hamming distance**, which is just the total number of features that have different values in the two vectors. -->
 <!-- 
@@ -605,6 +608,8 @@ The central cluster scores well, but the rings score poorly because they are not
 While we have no trouble validating good clusterings by eye in two dimensions in cases such as @fig-clustering-stripes and @fig-clustering-bullseye, it can be challenging to assess such nonspherical clusters in higher dimensions if there is no reference or validation available.
 :::
 
+![](_media/memes/silhouette.jpg){height=240px fig-align="center"}
+
 ## k-means
 
 The **$k$-means algorithm** is one of the best-known clustering methods. It is often the method of first resort, even though it has some significant limitations. 
@@ -718,6 +723,9 @@ If Lloyd's algorithm converges, it finds a local minimum of total inertia, in th
 Two-phase iterations like Lloyd's algorithm are common in optimization: you start with an approximate answer, compute something based on it, and use that to improve your answer.
 :::
 
+![](_media/memes/k-means.jpeg){height=240px fig-align="center"}
+
+
 ### Practical issues
 
 * **Initialization**. The performance of $k$-means depends a great deal on the initial set of centroids. Traditionally, the centroids were chosen as random members of the sample set, but more reliable heuristics, such as *$k$-means++*, have since become dominant. 
@@ -802,6 +810,10 @@ Based on silhouette values, we would be justified to stop at $k=3$ clusters.
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2vl75uac&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1uhuj1qk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.11" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+:::
+
+::: {.callout-warning}
+In @exm-cluster-kmeans-blobs, we were able to visualize the clusters because the data is two-dimensional. That is not a trivial matter in higher dimensions, and we usually have to rely on scoring methods like silhouette values to guide us.
 :::
 
 ::::{#exm-cluster-kmeans-stripes chapter=6 type=💻 description="k-means on *stripes* dataset"}
@@ -1033,6 +1045,9 @@ We can choose to stop at any horizontal position (linkage value). Based on the d
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2cz7adyp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_yjsi5575" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.15" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
 
+![](_media/memes/hierarchy.jpg){height=240px fig-align="center"}
+
+
 The `AgglomerativeClustering` class in `sklearn.cluster` performs the clustering process to create a learner object.
 
 ::::{#exm-cluster-linkage chapter=6 type=💻 description="Comparing linkages on simple datasets"}
@@ -1195,11 +1210,11 @@ While the performance of clustering as a classifier in @exm-cluster-penguins is 
 ::::
 
 ::::{#exr-cluster-cosine}
-(6.1) Find an example for which the cosine distance does not satisfy the triangle inequality. That is, find three vectors $\bfx$, $\bfy$, and $\bfz$ such that 
+(6.1) Find an example for which the cosine pseudodistance does not satisfy the triangle inequality. That is, find three vectors $\bfx$, $\bfy$, and $\bfz$ such that 
 $$
 \dist(\bfx,\bfy) > \dist(\bfx,\bfz) + \dist(\bfz,\bfy). 
 $$
-(Hint: it's enough to play around with some simple vectors in two dimensions. Use vectors for which the angle between is a multiple of $\pi/6$ or $\pi/4$.)
+(Hint: it's enough to play around with some simple vectors in two dimensions. Use vectors for which the angle between is a multiple of $\pi/6$ or $\pi/4$, so that you know the exact values of the cosine.)
 ::::
 
 ::::{#exr-cluster-distmatrix}
@@ -1231,7 +1246,7 @@ $$
 \end{bmatrix}
 $$
 
-**(a)** Find the Rand index between these clusterings.
+**(a)** Find the Rand index (*not* the ARI) between clusterings A and B.
 
 **(b)** Find the silhouette values for all samples in clustering A.
 ::::
