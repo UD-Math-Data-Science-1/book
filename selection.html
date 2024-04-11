@@ -351,7 +351,7 @@ MathJax = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div id="23b2beb1" class="cell" data-execution_count="1">
+<div id="23b2beb1" class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -471,7 +471,7 @@ How close is the average prediction to the ground truth?
 How close to the average prediction is any one prediction likely to be?
 </dd>
 </dl>
-<div id="cell-fig-select-biasvar" class="cell" data-execution_count="2">
+<div id="cell-fig-select-biasvar" class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">302</span>)</span>
@@ -513,7 +513,7 @@ How close to the average prediction is any one prediction likely to be?
 <p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
 <div id="exm-select-learning-curves" class="theorem example" data-chapter="4" type="💻" data-description="Learning curves">
 <p><span class="theorem-title"><strong>Example 4.2 </strong></span>We will use the handwritten digits data in an experiment with a decision tree classifier of fixed depth:</p>
-<div id="ce1c24bd" class="cell" data-execution_count="3">
+<div id="ce1c24bd" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> LearningCurveDisplay, StratifiedShuffleSplit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
@@ -565,7 +565,7 @@ How close to the average prediction is any one prediction likely to be?
 </div>
 </div>
 </div></div><p>Consider first a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Here are the results for four different training sets, each of size 40:</p>
-<div id="cell-fig-select-knn-1-clean" class="cell" data-execution_count="5">
+<div id="cell-fig-select-knn-1-clean" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-1-clean" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -577,7 +577,7 @@ How close to the average prediction is any one prediction likely to be?
 </div>
 <p>As you can see above, all four results are quite good. The only errors are for queries near zero.</p>
 <p>Now suppose we use training sets that have just 3 mislabeled examples each. Here are some resulting classifiers:</p>
-<div id="cell-fig-select-knn-1-noisy" class="cell" data-execution_count="6">
+<div id="cell-fig-select-knn-1-noisy" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-1-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -589,7 +589,7 @@ How close to the average prediction is any one prediction likely to be?
 </div>
 <p>Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. We can generally expect such overfitting with <span class="math inline">\(k=1\)</span>, for which the deicision boundary can be complex.</p>
 <p>Now let’s bump up to <span class="math inline">\(k=3\)</span>. The results are more like we want, even with noisy data:</p>
-<div id="cell-fig-select-knn-3-noisy" class="cell" data-execution_count="7">
+<div id="cell-fig-select-knn-3-noisy" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-3-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -600,7 +600,7 @@ How close to the average prediction is any one prediction likely to be?
 </div>
 </div>
 <p>The voting mechanism of kNN allows the classifier to ignore isolated bad examples. If we continue to <span class="math inline">\(k=7\)</span>, then the 3 outliers will never be able to outvote the correct values:</p>
-<div id="cell-fig-select-knn-7-noisy" class="cell" data-execution_count="8">
+<div id="cell-fig-select-knn-7-noisy" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-7-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -635,7 +635,7 @@ Caution
 </iframe>
 </div>
 </div>
-</div></div><div id="cell-fig-select-tree-6-noisy" class="cell" data-execution_count="9">
+</div></div><div id="cell-fig-select-tree-6-noisy" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-6-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -646,7 +646,7 @@ Caution
 </div>
 </div>
 <p>Using a shallower tree reduces the extent of overfitting:</p>
-<div id="cell-fig-select-tree-3-noisy" class="cell" data-execution_count="10">
+<div id="cell-fig-select-tree-3-noisy" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-3-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -657,7 +657,7 @@ Caution
 </div>
 </div>
 <p>We can eliminate the overfitting completely and get a single point as the decision boundary, although its location still might not be ideal:</p>
-<div id="cell-fig-select-tree-2-noisy" class="cell" data-execution_count="11">
+<div id="cell-fig-select-tree-2-noisy" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-2-noisy" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -673,7 +673,7 @@ Caution
 <p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>, and <a href="#fig-select-tree-6-noisy" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in <a href="#sec-select-learning-curves" class="quarto-xref"><span>Section&nbsp;4.1</span></a>.</p>
 <div id="exm-select-overfit-digits" class="theorem example" data-chapter="4" type="💻" data-description="Overfitting">
 <p><span class="theorem-title"><strong>Example 4.3 </strong></span><a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a> showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew. Now look at what happens for a much deeper decision tree:</p>
-<div id="bbc46780" class="cell" data-execution_count="12">
+<div id="bbc46780" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]<span class="op">==</span><span class="dv">8</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">10</span>)</span>
@@ -731,7 +731,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 <p>Scikit-learn has a <code>BaggingClassifier</code> that automates the process of generating an ensemble from just one basic type of estimator.</p>
 <div id="exm-select-ensemble-knn" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble classifier">
 <p><span class="theorem-title"><strong>Example 4.4 </strong></span>Here is a dataset collected from images of dried beans:</p>
-<div id="157b4671" class="cell" data-execution_count="13">
+<div id="157b4671" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -864,11 +864,11 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 </div>
 </div>
 <p>Although the dataset has data on 7 classes of beans, we will simplify our output by making it a one-vs-rest problem for just one class:</p>
-<div id="deade424" class="cell" data-execution_count="14">
+<div id="deade424" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"SIRA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is the confusion matrix we get from training a single kNN classifier on this dataset:</p>
-<div id="d9ae03df" class="cell" data-execution_count="15">
+<div id="d9ae03df" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  X, y,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -886,7 +886,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 </div>
 </div>
 <p>Here, we create an ensemble with 100 such classifiers, each trained on a different subset that is 75% of the size of the original training set:</p>
-<div id="32e876bb" class="cell" data-execution_count="16">
+<div id="32e876bb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
@@ -1315,7 +1315,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:</p>
-<div id="b6231a34" class="cell" data-execution_count="17">
+<div id="b6231a34" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X_test.iloc[<span class="op">-</span><span class="dv">1</span>:,:]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(query)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ensemble probability of True on query is </span><span class="sc">{</span>p_hat[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1324,7 +1324,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Internally, the <code>estimators_</code> field of the ensemble object is a list of the individual trained classifiers. With a little work, we could find out the prediction for <em>True</em> from every constituent:</p>
-<div id="6a3d34b7" class="cell" data-execution_count="18">
+<div id="6a3d34b7" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>,<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]   <span class="co"># first 6 predictions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
@@ -1337,7 +1337,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The ensemble takes the average of this list to create its prediction:</p>
-<div id="54ef0fb7" class="cell" data-execution_count="19">
+<div id="54ef0fb7" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean probability of True for query is </span><span class="sc">{</span>np<span class="sc">.</span>mean(pm)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean probability of True for query is 52.67%</code></pre>
@@ -1345,7 +1345,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>The result above matches what we got by predicting directly from the ensemble, which is the normal mode of operation.</p>
 <p>Over the testing set, we find that the ensemble has improved the AUC score:</p>
-<div id="05b2592a" class="cell" data-execution_count="20">
+<div id="05b2592a" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1378,7 +1378,7 @@ Note
 </div>
 <div id="exm-select-ensemble-knn-better" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble (better)">
 <p><span class="theorem-title"><strong>Example 4.5 </strong></span>If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:</p>
-<div id="86f72435" class="cell" data-execution_count="21">
+<div id="86f72435" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1398,7 +1398,7 @@ Note
 </div>
 <div id="exm-select-ensemble-forest" class="theorem example" data-chapter="4" type="💻" data-description="Random forest classifier">
 <p><span class="theorem-title"><strong>Example 4.6 </strong></span>Let’s work again with the forest cover dataset. It’s got over 500,000 samples and 54 features:</p>
-<div id="d8682321" class="cell" data-execution_count="22">
+<div id="d8682321" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>forest[<span class="st">"data"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
@@ -1406,7 +1406,7 @@ Note
 </div>
 </div>
 <p>We’ll turn this into a binary classification by looking for just one of the possible label values:</p>
-<div id="46e7feab" class="cell" data-execution_count="23">
+<div id="46e7feab" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>]</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>] <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
@@ -1416,7 +1416,7 @@ Note
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How should we best make use of all that data? We can use a fairly deep decision tree without fear of overfitting, and the result is not bad:</p>
-<div id="21b85b1c" class="cell" data-execution_count="24">
+<div id="21b85b1c" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>) </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1428,7 +1428,7 @@ Note
 </div>
 </div>
 <p>A simple averaging over the same type of tree actually does worse here:</p>
-<div id="00be342f" class="cell" data-execution_count="25">
+<div id="00be342f" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">12</span>, </span>
@@ -1444,7 +1444,7 @@ Note
 </div>
 </div>
 <p>It’s possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:</p>
-<div id="eba2002c" class="cell" data-execution_count="26">
+<div id="eba2002c" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1459,7 +1459,7 @@ Note
 </div>
 </div>
 <p>In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:</p>
-<div id="1c8a1b52" class="cell" data-execution_count="27">
+<div id="1c8a1b52" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    max_features<span class="op">=</span><span class="fl">0.5</span>,</span>
@@ -1523,7 +1523,7 @@ Note
 </div>
 <div id="exm-select-folds" class="theorem example" data-chapter="4" type="✍️" data-description="Folds for validation">
 <p><span class="theorem-title"><strong>Example 4.7 </strong></span>Here is how 16 elements can be split into 4 folds:</p>
-<div id="b0eb2cb1" class="cell" data-execution_count="28">
+<div id="b0eb2cb1" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
@@ -1540,13 +1540,13 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <p>A different variation is <strong>stratified</strong> <span class="math inline">\(k\)</span>-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.</p>
 <div id="exm-select-cv-beans" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation">
 <p><span class="theorem-title"><strong>Example 4.8 </strong></span>Let’s apply cross-validation to the beans dataset.</p>
-<div id="20858350" class="cell" data-execution_count="29">
+<div id="20858350" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
-<div id="003aaa0c" class="cell" data-execution_count="30">
+<div id="003aaa0c" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
@@ -1597,7 +1597,7 @@ Important
 <p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
 <div id="exm-select-vc-beans" class="theorem example" data-chapter="4" type="💻" data-description="Validation curve">
 <p><span class="theorem-title"><strong>Example 4.9 </strong></span>Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:</p>
-<div id="d966ee78" class="cell" data-execution_count="31">
+<div id="d966ee78" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ValidationCurveDisplay</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1631,7 +1631,7 @@ Important
 <p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
 <div id="exm-select-grid-cancer" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation grid search">
 <p><span class="theorem-title"><strong>Example 4.10 </strong></span>Let’s work with a dataset on breast cancer detection:</p>
-<div id="19aa3e37" class="cell" data-execution_count="32">
+<div id="19aa3e37" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
@@ -1804,7 +1804,7 @@ Important
 </div>
 </div>
 <p>We start by trying decision tree classifiers in which we vary the maximum depth as well as some other options.</p>
-<div id="2b24a1f7" class="cell" data-execution_count="33">
+<div id="2b24a1f7" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"criterion"</span>:[<span class="st">"gini"</span>, <span class="st">"entropy"</span>], </span>
@@ -1835,7 +1835,7 @@ Best score:
 </div>
 </div>
 <p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
-<div id="453b867f" class="cell" data-execution_count="34">
+<div id="453b867f" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"kneighborsclassifier__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
@@ -1864,7 +1864,7 @@ Best score:
 </div>
 </div>
 <p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
-<div id="8bdff0ed" class="cell" data-execution_count="35">
+<div id="8bdff0ed" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>knn_score <span class="op">=</span> f1_score( y_test, grid_knn.predict(X_test) )</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best tree f1 score: </span><span class="sc">{</span>dt_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
@@ -1918,7 +1918,8 @@ y = f(x) =
 -1, &amp; \text{otherwise}.
 \end{cases}
 \]</span></p>
-<p>Here is a table of training data:</p>
+<p><strong>(a)</strong> Make a table of <span class="math inline">\(x\)</span> and <span class="math inline">\(f(x)\)</span> values on the testing set <span class="math inline">\(-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25\)</span>.</p>
+<p>Now, here is a table of training data:</p>
 <table class="table">
 <colgroup>
 <col style="width: 12%">
@@ -1967,11 +1968,10 @@ y = f(x) =
 </tr>
 </tbody>
 </table>
-<p>Your test set consists of the values <span class="math inline">\(-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25\)</span>.</p>
-<p><strong>(a)</strong> Find the testing recall of a kNN classifier with <span class="math inline">\(k=1\)</span>. (The positive outcome is <span class="math inline">\(+1\)</span>.)</p>
-<p><strong>(b)</strong> Find the testing recall of a kNN classifier with <span class="math inline">\(k=3\)</span>.</p>
-<p><strong>(c)</strong> Find the testing recall of a kNN classifier with <span class="math inline">\(k=9\)</span>.</p>
-<p><strong>(d)</strong> Which of the classifiers in (a), (b), and (c) would you expect to have the highest training variance? Which would have the lowest?</p>
+<p><strong>(b)</strong> Add a row to your table from part (a) showing the predictions of a kNN classifier with <span class="math inline">\(k=1\)</span>.</p>
+<p><strong>(c)</strong> Add a row to your table showing the predictions of a kNN classifier with <span class="math inline">\(k=3\)</span>. Then add another row for <span class="math inline">\(k=9\)</span>.</p>
+<p><strong>(e)</strong> Find the recall for each of the cases <span class="math inline">\(k=1\)</span>, <span class="math inline">\(k=3\)</span>, and <span class="math inline">\(k=9\)</span>.</p>
+<p><strong>(f)</strong> Over all possible training subsets of the original training data, which of the classifiers above would you expect to have the largest training variance? Which would have the smallest?</p>
 </div>
 
 

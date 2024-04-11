@@ -818,8 +818,7 @@ median degree of ego graph: 2.0</code></pre>
 p\binom{n}{2} = \frac{pn(n-1)}{2}.
 \]</span> This fact is usually stated in terms of the average node degree.</p>
 <div id="thm-networks-degree-ER" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 7.2 </strong></span>The average degree <span class="math inline">\(\bar{k}\)</span> satisfies</p>
-<p><span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 7.2 </strong></span>The average degree <span class="math inline">\(\bar{k}\)</span> satisfies <span class="math display">\[
 \E{\bar{k}} = \frac{1}{n} pn(n-1) = p(n-1),
 \]</span> where the expectation operation is taken over all realizations of ER graphs on <span class="math inline">\(n\)</span> nodes.</p>
 </div>
@@ -864,16 +863,12 @@ p\binom{n}{2} = \frac{pn(n-1)}{2}.
 </iframe>
 </div>
 </div>
-</div></div><p><a href="#thm-networks-degree" class="quarto-xref">Theorem&nbsp;<span>7.1</span></a> states that the average degree in a graph with <span class="math inline">\(n\)</span> nodes and <span class="math inline">\(m\)</span> edges is <span class="math inline">\(2m/n\)</span>. According to <a href="#thm-networks-degree-ER" class="quarto-xref">Theorem&nbsp;<span>7.2</span></a>, an ER graph will have the same expected average degree if</p>
-<p><span id="eq-networks-ER-prob"><span class="math display">\[
+</div></div><p><a href="#thm-networks-degree" class="quarto-xref">Theorem&nbsp;<span>7.1</span></a> states that the average degree in a graph with <span class="math inline">\(n\)</span> nodes and <span class="math inline">\(m\)</span> edges is <span class="math inline">\(2m/n\)</span>. According to <a href="#thm-networks-degree-ER" class="quarto-xref">Theorem&nbsp;<span>7.2</span></a>, an ER graph will have the same expected average degree if <span id="eq-networks-ER-prob"><span class="math display">\[
 \frac{2m}{n} = p(n-1),
-\tag{7.1}\]</span></span></p>
-<p>or <span class="math inline">\(p=2m/(n^2-n)\)</span>.</p>
-<p>In <a href="#exm-networks-import" class="quarto-xref">Example&nbsp;<span>7.2</span></a>, for example, we found that our Twitch network has <span class="math inline">\(n=7126\)</span> nodes and <span class="math inline">\(m=35324\)</span> edges, which suggests an ER equivalent of</p>
-<p><span class="math display">\[
+\tag{7.1}\]</span></span> or <span class="math inline">\(p=2m/(n^2-n)\)</span>.</p>
+<p>In <a href="#exm-networks-import" class="quarto-xref">Example&nbsp;<span>7.2</span></a>, for example, we found that our Twitch network has <span class="math inline">\(n=7126\)</span> nodes and <span class="math inline">\(m=35324\)</span> edges, which suggests an ER equivalent of <span class="math display">\[
 p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
-\]</span></p>
-<p>That is, if connections in the Twitch network were made completely at random, they would have to occur at a probability of about <span class="math inline">\(0.14\)</span>%.</p>
+\]</span> That is, if connections in the Twitch network were made completely at random, they would have to occur at a probability of about <span class="math inline">\(0.14\)</span>%.</p>
 </section>
 <section id="wattsstrogatz-graphs" class="level3 page-columns page-full" data-number="7.2.2">
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="wattsstrogatz-graphs"><span class="header-section-number">7.2.2</span> Watts–Strogatz graphs</h3>
