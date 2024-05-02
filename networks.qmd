@@ -128,10 +128,10 @@ nx.draw(nx.cycle_graph(9))
 A cross between the star and the cycle is a **wheel graph**.
 
 ```{python}
-nx.draw(nx.wheel_graph(9))
+nx.draw(nx.wheel_graph(9), node_size=100)
 ```
 
-A **complete graph** is one that has every possible edge.
+A **complete graph** is one that has every possible edge, i.e., all possible pairs of nodes are connected.
 
 ```{python}
 K5 = nx.complete_graph(5)
@@ -145,7 +145,7 @@ $$
 \binom{n}{2} = \frac{n!}{(n-2)!2!} = \frac{n(n-1)}{2}
 $$
 
-unique pairs of distinct nodes. Hence, there are $\binom{n}{2}$ edges in the undirected complete graph on $n$ nodes.
+unique pairs of distinct nodes, not counting ordering. Hence, there are $\binom{n}{2}$ edges in the undirected complete graph on $n$ nodes.
 
 A **lattice graph** has a regular structure, like graph paper.
 
@@ -1461,14 +1461,14 @@ First, we construct the random-walk matrix $\bfW$.
 
 ```{python}
 n = WS.number_of_nodes()
-A = nx.adjacency_matrix(WS).astype(float)
+A = nx.adjacency_matrix(WS).toarray().astype(float)
 degree = [ WS.degree[i] for i in WS.nodes ] 
 
 W = A.copy()
 for j in range(n):
     W[:,j] /= degree[j]
 
-sns.heatmap(W.toarray()).set_aspect(1);
+sns.heatmap(W).set_aspect(1);
 ```
 
 We set up a probability vector to start at node 0, and then use `W.dot` to compute the first hop. The result is to end up at 5 other nodes with equal probability:
@@ -1667,11 +1667,11 @@ $$
 ::::
 
 ::::{#exr-networks-centrality-complete}
-Recall that the complete graph $K_n$ contains every possible edge on $n$ nodes. Prove that the vector $\bfx=[1,1,\ldots,1]$ is an eigenvector of the adjacency matrix of $K_n$. (Therefore, the eigenvector centrality is uniform over the nodes.)
+Recall that the complete graph $K_n$ contains every possible edge on $n$ nodes. Prove that the vector $\bfx=[1,1,\ldots,1]$ is an eigenvector of the adjacency matrix of $K_n$. (Therefore, the eigenvector centrality is uniform over the nodes.) Note: You do not need to know how to compute an eigenvector or eigenvalue in general; just verify that the given vector satisfies the equation $\bfA \bfx = \lambda \bfx$ for some $\lambda$.
 ::::
 
 ::::{#exr-networks-star-eigen}
-Prove that for the star graph on $n$ nodes as described in Exercise 8, the vector 
+Prove that for the star graph on $n$ nodes as described in @exr-networks-centrality-star, the vector 
 $$
 \bfx = \bigl[ \sqrt{n-1},1,1,\ldots,1 \bigr]
 $$
