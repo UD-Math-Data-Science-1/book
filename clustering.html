@@ -2128,6 +2128,7 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 <p>We can choose to stop at any horizontal position (linkage value). Based on the distance matrix, if we stop at a linkage value of 2.0, then we perform only the first 2 merges and get 3 clusters. The largest gap between merges is in the merge from 2 clusters to 1, which could be used to justify <span class="math inline">\(k=2\)</span> as the best number of clusters.</p>
 </div>
 
+<!-- ![](_media/memes/hierarchy.jpg){height=240px fig-align="center"} -->
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
@@ -2135,12 +2136,7 @@ C_1=\{\bfX_0,\bfX_1\},\, C_2 = \{\bfX_2,\bfX_3,\bfX_4\}.
 </iframe>
 </div>
 </div>
-</div></div><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="_media/memes/hierarchy.jpg" height="240" class="figure-img"></p>
-</figure>
-</div>
-<p>The <code>AgglomerativeClustering</code> class in <code>sklearn.cluster</code> performs the clustering process to create a learner object.</p>
+</div></div><p>The <code>AgglomerativeClustering</code> class in <code>sklearn.cluster</code> performs the clustering process to create a learner object.</p>
 <div id="exm-cluster-linkage" class="theorem example" data-chapter="6" type="💻" data-description="Comparing linkages on simple datasets">
 <p><span class="theorem-title"><strong>Example 6.16 </strong></span>We define a function that allows us to run all three linkages for a given feature matrix:</p>
 <div id="e8076dfc" class="cell" data-execution_count="40">
