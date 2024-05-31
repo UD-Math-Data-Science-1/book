@@ -1261,22 +1261,22 @@ $$
 $$
 See @fig-exercise6_5.
 
-![Samples for @exr-cluster-inertia.](_media/exer6_5.png){#fig-exercise6_5}
+![Samples for @exr-cluster-inertia.](_media/exer6_5.svg){#fig-exercise6_5}
 
 
 **(a)** Using the 2-norm, calculate the inertia, which may depend on $z$, of the clustering 
 $$
-C_1 = \{ [z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}. 
+C_1 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [z,j]: j=-3,-2,-1,1,2,3\}. 
 $$
-(This divides the sample points by the $y$-axis.)
+(This means clustering by the colors in @fig-exercise6_5.)
 
 **(b)** Using the 2-norm, calculate the inertia, which may depend on $z$, of the clustering 
 $$
 C_1 = \{ [-z,j] \text{ and } [z,j]: j=-3,-2,-1\}, \qquad C_2 = \{ [-z,j] \text{ and } [z,j]: j=1,2,3\}.
 $$
-(This divides the sample points by the $x$-axis.)
+(This means clustering by the shapes in @fig-exercise6_5.)
 
-**(c)** For which values of $z$, if any, does clustering from part (a) have less inertia than the clustering from part (b)?
+**(c)** It seems obvious that when $z$ is large, we would prefer the clustering in part (a), and when it is close to zero, we would prefer the one in part (b). Find the value of $z$ at which the transition occurs, i.e., when the inertias are equal.
 ::::
 
 ::::{#exr-cluster-linkage}
