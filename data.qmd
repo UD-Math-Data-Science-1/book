@@ -301,11 +301,8 @@ You can also use a list in square brackets to access multiple elements at once:
 x[ [0, 2, 4] ]
 ```
 
-::: {.callout-important}
-The result of a list reference is a new vector, not a number. 
-:::
+The result of a list reference is a new vector, not a number. Note the difference here:
 
-Note the difference here:
 ```{python}
 x[0]
 ```
@@ -320,22 +317,22 @@ x[ [0] ]
 You can also access multiple elements of a vector by using a list or range as the index. In the latter case, this is called **slicing**.
 
 :::{.column-margin}
+```{=html}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+```
 :::
+
+:::{.callout-warning}
+As with ranges in base Python, the last element of a slice range is omitted. This causes many headaches and bugs.
+:::
+
 
 ::::{#exm-data-slice chapter=1 description="Slicing vectors" type=💻}
 The syntax of a slice is `start:stop`. 
 
-::: {.callout-warning}
-As with ranges in base Python, the last element of a slice range is omitted. This causes many headaches and bugs.
-:::
-
-```{python}
-x[0:3]
-```
-
-```{python}
-x[-3:-1]
+```python
+print(x[0:3])
+print(x[-3:-1])
 ```
 
 If you want to use a range that skips over elements, you can use a third argument in the form `start:stop:step`:
@@ -1125,6 +1122,123 @@ Think carefully before you impute missing values, because doing so can easily mi
 :::
 
 ![](_media/memes/missing.jpg){width=40%}
+
+## Combining data frames 
+
+Sometimes you want to combine data from different sources. There are multiple ways to do this in pandas, depending on the structure of the data you want to combine and the result you want to receive.
+
+### Concatenating data
+
+The `concat` function is used to stack frames or series on top of each other. 
+
+::::{#exm-data-concat chapter=1 description="Concatenating data in pandas" type=💻}
+```{python}
+birds = pd.DataFrame(
+    {
+        "Name": ["Eagles", "Crows", "Falcons"],
+        "Predatory": [True, False, True],
+        "Family": ["Accipitridae", "Corvidae", "Falconidae"],
+        "Color": ["Brown", "Black", "Blue–Gray"]
+    }
+)
+birds
+```
+
+```{python}
+teams = pd.DataFrame(
+    {
+        "Name": ["Falcons", "Eagles", "Bears"],
+        "Home": ["Atlanta", "Philadelphia", "Chicago"],
+        "Color": ["Red", "Green", "Blue"]
+    }
+)
+teams
+```
+
+```{python}
+pd.concat([birds, teams])
+
+```
+::::
+
+This operation is occasionally useful, but more often data frames should be joined horizontally. While that can be done with `concat`, it's better to learn the more flexible `merge` method in the next section.
+
+### Merging data
+
+The `merge` function is used to merge frames based on the values within the columns. 
+
+::::{#exm-data-merge chapter=1 description="Merging data in pandas" type=💻}
+Continuing with the data frames from @exm-data-concat:
+
+```{python}
+pd.merge(birds, teams, on="Name")
+```
+
+The `on` keyword specifies the column that is the *key* for the merge. In the above merge, the result is a frame with only the rows that have a common value in the `Name` column. That's called an **inner join**, which is the default. An alternative is an **outer join**, which includes all rows from both frames:
+
+```{python}
+pd.merge(birds, teams, on="Name", how="outer")
+```
+
+Note also above that the column `Color` that appeared in both of the source frames was renamed to `Color_x` and `Color_y` in the result, since otherwise there would be a conflict.
+
+It's also possible to do a **left join** or a **right join**, which use one of the original frames as the basis for the result:
+
+```{python}
+print("Left merge:")
+print(pd.merge(birds, teams, on="Name", how="left"))
+print("\nRight merge:")
+print(pd.merge(birds, teams, on="Name", how="right"))
+```
+::::
+
+:::{.callout-note}
+The difference between outer join and inner join is the same as the union and intersection of sets—the sets here being the `"on"` column contents.
+:::
+
+::::{#exm-data-merge-weather chapter=1 description="Merging data" type=💻}
+Here we load in weather data for Newark, DE, being sure that the column representing the date is parsed as dates:
+
+```{python}
+weather = pd.read_csv("_datasets/ghcn_newark.csv", parse_dates=["DATE"])
+weather = weather[["DATE", "PRCP", "SNOW", "TMAX", "TMIN"]]
+weather.head()
+```
+
+Here is another data frame for the S&P 500 stock market index:
+```{python}
+sp500 = pd.read_csv("_datasets/SP500_daily.csv", parse_dates=["Date"])
+sp500["Gain"] = sp500["Close/Last"] - sp500["Open"]
+sp500.head()
+```
+
+Now we can merge the weather data with the stock data according to the date. Note that here, the key is named differently in the two frames:
+
+```{python}
+merged = pd.merge(sp500, weather, left_on="Date", right_on="DATE")
+merged.head()
+```
+
+Since we did an inner join, only the rows with a common date in both frames are included:
+
+```{python}
+print("There are", len(sp500), "rows in the S&P 500 data.")
+print("There are", len(weather), "rows in the weather data.")
+print("There are", len(merged), "rows in the inner-merged data.")
+```
+
+If the key you want to merge on is the index column, the syntax of the merge changes a little. Here is an example:
+
+```{python}
+weather = weather.set_index("DATE")
+weather.head()
+```
+
+```{python}
+result = pd.merge(sp500, weather, left_on="Date", right_index=True)
+result.head()
+```
+::::
 
 ## Exercises {.unnumbered}
 
