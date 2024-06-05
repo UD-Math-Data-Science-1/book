@@ -477,6 +477,21 @@ independently of $a$. This quantity is sensitive to the low specificity.
 
 When there are more than two unique possible labels, these metrics can be applied using the **one-vs-rest** paradigm. For $K$ unique labels, this paradigm poses $K$ binary questions: "Is it in class 1, or not?", "Is it in class 2, or not?", etc. The confusion matrix becomes $K\times K$. 
 
+::::{#exm-class-one-vs-rest chapter=3 type=✍️ description="Multiclass one-vs-rest"}
+Suppose we design a classifier to predict the composer of a section of classical music. Here is a hypothetical confusion matrix for a test set of 82 samples:
+
+```{python}
+#| echo: false
+from sklearn.metrics import ConfusionMatrixDisplay
+C = np.array([[26,2,0], [4,18,6], [1,5,20]])
+ConfusionMatrixDisplay(C, display_labels=["Bach", "Mozart", "Schubert"]).plot();
+```
+
+If we look down the middle column, for example, we see all the cases where the classifier predicted *Mozart*. In 18 of those cases, that was the correct label, while in $5+2=7$ cases, it was not. The first 18 cases are considered true positives for finding Mozart, while the other 7 are false positives. The precision score for *Mozart* is thus $18/(18+7)$, or 72%.
+
+We could also look at the bottom row, which tells us that out of 26 cases where the true label is *Schubert*, the classifier correctly predicted (true positives) 20 of them, missing (false negatives) on the other 6. The recall score for *Schubert* is thus $20/26$, or about 77%.
+::::
+
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hfixb8l6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eup2cbdf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
