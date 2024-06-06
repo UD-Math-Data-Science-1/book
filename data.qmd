@@ -804,6 +804,7 @@ pd.DataFrame(
 
 | Description                | Syntax                   | Result              |
 | :------------------------- | :----------------------- | :------------------ |
+| Summary information        | `df.info()`, `df.describe()` | DataFrame           |
 | First or last row(s)       | `df.head()`, `df.tail()` | DataFrame           |
 | Number of rows             | `len(df)`                | integer             |
 | Number of rows and columns | `df.shape`               | tuple               |
