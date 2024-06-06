@@ -316,16 +316,14 @@ x[ [0] ]
 
 You can also access multiple elements of a vector by using a list or range as the index. In the latter case, this is called **slicing**.
 
-:::{.column-margin}
-```{=html}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-```
-:::
-
 :::{.callout-warning}
 As with ranges in base Python, the last element of a slice range is omitted. This causes many headaches and bugs.
 :::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
 
 ::::{#exm-data-slice chapter=1 description="Slicing vectors" type=💻}
 The syntax of a slice is `start:stop`. 
@@ -584,103 +582,177 @@ Text is a ubiquitous data source. One way to quantify text is to use a dictionar
 
 The most straightforward way to represent an image is as a 3D array of values representing intensities representing of red, green and blue in each pixel. Sometimes it might be preferable to represent the image by a vector of statistics about these values, or by presence or absence of detected objects, etc.
 
-## Series and frames
+## Working in pandas
 
 The most popular Python package for manipulating and analyzing data is [pandas](https:pandas.pydata.org). We will use the paradigm it presents, which is fairly well understood throughout data science.
 
-::::{#def-data-frame}
-A **series** is a vector that is indexed by a finite ordered set. A **data frame** is a collection of series that all share the same index set. 
+### Series
+
+::::{#def-series}
+A **series** is a vector that is indexed by a finite ordered set. 
 ::::
 
-We can conceptualize a series as a vector plus an index list, and a data frame as a 2D array with index sets for the rows and the columns. In that sense, they are simply syntactic sugar. However, since people are much better at remembering the meaning of words than arbitrarily assigned integers, data frames serve to prevent errors and misunderstandings.
+In NumPy, we always index vectors by absolute position. In pandas, the elements still have an underlying ordering, but we can index them by anything, including strings. Since names are more memorable and intuitive than arbitrary integers, using them makes code easier to write, read, and debug. 
 
-::::{#exm-data-frames chapter=1 description="Series and data frames" type=✍️}
+::::{#exm-data-series chapter=1 description="Series" type=✍️}
 Some data that can be viewed as series:
 
 * The length, width, and height of a box can be expressed as a 3-vector of positive real numbers. If we index the vector by the names of the measurements, it becomes a series.
 * The number of steps taken by an individual over the course of a week can be expressed as a 7-vector of nonnegative integers. We could index it by the integers 1--7, or in a series by the names of the days of the week.
 * The bid prices of a stock at the end of each trading day can be represented as a *time series*, in which the index is drawn from timestamps. 
-* The scores of gymnasts on multiple apparatus types can be represented as a data frame whose rows are indexed by the names of the gymnasts and whole columns are indexed by the names of the apparatuses. 
 ::::
 
-::::{#exm-data-colors chapter=1 description="Series and frames in pandas" type=💻}
-Here is a pandas series for the wavelengths of light corresponding to rainbow colors:
+::::{#exm-data-series-create chapter=1 description="Series in pandas" type=💻}
+Here is a small pandas series. Note that we give the values first and then the index:
 ```{python}
 import pandas as pd
 
-wavelength = pd.Series( 
-  [400, 470, 520, 580, 610, 710],    # values
-  index=["violet", "blue", "green", "yellow", "orange", "red"],
-  name="wavelength"
-  )
-
-wavelength
+names = ["Marge", "Homer", "Bart", "Lisa", "Maggie"]
+months = pd.Series( ["March", "May", "February", "May", "January"], index=names)
+months
 ```
 
-We can use an index value (one of the colors) to access a value in the series:
+We can access the values by choosing a name in the index:
 ```{python}
-wavelength["blue"]
+months["Lisa"]
 ```
 
 If we access multiple values, we get a series that is a subset of the original:
 ```{python}
-wavelength[ ["violet", "red"] ]
+months[ ["Homer", "Marge"] ]
 ```
 
 We can also use the `iloc` property to access the underlying vector by NumPy slicing:
 ```{python}
-wavelength.iloc[:4]
+months.iloc[-3:]
 ```
 
-Here is a series of NFL teams based on the same index:
+Here is a series of years based on the same index:
 ```{python}
-team = pd.Series(
-  ["Vikings", "Bills", "Eagles", "Chargers", "Bengals", "Cardinals"],
-  index = wavelength.index,
-  name="team"
-  )
-
-team["green"]
+years = pd.Series([1955, 1956, 1979, 1981, 1988], index=names)
+years
 ```
 
-Now we can create a data frame using these two series as columns:
+We can also start with the series and separate it into a vector of values and its index:
+
 ```{python}
-rainbow = pd.DataFrame( {"wavelength": wavelength, "team name": team} )
-rainbow
+print("Values:")
+print(years.values)
+print("\nIndex:")
+print(years.index)
 ```
+::::
+
+@tbl-data-series lists some common operations on pandas series. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
+
+| Description                  | Syntax                   | Result         |
+| :--------------------------- | :----------------------- | :------------- |
+| First or last entries        | `s.head()`, `s.tail()`   | Series         |
+| Length                       | `len(s)`                 | integer        |
+| All of the values            | `s.values`               | array          |
+| Convert values to list       | `list(s)`                | list           |
+| Index                        | `s.index`                | Index          |
+| Unique values                | `s.unique()`             | array          |
+| Appearance frequencies       | `s.value_counts()`       | Series         |
+| Extreme values               | `s.min()`, `s.max()`     | number         |
+| Sum                          | `s.sum()`                | number         |
+| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
+| Locate missing               | `s.isna()`               | boolean Series |
+| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
+| Delete one or more rows      | `s.drop()`               | Series         |
+
+: Operations on pandas series {#tbl-data-series}
+
+::: {.callout-caution}
+As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
+:::
+
+::::{#exm-data-series-operate chapter=1 description="Operations on series" type=💻}
+We continue with the definitions in @exm-data-series-create. Here are all the unique values of the months:
+
+```{python}
+months.unique()
+```
+
+Here are the frequencies of their appearance:
+
+```{python}
+months.value_counts()
+```
+
+Note that we can do a logical comparison and get a series of boolean values:
+
+```{python}
+months == "May"
+```
+
+Since the years are numerical, we can do arithmetic operations on them:
+
+```{python}
+print("Minimum year is", years.min(), "and maximum year is", years.max())
+print("The sum of the years is", years.sum())
+```
+::::
+
+### Data frames
+
+::::{#def-data-frame}
+A **data frame** is a collection of series that all share the same index set. 
+::::
+
+Essentially, a data frame is a 2D array with a common index for the rows, where the constituent series are the columns of the array. Those columns can also be indexed by names (strings). Since names are much more memorable and intuitive than arbitrarily assigned integers, data frames make code easier to write, read, and reason about.
 
 ::: {.callout-tip}
 Curly braces `{ }` are used to construct a dictionary in Python.
 :::
 
-We can access a single column using simple bracket notation:
+::::{#exm-data-frames-create chapter=1 description="Series and frames in pandas" type=💻}
+We continue with the definitions of `months` and `years` in @exm-data-series-create, and use a dictionary to specify the columns of a data frame:
 
 ```{python}
-rainbow["team name"]
+simpsons = pd.DataFrame( {"month": months, "date":  [19, 12, 23, 9, 14], "year": years } )
+simpsons
 ```
 
-We can add a column after the fact by using a bracket access on the left side of the assignment:
-```{python}
-rainbow["flower"] = [
-    "Lobelia", 
-    "Cornflower", 
-    "Bells-of-Ireland", 
-    "Daffodil",
-    "Butterfly weed",
-    "Rose"
-    ]
+Notice above that the *date* column was given as just a list of numbers; the index for it was inherited from the `months` series.
 
-rainbow
+If we give the name of a column as an index into the frame, we get back a series for that column:
+
+```{python}
+simpsons["year"]
+```
+
+If we give a list of column names, we get back a data frame with just those columns:
+
+```{python}
+simpsons[ ["month", "date"] ]
+```
+
+We can even index a nonexistent column on the left side of an assignment, and pandas will create it for us:
+
+```{python}
+simpsons["weekday"] = ["Saturday", "Saturday", "Friday", "Saturday", "Thursday"]
+simpsons
 ```
 
 We can access a row by using brackets with the `loc` property of the frame, getting a series indexed by the column names of the frame:
 ```{python}
-rainbow.loc["orange"]
+simpsons.loc["Maggie"]
 ```
 
 We are also free to strip away the index and get an ordinary array:
 ```{python}
-rainbow.loc["red"].to_numpy()
+simpsons.to_numpy()
+```
+
+Another way to create a data frame is to give a list of rows, plus (optionally) the index and the names of the columns:
+
+```{python}
+pd.DataFrame( 
+    [ ("white", 5), ("brown", 9), ("pink", 8) ], 
+    columns=["Color", "Rating"],
+    index=["vanilla", "chocolate", "strawberry"]
+    )
 ```
 ::::
 
@@ -690,27 +762,6 @@ rainbow.loc["red"].to_numpy()
 
 ![](_media/memes/rainbow.jpg){width=50%}
 
-::::{#exm-data-create-frame chapter=1 description="Creating a data frame" type=💻}
-Here are some more direct ways to construct a data frame in pandas. 
-
-In this case, we give a list of rows, plus (optionally) the index and the names of the columns:
-```{python}
-pd.DataFrame( 
-    [ ("white", 4), ("brown", 8), ("pink", 7) ], 
-    columns=["Color", "Rating"],
-    index=["vanilla", "chocolate", "strawberry"]
-    )
-```
-
-We can also specify data as columns by using a dictionary:
-
-```{python}
-pd.DataFrame( 
-    { "Color": ["white", "brown", "pink"], "Rating": [4, 8, 7] }, 
-    index=["vanilla", "chocolate", "strawberry"]
-    )
-```
-::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_44v37coz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e9add9y2" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
@@ -718,51 +769,26 @@ pd.DataFrame(
 
 ### Common operations
 
-| Description                  | Syntax                   | Result         |
-| :--------------------------- | :----------------------- | :------------- |
-| First or last entries        | `s.head()`, `s.tail()`   | Series         |
-| Length                       | `len(s)`                 | integer        |
-| Number of entries            | `s.shape`                | tuple          |
-| All of the values            | `s.values`               | array          |
-| Convert to list              | `list(s)`                | list           |
-| Index                        | `s.index`                | Index          |
-| Unique values                | `s.unique()`             | array          |
-| Appearance counts for values | `s.value_counts()`       | Series         |
-| Extreme values               | `s.min()`, `s.max()`     | number         |
-| Sum                          | `s.sum()`                | number         |
-| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
-| Locate missing               | `s.isna()`               | boolean Series |
-| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
-| Delete one or more rows      | `s.drop(0)`              | Series         |
 
-: Operations on pandas series {#tbl-data-series}
+@tbl-data-frames shows common operations specific to a data frame. But since the columns are series, the operations in @tbl-data-series can be applied too, and they will act columnwise. 
 
-Pandas offers many methods for manipulating series and data frames. @tbl-data-series shows common operations that can be applied to a series. Since a column of a data frame is a series, these operations can be applied in that context, too. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
-
-::: {.callout-caution}
-As always in Python, you need to pay attention to the difference between applying a function, like `foo(bar)`, accessing a property, like `foo.bar`, and calling an object method, `foo.bar()`. Extra or missing parentheses groups can cause errors.
-:::
 
 | Description                | Syntax                   | Result              |
 | :------------------------- | :----------------------- | :------------------ |
-| First or last rows         | `df.head()`, `df.tail()` | DataFrame           |
+| First or last row(s)       | `df.head()`, `df.tail()` | DataFrame           |
 | Number of rows             | `len(df)`                | integer             |
 | Number of rows and columns | `df.shape`               | tuple               |
-| All of the values          | `df.values`              | array               |
 | Row index                  | `df.index`               | Index               |
 | Column names               | `list(df)`               | list                |
 | Column names               | `df.columns`             | Index               |
-| Access by column name(s)   | `df["name"]`             | Series or DataFrame |
-| Access by name             | `df.loc[rows, "name"]`   | (varies)            |
+| Access by column name(s)   | `df["name"]`, `df[["col1", "col2"]]`     | Series or DataFrame |
+| Access by index/name       | `df.loc[rows, "name"]`   | (varies)            |
 | Access by position         | `df.iloc[i, j]`          | (varies)            |
-| Sum                        | `df.sum()`               | Series              |
-| Comparison                 | `s > 1`, `s=="foo"`      | boolean DataFrame   |
 | Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
-| Apply columnwise           | `df.apply(myfun)`        | (varies)            |
 
 : Operations on pandas data frames {#tbl-data-frames}
 
-@tbl-data-frames shows additional operations that can be applied to an entire data frame (or to any subset). It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html), so they are just collected here for future reference. There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
+It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html). There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
 
 ### Categorical data in pandas
 
@@ -794,7 +820,7 @@ clarities = ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"]
 pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
 ```
 
-You often want to simply replace the ordered categories with integers:
+Often we want to replace ordered categories with integers:
 
 ```{python}
 cl_num = pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
@@ -834,7 +860,7 @@ pieces = pd.Series( [
 We can use pandas to convert this variable to dummy variables:
 
 ```{python}
-pd.get_dummies(pieces).head(9)
+pd.get_dummies(pieces)
 ```
 
 We can also use the encoding variant in which one of the categories is left out:
@@ -846,10 +872,10 @@ pd.get_dummies(pieces, drop_first=True).head(6)
 
 ### Loading from files 
 
-Datasets can be presented in many forms. In this course, we assume that they are given as spreadsheets or in *comma-separated value* (CSV) files. These files can be read by pandas locally or over the web.
+Datasets can be presented in many forms. The simplest and most universal are spreadsheets and *comma-separated value* (CSV) files. Such files can be read by pandas locally or over the web.
 
-::::{#exm-data-read chapter=1 description="Importing data with pandas" type=💻}
-The pandas function we use to load a dataset is `read_csv`. Here we use it to read a file that is available over the web:
+::::{#exm-data-read chapter=1 description="Importing CSV data" type=💻}
+The pandas function we use to load a dataset from CSV is `read_csv`. Here we use it to read a file that is available over the web:
 
 ```{python}
 ads = pd.read_csv("https://raw.githubusercontent.com/tobydriscoll/ds1book/master/advertising.csv")
@@ -888,6 +914,7 @@ In a data frame, we access columns by giving a string name, or a list of names, 
 
 ::::{#exm-data-row-iloc chapter=1 description="iloc for rows in a frame" type=💻}
 Here's a local file that contains daily weather summaries from Newark, Delaware:
+
 ```{python}
 weather = pd.read_csv("_datasets/ghcn_newark.csv")
 weather.head()
@@ -924,7 +951,7 @@ weather.iloc[-4:]
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_q2pr26id&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_oflglmwo" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 :::
 
-In @exm-data-row-iloc, we did not specify an index for the data frame, so the row numbers were the index. If we do give the data frame an index, we can use `loc` to access rows by the index value.
+In @exm-data-row-iloc, we did not specify an index for the data frame, so the row numbers were the index. If we give a data frame a different index, we can use `loc` to access rows by the index value.
 
 ::::{#exm-data-row-loc chapter=1 description="loc for rows in a frame" type=💻}
 A natural candidate for an index in the weather data is the *DATE* column. This can be specified when the file is read, but here we do it after the fact:
@@ -999,6 +1026,123 @@ The pandas user guide has a handy [section on selections](https://pandas.pydata.
 ::: {.callout-tip}
 For practice with pandas fundamentals, try the [Kaggle course](https://www.kaggle.com/learn/pandas).
 :::
+
+## Combining data frames 
+
+Sometimes you want to combine data from different sources. There are multiple ways to do this in pandas, depending on the structure of the data you want to combine and the result you want to receive.
+
+### Concatenation
+
+The `concat` function is used to stack frames or series on top of each other. 
+
+::::{#exm-data-concat chapter=1 description="Concatenating data in pandas" type=💻}
+```{python}
+birds = pd.DataFrame(
+    {
+        "Name": ["Eagles", "Crows", "Falcons"],
+        "Predatory": [True, False, True],
+        "Family": ["Accipitridae", "Corvidae", "Falconidae"],
+        "Color": ["Brown", "Black", "Blue–Gray"]
+    }
+)
+birds
+```
+
+```{python}
+teams = pd.DataFrame(
+    {
+        "Name": ["Falcons", "Eagles", "Bears"],
+        "Home": ["Atlanta", "Philadelphia", "Chicago"],
+        "Color": ["Red", "Green", "Blue"]
+    }
+)
+teams
+```
+
+```{python}
+pd.concat([birds, teams])
+
+```
+::::
+
+This operation is occasionally useful, but more often data frames should be joined horizontally. While that can be done with `concat`, it's better to learn the more flexible `merge` method in the next section.
+
+### Merging data
+
+The `merge` function is used to merge frames based on the values within the columns. Generically, each source frame can have a *key* column that is used to match up rows.
+
+::::{#exm-data-merge chapter=1 description="Merging data in pandas" type=💻}
+Continuing with the data frames from @exm-data-concat:
+
+```{python}
+pd.merge(birds, teams, on="Name")
+```
+
+The `on` keyword specifies the column that is the key for the merge. In the above merge, the result is a frame with only the rows that have a common value in the `Name` column. That's called an **inner join**, which is the default. An alternative is an **outer join**, which includes all rows from both frames:
+
+```{python}
+pd.merge(birds, teams, on="Name", how="outer")
+```
+
+Note also above that the column `Color` that appeared in both of the source frames was renamed to `Color_x` and `Color_y` in the result, since otherwise there would be a conflict.
+
+It's also possible to do a **left join** or a **right join**, which use one of the original frames as the basis for the result:
+
+```{python}
+print("Left merge:")
+print(pd.merge(birds, teams, on="Name", how="left"))
+print("\nRight merge:")
+print(pd.merge(birds, teams, on="Name", how="right"))
+```
+::::
+
+:::{.callout-note}
+The difference between outer join and inner join is the same as the union and intersection of sets—the sets here being the `"on"` column contents.
+:::
+
+::::{#exm-data-merge-weather chapter=1 description="Merging data" type=💻}
+Here we load in weather data for Newark, DE, being sure that the column representing the date is parsed as dates:
+
+```{python}
+weather = pd.read_csv("_datasets/ghcn_newark.csv", parse_dates=["DATE"])
+weather = weather[["DATE", "PRCP", "SNOW", "TMAX", "TMIN"]]
+weather.head()
+```
+
+Here is another data frame for the S&P 500 stock market index:
+```{python}
+sp500 = pd.read_csv("_datasets/SP500_daily.csv", parse_dates=["Date"])
+sp500["Gain"] = sp500["Close/Last"] - sp500["Open"]
+sp500.head()
+```
+
+Now we can merge the weather data with the stock data according to the date. Note that here, the key is named differently in the two frames:
+
+```{python}
+merged = pd.merge(sp500, weather, left_on="Date", right_on="DATE")
+merged.head()
+```
+
+Since we did an inner join, only the rows with a common date in both frames are included:
+
+```{python}
+print("There are", len(sp500), "rows in the S&P 500 data.")
+print("There are", len(weather), "rows in the weather data.")
+print("There are", len(merged), "rows in the inner-merged data.")
+```
+
+If the key you want to merge on is the index column, the syntax of the merge changes a little. Here is an example:
+
+```{python}
+weather = weather.set_index("DATE")
+weather.head()
+```
+
+```{python}
+result = pd.merge(sp500, weather, left_on="Date", right_index=True)
+result.head()
+```
+::::
 
 ## Data preparation
 
@@ -1123,122 +1267,6 @@ Think carefully before you impute missing values, because doing so can easily mi
 
 ![](_media/memes/missing.jpg){width=40%}
 
-## Combining data frames 
-
-Sometimes you want to combine data from different sources. There are multiple ways to do this in pandas, depending on the structure of the data you want to combine and the result you want to receive.
-
-### Concatenating data
-
-The `concat` function is used to stack frames or series on top of each other. 
-
-::::{#exm-data-concat chapter=1 description="Concatenating data in pandas" type=💻}
-```{python}
-birds = pd.DataFrame(
-    {
-        "Name": ["Eagles", "Crows", "Falcons"],
-        "Predatory": [True, False, True],
-        "Family": ["Accipitridae", "Corvidae", "Falconidae"],
-        "Color": ["Brown", "Black", "Blue–Gray"]
-    }
-)
-birds
-```
-
-```{python}
-teams = pd.DataFrame(
-    {
-        "Name": ["Falcons", "Eagles", "Bears"],
-        "Home": ["Atlanta", "Philadelphia", "Chicago"],
-        "Color": ["Red", "Green", "Blue"]
-    }
-)
-teams
-```
-
-```{python}
-pd.concat([birds, teams])
-
-```
-::::
-
-This operation is occasionally useful, but more often data frames should be joined horizontally. While that can be done with `concat`, it's better to learn the more flexible `merge` method in the next section.
-
-### Merging data
-
-The `merge` function is used to merge frames based on the values within the columns. 
-
-::::{#exm-data-merge chapter=1 description="Merging data in pandas" type=💻}
-Continuing with the data frames from @exm-data-concat:
-
-```{python}
-pd.merge(birds, teams, on="Name")
-```
-
-The `on` keyword specifies the column that is the *key* for the merge. In the above merge, the result is a frame with only the rows that have a common value in the `Name` column. That's called an **inner join**, which is the default. An alternative is an **outer join**, which includes all rows from both frames:
-
-```{python}
-pd.merge(birds, teams, on="Name", how="outer")
-```
-
-Note also above that the column `Color` that appeared in both of the source frames was renamed to `Color_x` and `Color_y` in the result, since otherwise there would be a conflict.
-
-It's also possible to do a **left join** or a **right join**, which use one of the original frames as the basis for the result:
-
-```{python}
-print("Left merge:")
-print(pd.merge(birds, teams, on="Name", how="left"))
-print("\nRight merge:")
-print(pd.merge(birds, teams, on="Name", how="right"))
-```
-::::
-
-:::{.callout-note}
-The difference between outer join and inner join is the same as the union and intersection of sets—the sets here being the `"on"` column contents.
-:::
-
-::::{#exm-data-merge-weather chapter=1 description="Merging data" type=💻}
-Here we load in weather data for Newark, DE, being sure that the column representing the date is parsed as dates:
-
-```{python}
-weather = pd.read_csv("_datasets/ghcn_newark.csv", parse_dates=["DATE"])
-weather = weather[["DATE", "PRCP", "SNOW", "TMAX", "TMIN"]]
-weather.head()
-```
-
-Here is another data frame for the S&P 500 stock market index:
-```{python}
-sp500 = pd.read_csv("_datasets/SP500_daily.csv", parse_dates=["Date"])
-sp500["Gain"] = sp500["Close/Last"] - sp500["Open"]
-sp500.head()
-```
-
-Now we can merge the weather data with the stock data according to the date. Note that here, the key is named differently in the two frames:
-
-```{python}
-merged = pd.merge(sp500, weather, left_on="Date", right_on="DATE")
-merged.head()
-```
-
-Since we did an inner join, only the rows with a common date in both frames are included:
-
-```{python}
-print("There are", len(sp500), "rows in the S&P 500 data.")
-print("There are", len(weather), "rows in the weather data.")
-print("There are", len(merged), "rows in the inner-merged data.")
-```
-
-If the key you want to merge on is the index column, the syntax of the merge changes a little. Here is an example:
-
-```{python}
-weather = weather.set_index("DATE")
-weather.head()
-```
-
-```{python}
-result = pd.merge(sp500, weather, left_on="Date", right_index=True)
-result.head()
-```
-::::
 
 ## Exercises {.unnumbered}
 
