@@ -14,11 +14,6 @@ A **quantitative** value is one that is numerical and supports meaningful compar
 
  Quantitative data is further divided into **continuous** and **discrete** types. The difference is the same as between real numbers and integers.
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_iur6b66n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2ddq77ql" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
 ::::{#exm-data-quantitative chapter=1 description="Quantitative data" type=✍️}
 Some continuous quantitative data sources:
 
@@ -33,6 +28,11 @@ Examples of discrete quantitative data:
 * Score on an exam
 ::::
 
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_iur6b66n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_xge4t7kj" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
 
 :::{.callout-note}
 Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values. As a rule of thumb, if there are many possible values, or the values are the result of a measurement, the continuous interpretation is usually more appropriate.
@@ -46,10 +46,6 @@ For both continuous and discrete quantities, it makes sense to order different v
 
 Mathematically, the real and integer number sets are infinite, but computers are finite machines. Integers are represented exactly within some range that is determined by how many binary bits are dedicated. The computational analog of real numbers are **floating-point numbers**, or more simply, **floats**. These are bounded in range as well as discretized. The details are complicated, but essentially, the floating-point numbers have about 16 significant decimal digits by default—which is virtually always far more precision than real data offers.
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1ksfwja3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_k1vhj9q5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-float chapter=1 description="Floating-point numbers" type=💻}
 if you enter an integer, it is interpreted as an `int`:
@@ -96,6 +92,14 @@ print( np.isclose(3.1 - 3.0, 0.1) )
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1ksfwja3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_k1vhj9q5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+![](_media/memes/float_goat.jpg){width=100%}
+
+:::
+
 ::: {.callout-warning}
 Be careful about comparing floating-point values. Exact comparisons may fail due to rounding errors.
 :::
@@ -110,10 +114,6 @@ For numerical work in Python, the NumPy package indispensible. We will use it of
 
 The value `inf` in NumPy stands for infinity. 
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nyqbc6h9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8zmeafud" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 :::{.callout-warning}
 By definition, every operation that involves a `NaN` value results in a `NaN`. 
@@ -148,6 +148,11 @@ print( "np.isnan(np.nan) is", np.isnan(np.nan) )
 ```
 
 ::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nyqbc6h9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8zmeafud" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
 
 ### Dates and times
 
@@ -197,11 +202,6 @@ In math, vector indexes usually begin with 1. In Python, they begin with 0.
 :::
 
 A vector with $n$ elements is often referred to as an $n$-vector, and we say that $n$ is the **length** of the vector. In math we often use $\real^n$ to denote the set of all $n$-vectors with real-valued elements.
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_g0hda6xi&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_tryruqu5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-vector chapter=1 description="Vectors in Python" type=💻}
 The usual way to work with vectors in Python is through NumPy:
@@ -258,13 +258,17 @@ print(np.zeros(4))
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_g0hda6xi&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_tryruqu5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+![](_media/memes/vectored.jpg){width=100%}
+
+:::
+
 ### Element access
 The elements of a vector can be accessed directly using square brackets notation. 
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f06t1pv6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lch4gsfq" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-access chapter=1 description="Accessing vector elements" type=💻}
 Use square brackets to refer to an element of a vector, remembering that the first element has index 0:
@@ -323,17 +327,17 @@ x[ [0] ]
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f06t1pv6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lch4gsfq" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
 ### Slicing
 
 You can also access multiple elements of a vector by using a list or range as the index. In the latter case, this is called **slicing**.
 
 :::{.callout-warning}
 As with ranges in base Python, the last element of a slice range is omitted. This causes many headaches and bugs.
-:::
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
 :::
 
 ::::{#exm-data-slice chapter=1 description="Slicing vectors" type=💻}
@@ -374,7 +378,12 @@ x[:10]
 
 ::::
 
-![](_media/memes/slicing.jpg){width=50%}
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_veepu3vo&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j1bs7x12" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+
+:::
+
 
 ## Arrays
 
@@ -396,11 +405,6 @@ The term **matrix** is often used simply to mean a 2D array. Technically, though
 :::
 
 For us, arrays will mostly be the results of importing or working on data. But it's occasionally useful to know how to build them from scratch.
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xqgr0oc8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ugy7sg7t" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-array chapter=1 description="Arrays in Python" type=💻}
 One way to construct an array is by a **list comprehension**:
@@ -455,14 +459,14 @@ np.vstack( (range(5), range(5, 0, -1)) )
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xqgr0oc8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ugy7sg7t" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
 ### Indexing and slicing
 
 One way to think about a 2D array is a vector of vector rows of the same length. That idea is reflected in NumPy syntax.
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nhk4pa65&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ns9347ku" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-array-index chapter=1 description="Indexing arrays" type=💻}
 We can use successive brackets to refer to an element, row then column:
@@ -497,14 +501,17 @@ A[:, :2]    # all rows, first 2 columns
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nhk4pa65&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ns9347ku" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<br></br>
+
+![](_media/memes/slicing.jpg){width=100%}
+
+:::
+
 ### Reductions
 
 A common task is to **reduce** an array along one dimension, called an *axis* in numpy, resulting in an array of one less dimension.
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_sb1cwatu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vnc91q62" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.10" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ::::{#exm-data-array-reduce chapter=1 description="Array reductions" type=💻}
 The first dimension of an array is axis number 0, the second is axis number 1, etc. 
@@ -531,9 +538,19 @@ np.sum(A)
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_sb1cwatu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vnc91q62" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.10" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+
+![](_media/memes/reduced.jpg){width=100%}
+
+:::
+
+:::{.callout-tip}
 You can also do reductions with `np.max`, `np.min`, `np.mean`, etc.
 
-![](_media/memes/reduced.jpg){width=50%}
+:::
 
 ## Qualitative data
 
@@ -579,22 +596,32 @@ $$
 Suppose that the *stooge* variable can take the values `Moe`, `Larry`, `Curly`, or `Shemp`, and we have the dataset
 
 ```{python}
-["Curly", "Moe", "Curly", "Shemp"]
+["Curly", "Moe", "Curly", "Larry", "Shemp", "Moe"]
 ```
 
 If we use 4 dummy variables, the data would be replaced by the array
 
 ```{python}
-[ [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1] ]
+#| echo: false
+import pandas as pd
+pd.get_dummies(["Curly", "Moe", "Curly", "Larry", "Shemp", "Moe"])
 ```
 
 If we use only 3 dummy variables, we would get
 
 ```{python}
-[ [0, 0, 1], [1, 0, 0], [0, 0, 1], [0, 0, 0] ]
+#| echo: false
+import pandas as pd
+pd.get_dummies(["Curly", "Moe", "Curly", "Larry", "Shemp", "Moe"], drop_first=True)
 ```
 
+The all-zero rows above correspond to the `Curly` values.
+
 ::::
+
+:::{.column-margin}
+![](_media/memes/dummies.jpg){width=100%}
+:::
 
 ### Text 
 
@@ -668,23 +695,30 @@ print(years.index)
 
 ::::
 
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_pfydzfw6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_y9gtvfzf" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.14" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
+
 @tbl-data-series lists some common operations on pandas series. There is an [exhaustive list](https://pandas.pydata.org/docs/reference/series.html) in the pandas documentation.
 
-| Description                  | Syntax                   | Result         |
-| :--------------------------- | :----------------------- | :------------- |
-| First or last entries        | `s.head()`, `s.tail()`   | Series         |
-| Length                       | `len(s)`                 | integer        |
-| All of the values            | `s.values`               | array          |
-| Convert values to list       | `list(s)`                | list           |
-| Index                        | `s.index`                | Index          |
-| Unique values                | `s.unique()`             | array          |
-| Appearance frequencies       | `s.value_counts()`       | Series         |
-| Extreme values               | `s.min()`, `s.max()`     | number         |
-| Sum                          | `s.sum()`                | number         |
-| Comparison                   | `s > 1`,  `s=="foo"`     | boolean Series |
-| Locate missing               | `s.isna()`               | boolean Series |
-| Arithmetic                   | `s + 1`,  `s * t`        | Series         |
-| Delete one or more rows      | `s.drop()`               | Series         |
+| Description             | Syntax                 | Result         |
+| :---------------------- | :--------------------- | :------------- |
+| First or last entries   | `s.head()`, `s.tail()` | Series         |
+| Length                  | `len(s)`               | integer        |
+| All of the values       | `s.values`             | array          |
+| Convert values to list  | `list(s)`              | list           |
+| Index                   | `s.index`              | Index          |
+| Unique values           | `s.unique()`           | array          |
+| Appearance frequencies  | `s.value_counts()`     | Series         |
+| Extreme values          | `s.min()`, `s.max()`   | number         |
+| Sort by values          | `s.sort_values()       | Series         |
+| Sum                     | `s.sum()`              | number         |
+| Comparison              | `s > 1`,  `s=="foo"`   | boolean Series |
+| Locate missing          | `s.isna()`             | boolean Series |
+| Arithmetic              | `s + 1`,  `s * t`      | Series         |
+| Delete one or more rows | `s.drop()`             | Series         |
 
 : Operations on pandas series {#tbl-data-series}
 
@@ -718,7 +752,18 @@ print("Minimum year is", years.min(), "and maximum year is", years.max())
 print("The sum of the years is", years.sum())
 ```
 
+It can be useful to know the index where the minimum or maximum value occurs:
+
+```{python}
+print("The oldest is", years.idxmin(), "and the youngest is", years.idxmax())
+```
+
 ::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_51folnr4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_1s36ha3f" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
 
 ### Data frames
 
@@ -786,129 +831,65 @@ pd.DataFrame(
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_t6nb4pa3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_oqa2u2y8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.14" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6i5fwhjv&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_xspxw0rn" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
-:::
+<br></br>
 
-![](_media/memes/rainbow.jpg){width=50%}
-
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_44v37coz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e9add9y2" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
+![](_media/memes/say_line.jpeg){width=100%}
 :::
 
 ### Common operations
 
-
 @tbl-data-frames shows common operations specific to a data frame. But since the columns are series, the operations in @tbl-data-series can be applied too, and they will act columnwise. 
 
 
-| Description                | Syntax                   | Result              |
-| :------------------------- | :----------------------- | :------------------ |
-| Summary information        | `df.info()`, `df.describe()` | DataFrame           |
-| First or last row(s)       | `df.head()`, `df.tail()` | DataFrame           |
-| Number of rows             | `len(df)`                | integer             |
-| Number of rows and columns | `df.shape`               | tuple               |
-| Row index                  | `df.index`               | Index               |
-| Column names               | `list(df)`               | list                |
-| Column names               | `df.columns`             | Index               |
-| Access by column name(s)   | `df["name"]`, `df[["col1", "col2"]]`     | Series or DataFrame |
-| Access by index/name       | `df.loc[rows, "name"]`   | (varies)            |
-| Access by position         | `df.iloc[i, j]`          | (varies)            |
-| Delete a column            | `df.drop(name, axis=1)`  | DataFrame           |
+| Description                | Syntax                               | Result              |
+| :------------------------- | :----------------------------------- | :------------------ |
+| Summary information        | `df.info()`, `df.describe()`         | DataFrame           |
+| First or last row(s)       | `df.head()`, `df.tail()`             | DataFrame           |
+| Number of rows             | `len(df)`                            | integer             |
+| Number of rows and columns | `df.shape`                           | tuple               |
+| Row index                  | `df.index`                           | Index               |
+| Column names               | `list(df)`                           | list                |
+| Column names               | `df.columns`                         | Index               |
+| Access by column name(s)   | `df["name"]`, `df[["col1", "col2"]]` | Series or DataFrame |
+| Access by index/name       | `df.loc[rows, "name"]`               | (varies)            |
+| Access by position         | `df.iloc[i, j]`                      | (varies)            |
+| Delete a column            | `df.drop(name, axis=1)`              | DataFrame           |
+| Sort by column values      | `df.sort_values("column")`           | DataFrame           |
 
 : Operations on pandas data frames {#tbl-data-frames}
 
-It takes a lot of space to demonstrate all the ways in which these can be used, as is done in the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html). There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of them in the pandas documentation.
-
-### Categorical data in pandas
-
-Pandas has many facilities for dealing with categorical variables.
-
-:::{.column-margin}
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_213gzjj8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_7h6a262o" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.17"></iframe>
-
-:::
-
-::::{#exm-data-ordinal chapter=1 description="Ordinal data" type=💻}
-Here is a [dataset](https://ggplot2.tidyverse.org/reference/diamonds.html) about features and prices of diamonds:
+::::{#exm-data-frames-operate chapter=1 description="Operations on data frames" type=💻}
+We continue with the definitions of `simpsons` in @exm-data-frames-create:
 
 ```{python}
-import seaborn as sns
-diamonds = sns.load_dataset("diamonds")
-diamonds.head()
+simpsons.info()
 ```
 
-As you can see above, some of the features (cut, color, clarity) have string designations. We could convert *clarity*, for example, to a categorical variable like so: 
-
 ```{python}
-pd.Categorical(diamonds["clarity"])
+simpsons.min()
 ```
 
-However, these values actually have a specific ordering in this context, and that is lost in the nominal variable above. We can fix that by specifying the ordering when we create the categorical variable:
+Summing numbers does what you expect, but summing strings concatenates them:
 
 ```{python}
-clarities = ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"]
-pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
+simpsons.sum()
 ```
 
-Often we want to replace ordered categories with integers:
+We can sort the entire frame by its values in a column:
 
 ```{python}
-cl_num = pd.Categorical(diamonds["clarity"], categories=clarities, ordered=True)
-diamonds["clarity"] = cl_num.codes
-diamonds.head()
-```
-
-In such cases, it's more direct to use string replacement:
-
-```{python}
-cuts = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
-diamonds["cut"] = diamonds["cut"].replace(
-    cuts,              # to be replaced
-    range(1, 6),       # replacements
-)
-diamonds.head()
+simpsons.sort_values("date")
 ```
 
 ::::
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_wh19lhvn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_z05q0byw" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-A common need is to convert a categorical variable to dummy variables. Pandas makes that a one-liner.
-
-::::{#exm-data-chess chapter=1 description="Categorical data in pandas" type=💻}
-Here is a vector of chess pieces at the start of a game:
-
-```{python}
-pieces = pd.Series( [
-    "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn", "pawn",
-    "knight", "bishop", "rook", "knight", "bishop", "rook",
-    "queen", "king"
-] )
-```
-
-We can use pandas to convert this variable to dummy variables:
-
-```{python}
-pd.get_dummies(pieces)
-```
-
-We can also use the encoding variant in which one of the categories is left out:
-
-```{python}
-pd.get_dummies(pieces, drop_first=True).head(6)
-```
-
-::::
+For a more thorough demonstration of operations on data frames, look at the [pandas user guide](https://pandas.pydata.org/docs/user_guide/basics.html). There is also an [exhaustive list](https://pandas.pydata.org/docs/reference/frame.html) of relevant functions in the pandas documentation.
 
 ### Loading from files 
 
-Datasets can be presented in many forms. The simplest and most universal are *comma-separated value* (CSV) files. Such files can be read by pandas locally or over the web.
+Datasets can be presented in many forms. The simplest and most universal are **comma-separated value** (CSV) files. Such files can be read by pandas locally or over the web.
 
 ::::{#exm-data-read chapter=1 description="Importing CSV data" type=💻}
 The pandas function we use to load a dataset from CSV is `read_csv`. Here we use it to read a file that is available over the web:
@@ -927,13 +908,17 @@ ads.info()
 
 ::::
 
-:::{.callout-tip}
-Here is one thing to watch for when loading numerical data. If a column has anything non-numeric in it, like "N/A" or "unknown", pandas will load that column as a string. 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_mrq75g07&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dc029nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+
+![](_media/memes/mad_men.jpg){width=100%}
 
 :::
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_mrq75g07&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dc029nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+:::{.callout-tip}
+Here is one thing to watch for when loading numerical data: if a column has anything non-numeric in it, like "N/A" or "unknown", pandas will load that column as a string. 
 
 :::
 
@@ -1024,8 +1009,6 @@ dated_weather.loc["1979-03-01":"1979-03-06"]
 
 :::
 
-![](_media/memes/rows.jpg){width=40%}
-
 Frequently we want to select rows from a data frame based on criteria applied to the data itself. We can use relational operators such as `>`, `<`, `==`, etc. to select rows based on the values in a column.
 
 ::::{#exm-data-row-select chapter=1 description="Selecting rows in a frame" type=💻}
@@ -1059,6 +1042,10 @@ weather[(weather["TMAX"] < 0) & (weather["SNOW"] > 0)]
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_k1lb9pe7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hs13e0f9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.21" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
+<br></br>
+
+![](_media/memes/weather.jpg){width=100%}
+
 :::
 
 ::: {.callout-tip}
@@ -1080,6 +1067,9 @@ Sometimes you want to combine data from different sources. There are multiple wa
 The `concat` function is used to stack frames or series on top of each other. 
 
 ::::{#exm-data-concat chapter=1 description="Concatenating data in pandas" type=💻}
+
+Here we create two frames with three rows each and some commonly named columns:
+
 ```{python}
 birds = pd.DataFrame(
     {
@@ -1103,14 +1093,31 @@ teams = pd.DataFrame(
 teams
 ```
 
+We can use `pd.concat()` to stack these frames on top of each other:
+
 ```{python}
 pd.concat([birds, teams])
 
 ```
 
+Notice above that any value that wasn't defined in the source frames ends up as a missing value in the result. 
+
+We can also concatenate the frames side by side by using the `axis` keyword:
+
+```{python}
+pd.concat([birds, teams], axis="columns")
+
+```
+
+The result is just a dumb pasting together of the source frames. There is no attempt to make the entries of the *Name* column match up, even though there were some overlapping values in it.
 ::::
 
-This operation is occasionally useful, but more often data frames should be joined horizontally. While that can be done with `concat`, it's better to learn the more flexible `merge` method in the next section.
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_c8600g1g&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_d1o2jjd3" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.22" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
+Concatenation is occasionally useful, but more often data frames should be joined horizontally using the more flexible `merge` method in the next section.
 
 ### Merging data
 
@@ -1141,6 +1148,15 @@ print(pd.merge(birds, teams, on="Name", how="right"))
 ```
 
 ::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_8brlfsj0&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_msgvrd2u" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+
+![](_media/memes/join.jpg){width=100%}
+
+:::
 
 :::{.callout-note}
 The difference between outer join and inner join is the same as the union and intersection of sets—the sets here being the `"on"` column contents.
@@ -1192,34 +1208,32 @@ result.head()
 
 ::::
 
-## Data preparation
+## Data wrangling
 
 Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling**.
 
 There are a number of frequently encountered tasks in data wrangling, including:
 
 Cleaning
-: Handling missing values, removing duplicates, and correcting errors.
+: Handling missing values, removing duplicates, correcting errors, and ensuring that data is in the right format.
 
-Preprocessing
-: Ensuring that numbers, dates, and strings are interpreted as desired.
+Encoding
+: Converting categorical variables to numerical form.
 
 Transforming
 : Normalizing, scaling, and encoding data (e.g., defining dummy variables).
 
 These are tasks that graphical and AI assistive tools can help with a great deal. When using such tools, have them generate code that reproduces its steps. That way, you have a definitive record of what was done and can reproduce or modify it later.
 
-### Cleaning
+### Missing values
 
 One of the most commonly encountered snags found in real data sets are rows that have missing values. There is no universal way that such values are presented. A missing value may be indicated by a zero or nonsensical value, or with a string such as "n/a", or just an empty cell. Within Python, it might be natural to represent missing values as `None`, but that is not a valid value for a NumPy array. It's more flexible within pandas to use `np.nan`, which stands for "not a number". 
 
-Most algorithms will fail went presented with missing values, so you must either remove or replace them.
+Most algorithms will fail when presented with missing values, so you must either remove or replace them.
 
-removal
-: The `dropna()` method removes all rows that have missing values. By default, it creates a new copy of the data frame, so you must assign the result to a variable. Alternatively, you can use the argument `inplace=True` to modify the original frame. When applying `dropna()`, you may want to limit its effect to a subset of columns by using the `subset` argument with a list of columns.
+For removal, the `dropna()` method deletes all rows that have missing values. By default, it does this to a new copy of the data frame, so you must assign the result to a variable. Alternatively, you can use the argument `inplace=True` to modify the original frame. When applying `dropna()`, you may want to limit its scope to a subset of columns by using the `subset` argument with a list of columns.
 
-replacement
-: Removing rows can lead to data loss. An alternative is **imputation**, which means replacing the missing values with a representative value. The `fillna()` method makes it easy to use the mean, median, or mode of the non-missing values in a column. But you should be cautious about imputation, because it can easily misrepresent the underlying data. At the very least, you need to document how many values have been changed.
+Replacement of missing values is called **imputation**. The `fillna()` method makes it easy to use the mean, median, or mode of the non-missing values in a column. Doing so allows you to avoid data loss, but you should be cautious about imputation, because it can easily misrepresent the underlying data. At the very least, you need to document how many values have been changed.
 
 ::::{#exm-data-missing chapter=1 description="Handling missing values in pandas" type=💻}
 Here is a well-known demonstration data set often referred to as *Palmer Penguins*:
@@ -1262,23 +1276,24 @@ Note that only the numerical data columns were affected. The categorical column 
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uumcim3n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cs0thbt3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1yoo56s2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_s9rb8i4t" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.25" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+<br></br>
+![](_media/memes/missing.jpg){width=100%}
 
 :::
 
-![](_media/memes/missing.jpg){width=40%}
-
-
-### Preprocessing
+### Strings
 
 A common pitfall is that data that seems numerical to you might be parsed as strings by pandas. This happens when there are non-numeric characters in the data, such as dollar signs or percent signs, and any row with such a character will cause the whole column to be interpreted as strings.
 
 ::::{#exm-data-loans chapter=1 description="Cleaning a data frame" type=💻}
-To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
+To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. For this example, we'll keep only a few columns.
 
 ```{python}
 loans = pd.read_csv("_datasets/loans.csv")
-loans.head()
+loans = loans[["loan_amnt", "funded_amnt", "int_rate", "title"]]
+loans.head(8)
 ```
 
 The `int_rate` column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We'd like to strip out those percent signs and convert the rest to numeric types. We can use the `str` property of the column to access string methods:
@@ -1287,46 +1302,115 @@ The `int_rate` column, which gives the interest rate on the loan, has been inter
 int_rate = loans["int_rate"].str.strip('%')
 ```
 
-Then, we can convert the result to numeric:
+Then, we can convert the result to numbers:
 
 ```{python}
 loans["int_rate"] = pd.to_numeric( int_rate )
 loans.head()
 ```
 
-The *title* column contains strings that haphazardly formatted:
-
-```{python}
-loans["title"]
-```
-
-We might improve matters by converting everything in that column to lowercase:
+The *title* column contains strings that are haphazardly formatted. We might want to convert everything in that column to lowercase:
 
 ```{python}
 loans["title"] = loans["title"].str.lower()
-loans.head()
-```
-
-Let's add a column for the percentage of the loan request that was eventually funded. This might be a useful feature for a learning model.
-
-```{python}
-loans["percent_funded"] = 100 * loans["funded_amnt"] / loans["loan_amnt"]
-loans.head()
+loans.head(8)
 ```
 
 ::::
 
-:::{.callout-tip}
-As you see above, we often end up with chains of methods separated by dots. Python works from the inside out, left to right, evaluating a sub-expression and then replacing it with the output for the next segment in the chain. We could write these as a sequence of separate lines having intermediate results assigned to variable names, but it's considered better style to chain them.
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2ul0qp9u&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wgjmc04r" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.26" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
 :::
+
+You can look at the [pandas user guide](https://pandas.pydata.org/docs/user_guide/text.html#text-string-methods) for a more thorough demonstration of string methods in pandas.
+
+### Encoding qualitative data
+
+Most algorithms require numerical data. If you have qualitative data, you need to convert it to a numerical form. This is called **encoding**. 
+
+For a category with ordered values, it's usually best to replace the categories with integers that reflect the ordering. 
+
+::::{#exm-data-encoding chapter=1 description="Encoding qualitative data" type=💻}
+This dataset contains information about diamonds:
+
+```{python}
+import seaborn as sns
+diamonds = sns.load_dataset("diamonds")
+diamonds.head()
+```
+
+As you can see above, some of the features (*cut*, *color*, *clarity*) have string designations. We could convert *cut*, for example, to a categorical variable like so: 
+
+```{python}
+pd.Categorical(diamonds["cut"])
+```
+
+However, these values actually have a specific ordering in this context that is lost in the nominal variable above. Instead, we can replace the strings with integers that reflect the ordering:
+
+```{python}
+cuts = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
+diamonds["cut"].replace(cuts, range(1, 6), inplace=True)
+diamonds.head()
+```
+::::
+
+For nominal categories that have no natural ordering, it's common to encode via dummy variables.
+
+::::{#exm-data-dummies chapter=1 description="Dummy variables in pandas" type=💻}
+Here is a dataset of NBA player statistics from 2023–2024:
+
+```{python}
+nba = pd.read_csv("_datasets/NBA player stats 2023-24.csv")
+nba.head()
+```
+
+For this example, we will narrow the focus to the *NAME* and *POS* columns:
+
+```{python}
+nba = nba[["NAME", "POS"]]
+nba.head(10)
+```
+
+The *POS* column is a categorical variable (the player's position):
+
+```{python}
+nba["POS"].unique()
+```
+
+We can use `pd.get_dummies` to convert this column to dummy variables:
+
+```{python}
+dum1 = pd.get_dummies(nba["POS"])
+dum1.head(10)
+```
+
+As you can see, the *POS* column was replaced by 7 columns, one for each of the unique positions in the dataset. But this result is a little awkward, because a position value such as `"C-F"` means both center and forward. We can use a different encoding scheme to handle this more sensibly:
+
+```{python}
+dum2 = nba["POS"].str.get_dummies("-")  # split on hyphen
+dum2.head(10)
+```
+
+Now we can manually paste together the original data frame with the dummy variables:
+
+```{python}
+nba = pd.concat([nba, dum2], axis="columns")
+nba.head(10)
+```
+
+Here's how it looks for a player who has multiple positions:
+
+```{python}
+nba[nba["NAME"] == "Kelly Oubre Jr."]
+```
+
+::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_atu5pvx5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e6fttwyk" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.22" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hu44cer7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_yui8jnp5" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.28" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
 :::
-
-
 
 ## Exercises {.unnumbered}
 
