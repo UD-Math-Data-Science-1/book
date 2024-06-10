@@ -906,7 +906,7 @@ pd.get_dummies(pieces, drop_first=True).head(6)
 
 ### Loading from files 
 
-Datasets can be presented in many forms. The simplest and most universal are spreadsheets and *comma-separated value* (CSV) files. Such files can be read by pandas locally or over the web.
+Datasets can be presented in many forms. The simplest and most universal are *comma-separated value* (CSV) files. Such files can be read by pandas locally or over the web.
 
 ::::{#exm-data-read chapter=1 description="Importing CSV data" type=💻}
 The pandas function we use to load a dataset from CSV is `read_csv`. Here we use it to read a file that is available over the web:
@@ -918,20 +918,17 @@ ads.head(6)    # show the first 6 rows
 
 Note above that we used `head(6)` to see just the first 6 rows.
 
-A data frame has a few properties that describe its contents:
+It's a good idea to check what you've just loaded:
 ```{python}
-ads.shape    # number of rows, number of columns
-```
-
-```{python}
-ads.columns   # names of the columns
-```
-
-```{python}
-ads.dtypes    # data types of the columns
+ads.info()   
 ```
 
 ::::
+
+:::{.callout-tip}
+Here is one thing to watch for when loading numerical data. If a column has anything non-numeric in it, like "N/A" or "unknown", pandas will load that column as a string. 
+
+:::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_mrq75g07&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dc029nzp" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.18" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
@@ -1195,18 +1192,84 @@ result.head()
 
 ## Data preparation
 
-Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling** or **data munging**. 
+Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling**.
+
+There are a number of frequently encountered tasks in data wrangling, including:
+
+* **Cleaning**: Handling missing values, removing duplicates, and correcting errors.
+* **Preprocessing**: Ensuring that numbers, dates, and strings are interpreted as desired.
+* **Transforming**: Normalizing, scaling, and encoding data (e.g., defining dummy variables).
+
+These are tasks that graphical and AI assistive tools can help with a great deal. When using such tools, have them generate code that reproduces its steps. That way, you have a definitive record of what was done and can reproduce or modify it later.
+
+### Cleaning
+
+One of the most commonly encountered snags found in real data sets are rows that have missing values. There is no universal way that such values are presented. A missing value may be indicated by a zero or nonsensical value, or with a string such as "n/a", or just an empty cell. Within Python, it might be natural to represent missing values as `None`, but that is not a valid value for a NumPy array. It's more flexible within pandas to use `np.nan`, which stands for "not a number". 
+
+Most algorithms will fail went presented with missing values, so you must either remove or replace them.
+
+removal
+: The `dropna()` method removes all rows that have missing values. By default, it creates a new copy of the data frame, so you must assign the result to a variable. Alternatively, you can use the argument `inplace=True` to modify the original frame. When applying `dropna()`, you may want to limit its effect to a subset of columns by using the `subset` argument with a list of columns.
+
+replacement
+: Removing rows can lead to data loss. An alternative is **imputation**, which means replacing the missing values with a representative value. The `fillna()` method makes it easy to use the mean, median, or mode of the non-missing values in a column. But you should be cautious about imputation, because it can easily misrepresent the underlying data. At the very least, you need to document how many values have been changed.
+
+::::{#exm-data-missing chapter=1 description="Handling missing values in pandas" type=💻}
+Here is a well-known demonstration data set often referred to as *Palmer Penguins*:
+
+```{python}
+import seaborn as sns
+penguins = sns.load_dataset("penguins")
+penguins.head()
+```
+
+Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using `isna`, which creates a Boolean series:
+
+```{python}
+penguins.isna()
+```
+
+The total number of rows with missing data is  
+
+```{python}
+penguins.isna().sum()
+```
+
+To drop the rows with missing values, you can use `dropna()`:
+
+```{python}
+dropped = penguins.dropna()
+print("Original has", len(penguins), "rows.")
+print("After removals, there are", len(dropped), "rows.")
+```
+
+If you want to impute missing values, you can use `fillna()`. Here, for example, we replace missing values in any column with the mean of the column:
+
+```{python}
+filled = penguins.fillna(penguins.mean())
+filled.head()
+```
+
+Note that only the numerical data columns were affected. The categorical column for *sex* was left alone.
+
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uumcim3n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cs0thbt3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
+![](_media/memes/missing.jpg){width=40%}
+
 
 ### Preprocessing
 
-I'm impossible to prepare for every future situation when it comes to preprocessing data. You might find the `replace()` method or `str.` methods handy to tidy up strings, or to replace strings with numerical values. You can parse a string that represents one or more numbers using the `to_numeric()` or extractall There are built-in ways to parse and manipulate dates and times. 
-
-To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
+A common pitfall is that data that seems numerical to you might be parsed as strings by pandas. This happens when there are non-numeric characters in the data, such as dollar signs or percent signs, and any row with such a character will cause the whole column to be interpreted as strings.
 
 ::::{#exm-data-loans chapter=1 description="Cleaning a data frame" type=💻}
-First, we load the raw data from a CSV (comma separated values) file.
+To demonstrate algorithms in later sections, we will be using a [dataset describing loans](https://www.kaggle.com/datasets/imsparsh/lending-club-loan-dataset-2007-2011) made on the crowdfunding site LendingClub. 
+
 ```{python}
-import pandas as pd
 loans = pd.read_csv("_datasets/loans.csv")
 loans.head()
 ```
@@ -1214,13 +1277,13 @@ loans.head()
 The `int_rate` column, which gives the interest rate on the loan, has been interpreted as strings due to the percent sign. We'd like to strip out those percent signs and convert the rest to numeric types. We can use the `str` property of the column to access string methods:
 
 ```{python}
-loans["int_rate"].str.strip('%')
+int_rate = loans["int_rate"].str.strip('%')
 ```
 
 Then, we can convert the result to numeric:
 
 ```{python}
-loans["int_rate"] = pd.to_numeric( loans["int_rate"].str.strip('%') )
+loans["int_rate"] = pd.to_numeric( int_rate )
 loans.head()
 ```
 
@@ -1230,30 +1293,18 @@ The *title* column contains strings that haphazardly formatted:
 loans["title"]
 ```
 
-We might improve matters by converting everything in that column to lowercase. We can use the `str.lower()` method for that:
+We might improve matters by converting everything in that column to lowercase:
 
 ```{python}
 loans["title"] = loans["title"].str.lower()
-loans["title"]
+loans.head()
 ```
-Let's add a column for the percentage of the loan request that was eventually funded. This will be a target for some of our learning methods.
+
+Let's add a column for the percentage of the loan request that was eventually funded. This might be a useful feature for a learning model.
 
 ```{python}
 loans["percent_funded"] = 100 * loans["funded_amnt"] / loans["loan_amnt"]
-```
-
-In future chapters, we will only use a small subset of the numerical columns: 
-
-```{python}
-columns = [ "percent_funded", "loan_amnt", "int_rate", "installment", "annual_inc",
-    "dti", "delinq_2yrs", "delinq_amnt" ]
-loans = loans[columns]
-```
-
-Finally, we'll output this cleaned data frame to its own CSV file. By default, saving will include the index, which in this case is a meaningless row number, so we suppress that with a keyword: 
-
-```{python}
-loans.to_csv("loan_clean.csv", index=False)
+loans.head()
 ```
 
 ::::
@@ -1268,57 +1319,6 @@ As you see above, we often end up with chains of methods separated by dots. Pyth
 
 :::
 
-### Missing values
-
-In real data sets we often must cope with rows that have missing values. There is no universal way that such values are presented. A missing value may be indicated by a zero or nonsensical value, or with a string such as "n/a", or just an empty spot. Within Python, it might be natural to represent missing values as `None`, but that is not a valid value for a NumPy array. It's more flexible within pandas to use `np.nan`, for "not a number". 
-
-The best practice for locating missing values in pandas is to use the `isna()` method. But you have to do something about them before you can apply algorithms. It's simplest to remove all rows that contain missing values, which is the job of the pandas `dropna()` method. But if that leads to too much data loss, you can try **imputation**, which means replacing the missing values with a representative value, such as the mean or median of the non-missing values. In that case you should use the `fillna()` method.
-
-::::{#exm-data-missing chapter=1 description="Handling missing values in pandas" type=💻}
-Here is a well-known data set about penguins:
-
-```{python}
-import seaborn as sns
-penguins = sns.load_dataset("penguins")
-penguins.head()
-```
-
-Note above that the fourth row of the frame is missing measurements. We can discover how many such rows there are using `isna`, which creates a Boolean series:
-
-```{python}
-penguins.isna()
-```
-
-```{python}
-penguins.isna().sum()
-```
-
-If all you want to do is drop the rows with missing values, you can use `dropna`:
-
-```{python}
-print("Original has", len(penguins), "rows.")
-print("After removals, there are", len(penguins.dropna()), "rows.")
-```
-
-If you want to impute missing values, you can use `fillna`. Here, for example, we replace missing values in any column with the mean of the column:
-
-```{python}
-new_penguins = penguins.fillna(penguins.mean())
-new_penguins.head()
-```
-
-Note that only the numerical data columns were affected. The categorical column for *sex* was left alone.
-
-Think carefully before you impute missing values, because doing so can easily misrepresent the underlying data. At the very least, you need to document how many values have been changed.
-
-::::
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uumcim3n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cs0thbt3" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.23" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-![](_media/memes/missing.jpg){width=40%}
 
 
 ## Exercises {.unnumbered}
