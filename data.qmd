@@ -14,6 +14,11 @@ A **quantitative** value is one that is numerical and supports meaningful compar
 
  Quantitative data is further divided into **continuous** and **discrete** types. The difference is the same as between real numbers and integers.
 
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_iur6b66n&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2ddq77ql" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+:::
+
 ::::{#exm-data-quantitative chapter=1 description="Quantitative data" type=✍️}
 Some continuous quantitative data sources:
 
@@ -28,9 +33,6 @@ Examples of discrete quantitative data:
 * Score on an exam
 ::::
 
-:::{.column-margin}
-{{< video https://www.dropbox.com/s/l9fs3fa43hup08l/Example1_1.mp4?raw=1 >}}
-:::
 
 :::{.callout-note}
 Sometimes there may be room for interpretation or context. For example, the retail price of a gallon of milk might be regarded as discrete data, since it technically represents a whole number of pennies. But in finance, transactions are regularly computed to much higher precision, so it might make more sense to interpret prices as continuous values. As a rule of thumb, if there are many possible values, or the values are the result of a measurement, the continuous interpretation is usually more appropriate.
@@ -825,7 +827,7 @@ It takes a lot of space to demonstrate all the ways in which these can be used, 
 Pandas has many facilities for dealing with categorical variables.
 
 :::{.column-margin}
-{{< video https://www.dropbox.com/s/fjf4gj8bj5hwvwm/Section1_5_c.mp4?raw=1 >}}
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_213gzjj8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_7h6a262o" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 1.17"></iframe>
 
 :::
 
@@ -1196,9 +1198,14 @@ Raw data often needs to be manipulated into a useable format before algorithms c
 
 There are a number of frequently encountered tasks in data wrangling, including:
 
-* **Cleaning**: Handling missing values, removing duplicates, and correcting errors.
-* **Preprocessing**: Ensuring that numbers, dates, and strings are interpreted as desired.
-* **Transforming**: Normalizing, scaling, and encoding data (e.g., defining dummy variables).
+Cleaning
+: Handling missing values, removing duplicates, and correcting errors.
+
+Preprocessing
+: Ensuring that numbers, dates, and strings are interpreted as desired.
+
+Transforming
+: Normalizing, scaling, and encoding data (e.g., defining dummy variables).
 
 These are tasks that graphical and AI assistive tools can help with a great deal. When using such tools, have them generate code that reproduces its steps. That way, you have a definitive record of what was done and can reproduce or modify it later.
 
