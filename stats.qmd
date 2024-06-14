@@ -30,6 +30,7 @@ We will use data about car fuel efficiency for illustrations.
 
 ```{python}
 cars = sns.load_dataset("mpg")
+cars.info()
 ```
 
 The `describe` method of a data frame gives summary statistics for each column of quantitative data:
@@ -39,7 +40,7 @@ cars.describe()
 ```
 We now discuss the definitions and interpretations of these values.
 
-### Mean and spread
+### Mean and dispersion
 
 You may already know the Big Three summary statistics: 
 
@@ -60,7 +61,7 @@ and their **standard deviation** (STD) is $\sigma$, the square root of the varia
 
 :::
 
-Mean is a measurement of central tendency. Variance and STD are measures of spread or *dispersion* in the data.
+Mean is a measurement of central tendency. Variance and STD are measures of spread or **dispersion** in the data.
 
 ::::{#exm-stats-maxvar chapter=2 type=✍️ description="Standard deviation by hand"}
 Suppose that $x_1=0$, $x_2=t$, and $x_3=-t$, where $|t| \le 6$. What are the minimum and maximum possible values of the standard deviation? 
@@ -269,38 +270,111 @@ IQR(x)
 
 ::::
 
-## Distributions
+## Empirical distributions
 
-Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution of all values precisely using a function. 
+Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution values more precisely using functions and graphical tools. 
+
+### Histograms
+
+By definition, we know that if $a<b$, $\hat{F}(b) - \hat{F}(a)$ is the number of observations in the half-open interval $(a,b]$. This leads into the next definition.
+
+::::{#def-stats-histogram}
+Select the ordered values $t_1 < t_2 < \cdots < t_m$, called **edges**, and define **bins** as the intervals
+$$
+B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
+$$
+
+where we adopt the convention that $t_0=-\infty$ and  $t_{m+1}=\infty$. Let $c_k$ be the number of data values in $B_k$. Then a **histogram** relative to the bins is the list of $(B_0,c_0),\ldots,(B_m,c_m)$.
+::::
+
+Seaborn uses `displot` to show empirical distributions, and the default is to show a histogram.
+
+::::{#exm-stats-ecdf-penguins chapter=2 type=💻 description="ECDF of penguins"}
+Here is a histogram from the `penguins` dataset:
+
+```{python}
+penguins = sns.load_dataset("penguins")
+sns.displot(data=penguins, x="body_mass_g");
+```
+
+We can specify the number of bins to use, or their edges:
+
+```{python}
+sns.displot(data=penguins, x="body_mass_g", bins=20);
+```
+
+Sometimes we'd rather show the proportions of values rather than the counts:
+
+```{python}
+sns.displot(data=penguins, x="body_mass_g", stat="proportion");
+```
+
+::::
+
+### Empirical CDF
+
+Given a sample of a population, we can characterize it using an important function defined by the data.
+
+::::{#def-stats-ecdf}
+The **empirical cumulative distribution function** or ECDF of a sample is the function $\hat{F}(t)$ whose value at $t$ equals the proportion of the sample values that are less than or equal to $t$.
+
+::::
+
+Note that the value of $\hat{F}$ ranges between 0 and 1 (inclusive) and is a nondecreasing function of $t$.
+
+::::{#exm-stats-uniform-discrete chapter=2 type=✍️ description="ECDF of a simple distribution"}
+Consider the population
+
+$$
+x_1=1/4, \quad x_2=2/4, \quad x_3=3/4, \quad x_4=1. 
+$$
+
+Since the smallest value is at 1/4, we have $F(t)=0$ when $t < 1/4$.  At $t=1/4$ we have passed 1 of the 4 values, so $F(1/4)=1/4$. This value of $F$ remains constant until we get to $t=1/2$, at which point it jumps to the value $1/2$, and so on, leading to the graph in @fig-stats-cdf-a
+
+![CDF for a population of size 4.](_media/ch2_cdf_a.svg){width=75% #fig-stats-cdf-a}
+
+Now consider the population 
+
+$$
+x_1=1/10, \quad x_2=2/10, \quad x_3=3/10, \quad \ldots, \quad x_{10}=1. 
+$$
+
+Using the same reasoning as above, we get the graph in @fig-stats-cdf-b.
+
+![CDF for a population of size 10.](_media/ch2_cdf_b.svg){width=75% #fig-stats-cdf-b}
+
+::::
+
+::::{#exm-stats-ecdf-penguins chapter=2 type=💻 description="ECDF of penguins"}
+A variation of the seaborn `displot` function creates an ECDF. Here is one for the `penguins` dataset:
+```{python}
+penguins = sns.load_dataset("penguins")
+sns.displot(data=penguins, x="body_mass_g", kind="ecdf");
+```
+
+It's a stairstep plot, because the ECDF jumps at each data value.
+
+::::
+
+There is a simple relationship between the ECDF $\hat{F}$ and histograms. If there are $n$ total observations in the sample and $c_k$ is the count in bin $(t_k,t_{k+1}]$, then 
+
+$$
+c_k = n[\hat{F}(t_{k+1}) - \hat{F}(t_k)].
+$$ {#eq-stats-hist-ecdf}
+
+
+## Continuous distributions
+
+Paradoxically, sometimes infinity makes things easier. For instance, a Riemann sum is a long, complicated expression, but in the limit of infinitely many rectangles, it becomes a simple definite integral. Something similar happens when we think about populations so large that they can be considered infinite.
 
 ### CDF
 
-::::{#def-stats-cdf}
-The **cumulative distribution function** (CDF) of a population is the function 
-$$
-F(t) = \text{fraction of the population that is $\le t$},
-$$
-where $t$ ranges over all possible values.
+::::{#exm-stats-uniform-continuous chapter=2 type=✍️ description="CDF of a uniform distribution"}
+It's natural and easy to generalize @exm-stats-uniform-discrete to samples of any size $n$: $x_i=i/n$ for $i=1,\ldots,n$. Intuitively you cam see that as $n$ increases,     the stairs in the plots in @fig-stats-cdf-a and @fig-stats-cdf-b become narrower and shallower, eventually becoming a smooth ramp:
 
-::::
+![CDF for an infinite population.](_media/ch2_cdf_c.svg){width=75% #fig-stats-cdf-c}
 
-Note that by its definition, $F$ ranges between 0 and 1 (inclusive) and is a nondecreasing function.
-
-::::{#exm-stats-uniform-discrete chapter=2 type=✍️ description="CDF of a uniform distribution"}
-If a population is $x_i=i$ for $i=1,\ldots,n$, then $F(k)=k/n$ at each $k=1,\ldots,n$. We could, however, also regard $F$ as a function of a continuous variable $t$, in which case
-$$
-F(t) = \frac{\lfloor t \rfloor}{n},
-$$
-where $\lfloor\cdot\rfloor$ is the *floor function* that rounds leftward to the nearest integer. This produces a step function that looks like stairs going up from 0 to 1.
-
-::::
-
-:::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_w41hr5us&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ci20taew" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-@exm-stats-uniform-discrete becomes interesting as a template for generalizing to infinite populations. If we take not $x_i=i$ but $x_i=i/n$ and then let $n\to \infty$, then the graph of $F$ converges to
+The formal expression of the function plotted in @fig-stats-cdf-c is
 
 $$
 F(t) = \begin{cases} 
@@ -310,13 +384,93 @@ t,& 0 \le t \le 1, \\
 \end{cases}
 $$  {#eq-stats-uniform-cdf}
 
-While it doesn't make sense to think about a fraction of the number of values in the infinite case, we can interpret $F(t)$ as the *probability of observing a value less than or equal to the real number $t$. 
-
-::::{#def-stats-uniform-cdf}
-A **uniform distribution** gives an equal probability to every value. In particular, the uniform distribution over the interval $[0,1]$ has the CDF given in @eq-stats-uniform-cdf.
+Conceptually, this function represents a distribution in which every value between 0 and 1 is equally likely. This is known as the **uniform distribution** over the interval $[0,1]$.
 
 ::::
 
+We now define the continuous counterpart of the ECDF.
+
+::::{#def-stats-cdf-continuous}
+The **cumulative distribution function** (CDF) of a distribution is the function 
+$$
+F(t) = \text{probability that a randomly chosen value is $\le t$},
+$$
+
+where $t$ is any real number.
+
+::::
+
+For a finite population, the CDF and the ECDF are the same. 
+
+::::{#exm-stats-temps-ecdf chapter=2 type=💻 description="ECDF of temperatures"}
+Here are maximum daily temperatures (in tenths of Celsius degrees) for Newark, DE, starting in 1894:
+```{python}
+weather = pd.read_csv("_datasets/ghcn_newark.csv")
+sns.displot(weather, x="TMAX", kind="ecdf");
+```
+
+More than 29,000 observations are summarized in this ECDF. There are still small steps visible in the graph above because the temperature values are discrete. Even so, there would be little changed by approximating the distribution with a smooth one.
+
+::::
+
+Conceptually we may interpret a large sample as an approximation to an infinite population. In this case, the ECDF is an approximation to the CDF.
+
+### PDF
+
+In @eq-stats-hist-ecdf we connected a histogram to the ECDF via ${c_k} = n[\hat{F}(t_{k+1}) - \hat{F}(t_k)]$, where $c_k$ is the count in bin $(t_k,t_{k+1}]$. If we let $p_k = c_k/n$ be the fraction of observations in that bin, then we can write
+
+$$
+\frac{p_k}{t_{k+1}-t_k} = \frac{\hat{F}(t_{k+1})-\hat{F}(t_k)}{t_{k+1}-t_k}. 
+$$  {#eq-stats-pdf}
+
+We can interpret the left-hand side of @eq-stats-pdf as the density of observations in the bin. If we take the limit $t_{k+1} \to t_k$, we get a derivative on the right-hand side, which motivates the following definition.
+
+::::{#def-stats-pdf}
+The **probability density function** or **PDF** of a distribution, denoted $f(t)$, is the derivative of the CDF, i.e.,
+
+$$
+f(t) = F'(t).
+$$ {#eq-stats-pdf-def}
+
+::::
+
+The intuitive interpretation of $f(t)$ is as the probability of observing a value in a tiny interval around $t$. 
+
+::::{#exm-stats-temps-pdf chapter=2 type=✍️ description="PDF of temperature distribution"}
+The histogram of the temperature distribution in @exm-stats-temps-ecdf is an approximation to the continuous PDF, if we normalize the counts properly:
+
+```{python}
+sns.displot(weather, x="TMAX", bins=20, stat="density");
+```
+
+There is an algorithm known as **kernel density estimation** (KDE) that can be used to estimate the true PDF from a sample. It's another option in the `displot` function:
+
+```{python}
+sns.displot(weather, x="TMAX", kind="kde");
+```
+
+::::
+
+::::{#exm-stats-uniform-pdf chapter=2 type=✍️ description="PDF of a uniform distribution"}
+For a uniform distribution over $[0,1]$, we can take the derivative of the CDF in @eq-stats-uniform-cdf to get
+
+$$
+F'(t) = \begin{cases}
+0, & t < 0, \\
+1, & 0 < t < 1, \\
+0, & t > 1.
+\end{cases}
+$$ {#eq-stats-uniform-pdf}
+
+We're sweeping some details under the rug here, because $F$ is not differentiable at $t=0$ and $t=1$. It turns out that we can mostly ignore such points in practice.
+
+::::
+
+The Fundamental Theorem of Calculus and @eq-stats-pdf-def imply that the CDF is the integral of the PDF. Specifically, for any value of $a$,
+
+$$
+F(t) = F(a) + \int_{a}^t f(s) \, ds.
+$$ {#eq-stats-cdf-integral}
 
 ### Random numbers in Python
 
@@ -338,176 +492,75 @@ rng = default_rng(19716)    # setting an initial state
 The `uniform` generator method produces numbers distributed uniformly between two limits you specify.
 
 ```{python}
-for _ in range(5):
-    print( rng.uniform( -1, 1 ) )
+rng.uniform( 0, 1, size=5)
 ```
 
-::::
+For a large uniform random sample, the ECDF will approximate the CDF in @fig-stats-cdf-c.
 
-### Empirical CDF
-
-Given a sample of a population, we can always calculate the analog of a CDF from its values.
-
-::::{#def-stats-ecdf}
-The **empirical cumulative distribution function** or ECDF of a sample is the function $\hat{F}$ whose value at $t$ equals the proportion of the sample values that are less than or equal to $t$.
-
-::::
-
-::::{#exm-stats-ecdf-uniform chapter=2 type=💻 description="Empirical CDF"}
-Here is an experiment that producing the ECDF for a sample from the random number generator:
 ```{python}
-from numpy.random import default_rng
-rng = default_rng(19716)
-x = rng.uniform( size=(100,) )
+x = rng.uniform( size=10000 )
 sns.displot(x, kind="ecdf");
 ```
 
-If we take more samples, we expect to see a curve closer to the theoretical CDF, $F(t)=t$:
+Similarly, a histogram of the sample will approximate a plot of the PDF in @eq-stats-uniform-pdf:
 
 ```{python}
-x = rng.uniform( size=(4000,) )
-sns.displot(x, kind="ecdf");
+sns.displot(x, bins=16, stat="density");
 ```
 
 ::::
+
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zcbcjzcd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gz582maa" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.11" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
+</br>
+![](_media/memes/cat-distributon.jpg){width=100%}
+
+:::
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ksxfliwz&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_z6swe1lg" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.10" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
 :::
 
-### PDF
-
-By definition, we know that if $a<b$, $\hat{F}(b) - \hat{F}(a)$ is the number of observations in the half-open interval $(a,b]$. This leads into the next definition.
-
-::::{#def-stats-histogram}
-Select the ordered values $t_1 < t_2 < \cdots < t_m$, called **edges**, and define **bins** as the intervals
-$$
-B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
-$$
-where we adopt the convention that $t_0=-\infty$ and  $t_{m+1}=\infty$. Let $c_k$ be the number of data values in $B_k$. Then a **histogram** relative to the bins is the list of $(B_0,c_0),\ldots,(B_m,c_m)$.
-::::
-
-The default for a seaborn `displot` is to show a histogram.
-
-::::{#exm-stats-uniform-hist chapter=2 type=💻 description="Histogram of a uniform distribution"}
-Continuing with the uniform distribution over $[0,1]$:
-
-```{python}
-x = rng.uniform( size=(1000,) )
-sns.displot(x);
-```
-
-We can choose the number of bins to use, or give a vector of their edges:
-```{python}
-sns.displot(x, bins=40);
-```
-
-::::
-
-:::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zcbcjzcd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gz582maa" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.11" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-![](_media/memes/cat-distributon.jpg){width=60%}
-
-Again something interesting happens in a limiting case. If we normalize the count in a bin by the length of that bin, we get
-$$
-\frac{c_k}{t_{k+1}-t_k} = \frac{\hat{F}(t_{k+1})-\hat{F}(t_k)}{t_{k+1}-t_k}. 
-$$  {#eq-stats-pdf}
-If we let the number of observations tend to infinity, then $\hat{F}$ will converge to $F$, and if we also let the number of bins go to infinity, then the fraction in @eq-stats-pdf converges to $F'(t_k)$. 
-
-::::{#def-stats-pdf}
-The **probability density function** or PDF of a distribution is the derivative of the CDF.
-::::
-
-::::{#exm-stats-uniform-pdf chapter=2 type=💻 description="PDF of a uniform distribution"}
-If we have many samples, then we can use a normalized histogram to give an approximation of the PDF:
-```{python}
-x = rng.uniform( size=(20000,) )
-sns.displot(x, bins=24, stat="density");
-```
-
-Alternatively, we can use process called *kernel density estimation* to plot a continuous estimate of the PDF:
-```{python}
-sns.displot(x, kind="kde");
-```
-
-In this case we did not obtain a particularly good approximation of the true PDF. In part this is because kernel density estimation assumes that the PDF is continuous, but here it is 1 over $[0,1]$ and jumps down to 0 elsewhere.
-::::
-
-:::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3wdjax7z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_pd3wko0x" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.12" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-### Mean and variance
-
-It's possible to compute the mean and variance (thus STD) of a distribution from its PDF:
-$$
-\begin{split}
-\mu &= \int x f(x) \, dx \\ 
-\sigma^2 &= \int (x-\mu)^2 f(x) \, dx,
-\end{split}
-$$
-where the integrals are taken over the domain of $f$. 
-
-::::{#exm-stats-uniform-mean chapter=2 type="✍️, 💻" description="Mean of a uniform distribution"}
-The uniform distribution over $[0,1]$ has $f(x)=1$ over that interval. Hence,
-$$
-\begin{split}
-\mu &= \int_0^1 x \, dx = \left[ \frac{1}{2} x^2\right]_0^1 = \frac{1}{2}, \\ 
-\sigma^2 &= \int_0^1 \left(x-\tfrac{1}{2}\right)^2 \, dx = \frac{1}{3} - \frac{1}{2} + \frac{1}{4} = \frac{1}{12}.
-\end{split}
-$$
-
-Let's check these results empirically:
-
-```{python}
-from numpy.random import default_rng
-import numpy as np
-
-rng = default_rng(19716)
-x = rng.uniform( size=(2000,) )
-print(f"µ = {np.mean(x):.5f}, 12σ² = {12*np.var(x):.5f}")
-```
-
-::::
-
-:::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xym85fqe&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e3k4sp4q" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.13" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
 
 ### Normal distribution
 
-Next to perhaps the uniform distribution, the following is the most widely used distribution of a random variable.
+Next to the uniform distribution, the following is the most important continuous distribution to know.
 
 ::::{#def-stats-normal}
 The **normal distribution** or *Gaussian distribution* with mean $\mu$ and variance $\sigma^2$ is defined by the PDF
 
 $$
-f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(x-\mu)^2/(2\sigma^2)}. 
+f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}. 
 $$ {#eq-stats-normal}
+
 The **standard normal** distribution uses $\mu=0$ and $\sigma=1$.
 
 :::: 
+
+For data that are distributed normally, about 68% of the values lie within one standard deviation of the mean, and 95% lie within two standard deviations. Note however that all real values of $t$ are theoretically possible. 
+
+One appealing fact about the normal distribution is that the effects of scaling and shifting the variable are simple:
+
+:::{#thm-stats-normal}
+If the variable $s$ has a standard normal distribution, then the variable $t = \sigma s + \mu$ has a normal distribution with mean $\mu$ and variance $\sigma^2$.
+
+:::
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_68mq0j28&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_9o924icz" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 2.2.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
 :::
 
-For data that are distributed normally, about 68% of the values lie within one standard deviation of the mean, and 95% lie within two standard deviations.
-
 ::::{#exm-stats-normal chapter=2 type=💻 description="Normal distribution in NumPy"}
 The `normal` method of a NumPy RNG simulates a standard normal distribution.
 
 ```{python}
 rng = default_rng(19716)
-x = rng.normal( size=(10000,) )
-sns.displot(x, bins=np.linspace(-4, 4, 28), stat="probability");
+x = rng.normal( size=(30000,) )
+sns.displot(x, bins=25, stat="density");
 ```
 
 We can change the variance by multiplying by $\sigma$ and change the mean by adding $\mu$:
@@ -517,7 +570,7 @@ df = pd.DataFrame( {"x": x, "3x-10": 3*x-10} )
 df.describe()
 ```
 
-The KDE density estimator works pretty well for normally distributed data, except in the tails where there are few observations:
+A KDE plot shows us a result close to the classic bell curve:
 
 ```{python}
 sns.displot(data=df, x="3x-10", kind="kde");
@@ -527,42 +580,72 @@ sns.displot(data=df, x="3x-10", kind="kde");
 
 ![](_media/memes/cant-be-normal.jpg){width=60%}
 
+
 ## Grouping data
 
+It's often useful to analyze data in groups defined by one or more columns.
+
+::::{#exm-stats-groups chapter=2 type=💻 description="Grouping data"}
 Here is the distribution of the *mpg* variable in `cars` over the entire dataset:
+
 ```{python}
+cars = sns.load_dataset("mpg")
 sns.displot(data=cars, x="mpg", bins=20);
 ```
 
-It's often useful to analyze the data in groups defined by categorical values or other criteria. For instance, does the distribution of the *mpg* variable look the same regardless of where the cars were made? Both seaborn and pandas make investigating this kind of question much more easily and efficiently than hand-written code can do.
-
-
-### Facet, box, and violin plots
-
-In a **facet plot**, a distribution plot is repeated across columns or rows for each group. 
-
-::::{#exm-stats-groups-facet chapter=2 type=💻 description="Facet plots"}
-Suppose we want to separate the `cars` data by the *origin* categorical column, which has 3 unique values:
+One of the columns of the dataset indicates the place of manufacture:
 
 ```{python}
 cars["origin"].value_counts()
 ```
 
-We can tell seaborn to group by *origin* and apply different colors to each group using the `hue` keyword in a `displot`, or distribution plot:
+Knowing this, it makes sense to consider how the distribution of *mpg* varies for different values of *origin*. Seaborn allows us to give certain keyword arguments that are names of categorical columns:
 
 ```{python}
-sns.displot(data=cars, x="mpg", hue="origin");
+sns.displot(data=cars, x="mpg", hue="origin", bins=20);
 ```
 
-The above graph is a little hard to interpret because of the overlaps. We can instead plot the groups in separate columns in a facet plot:
+This particular visualization is not the best due to the overlap of the histograms. We will look into better alternatives below.
+
+::::
+
+Grouping data is tied to the idea of **conditional probability**. 
+
+::::{#exm-stats-conditional chapter=2 type=💻 description="Conditional probability"}
+Here is the probability that a randomly chosen car has *mpg* less than 20:
 
 ```{python}
-sns.displot(data=cars, 
-    x="mpg", col="origin", height=2.2
-    );
+(cars["mpg"] < 20).mean()
 ```
 
-From the facet plot it is clear that the U.S.A. cars are more clustered on the left (smaller MPG) than are the Japanese and European cars.
+The command above works by creating a boolean series, which is interpreted as 1 for `True` and 0 for `False` when arithmetic operations are applied. The mean of this series is therefore the proportion of `True` values. 
+
+Now we can compute the probability that a randomly chosen car from the U.S.A. has *mpg* less than 20:
+
+```{python}
+(cars.loc[cars["origin"]=="usa", "mpg"] < 20).mean()
+```
+
+There is no need to pattern your code after this example, as we are about to look at more efficient ways to compute conditional probabilities in pandas.
+
+::::
+
+### Facet, box, and violin plots
+
+In a **facet plot**, a distribution plot is repeated across columns or rows for each group. 
+
+::: {.callout-important}
+In these examples we sometimes use `height` or `width` keywords to specify the size of the plots (in inches) for this output format. You should start without them and use them only as needed.
+:::
+
+::::{#exm-stats-groups-facet chapter=2 type=💻 description="Facet plots"}
+A facet plot improves on the overlapping histograms in @exm-stats-groups:
+
+```{python}
+sns.displot(data=cars, x="mpg", col="origin", height=2.2);
+```
+
+An important feature of the facet plots is that the $x$ axis limits are the same in all three cases, which makes a direct visual comparison obvious.
 
 ::::
 
@@ -577,9 +660,7 @@ Other ways to visualize grouped data are offered by the `catplot` function in se
 Here is a grouped **box plot** for *mpg*:
 
 ```{python}
-sns.catplot(data=cars, 
-    x="origin", y="mpg", kind="box"
-    );
+sns.catplot(data=cars, x="origin", y="mpg", kind="box");
 ```
 
 Each colored box shows the interquartile range, with the interior horizontal line showing the median. The whiskers and dots are explained in a later section. A related visualization is a **violin plot**:
@@ -593,25 +674,6 @@ sns.catplot(data=cars,
 
 In a violin plot, the inner lines show the same information as the box plot, with the thick part showing the IQR, while the sides of the "violins" are KDE estimates of the density functions.
 
-It's also possible to make groups using a quantitative variable. The pandas `cut` method lets you define ranges that serve as bins:
-
-```{python}
-cuts = pd.cut( 
-    cars["weight"],         # series to cut by
-    range(1500, 5800, 1000)    # bin edges
-    )
-
-cars["cuts"] = cuts
-cars.head(6)
-```
-
-```{python}
-sns.catplot(data=cars, 
-    x="mpg", y="cuts", 
-    kind="violin"
-    );
-```
-
 ::::
 
 :::{.column-margin}
@@ -619,9 +681,13 @@ sns.catplot(data=cars,
 
 :::
 
-### Aggregation
+### Grouped operations in pandas
 
-In pandas, the `groupby` method splits a data frame into groups based on values in a designated column. These groups can then be passed through *aggregators* that reduce each grouped column to a single value. A list of the most common predefined aggregation functions is given in @tbl-stats-agg. 
+In pandas, the `groupby` method splits a data frame into groups based on values in a designated (categorical) column. By itself, this method doesn't accomplish much, but it's a prelude to operating in a groupwise (i.e., conditional) manner.
+
+#### Aggregation
+
+When you want to compute a summary statistic for each group, you need an *aggregator*. A list of the most common predefined aggregation functions is given in @tbl-stats-agg. 
 
 | method | effect | 
 |---------|--------|
@@ -642,19 +708,21 @@ Here is how we can define groups based on the categorical *origin* column:
 cars.groupby("origin")
 ```
 
-As you can see from the output above, a grouped data frame isn't of much value until you apply some operation to it. For instance, we can find the mean of each quantitative column:
+As you can see from the output above, a grouped data frame isn't of much value on its own. But let's use it to find the groupwise mean of each quantitative column in the frame:
 
 ```{python}
 cars.groupby("origin").mean()
 ```
 
-The result is a frame indexed by *origin* and whose columns contain the group means. If we want to focus on just *mpg* from the dataset, we can extract that column *after* the grouping (which needs to know *origin*) but *before* operating on the groups:
+Multiply dotted commands are common in pandas. You need to parse them from left to right. The first command above groups the data frame, and the second computes the mean within each group.
+
+If we want to focus on just *mpg* from the dataset, we can extract that column *after* the grouping but *before* operating on the groups:
 
 ```{python}
 cars.groupby("origin")["mpg"].mean()
 ```
 
-A lot of pandas expressions end up as compound statements like the one above. It's equivalent to a sequence of assignments to temporary names:
+To help interpret this expression, we could break it into equivalent separate steps:
 
 ```{python}
 by_origin = cars.groupby("origin")
@@ -662,15 +730,7 @@ mpg_by_origin = by_origin["mpg"]
 mpg_by_origin.mean()
 ```
 
-When you encounter a compound statement in pandas, just interpret it step by step, from left to right. 
-
-Here we define bins for the weights and find the max of *mpg* within each bin:
-
-```{python}
-cuts = pd.cut(cars["weight"], range(1500, 5800, 1000))
-by_weight = cars.groupby(cuts)
-by_weight["mpg"].max()
-```
+However, the one-liner is considered better style most of the time.
 
 If you want an aggregator other than those in @tbl-stats-agg, you can call `agg` with your own function:
 
@@ -679,7 +739,7 @@ def iqr(x):
     q1, q3 = x.quantile( [.25, .75] )
     return q3 - q1
 
-by_weight["mpg"].agg(iqr)
+cars.groupby("origin")["mpg"].agg(iqr)
 ```
 
 ::::
@@ -689,9 +749,9 @@ by_weight["mpg"].agg(iqr)
 
 :::
 
-### Transformation
+#### Transformation
 
-A **transformation** applies a function to each element of a column, producing a result of the same length that can be indexed the same way. This transformation is applied group by group.
+A **transformation** applies a function groupwise to a column, producing a column of the same length. 
 
 ::::{#exm-stats-groups-transformation chapter=2 type=💻 description="Transforming data in groups"}
 We can convert the *mpg* values to z-scores using the population mean and variance:
@@ -701,23 +761,21 @@ def standardize(x):
     return (x - x.mean()) / x.std()
 
 cars["mpg_z"] = standardize(cars["mpg"])
-sns.displot(data=cars, 
-    x="mpg_z", 
-    col="origin", height=2.3
-    );
+sns.displot(data=cars, x="mpg_z", col="origin", height=2.3);
 ```
 
-Above, each of the distributions is shifted and scaled identically. The result is identical to the facet plot in @exm-stats-groups-facet except for relabeled $x$-axes. Instead, we could standardize *mpg* to z-scores within groups separately, so that each group is shifted and scaled independently:
+Above, each of the conditional distributions was shifted and scaled identically. But we might instead, want to standardize within groups separately, with each group using its own mean and standard deviation:
 
 ```{python}
-cars["group_mpg_z"] = by_weight["mpg"].transform(standardize)
+by_origin = cars.groupby("origin")
+cars["group_mpg_z"] = by_origin["mpg"].transform(standardize)
 sns.displot(data=cars, 
     x="group_mpg_z", 
     col="origin", height=2.3
     );
 ```
 
-(Another reason the second set of plots looks different is that the histogram bins are chosen differently.)
+Now, each group distribution is centered at 0 and has a standard deviation of 1.
 
 ::::
 
@@ -726,32 +784,23 @@ sns.displot(data=cars,
 
 :::
 
-### Filtering
+### Grouping by a quantitative variable
 
-A **filter** is a function that operates on a column and returns either `True`, meaning to keep the column, or `False`, meaning to reject it. This filter may be applied to a grouped frame.
+Grouping is easiest to think about as being conditioned on a categorical variable. But it can also be done on a quantitative variable by first binning it into intervals using `pd.cut`.
 
-::::{#exm-stats-groups-filtering chapter=2 type=💻 description="Filtering data in groups"}
-Suppose we want to group cars by horsepower, but we find out that some of the groups don't have a lot of members:
+::::{#exm-stats-groups-cuts chapter=2 type=💻 description="Grouping data by cuts"}
+Suppose we want to group cars by horsepower:
 
 ```{python}
-cuts = pd.cut(cars["horsepower"], range(40, 220, 20))
+cuts = pd.cut(cars["horsepower"], range(40, 250, 40))
 by_hp = cars.groupby(cuts)
 by_hp["mpg"].count()
 ```
 
-Since small groups can give misleading statistics, we can filter out the groups with fewer than, say, 30 members:
+Note above that we grouped by a series that was not a column in the dataframe. The `count` method then gives the number of observations in each group. We can do something similar to make, for example, a violin plot:
 
 ```{python}
-def keeper(x):
-    return len(x) > 29
-hp_30 = by_hp.filter(keeper)
-hp_30.head()
-```
-
-The result is a single, ungrouped frame in which the members of all groups that failed the filter were removed. Thus, the *horsepower* column has no values left less than 60 or greater than 160:
-
-```{python}
-hp_30["horsepower"].describe()
+sns.catplot(data=cars, x="mpg", y=cuts, kind="violin");
 ```
 
 ::::
@@ -759,13 +808,15 @@ hp_30["horsepower"].describe()
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_p15atvyr&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_iimonnmm" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
+</br>
+![](_media/memes/groupby.jpg){height="240" alt-text="Blue Men Group-ing"}
+
 :::
 
-![](_media/memes/groupby.jpg){height="240" alt-text="Blue Men Group-ing"}
 
 ## Outliers
 
-Informally, an **outlier** is a data value that is considered to be far from typical. In some applications, such as detecting earthquakes or cancer, outliers are the cases of real interest. But we will be thinking of them as unwelcome values that might result from equipment failure, confounding effects, mistyping a value, using an extreme value to represent missing data, and so on. In such cases we want to minimize the effect of the outliers on the statistics. 
+Informally, an **outlier** is a data value that is considered to be far from typical. In some applications, such as detecting earthquakes or cancer, outliers are the cases of real interest. But here we will treat them as unwelcome values that might result from equipment failure, confounding effects, mistyping a value, using an artificial extreme value to represent missing data, and so on. In such cases we want to minimize the effect of the outliers on the statistics. 
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_fdm9u5cu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wqj1o7yr" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 2.4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
@@ -779,9 +830,11 @@ The values $1,2,3,4,5$ have a mean and median both equal to 3. If we change the 
 
 ::::
 
-![](_media/memes/outlier.jpg){height="240"}
+:::{.column-margin}
+![](_media/memes/outlier.jpg)
+:::
 
-If you want to use a method that is vulnerable to outliers, it's typical to remove such values early on. There are various ways of deciding what qualifies as an outlier, with no one-size recommendation for all applications.
+If you want to use a statistic like the mean that is vulnerable to outliers, it's typical to remove such values early on. There are various ways of deciding what qualifies as an outlier, with no one-size recommendation for all applications.
 
 ### IQR
 
@@ -811,10 +864,7 @@ by_event["signal"].describe()
 Here is a box plot of the signal for these groups.
 
 ```{python}
-sns.catplot(data=fmri,
-    x="event", y="signal",
-    kind="box"
-    );
+sns.catplot(data=fmri, x="event", y="signal", kind="box");
 ```
 
 The dots lying outside the whiskers in the plot can be considered outliers satisfying one of the inequalities in @eq-stats-outlier-iqr.
@@ -866,7 +916,7 @@ For the *stim* case in particular, the mean value changes by almost 200%, includ
 
 ### Mean and STD
 
-For normal distributions, values more than twice the standard deviation $\sigma$ from the mean could be considered to be outliers; this would exclude 5% of the values, on average. A less aggressive criterion is to allow a distance of $3\sigma$, which excludes only about 0.3% of the values. The IQR criterion above corresponds to about $2.7\sigma$ in the normal distribution case.
+In normal distributions, values more than twice the standard deviation $\sigma$ from the mean could be considered to be outliers; this would exclude 5% of the values, on average. A less aggressive criterion is to allow a distance of $3\sigma$, which excludes only about 0.3% of the values. The IQR criterion above corresponds to about $2.7\sigma$ in the normal distribution case.
 
 :::{.callout-note}
 A criticism of classical statistics is that much of it is conditioned on the assumption of normal distributions. This assumption is often violated by real datasets; quantities that depend on normality should be used judiciously.
@@ -907,7 +957,7 @@ For asymmetric distributions, or those with a heavy tail, these criteria might s
 
 ## Correlation
 
-There are often variables that we believe to be linked, either because one influences the other, or because both are influenced by some other factor. In either case, we say the quantities are *correlated*.
+There are often variables that we believe to be linked, either because one influences the other, or because both are influenced by some other factor. In either case, we say the quantities are **correlated**.
 
 There are several ways to measure correlation. It's good practice to look at the data first, though, before jumping to the numbers.
 
@@ -948,9 +998,7 @@ In order to see multiple pairwise scatter plots in one shot, we can use `pairplo
 columns = [ "mpg", "horsepower", 
             "displacement", "origin" ]
 
-sns.pairplot(data=cars[columns],
-    hue="origin", height=2
-    );
+sns.pairplot(data=cars[columns], hue="origin", height=2);
 ```
 
 The panels along the diagonal show each quantitative variable's PDF. The other panels show scatter plots putting one pair at a time of the variables on the coordinate axes. 
@@ -971,16 +1019,18 @@ $$
 $$
 ::::
 
-Note that the values $x_i-\mu_X$ and $y_i-\mu_Y$ are deviations from the means. It follows from the definitions that 
+Note that the values $x_i-\mu_X$ and $y_i-\mu_Y$ are deviations from the means. 
+
+It follows from the definitions that 
 
 $$
 \begin{split}
     \Cov(X,X) &= \sigma_X^2, \\ 
-    \Cov(Y,Y) &= \sigma_Y^2,
+    \Cov(Y,Y) &= \sigma_Y^2.
 \end{split}
 $$
 
-i.e., self-covariance is simply variance.
+In words, self-covariance is simply variance.
 
 Covariance is not easy to interpret. Its units are the products of the units of the two variables, and it is sensitive to rescaling the variables (e.g., grams versus kilograms).
 
@@ -1218,6 +1268,7 @@ In casual speech, you might expect two variables that are uncorrelated to be unr
 For example, here are $x$ and $y$ variables that both depend on a hidden variable $\theta$:
 
 ```{python}
+import numpy as np
 theta = np.linspace(0,2*np.pi,50)
 x = pd.Series(np.cos(theta))
 y = pd.Series(np.sin(theta))
@@ -1281,7 +1332,7 @@ As often happens in statistics, the precise framing of the question can strongly
 For these exercises, you may use computer help to work on a problem, but your submitted solution should be self-contained without reference to computer output (unless stated otherwise).
 
 :::{#exr-stats-summary}
-The following parts are about the sample set of $n$ values ($n>2$) 
+(2.1) The following parts are about the sample set of $n$ values ($n>2$) 
 
 $$
 0, 0, 0, \ldots, 0, 1000.
@@ -1298,53 +1349,26 @@ $$
 **(d)** Find the sample z-scores of all the values.
 :::
 
-:::{#exr-stats-outlier}
-This exercise is about the same set of sample values as @exr-stats-summary. Suppose the 2σ-outlier criterion is applied using the sample mean and sample variance. 
-
-**(a)** Show that regardless of $n$, the value 0 is never an outlier.
-
-**(b)** Show that the value 1000 is an outlier if $n \ge 6$.
-:::
-
 :::{#exr-stats-z-scores}
-Suppose the samples $x_1,\ldots,x_n$ have the z-scores $z_1,\ldots,z_n$. 
+(2.1) Suppose given samples $x_1,\ldots,x_n$ have the sample z-scores $z_1,\ldots,z_n$. 
 
-**(a)** Show that the sample z-scores satisfy $\displaystyle \sum_{i=1}^n z_i = 0.$
+**(a)** Show that $\displaystyle \sum_{i=1}^n z_i = 0.$ (Start by substituting the definition of $z_i$, using a new index variable $j$ for that sum.)
 
-**(b)** Show that the sample z-scores satisfy $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
-:::
-
-:::{#exr-stats-outlier-iqr}
-Define a population by
-
-$$
-x_i = \begin{cases}
-1, & 1 \le i \le 11, \\ 
-2, & 12 \le i \le 14,\\ 
-4, & 15 \le i \le 22, \\ 
-6, & 23 \le i \le 32.
-\end{cases}
-$$
-
-(That is, there are 11 values of 1, 3 values of 2, 8 values of 4, and 10 values of 6.)
-
-**(a)** Find the median of the population.
-
-**(b)** Find the smallest interval containing all non-outlier values according to the 1.5 IQR criterion.
+**(b)** Show that $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
 :::
 
 :::{#exr-stats-least-squares}
-Given a population of values $x_1,x_2,\ldots,x_n$, define the function 
+(2.1) Given a population of values $x_1,x_2,\ldots,x_n$, define the function 
 
 $$
 r_2(x) = \sum_{i=1}^n (x_i-x)^2.
 $$
 
-Show using calculus that $r_2$ is minimized at $x=\mu$, the population mean.
+Show using calculus that $r_2$ is minimized at $x=\mu$, the population mean. (The idea is that minimizing $r_2$ is a way to find the "most representative" value for the dataset.)
 :::
 
 :::{#exr-stats-least-mad}
-Suppose that $n=2k+1$ and a population has values $x_1,x_2,\ldots,x_{n}$ in sorted order, so that the median is equal to $x_k$. Define the function 
+(2.1) Suppose that $n=2k+1$ and a population has values $x_1,x_2,\ldots,x_{n}$ in sorted order, so that the median is equal to $x_k$. Define the function 
 
 $$
 r_1(x) = \sum_{i=1}^n |x_i - x|.
@@ -1363,11 +1387,84 @@ r_1(x_1) > r_1(x_2) > \cdots > r_1(x_k) < r_1(x_{k+1}) < \cdots < r_1(x_n).
 $$
 :::
 
+:::{#exr-stats-empirical}
+(2.2) This problem is about the dataset
+
+$$
+1, 3, 4, 5, 5, 6, 7, 8.
+$$
+
+**(a)** Make a table of the values of the ECDF $\hat{F}(t)$ at the values $t=0,1,2,\ldots,10$. 
+
+**(b)** Carefully sketch the ECDF of the dataset over the interval $[0,10]$. 
+
+**(c)** Make a table of counts $c_k$ for the bins $(0,2],(2,4],(4,6],(6,8],(8,10]$.
+
+**(d)** Sketch a histogram of the dataset using the bins from part (c).
+
+**(e)** Verify the equation @eq-stats-hist-ecdf for the bins from part (c).
+
+:::
+
+:::{#exr-stats-integrate-pdf}
+(2.3) Suppose that a distribution has continuous PDF $f(t)$ and CDF $F(t)$, and that $F(a)=0$ and $F(b)=1$. Explain why 
+
+$$
+\int_a^b f(t)\,dt = 1.
+$$
+
+:::
+
+:::{#exr-stats-get-cdf}
+(2.3) Suppose that a distribution has PDF
+
+$$
+f(t) = \begin{cases}
+0, & |t| >  1, \\
+\tfrac{1}{2}(1+t), & |t| \le 1.
+$$
+
+Find a formula for its CDF. (Hint: It's a piecewise formula.)
+
+:::
+
+:::{#exr-stats-normal-median}
+(2.3) What is the median of the normal distribution, whose PDF is given by @eq-stats-normal? The answer is probably intuitively clear, but you should find a way to make a mathematical argument. Do note, however, that there is no simple antiderivative formula of the PDF.
+
+:::
+
+:::{#exr-stats-outlier}
+(2.5) This exercise is about the same set of sample values as @exr-stats-summary. Suppose the 2σ-outlier criterion is applied using the sample mean and sample variance. 
+
+**(a)** Show that regardless of $n$, the value 0 is never an outlier.
+
+**(b)** Show that the value 1000 is an outlier if $n \ge 6$.
+:::
+
+:::{#exr-stats-outlier-iqr}
+(2.5) Define a population by
+
+$$
+x_i = \begin{cases}
+1, & 1 \le i \le 11, \\ 
+2, & 12 \le i \le 14,\\ 
+4, & 15 \le i \le 22, \\ 
+6, & 23 \le i \le 32.
+\end{cases}
+$$
+
+(That is, there are 11 values of 1, 3 values of 2, 8 values of 4, and 10 values of 6.)
+
+**(a)** Find the median of the population.
+
+**(b)** Find the smallest interval containing all non-outlier values according to the 1.5 IQR criterion.
+:::
+
 :::{#exr-stats-pearson-z}
-Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: Use the results of @exr-stats-z-scores.)
+(2.6) Prove that two sample sets have a Pearson correlation coefficient equal to 1 if they have identical z-scores. (Hint: Use the results of @exr-stats-z-scores.)
 :::
 
 :::{#exr-stats-pearson-anti}
-Suppose that two sample sets satisfy $y_i=-x_i$ for all $i$. Prove that the Pearson correlation coefficient between the sets equals $-1$.
+(2.6) Suppose that two sample sets satisfy $y_i=-x_i$ for all $i$. Prove that the Pearson correlation coefficient between the sets equals $-1$.
 :::
 
