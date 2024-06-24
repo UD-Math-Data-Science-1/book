@@ -3,56 +3,51 @@
 {{< include _macros.qmd >}}
 :::
 
-When confronted with a new dataset, it's crucial to get a sense of its characteristics before attempting to draw conclusions or predictions from it.
+When confronted with a new dataset, it's crucial to get a sense of its characteristics before attempting to draw conclusions or predictions from it. There are two aspects of this exploration: numerical and graphical. We begin with numbers.
 
-One of the fastest ways to become familiar with a data set is to visualize it. Python has many graphics packages with different niches. The most widespread is **Matplotlib**, which is fairly low-level in the sense that you must explicitly specify most aspects of how the plots will look. 
-
-We will make extensive use of **seaborn**, which is built on top of Matplotlib. It's meant to be used at a higher level, i.e., letting you describe what you want to see and making it look pretty good. (It is possible to customize seaborn plots using Matplotlib commands, but we won't need much of that.)
-
-```{python}
-import seaborn as sns
-```
-
-There are three major plot types within seaborn:
-
-`displot`
-: How values of a single variable are distributed.
-
-`catplot`
-: How categorical values are distributed within and across categories.
-
-`relplot`
-: How values of two variables are related to each other.
 
 ## Summary statistics
 
-We will use data about car fuel efficiency for illustrations.
+The idea of descriptive statistics is to reduce a large collection of numerical values to a much smaller one, or even a single number, that captures essential features. You have probably encountered at least a few of these statistics before. In many cases, the statistical results connect to mathematical theory that makes it possible to reason abstractly about the data. 
+
+::::{#exm-stats-summary chapter=2 type=💻 description="Summary statistics in pandas"}
+Here a classic dataset about flowers:
 
 ```{python}
-cars = sns.load_dataset("mpg")
-cars.info()
+import pandas as pd
+iris = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')
+iris.info()
 ```
 
-The `describe` method of a data frame gives summary statistics for each column of quantitative data:
+The `describe` method of a data frame gives a bunch of summary statistics for each column of quantitative data:
 
 ```{python}
-cars.describe()
+iris.describe()
 ```
-We now discuss the definitions and interpretations of these values.
+::::
+
+:::{.column-margin}
+![](_media/memes/panda.jpg)
+
+:::
+
+We now discuss the definitions and interpretations of the values prodcued by `describe`.
 
 ### Mean and dispersion
 
-You may already know the Big Three summary statistics: 
+Here are the Big Three of summary statistics: mean, variance, and standard deviation.
 
 ::::{#def-stats-meanvarstd}
 Given data values $x_1,\ldots,x_n$, their **mean** is
 $$
 \mu = \frac{1}{n}\sum_{i=1}^n x_i,
 $$ {#eq-stats-mean}
+
 their **variance** is 
 $$
 \sigma^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \mu)^2,
 $$ {#eq-stats-var}
+
 and their **standard deviation** (STD) is $\sigma$, the square root of the variance.
 ::::
 
@@ -77,6 +72,7 @@ $$
 $$
 Given that $0 \le |t| \le 6$, we see that the minimum value of $\sigma$ is 0 and the maximum is $2\sqrt{6}$.
 :::
+
 ::::
 
 :::{.column-margin}
@@ -85,79 +81,49 @@ Given that $0 \le |t| \le 6$, we see that the minimum value of $\sigma$ is 0 and
 :::
 
 ::: {.callout-note}
-Variance is in units that are the square of the data, which can be harder to interpret than STD, which has units the same as the data values.
-:::
-
-### z-scores
-
-Given data values $x_1,\ldots,x_n$, we can define related values known as **standardized scores** or **z-scores**:
-
-$$
-z_i = \frac{x_i-\mu}{\sigma}, \qquad i=1,\ldots,n.
-$$
-
-The z-scores have mean zero and standard deviation equal to 1; in physical terms, they are dimensionless. That is, the results don't depend on the physical units chosen to express the data. Converting data into z-scores is referred to as **standardization**, and it helps make operations uniform across different datasets. 
-
-:::{#thm-stats-zscores}
-The z-scores have mean equal to zero and variance equal to 1. 
-:::
-
-::: {.proof}
-Direct calculations.
-:::
-
-::::{#exm-stats-zscores chapter=2 type="✍️, 💻" description="Z scores"}
-Continuing with the values from @exm-stats-maxvar, we assume without losing generality that $t\ge 0$. (Otherwise, we can just swap $x_2$ and $x_3$.) Then we have the z-scores
-$$
-z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{2\sqrt{6}} \quad z_3 = \frac{-t-0}{2t\sqrt{6}} = \frac{-1}{2\sqrt{6}}. 
-$$
-These are independent of $t$, which just scales the original values. 
-::::
-
-::::{#exm-stats-zscores-py chapter=2 type=💻 description="Z scores in Python"}
-We can write a little function to compute z-scores in Python:
-```{python}
-def standardize(x):
-    return (x - x.mean()) / x.std()
-
-cars["mpg_z"] = standardize( cars["mpg"] )
-cars[ ["mpg", "mpg_z"] ].describe()
-```
-
-::::
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xe53cr77&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ujxp7si5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-
-:::
-
-:::{.callout-caution}
-Since floating-point values are rounded off, it's unlikely that a value derived from them that is meant to be zero will actually be exactly zero. Above, the mean value of about $-10^{-15}$ should be seen as reasonable for values that have been rounded off in the 15th digit or so.
+Variance is in units that are the square of the data, which can be hard to interpret. But it has other characteristics that are useful mathematically.
 :::
 
 ### Populations and samples
 
-In statistics one refers to the **population** as the entire universe of available values. Thus, the ages of adult on Earth at some instant has a particular population mean and standard deviation. However, in order to estimate those values, we can only measure a **sample** of the population directly. 
+In statistics one refers to the **population** as the entire universe of available values. Thus, the ages of adults on Earth at some instant has a particular population mean and standard deviation. However, we can usually only measure a **sample** of the population directly, and we use the sample mean and standard deviation as estimates of the population values.
 
-When @eq-stats-mean is used to compute the mean of a sample rather than a population, we change the notation a bit as a reminder:
+The definitions in @def-stats-meanvarstd are for populations. When they are used on a sample rather than a population, we change the notation a bit as a reminder.
+
+::::{#def-stats-sample-mean}
+Given a sample of data values $x_1,\ldots,x_n$, the **sample mean** is
+
 $$
-\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i.
+\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i,
 $$ {#eq-stats-mean-sample}
 
-It can be proved that the sample mean is an accurate way to estimate the population mean, in the following precise sense. If, in a thought experiment, we could average $\bar{x}$ over all possible samples of size $n$, the result would be exactly the population mean $\mu$. That is, we say that $\bar{x}$ is an **unbiased estimator** for $\mu$.
-
-The sample mean in turn can be used within @eq-stats-var to compute **sample variance**:
+and the **sample variance** is
 $$
 s_n^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2.
 $$ 
 
-However, sample variance is more subtle than the sample mean. If $s_n^2$ is averaged over all possible sample sets, we do *not* get the population variance $\sigma^2$; hence, $s_n^2$ is called a **biased estimator** of the population variance.
+::::
 
+:::{.column-margin}
+![](_media/memes/sample.jpg)
+:::
+
+It can be proved that the sample mean is an accurate way to estimate the population mean, in the following precise sense. If, in a thought experiment, we could average $\bar{x}$ over all possible samples of size $n$, the result would be exactly the population mean $\mu$. That is, we say that $\bar{x}$ is an **unbiased estimator** for $\mu$.
+
+The situation with sample variance is more subtle. If $s_n^2$ is averaged over all possible sample sets, we do *not* get the population variance $\sigma^2$; hence, $s_n^2$ is called a **biased estimator** of the population variance. This can be proved by a calculation we won't go into here, but the essential issue is that the sample mean used in $s_n^2$ is itself only an estimate of the population mean. A minor adjustment fixes that issue.
+
+::::{#thm-stats-sample-var}
 An unbiased estimator for $\sigma^2$ is
 
 $$
 s_{n-1}^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2.
 $$ {#eq-stats-var-sample}
+
+::::
+
+:::{.callout-warning}
+Sources are not always uniform using this terminology. Some use *sample variance* to mean $s_{n-1}^2$, not $s_n^2$, and many even omit the subscripts. You should check any source to understand its conventions.
+:::
 
 ::::{#exm-stats-sample chapter=2 type=✍️ description="Sample variance"}
 The values [1, 4, 9, 16, 25] have mean $\bar{x}=55/5 = 11$. The sample variance is 
@@ -174,27 +140,107 @@ By contrast, the unbiased estimate of population variance from this sample is
 $$
 s_{n-1}^2 = \frac{374}{4} = 93.5.
 $$
+
 ::::
 
-As you can see from the formulas and the example, the sample variance is always too large as an estimator, but the difference vanishes as the sample size $n$ increases. 
+As you can see from the formulas and in @exm-stats-sample, $s_n^2$ is always an overestimate of the variance. However, the difference becomes negligible as the sample size $n$ increases, and in any practical dataset the distinction is basically academic.
 
-:::{.callout-warning}
-Sources are not always clear about this terminology. Some use *sample variance* to mean $s_{n-1}^2$, not $s_n^2$, and many even omit the subscripts. You always have to check each source.
+:::{.callout-caution}
+NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee! 
+:::
+
+For standard deviation, *neither* $s_n$ *nor* $s_{n-1}$ is an unbiased estimator of $\sigma$, and there is no simple fix. Again, though, it's not usually something we worry about in practice. 
+
+::::{#exm-stats-meanvar-pandas chapter=2 type=💻 description="Mean, variance, STD in pandas"}
+While the `describe` method computes all the summary statistics, you can also obtain them individually using the `mean`, `var`, and `std` methods:
+
+```{python}
+iris.mean()
+```
+
+The result above is a series with the mean of each column. When given a series, the result is just a number:
+
+```{python}
+iris["sepal_length"].var()
+```
+
+::::
+
+### z-scores
+
+Comparing or operating on datasets that have different ranges can be difficult. One common step is to **standardize** the data.
+
+:::{#def-stats-zscores}
+Given data values $x_1,\ldots,x_n$, we define the **standardized scores** or **z-scores** by
+
+$$
+z_i = \frac{x_i-\mu}{\sigma}, \qquad i=1,\ldots,n.
+$$ {#eq-stats-zscores}
+:::
+
+::: {.callout-note}
+@eq-stats-zscores requires the population statistics $\mu$ and $\sigma$. If sample estimates are used, the results are technically called *t-scores* in classical statistics, but this distinction is generally ignored for large datasets in practice.
+
+:::
+
+In physical terms, z-scores are dimensionless, i.e., not dependent on the physical units chosen to express the data. The following characteristics are important:
+
+:::{#thm-stats-zscores}
+The z-scores have mean equal to zero and variance equal to 1. 
+
+:::
+
+::: {.proof}
+Using the definition @eq-stats-zscores, we calculate the mean of the z-scores as
+
+$$
+\begin{split}
+    \frac{1}{n}\sum_{i=1}^n z_i &= \frac{1}{n}\sum_{i=1}^n \frac{x_i-\mu}{\sigma} \\
+    &= \frac{1}{n\sigma}\sum_{i=1}^n x_i - \frac{1}{n\sigma}\sum_{i=1}^n \mu \\
+    &= \frac{1}{n\sigma}\sum_{i=1}^n x_i - \frac{1}{n\sigma}(n\mu) \\
+    &= \frac{1}{n\sigma}\sum_{i=1}^n x_i - \frac{\mu}{\sigma} \\
+    &= \frac{1}{\sigma}\left( \frac{1}{n}\sum_{i=1}^n x_i - \mu \right) = 0.
+\end{split}
+$$
+
+A longer but similar direct calculation shows that the variance is 1.
+
+:::
+
+::::{#exm-stats-zscores chapter=2 type="✍️, 💻" description="Z scores"}
+Continuing with the values from @exm-stats-maxvar, we assume without losing generality that $t\ge 0$. (Otherwise, we can just swap $x_2$ and $x_3$.) Then we have the z-scores
+$$
+z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{2\sqrt{6}} \quad z_3 = \frac{-t-0}{2t\sqrt{6}} = \frac{-1}{2\sqrt{6}}. 
+$$
+
+These are independent of $t$, which just scales the original values. 
+::::
+
+::::{#exm-stats-zscores-py chapter=2 type=💻 description="Z scores in Python"}
+We can write a little function to compute z-scores in Python:
+```{python}
+def standardize(x):
+    return (x - x.mean()) / x.std()
+```
+
+This function can be applied to any series `x` and returns a series of the same length. If we apply it to a data frame, it standardizes each column:
+
+```{python}
+iris["z"] = standardize( iris["petal_length"] )
+iris[ ["petal_length", "z"] ].describe()
+```
+
+::::
+
+:::{.column-margin}
+<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xe53cr77&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ujxp7si5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 2.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
 :::{.callout-caution}
-NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee! Fortunately, most datasets today have large enough $n$ to make the difference negligible.  
+Since floating-point values are rounded off, it's unlikely that a value derived from them that is meant to be zero will actually be exactly zero. Above, the mean value of about $-10^{-15}$ should be seen as reasonable for values that have been rounded off in the 15th digit or so.
 :::
 
-For standard deviation, *neither* $s_n$ *nor* $s_{n-1}$ is an unbiased estimator of $\sigma$. There is no simple correction that works for all distributions. Our practice is to use $s_{n-1}$, which is what `std` computes in pandas. Thus, for instance, a **sample z-score** for $x_i$ is 
-
-$$
-z_i = \frac{x_i-\bar{x}}{s_{n-1}}.
-$$ {#eq-stats-t-score}
-
-<!-- :::{.callout-important}
-In statistics, @eq-stats-t-score is referred to as a *t-score*, and the term *sample z-score* is not common. In data science practice, however, the sample sizes are usually so large that the difference between z-scores and t-scores is rarely important. Most sources just use the term *z-score* indiscriminately.
-::: -->
 
 ### Median and quantiles
 
@@ -215,17 +261,16 @@ Some sources reserve the term *quantile* for another meaning, but since pandas o
 The unbiased sample median of $x_1,\ldots,x_n$ can be computed by sorting the values into $y_1,\ldots,y_n$. If $n$ is odd, then $y_{(n+1)/2}$ is the sample median; otherwise, the average of $y_{n/2}$ and $y_{1+(n/2)}$ is the sample median. 
 
 ::::{#exm-stats-median chapter=2 type=✍️ description="Median"}
-If the sorted values are $1,3,3,4,5,5,5$, then $n=7$ and the sample median is $y_4=4$. If the sample values are $1,3,3,4,5,5,5,9$, then $n=8$ and the sample median is $(4+5)/2=4.5$.
+For the sorted sample values $1,3,3,4,5,5,5$, we have $n=7$ and the sample median is $4$. 
+
+If the sample values are $1,3,3,4,5,5,5,9$, then $n=8$ and the sample median is $(4+5)/2=4.5$.
 ::::
 
-Computing unbiased sample estimates of percentiles other than the median is complicated, and we won't go into the details. For large datasets, the sample values are good estimators in practice.
-
 ::::{#exm-stats-quantiles chapter=2 type=💻 description="Quantiles"}
-Here we find the 90th percentile of the *loan_amnt* variable in the `loans` dataset:
+Here we find the 90th quantile (percentile) of the *loan_amnt* variable in the `loans` dataset:
 
 ```{python}
-import pandas as pd
-loans = pd.read_csv("_datasets/loan.csv")
+loans = pd.read_csv("_datasets/loans_small.csv")
 x = loans["loan_amnt"]
 pct90 = x.quantile(0.9)
 print(pct90)
@@ -244,28 +289,36 @@ print(x.quantile(0.50))
 
 ::::
 
+The median is a measure of central tendency that can substitute for the mean. To calculate an alternative to the standard deviation, we can use two other quantiles.
+
 ::::{#def-stats-quartile}
-The 25th, 50th, and 75th percentiles are the first, second, and third **quartiles** of the distribution. The **interquartile range** (IQR) is the difference between the 75th percentile and the 25th percentile.
+The 25th, 50th, and 75th percentiles are the called first, second, and third **quartiles** of the distribution. The **interquartile range (IQR)** is the difference between the 75th percentile and the 25th percentile.
 ::::
 
-Sometimes the definition above is extended to the *zeroth quartile*, which is the minimum sample value, and the *fourth quartile*, which is the maximum sample value.
+<!-- Sometimes the definition above is extended to the *zeroth quartile*, which is the minimum sample value, and the *fourth quartile*, which is the maximum sample value. -->
 
-IQR is an indication of the spread of the values. For some distributions, the median and IQR might be a good substitute for the mean and standard deviation.
+For some samples, the median and IQR might be a good substitute for the mean and standard deviation.
 
 ::::{#exm-stats-describe chapter=2 type=💻 description="Quartiles and IQR"}
 The dataframe `describe` method includes mean, standard deviation, and the quartiles:
 
 ```{python}
-x.describe()
+loans.describe()
 ```
 
-It's easy to write a function to compute the IQR of a series:
+It's easy to write a function that computes and returns the IQR of a series:
 ```{python}
 def IQR(x):
     Q25, Q75 = x.quantile( [0.25, 0.75] )
     return Q75 - Q25 
 
-IQR(x)
+IQR(loans["loan_amnt"])
+```
+
+That function can also be applied columnwise to a data frame:
+
+```{python}
+loans.apply(IQR)
 ```
 
 ::::
@@ -273,6 +326,27 @@ IQR(x)
 ## Empirical distributions
 
 Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution values more precisely using functions and graphical tools. 
+
+Python has many graphics packages with different niches. The most widespread is **Matplotlib**, for which you must explicitly specify most aspects of how the plots will look. 
+
+We will instead use **seaborn**, which is built on top of Matplotlib. It's built around a declarative style, meaning that you describe what you want to see and seaborn makes the decisions about how it looks. Most of the time, the decisions it makes are just fine. To use seaborn, you import it:
+
+```{python}
+import seaborn as sns
+```
+
+There are three major commands that you call in seaborn:
+
+`displot`
+: How values of a single variable are distributed.
+
+`catplot`
+: How categorical values are distributed within and across categories.
+
+`relplot`
+: How values of two variables are related to each other.
+
+These three commands then call other functions to create the actual plots. (You can call those directly yourself, but then you will be missing a lot of automated setup and formatting that seaborn provides.)
 
 ### Histograms
 
