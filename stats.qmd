@@ -1477,12 +1477,12 @@ f(t) = \begin{cases}
 \tfrac{1}{2}(1+t), & |t| \le 1.
 $$
 
-Find a formula for its CDF. (Hint: It's a piecewise formula.)
+Find a formula for its CDF. (Hint: It's a piecewise formula. First find it for $t< -1$, then for $-1 \le t \le 1$, and finally for $t>1$.)
 
 :::
 
 :::{#exr-stats-normal-median}
-(2.3) What is the median of the normal distribution, whose PDF is given by @eq-stats-normal? The answer is probably intuitively clear, but you should find a way to make a mathematical argument. Do note, however, that there is no simple antiderivative formula of the PDF.
+(2.3) What is the median of the normal distribution whose PDF is given by @eq-stats-normal? The answer is probably intuitively clear, but you should make a mathematical argument (though it does not require difficult calculations). Note: there is no simple antiderivative formula for the PDF, and you do not need it anyway.
 
 :::
 
@@ -1492,6 +1492,7 @@ Find a formula for its CDF. (Hint: It's a piecewise formula.)
 **(a)** Show that regardless of $n$, the value 0 is never an outlier.
 
 **(b)** Show that the value 1000 is an outlier if $n \ge 6$.
+
 :::
 
 :::{#exr-stats-outlier-iqr}
