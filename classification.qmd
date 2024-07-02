@@ -1396,11 +1396,37 @@ Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vec
 ::::
 
 ::::{#exr-class-manhattan}
-Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*.
+Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*. (Hint: You can consider each quadrant of the plane separately.)
 ::::
 
 ::::{#exr-class-triangle}
-Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for $k$-nearest neighbors with $k=1$, using **(a)** the 2-norm ~~and **(b)** the infinity-norm.~~ 
+Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for $k$-nearest neighbors with $k=1$, using the 2-norm.
+::::
+
+::::{#exr-class-knn1d}
+Suppose you are training to fit the ground-truth one-dimensional classifier
+
+$$
+y = f(x) =
+\begin{cases}
++1, & \text{if } |x| \leq 2, \\
+-1, & \text{otherwise}.
+\end{cases}
+$$
+
+Here is a table of training data:
+
+| $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ |  $0$ |  $1$ |  $2$ |  $3$ |  $4$ |  $5$ |
+|-------|-----|-----|-----|-----|-----|----|----|----|----|----|----|
+| $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ | 
+
+**(a)** Make a table of $x$ and $f(x)$ values on the testing set $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$. 
+
+**(b)** Add a row to your table from part (a) showing the predictions of a kNN classifier with $k=1$ trained on the given training data.
+
+**(c)** Add another row for a kNN classifier with $k=3$. Then add another row for $k=9$.
+
+**(d)** Find the testing precision and recall for the rows with $k=1,3,9$.
 ::::
 
 ::::{#exr-class-ellipse}

@@ -772,37 +772,46 @@ Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning 
 
 ## Exercises {.unnumbered}
 
-::::{#exr-select-always chapter=4}
-Suppose that for a binary classification problem, you always choose a classifier that returns the positive outcome for every input. Would you expect this classifier to have a high training variance, high testing bias, or both? Give reasons for your answer.
+::::{#exr-select-always}
+One (dumb) algorithm for binary classification is to always predict the positive outcome. 
+
+**(a)** Considered over all possible training sets, does this method have a high training variance or low training variance? Explain.
+
+**(b)** Considered over all possible testing sets, does this method have a high testing bias or low testing bias? Explain.
 ::::
 
-
-::::{#exr-select-knn1 chapter=4}
-Suppose you are training to fit the ground-truth one-dimensional classifier
+::::{#exr-select-ensemble}
+Suppose you are trying to fit this ground-truth one-dimensional classifier defined on positive integers:
 
 $$
-y = f(x) =
-\begin{cases}
-+1, & \text{if } |x| \leq 2, \\
--1, & \text{otherwise}.
-\end{cases}
+y = f(m) = 
+    \begin{cases}
+    0, & \text{ if $m$ is odd}, \\
+    1, & \text{ if $m$ is even}.
+    \end{cases}
 $$
 
-**(a)** Make a table of $x$ and $f(x)$ values on the testing set $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$. 
+Here are three individual classifiers:
 
-Now, here is a table of training data:
+$$
+\begin{aligned}
+\hat{f}_a(m) &= 1 \text{ for all $m$}, \\ 
+\hat{f}_b(m) &= 
+    \begin{cases}
+    0, & \text{ if $m = 1,2,5,6,9,10,\dots$}, \\
+    1, & \text{ if $m = 3,4,7,8,11,12,\dots$ },
+    \end{cases} \\
+\hat{f}_c(m) &=
+    \begin{cases}
+    0, & \text{ if $m = 1,4,5,8,9,12,\dots$}, \\
+    1, & \text{ if $m = 2,3,6,7,10,11,\dots$}.
+    \end{cases}
+\end{aligned}
+$$
 
-| $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ |  $0$ |  $1$ |  $2$ |  $3$ |  $4$ |  $5$ |
-|-------|-----|-----|-----|-----|-----|----|----|----|----|----|----|
-| $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ | 
+Let the testing set be $1,2,3,\ldots,12$.
 
+**(a)** Compute the accuracy of each classifier on the testing set.
 
-**(b)** Add a row to your table from part (a) showing the predictions of a kNN classifier with $k=1$.
-
-**(c)** Add a row to your table showing the predictions of a kNN classifier with $k=3$. Then add another row for $k=9$.
-
-**(e)** Find the recall for each of the cases $k=1$, $k=3$, and $k=9$.
-
-**(f)** Over all possible training subsets of the original training data, which of the classifiers above would you expect to have the largest training variance? Which would have the smallest?
-
+**(b)** Compute the accuracy of the majority-vote ensemble of the three classifiers on the testing set. That is, the classifier with $\hat{f}(m) = 1$ if at least two of the member classifiers are 1, and $\hat{f}(m) = 0$ otherwise.
 ::::
