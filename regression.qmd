@@ -225,6 +225,7 @@ We need ways to measure regression performance. Unlike with binary classificatio
 
 ::: {.callout-caution}
 A quirk of linear regression is that it's an older and broader idea than most of machine learning, and it's often presented as though the training and testing sets are identical. We follow that convention for the definitions in this section. The same quantities can also be calculated for a set of labels and predictions obtained from a separate testing set, although a few of the properties stated here don't apply in that case.
+
 :::
 
 ::::{#def-regression-residual-error}
@@ -232,15 +233,19 @@ The **residuals** of the regression are
 $$
 y_i - \hat{y}_i, \qquad i=1,\ldots,n,
 $$ {#eq-regression-residual}
+
 where the $y_i$ are the true labels and the $\hat{y}_i$ are the values predicted by the regressor. We can express them compactly as the **residual vector** $\bfy-\hat{\bfy}$.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_myxlnosi&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_y65cyatg" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::: {.callout-caution}
 The terms *error* and *residual* are frequently used interchangeably and even inconsistently.  I try to follow the most common practices here, even though the names can be confusing if you think about them too hard.
+
 :::
 
 ::::{#def-regression-mse}
@@ -252,6 +257,7 @@ The **mean absolute error** (MAE) is
 $$
 \text{MAE} = \frac{1}{n} \sum_{i=1}^n \abs{y_i - \hat{y}_i }= \frac{1}{n} \onenorm{\bfy - \hat{\bfy}}.
 $$
+
 ::::
 
 The MSE is simply $1/n$ times the loss function $L$. MAE is less sensitive than MSE to large outliers. Both quantities are dimensional and therefore depend on how the variables are scaled, but only the units of MAE are the same as of the data.
@@ -273,6 +279,7 @@ $$
 \text{MAE} &= \frac{1}{3} \left( \abs{0-\tfrac{1}{6}} + \abs{2-\tfrac{5}{3}} + \abs{3-\tfrac{19}{6}} \right) = \frac{2}{9}. \\ 
 \end{split}
 $$
+
 ::::
 
 ::::{#def-regression-cod}
@@ -280,7 +287,9 @@ The **coefficient of determination** (CoD) is denoted $R^2$ and defined as
 $$
 R^2 = 1 - \frac{\displaystyle\sum_{i=1}^n \,\left(y_i - \hat{y}_i \right)^2}{\displaystyle\sum_{i=1}^n \, \left(y_i - \bar{y}\right)^2},
 $$
+
 where $\bar{y}$ is the sample mean of $y_1,\ldots,y_n$. 
+
 ::::
 
 Here are important things to know about the coefficient of determination. 
@@ -292,10 +301,12 @@ Given sample values $y_1,\ldots,y_n$ with mean $\bar{y}$ and the predictions $\h
 2. If $\hat{y}_i=y_i$ for all $i$ (i.e., perfect predictions), then $R^2=1$. 
 3. If $\hat{y}_i=\bar{y}$ for all $i$ (i.e., always predict the sample mean), then $R^2=0$.
 4. If the $\hat{y}_i$ are found from a linear regression, then $R^2$ is the square of the Pearson correlation coefficient between $\bfy$ and $\hat{\bfy}$.
+
 ::::
 
 ::: {.callout-warning}
 The notation $R^2$ is *highly* unfortunate. While it is the square of the Pearson coefficient in linear regression, $R^2$ can actually be negative for other regression methods! Such a result indicates that the predictor is doing worse than just predicting the mean value every time. It has nothing to do with imaginary numbers.
+
 :::
 
 ::::{#exm-regression-cod chapter=5 type=✍️ description="Coefficient of determination"}
@@ -322,7 +333,9 @@ $$
     &= 1 - \frac{9}{14/3} = -\frac{13}{14}.
 \end{split}
 $$
+
 Since this result is negative, we would be better off always predicting $5/3$ rather than using $\hat{f}(x)=x$.
+
 ::::
 
 ::::{#exm-regression-ice-linear chapter=5 type=💻 description="Linear regression for sea ice dataset"}
@@ -426,14 +439,17 @@ print(f"R-squared: {R2:.3f}")
 ```
 
 An $R^2$ value this close to 1 would usually be considered a sign of a good fit, although we have not tested for generalization to new data.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_kxpjms7o&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sorg6uqg" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::: {.callout-tip}
 Python objects can have *attributes*, which are values, and *methods*, which are functions. In scikit-learn the attribute names of models usually end with an underscore to help distinguish them, as in `lm.coef_` and `lm.intercept_`. These attributes can be accessed after fitting the model.
+
 :::
 
 ## Multilinear regression
@@ -446,6 +462,7 @@ $$ {#eq-regression-multilinear}
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_jfzjl1ac&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_cfv59s7b" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 First, observe that we can actually drop the intercept term $b$ from the discussion, because we could always define an additional constant feature $x_0=1$ and get the same effect in one higher dimension. So we will use the following.
@@ -455,11 +472,14 @@ First, observe that we can actually drop the intercept term $b$ from the discuss
 $$
 y \approx \hat{f}(\bfx) = w_1 x_1 + w_2x_2 + \cdots w_d x_d = \bfw^T\bfx,
 $$
+
 for a constant vector $\bfw$ known as the **weight vector**.
+
 ::::
 
 ::: {.callout-note}
 Multilinear regression is also simply called *linear regression* most of the time. What we previously called linear regression is just a special case. The `LinearRegression` learner class does both types of fits. It has a keyword option `fit_intercept` that determines whether or not the $b$ term in @eq-regression-multilinear is used.
+
 :::
 
 As before, we find the unknown weight vector $\bfw$ by minimizing a loss function. To create the least-squares loss function, we use $\bfX_i$ to denote the $i$th row of an $n\times d$ feature matrix $\bfX$. Then
@@ -478,6 +498,7 @@ $$
     \bfX_1^T\bfw \\ \bfX_2^T\bfw \\ \vdots \\ \bfX_n^T\bfw
 \end{bmatrix}.
 $$
+
 ::::
 
 ::::{#exm-regression-matvec chapter=5 type=✍️ description="Matrix times vector"}
@@ -489,6 +510,7 @@ $$
 \qquad 
 \bfw = [5,-2]. 
 $$
+
 Then $\bfX_1=[3,-1]$, $\bfX_2=[0,2]$, $\bfX_3=[1,4]$, and
 $$
 \bfX \bfw = \begin{bmatrix}
@@ -499,6 +521,7 @@ $$
 17 \\ -4 \\ -3
 \end{bmatrix}. 
 $$
+
 ::::
 
 We now have the compact expression
@@ -511,6 +534,7 @@ As in the $d=1$ case, minimizing the loss is equivalent to solving a linear syst
 
 ::: {.callout-caution}
 Be careful interpreting the magnitudes of regression coefficients (i.e., entries of the weight vector). These are sensitive to the units and scales of the features. For example, distances expressed in meters would have a coefficient that is 1000 times larger than the same distances expressed in kilometers. For quantitative comparisons, it helps to standardize the features first, which does not affect the quality of the fit.
+
 :::
 
 ::::{#exm-regression-cars-multi chapter=5 type=💻 description="Multilinear regression for MPG dataset"}
@@ -542,6 +566,7 @@ def fitcars(model, features):
 
 ::: {.callout-tip}
 When you run the same lines of code over and over with only slight changes, it's advisable to put the repeated code into a function. It makes the overall code shorter, easier to understand, and less prone to silly errors.
+
 :::
 
 First, we try using *horsepower* as the only feature in a linear regression to fit *mpg*:
@@ -579,7 +604,9 @@ We did not get much improvement in the fit this time. But by comparing the coeff
 weights = pd.Series(pipe[1].coef_, index=features).sort_values()
 weights
 ```
+
 We now have evidence that *weight* is the most significant negative factor for MPG, by a wide margin.
+
 ::::
 
 ![](_media/memes/multiple-regression.jpg){width=400}
@@ -647,6 +674,7 @@ While we have a very good $R^2$ score now, we can try to improve it. We can add 
 
 ::: {.callout-tip}
 In order to modify a frame, it has to be an independent copy, not just a subset of another frame.
+
 :::
 
 ```{python}
@@ -656,10 +684,12 @@ regress(lm, X, y, X.columns)
 ```
 
 We did see a small increase in the $R^2$ score, and the combination of both types of spending does have a positive effect on *Sales*. 
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_0otfbu23&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_xs33vwho" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.8" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 
@@ -677,6 +707,7 @@ $$
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3228tsmj&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sd10nlnm" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 This makes the regressive approximation into
@@ -689,6 +720,7 @@ which is a polynomial of degree $d-1$. This allows representation of data that d
 
 ::: {.callout-note}
 It might seem odd to categorize polynomial fits under the heading "linear." The $y$ in @eq-regression-polynomial has a nonlinear dependence as a function of $t$. But the dependence on the weights $\bfw$ is linear, which means that the problem can be solved by linear algebra methods alone.
+
 :::
 
 Rather than constructing polynomial features manually, it's easier to use a pipeline.
@@ -737,10 +769,12 @@ linscore = LinearRegression().fit(X,y).score(X,y)
 print(f"CoD for linear fit: {linscore:4f}")
 print(f"CoD for cubic fit: {cubic.score(X,y):4f}")
 ```
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_myfj2re4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_41qyb4dt" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 
@@ -794,16 +828,19 @@ fitcars(pipe, features)
 ```
 
 This is our best regression fit so far, by a mile. -->
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_jyjb5url&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_e3m6ce0a" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.10" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 Let's summarize the situation:
 
 ::: {.callout-caution}
 Adding polynomial features improves the expressive power of a regression model, which can decrease bias but also increase overfitting.
+
 :::
 
 ## Regularization
@@ -812,6 +849,7 @@ As a general term, *regularization* refers to modifying something that is diffic
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_i48yjeqq&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_w8z85xgi" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 Suppose we had an $\real^{n\times 4}$ feature matrix in which the features are identical; that is, the predictor variables satisfy $x_1=x_2=x_3=x_4$, and suppose the target $y$ also equals $x_1$. Clearly, we get a perfect regression if we use
@@ -849,6 +887,7 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 $$
 
 again for a nonnegative value of $\alpha$.
+
 ::::
 
 The new terms in @eq-regression-ridge and @eq-regression-ridge based on norms of $\bfw$ are called **penalty terms**. As $\alpha\to 0$, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as $\alpha \to \infty$, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. In this limit, the model pays less and less attention to the data, which can reduce overfitting.
@@ -915,6 +954,7 @@ for alpha in [0.25, 0.5, 1, 2]:
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_cjwkntgp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hgnnthz7" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.11" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 While ridge regression is an easier function to minimize quickly, LASSO has an interesting advantage, as illustrated in this figure.
@@ -980,10 +1020,12 @@ lm.fit(X_train_reduced, y_train)
 Rsq = lm.score(X_test_reduced, y_test)
 print(f"reduced linear model score: {Rsq:.4f}")
 ```
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_3kg9kwjn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4fi9awbt" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.12" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 
@@ -993,10 +1035,12 @@ Multilinear regression limits the representation of the dataset to a function of
 $$
 \hat{f}(\bfx) = \bfw^T \bfx. 
 $$ {#eq-regression-multilinear}
+
 This is a **linear** function, meaning that two key properties are satisfied. For all possible vectors $\bfu,\bfv$ and numbers $c$,
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_tgywzwbw&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_sodg9i2n" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.4" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 1. $\hat{f}(\bfu + \bfv) = \hat{f}(\bfu) + \hat{f}(\bfv)$,
@@ -1023,6 +1067,7 @@ $$
     &= c\cdot\hat{f}(\bfu). 
 \end{split}
 $$
+
 ::::
 
 ::::{#exm-regression-nonlinear chapter=5 type=✍️ description="Proving nonlinearity"}
@@ -1034,6 +1079,7 @@ $$
     &= |c| \cdot |u_1 + u_2|.
 \end{split}
 $$
+
 We are trying to show that this equals $c \cdot \hat{f}(\bfu)$, which is $c\cdot |u_1+u_2|$. However, it doesn't look as though this is equivalent to the last line above in all cases. In fact, they must be different if $c < 0$ and $|u_1+u_2|$ is nonzero.
 
 To prove *nonlinearity*, we only have to find one counterexample where one of the properties of a linear function doesn't hold. The attempt above suggests, for instance, $\bfu=[1,1]$ and the number $c=-1$. Then
@@ -1044,7 +1090,9 @@ but at the same time,
 $$
 c\cdot \hat{f}(\bfu) = -1 \cdot |1+1| = -2. 
 $$
+
 Since these values are different, $\hat{f}$ can't be linear.
+
 ::::
 
 For our regression function @eq-regression-multilinear, the linearity properties follow easily from how the inner product is defined. For example,
@@ -1066,6 +1114,7 @@ To use kNN for regression, we find the $k$ nearest examples as with classificati
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_gcf5bxmt&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lp6ala2r" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.4.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::::{#exm-regression-knn chapter=5 type=✍️ description="Nonlinearity of kNN regression"}
@@ -1078,7 +1127,9 @@ $$
     1, & x > 1.
 \end{cases}
 $$
+
 (Convince yourself that the result is the same whether the mean or the median is used.) Thus, for instance, $\hat{f}(2 \cdot 0.6)=\hat{f}(1.2)=1$, while $2\cdot \hat{f}(0.6) = 0$.
+
 ::::
 
 kNN regression can produce a function that conforms itself to the training data much more closely than a linear regressor does. This can both decrease bias and increase variance, especially for small values of $k$. As illustrated in the following video, increasing $k$ flattens out the approximation, decreasing variance while increasing bias.
@@ -1128,10 +1179,12 @@ print(f"best kNN CoD: {optim.score(X_test, y_test):.4f}")
 ```
 
 As you can see above, we got some improvement over the linear regressor.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_vcdc7ddk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wri6tnzb" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.14" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ### Decision tree
@@ -1144,6 +1197,7 @@ where $H$ is an empirical error measure. The split location is chosen to minimiz
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5zlo1g14&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_yzrae7bx" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.4.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 1. The mean of the leaf labels is the regression value, and $H$ is mean square error from the prediction.
@@ -1182,11 +1236,13 @@ $$
 \end{split}
 $$
 
-Thus, the first split above produces the smallest Q, and it improves on the orignal set.
+Thus, the first split above produces the smallest Q, and it improves on the original set.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_pjw3mdbc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_4aa35vvi" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.15" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::::{#exm-regression-tree chapter=5 type=💻 description="Tree regression on a small dataset"}
@@ -1240,10 +1296,12 @@ All values of the regressor will be one of the four values above. This is exactl
 ```{python}
 print( dtree.predict(X) )
 ```
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_bpcrc2rs&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_nviq9get" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.16" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::::{#exm-regression-tree-demo chapter=5 type=💻 description="Random forest for regression"}
@@ -1275,6 +1333,7 @@ optim.fit(X_train, y_train)
 
 print(f"best forest CoD: {optim.score(X_test, y_test):.4f}")
 ```
+
 ::::
 
 ## Logistic regression
@@ -1288,11 +1347,14 @@ The **logistic function** is
 $$
 \sigma(x) = \frac{1}{1+e^{-x}},
 $$
+
 defined for all real values of $x$.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_8ioj8704&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_zgf52cij" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 The logistic function takes the form of a smoothed step increasing from 0 to 1:
@@ -1308,6 +1370,7 @@ Given samples of a probability variable $p(\bfx)$, the regression task is to fin
 $$
 p \approx \sigma(\bfx^T\bfw).
 $$
+
 The result is known as **logistic regression**. A common way to use logistic regression is for binary classification. Suppose we have training samples $(\bfx_i, y_i)$, $i=1,\ldots,n$, where for each $i$ either $y_i=0$ or $y_i=1$. The resulting approximation to $p$ at some query $\bfx$ can then be interpreted as the probability of observing a 1 at $\bfx$.
 
 In order to fully specify the regressor, we need to specify a loss function to be optimized.
@@ -1321,6 +1384,7 @@ $$
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_o2jgpf6u&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_whltv54a" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 5.5.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 However, it's more common to use a different kind of loss function.
@@ -1333,10 +1397,12 @@ L(\bfw) = -\sum_{i=1}^n \left[ y_i \log(\hat{p}_i) + (1-y_i) \log(1-\hat{p}_i) \
 $$ {#eq-regression-cross-entropy}
 
 where every label $y_i$ takes the value 0 or 1.
+
 ::::
 
 ::: {.callout-note}
 The logarithms in @eq-regression-cross-entropy can be in any base, since that choice only affects $L$ by a constant factor. 
+
 :::
 
 Suppose we choose some $i$ for which $y_i=0$. Then the contribution of the $i$th term in the sum of @eq-regression-cross-entropy is
@@ -1369,7 +1435,9 @@ Hence the total cross-entropy is
 $$
 -\log\bigl[ (0.9)(0.6)(0.8)(0.3)\bigr] = -\log(0.1296). 
 $$
+
 Using the natural log, this is about $2.043$. 
+
 ::::
 
 Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does *not* lead to a linear problem for the weight vector $\bfw$. The difference in practice is usually not a concern, though.
@@ -1442,13 +1510,16 @@ print(weights[-4:])
 
 ::: {.callout-caution}
 For a `LinearRegression` and its regularized siblings, the `coef_` property of a trained learner is a vector of coefficients, while for `LogisticRegression`, it is a matrix with one row. The reason is that logistic regression is often applied to a multiclass problem, and there is one row for each version of the one-vs-rest fit.
+
 :::
 
 We see above that the word "george" is a strong counter-indicator for spam; remember that this data set comes from an individual's inbox. Its presence makes the inner product $\bfx^T\bfw$ more negative, which drives the logistic function closer to 0. Conversely, the presence of consecutive capital letters increases the inner product and pushes the probability of spam closer to 1. 
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_d2b8yjqe&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dun9p0b8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.19" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ### Regularization {#sec-regression-logistic-regular}
@@ -1463,6 +1534,7 @@ where the vector norm is either the 1-norm (LASSO style) or 2-norm (ridge style)
 
 ::: {.callout-important}
 The parameter $C$ functions like the inverse of the regularization parameter $\alpha$ we used in the linear regressor. It's because of a different convention chosen historically.
+
 :::
 
 ::::{#exm-regression-spam-regular chapter=5 type=💻 description="Regularization for the spam filter regressor"}
@@ -1472,6 +1544,7 @@ In @exm-regression-spam, we disabled regularization. The default call uses 2-nor
 
 ::: {.callout-tip}
 The use of the `solver` keyword argument in `LogisticRegression` is optional, but the default choice does not work with the LASSO-style penalty term.
+
 :::
 
 ```{python}
@@ -1525,10 +1598,12 @@ print(f"Best score is {search.best_score_:.2%}")
 ```
 
 In this case, we failed to improve on the default regularization. (Recall that cross-validation means that each learner is trained on less data, so the grid metrics might not be completely accurate.)
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y9qykrqv&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_20nobqz7" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.20" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ### Multiclass classification
@@ -1572,7 +1647,9 @@ $$
  \hat{p}_3 &= \frac{\hat{q}_3}{\hat{q}_1 + \hat{q_2} + \hat{q_3}} \approx 0.37030. 
 \end{split}
 $$
+
 These probabilities, in exact arithmetic, add up to 100%.
+
 ::::
 
 The situation is now the same as for probabilistic classification in @sec-class-probabilistic. Over a testing set, we get a matrix of probabilities. Each of the rows gives the class probabilities at a single query point. We can simply select the most likely class at each test query, or use ROC and AUC to better understand the probabilistic results.
@@ -1618,6 +1695,7 @@ sns.relplot(data=roc,
     palette="Dark2"
     );
 ```
+
 ::::
 
 ## Exercises {.unnumbered}
@@ -1643,6 +1721,7 @@ $$
     \bfy &= [4, 1, 2, 0].
 \end{split}
 $$
+
 Find the **(a)** MSE, **(b)** MAE, and **(c)** coefficient of determination on this set for the regression function $\hat{f}(x)=1-x$. 
 ::::
 
@@ -1651,6 +1730,7 @@ Find the **(a)** MSE, **(b)** MAE, and **(c)** coefficient of determination on t
 $$
 \bfx_1 = [1,0,1], \quad \bfx_2 = [-1,2,2],\quad \bfx_3=[3,-1,0], \quad \bfx_4 = [0,2,-2], 
 $$
+
 and a multilinear regression computes the weight vector $\bfw = [2,1,-1]$. Find **(a)** the matrix-vector product $\bfX\bfw$, and **(b)** the predictions of the regressor on the sample vectors. 
 ::::
 
@@ -1659,6 +1739,7 @@ and a multilinear regression computes the weight vector $\bfw = [2,1,-1]$. Find 
 $$ 
 r = \sum_{i=1}^n \bigl(y_i - \hat{f}(\bfx_i)\bigr)^2. 
 $$
+
 Show that by holding $w_1$ constant and taking a derivative with respect to $w_2$, and then holding $w_2$ constant and taking a derivative with respect to $w_1$, at the minimum residual we must have 
 $$
 \begin{split}
@@ -1666,6 +1747,7 @@ $$
 \left(\sum X_{i,1} X_{i,2} \right) w_1 + \left(\sum X_{i,2}^2 \right) w_2 &= \sum X_{i,2} \, y_i, 
 \end{split}
 $$
+
 where $X_{i,1}$ and $X_{i,2}$ are the entries in the $i$th row of the feature matrix $\bfX$. (In each case above the sum is from $i=1$ to $i=n$.)
 ::::
 
@@ -1674,6 +1756,7 @@ where $X_{i,1}$ and $X_{i,2}$ are the entries in the $i$th row of the feature ma
 $$
 r(w) = (2w-6)^2 + \alpha w^2,
 $$
+
 where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Show that if $\alpha>0$, then $r'(w)$ is zero at a value of $w$ in the interval $(0,3)$. (This shows that the weight decreases in the presence of the regularization penalty.) 
 ::::
 
@@ -1682,6 +1765,7 @@ where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=
 $$
 r(w) = (2w-6)^2 + \alpha |w|,
 $$
+
 where $\alpha$ is a nonnegative constant. When $\alpha = 0$, it's clear that $w=3$ is the minimizer of $r(w)$. Below you will show that the minimizer is less than this if $\alpha > 0$.
 
 **(a)** Show that if $w < 0$, then $r'(w)$ cannot be zero. (Remember that for such $w$, $|w|=-w$.)
@@ -1732,12 +1816,14 @@ Let $\hat{f}(x_1,x_2)$ be the kNN regressor using $k=4$, Euclidean metric, and m
 
 ::::{#exr-regression-cross-entropy}
 (5.5) Here are some label values and probabilistic predictions by a logistic regressor:
+
 $$
 \begin{split}
     \bfy  &= [0,0,1,1], \\ 
     \hat{\mathbf{p}} &= [\tfrac{3}{4},0,1,\tfrac{1}{2}]. 
 \end{split}
 $$
+
 Using base-2 logarithms, calculate the cross-entropy loss for these predictions.
 ::::
 
