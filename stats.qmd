@@ -1410,6 +1410,14 @@ $$
 **(b)** Show that $\displaystyle \sum_{i=1}^n z_i^2 = n-1.$
 :::
 
+::::{#exr-stats-ellipse}
+(2.1) Define 8 points on an ellipse by $x_k=a\cos(\theta_k)$ and $y_k=b\sin(\theta_k)$, where $a$ and $b$ are positive and 
+$$
+\theta_1= \frac{\pi}{4}, \theta_2 = \frac{\pi}{2}, \theta_3 = \frac{3\pi}{4}, \ldots, \theta_8 = 2\pi. 
+$$
+Let $u_1,\ldots,u_8$ and $v_1,\ldots,v_8$ be the z-scores of the $x_k$ and the $y_k$, respectively. Show that the points $(u_k,v_k)$ all lie on a circle centered at the origin for all $k=1,\ldots,8$. (By extension, standardizing points into z-scores is sometimes called *sphereing* them.)
+::::
+
 :::{#exr-stats-least-squares}
 (2.1) Given a population of values $x_1,x_2,\ldots,x_n$, define the function 
 
