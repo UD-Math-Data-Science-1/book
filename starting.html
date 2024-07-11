@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science 1 - Getting started</title>
+<title>Getting started – Data Science 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./genAI.html" rel="next">
+<link href="./data.html" rel="next">
 <link href="./resources.html" rel="prev">
 <link href="./_media/logo_small.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -48,12 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -62,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -75,6 +77,35 @@ MathJax = {
 }
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -84,13 +115,13 @@ MathJax = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./starting.html">Getting started</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -99,10 +130,10 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
+<p><img src="_media/logo_small.png" class="quarto-figure quarto-figure-center figure-img" height="120"></p>
 </figure>
 </div>
 </div></div>
@@ -140,18 +171,6 @@ MathJax = {
   <div class="sidebar-item-container"> 
   <a href="./starting.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Getting started</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Generative AI</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math notation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -202,18 +221,12 @@ MathJax = {
  <span class="menu-text">Review questions by section</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./merge.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joining and merging</span></a>
-  </div>
-</li>
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright (c) 2024 by <a href="https://tobydriscoll.net">Toby Driscoll</a></p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -231,6 +244,12 @@ MathJax = {
   </ul></li>
   <li><a href="#setting-up-vs-code" id="toc-setting-up-vs-code" class="nav-link" data-scroll-target="#setting-up-vs-code">Setting up VS Code</a></li>
   <li><a href="#tips-on-jupyter-success" id="toc-tips-on-jupyter-success" class="nav-link" data-scroll-target="#tips-on-jupyter-success">Tips on Jupyter success</a></li>
+  <li><a href="#generative-ai" id="toc-generative-ai" class="nav-link" data-scroll-target="#generative-ai">Generative AI</a>
+  <ul class="collapse">
+  <li><a href="#getting-started-with-github-copilot" id="toc-getting-started-with-github-copilot" class="nav-link" data-scroll-target="#getting-started-with-github-copilot">Getting started with GitHub Copilot</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
+  </ul></li>
+  <li><a href="#math-notation" id="toc-math-notation" class="nav-link" data-scroll-target="#math-notation">Math notation</a></li>
   </ul>
 </nav>
     </div>
@@ -255,6 +274,7 @@ MathJax = {
 
 </header>
 
+
 <p>We will be using Python extensively. There are choices for two major aspects of using Python:</p>
 <ul>
 <li>How the code runs (the <em>back end</em>), and</li>
@@ -263,7 +283,7 @@ MathJax = {
 <section id="back-end" class="level2">
 <h2 class="anchored" data-anchor-id="back-end">Back end</h2>
 <p>Here are some pros and cons of the usual options:</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Your own machine</th>
@@ -340,7 +360,7 @@ Tip
 </section>
 <section id="setting-up-vs-code" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-vs-code">Setting up VS Code</h2>
-<p>If you use the free Visual Studio Code editor, you can take advantage of its <a href="./genAI.html">AI assistant</a>.</p>
+<p>If you use the free Visual Studio Code editor, you can take advantage of its <a href="genAI.qmd">AI assistant</a>.</p>
 <ol type="1">
 <li>First install <a href="https://www.anaconda.com">Anaconda Python</a>. (Be patient! It’s a big download and a long installation.)</li>
 <li>Download and install <a href="https://code.visualstudio.com">Visual Studio Code</a>.</li>
@@ -389,9 +409,74 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before submitting a notebook, it’s <em>highly recommended</em> to restart the kernel and run all cells in order, just to make sure that everything still works as seen on screen.</p>
+<p>Before submitting a notebook, it’s <em>highly recommended</em> to take two steps: Restart the kernel and then run all cells, just to make sure that everything still works as it’s seen on screen.</p>
 </div>
 </div>
+</section>
+<section id="generative-ai" class="level2">
+<h2 class="anchored" data-anchor-id="generative-ai">Generative AI</h2>
+<p>Generative AI is a catchall term for models that can produce output similar to data they were trained on. Most notoriously of late, these include the large language models such as Chat GPT that can simulate conversation.</p>
+<p>The ultimate utility of these models is yet to be realized in most domains. However, they are already quite useful for generating computer code, given careful use and supervision. If nothing else, they offer a sort of intelligent autocomplete that can assist you when you have forgotten the names of functions and the orders of their arguments.</p>
+<p>For students, there is a sophisticated code-oriented AI that you can use for free: <a href="https://copilot.github.com/">GitHub Copilot</a>. It is a plugin for the free <a href="https://code.visualstudio.com">Visual Studio Code editor</a> that is well-developed for use with most computer programming languages, including Python, Matlab, and Julia, and it can work with Jupyter notebooks natively.</p>
+<section id="getting-started-with-github-copilot" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-with-github-copilot">Getting started with GitHub Copilot</h3>
+<ol type="1">
+<li>Sign up for a free <a href="https://github.com">GitHub account</a>.</li>
+<li>Apply for <a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student">GitHub Global Campus</a> as a student. This requires uploading some validation of your student status, such as a student ID or bursar’s receipt. <strong>It may take some time for your status to be verified.</strong></li>
+<li>Download and install <a href="https://code.visualstudio.com">Visual Studio Code</a>.</li>
+<li>Install the <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot">GitHub Copilot</a> and the <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat">GitHub Copilot chat</a> extensions for Visual Studio Code. You may need to restart or reload VS Code after installing these extensions.</li>
+<li><a href="https://itsfoss.com/vs-code-github/">Sign in to your GitHib account</a> in Visual Studio Code.</li>
+<li>Finally, open the GitHub chat window by clicking on the speech bubbles icon along the left side of the window. If it shows a button for starting a 30-day free trial, go ahead and click that, which takes you to a website. If your student status has been approved, yopu should <em>not</em> get asked for payment information before getting to a success screen. After one more restart of VS Code, you should be good to go.</li>
+</ol>
+</section>
+<section id="usage" class="level3">
+<h3 class="anchored" data-anchor-id="usage">Usage</h3>
+<p>There are now several ways you can interact with Copilot:</p>
+<ul>
+<li>Open or create a code file and start typing. You will soon start to see grayed-out suggestions from Copilot. You can accept these suggestions by pressing <code>Tab</code> or <code>Enter</code>. If you continue typing, the suggestions will change to match. Note that Copilot will use the open file as context for its suggestions, including comments and variable names.</li>
+<li>Within your code file, you can type <code>Ctrl</code>+<code>i</code>, or <code>Cmd</code>+<code>i</code> on a Mac, to open the Copilot panel. You can type in the panel to ask questions or create a prompt for it to respond to.</li>
+<li>Along the left side of the VS Code window are icons representing the extensions you have installed. The Copilot Chat icon is a pair of speech bubbles (though this can change). Clicking on this icon will open a chat window.</li>
+<li>You can use <code>Ctrl</code>+<code>Shift</code>+<code>P</code>, or <code>Cmd</code>+<code>Shift</code>+<code>P</code> on a Mac, to open the command palette and type “Copilot” to see a list of commands you can use to interact with Copilot. For example, you can ask Copilot to generate a function definition or a class definition, or to complete a line of code.</li>
+</ul>
+</section>
+</section>
+<section id="math-notation" class="level2">
+<h2 class="anchored" data-anchor-id="math-notation">Math notation</h2>
+<p>To make good-looking math in Jupyter notebooks, you can use <a href="https://www.overleaf.com/learn/latex/Free_online_introduction_to_LaTeX_(part_1)">LaTeX</a> notation. For example, to write the equation of a line as <span class="math inline">\(y=mx+b\)</span>, you can use the following within a text cell:</p>
+<pre class="{markdown}"><code>For example, to write the equation of a line as $y=mx+b$, you can use the following</code></pre>
+<p>The example above produces <strong>inline math</strong>, which is shown as part of the text. You can also use <strong>display math</strong>, which is shown on its own line.</p>
+<p>For example, to write the equation of a line on its own line as</p>
+<p><span class="math display">\[
+y=mx+b,
+\]</span></p>
+<p>you can use the following within a text cell:</p>
+<pre class="{markdown}"><code>For example, to write the equation of a line on its own line as
+
+$$
+y=mx+b,
+$$
+
+you can use the following</code></pre>
+<p>Use <code>_</code> for subscripts and <code>^</code> for superscripts. For example, to write <span class="math inline">\(x_1^2\)</span>, use <code>$x_1^2$</code>. If you have more than one character in the sub/superscript, use curly braces. For example, to write <span class="math inline">\(X_{i,j}=10^{100}\)</span>, use <code>$X_{i,j}=10^{100}$</code>.</p>
+<p>Function names and Greek letters are written with a backslash. For example, to write <span class="math inline">\(\sin(\theta)\)</span>, use <code>$\sin(\theta)$</code>. To write <span class="math inline">\(\alpha+\ln(\beta)\)</span>, use <code>$\alpha + \ln(\beta)$</code>. Note the difference between <span class="math inline">\(\cos(\phi)\)</span>, which is written as <code>$\cos(\phi)$</code>, and <span class="math inline">\(cos(\phi)\)</span>, which is written as <code>$cos(\phi)$</code>. All the functions you know work like this, plus square roots, like <span class="math inline">\(\sqrt{2+z}\)</span>, which is written as <code>$\sqrt{2+z}$</code>. Occasionally you want a short bit of text to appear like function names (upright) rather than multiplied variables (italic). For instance, to get <span class="math inline">\(x_\text{init}\)</span>, use <code>$x_\text{init}$</code>.</p>
+<p>You’ve seen that curly braces are used to indicate groupings. If you actually want curly braces to appear, you have to escape them with a backslash. For example, to write <span class="math inline">\(\{2, 3, 5, 7\}\)</span>, use <code>$\{2, 3, 5, 7\}$</code>.</p>
+<p>To write a fraction, use <code>\frac{numerator}{denominator}</code>. For example, to write <span class="math inline">\(\frac{1}{2}\)</span>, use <code>$\frac{1}{2}$</code>. Derivatives are written as fractions, so to write <span class="math inline">\(f'(x) = \frac{dy}{dx}\)</span>, use <code>$f'(x) = \frac{dy}{dx}$</code>.</p>
+<p>If you want to put fractions inside of parentheses, use <code>\left(</code> and <code>\right)</code> to make the parentheses the right size. For example, to write</p>
+<p><span class="math display">\[
+\left( x - \frac{1}{2} \right)^3,
+\]</span></p>
+<p>use <code>$\left(x - \frac{1}{2}\right)^3$</code>. The same applies to <code>\left[</code> and <code>\right]</code> for square brackets.</p>
+<p>For the most part, the spaces you put in don’t matter. For example, <code>$x+1$</code> and <code>$x  + 1$</code> both produce <span class="math inline">\(x+1\)</span>. Usually, the automatic spacing makes the best-looking result. But if you want to put a space in manually, you can use <code>\,</code> for a small space, <code>\:</code> for a medium space, <code>\;</code> for a large space, and <code>\quad</code> for a really large space.</p>
+<p>Integrals and sums are produced using <code>\int</code> and <code>\sum</code>, with subscripts and superscripts put where you would expect them to go. For example, to write</p>
+<p><span class="math display">\[
+\int_0^1 x^2 \, dx,
+\]</span></p>
+<p>use <code>$$\int_0^1 x^2 \, dx$$</code>. (Here is one legitimate use for a manual space!) To write</p>
+<p><span class="math display">\[
+\sum_{i=1}^n i^2,
+\]</span></p>
+<p>use <code>$$\sum_{i=1}^n i^2$$</code>.</p>
+<p>There are seventeen squijillion web pages and blogs giving quick introductions to LaTeX, if you need to do something more complex than the above. Beware: it can be a deep rabbit hole to fall into.</p>
 
 
 </section>
@@ -432,18 +517,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -475,7 +549,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -510,7 +624,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -525,15 +643,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -542,7 +673,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -584,6 +723,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -659,7 +821,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -743,13 +904,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./resources.html" class="pagination-link">
+      <a href="./resources.html" class="pagination-link" aria-label="Resources">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Resources</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./genAI.html" class="pagination-link">
-        <span class="nav-page-text">Generative AI</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data.html" class="pagination-link" aria-label="Representation of data">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Representation of data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

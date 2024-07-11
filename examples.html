@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.339">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science 1 - List of examples</title>
+<title>List of examples – Data Science 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -50,12 +50,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -64,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -107,8 +109,35 @@ MathJax = {
 }
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -118,13 +147,13 @@ MathJax = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./examples.html">List of examples</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -133,10 +162,10 @@ MathJax = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="quarto-sidebar-header"><div class="sidebar-header-item">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="_media/logo_small.png" height="120" class="figure-img"></p>
+<p><img src="_media/logo_small.png" class="quarto-figure quarto-figure-center figure-img" height="120"></p>
 </figure>
 </div>
 </div></div>
@@ -174,18 +203,6 @@ MathJax = {
   <div class="sidebar-item-container"> 
   <a href="./starting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./genAI.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Generative AI</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./math.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Math notation</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -236,18 +253,12 @@ MathJax = {
  <span class="menu-text">Review questions by section</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./merge.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Joining and merging</span></a>
-  </div>
-</li>
     </ul>
     </div>
 <div class="quarto-sidebar-footer"><div class="sidebar-footer-item">
 <p>Copyright (c) 2024 by <a href="https://tobydriscoll.net">Toby Driscoll</a></p>
 </div></div></nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -278,6 +289,7 @@ MathJax = {
 
 
 </header>
+
 
 <section id="list-of-examples" class="level2">
 <h2 class="anchored" data-anchor-id="list-of-examples">List of examples</h2>
@@ -495,7 +507,7 @@ MathJax = {
 </tr>
 <tr data-index="12">
 <td>
-<span class="listing-description">Series and data frames</span>
+<span class="listing-description">Series</span>
 </td>
 <td>
 <span class="listing-type">✍️</span>
@@ -504,10 +516,38 @@ MathJax = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-frames" class="quarto-xref">Example&nbsp;<span>1.13</span></a></span>
+<span class="listing-link"><a href="data.html#exm-data-series" class="quarto-xref">Example&nbsp;<span>1.13</span></a></span>
 </td>
 </tr>
 <tr data-index="13">
+<td>
+<span class="listing-description">Series in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-series-create" class="quarto-xref">Example&nbsp;<span>1.14</span></a></span>
+</td>
+</tr>
+<tr data-index="14">
+<td>
+<span class="listing-description">Operations on series</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-series-operate" class="quarto-xref">Example&nbsp;<span>1.15</span></a></span>
+</td>
+</tr>
+<tr data-index="15">
 <td>
 <span class="listing-description">Series and frames in pandas</span>
 </td>
@@ -518,40 +558,12 @@ MathJax = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-colors" class="quarto-xref">Example&nbsp;<span>1.14</span></a></span>
-</td>
-</tr>
-<tr data-index="14">
-<td>
-<span class="listing-description">Creating a data frame</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">1</span>
-</td>
-<td>
-<span class="listing-link"><a href="data.html#exm-data-create-frame" class="quarto-xref">Example&nbsp;<span>1.15</span></a></span>
-</td>
-</tr>
-<tr data-index="15">
-<td>
-<span class="listing-description">Ordinal data</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">1</span>
-</td>
-<td>
-<span class="listing-link"><a href="data.html#exm-data-ordinal" class="quarto-xref">Example&nbsp;<span>1.16</span></a></span>
+<span class="listing-link"><a href="data.html#exm-data-frames-create" class="quarto-xref">Example&nbsp;<span>1.16</span></a></span>
 </td>
 </tr>
 <tr data-index="16">
 <td>
-<span class="listing-description">Categorical data in pandas</span>
+<span class="listing-description">Operations on data frames</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -560,12 +572,12 @@ MathJax = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-chess" class="quarto-xref">Example&nbsp;<span>1.17</span></a></span>
+<span class="listing-link"><a href="data.html#exm-data-frames-operate" class="quarto-xref">Example&nbsp;<span>1.17</span></a></span>
 </td>
 </tr>
 <tr data-index="17">
 <td>
-<span class="listing-description">Importing data with pandas</span>
+<span class="listing-description">Importing CSV data</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -621,7 +633,7 @@ MathJax = {
 </tr>
 <tr data-index="21">
 <td>
-<span class="listing-description">Cleaning a data frame</span>
+<span class="listing-description">Concatenating data in pandas</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -630,10 +642,38 @@ MathJax = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-loans" class="quarto-xref">Example&nbsp;<span>1.22</span></a></span>
+<span class="listing-link"><a href="data.html#exm-data-concat" class="quarto-xref">Example&nbsp;<span>1.22</span></a></span>
 </td>
 </tr>
 <tr data-index="22">
+<td>
+<span class="listing-description">Merging data in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-merge" class="quarto-xref">Example&nbsp;<span>1.23</span></a></span>
+</td>
+</tr>
+<tr data-index="23">
+<td>
+<span class="listing-description">Merging data</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-merge-weather" class="quarto-xref">Example&nbsp;<span>1.24</span></a></span>
+</td>
+</tr>
+<tr data-index="24">
 <td>
 <span class="listing-description">Handling missing values in pandas</span>
 </td>
@@ -644,10 +684,66 @@ MathJax = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-missing" class="quarto-xref">Example&nbsp;<span>1.23</span></a></span>
+<span class="listing-link"><a href="data.html#exm-data-missing" class="quarto-xref">Example&nbsp;<span>1.25</span></a></span>
 </td>
 </tr>
-<tr data-index="23">
+<tr data-index="25">
+<td>
+<span class="listing-description">Cleaning a data frame</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-loans" class="quarto-xref">Example&nbsp;<span>1.26</span></a></span>
+</td>
+</tr>
+<tr data-index="26">
+<td>
+<span class="listing-description">Encoding qualitative data</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-encoding" class="quarto-xref">Example&nbsp;<span>1.27</span></a></span>
+</td>
+</tr>
+<tr data-index="27">
+<td>
+<span class="listing-description">Dummy variables in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">1</span>
+</td>
+<td>
+<span class="listing-link"><a href="data.html#exm-data-dummies" class="quarto-xref">Example&nbsp;<span>1.28</span></a></span>
+</td>
+</tr>
+<tr data-index="28">
+<td>
+<span class="listing-description">Summary statistics in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-summary" class="quarto-xref">Example&nbsp;<span>2.1</span></a></span>
+</td>
+</tr>
+<tr data-index="29">
 <td>
 <span class="listing-description">Standard deviation by hand</span>
 </td>
@@ -658,38 +754,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-maxvar" class="quarto-xref">Example&nbsp;<span>2.1</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-maxvar" class="quarto-xref">Example&nbsp;<span>2.2</span></a></span>
 </td>
 </tr>
-<tr data-index="24">
-<td>
-<span class="listing-description">Z scores</span>
-</td>
-<td>
-<span class="listing-type">✍️, 💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-zscores" class="quarto-xref">Example&nbsp;<span>2.2</span></a></span>
-</td>
-</tr>
-<tr data-index="25">
-<td>
-<span class="listing-description">Z scores in Python</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-zscores-py" class="quarto-xref">Example&nbsp;<span>2.3</span></a></span>
-</td>
-</tr>
-<tr data-index="26">
+<tr data-index="30">
 <td>
 <span class="listing-description">Sample variance</span>
 </td>
@@ -700,10 +768,52 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-sample" class="quarto-xref">Example&nbsp;<span>2.4</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-sample" class="quarto-xref">Example&nbsp;<span>2.3</span></a></span>
 </td>
 </tr>
-<tr data-index="27">
+<tr data-index="31">
+<td>
+<span class="listing-description">Mean, variance, STD in pandas</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-meanvar-pandas" class="quarto-xref">Example&nbsp;<span>2.4</span></a></span>
+</td>
+</tr>
+<tr data-index="32">
+<td>
+<span class="listing-description">Z scores</span>
+</td>
+<td>
+<span class="listing-type">✍️, 💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-zscores" class="quarto-xref">Example&nbsp;<span>2.5</span></a></span>
+</td>
+</tr>
+<tr data-index="33">
+<td>
+<span class="listing-description">Z scores in Python</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-zscores-py" class="quarto-xref">Example&nbsp;<span>2.6</span></a></span>
+</td>
+</tr>
+<tr data-index="34">
 <td>
 <span class="listing-description">Median</span>
 </td>
@@ -714,10 +824,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-median" class="quarto-xref">Example&nbsp;<span>2.5</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-median" class="quarto-xref">Example&nbsp;<span>2.7</span></a></span>
 </td>
 </tr>
-<tr data-index="28">
+<tr data-index="35">
 <td>
 <span class="listing-description">Quantiles</span>
 </td>
@@ -728,10 +838,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-quantiles" class="quarto-xref">Example&nbsp;<span>2.6</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-quantiles" class="quarto-xref">Example&nbsp;<span>2.8</span></a></span>
 </td>
 </tr>
-<tr data-index="29">
+<tr data-index="36">
 <td>
 <span class="listing-description">Quartiles and IQR</span>
 </td>
@@ -742,10 +852,52 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-describe" class="quarto-xref">Example&nbsp;<span>2.7</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-describe" class="quarto-xref">Example&nbsp;<span>2.9</span></a></span>
 </td>
 </tr>
-<tr data-index="30">
+<tr data-index="37">
+<td>
+<span class="listing-description">ECDF of penguins</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span>2.12</span></a></span>
+</td>
+</tr>
+<tr data-index="38">
+<td>
+<span class="listing-description">ECDF of a simple distribution</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-discrete" class="quarto-xref">Example&nbsp;<span>2.11</span></a></span>
+</td>
+</tr>
+<tr data-index="39">
+<td>
+<span class="listing-description">ECDF of penguins</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span>2.12</span></a></span>
+</td>
+</tr>
+<tr data-index="40">
 <td>
 <span class="listing-description">CDF of a uniform distribution</span>
 </td>
@@ -756,10 +908,52 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-discrete" class="quarto-xref">Example&nbsp;<span>2.8</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-continuous" class="quarto-xref">Example&nbsp;<span>2.13</span></a></span>
 </td>
 </tr>
-<tr data-index="31">
+<tr data-index="41">
+<td>
+<span class="listing-description">ECDF of temperatures</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-temps-ecdf" class="quarto-xref">Example&nbsp;<span>2.14</span></a></span>
+</td>
+</tr>
+<tr data-index="42">
+<td>
+<span class="listing-description">PDF of temperature distribution</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-temps-pdf" class="quarto-xref">Example&nbsp;<span>2.15</span></a></span>
+</td>
+</tr>
+<tr data-index="43">
+<td>
+<span class="listing-description">PDF of a uniform distribution</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-uniform-pdf" class="quarto-xref">Example&nbsp;<span>2.16</span></a></span>
+</td>
+</tr>
+<tr data-index="44">
 <td>
 <span class="listing-description">Uniform random numbers in NumPy</span>
 </td>
@@ -770,66 +964,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-numpy-uniform" class="quarto-xref">Example&nbsp;<span>2.9</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-numpy-uniform" class="quarto-xref">Example&nbsp;<span>2.17</span></a></span>
 </td>
 </tr>
-<tr data-index="32">
-<td>
-<span class="listing-description">Empirical CDF</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-ecdf-uniform" class="quarto-xref">Example&nbsp;<span>2.10</span></a></span>
-</td>
-</tr>
-<tr data-index="33">
-<td>
-<span class="listing-description">Histogram of a uniform distribution</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-hist" class="quarto-xref">Example&nbsp;<span>2.11</span></a></span>
-</td>
-</tr>
-<tr data-index="34">
-<td>
-<span class="listing-description">PDF of a uniform distribution</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-pdf" class="quarto-xref">Example&nbsp;<span>2.12</span></a></span>
-</td>
-</tr>
-<tr data-index="35">
-<td>
-<span class="listing-description">Mean of a uniform distribution</span>
-</td>
-<td>
-<span class="listing-type">✍️, 💻</span>
-</td>
-<td>
-<span class="listing-chapter">2</span>
-</td>
-<td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-mean" class="quarto-xref">Example&nbsp;<span>2.13</span></a></span>
-</td>
-</tr>
-<tr data-index="36">
+<tr data-index="45">
 <td>
 <span class="listing-description">Normal distribution in NumPy</span>
 </td>
@@ -840,10 +978,24 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-normal" class="quarto-xref">Example&nbsp;<span>2.14</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-normal" class="quarto-xref">Example&nbsp;<span>2.18</span></a></span>
 </td>
 </tr>
-<tr data-index="37">
+<tr data-index="46">
+<td>
+<span class="listing-description">Grouping data</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">2</span>
+</td>
+<td>
+<span class="listing-link"><a href="stats.html#exm-stats-groups" class="quarto-xref">Example&nbsp;<span>2.19</span></a></span>
+</td>
+</tr>
+<tr data-index="47">
 <td>
 <span class="listing-description">Facet plots</span>
 </td>
@@ -854,10 +1006,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-facet" class="quarto-xref">Example&nbsp;<span>2.15</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-facet" class="quarto-xref">Example&nbsp;<span>2.20</span></a></span>
 </td>
 </tr>
-<tr data-index="38">
+<tr data-index="48">
 <td>
 <span class="listing-description">Box and violin plots</span>
 </td>
@@ -868,10 +1020,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-box-violin" class="quarto-xref">Example&nbsp;<span>2.16</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-box-violin" class="quarto-xref">Example&nbsp;<span>2.21</span></a></span>
 </td>
 </tr>
-<tr data-index="39">
+<tr data-index="49">
 <td>
 <span class="listing-description">Aggregating data in groups</span>
 </td>
@@ -882,10 +1034,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-aggregation" class="quarto-xref">Example&nbsp;<span>2.17</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-aggregation" class="quarto-xref">Example&nbsp;<span>2.22</span></a></span>
 </td>
 </tr>
-<tr data-index="40">
+<tr data-index="50">
 <td>
 <span class="listing-description">Transforming data in groups</span>
 </td>
@@ -896,12 +1048,12 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-transformation" class="quarto-xref">Example&nbsp;<span>2.18</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-transformation" class="quarto-xref">Example&nbsp;<span>2.23</span></a></span>
 </td>
 </tr>
-<tr data-index="41">
+<tr data-index="51">
 <td>
-<span class="listing-description">Filtering data in groups</span>
+<span class="listing-description">Grouping data by cuts</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -910,10 +1062,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-filtering" class="quarto-xref">Example&nbsp;<span>2.19</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-groups-cuts" class="quarto-xref">Example&nbsp;<span>2.24</span></a></span>
 </td>
 </tr>
-<tr data-index="42">
+<tr data-index="52">
 <td>
 <span class="listing-description">Outliers for mean and median</span>
 </td>
@@ -924,10 +1076,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-median-mean" class="quarto-xref">Example&nbsp;<span>2.20</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-median-mean" class="quarto-xref">Example&nbsp;<span>2.25</span></a></span>
 </td>
 </tr>
-<tr data-index="43">
+<tr data-index="53">
 <td>
 <span class="listing-description">Interquartile range</span>
 </td>
@@ -938,10 +1090,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-outlier-iqr" class="quarto-xref">Example&nbsp;<span>2.21</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-outlier-iqr" class="quarto-xref">Example&nbsp;<span>2.26</span></a></span>
 </td>
 </tr>
-<tr data-index="44">
+<tr data-index="54">
 <td>
 <span class="listing-description">Outliers</span>
 </td>
@@ -952,10 +1104,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-outlier-std" class="quarto-xref">Example&nbsp;<span>2.22</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-outlier-std" class="quarto-xref">Example&nbsp;<span>2.27</span></a></span>
 </td>
 </tr>
-<tr data-index="45">
+<tr data-index="55">
 <td>
 <span class="listing-description">Relational plots</span>
 </td>
@@ -966,10 +1118,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-relational" class="quarto-xref">Example&nbsp;<span>2.23</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-relational" class="quarto-xref">Example&nbsp;<span>2.28</span></a></span>
 </td>
 </tr>
-<tr data-index="46">
+<tr data-index="56">
 <td>
 <span class="listing-description">Pearson correlation coefficient</span>
 </td>
@@ -980,10 +1132,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-pearson-cars" class="quarto-xref">Example&nbsp;<span>2.24</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-pearson-cars" class="quarto-xref">Example&nbsp;<span>2.29</span></a></span>
 </td>
 </tr>
-<tr data-index="47">
+<tr data-index="57">
 <td>
 <span class="listing-description">Outliers and the Pearson coefficient</span>
 </td>
@@ -994,10 +1146,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span>2.25</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span>2.30</span></a></span>
 </td>
 </tr>
-<tr data-index="48">
+<tr data-index="58">
 <td>
 <span class="listing-description">Spearman correlation coefficient</span>
 </td>
@@ -1008,10 +1160,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-spearman-outlier" class="quarto-xref">Example&nbsp;<span>2.26</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-spearman-outlier" class="quarto-xref">Example&nbsp;<span>2.31</span></a></span>
 </td>
 </tr>
-<tr data-index="49">
+<tr data-index="59">
 <td>
 <span class="listing-description">Categorical correlation</span>
 </td>
@@ -1022,10 +1174,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-catcorr" class="quarto-xref">Example&nbsp;<span>2.27</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-catcorr" class="quarto-xref">Example&nbsp;<span>2.32</span></a></span>
 </td>
 </tr>
-<tr data-index="50">
+<tr data-index="60">
 <td>
 <span class="listing-description">The Datasaurus</span>
 </td>
@@ -1036,10 +1188,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-datasaurus" class="quarto-xref">Example&nbsp;<span>2.28</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-datasaurus" class="quarto-xref">Example&nbsp;<span>2.33</span></a></span>
 </td>
 </tr>
-<tr data-index="51">
+<tr data-index="61">
 <td>
 <span class="listing-description">Correlation vs.&nbsp;dependence</span>
 </td>
@@ -1050,10 +1202,10 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-correlation" class="quarto-xref">Example&nbsp;<span>2.29</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-correlation" class="quarto-xref">Example&nbsp;<span>2.34</span></a></span>
 </td>
 </tr>
-<tr data-index="52">
+<tr data-index="62">
 <td>
 <span class="listing-description">Simpson’s paradox</span>
 </td>
@@ -1064,10 +1216,24 @@ MathJax = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-simpson" class="quarto-xref">Example&nbsp;<span>2.30</span></a></span>
+<span class="listing-link"><a href="stats.html#exm-stats-simpson" class="quarto-xref">Example&nbsp;<span>2.35</span></a></span>
 </td>
 </tr>
-<tr data-index="53">
+<tr data-index="63">
+<td>
+<span class="listing-description">Digit classification</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-digits" class="quarto-xref">Example&nbsp;<span>3.1</span></a></span>
+</td>
+</tr>
+<tr data-index="64">
 <td>
 <span class="listing-description">Feature matrix</span>
 </td>
@@ -1078,10 +1244,38 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-basketball" class="quarto-xref">Example&nbsp;<span>3.1</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-basketball" class="quarto-xref">Example&nbsp;<span>3.2</span></a></span>
 </td>
 </tr>
-<tr data-index="54">
+<tr data-index="65">
+<td>
+<span class="listing-description">Train–test split</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-traintest" class="quarto-xref">Example&nbsp;<span>3.3</span></a></span>
+</td>
+</tr>
+<tr data-index="66">
+<td>
+<span class="listing-description">Testing accuracy</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span>3.4</span></a></span>
+</td>
+</tr>
+<tr data-index="67">
 <td>
 <span class="listing-description">Classifier performance metrics</span>
 </td>
@@ -1092,10 +1286,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-confusion" class="quarto-xref">Example&nbsp;<span>3.2</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-confusion" class="quarto-xref">Example&nbsp;<span>3.5</span></a></span>
 </td>
 </tr>
-<tr data-index="55">
+<tr data-index="68">
 <td>
 <span class="listing-description">Binary classifier metrics</span>
 </td>
@@ -1106,10 +1300,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-metrics" class="quarto-xref">Example&nbsp;<span>3.3</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-metrics" class="quarto-xref">Example&nbsp;<span>3.6</span></a></span>
 </td>
 </tr>
-<tr data-index="56">
+<tr data-index="69">
 <td>
 <span class="listing-description">Combined metrics</span>
 </td>
@@ -1120,10 +1314,24 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-scores-simple" class="quarto-xref">Example&nbsp;<span>3.4</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-scores-simple" class="quarto-xref">Example&nbsp;<span>3.7</span></a></span>
 </td>
 </tr>
-<tr data-index="57">
+<tr data-index="70">
+<td>
+<span class="listing-description">Multiclass one-vs-rest</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-one-vs-rest" class="quarto-xref">Example&nbsp;<span>3.8</span></a></span>
+</td>
+</tr>
+<tr data-index="71">
 <td>
 <span class="listing-description">Multiclass metrics</span>
 </td>
@@ -1134,10 +1342,24 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-multiclass" class="quarto-xref">Example&nbsp;<span>3.5</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-multiclass" class="quarto-xref">Example&nbsp;<span>3.9</span></a></span>
 </td>
 </tr>
-<tr data-index="58">
+<tr data-index="72">
+<td>
+<span class="listing-description">Decision tree</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-tree" class="quarto-xref">Example&nbsp;<span>3.10</span></a></span>
+</td>
+</tr>
+<tr data-index="73">
 <td>
 <span class="listing-description">Gini impurity</span>
 </td>
@@ -1148,10 +1370,24 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-gini" class="quarto-xref">Example&nbsp;<span>3.6</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-gini-spread" class="quarto-xref">Example&nbsp;<span>3.11</span></a></span>
 </td>
 </tr>
-<tr data-index="59">
+<tr data-index="74">
+<td>
+<span class="listing-description">Gini impurity</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-gini" class="quarto-xref">Example&nbsp;<span>3.12</span></a></span>
+</td>
+</tr>
+<tr data-index="75">
 <td>
 <span class="listing-description">Tree partitioning</span>
 </td>
@@ -1162,10 +1398,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-partition" class="quarto-xref">Example&nbsp;<span>3.7</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-tree-partition" class="quarto-xref">Example&nbsp;<span>3.13</span></a></span>
 </td>
 </tr>
-<tr data-index="60">
+<tr data-index="76">
 <td>
 <span class="listing-description">Inspecting a decision tree</span>
 </td>
@@ -1176,10 +1412,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-toy" class="quarto-xref">Example&nbsp;<span>3.8</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-tree-toy" class="quarto-xref">Example&nbsp;<span>3.14</span></a></span>
 </td>
 </tr>
-<tr data-index="61">
+<tr data-index="77">
 <td>
 <span class="listing-description">Tree classifier for the penguins dataset</span>
 </td>
@@ -1190,10 +1426,24 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span>3.9</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span>3.15</span></a></span>
 </td>
 </tr>
-<tr data-index="62">
+<tr data-index="78">
+<td>
+<span class="listing-description">Interpreting a decision tree</span>
+</td>
+<td>
+<span class="listing-type">💻</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-tree-penguins-interpret" class="quarto-xref">Example&nbsp;<span>3.16</span></a></span>
+</td>
+</tr>
+<tr data-index="79">
 <td>
 <span class="listing-description">Calculating distance</span>
 </td>
@@ -1204,10 +1454,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-distance" class="quarto-xref">Example&nbsp;<span>3.10</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-distance" class="quarto-xref">Example&nbsp;<span>3.17</span></a></span>
 </td>
 </tr>
-<tr data-index="63">
+<tr data-index="80">
 <td>
 <span class="listing-description">kNN classifier</span>
 </td>
@@ -1218,10 +1468,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn-small" class="quarto-xref">Example&nbsp;<span>3.11</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-knn-small" class="quarto-xref">Example&nbsp;<span>3.18</span></a></span>
 </td>
 </tr>
-<tr data-index="64">
+<tr data-index="81">
 <td>
 <span class="listing-description">kNN classifier for the penguins dataset</span>
 </td>
@@ -1232,12 +1482,26 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn" class="quarto-xref">Example&nbsp;<span>3.12</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-knn" class="quarto-xref">Example&nbsp;<span>3.19</span></a></span>
 </td>
 </tr>
-<tr data-index="65">
+<tr data-index="82">
 <td>
-<span class="listing-description">Pipeline for standardized columns</span>
+<span class="listing-description">kNN sensitivity to scaling</span>
+</td>
+<td>
+<span class="listing-type">✍️</span>
+</td>
+<td>
+<span class="listing-chapter">3</span>
+</td>
+<td>
+<span class="listing-link"><a href="classification.html#exm-class-knn-norm" class="quarto-xref">Example&nbsp;<span>3.20</span></a></span>
+</td>
+</tr>
+<tr data-index="83">
+<td>
+<span class="listing-description">Pipeline for standardizing columns</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -1246,10 +1510,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn-standard" class="quarto-xref">Example&nbsp;<span>3.13</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-knn-standard" class="quarto-xref">Example&nbsp;<span>3.21</span></a></span>
 </td>
 </tr>
-<tr data-index="66">
+<tr data-index="84">
 <td>
 <span class="listing-description">Probabilistic classifier</span>
 </td>
@@ -1260,10 +1524,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.14</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.22</span></a></span>
 </td>
 </tr>
-<tr data-index="67">
+<tr data-index="85">
 <td>
 <span class="listing-description">Probabilistic classifier for the penguins dataset</span>
 </td>
@@ -1274,10 +1538,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.15</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.23</span></a></span>
 </td>
 </tr>
-<tr data-index="68">
+<tr data-index="86">
 <td>
 <span class="listing-description">Varying decision threshold</span>
 </td>
@@ -1288,12 +1552,12 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-hits" class="quarto-xref">Example&nbsp;<span>3.16</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-hits" class="quarto-xref">Example&nbsp;<span>3.24</span></a></span>
 </td>
 </tr>
-<tr data-index="69">
+<tr data-index="87">
 <td>
-<span class="listing-description">ROC curve, quasi-manually</span>
+<span class="listing-description">ROC curve</span>
 </td>
 <td>
 <span class="listing-type">💻</span>
@@ -1302,24 +1566,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-roc-simple" class="quarto-xref">Example&nbsp;<span>3.17</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-roc" class="quarto-xref">Example&nbsp;<span>3.25</span></a></span>
 </td>
 </tr>
-<tr data-index="70">
-<td>
-<span class="listing-description">ROC curve for the penguins dataset</span>
-</td>
-<td>
-<span class="listing-type">💻</span>
-</td>
-<td>
-<span class="listing-chapter">3</span>
-</td>
-<td>
-<span class="listing-link"><a href="classification.html#exm-class-roc-penguin" class="quarto-xref">Example&nbsp;<span>3.18</span></a></span>
-</td>
-</tr>
-<tr data-index="71">
+<tr data-index="88">
 <td>
 <span class="listing-description">Area under ROC curve</span>
 </td>
@@ -1330,10 +1580,10 @@ MathJax = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-auc" class="quarto-xref">Example&nbsp;<span>3.19</span></a></span>
+<span class="listing-link"><a href="classification.html#exm-class-auc" class="quarto-xref">Example&nbsp;<span>3.26</span></a></span>
 </td>
 </tr>
-<tr data-index="72">
+<tr data-index="89">
 <td>
 <span class="listing-description">Hyperparameters</span>
 </td>
@@ -1347,7 +1597,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-hyper" class="quarto-xref">Example&nbsp;<span>4.1</span></a></span>
 </td>
 </tr>
-<tr data-index="73">
+<tr data-index="90">
 <td>
 <span class="listing-description">Learning curves</span>
 </td>
@@ -1361,7 +1611,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a></span>
 </td>
 </tr>
-<tr data-index="74">
+<tr data-index="91">
 <td>
 <span class="listing-description">Overfitting</span>
 </td>
@@ -1375,7 +1625,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-overfit-digits" class="quarto-xref">Example&nbsp;<span>4.3</span></a></span>
 </td>
 </tr>
-<tr data-index="75">
+<tr data-index="92">
 <td>
 <span class="listing-description">Bagging ensemble classifier</span>
 </td>
@@ -1389,7 +1639,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-ensemble-knn" class="quarto-xref">Example&nbsp;<span>4.4</span></a></span>
 </td>
 </tr>
-<tr data-index="76">
+<tr data-index="93">
 <td>
 <span class="listing-description">Bagging ensemble (better)</span>
 </td>
@@ -1403,7 +1653,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-ensemble-knn-better" class="quarto-xref">Example&nbsp;<span>4.5</span></a></span>
 </td>
 </tr>
-<tr data-index="77">
+<tr data-index="94">
 <td>
 <span class="listing-description">Random forest classifier</span>
 </td>
@@ -1417,7 +1667,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-ensemble-forest" class="quarto-xref">Example&nbsp;<span>4.6</span></a></span>
 </td>
 </tr>
-<tr data-index="78">
+<tr data-index="95">
 <td>
 <span class="listing-description">Folds for validation</span>
 </td>
@@ -1431,7 +1681,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-folds" class="quarto-xref">Example&nbsp;<span>4.7</span></a></span>
 </td>
 </tr>
-<tr data-index="79">
+<tr data-index="96">
 <td>
 <span class="listing-description">Cross-validation</span>
 </td>
@@ -1445,7 +1695,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-cv-beans" class="quarto-xref">Example&nbsp;<span>4.8</span></a></span>
 </td>
 </tr>
-<tr data-index="80">
+<tr data-index="97">
 <td>
 <span class="listing-description">Validation curve</span>
 </td>
@@ -1459,7 +1709,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-vc-beans" class="quarto-xref">Example&nbsp;<span>4.9</span></a></span>
 </td>
 </tr>
-<tr data-index="81">
+<tr data-index="98">
 <td>
 <span class="listing-description">Cross-validation grid search</span>
 </td>
@@ -1473,7 +1723,7 @@ MathJax = {
 <span class="listing-link"><a href="selection.html#exm-select-grid-cancer" class="quarto-xref">Example&nbsp;<span>4.10</span></a></span>
 </td>
 </tr>
-<tr data-index="82">
+<tr data-index="99">
 <td>
 <span class="listing-description">Linear regression</span>
 </td>
@@ -1487,7 +1737,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-linear" class="quarto-xref">Example&nbsp;<span>5.13</span></a></span>
 </td>
 </tr>
-<tr data-index="83">
+<tr data-index="100">
 <td>
 <span class="listing-description">Inner product</span>
 </td>
@@ -1501,7 +1751,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-dot" class="quarto-xref">Example&nbsp;<span>5.2</span></a></span>
 </td>
 </tr>
-<tr data-index="84">
+<tr data-index="101">
 <td>
 <span class="listing-description">Mean squared and mean absolute error</span>
 </td>
@@ -1515,7 +1765,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-mse-mae" class="quarto-xref">Example&nbsp;<span>5.3</span></a></span>
 </td>
 </tr>
-<tr data-index="85">
+<tr data-index="102">
 <td>
 <span class="listing-description">Coefficient of determination</span>
 </td>
@@ -1529,7 +1779,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-cod" class="quarto-xref">Example&nbsp;<span>5.4</span></a></span>
 </td>
 </tr>
-<tr data-index="86">
+<tr data-index="103">
 <td>
 <span class="listing-description">Linear regression for sea ice dataset</span>
 </td>
@@ -1543,7 +1793,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-ice-linear" class="quarto-xref">Example&nbsp;<span>5.5</span></a></span>
 </td>
 </tr>
-<tr data-index="87">
+<tr data-index="104">
 <td>
 <span class="listing-description">Matrix times vector</span>
 </td>
@@ -1557,7 +1807,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-matvec" class="quarto-xref">Example&nbsp;<span>5.6</span></a></span>
 </td>
 </tr>
-<tr data-index="88">
+<tr data-index="105">
 <td>
 <span class="listing-description">Multilinear regression for MPG dataset</span>
 </td>
@@ -1571,7 +1821,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-cars-multi" class="quarto-xref">Example&nbsp;<span>5.7</span></a></span>
 </td>
 </tr>
-<tr data-index="89">
+<tr data-index="106">
 <td>
 <span class="listing-description">Multilinear regression for sales dataset</span>
 </td>
@@ -1585,7 +1835,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-sales-multi" class="quarto-xref">Example&nbsp;<span>5.8</span></a></span>
 </td>
 </tr>
-<tr data-index="90">
+<tr data-index="107">
 <td>
 <span class="listing-description">Polynomial regression for the MPG dataset</span>
 </td>
@@ -1599,7 +1849,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-polynomial" class="quarto-xref">Example&nbsp;<span>5.9</span></a></span>
 </td>
 </tr>
-<tr data-index="91">
+<tr data-index="108">
 <td>
 <span class="listing-description">Overfitting in polynomial regression</span>
 </td>
@@ -1613,7 +1863,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-polynomial-high" class="quarto-xref">Example&nbsp;<span>5.10</span></a></span>
 </td>
 </tr>
-<tr data-index="92">
+<tr data-index="109">
 <td>
 <span class="listing-description">Ridge regression for diabetes dataset</span>
 </td>
@@ -1627,7 +1877,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-ridge-diabetes" class="quarto-xref">Example&nbsp;<span>5.11</span></a></span>
 </td>
 </tr>
-<tr data-index="93">
+<tr data-index="110">
 <td>
 <span class="listing-description">LASSO regression for diabetes dataset</span>
 </td>
@@ -1641,7 +1891,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-lasso-diabetes" class="quarto-xref">Example&nbsp;<span>5.12</span></a></span>
 </td>
 </tr>
-<tr data-index="94">
+<tr data-index="111">
 <td>
 <span class="listing-description">Proving linearity</span>
 </td>
@@ -1655,7 +1905,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-linear" class="quarto-xref">Example&nbsp;<span>5.13</span></a></span>
 </td>
 </tr>
-<tr data-index="95">
+<tr data-index="112">
 <td>
 <span class="listing-description">Proving nonlinearity</span>
 </td>
@@ -1669,7 +1919,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-nonlinear" class="quarto-xref">Example&nbsp;<span>5.14</span></a></span>
 </td>
 </tr>
-<tr data-index="96">
+<tr data-index="113">
 <td>
 <span class="listing-description">Nonlinearity of kNN regression</span>
 </td>
@@ -1683,7 +1933,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-knn" class="quarto-xref">Example&nbsp;<span>5.15</span></a></span>
 </td>
 </tr>
-<tr data-index="97">
+<tr data-index="114">
 <td>
 <span class="listing-description">kNN regression for MPG dataset</span>
 </td>
@@ -1697,7 +1947,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-knn-demo" class="quarto-xref">Example&nbsp;<span>5.16</span></a></span>
 </td>
 </tr>
-<tr data-index="98">
+<tr data-index="115">
 <td>
 <span class="listing-description">Creating a decision tree regressor</span>
 </td>
@@ -1711,7 +1961,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-split" class="quarto-xref">Example&nbsp;<span>5.17</span></a></span>
 </td>
 </tr>
-<tr data-index="99">
+<tr data-index="116">
 <td>
 <span class="listing-description">Tree regression on a small dataset</span>
 </td>
@@ -1725,7 +1975,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-tree" class="quarto-xref">Example&nbsp;<span>5.18</span></a></span>
 </td>
 </tr>
-<tr data-index="100">
+<tr data-index="117">
 <td>
 <span class="listing-description">Random forest for regression</span>
 </td>
@@ -1739,7 +1989,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-tree-demo" class="quarto-xref">Example&nbsp;<span>5.19</span></a></span>
 </td>
 </tr>
-<tr data-index="101">
+<tr data-index="118">
 <td>
 <span class="listing-description">Cross-entropy</span>
 </td>
@@ -1753,7 +2003,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-cross-entropy" class="quarto-xref">Example&nbsp;<span>5.20</span></a></span>
 </td>
 </tr>
-<tr data-index="102">
+<tr data-index="119">
 <td>
 <span class="listing-description">Logistic regression as a spam filter</span>
 </td>
@@ -1767,7 +2017,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-spam" class="quarto-xref">Example&nbsp;<span>5.21</span></a></span>
 </td>
 </tr>
-<tr data-index="103">
+<tr data-index="120">
 <td>
 <span class="listing-description">Regularization for the spam filter regressor</span>
 </td>
@@ -1781,7 +2031,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-spam-regular" class="quarto-xref">Example&nbsp;<span>5.22</span></a></span>
 </td>
 </tr>
-<tr data-index="104">
+<tr data-index="121">
 <td>
 <span class="listing-description">Multiclass logistic regression</span>
 </td>
@@ -1795,7 +2045,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-logistic-ovr" class="quarto-xref">Example&nbsp;<span>5.23</span></a></span>
 </td>
 </tr>
-<tr data-index="105">
+<tr data-index="122">
 <td>
 <span class="listing-description">Multiclass logistic regression for forest cover dataset</span>
 </td>
@@ -1809,7 +2059,7 @@ MathJax = {
 <span class="listing-link"><a href="regression.html#exm-regression-logistic-gas" class="quarto-xref">Example&nbsp;<span>5.24</span></a></span>
 </td>
 </tr>
-<tr data-index="106">
+<tr data-index="123">
 <td>
 <span class="listing-description">Distance matrix</span>
 </td>
@@ -1823,7 +2073,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-distmat-small" class="quarto-xref">Example&nbsp;<span>6.1</span></a></span>
 </td>
 </tr>
-<tr data-index="107">
+<tr data-index="124">
 <td>
 <span class="listing-description">Usage of <code>pairwise_distances</code></span>
 </td>
@@ -1837,7 +2087,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-distmat" class="quarto-xref">Example&nbsp;<span>6.2</span></a></span>
 </td>
 </tr>
-<tr data-index="108">
+<tr data-index="125">
 <td>
 <span class="listing-description">Angular distance</span>
 </td>
@@ -1851,7 +2101,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-angular" class="quarto-xref">Example&nbsp;<span>6.3</span></a></span>
 </td>
 </tr>
-<tr data-index="109">
+<tr data-index="126">
 <td>
 <span class="listing-description">Rand index by hand</span>
 </td>
@@ -1865,7 +2115,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-rand" class="quarto-xref">Example&nbsp;<span>6.4</span></a></span>
 </td>
 </tr>
-<tr data-index="110">
+<tr data-index="127">
 <td>
 <span class="listing-description">Adjusted Rand index</span>
 </td>
@@ -1879,7 +2129,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span>6.5</span></a></span>
 </td>
 </tr>
-<tr data-index="111">
+<tr data-index="128">
 <td>
 <span class="listing-description">Silhouette values</span>
 </td>
@@ -1893,7 +2143,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-silhouette" class="quarto-xref">Example&nbsp;<span>6.6</span></a></span>
 </td>
 </tr>
-<tr data-index="112">
+<tr data-index="129">
 <td>
 <span class="listing-description">Silhouette values calculation</span>
 </td>
@@ -1907,7 +2157,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-sil-blobs" class="quarto-xref">Example&nbsp;<span>6.7</span></a></span>
 </td>
 </tr>
-<tr data-index="113">
+<tr data-index="130">
 <td>
 <span class="listing-description">Silhouettes as performance metric</span>
 </td>
@@ -1921,7 +2171,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-perform-digits" class="quarto-xref">Example&nbsp;<span>6.8</span></a></span>
 </td>
 </tr>
-<tr data-index="114">
+<tr data-index="131">
 <td>
 <span class="listing-description">Limitation of silhouettes</span>
 </td>
@@ -1935,7 +2185,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-sil-bullseye" class="quarto-xref">Example&nbsp;<span>6.9</span></a></span>
 </td>
 </tr>
-<tr data-index="115">
+<tr data-index="132">
 <td>
 <span class="listing-description">Inertia</span>
 </td>
@@ -1949,7 +2199,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-inertia" class="quarto-xref">Example&nbsp;<span>6.10</span></a></span>
 </td>
 </tr>
-<tr data-index="116">
+<tr data-index="133">
 <td>
 <span class="listing-description">k-means on <em>blobs</em> dataset</span>
 </td>
@@ -1963,7 +2213,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span>6.11</span></a></span>
 </td>
 </tr>
-<tr data-index="117">
+<tr data-index="134">
 <td>
 <span class="listing-description">k-means on <em>stripes</em> dataset</span>
 </td>
@@ -1977,7 +2227,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-stripes" class="quarto-xref">Example&nbsp;<span>6.12</span></a></span>
 </td>
 </tr>
-<tr data-index="118">
+<tr data-index="135">
 <td>
 <span class="listing-description">k-means on digits dataset</span>
 </td>
@@ -1991,7 +2241,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-digits" class="quarto-xref">Example&nbsp;<span>6.13</span></a></span>
 </td>
 </tr>
-<tr data-index="119">
+<tr data-index="136">
 <td>
 <span class="listing-description">Linkage</span>
 </td>
@@ -2005,7 +2255,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-linkage-tiny" class="quarto-xref">Example&nbsp;<span>6.14</span></a></span>
 </td>
 </tr>
-<tr data-index="120">
+<tr data-index="137">
 <td>
 <span class="listing-description">Agglomerative for toy example</span>
 </td>
@@ -2019,7 +2269,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-hier-toy" class="quarto-xref">Example&nbsp;<span>6.15</span></a></span>
 </td>
 </tr>
-<tr data-index="121">
+<tr data-index="138">
 <td>
 <span class="listing-description">Comparing linkages on simple datasets</span>
 </td>
@@ -2033,7 +2283,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span>6.16</span></a></span>
 </td>
 </tr>
-<tr data-index="122">
+<tr data-index="139">
 <td>
 <span class="listing-description">Agglomerative for penguins dataset</span>
 </td>
@@ -2047,7 +2297,7 @@ MathJax = {
 <span class="listing-link"><a href="clustering.html#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span>6.17</span></a></span>
 </td>
 </tr>
-<tr data-index="123">
+<tr data-index="140">
 <td>
 <span class="listing-description">Constructing networks/graphs</span>
 </td>
@@ -2061,7 +2311,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-construct" class="quarto-xref">Example&nbsp;<span>7.1</span></a></span>
 </td>
 </tr>
-<tr data-index="124">
+<tr data-index="141">
 <td>
 <span class="listing-description">Importing networks</span>
 </td>
@@ -2075,7 +2325,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-import" class="quarto-xref">Example&nbsp;<span>7.2</span></a></span>
 </td>
 </tr>
-<tr data-index="125">
+<tr data-index="142">
 <td>
 <span class="listing-description">Neighbors of a node</span>
 </td>
@@ -2089,7 +2339,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-neighbors" class="quarto-xref">Example&nbsp;<span>7.3</span></a></span>
 </td>
 </tr>
-<tr data-index="126">
+<tr data-index="143">
 <td>
 <span class="listing-description">Ego graph</span>
 </td>
@@ -2103,7 +2353,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-ego" class="quarto-xref">Example&nbsp;<span>7.4</span></a></span>
 </td>
 </tr>
-<tr data-index="127">
+<tr data-index="144">
 <td>
 <span class="listing-description">Adjacency matrix</span>
 </td>
@@ -2117,7 +2367,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-adjmatrix" class="quarto-xref">Example&nbsp;<span>7.5</span></a></span>
 </td>
 </tr>
-<tr data-index="128">
+<tr data-index="145">
 <td>
 <span class="listing-description">Node degrees</span>
 </td>
@@ -2131,7 +2381,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-degree" class="quarto-xref">Example&nbsp;<span>7.6</span></a></span>
 </td>
 </tr>
-<tr data-index="129">
+<tr data-index="146">
 <td>
 <span class="listing-description">Average degree</span>
 </td>
@@ -2145,7 +2395,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-avgdegree" class="quarto-xref">Example&nbsp;<span>7.7</span></a></span>
 </td>
 </tr>
-<tr data-index="130">
+<tr data-index="147">
 <td>
 <span class="listing-description">ER graphs</span>
 </td>
@@ -2159,7 +2409,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-degree-ER" class="quarto-xref">Example&nbsp;<span>7.8</span></a></span>
 </td>
 </tr>
-<tr data-index="131">
+<tr data-index="148">
 <td>
 <span class="listing-description">WS graphs</span>
 </td>
@@ -2173,7 +2423,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-WS" class="quarto-xref">Example&nbsp;<span>7.9</span></a></span>
 </td>
 </tr>
-<tr data-index="132">
+<tr data-index="149">
 <td>
 <span class="listing-description">Clustering coefficient</span>
 </td>
@@ -2187,7 +2437,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-cluster-small-world" class="quarto-xref">Example&nbsp;<span>7.10</span></a></span>
 </td>
 </tr>
-<tr data-index="133">
+<tr data-index="150">
 <td>
 <span class="listing-description">Clustering in the Twitch network</span>
 </td>
@@ -2201,7 +2451,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>7.11</span></a></span>
 </td>
 </tr>
-<tr data-index="134">
+<tr data-index="151">
 <td>
 <span class="listing-description">Clustering in ER graphs</span>
 </td>
@@ -2215,7 +2465,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-cluster-er" class="quarto-xref">Example&nbsp;<span>7.12</span></a></span>
 </td>
 </tr>
-<tr data-index="135">
+<tr data-index="152">
 <td>
 <span class="listing-description">Clustering of WS graphs</span>
 </td>
@@ -2229,7 +2479,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-cluster-WS" class="quarto-xref">Example&nbsp;<span>7.13</span></a></span>
 </td>
 </tr>
-<tr data-index="136">
+<tr data-index="153">
 <td>
 <span class="listing-description">Distances in a complete graph</span>
 </td>
@@ -2243,7 +2493,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-distance-complete" class="quarto-xref">Example&nbsp;<span>7.14</span></a></span>
 </td>
 </tr>
-<tr data-index="137">
+<tr data-index="154">
 <td>
 <span class="listing-description">Distances in a wheel graph</span>
 </td>
@@ -2257,7 +2507,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-distance-wheel" class="quarto-xref">Example&nbsp;<span>7.15</span></a></span>
 </td>
 </tr>
-<tr data-index="138">
+<tr data-index="155">
 <td>
 <span class="listing-description">Connectedness</span>
 </td>
@@ -2271,7 +2521,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-connected" class="quarto-xref">Example&nbsp;<span>7.16</span></a></span>
 </td>
 </tr>
-<tr data-index="139">
+<tr data-index="156">
 <td>
 <span class="listing-description">Distances in ER graphs</span>
 </td>
@@ -2285,7 +2535,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-distance-ER" class="quarto-xref">Example&nbsp;<span>7.17</span></a></span>
 </td>
 </tr>
-<tr data-index="140">
+<tr data-index="157">
 <td>
 <span class="listing-description">Degree distribution in the Twitch network</span>
 </td>
@@ -2299,7 +2549,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span>7.18</span></a></span>
 </td>
 </tr>
-<tr data-index="141">
+<tr data-index="158">
 <td>
 <span class="listing-description">Degree distribution in the Twitch network</span>
 </td>
@@ -2313,7 +2563,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-ddist-ERWS" class="quarto-xref">Example&nbsp;<span>7.19</span></a></span>
 </td>
 </tr>
-<tr data-index="142">
+<tr data-index="159">
 <td>
 <span class="listing-description">Barabási–Albert graphs</span>
 </td>
@@ -2327,7 +2577,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-BA" class="quarto-xref">Example&nbsp;<span>7.20</span></a></span>
 </td>
 </tr>
-<tr data-index="143">
+<tr data-index="160">
 <td>
 <span class="listing-description">Power-law degrees in the Twitch network</span>
 </td>
@@ -2341,7 +2591,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-powerlaw-ba" class="quarto-xref">Example&nbsp;<span>7.21</span></a></span>
 </td>
 </tr>
-<tr data-index="144">
+<tr data-index="161">
 <td>
 <span class="listing-description">Degree centrality</span>
 </td>
@@ -2355,7 +2605,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-centrality-degree" class="quarto-xref">Example&nbsp;<span>7.22</span></a></span>
 </td>
 </tr>
-<tr data-index="145">
+<tr data-index="162">
 <td>
 <span class="listing-description">Betweenness centrality</span>
 </td>
@@ -2369,7 +2619,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-between-barbell" class="quarto-xref">Example&nbsp;<span>7.23</span></a></span>
 </td>
 </tr>
-<tr data-index="146">
+<tr data-index="163">
 <td>
 <span class="listing-description">Betweenness centrality in BA graphs</span>
 </td>
@@ -2383,7 +2633,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-centrality-btw-power" class="quarto-xref">Example&nbsp;<span>7.24</span></a></span>
 </td>
 </tr>
-<tr data-index="147">
+<tr data-index="164">
 <td>
 <span class="listing-description">Betweenness centrality in the Twitch network</span>
 </td>
@@ -2397,7 +2647,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-centrality-btw-big" class="quarto-xref">Example&nbsp;<span>7.25</span></a></span>
 </td>
 </tr>
-<tr data-index="148">
+<tr data-index="165">
 <td>
 <span class="listing-description">Eigenvectors</span>
 </td>
@@ -2411,7 +2661,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-centrality-eigvector" class="quarto-xref">Example&nbsp;<span>7.26</span></a></span>
 </td>
 </tr>
-<tr data-index="149">
+<tr data-index="166">
 <td>
 <span class="listing-description">Eigenvector centrality</span>
 </td>
@@ -2425,7 +2675,7 @@ MathJax = {
 <span class="listing-link"><a href="networks.html#exm-networks-centrality-eig" class="quarto-xref">Example&nbsp;<span>7.27</span></a></span>
 </td>
 </tr>
-<tr data-index="150">
+<tr data-index="167">
 <td>
 <span class="listing-description">Comparison of centrality metrics</span>
 </td>
@@ -2489,18 +2739,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2532,7 +2771,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -2567,7 +2846,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -2582,15 +2865,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -2599,7 +2895,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -2641,6 +2945,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -2716,7 +3043,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -2800,12 +3126,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./resources.html" class="pagination-link">
+      <a href="./resources.html" class="pagination-link" aria-label="Resources">
         <span class="nav-page-text">Resources</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
