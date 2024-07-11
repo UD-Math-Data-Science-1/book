@@ -612,7 +612,9 @@ We now have evidence that *weight* is the most significant negative factor for M
 
 ::::
 
-![](_media/memes/multiple-regression.jpg){width=400}
+:::{.column-margin}
+![](_media/memes/multiple-regression.jpg){.lightbox}
+:::
 
 In the next example we will see that we can create new features out of the ones that are initially given. Sometimes these new features add a lot to the quality of the regression. 
 
@@ -895,7 +897,9 @@ again for a nonnegative value of $\alpha$.
 
 The new terms in @eq-regression-ridge and @eq-regression-ridge based on norms of $\bfw$ are called **penalty terms**. As $\alpha\to 0$, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as $\alpha \to \infty$, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. In this limit, the model pays less and less attention to the data, which can reduce overfitting.
 
-![](_media/memes/penalty.jpg){width=400}
+:::{.column-margin}
+![](_media/memes/penalty.jpg){.lightbox}
+:::
 
 ::::{#exm-regression-ridge-diabetes chapter=5 type=💻 description="Ridge regression for diabetes dataset"}
 We'll apply ridge regression to data collected about the progression of diabetes:
@@ -1109,7 +1113,9 @@ As the simplest type of multidimensional function, linear relationships are a go
 
 Alternatively, we can resort to fully nonlinear regression methods. Two of them come from generalizations of our staple classifiers.
 
-![](_media/memes/not-a-classifier.jpg){width=400}
+:::{.column-margin}
+![](_media/memes/not-a-classifier.jpg){.lightbox}
+:::
 
 ### Nearest neighbors
 
@@ -1421,7 +1427,6 @@ $$
 
 which becomes infinite as $\hat{p}_i\to 0^+$. This sensitivity to the worst-case values of every $\hat{p}_i$ usually makes cross-entropy more successful than least squares for logistic regression.
 
-![](_media/memes/cross-entropy.jpeg){width=400}
 
 ::::{#exm-regression-cross-entropy chapter=5 type=✍️ description="Cross-entropy"}
 Suppose we have true labels $\bfy=[0,0,0,1]$ and predicted probabilities $\hat{\mathbf{p}} = [0.1,0.4,0.2,0.3].$ This gives the following terms in the cross-entropy sum:
@@ -1442,6 +1447,10 @@ $$
 Using the natural log, this is about $2.043$. 
 
 ::::
+
+:::{.column-margin}
+![](_media/memes/cross-entropy.jpeg){.lightbox}
+:::
 
 Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does *not* lead to a linear problem for the weight vector $\bfw$. The difference in practice is usually not a concern, though.
 
