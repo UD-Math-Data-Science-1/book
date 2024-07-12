@@ -23,21 +23,127 @@ We start with supervised learning, which can be subdivided into two major areas:
 
 Most algorithms for one of these problems have counterparts in the other. 
 
-## Classification basics
+## Quickstart
 
+The *scikit-learn* package `sklearn` is a collection of well-known machine learning algorithms and tools. We use it here to demonstrate a classic classification problem: recognizing handwritten digits.
+
+::::{#exm-class-digits chapter=3 type=💻 description="Digit classification"}
+```{python}
+from sklearn import datasets 
+ds = datasets.load_digits()    # loads a well-known dataset
+X, digits = ds["data"], ds["target"]    # feature matrix and label vector
+```
+
+The two objects defined in the last line above define the dataset. The value `X` is called the *feature matrix*. 
+
+```{python}
+print("The feature matrix has shape", X.shape)
+```
+
+In this particular dataset, each row is a vector of 64 pixel intensity values taken from an $8\times 8$ bitmap of a handwritten digit. Here are the digit images from the first 16 rows, for example:
+
+```{python}
+#| code-fold: true
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+def plot_digits(X):
+    fig, axes = plt.subplots(4,4)
+    for i in range(4):
+        for j in range(4):
+            row = j + 4*i
+            A = np.reshape(np.array(X[row,:]),(8,8))
+            sns.heatmap(1-A,ax=axes[i,j],square=True,cmap="gray",cbar=False)
+            axes[i,j].axis(False)
+    return None
+
+plot_digits(X)
+```
+
+The value `digits` is the a vector of labels for the digits:
+
+```{python}
+print("There are", len(digits), "labels. Here are the first 16:")
+print(digits[:16])
+```
+
+Naturally, each sample (pixelized digit) belongs to one of ten classes. We're going to make this a much easier problem, a classifier that answers the yes/no question, "Is this digit a 6?"
+
+```{python}
+y = (digits == 6)
+print("Number of 6s in dataset:", sum(y))
+```
+
+Next, we'll choose a learning method. Scikit-learn has many predefined classes of learners. Here we create an instance of one that we learn about later in this chapter.
+
+```{python}
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=20)  
+```
+
+The learner object needs to be supplied with the dataset in order to do the math it needs to figure out how to make predictions. This is called *training* or, in scikit-learn parlance, *fitting* the learner.
+
+```{python}
+knn.fit(X, y) 
+```
+
+At this point, the classifier object `knn` has figured out what it needs from the training data. It has methods we can now call to make predictions and evaluate the quality of the results. For example, let's ask it to make predictions for the first 8 rows of the feature matrix:
+
+```{python}
+yhat = knn.predict(X[:8,:])
+print("Predictions for the first 8 digits:")
+print(yhat)
+```
+
+So far, so good! It's easy to calculate how frequently the prediction agrees with the true answer in every case:
+
+```{python}
+num_ok = sum(knn.predict(X) == y)
+print(f"{num_ok} predicted correctly, or {num_ok/len(y):.2%}.")
+```
+
+::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f63ccqhd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ox5akxcd" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/numbers.jpg){.lightbox}
+
+:::
+
+The standard workflow in scikit-learn is as follows:
+
+```{mermaid}
+flowchart LR
+    dataset["Get feature matrix
+    and label vector"]
+    object["Create learner object"]
+    train["Fit learner to data"]
+    predict["Make predictions"]
+    dataset --> object --> train --> predict
+```
+
+There are two components to a classification dataset: the **features** and the **labels**. The features describe the known examples and are what we use to make predictions, while the labels are the correct answers we are trying to predict.
+
+::::{#def-class-samples}
 A single training example or sample is characterized by a **feature vector** $\bfx$ of $d$ real numbers and a **label** $y$ drawn from a finite set $L$. If $L$ has only two members (say, "true" and "false"), we have a **binary classification** problem; otherwise, we have a **multiclass** problem.
 
-When we have $n$ training samples, it's natural to collect them into columns of a **feature matrix** $\bfX$ with $n$ rows and $d$ columns. 
-Using subscripts to represent the indexes of the matrix, we can write
+Taken over an entire dataset of $n$ examples, the labels form a **label vector** $\bfy$ and the feature vectors form an $n\times d$ **feature matrix**,
 
 $$
 \bfX = \begin{bmatrix}
+\bfx_1 \\ \bfx_2 \\ \vdots \\ \bfx_n
+\end{bmatrix} =
+\begin{bmatrix}
 X_{11} & X_{12} & \cdots & X_{1d} \\
 X_{21} & X_{22} & \cdots & X_{2d} \\
 \vdots & \vdots && \vdots \\ 
 X_{n1} & X_{n2} & \cdots & X_{nd} 
 \end{bmatrix}.
 $$
+
+::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_k80zm74i&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_waoitbmv" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
@@ -56,163 +162,56 @@ Each row of the feature matrix is a single feature vector, while each column is 
 Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a $200\times 9$ feature matrix.
 ::::
 
-We can also collect the associated training labels into the **label vector**
+### One-vs-rest
+
+In @exm-class-digits we simplified the problem of recognizing 10 digits by asking the classifier to distinguish only 6 from all the others. This is known as a **one-versus-rest** strategy. In fact, any multiclass problem can be broken down into separate binary problems using one-versus-rest.
+
+Suppose the label set $L$ has $m$ members $\ell_1, \ell_2, \ldots, \ell_m$. We can define $m$ binary classification problems by
 
 $$
-\bfy = \begin{bmatrix} 
-y_1 \\ y_2 \\ \vdots \\ y_n
-\end{bmatrix}
+\begin{align*}
+\text{Does } y &= \ell_1 \text{ or not?} \\ 
+\text{Does } y &= \ell_2 \text{ or not?} \\
+\vdots \\
+\text{Does } y &= \ell_m \text{ or not?}
+\end{align*}
 $$
 
-:::{.callout-important}
-In linear algebra, the default shape for a vector is usually as a single column. In Python, a vector doesn't exactly have a row or column orientation, though when it matters, a row shape is usually preferred.
-:::
+Answering all $m$ of these questions gives us the full classification.
 
-Each component $y_i$ of the label vector is drawn from the label set $L$.
+### Qualitative features
 
-<!-- ### One-vs-rest
-
-Many classification algorithms are derived for binary classification problems, in which there are only two unique labels. There are automatic ways of upgrading this capability to a multiclass problem. Probably the most useful one is the **one versus rest** or *one versus all* method. 
-
-Suppose the label set $L$ has $m > 2$ members, which we can arbitrarily denote by the integers $1$ through $m$. We can define $m$ separate binary classification problems with the true/false label sets
-$$
-L_k = \{ y=k, y\neq k\},
-$$
-for each $k=1,2,\ldots,m$.  -->
-
-### Encoding qualitative data
-
-We have defined the features as numerical values. What should we do with qualitative data? We could arbitrarily assign numbers to possible values, such as "0=red", "1=blue", "2=yellow," and so on. But this is not ideal: most of the time, we would not want to say that yellow is twice as far from red as it is from blue!
+We have defined the features of a training example as numerical values. What should we do with qualitative data? We could arbitrarily assign numbers to possible values, such as "0=red", "1=blue", "2=yellow," and so on. But this is not ideal: most of the time, we would not want to say that yellow is twice as far from red as it is from blue!
 
 A better strategy is to use the one-hot or dummy encoding. If a particular feature can take on $k$ unique values, then we introduce $k$ new features indicating which value is present. (We can use $k-1$ dummy features if we interpret all-zeros to mean the $k$th possibility.)
 
-### Walkthrough
+<!-- ### Continuous labels
 
-The *scikit-learn* package `sklearn` is a collection of well-known machine learning algorithms and tools. Scikit-learn offers a uniform framework across all classifier types:
+@def-class-samples requires the labels of the dataset to be drawn from a finite, discrete set. But what if the labels are continuous? 
 
-1. Define features and labels as numpy arrays or pandas frames.
-1. Create a learner object, specifying any values that specialize the behavior.
-1. Train the learner on the data by calling the `fit` method.
-1. Apply the learner to a feature matrix/frame using the `predict` method.
+It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuous labels into discrete ones. However, **this is the wrong approach**, for two reasons. First, binning is a lossy operation that throws away information. Second, and more importantly, classification methods do not respect any notion of ordering in the labels. For instance, if a sample is supposed to go into a bin $[0, 10)$, then predicting it into the bin $[90,100)$ is a much bigger error than predicting it into $[10,20)$ would be. Yet classification algorithms treat all errors as equal.
 
-The package also includes a few classic example datasets. We load one derived from automatic recognition of handwritten digits:
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f63ccqhd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_kw47k6ng" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
-:::
-
-```{python}
-from sklearn import datasets 
-ds = datasets.load_digits()        # loads a well-known dataset
-X, digits = ds["data"], ds["target"]      # assign feature matrix and label vector
-print("The feature matrix has shape", X.shape)
-print("The label vector has shape", digits.shape)
-n, d = X.shape
-print("there are", d, "features and", n, "samples")
-```
-
-The entries of `digits` are integer values 0 through 9, indicating the true value of the corresponding handwritten digit. Let's consider the binary problem, "is this digit a 6?" That implies the following Boolean label vector:
-
-```{python}
-y = (digits == 6)
-print("Number of sixes in dataset:", sum(y))
-```
-
-It so happens that the 64 features in the dataset are the pixel grayscale values from an $8\times 8$ bitmap of a handwritten digit. We can visualize the raw data. Here are some of the 6s, for example:
-
-```{python}
-#| code-fold: true
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
-
-def plot_digits(X):
-    fig, axes = plt.subplots(4,4)
-    for i in range(4):
-        for j in range(4):
-            row = j + 4*i
-            A = np.reshape(np.array(X[row,:]),(8,8))
-            sns.heatmap(A,ax=axes[i,j],square=True,cmap="gray",cbar=False)
-            axes[i,j].axis(False)
-    return None
-
-plot_digits(X[y])
-```
-
-
-The process of training a classifier is called **fitting**. We first have to import a particular classifier type, then create an instance of that type. Here, we choose one that we will study in a future section:
-
-```{python}
-from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors=20)    # specification of the model
-```
-
-Now we can fit the learner to the training data:
-
-```{python}
-knn.fit(X, y)                                 # training of the model
-```
-
-At this point, the classifier object `knn` has figured out what it needs from the training data. It has methods we can now call to make predictions and evaluate the quality of the results. 
-
-Each new prediction is for a **query vector** with 64 features. In practice, we can use a list in place of a vector for the query. 
-
-```{python}
-query = [20]*d    # list with d copies of 20  
-```
-
-The `predict` method of the classifier allows specifying multiple query vectors as rows of an array. In fact, it expects a 2D array in all cases, even if there is just one row.
-
-```{python}
-Xq = [ query ]    # 2D array with a single row
-```
-
-The result of the prediction will be a vector of labels, one per row of the query.
-
-```{python}
-# Get vector of predictions:
-knn.predict(Xq)  
-```
-
-:::{.callout-important}
-The `predict` method requires a vector or list of query vectors or lists and it outputs a vector of classes. This is true even if there is just a single query.
-:::
-
-At the moment, we don't have any realistic query data at hand other than the training data. But we can investigate the question of how well the classifier does on that data, simply by using the feature matrix as the query: 
-
-```{python}
-# Get vector of predictions for the training set:
-yhat = knn.predict(X)    
-```
-
-Now we simply count up the number of correctly predicted labels and divide by the total number of samples to get the **accuracy** of the classifier.
-
-```{python}
-acc = sum(yhat == y) / n    # fraction of correct predictions
-print(f"accuracy is {acc:.1%}")
-```
-
-Not surprisingly, sklearn has functions for doing this measurement in fewer steps. The `metrics` module has functions that can compare true labels with predictions. In addition, each classifier object has a `score` method that allows you to skip finding the predictions vector yourself.
-
-```{python}
-from sklearn.metrics import accuracy_score
-
-# Compare original labels to predictions:
-acc = accuracy_score(y, yhat)    
-print(f"accuracy score is {acc:.1%}")
-
-# Same result, if we don't want to keep the predicted values around:
-acc = knn.score(X, y)    
-print(f"knn score is {acc:.1%}")
-```
-
-Does this mean that the classifier is a good one? The raw number looks great, but that question is more subtle than you would expect.
-
-<!-- ![](_media/memes/biden.png){height="240"} -->
+::: {.callout-important}
+"Classification" problems with continuous labels are actually regression problems and should be treated as such for best results.
+::: -->
 
 ## Classifier performance
 
-Let's return to the (previously cleaned) loan applications dataset.
+Before we start discussing classification algorithms, we need to understand how to evaluate the performance of a classifier. The most straightforward take would be to calculate how often the classifier is correct on the data used to train it, like we did in @exm-class-digits. But there are some important reasons why this is not a good idea. 
+
+### Generalization
+
+Consider the following classification algorithm: To make a prediction, see if the input matches one of the samples in the training set. If so, return the correct label; otherwise, predict randomly. This algorithm would have perfect accuracy on the training set, but it would be useless for any new data---which is the entire point of training a classifier!
+
+:::{#def-class-generalization}
+The performance of a predictor on previously unseen data is known as the **generalization** of the predictor. 
+:::
+
+In order to gauge generalization, we should hold back some of the original labeled data from training and use it only to test the performance. That is, we split the dataset into nonoverlapping **training and testing sets**. Only the training set is fit by the classifier, while the testing set is used to evaluate its performance.
+
+
+::::{#exm-class-traintest chapter=3 type=💻 description="Train–test split"}
+Here is a cleaned-up version of the Lending Tree loan applications dataset.
 
 ```{python}
 import pandas as pd
@@ -220,114 +219,145 @@ loans = pd.read_csv("_datasets/loan_clean.csv")
 loans.head()
 ```
 
-We create a binary classification problem by labelling whether each loan was at least 95% funded. The other columns will form the features for the predictions.
+We formulate a binary classification problem by labelling whether each loan was at least 95% funded. The other columns of the frame will form the features for the predictions.
 
 ```{python}
-X = loans.drop("percent_funded", axis=1)
 y = loans["percent_funded"] > 95
+X = loans.drop("percent_funded", axis=1)
+print("There are", len(y), "samples having", len(X.columns), "features.")
 ```
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_x9ekm6vr&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_94rtn1p9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
-:::
 
-### Train–test paradigm
+The helper function called `train_test_split` allows us to split off a stated proportion of the data to use for testing. 
 
-It seems desirable for a classifier to work well on the samples it was trained on. But we probably want to do more than that. 
-
-:::{#def-class-generalization}
-The performance of a predictor on previously unseen data is known as the **generalization** of the predictor. 
-:::
-
-In order to gauge generalization, we hold back some of the labeled data from training and use it only to test the performance. An `sklearn` helper function called `train_test_split` allows us to split off 20% of the data to use for testing. It's usually recommended to shuffle the order of the samples before the split, and in order to make the results reproducible, we give a specific random seed to the RNG used for the shuffle.
-
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6o101qr3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_rk4sf8p4" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+::: {.callout-tip}
+It's usually recommended to shuffle the order of the samples before the train--test split. In order to make the results fully reproducible, give a specific random seed to the RNG used for that shuffle.
 :::
 
 ```{python}
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(X, y,
-  test_size=0.2,
+X_train, X_test, y_train, y_test = train_test_split(
+  X, y,
+  test_size=0.2,  # testing fraction
   shuffle=True,
-  random_state=3
+  random_state=302
 )
 
-print("There are", X_train.shape[0], "training samples.")
-print("There are", X_test.shape[0], "testing samples.")
+print("There are", len(X_train), "training samples.")
+print("There are", len(X_test), "testing samples.")
 ```
 
 We can check that the test and train labels have similar characteristics:
 
 ```{python}
 import pandas as pd
-print("labels in the training set:")
-print( pd.Series(y_train).describe() )
+print("fraction of True in the training set:")
+print( f"{y_train.mean():.2%}" )
 
-print("\nlabels in the testing set:")
-print( pd.Series(y_test).describe() )
+print("\nfraction of True in the testing set:")
+print( f"{y_test.mean():.2%}" )
 ```
 
-Now we train on the training data...
+::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_j0w2wyn3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_udfl9dd3" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/loans.jpg){.lightbox}
+
+:::
+
+### Metrics for binary classifiers
+
+A binary classifier is one that produces just two unique labels, which we can call *yes* and *no*, *positive* and *negative*, or `True` and `False`. The accuracy of the classifier is the proportion of correct predictions made on the test set.
+
+::::{#exm-class-accuracy chapter=3 type=💻 description="Testing accuracy"}
+Continuing with @exm-class-traintest, we can now train a classifier on the training data and test it on the testing data.
 
 ```{python}
 knn = KNeighborsClassifier(n_neighbors=9)
-knn.fit(X_train, y_train)    # fit only to train set
+knn.fit(X_train, y_train)     # fit only to training set
+yhat_test = knn.predict(X_test)    # predict on test set
+acc = (yhat_test == y_test).mean()
+print(f"test accuracy is {acc:.2%}")
 ```
 
-...and test on the rest.
+Actually, every learner object has a `score` method that computes a default metric. For binary classifiers, that metric is accuracy:
 
 ```{python}
 acc = knn.score(X_test, y_test)    # score only on test set
-print(f"test accuracy is {acc:.1%}")
+print(f"test accuracy is {acc:.2%}")
 ```
 
-This seems like a high accuracy, perhaps. But consider that the vast majority of loans were funded:
+That number seems comfortingly close to 100%. But consider a rather silly classifier that predicts "yes" for every loan application:
 
 ```{python}
-funded = sum(y)
-print(f"{funded/len(y):.1%} were funded")
+yhat_test = [True]*len(X_test)    # predict all True
+acc = (yhat_test == y_test).mean()
+print(f"test accuracy is {acc:.2%}")
 ```
 
-Therefore, an algorithm that simply "predicts" funding every single loan could do as well as the trained classifier! 
+Our real classifier is barely better than this!
 
-```{python}
-from sklearn.metrics import accuracy_score
-generous = [True]*len(y_test)
-acc = accuracy_score(y_test, generous)
-print(f"fund-them-all accuracy is {acc:.1%}")
-```
-
-In this context, our trained classifier is not impressive at all. We need a metric other than accuracy.
-
-### Binary classifiers
-
-A binary classifier is one that produces just two unique labels, which we call "yes" and "no" here. To fully understand the performance of a binary classifier, we have to account for four cases:
+::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_m5keewod&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_2971rmo5" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_lxdc52jg&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_j46hrnd7" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
-* True positives (TP): Predicts "yes", actually is "yes"
-* False positives (FP): Predicts "yes", actually is "no"
-* True negatives (TN): Predicts "no", actually is "no"
-* False negatives (FN): Predicts "no", actually is "yes"
+@exm-class-accuracy demonstrates that accuracy alone may not capture anything useful about a classifier. In that case, it happened that a huge fraction of the loans were actually funded, so the "predict True always" classifier scored amazingly well. Presumably, though, approving loans for the small fraction of applicants who should not get them could lead to big financial losses.
+The possibilities for comparing a prediction with the correct value, or *ground truth*, can be diagrammed in a 2x2 table, as illustrated in @fig-class-confusion. 
 
-We often display these in a 2×2 table according to the states of the prediction and *ground truth* (i.e., the given label in the dataset). The table can be filled with counts or percentages of tested instances to create a **confusion matrix**, as illustrated in @fig-class-confusion. 
+```{python}
+#| echo: false
+#| label: fig-class-confusion
+#| fig-cap: "Binary confusion matrix."
 
-![A confusion matrix. Correct predictions are on the diagonal.](_media/confusion.png){fig-alt="A binary confusion matrix." height="240" #fig-class-confusion}
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
+# Numeric values for generating heatmap (these are arbitrary since they won't be displayed)
+data = np.array([[1, 2], [3, 4]])
+
+# Annotations as strings corresponding to the data points
+labels = np.array([["TN", "FP"], ["FN", "TP"]])
+
+# Create a heatmap
+plt.figure(figsize=(5, 5))
+sns.heatmap(data, annot=labels, fmt='', cmap='Blues', cbar=False, linewidths=2, linecolor='black',
+            xticklabels=['Negative', 'Positive'], yticklabels=['Negative', 'Positive'],
+            annot_kws={'size': 36})  # Increase font size here
+
+# Adding titles and labels
+plt.title('')
+plt.xlabel('Predicted Labels',size=20)
+plt.ylabel('True Labels',size=20)
+plt.xticks(rotation=0,size=16)  # Optional: adjust rotation of x-axis labels if needed
+plt.yticks(rotation=0,size=16)  # Optional: adjust rotation of y-axis labels if needed
+plt.show()
+```
+
+The notations in the figure are as follows:
+
+* True positive (TP): Predicts *positive*, actually is *positive*
+* False positive (FP): Predicts *positive*, actually is *negative*
+* True negative (TN): Predicts *negative*, actually is *negative*
+* False negative (FN): Predicts *negative*, actually is *positive*
+
+When the counts of these four cases over the testing set are put into such a table, we call it a **confusion matrix**. Based on these counts, we can define several metrics that give a nuanced view of the classifier's performance.
 
 ::::{#def-class-metrics}
 The following primary metrics are defined for a binary classifier:
 
-|                                     |                                            |
-| ----------------------------------: | :----------------------------------------: |
-|                        **accuracy** | $\dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}$ |
-|                          **recall** |          $\dfrac{\TP}{\TP + \FN}$          |
-|                     **specificity** |          $\dfrac{\TN}{\TN + \FP}$          |
-|                       **precision** |          $\dfrac{\TP}{\TP + \FP}$          |
-| **negative predictive value** (NPV) |          $\dfrac{\TN}{\TN + \FN}$          |
+|                 |                                            |
+| --------------: | :----------------------------------------: |
+|    **accuracy** | $\dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}$ |
+|      **recall** |          $\dfrac{\TP}{\TP + \FN}$          |
+| **specificity** |          $\dfrac{\TN}{\TN + \FP}$          |
+|   **precision** |          $\dfrac{\TP}{\TP + \FP}$          |
+
 ::::
 
 ::: {.callout-note}
@@ -336,36 +366,48 @@ Recall is also known as *sensitivity* or the *true positive rate*. Specificity i
 
 All of the primary metrics vary between 0 (worst) and 1 (best). Accuracy is self-explanatory; the other metrics answer the following questions:
 
-* **recall** How often are actual "yes" cases predicted correctly?
-* **specificity** How often are actual "no" cases predicted correctly?
-* **precision** How often are the "yes" predictions correct?
-* **NPV** How often are the "no" predictions correct?
+**recall** 
+: How often are actual *positive* cases predicted correctly?
+
+**specificity** 
+: How often are actual *negative* cases predicted correctly?
+
+**precision**
+: How often are the *positive* predictions correct?
 
 ::::{#exm-class-confusion chapter=3 type=✍️ description="Classifier performance metrics"}
 Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:
 
 |              |               |               |
 | -----------: | :-----------: | :-----------: |
-|              | Predicted $+$ | Predicted $-$ |
-| Actually $+$ |      22       |       4       |
-| Actually $-$ |      12       |      62       |
+|              | Predicted $-$ | Predicted $+$ |
+| Actually $-$ |      62       |      12       |
+| Actually $+$ |       4       |      22       |
 
-From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that had the antigen, the test identified 22, for a recall of $22/26=84.6$\%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of $62/74=83.8$\%. Finally, the precision is $22/34=64.7$\% and the NPV is $62/66=93.9$\%. 
+From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that had the antigen, the test identified 22, for a recall of $22/26=84.6$\%. Out of 74 samples that did not have the antigen, 62 were predicted correctly, for a specificity of $62/74=83.8$\%. Finally, the precision is $22/34=64.7$\%. 
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uz0psivl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0fv0iriz" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+*(ordering of +/- is different in the video)*
+</br>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uz0psivl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qgapi2yu" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/no%20fp.jpg){.lightbox}
+
 :::
 
-The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might aim mainly for a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and seek a high precision.
+::: {.callout-tip}
+As you can see from @def-class-metrics, recall and specificity switch places if we swap the roles of *positive* and *negative*. In other words, specificity is equal to recall of the negative class.
 
-![](_media/memes/no%20fp.jpg){height="420"}
+:::
 
+The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might prioritize a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e. a low false positive rate, and therefore seek a high precision.
 
-There are ways of combining the primary metrics in order to account for two at once.
+There are also a few ways to combine the primary metrics in order to account for two at once.
 
 ::::{#def-class-metrics-2nd}
-The ***F*₁ score** is the harmonic mean of the precision and the recall, i.e.,
+The $\mathbf{F_1}$ **score** is the harmonic mean of the precision and the recall, i.e.,
 $$
 F_1 = \left[ \frac{1}{2} \left(\frac{1}{\text{precision}} + \frac{1}{\text{recall}} \right)  \right]^{-1} = \frac{2\TP}{2\TP+\FN+\FP}.
 $$
@@ -373,57 +415,49 @@ $$
 The **balanced accuracy** is the arithmetic mean of recall and specificity.
 ::::
 
-Like the primary metrics, $F_1$ and balanced accuracy range between 0 (worst) and 1 (best). The harmonic mean is small if either of its terms is small, so a high $F_1$ means both precision and recall are good.
+Like the primary metrics, $F_1$ and balanced accuracy range between 0 (worst) and 1 (best). 
 
-::::{#exm-class-metrics chapter=3 type=💻 description="Binary classifier metrics"}
-Continuing with the loan classifier trained earlier in this section, we can find the confusion matrix:
 
-```{python}
-from sklearn.metrics import confusion_matrix
-yhat = knn.predict(X_test)
-C = confusion_matrix(y_test, yhat, labels=[True, False])
-C
-```
+::: {.callout-note}
+The harmonic mean is small if either of its terms is small, so a high $F_1$ means both precision and recall are good.
 
-:::{.callout-caution}
-It's advisable to always call `confusion_matrix` with the `labels` argument, even though it is optional, in order to control the ordering within the matrix. In particular, `False` < `True`, so the default for Boolean labels is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
 :::
 
-In order order to help keep track of what the entries mean, we can also make a picture of the confusion matrix:
+::::{#exm-class-metrics chapter=3 type=💻 description="Binary classifier metrics"}
+Continuing with the loan classifier trained in @exm-class-accuracy, we can find its confusion matrix:
 
 ```{python}
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+yhat = knn.predict(X_test)
+C = confusion_matrix(y_test, yhat, labels=[True, False])
 lbl = ["fund", "reject"]
 ConfusionMatrixDisplay(C, display_labels=lbl).plot();
 ```
+
+:::{.callout-caution}
+It's advisable to always call `confusion_matrix` with the `labels` argument, in order to control the interpretation of the matrix. In particular, `False` < `True`, so the default for Boolean labels is to count the upper left corner of the matrix as "true negatives," assuming that `False` represents a negative result.
+
+:::
 
 Hence, there are 7570 true positives. The accuracy is
 ```{python}
 print( f"accuracy = {(7570 + 26) / np.sum(C):.1%}" )
 ```
-(In practice, of course, we can use the `accuracy` function we imported earlier.) Here are the other primary scores:
+
+In practice, we can just ask the classifier for its score, which defaults to accuracy:
 
 ```{python}
-TP, FN, FP, TN = C.ravel()    # grab the 4 values in the confusion matrix
-print( f"recall = {TP/(TP+FN):.1%}" )
-print( f"specificity = {TN/(TN+FP):.1%}" )
-print( f"precision = {TP/(TP+FP):.1%}" )
-print( f"NPV = {TN/(TN+FN):.1%}" )
+print( knn.score(X_test, y_test) )
 ```
-As noted above, few who ought to get a loan will go away disappointed, a loan officer might get nervous about the low specificity score that indicates bad loans. 
-
-In `sklearn.metrics` there are functions to compute recall and precision without reference to the confusion matrix. You must put the ground-truth labels before the predicted labels, and you should also specify which label value corresponds to a "positive" result. Swapping the "positive" role effectively swaps recall with specificity and precision with NPV.
+In `sklearn.metrics` there are functions to compute recall and precision without reference to the confusion matrix. You must put the ground-truth labels before the predicted labels, and you should also specify which label value corresponds to a "positive" result. 
 
 ```{python}
 from sklearn.metrics import precision_score, recall_score
 
-for pos in [True, False]:
-  print("With", pos, "as positive:")
-  s = recall_score(y_test, yhat, pos_label=pos)
-  print(f"    recall is {s:.3f}")
-  s = precision_score(y_test, yhat, pos_label=pos) 
-  print(f"    precision is {s:.3f}")
-  print()
+recall = recall_score(y_test, yhat, pos_label=True)
+precision = precision_score(y_test, yhat, pos_label=True) 
+specificity = recall_score(y_test, yhat, pos_label=False)
+print(f"recall is {recall:.1%}, precision is {precision:.1%}, and specificity is {specificity:.1%}")
 ```
 
 There are also functions for the composite scores defined in @def-class-metrics-2nd:
@@ -435,11 +469,13 @@ print( f"F1 = {f1_score(y_test, yhat):.1%}" )
 print( f"balanced accuracy = {balanced_accuracy_score(y_test, yhat):.1%}" )
 ```
 
-The loan classifier has excellent recall, respectable precision, and terrible specificity, resulting in a good *F*₁ score and a low balanced accuracy score.
+The loan classifier has excellent recall, respectable precision, and terrible specificity, resulting in a good *F*₁ score and a mediocre balanced accuracy score.
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_d1ye0bph&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_96mrc7cd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xez8q895&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_gxc83x84" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
 
@@ -465,10 +501,11 @@ $$
 $$
 
 independently of $a$. This quantity is sensitive to the low specificity.
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ef7mli52&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_pch0h80o" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ef7mli52&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_01wzcl0k" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 
 :::
 
@@ -487,13 +524,16 @@ C = np.array([[26,2,0], [4,18,6], [1,5,20]])
 ConfusionMatrixDisplay(C, display_labels=["Bach", "Mozart", "Schubert"]).plot();
 ```
 
-If we look down the middle column, for example, we see all the cases where the classifier predicted *Mozart*. In 18 of those cases, that was the correct label, while in $5+2=7$ cases, it was not. The first 18 cases are considered true positives for finding Mozart, while the other 7 are false positives. The precision score for *Mozart* is thus $18/(18+7)$, or 72%.
+If we look down the middle column, for example, we see all the cases where the classifier predicted *Mozart*. In 18 of those cases, that was the correct label, which we call the true positives for finding *Mozart* vs. the rest. There were also another $5+2=7$ cases that were labeled *Mozart* that were actually someone else, and we call those the false positives. The precision score for *Mozart* is thus $18/(18+7)$, or 72%.
 
-We could also look at the bottom row, which tells us that out of 26 cases where the true label is *Schubert*, the classifier correctly predicted (true positives) 20 of them, missing (false negatives) on the other 6. The recall score for *Schubert* is thus $20/26$, or about 77%.
+We could instead look at the bottom row, which tells us that out of 26 cases where the true label is *Schubert*, the classifier correctly predicted (true positives) 20 of them, missing (false negatives) on the other 6. The recall score for *Schubert* is thus $20/26$, or about 77%.
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hfixb8l6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eup2cbdf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/confusion.jpg){.lightbox}
+
 :::
 
 ::::{#exm-class-multiclass chapter=3 type=💻 description="Multiclass metrics"}
@@ -510,13 +550,9 @@ Now we extract the quantitative features and labels:
 ```{python}
 features = ["cylinders", "horsepower", "weight", "acceleration", "mpg"]
 X = cars[features]
-y = pd.Categorical(cars["origin"])
+y = cars["origin"]
 print(X.shape[0], "samples and", X.shape[1], "features")
 ```
-
-::: {.callout-tip}
-It's not necessary to convert a vector of strings into a `Categorical` vector of labels, but it does make a few things handy in post-processing.
-:::
 
 Next, we split into training and testing subsets:
 
@@ -525,7 +561,7 @@ X_train, X_test, y_train, y_test = train_test_split(
   X, y, 
   test_size=0.2, 
   shuffle=True, 
-  random_state=1
+  random_state=19716
 )
 ```
 
@@ -535,89 +571,137 @@ Now we perform the fit and measure the accuracy:
 knn = KNeighborsClassifier(n_neighbors=8)
 knn.fit(X_train, y_train)
 yhat = knn.predict(X_test)
+from sklearn.metrics import accuracy_score
 print(f"accuracy is {accuracy_score(y_test, yhat):.1%}")
+print(f"balanced accuracy is {balanced_accuracy_score(y_test, yhat):.1%}")
 ```
 
 Here is the confusion matrix:
 
 ```{python}
-labels = y.categories
+labels = knn.classes_
 C = confusion_matrix(y_test, yhat, labels=labels)
 ConfusionMatrixDisplay(C, display_labels=labels).plot();
 ```
 
-From the confusion matrix above we can see that, for example, out of 54 predictions of "usa" on the test set, there are 8 total false positives, in the sense that the actual labels were otherwise.
-
-We also get $K$ versions of the metrics like accuracy, recall, *F*₁ score, and so on. We can get all the individual precision scores, say, automatically:
+We also get $K$ versions of the usual metrics. In order to use functions like `recall_score`, `f1_score`, and so on, we have to specify an averaging method. The keyword `average=None` gives the individual scores of the classes:
 
 ```{python}
-precisions = precision_score(y_test, yhat, average=None)
-for (label,p) in zip(labels,precisions): 
-    print(f"{label}: {p:.1%}")
+pd.DataFrame({
+  "Precision" : precision_score(y_test, yhat, average=None),
+  "Recall" : recall_score(y_test, yhat, average=None),
+  "F1 score" : f1_score(y_test, yhat, average=None),
+  }, index=labels)
 ```
 
-To get a composite precision score, we have to specify an averaging method. The `"macro"` option simply takes the mean of the vector above.
+To get a single composite score for a metric, you have to give a valid `average` method, such as `"macro"` or `"weighted"`. These are described in the scikit-learn documentation.
 
 ```{python}
-mac = precision_score(y_test, yhat, average="macro")
-print(mac)
+print(f'macro avg: {precision_score(y_test, yhat, average="macro"):.1%}')
+print(f'weighted avg: {precision_score(y_test, yhat, average="weighted"):.1%}')
 ```
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1qocbyij&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_3uoamfln" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1qocbyij&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ad07ksvs" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/car.jpg){.lightbox}
 
 :::
 
-There are other ways to average performance scores over the classes, depending on whether poorly represented classes should be weighted more weakly than others.
+It's time to update our scikit-learn workflow:
+
+```{mermaid}
+flowchart TD
+    dataset["Get feature matrix and label vector"]
+    split["Split into training and testing sets
+    train_test_split()"]
+    object["Create learner object"]
+    train["Fit learner to data
+    .fit()"]
+    predict["Make predictions
+    .predict()"]
+    evaluate["Compute metrics
+    .confusion_matrix(), .score(), recall_score(), etc."]
+    dataset --> split --> object --> train --> predict
+    train --> evaluate
+```
 
 ## Decision trees
 
-A decision tree is much like playing Twenty Questions. A question is asked, and the answer reduces the possible results, leading to a new question. **CART** (Classification And Regression Tree), which we present here, is a popular method for systematizing the idea.
+A decision tree is much like playing Twenty Questions. A question is asked, and the answer reduces the possible results, leading to a new question. 
 
-Given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, the immediate goal is to partition the samples into two subsets, each of which has as uniform as set of labels as possible. The process is then repeated recursively: the subsets are bisected to make four subsets, and so on. These splits form a binary tree. When a prediction is required, we apply the same criteria as the splits in our tree, and when we reach a *leaf* of the tree (i.e., no further subdivisions), we take a vote of all the samples in the leaf subset to determine the label. 
+The fundamental step is: *given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, partition the samples into two subsets, each of which has as uniform as set of labels as possible.* That step is then repeated recursively on the two subsets just formed by the partition, and so on. The result is a **binary tree**, as illustrated in @fig-class-tree.
 
-There are two details that need to be specified: what kind of subset splits to allow, and how to determine the uniformity of labels within each subset. We start with the latter.
+```{mermaid} 
+%%| label: fig-class-tree
+%%| fig-cap: "A simple binary decision tree on two features."
+flowchart TD
+    root[Is y < 2?]
+    l[Is x < 0?]
+    root-- Yes -->l
+    r([leaf A])
+    root-->|No|r
+    ll([leaf B])
+    l-->|Yes|ll
+    lr([leaf C])
+    l-->|No|lr
+```
+
+When a prediction is required, we apply the same criteria as the splits in our tree, and when we reach a *leaf* of the tree (i.e., no further subdivisions), we take a vote of all the samples in the leaf subset to determine the label. 
+
+::::{#exm-class-tree chapter=3 type=✍️ description="Decision tree"}
+In @fig-class-tree, suppose that leaf A contains [H,T,T], leaf B contains [H], and leaf C contains [H,H,T]. The query $(x,y)=(1,0)$ first goes left (since $0 <2$) and then right (since $1\not< 0$), landing in leaf C. The prediction for this query is then "H".
+
+::::
+
+There are two crucial details that still need to be specified: how to split samples into subsets, and how to determine the uniformity of labels within each subset. The answer to the first issue was hinted at in @fig-class-tree: each split is defined by a cutoff value for one of the features. Addressing the second issue is more complicated.
 
 ### Gini impurity
 
-::::{#def-class-indicator}
-Let $k$ be an integer. The **indicator function** $\mathbb{1}_k$ is the function on integers defined as
-$$
-\mathbb{1}_k(t) = \begin{cases} 
-  1, & \text{if } t=k, \\ 
-  0, & \text{otherwise.}
-  \end{cases}
-$$
-::::
+In thinking about how to determine the uniformity of a set of samples, it helps to start with the extreme cases. Consider a binary classification problem. If all the samples in a set have the same label, then we say the set is maximally pure; the decision for any query landing here is clear. At the other end, a set that has an equal number of samples from each class. This set is maximally impure, because the decision for any query landing here is essentially a coin toss.
 
-Let $S$ be any subset of samples, given as a list of indices into the original set. Suppose there are $K$ unique labels, which we denote $1,2,\ldots,K$. Define the values
-
-$$
-p_k = \frac{1}{ |S| } \sum_{i\in S} \mathbb{1}_k(y_i), \qquad k=1,\ldots,K,
-$$ {#eq-class-prop-samples}
-
-where $|S|$ is the number of elements in $S$. In words, $p_k$ is the proportion of samples in $S$ that have label $k$. Note that the sum over all the $p_k$ equals 1.
+The following is one way to quantify the notion of impurity that matches these two extremes.
 
 ::::{#def-class-gini}
-The **Gini impurity** of sample set $S$ is defined as 
+Suppose the samples have $K$ labels. Given a sample set $S$, for each $k=1,\ldots,K$ let $p_k$ be the fraction of samples in $S$ that have label $k$. Then  the **Gini impurity** of $S$ is defined as 
 $$
-H(S) = \sum_{k=1}^K p_k(1-p_k),
+H(S) = \sum_{k=1}^K p_k(1-p_k).
+$$ {#eq-class-gini}
+
+In the special case of binary classification in which $K=2$, this simplifies to
+
 $$
-where $p_k$ is defined in @eq-class-prop-samples.
+H(S) = 2p(1-p),
+$$ {#eq-class-gini-binary}
+
+where $p$ is the fraction of samples in $S$ that have a positive label.
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2fy3h53b&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_o52kj8wl" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.3.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2fy3h53b&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_y9yi8i84" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Definition 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
-If one of the $p_k$ is 1, then the others are all zero and $H(S)=0$. This is considered optimal---it indicates that all the labels in the set $S$ are identical. 
+Consider our two extreme binary cases from above. First, if all the samples in $S$ have the same label, then either $p=1$ or $p=0$ in @eq-class-gini-binary, so $H(S)=0$. On the other hand, if there are two labels equally present, then $p=\tfrac{1}{2}$, and $H(S)=\tfrac{1}{2}$ as well. 
 
-At the other extreme, if $p_k=1/K$ for all $k$, then 
+::::{#exm-class-gini-spread chapter=3 type=✍️ description="Gini impurity"}
+Suppose set $S$ has equal numbers of members having class 1, class 2, etc., up to class $K$. Then for every $k=1,\ldots,K,$ $p_k=1/K$, and 
+
 $$
-H(S) = \sum_{k=1}^K \frac{1}{K} \left(1 - \frac{1}{K} \right) = K\cdot \frac{1}{K}\cdot\frac{K-1}{K} = \frac{K-1}{K} < 1.
+\begin{split}
+H(S) &= \sum_{k=1}^K p_k(1-p_k)\\
+ &= \sum_{k=1}^K \frac{1}{K}\left(1-\frac{1}{K}\right)\\
+ &= \frac{1}{K}\cdot \frac{K-1}{K} \cdot\sum_{k=1}^K 1 \\
+  &= \frac{K-1}{K}.
+\end{split}
 $$
-In general, $H$ is always nonnegative and less than 1, and it only approaches 1 in the limit of a large number of equally distributed classes.
+
+For $K=2$, this is $\tfrac{1}{2}$, as we deduced above. In the limit $K\to \infty$, $H(S)$ approaches 1 from below.
+
+::::
 
 ::::{#exm-class-gini chapter=3 type=✍️ description="Gini impurity"}
 Suppose a set $S$ has $n$ members with label A, 1 member with label B, and 1 member with label C. What is the Gini impurity of $S$?
@@ -633,71 +717,90 @@ $$
 \end{split}
 $$
 
-This value is 1/2 for $n=0$ and approaches zero as $n\to\infty$.
+This value is $\tfrac{1}{2}$ for $n=0$ and approaches zero as $n\to\infty$.
+
 :::
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6j5svtw2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wtimf6z2" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.6" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6j5svtw2&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_c056o21q" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.12" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
+
+There are alternatives to the Gini impurity score, but we won't go into the details.
 
 ### Partitioning
 
-Suppose we start with a sample set $S$ that we partition into disjoint (i.e., nonoverlapping) subsets $S_L$ and $S_R$. We want to assign a total impurity to the partitioning so that we can compare different scenarios. One pitfall we should avoid is to put just one sample into $S_L$ and all the rest into $S_R$, which would make $H(S_L)=0$ automatically and give an advantage. So we will choose a formula that rewards more evenly divided subsets.
+Suppose we start with a sample set $S$ that we partition into disjoint (i.e., nonoverlapping) subsets $S_L$ and $S_R$. We want to assign a total impurity to the partitioning so that we can compare different scenarios. 
+
+One pitfall we should avoid is to put just one sample into $S_L$ and all the rest into $S_R$, which would make $H(S_L)=0$ automatically. That logic would lead us to put every sample into its own leaf, which is not only potentially inefficient but has other drawbacks we will learn about later. So we will choose a formula that rewards more evenly divided subsets.
 
 ::::{#def-class-impurity}
 The **total impurity** of the partition $(S_L,S_R)$ is 
+
 $$
-Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R).
-$$
+Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R),
+$$ {#eq-class-partition-impurity}
+
+where $H$ is Gini impurity and $|S_L|$ and $|S_R|$ are the number of samples in $S_L$ and $S_R$, respectively.
+
 ::::
+
+If $S_L$ and $S_R$ are both pure subsets, then $Q(S_L,S_R)=0$. Otherwise, @eq-class-partition-impurity favors equally sized subsets as well as low impurity within the subsets.
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xw3wpe9m&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_8sa79t5k" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.3.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
-If $S_L$ and $S_R$ are both pure subsets, then $Q(S_L,S_R)=0$. Otherwise, $Q$ tends to be larger in response to less purity and greater size in the subsets.
+Our goal is to choose a partition that minimizes $Q$. It would be far too slow to look at all possible partitions, so we look only among those that are based on a single feature and a threshold value. 
 
-Our goal is to choose a partition that minimizes $Q$. However, we constrain ourselves to allow only certain kinds of partitions. If feature space is $d$-dimensional, we select a dimension $1 \le j \le d$ and a real threshold value $\theta$. Then each feature vector $\bfx$ is placed in $S_L$ if $x_j \le \theta$ and in $S_R$ if $x_j > \theta$. Geometrically, we are dividing feature space by an axis-aligned line if $d=2$ or an axis-aligned plane if $d=3$. This splitting criterion can be evaluated extremely quickly, and we can find the best possible such partitioning in the sense of minimizing $Q(S_L,S_R)$ in a reasonable amount of time. 
+:::{.callout-note}
+The decision tree algorithm is a so-called *greedy* algorithm: it makes the best choice at each step without trying to look into the future. 
+
+:::
 
 ::::{#exm-class-tree-partition chapter=3 type=✍️ description="Tree partitioning"}
-Suppose we have $d=1$ feature and are given the four samples $(X_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}$. What is the optimal partition?
+Suppose we have $d=1$ feature and are given the four samples $(x_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}$. What is the optimal partition?
 
 ::: {.solution}
-We can partition into two pieces based on a threshold value $\theta$: $\{x \le \theta\}$ and $\{x > \theta\}$. But there are really only 5 different cases.
+We can partition into two pieces based on a threshold value $\theta$: $\{x \le \theta\}$ and $\{x > \theta\}$. But there are really only 5 unique cases.
 
-|     $\theta$ | Left | Right | $Q$ |
-| -----------: | :---: | :---: | :-: |
-| $< 0$ |  $\varnothing$, $H=0$   |  $[A, B, A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$  | $0\cdot 0 + 4\cdot \tfrac{1}{2} = 2$ |
-| $[0,1)$ | $[A]$, $H=0$  |  $[B, A, B]$, $H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}$  | $1 \cdot 0 + 3 \cdot\tfrac{4}{9} = \tfrac{4}{3}$ |
-| $[1,2)$ | $[A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$  |  $[A, B]$, $H=\tfrac{1}{2}$  | $2 \cdot \tfrac{1}{2} + 2 \cdot\tfrac{1}{2} = 2$ |
-| $[2,3)$ | $[A,B,A]$, $H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}$  |  $[B]$, $H=0$  | $3 \cdot\tfrac{4}{9} + 1\cdot 0= \tfrac{4}{3}$ |
-| $\ge 3$  |  $[A, B, A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$ |  $\varnothing$, $H=0$  | $4\cdot \tfrac{1}{2} + 0\cdot 0 = 2$ |
+| $\theta$ |                                                Left                                                |                                               Right                                                |                       $Q$                        |
+| -------: | :------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: | :----------------------------------------------: |
+|    $< 0$ |                                        $\varnothing$, $H=0$                                        | $[A, B, A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$ |       $0\cdot 0 + 4\cdot \tfrac{1}{2} = 2$       |
+|  $[0,1)$ |                                            $[A]$, $H=0$                                            |  $[B, A, B]$, $H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}$   | $1 \cdot 0 + 3 \cdot\tfrac{4}{9} = \tfrac{4}{3}$ |
+|  $[1,2)$ |    $[A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$    |                                     $[A, B]$, $H=\tfrac{1}{2}$                                     | $2 \cdot \tfrac{1}{2} + 2 \cdot\tfrac{1}{2} = 2$ |
+|  $[2,3)$ |   $[A,B,A]$, $H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}$    |                                            $[B]$, $H=0$                                            |  $3 \cdot\tfrac{4}{9} + 1\cdot 0= \tfrac{4}{3}$  |
+|  $\ge 3$ | $[A, B, A, B]$, $H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}$ |                                        $\varnothing$, $H=0$                                        |       $4\cdot \tfrac{1}{2} + 0\cdot 0 = 2$       |
 
 Both $\{ (0,A) \}, \{ (1,B), (2,A), (3,B) \}$ and $\{ (0,A), (1,B), (2,A) \}, \{ (3,B) \}$ are equally optimal partitionings, with $Q=4/3$.
+
 :::
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_e1w27rpl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_nr8bd4u5" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.7" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_e1w27rpl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ejrvzi5x" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.13" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/decision%20tree.jpeg){.lightbox}
+
 :::
 
-Finally, once we have found the optimal way to split $S$ into $(S_L,S_R)$, we need to check whether it is an improvement---that is, whether 
+Finally, once we have found the split that minimizes $Q(S_L,S_R)$, we need to check whether it is an improvement---that is, whether 
+
 $$
 Q(S_L,S_R) + \alpha < Q(S,\varnothing) = |S| H(S),
 $$
-where $\alpha$ is an optional nonnegative number that requires a certain minimum amount of decrease.
-If the condition is satisfied, then $S$ is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both $S_L$ and $S_R$ for partitioning. 
 
-The above strategy is fast but can fail to get the best possible decision tree. That is, the optimal partition into 4 or 8 subsets might require you to look ahead in order to avoid a good-looking first partition that leads you astray. Because the optimization algorithm considers only one level at a time, we say it is a *greedy* approach.
-
-![](_media/memes/decision%20tree.jpeg){height=420}
+where $\alpha \ge 0$ is a number that ensures a certain minimum amount of decrease. If the condition is not satisfied, then $S$ is not split and becomes a leaf of the decision tree. If so, then we add this split to the binary tree and recursively check both $S_L$ and $S_R$ for partitioning. 
 
 ### Decision boundary
 
 One way to think about a classifier is that it divides all of feature space into zones belonging to the different classes. The boundary between two zones is the set of points where the classifier is indifferent between the two classes; together, the boundary points form the **decision boundary**. 
 
-For a decision tree, the decision boundary is always perpendicular to the feature axes, as illustrated in this animation:
+For a decision tree, the decision boundary is piecewise perpendicular to the feature axes, as illustrated in this animation:
 
 {{< video _media/dtree_demo.mp4 >}}
 
@@ -708,33 +811,28 @@ Initially, when the tree has a depth of 1, all of feature space is divided into 
 In naive form, the decision tree construction continues to find partitions until every leaf in the tree represents a pure subset. In practice, we usually set a limit on the depth of the tree, which is the maximum number of partitions it takes to start from the root and reach any leaf. This obviously puts an upper limit on the computational time, but it is also desirable for other reasons we will explore in the next chapter.
 
 ::::{#exm-class-tree-toy chapter=3 type=💻 description="Inspecting a decision tree"}
-We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. (The details are not important.) Here is how the set looks: 
+We create a toy dataset with 20 random points in the plane, with two subsets of 10 that are shifted left/right a bit. The details are not important. For simplicity, the feature values (coordinates) are rounded to integers.
 
 ```{python}
 #| code-fold: true
 import numpy as np
 import pandas as pd
 from numpy.random import default_rng
+import matplotlib.pyplot as plt
 
-rng = default_rng(1)
+rng = default_rng(19716)
 gp1 = rng.random((10,2))
-gp1[:,0] -= 0.25
+gp1[:,0] -= 0.1
 gp2 = rng.random((10,2))
-gp2[:,0] += 0.25
-X = np.vstack((gp1,gp2))
+gp2[:,0] += 0.1
+X = np.round(10*np.vstack((gp1,gp2)))
 y = np.hstack(([1]*10,[2]*10))
-print("feature matrix X:")
-print(X)
-print("\nlabel vector y:")
-print(y)
-```
-
-The features are the two point coordinates, giving a 20-by-2 feature matrix `X`, and the labels are a vector `y` of length 20. We will create a data frame for aiding in visualization:
-
-```{python}
 import seaborn as sns
 df = pd.DataFrame( {"x₁":X[:,0], "x₂":X[:,1], "y":y} )
-sns.scatterplot(data=df, x="x₁", y="x₂", hue="y");
+sns.scatterplot(data=df, x="x₁", y="x₂", hue="y", palette=["red", "blue"]);
+plt.grid(True)
+plt.axis("equal")  # This adds grid lines to both x and y axes
+plt.show()
 ```
 
 Now we create and fit a decision tree for these samples:
@@ -742,7 +840,7 @@ Now we create and fit a decision tree for these samples:
 ```{python}
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 tree = DecisionTreeClassifier(max_depth=3)
-tree.fit(X,y)
+tree.fit(X, y)
 ```
 
 At this point, the `tree` object has created and stored all the information derived from the dataset that defines the decision tree. Since this is a small tree, we can easily look under the hood:
@@ -750,83 +848,62 @@ At this point, the `tree` object has created and stored all the information deri
 ```{python}
 #| code-fold: true
 from matplotlib.pyplot import figure
-figure(figsize=(18,11), dpi=160)
+figure(figsize=(6,8), dpi=200)
 plot_tree(tree, feature_names=["x₁", "x₂"]);
 ```
 
-The root of the tree at the top shows that the best initial split was found at the vertical line $x_1=0.644$. To the right of that line is a Gini value of zero: 8 samples, all with label 2. That is, any future prediction by this tree will immediately return label 2 if its value for $x_1$ exceeds 0.644. Otherwise, it moves to the left child node and tests whether $x_2$ is greater than $0.96$. As you can see from the scatterplot above, that horizontal line has a single sample with label 2 above it. And so on.
+The root of the tree at the top shows that the best initial split was found at the vertical line $x_1=1.5$. To the left of that line is are 4 red points, for a Gini value of zero. Therefore, in any future query having $x_1 \le 1.5$, the tree will return the red label. 
 
-Notice that the bottom right node has a nonzero final Gini impurity. This node could be partitioned, but the classifier was constrained to stop at a depth of 3. If a prediction ends up here, then the classifier returns label 1, which is the most likely outcome.
+The other branch from the root draws another vertical line, this time at $x_1 = 7.5$. This captures 7 blue points, another pure subset. Finally, the rightmost branch draws a horizontal line at $x_2=7.5$, which peels off a pure subset of 2 blue points. The tree has now reached a depth of 3, which is the upper limit we set at the time the tree object was created.
+
+Notice that the bottom left leaf has a nonzero Gini impurity. If a prediction ends up here, then the classifier returns the red label, since red examples outnumber the blues by 6 to 1.
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nqwoof7u&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_dyxb6uzv" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.8" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_xze8d28c&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_y37a8miq" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.14" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
-Because we can follow a decision tree's logic step by step, we say it is highly **interpretable**. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage can weaken as the power of the tree is increased to handle difficult datasets.
-
 ::::{#exm-class-tree-penguins chapter=3 type=💻 description="Tree classifier for the penguins dataset"}
-We return to the penguins and fit a decision tree to the quantitative features:
+We return to the penguins and fit a decision tree to the quantitative features. In order to assess the effectiveness of the tree, we use the train–test paradigm.
 
 ```{python}
 import pandas as pd
-pen = sns.load_dataset("penguins")
-pen = pen.dropna()
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import *
+
+penguins = sns.load_dataset("penguins")
+penguins = penguins.dropna()
 features = [
   "bill_length_mm",
   "bill_depth_mm",
   "flipper_length_mm",
   "body_mass_g"
 ]
-X = pen[features]
-y = pen["species"]
+X = penguins[features]
+y = penguins["species"]
 
-dt = DecisionTreeClassifier(max_depth=4)
-dt.fit(X, y)
-```
-
-We get some interesting information from looking at the top levels of a decision tree trained on the full dataset:
-
-```{python}
-#| code-fold: true
-from matplotlib.pyplot import figure
-figure(figsize=(18,11), dpi=160)
-plot_tree(dt, max_depth=2, feature_names=features);
-```
-
-The most determinative feature for identifying the species is apparently the flipper length. If it exceeds 206.5 mm, then the penguin is rather likely to be a Gentoo. 
-
-We can measure the relative importance of each feature by comparing their total contributions to reducing the Gini index:  
-
-```{python}
-pd.Series(dt.feature_importances_, index=features)
-```
-This ranking is known as **Gini importance**. 
-
-Flipper length alone accounts for about half of the resolving power of the tree, followed in importance by the bill length. The other measurements apparently have little discriminative value.
-
-In order to assess the effectiveness of the tree, we use the train–test paradigm:
-
-```{python}
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix,classification_report
-
+dtree = DecisionTreeClassifier(max_depth=4)
 X_train, X_test, y_train, y_test = train_test_split(
   X, y,
   test_size=0.2,
   shuffle=True,
-  random_state=0
+  random_state=19716
 )
-dt.fit(X_train, y_train)
+dtree.fit(X_train, y_train)
 
-yhat = dt.predict(X_test)
+```
+
+Now we can evaluate the performance of the tree:
+
+```{python}
+yhat = dtree.predict(X_test)
 print("Confusion matrix:")
 print( confusion_matrix(
   y_test, yhat, 
   labels=["Adelie", "Chinstrap", "Gentoo"]
   ) )
-print("\nPerformance metrics:")
-print( classification_report(y_test, yhat) )
 ```
 
 The performance is quite good, although the Chinstrap case is hindered by the relatively low number of training examples:
@@ -834,13 +911,45 @@ The performance is quite good, although the Chinstrap case is hindered by the re
 ```{python}
 y_train.value_counts()
 ```
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_q2w2n6cs&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_mllwanmt" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nqnioaq8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_udcy8xbp" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.15" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
-Decision trees can depend sensitively on the sample locations; a small change might completely rewrite large parts of the tree, in which case interpretability becomes less clear. 
+Because we can follow a decision tree's logic step by step, we say it is highly *interpretable*. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage weakens as the power of the tree is increased to handle difficult datasets.
+
+::::{#exm-class-tree-penguins-interpret chapter=3 type=💻 description="Interpreting a decision tree"}
+We get some interesting information from looking at the top levels of the decision tree from @exm-class-tree-penguins:
+
+```{python}
+#| code-fold: true
+from matplotlib.pyplot import figure
+figure(figsize=(8,4), dpi=200)
+plot_tree(dtree, max_depth=2, feature_names=features);
+```
+
+The most determinative feature for identifying the species is apparently the flipper length. If it exceeds 206.5 mm, then the penguin is rather likely to be a Gentoo. 
+
+Each time we partition a subset, we choose one feature and get an improvement in total purity. By adding these improvements per feature over the entire tree, we get an idea of how important each feature was to the overall impurity reduction, creating a ranking known as **Gini importance**. 
+
+```{python}
+GIs = dtree.feature_importances_
+pd.Series(GIs, index=features).sort_values(ascending=False)
+```
+
+From above we see that flipper length alone accounts for about half of the resolving power of the tree, followed in importance by the bill length. The other measurements apparently have little discriminative value.
+
+::::
+
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_gr3z11sh&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_3rgpgrpj" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/gentoo.jpg){.lightbox}
+
+:::
 
 ## Nearest neighbors
 
@@ -857,9 +966,10 @@ A **distance metric** is a function $\dist$ on pairs of vectors that satisfies t
 2. $\dist(\bfu,\bfv)=0$ if and only if $\bfu=\bfv$,
 3. $\dist(\bfu,\bfv) = \dist(\bfv,\bfu)$, and
 4. $\dist(\bfu,\bfv) \le \dist(\bfu,\bfz) + \dist(\bfz,\bfv)$, known as the triangle inequality.
+
 ::::
 
-These are considered the essential properties desired of a distance metric. We will define a distance metric by using a function on vectors known as a *norm*. 
+These are considered the essential properties desired of a distance metric. The most common way to define a distance metric is by using a function on vectors known as a **norm**. 
 
 :::{#def-class-norm}
 For any vector $\bfu \in \real^d$, we define the following norms.
@@ -868,55 +978,61 @@ For any vector $\bfu \in \real^d$, we define the following norms.
 $$
 \twonorm{\bfu} = \bigl(u_1^2 + u_2^2 + \cdots + u_d^2\bigr)^{1/2}.
 $$
+
 * The **1-norm** or *Manhattan norm*: 
 $$
 \onenorm{\bfu} = |u_1| + |u_2| + \cdots + |u_d|.
 $$
+
 * The **$\infty$-norm**, *max norm*, or *Chebyshev norm*:
 $$
 \infnorm{\bfu} = \max_{1\le i \le d} \abs{u_i}.
 $$
 
-<!-- A **norm** is a function $\norm{\bfu}$ on $\real^d$ that satisfies the following properties:
+:::
+
+
+Here is the key connection.
+
+:::{#thm-class-norm-distance}
+Given a vector norm $\norm{\cdot}$, the function 
 
 $$
-\begin{split}
-\norm{\bfzero} &= 0,  \\ 
-\norm{\bfu} &> 0 \text{ if $\bfu$ is a nonzero vector}, \\ 
-\norm{c\bfu} &= |c| \, \norm{u} \text{ for any real number $c$}, \\ 
-\norm{\bfu + \bfv } &\le \norm{\bfu} + \norm{\bfv} 
-\end{split}
-$$ -->
+\dist(\bfu,\bfv) = \norm{\bfu - \bfv}
+$$ {#eq-class-norm-distance}
+
+defines a distance metric.
+
 :::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_w85a5am5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_579yxing" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.4.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_w85a5am5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_vuwipzaa" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Theorem 3.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
-Given a norm, the distance between vectors $\bfu$ and $\bfv$ is defined by
-$$
-\dist(\bfu,\bfv) = \norm{\bfu - \bfv}. 
-$$
-
 ::::{#exm-class-distance chapter=3 type=✍️ description="Calculating distance"}
-Given $\bfu=[-1,1,0,4]$ and $\bfv=[-2,1,2,2]$, find the distance between them using all three common norms.
+Given $\bfu=[-1,1,0,4]$ and $\bfv=[-2,1,2,2]$, find the distance between them using all three common vector norms.
 
 :::{.solution}
 We first calculate $\bfu - \bfv = [1,0,-2,2]$. Then 
+
 $$
 \begin{split}
-\twonorm{\bfu-\bfv} &= \bigl( 1^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{9} = 3, \\ 
-\onenorm{\bfu-\bfv} &= 1  + 0 + 2 + 2 = 5, \\ 
+\twonorm{\bfu-\bfv} &= \bigl( 1^2 + 0^2 + 2^2 + 2^2 \bigr)^{1/2} = \sqrt{9} = 3, \\[1ex] 
+\onenorm{\bfu-\bfv} &= 1  + 0 + 2 + 2 = 5, \\[1ex] 
 \infnorm{\bfu-\bfv} &= \max\{ 1, 0, 2, 2 \} = 2.
 \end{split}
 $$
+
 :::
+
 ::::
 
 The Euclidean norm generalizes ordinary geometric distance in $\real^2$ and $\real^3$ and is usually considered the default. One of its most important features is that $\twonorm{\bfx}^2$ is a differentiable function of the components of $\bfx$. 
 
 :::{.callout-note}
-When $\norm{\,}$ is used with no subscript, it's usually meant to be the 2-norm, but it can also mean a generic, unspecified norm.
+When $\norm{\cdot}$ is used with no subscript, it's usually meant to be the 2-norm, but it can also mean a generic, unspecified norm.
+
 :::
 
 ### Algorithm
@@ -925,6 +1041,7 @@ As data, we are given labeled samples $\bfx_1,\ldots,\bfx_n$ in $\real^d$.
 
 ::::{#def-class-knn}
 Given a new query vector $\bfx$, the **kNN algorithm** finds the $k$ labeled samples closest to $\bfx$ and chooses the most frequently occurring label among them. Ties are broken randomly.
+
 ::::
 
 ::: {.callout-note}
@@ -945,34 +1062,36 @@ At point B, the nearest samples are at $(0,0)$ with distance 1, $(-2,-1)$ with d
 
 Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the next two nearest neighbors are red. Therefore, in kNN with $k=3$, the red points will outvote it and predict red! As always, we should not expect perfect performance on the training set.
 :::
+
 ::::
 
-![](_media/memes/neighbors.jpeg)
+:::{.column-margin}
+![](_media/memes/neighbors.jpeg){.lightbox}
 
+:::
 
-kNN effectively divides up the feature space into domains that are dominated by nearby instances. The evolution of the decision boundary is illustrated here for two features using 2-norm distance:
+Like a decision tree, kNN divides up the feature space into domains that map to classes. The evolution of the decision boundary is illustrated in @fig-class-knn-boundary for two features using 2-norm distance.
 
+:::{#fig-class-knn-boundary fig-cap="Evolution of decision boundaries for kNN."}
 {{< video _media/knn_demo.mp4 >}}
 
-At $k=1$ neighbor, each sample point defines its own local domain of influence that gives way when reaching a point equally close to a differently-labeled sample. This typically produces the most complicated decision boundaries. At the other extreme, with $k=n$ neighbors, all the samples vote every time, so all of feature space is given the same label (pending tiebreakers). 
+:::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_5gh9td14&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eflwm15d" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.4.2" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
+At $k=1$ neighbor, the decision boundaries are centered at samples and meet at equidistant points between them. This typically produces the most complicated decision boundaries. As $k$ increases, the decision boundaries become smoother. Finally, when $k$ reaches or exceeds the total number of samples, all of feature space is given the same label (except perhaps for tiebreakers). 
+
 ::::{#exm-class-knn chapter=3 type=💻 description="kNN classifier for the penguins dataset"}
-Back to the penguins! We use `dropna` to drop any rows with missing values.
+Back to the penguins! The data set has four quantitative columns that we use as features, and the species name is the label. 
+
 ```{python}
 import seaborn as sns
 import pandas as pd
 penguins = sns.load_dataset("penguins")
 penguins = penguins.dropna()
-penguins.head(6)
-```
-
-The data set has four quantitative columns that we use as features, and the species name is the label. 
-
-```{python}
 features = [
   "bill_length_mm",
   "bill_depth_mm",
@@ -983,7 +1102,8 @@ X = penguins[features]
 y = penguins["species"]
 ```
 
-Each type of classifier has to be imported before its first use in a session. (Importing more than once does no harm.)
+
+We set up and then train a classifier with $k=5$ neighbors:
 
 ```{python}
 from sklearn.neighbors import KNeighborsClassifier
@@ -991,7 +1111,7 @@ knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X, y)
 ```
 
-We can manually find the neighbors of a new vector. However, we have to make the query in the form of a data frame, since that is how the training data was provided. Here we make a query frame for values very close to the ones in the first row of the data.
+Here, we make a query vector using made-up feature values and ask to find its nearest neighbors in the training set:
 
 ```{python}
 vals = [39, 19, 180, 3750]
@@ -1000,33 +1120,67 @@ dist, idx = knn.kneighbors(query)
 idx[0]
 ```
 
-The result above indicates that the first sample (index 0) was the closest, followed by four others. We can look up the labels of these points:
+The result above shows the locations of the $k$ samples that best match the query. Here are the features of those neighbors:
+
+```{python}
+X.iloc[idx[0]]
+```
+
+(The sample index values don't always match the locations because when we dropped rows with missing values, the index was no longer increasing consecutively.) We can also look up the labels of these points:
 
 ```{python}
 y[ idx[0] ]
 ```
 
-By a vote of 4–1, then, the classifier should choose Adelie as the result at this location.
+By a vote of 4–1, then, the classifier should choose Adelie as the result at this location:
 
 ```{python}
 knn.predict(query)
 ```
 
-Note that points can be outvoted by their neighbors. In other words, the classifier won't necessarily be correct on every training sample. For example:
+::::
 
-```{python}
-print("Predicted:")
-print( knn.predict(X.iloc[:5,:]) )
-print()
-print("Data:")
-print( y.iloc[:5].values )
-```
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_djnpafsx&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lbr5rdhg" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/label.jpg){.lightbox}
 
-Next, we split into training and test sets to gauge the performance of the classifier. The `classification_report` function creates a summary of some of the important metrics.
+:::
+
+::: {.callout-tip}
+The default norm in the kNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
+
+:::
+
+### Standardization
+
+Norms are sensitive to the scales of the features. 
+
+::::{#exm-class-knn-norm chapter=3 type=✍️ description="kNN sensitivity to scaling"}
+Here are the heights and weights of two NBA players:
+
+| Player       | Height (m) | Weight (kg) |
+| ------------ | ---------- | ----------- |
+| Mugsy Bogues | 1.60       | 62          |
+| LeBron James | 2.06       | 113         |
+
+The norm of the difference between the feature vectors of these players is dominated by the weight. If we were to use this data in a kNN classifier, the height would be almost irrelevant.
+
+::::
+
+::: {.callout-tip}
+If your answer depends on the units of measure you chose for the features, you've probably done something wrong.
+
+:::
+
+A common remedy to the dependence on scales is to standardize the feature columns before using them. Scikit-learn allows us to automate that process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
+
+::::{#exm-class-knn-standard chapter=3 type=💻 description="Pipeline for standardizing columns"}
+Let's use a train--test split to gauge the performance of the KNN classifier in @exm-class-knn:
 
 ```{python}
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report,confusion_matrix
+from sklearn.metrics import confusion_matrix
 
 X_train, X_test, y_train, y_test = train_test_split(
   X, y,
@@ -1041,37 +1195,17 @@ print( confusion_matrix(
     y_test, yhat, 
     labels=["Adelie", "Chinstrap", "Gentoo"]
     ) )
-print("\nPerformance metrics:")
-print( classification_report(y_test, yhat) )
+print(f"\nAccuracy is {knn.score(X_test, y_test):.1%}")
 ```
-::::
 
-:::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_i1xfob91&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_jt0572v9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.12" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
-:::
-
-::: {.callout-tip}
-The default norm in the kNN learner is the 2-norm. To use the 1-norm instead, add `metric="manhattan"` to the classifier construction call.
-:::
-
-### Standardization
-
-The values in the columns of the penguin frame in @exm-class-knn are scaled quite differently. In particular, the values in the body mass column are more than 20x larger than the other columns on average:
+Not so great! But the columns of the feature matrix are scaled rather differently:
 
 ```{python}
-X.mean()
+X_train.median()
 ```
 
-Consequently, the mass feature will dominate the distance calculations. To remedy this issue, we could transform the data into z-scores:
+We may therefore benefit from standardizing the columns. We can do this by creating a pipeline:
 
-```{python}
-Z = X.transform( lambda x: (x - x.mean()) / x.std() )
-```
-
-We could then retrain the classifier using `Z` in place of `X`. Scikit-learn allows us to automate this process by creating a **pipeline**, which makes it easy to chain together a data transformation followed by a learner. 
-
-::::{#exm-class-knn-standard chapter=3 type=💻 description="Pipeline for standardized columns"}
-Once created, a pipeline object can mostly be treated the same as any other learner:
 ```{python}
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler   # converts to z-scores
@@ -1081,7 +1215,8 @@ pipe = make_pipeline(StandardScaler(), knn)
 pipe.fit(X_train, y_train)
 ```
 
-In this case, standardization allows us to perform perfectly!
+Once created, a pipeline object can mostly be treated the same as any other learner for scoring and prediction:
+
 ```{python}
 yhat = pipe.predict(X_test)
 
@@ -1090,49 +1225,60 @@ print( confusion_matrix(
     y_test, yhat, 
     labels=["Adelie", "Chinstrap", "Gentoo"]
     ) )
-print("\nPerformance metrics:")
-print( classification_report(y_test, yhat) )
+print(f"\nAccuracy is {pipe.score(X_test, y_test):.1%}")
 ```
 
-We can look under the hood of the pipeline. For example, we can see that the mean and variance of each of the original data columns is stored in the first part of the pipeline:
+In this case, standardization allowed us to perform perfectly.
+
+We can look under the hood of the pipeline if we want. For example, we can can access the individual parts of the pipeline by indexing into it:
 
 ```{python}
-print( pipe[0].mean_ )
-print( pipe[0].var_ )
+pipe[0]
 ```
-However, we don't need to access that data just to use the pipeline. That's taken care of when we use `pipe.score` or `pipe.predict`.
+
+```{python}
+pipe[1]
+```
+
+However, we do not want to use `pipe[1]` on its own for prediction, because it would be doing so without standardizing the query, and the results will be nonsense.
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_swqmj45e&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ghyc5qas" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.13" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_swqmj45e&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_rx9qd8wd" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.20" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
 
+::: {.callout-tip}
 The `StandardScaler`, which converts each column (feature) into z-scores, is appropriate for data that is roughly normally distributed. For other distributions, or if there are many outliers, it may be better to use the `RobustScaler`, which instead centers on the median and scales using the IQR. Finally, if you just want to force all the data to fit within a fixed interval, you can use the `MinMaxScaler`.
 
+:::
 
 ## Probabilistic interpretation {#sec-class-probabilistic}
 
-Both kNN and decision trees base classification on a voting procedure---for kNN, the $k$ nearest neighbors cast votes, and for a decision tree, the values at a leaf cast votes. So far, we have interpreted the voting results in a winner-takes-all sense, i.e., the class with the most votes wins. But that interpretation discards a lot of potentially valuable information. 
+Both kNN and decision trees base classification on a voting procedure---for kNN, the voters are the $k$ nearest neighbors, and for a decision tree, they are the values in a leaf. So far, we have interpreted the voting results in a winner-takes-all sense. But that interpretation discards a lot of potentially valuable information. 
 
 ::::{#def-class-phat}
 Let $\bfx$ be a query vector in a vote-based classification method. The **probability vector** $\hat{p}(\bfx)$ is the vector of vote fractions received by each class.
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_new5vjt4&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_137v0vyn" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 ::::{#exm-class-phat chapter=3 type="✍️, 💻" description="Probabilistic classifier"}
-Suppose we have trained a kNN classifier with $k=10$ for data with three classes, called A, B, and C, and that the votes at the testing points are as follows:
+Suppose we have trained a kNN classifier with $k=10$ for data with three classes, called A, B, and C, and that the votes at 5 testing points are as follows:
+
 ```{python}
 #| echo: false
 import pandas as pd
 pd.DataFrame({ "A":[9,5,6,2,4], "B":[0,3,1,0,5], "C":[1,2,3,8,1] })
 ```
+
 The values of $\hat{p}$ over the test set form a $5\times 3$ matrix:
-<!-- $$
-[0.9,0,0.1],\,[0.3,0.3,0.4],\,[0.6,0.1,0.3],\,[0.2,0,0.8],\,[0.4,0.5,0.1]. 
-$$ -->
+
 ```{python}
 p_hat = np.array( [
     [0.9, 0, 0.1],
@@ -1142,210 +1288,236 @@ p_hat = np.array( [
     [0.4, 0.5, 0.1]
     ] )
 ```
+
 ::::
+
+:::{.column-margin}
+![](_media/memes/votes.jpg){.lightbox}
+
+:::
 
 It's natural to interpret $\hat{p}$ as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given $\hat{p}$, we can still output a predicted class; it's just that we also get additional information about how the prediction was made. 
 
 ::::{#exm-class-prob chapter=3 type=💻 description="Probabilistic classifier for the penguins dataset"}
-Consider the penguin species classification problem:
+Consider once more the penguin species classification problem:
 
 ```{python}
-penguins = sns.load_dataset("penguins").dropna()
-# Select only numeric columns for features:
-X = penguins.loc[:, penguins.dtypes=="float64"]  
-y = penguins["species"].astype("category")
-
 X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.2, 
-    shuffle=True, random_state=5
+    shuffle=True, random_state=302
     )
 ```
 
 We can train a kNN classifier and then retrieve the probabilities via `predict_proba`:
 
 ```{python}
-knn = KNeighborsClassifier(n_neighbors=5)
-knn.fit(X_train, y_train)
-p_hat = knn.predict_proba(X_test)
-p_hat[:6,:]
+knn = KNeighborsClassifier(n_neighbors=15)
+pipe = make_pipeline(StandardScaler(), knn)
+pipe.fit(X_train, y_train)
+p_hat = pipe.predict_proba(X_test)
+p_hat[:5, :]
 ```
 
-From the output above we see that, for example, while the third and fourth test cases led to unanimous votes for *Gentoo*, the sixth case is deemed *Adelie* in a 3--2 squeaker (or is it a squawker?):
+From the output above we see that for the first 5 test samples, the votes were unanimous. But there is one row in which the outcome was a 3--2 squeaker (or is it a squawker?):
 
 ```{python}
-yhat = knn.predict(X_test)
-yhat[:6]
+p_hat[13, :]
 ```
+
 ::::
 
 ### ROC curve
 
-In the binary label case, our assumption so far has been that a simple majority vote determines a positive outcome. But we could choose a different threshold---a supermajority, for example, if we want to reduce false positives. This way of thinking leads us to a new way to fine-tune classification methods.
+For simplicity, let's now consider just a binary classification. Our assumption so far has been that a simple majority vote determines the outcome. But we could choose a different threshold---a supermajority, for example, if we want to reduce false positives. This way of thinking leads us to a new way to fine-tune classification methods.
 
 ::::{#def-class-hits}
-Let $\theta$ be a number in the interval $[0,1]$. We say that a class $T$ **hits** at level $\theta$ at a query point if the fraction of votes that $T$ receives at that point is at least $\theta$. 
+Let $\theta$ be a nonnegative number. We say that a sample point **hits at level $\theta$** if the fraction of positive votes at that point is at least $\theta$. 
+
 ::::
 
 ::::{#exm-class-hits chapter=3 type=💻 description="Varying decision threshold"}
-Continuing with the data in @exm-class-phat, we find that at $\theta=0$, everything always hits:
+Here are some fictitious voting results for a binary classification problem:
 ```{python}
 #| echo: false
-pd.DataFrame({"A":[1,1,1,1,1],"B":[1,1,1,1,1],"C":[1,1,1,1,1]})
+pd.DataFrame({ "negative":[3,0,4,2,7], "positive":[7,10,6,8,3], "Actual" : ["+", "+", "-", "+", "-"] })
 ```
-At $\theta=0.05$, say, we lose all the cases where no votes were received:
-```{python}
-#| echo: false
-pd.DataFrame({"A":[1,1,1,1,1],"B":[0,1,1,0,1],"C":[1,1,1,1,1]})
-```
-At $\theta=0.15$, we have also lost all those receiving 1 out of 10 votes:
-```{python}
-#| echo: false
-pd.DataFrame({"A":[1,1,1,1,1],"B":[0,1,0,0,1],"C":[0,1,1,1,0]})
-```
-By the time we get to $\theta=0.7$, there are only two hits left:
-```{python}
-#| echo: false
-pd.DataFrame({"A":[1,0,0,0,0],"B":[0,0,0,0,0],"C":[0,0,0,1,0]})
-```
+
+We consider only the *positive* class. If we start at $\theta=\infty$, we have no hits. If we decrease $\theta$ to 1, though, the second sample becomes a hit, since it has 100% of the votes. At this level, the predictions are
+
+$$
+[ -, +, -, -, - ],
+$$
+
+which implies 1 true positive and 0 false positives. 
+
+As $\theta$ decreases further, nothing happens until it reaches 0.8, at which point the 4th sample becomes a hit. The predictions are now
+
+$$
+[ -, +, -, +, - ],
+$$
+
+which implies 2 true positives and 0 false positives.
+
+We continue accruing more hits as $\theta$ decreases every time it crosses over a vote fraction for one of the samples. Eventually, we reach $\theta=0$, in which, by definition, every sample must hit. With all positive predictions, we end up with 3 true positives and 2 false positives.
+
 ::::
 
-The probability vector $\hat{p}(\bfx)$ holds the largest possible $\theta$ values for which each class hits at $\bfx$. Looking at it another way, $\theta=0$ represents maximum credulity---everybody's a winner!---while $\theta=1$ represents maximum skepticism---unanimous winners only, please.
-
-The **ROC curve** is a way to visualize the hits as a function of $\theta$ over a fixed testing set. The idea is to tally, at each value of $\theta$, all the hits within each class that represent true positives and false positives, and present the results visually.
-
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zi41n611&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qwimazfl" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.5.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+*(video uses different numbers, same idea)*
+</br>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_zi41n611&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_pfrhx9a6" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.24" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+
 :::
+
+Imagine $\theta$ as a dial that tunes the classification method. At $\theta=0$, we have maximum credulity---everybody gets a trophy! Once $\theta$ goes above 1, we have maximum skepticism---nobody's good enough to get a hit. If we turn the dial from infinity down to zero, each sample eventually toggles from a miss to a hit. Both the true positives and false positives can only increase as $\theta$ decreases.
+
+The **ROC curve** is a way to visualize this process over a fixed testing set. 
 
 ::: {.callout-note}
 The name of the ROC curve is a throwback to the early days of radar, when the idea was first developed.
+
 :::
 
-::::{#exm-class-roc-simple chapter=3 type=💻 description="ROC curve, quasi-manually"}
-We continue with the data from @exm-class-phat, but now we add ground truth to the queries:
+::::{#exm-class-roc chapter=3 type=💻 description="ROC curve"}
+Here is a dataset that tabulates features of email messages, along with a classification of whether they are spam. 
 
 ```{python}
-#| echo: false
-pd.DataFrame({"A":[9,5,6,2,4],"B":[0,3,1,0,5],"C":[1,2,3,8,1],"truth":["A","B","A","C","A"]})
+spam = pd.read_csv("_datasets/spambase.csv")
+spam.head()
 ```
 
-Let's look at class A. At $\theta=0.05$, class A hits in every case, giving TP=3 and FP=2. At $\theta=0.25$, the fourth query drops out; we still have TP=3, but now FP=1. Here is the table of all the unique values of TP and FP that we can achieve as $\theta$ varies between 0 and 1:
-
+Let's train a decision tree classifier on this data:
 ```{python}
-#| echo: false
-pd.DataFrame({"theta":[0.05,0.25,0.45,0.55,0.65,0.95],"FP":[2,1,1,0,0,0],"TP":[3,3,2,2,1,0]})
+X = spam.drop("class", axis=1)
+y = spam["class"] == 1
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2, 
+    shuffle=True, random_state=302
+    )
+
+dtree = DecisionTreeClassifier(max_depth=7)
+dtree.fit(X_train, y_train)
+print(f"Accuracy is {dtree.score(X_test, y_test):.2%}")
 ```
 
-In order to make a graph, we convert the raw TP and FP numbers to rates. Since there are 2 positive and 3 negative over the entire test set, we can represent the rows above as the points
-$$
-\left(\tfrac{2}{2},\tfrac{3}{3}\right), \, \left(\tfrac{1}{2},\tfrac{3}{3}\right), \, \left(\tfrac{1}{2},\tfrac{2}{3}\right), \, \left(\tfrac{0}{2},\tfrac{2}{3}\right), \, \left(\tfrac{0}{2},\tfrac{1}{3}\right)\, \left(\tfrac{0}{2},\tfrac{0}{3}\right). 
-$$
-The ROC curve for class A is just connect-the-dots for these points:
+Now we use a function that tabulates true and false positives at relevant values of $\theta$, as we did manually in @exm-class-hits:
 
-```{python}
-data = pd.DataFrame({"FP rate": [1,1/2,1/2,0,0,0], "TP rate": [1,1,2/3,2/3,1/3,0]})
-sns.relplot(data=data, 
-    x="FP rate", y="TP rate", 
-    kind="line", estimator=None
-    );
-```
-
-As we're about to see, the step-by-step process above is just for illustration and is completely automated in practice.
-::::
-
-![](_media/memes/ROC.jpeg){height=380}
-
-
-Unsurprisingly, `sklearn` can compute the points defining the ROC curve automatically, which greatly simplifies drawing them. In a multiclass problem with $K$ classes, there are $K$ implied binary classificiation versions of one-vs-rest, so there are $K$ curves to draw, one for the identification of each class.
-
-::::{#exm-class-roc-penguin chapter=3 type=💻 description="ROC curve for the penguins dataset"}
-Continuing @exm-class-prob, we will plot ROC curves for the three species in the penguin data:
 ```{python}
 from sklearn.metrics import roc_curve
-
-p_hat = knn.predict_proba(X_test)
-results = []
-for i, label in enumerate(knn.classes_):
-    actual = (y_test==label)
-    fp, tp, theta = roc_curve(actual,p_hat[:,i])
-    results.extend( [(label,fp,tp) for fp,tp in zip(fp,tp)] )
-roc = pd.DataFrame( results, columns=["label","FP rate","TP rate"] )
-roc
+p_hat = dtree.predict_proba(X_test)
+fp, tp, theta = roc_curve(y_test, p_hat[:, 1])
 ```
 
-The table above holds all of the key points on the ROC curves:
+The second argument of `roc_curve` is a vector of vote fractions (i.e., hit probabilities) for the positive class. Since `False` is less than `True`, that's the second column of `p_hat` here. The return values are the false positive rate, true positive rate, and the thresholds at which they were computed:
 
 ```{python}
-sns.relplot(data=roc, 
-    x="FP rate", y="TP rate", 
-    hue="label", kind="line", estimator=None
-    );
+results = pd.DataFrame( {"FP rate":fp, "TP rate":tp, "Threshold":theta} )
+results
 ```
 
-Each curve starts in the lower left corner and ends at the upper right corner. The ideal situation is in the top left corner of the plot, corresponding to perfect recall and specificity. All of the curves explicitly show the tradeoff between recall and specificity as the decision threshold is varied. The *Gentoo* curve comes closest to the ideal. 
-
-If we weight neighbors' votes inversely to their distances from the query point, then the thresholds aren't restricted to multiples of $\tfrac{1}{5}$:
+A plot is more informative than the table of numbers:
 
 ```{python}
-knnw = KNeighborsClassifier(n_neighbors=5, weights="distance")
-knnw.fit(X_train, y_train)
-p_hat = knnw.predict_proba(X_test)
-
-results = []
-for i, label in enumerate(knn.classes_):
-    actual = (y_test==label)
-    fp, tp, theta = roc_curve(actual,p_hat[:,i])
-    results.extend( [(label,fp,tp) for fp,tp in zip(fp,tp)] )
-roc = pd.DataFrame( results, columns=["label","FP rate","TP rate"] )
-sns.relplot(data=roc, 
-    x="FP rate", y="TP rate", 
-    hue="label", kind="line", estimator=None
-    );
+import seaborn as sns
+sns.relplot(data=results, x="FP rate", y="TP rate", kind="line");
 ```
+
 ::::
 
 :::{.column-margin}
-<div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_j0jantoa&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_6itqu4ll" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.18" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_8amtzxkx&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0gtijpcm" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.25" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/ROC.jpeg){.lightbox}
+
 :::
 
+::: {.callout-important}
+When using `roc_curve`, the second argument should be the probability of the positive class. You have to pick the correct column from the output of `predict_proba`. For a `True`/`False` classification, the positive class is usually `True`, so you should use the second column.
+
+:::
+
+The ROC curve always starts in the top right corner (total skepticism) and ends in the bottom left corner (total credulity). The ideal situation is in the top left corner of the plot, corresponding to perfect TP rate (recall) and perfect FP rate (specificity). 
+
+The ROC curve in @exm-class-roc illustrates the tradeoff between true positives (recall) and false positives (specificity). For that classifier, if we want a TP rate greater than 90%, then we have to accept a FP rate of about 5%.
 
 ### AUC
 
-ROC curves lead to another classification performance metric known as **area under ROC curve (AUC)**. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range from credulous to skeptical. You might think of it as grading with partial credit.
+ROC curves lead to another classification performance metric known as **area under ROC curve (AUC)**. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range. You might think of it as grading with partial credit.
 
 ::::{#exm-class-auc chapter=3 type=💻 description="Area under ROC curve"}
-The AUC metric allows us to compare the standard and weighted kNN classifiers from @exm-class-roc-penguin. Note that the function for computing them, `roc_auc_score`, requires a keyword argument when there are more than two classes, to specify "one vs. rest" (our usual) or "one vs. one" matchups.
+The AUC metric allows us to compare classifiers for @exm-class-roc. Note that the function for computing them, `roc_auc_score`, requires a keyword argument when there are more than two classes, to specify "one vs. rest" (our usual) or "one vs. one" matchups.
 
 ```{python}
 from sklearn.metrics import roc_auc_score
-s = roc_auc_score(
-    y_test, knn.predict_proba(X_test), 
-    multi_class="ovr", average=None
-    )
-
-sw = roc_auc_score(
-  y_test, knnw.predict_proba(X_test), 
-  multi_class="ovr", average=None
-  )
-
-pd.DataFrame(
-    {"standard": s, "weighted": sw},
-    index=knn.classes_
-    )
+auc = roc_auc_score(y_test, p_hat[:, 1])
+print(f"AUC for decision tree is {auc:.3f}")
 ```
 
-Based on the above scores, the weighted classifier seems to be better at identifying all three species.
+Let's compare this to a kNN classifier:
+
+```{python}
+from sklearn.preprocessing import RobustScaler
+knn = KNeighborsClassifier(n_neighbors=7)
+pipe = make_pipeline(RobustScaler(), knn)
+pipe.fit(X_train, y_train)
+p_hat = pipe.predict_proba(X_test)
+auc = roc_auc_score(y_test, p_hat[:, 1])
+print(f"AUC for kNN is {auc:.3f}")
+```
+
+In terms of AUC, kNN looks better. But consider its ROC curve:
+
+```{python}
+fp, tp, _ = roc_curve(y_test, p_hat[:, 1])
+results = pd.DataFrame( {"FP rate":fp, "TP rate":tp} )
+sns.relplot(data=results, x="FP rate", y="TP rate", kind="line");
+```
+
+Reading from left to right, the curve in @exm-class-roc rises more quickly than this one at first but then more slowly increases once past a 90% TP rate. If we were satisfied with a 90% TP rate, we would prefer the decision tree at a 5% FP rate. But if we could tolerate a larger FP rate, we would then prefer the higher TP rate attainable with the kNN classifier.
+
 ::::
 
-![](_media/memes/AUC.jpg){height=360}
+:::{.column-margin}
+<div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_wcwz6whf&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_l88zyvcx" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.26" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/AUC.jpg){.lightbox}
+
+:::
+
+::: {.callout-caution}
+While it's nice to have a numerical metric such as AUC, the ROC curve is more valuable for the insight it gives about threshold tradeoffs.
+
+:::
+
+
+Here's the latest for the scikit-learn workflow:
+
+```{mermaid}
+flowchart TD
+    dataset["Get feature matrix and label vector"]
+    split["Split into training and testing sets
+    train_test_split()"]
+    object["Create learner object"]
+    train["Fit learner to data
+    .fit()"]
+    predict["Make predictions
+    .predict()
+    .predict_proba()"]
+    evaluate["Compute metrics
+    .confusion_matrix(), .score(), recall_score(), etc.
+    roc_curve()"]
+    dataset --> split --> object --> train --> predict
+    train --> evaluate
+```
 
 ## Exercises {.unnumbered}
 
 For these exercises, you may use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).
 
 ::::{#exr-class-dankness}
-Here is a confusion matrix for a classifier of meme dankness. 
+(2.2) Here is a confusion matrix for a classifier of meme dankness. 
 
 ![](./_media/dankness.png){width=360}
 
@@ -1353,7 +1525,7 @@ Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(
 ::::
 
 ::::{#exr-class-flavors}
-Here is a confusion matrix for a classifier of ice cream flavors. 
+(2.2) Here is a confusion matrix for a classifier of ice cream flavors. 
 
 ![](./_media/flavors.png){width=500}
 
@@ -1365,24 +1537,31 @@ Here is a confusion matrix for a classifier of ice cream flavors.
 ::::
 
 ::::{#exr-class-gini}
-Find the Gini impurity of this set: 
+(2.3) Find the Gini impurity of this set: 
 $$ \{ A, B, B, C, C, C \}.$$
 ::::
 
-::::{#exr-class-gini-bounds}
-~~Use the definition of Gini impurity to prove that it is never negative and always less than 1.~~
+::::{#exr-class-maxgini}
+(2.3) Explain why for the binary case $K=2$, @def-class-gini implies that $H(S)$ is maximized when the two classes are equally represented in $S$.
 ::::
 
 ::::{#exr-class-partition}
-Given $x_i=i$ for $i=0,\ldots,5$, with labels
+(2.3) Given $x_i=i$ for $i=0,\ldots,5$, with labels
 $$
 y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 $$
 find an optimal partition threshold using Gini impurity.
 ::::
 
+::::{#exr-class-tree}
+(2.3) For the decision tree drawn in @exm-class-tree, make predictions for each of the following queries, showing the path taken through the tree for each case.
+
+**(a)** $(x_1, x_2) = (4, 5),\quad$  **(b)** $(x_1, x_2) = (8,9),\quad$  **(c)** $(x_1, x_2) = (10, 4)$
+
+::::
+
 ::::{#exr-class-distance}
-Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vectors.
+(2.4) Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vectors.
 
 **(a)** $\bfu=[2,3,0]$, $\;\bfv=[-2,2,1]$
 
@@ -1390,21 +1569,17 @@ Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vec
 ::::
 
 ::::{#exr-class-norm}
-**(a)** Prove that for any $\bfu \in \real^d$, $\infnorm{\bfu} \le \twonorm{\bfu}$. 
+**(a)** (2.4) Prove that for any $\bfu \in \real^d$, $\infnorm{\bfu} \le \twonorm{\bfu}$. 
 
-**(b)** Prove that for any $\bfu \in \real^d$, $\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}$. 
+**(b)** (2.4) Prove that for any $\bfu \in \real^d$, $\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}$. 
 ::::
 
 ::::{#exr-class-manhattan}
-Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*. (Hint: You can consider each quadrant of the plane separately.)
-::::
-
-::::{#exr-class-triangle}
-Three points in the plane lie at the vertices of an equilateral triangle. One is labeled A and the other two are B. Carefully sketch the decision boundary for $k$-nearest neighbors with $k=1$, using the 2-norm.
+(2.4) Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*. (Hint: You can consider each quadrant of the plane separately.)
 ::::
 
 ::::{#exr-class-knn1d}
-Suppose you are training to fit the ground-truth one-dimensional classifier
+(2.4) Suppose you are training to fit the ground-truth one-dimensional classifier
 
 $$
 y = f(x) =
@@ -1416,9 +1591,9 @@ $$
 
 Here is a table of training data:
 
-| $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ |  $0$ |  $1$ |  $2$ |  $3$ |  $4$ |  $5$ |
-|-------|-----|-----|-----|-----|-----|----|----|----|----|----|----|
-| $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ | 
+| $x_i$ | $-5$ | $-4$ | $-3$ | $-2$ | $-1$ | $0$  | $1$  | $2$  | $3$  | $4$  | $5$  |
+| ----- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| $y_i$ | $-1$ | $-1$ | $+1$ | $-1$ | $+1$ | $+1$ | $-1$ | $+1$ | $-1$ | $-1$ | $-1$ |
 
 **(a)** Make a table of $x$ and $f(x)$ values on the testing set $-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25$. 
 
@@ -1429,18 +1604,10 @@ Here is a table of training data:
 **(d)** Find the testing precision and recall for the rows with $k=1,3,9$.
 ::::
 
-::::{#exr-class-ellipse}
-Define 8 points on an ellipse by $x_k=a\cos(\theta_k)$ and $y_k=b\sin(\theta_k)$, where $a$ and $b$ are positive and 
-$$
-\theta_1= \frac{\pi}{4}, \theta_2 = \frac{\pi}{2}, \theta_3 = \frac{3\pi}{4}, \ldots, \theta_8 = 2\pi. 
-$$
-Let $u_1,\ldots,u_8$ and $v_1,\ldots,v_8$ be the z-scores of the $x_k$ and the $y_k$, respectively. Show that the points $(u_k,v_k)$ all lie on a circle centered at the origin for all $k=1,\ldots,8$. (By extension, standardizing points into z-scores is sometimes called *sphereing* them.)
-::::
-
 ::::{#exr-class-lattice-colors}
-Here are blue/orange labels on an integer lattice.
+(2.4) Here are blue/orange labels on an integer lattice.
 
-![](_media/gridlabels.png){width="360"}
+![](_media/gridlabels.png){width="360" .lightbox}
 
 Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $2\le t \le 2$. 
 
@@ -1451,4 +1618,75 @@ Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean
 **(c)** $g(t) = \hat{f}(t,1.6)$ 
 
 **(d)** $g(t) = \hat{f}(-0.25,t)$ 
+::::
+
+::::{#exr-class-knn-roc}
+(2.5) Suppose you have written a kNN classifier with $k=5$ to predict whether dad jokes are funny. Here are the votes for 6 test jokes:
+
+```{=html}
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 604px"><colgroup>
+<col style="width: 55%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-1wig">Joke</th>
+    <th class="tg-1wig">Funny</th>
+    <th class="tg-1wig">Not funny</th>
+    <th class="tg-1wig">Actual</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Is the refrigerator running? Better go catch it!</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">2</td>
+    <td class="tg-0lax">not funny</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Why did the scarecrow win an award? Because he was outstanding in his field!</td>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">funny</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">What do you call a fake noodle? An impasta!</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">0</td>
+    <td class="tg-0lax">funny</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Why couldn’t the bicycle stand up by itself? It was two-tired!</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">funny</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">What’s blue and not heavy? Light blue.</td>
+    <td class="tg-0lax">2</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">not funny</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">What do you call a pile of cats? A meowtain!</td>
+    <td class="tg-0lax">0</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">not funny</td>
+  </tr>
+</tbody></table>
+```
+
+Carefully sketch the ROC curve for this classifier.
+
+(This exercise is for illustration only. In reality, all the jokes are funny.)
 ::::
