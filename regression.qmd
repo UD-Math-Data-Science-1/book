@@ -1813,7 +1813,7 @@ $$
 ::::{#exr-regression-lattice-values}
 (5.4) Here are values (labels) on an integer lattice.
 
-![](_media/griddata.png){width="360"}
+![](_media/griddata.png){width="360" .lightbox}
 
 Let $\hat{f}(x_1,x_2)$ be the kNN regressor using $k=4$, Euclidean metric, and mean averaging. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $-2\le t \le 2$.
 

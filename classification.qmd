@@ -205,6 +205,12 @@ Consider the following classification algorithm: To make a prediction, see if th
 
 :::{#def-class-generalization}
 The performance of a predictor on previously unseen data is known as the **generalization** of the predictor. 
+
+:::
+
+:::{.column-margin}
+![](_media/memes/generalization.jpg){.lightbox}
+
 :::
 
 In order to gauge generalization, we should hold back some of the original labeled data from training and use it only to test the performance. That is, we split the dataset into nonoverlapping **training and testing sets**. Only the training set is fit by the classifier, while the testing set is used to evaluate its performance.
@@ -1519,7 +1525,7 @@ For these exercises, you may use computer help to work on a problem, but your an
 ::::{#exr-class-dankness}
 (2.2) Here is a confusion matrix for a classifier of meme dankness. 
 
-![](./_media/dankness.png){width=360}
+![](./_media/dankness.png){width=360 .lightbox}
 
 Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(b)** precision, **(c)** specificity, **(d)** accuracy, and **(e)** $F_1$ score of the classifier.
 ::::
@@ -1527,7 +1533,7 @@ Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(
 ::::{#exr-class-flavors}
 (2.2) Here is a confusion matrix for a classifier of ice cream flavors. 
 
-![](./_media/flavors.png){width=500}
+![](./_media/flavors.png){width=500 .lightbox}
 
 **(a)** Calculate the recall rate for *chocolate*.
 

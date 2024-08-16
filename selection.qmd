@@ -20,7 +20,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, roc_auc_score
 ```
 
-We have barely scratched the surface of the universe of classification algorithms. Even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through *hyperparameters*.
+We have barely scratched the surface of the universe of classification algorithms. But even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through *hyperparameters*.
 
 ::::{#def-select-hyper}
 A **hyperparameter** of a learning algorithm is a value or setting affecting the algorithm that remains fixed throughout training.
@@ -32,18 +32,18 @@ A **hyperparameter** of a learning algorithm is a value or setting affecting the
 
 
 :::{.callout-note}
-In ML, a *parameter* is a value that is adjusted during training; i.e., it is learned from the training data. In most of mathematics, we would refer to these as *variables*, but in ML that term is often understood to be synonymous with *feature*.
+In machine learning, a *parameter* is a value that is adjusted during training; i.e., it is learned from the training data. In most of mathematics, we would refer to these as *variables*, but in ML that term is often understood to be synonymous with *feature*.
 :::
 
 Some hyperparameters, such as the choice of norm in the nearest-neighbors algorithm, have an influence that is not easy to characterize. But others clearly affect the potential expressive power of the algorithm. 
 
 ::::{#exm-select-hyper chapter=4 type=✍️ description="Hyperparameters"}
-The maximum depth $r$ of a decision tree limits the complexity that the tree can attain. When $r=1$, the tree can divide the data only once and assign different values to the different sides. In general, though, a tree can assign up to $2^r$ unique values, which grows exponentially with $r$; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.
+The maximum depth $r$ of a decision tree limits the complexity that the tree can attain. When $r=1$, the tree can divide the data only once and assign one or two different labels. In general, though, a tree can assign up to $2^r$ unique labels, which grows exponentially with $r$; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.
 
 For a kNN classifier, when $k$ is as large as the number of samples, the classifier can only take one value on the entire set---all the samples have a vote everywhere. The other extreme is $k=1$, where each sample rules within its own neighborhood, and again we achieve 100% training accuracy.
 ::::
 
-Options provide flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.
+Options provide valuable flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.
 
 ## Bias--variance tradeoff {#sec-select-learning-curves}
 
@@ -57,16 +57,17 @@ Let $\hat{f}(x)$ denote a probabilistic classification function obtained after t
 $$
 \hat{f}_1(x),\hat{f}_2(x),\dots,\hat{f}_N(x). 
 $$
+
 Then we define the **expected value** of the classifier as the average over all training sets:
 $$
 \E{\hat{f}(x)} = \frac{1}{N} \sum_{i=1}^N \hat{f_i}(x).
 $$
 
 ::: {.callout-note}
-Except on toy problems, we don't know how to calculate this average. This is more of a thought experiment. But we will simulate the idea later on.
+Except on toy problems, we don't know how to calculate this average. This is more of a thought experiment. But we do simulate the process later on.
 :::
 
-The term *expected* doesn't mean that we anticipate getting this answer for our particular $\hat{f}$. It's just what we would get if we could average over all parallel universes receiving unique training sets. 
+The term *expected* doesn't mean that we anticipate getting this answer for our particular instance of $\hat{f}$. It's just what we would get if we could average over all parallel universes receiving unique training sets. 
 
 We can apply the expectation operator $\mathbb{E}$ to any function of $x$. In particular, the expected error in our own universe's prediction is
 $$
@@ -76,11 +77,18 @@ $$
   &= f(x) - \E{\hat{f}(x)}.
 \end{split}
 $$
-We will set $y=f(x)$ as the true label and $\hat{y}=\E{\hat{f}(x)}$ as the expected prediction. The quantity above, $y-\hat{y}$, is called the **bias** of the classifier. Bias depends on the particular algorithm and its hyperparameters, but not on the training set. Among other things, bias accounts for the fact that any particular finite algorithm can represent only some labelling functions perfectly.
+
+::::{#def-select-bias}
+The **bias** of a method $\hat{f}(x)$ for learning the labeler $f(x)$ is the expected difference between the true label and the expected prediction, $f(x) - \E{\hat{f}(x)}$.
+::::
+
+We often set $y=f(x)$ as the true label and $\hat{y}=\E{\hat{f}(x)}$ as the expected prediction, allowing us to write the bias as $y-\hat{y}$. 
+
+Bias depends on the particular learning algorithm and its hyperparameters, but not on the training set. Among other things, bias accounts for the fact that any particular finite algorithm can represent only a finite number of labelling functions perfectly.
 
 ### Variance
 
-It might seem as though the only important goal is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You're capable of landing the ball on the green in one swing, but it's near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water's edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing pretty well, though not optimally. 
+It might seem as though the only important goal in machine learning is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You're capable of landing the ball on the green in one swing, but it's near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water's edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score on the hole from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing fairly well, though not optimally. 
 
 In essence, a good chance of a mediocre result can outweigh a small chance of a better result. To express this tradeoff mathematically, we can compute the variance of the predicted label at any $x$:
 $$
@@ -101,19 +109,36 @@ $$
 \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right) = 
 \hat{y} - \frac{1}{N} \sum_{i=1}^N \hat{f}_i(x) = 0,
 $$
+
 by the definition of $\hat{y}$. So overall,
+
 $$
 \begin{split}
 	\E{\bigl(y - \hat{f}(x)\bigr)^2} &= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} \right)^2 + \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right)^2 \\ 
   &= (y-\hat{y})^2 + \E{\left(\hat{y} - \hat{f}(x)\right)^2}
 \end{split}
 $$ {#eq-select-biasvar}
-The first term is the squared bias. The second is the **variance** of the learning method. In words, the variance of the learning process has two contributions:
 
-Bias
+At the end, we have a sum of two nonnegative terms. The first term is the squared bias. The second is the *variance* of the learning method. 
+
+::::{#def-select-variance}
+The **variance** of a method $\hat{f}(x)$ for learning the labeler $f(x)$ is 
+
+$$
+\E{\left(\hat{y} - \hat{f}(x)\right)^2},
+$$ {#eq-select-variance}
+
+where $\hat{y} = \E{\hat{f}(x)}$ is the expected prediction. 
+::::
+
+You might think of a method's variance as the inverse of its repeatability or stability. 
+
+To summarize @eq-select-biasvar, the variance of a prediction has two contributions:
+
+Method bias
 : How close is the average prediction to the ground truth? 
 
-Variance
+Method variance
 : How close to the average prediction is any one prediction likely to be?
 
 ```{python}
@@ -145,7 +170,7 @@ fig.set(xlim=(-1.25,1.25), ylim=(-1.25,1.25));
 
 Why would these two factors be in opposition? When a learning method has the capacity to capture complex behavior, it potentially has a low bias. However, that same capacity means that the learner will fit itself very well to each individual training set, which increases the potential for variance over the whole collection of training sets. 
 
-This tension is known as the *bias--variance tradeoff*. Perhaps we can view this tradeoff as a special case of *Occam's Razor*: it's best to choose the least complex method necessary to reach a particular level of explanatory power.
+This tension is known as the *bias--variance tradeoff*. Perhaps we can view this tradeoff as a special case of Occam's Razor: it's best to choose the least complex method necessary to reach a particular level of explanatory power.
 
 ### Learning curves 
 
@@ -174,19 +199,22 @@ LearningCurveDisplay.from_estimator(
 The plot above shows **learning curves** resulting from experiments over 100 different training sets at various sizes selected randomly from the full set. The solid lines and ribbons show the means and standard deviations, respectively, for each training set size. 
 
 The model in the experiment is a decision tree of depth 4. When the training set is tiny, the model can represent it very well. But those results generalize poorly, and the testing score is much lower and shows a lot of variance. As the training set size increases, the model cannot fit it as well (bias increases), but both the testing scores and training scores show less variance due to better generalization. 
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_9bbqi721&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_h1yyrcno" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
+</br>
+![](_media/memes/learning-curve.jpg){.lightbox}
+
 :::
 
 When you see a large gap between training and test errors, you should suspect that the learner may not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.
 
-![](_media/memes/learning-curve.jpg){height="240"}
 
 ## Overfitting
 
-One important factor we have not yet considered is noise in the training data---that is, erroneous values. If a learner responds too adeptly to isolated wrong values, it will also respond incorrectly to other nearby inputs. This situation is known as **overfitting**.
+One important factor we have not yet considered is noise in the training data---that is, erroneous labels. If a learner responds too adeptly to isolated wrong cases, it will also respond incorrectly to other nearby inputs. This situation is known as **overfitting**.
 
 ### Overfitting in kNN
 
@@ -248,7 +276,7 @@ Now suppose we use training sets that have just 3 mislabeled examples each. Here
 overfit(40,KNeighborsClassifier(n_neighbors=1),3)
 ```
 
-Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. We can generally expect such overfitting with $k=1$, for which the deicision boundary can be complex.
+Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. We can generally expect such overfitting with $k=1$, for which the decision boundary can be complex.
 
 Now let's bump up to $k=3$. The results are more like we want, even with noisy data:
 
@@ -337,9 +365,10 @@ The testing scores increase with the training set size, which is good, but the t
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_6y3owvh7&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_n5k5ciot" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
-:::
+</br>
+![](_media/memes/overfit.jpg){.lightbox}
 
-![](_media/memes/overfit.jpg){height="240"}
+:::
 
 ## Ensemble methods
 
@@ -347,25 +376,30 @@ When a relatively expressive learning model is used, overfitting and strong depe
 
 ::::{#def-select-bagging}
 In *bootstrap aggregation*, or **bagging** for short, samples are drawn randomly from the original training set. Usually, this is done *with replacement*, which means that some samples might be selected multiple times.
-::::
 
-Why should bagging work? It comes down to the way that bias and variance behave. Suppose we produce $M$ prbabilstic binary classifiers, $\hat{f}_1,\ldots,\hat{f}_M$, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier
+::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_he2khxi8&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_315g3ohe" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
+
+Why does bagging work? It comes down to the way that bias and variance behave. Suppose we produce $M$ probabilistic binary classifiers, $\hat{f}_1,\ldots,\hat{f}_M$, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier
 $$
 \hat{F}(x) = \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x).
 $$
+
 The bias of the bagging classifier is the expectation of
 $$
 y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \frac{1}{M} \sum_{m=1}^M \left(  y - \hat{f}_m(x)  \right). 
 $$
-This is simply the mean of the constitutent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bagging classifier has the same expected bias as its constituents. 
 
-The story for the variance is different. It [can be derived](https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables) that the variance of the bagging predictor is $1/M$ times that of the constituent classifiers. (This effect can be used to explain the *wisdom of crowds*. If each person in a classroom is asked to guess the number of jellybeans in a large jar, the mean of the class' guesses will tend to be much closer to the true value than most individuals' guesses are.)
+This is simply the mean of the constituent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bias of the bagging classifier has is the same as its constituents. But it [can be derived](https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables) that the *variance* of the bagging predictor is $1/M$ times that of the constituent classifiers. We should therefore expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-$k$ kNN classifiers, for example. 
 
-We should expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-$k$ kNN classifiers. 
+:::{.callout-note}
+Bagging explains the *wisdom of crowds*. For instance, if many people are asked to independently guess the number of jellybeans in a large jar, the mean of the guesses will tend to be much closer to the true value than most individuals' guesses are.
+
+:::
 
 Scikit-learn has a `BaggingClassifier` that automates the process of generating an ensemble from just one basic type of estimator. 
 
@@ -445,18 +479,20 @@ p_hat = ensemble.predict_proba(X_test)
 auc = roc_auc_score(y_test==True, p_hat[:,1])   # columns are for [False, True]
 print(f"AUC for ensemble is {auc:.4f}")
 ```
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_4ad9lnpm&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_28i59tgw" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.4" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 There is a significant catch in that the theory requires the constituent learners to be uncorrelated, which is less true as the size of the bagging sample grows relative to the original training set. This can somewhat counterintuitively lead to better results by training on *smaller* individual training sets.
 
 ::: {.callout-note}
-An ensemble of decision trees is known as a **random forest**. We can use a `RandomForestClassifier` to accomplish the same thing as a bagged decision tree ensemble. 
+An ensemble of decision trees is known as a **random forest**. We can use a `RandomForestClassifier` to accomplish the same thing as a bagged decision tree ensemble.
+ 
 :::
-
 
 ::::{#exm-select-ensemble-knn-better chapter=4 type=💻 description="Bagging ensemble (better)"}
 If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:
@@ -475,6 +511,7 @@ print(f"AUC for the new ensemble is {auc:.4f}")
 ```
 
 We may get better results by increasing the size of the ensemble, too, though in this case there isn't much room left for improvement.
+
 ::::
 
 ::::{#exm-select-ensemble-forest chapter=4 type=💻 description="Random forest classifier"}
@@ -548,15 +585,18 @@ rf.fit(X_train,y_train)
 F1 = f1_score(y_test, rf.predict(X_test) )
 print(f"F₁ for a taller, skinnier forest is {F1:.4f}")
 ```
+
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_nx4y7s7a&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_5kl56l4m" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.6" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/random-forest.jpeg){.lightbox}
+
 :::
 
 Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.
 
-![](_media/memes/random-forest.jpeg){width="360"}
 
 ## Validation
 
@@ -761,6 +801,9 @@ It may be instructive to rerun the competition above using different random seed
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ry2p82e9&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_awcakaj1" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.10" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/validation.jpg){.lightbox}
+
 :::
 
 
@@ -768,7 +811,6 @@ It may be instructive to rerun the competition above using different random seed
 
 Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.
 
-![](_media/memes/validation.jpg){height="300"}
 
 ## Exercises {.unnumbered}
 
