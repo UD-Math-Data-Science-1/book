@@ -126,6 +126,8 @@ nx.draw(nx.cycle_graph(9))
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_7adqz4nu&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_i0b3xbgb" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 7.1.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/cycle.jpg){.lightbox}
 
 :::
 
@@ -135,6 +137,10 @@ A cross between the star and the cycle is a **wheel graph**.
 nx.draw(nx.wheel_graph(9), node_size=100)
 ```
 
+:::{.column-margin}
+![](_media/memes/wheel.jpg){.lightbox}
+:::
+
 A **complete graph** is one that has every possible edge, i.e., all possible pairs of nodes are connected.
 
 ```{python}
@@ -142,6 +148,10 @@ K5 = nx.complete_graph(5)
 print("5 nodes,", nx.number_of_edges(K5), "edges")
 nx.draw(K5)
 ```
+
+:::{.column-margin}
+![](_media/memes/complete.jpg){.lightbox}
+:::
 
 In a graph on $n$ nodes, there are 
 
@@ -158,6 +168,10 @@ lat = nx.grid_graph( (5,4) )
 print(lat.number_of_nodes(), "nodes,", lat.number_of_edges(), "edges")
 nx.draw(lat, node_size=100)
 ```
+
+:::{.column-margin}
+![](_media/memes/grid.jpg){.lightbox}
+:::
 
 In an $m\times n$ lattice graph, there are $m-1$ edges in one direction repeated $n$ times, plus $n-1$ edges in the other direction, repeated $m$ times. Thus there are 
 
@@ -234,13 +248,15 @@ A_{ij} = \begin{cases}
     0, & \text{otherwise.}
     \end{cases}
 $$
+
 ::::
 
 In an undirected graph, we have 
 $$
-A_{ij}=A_{ji}
+A_{ij}=A_{ji},
 $$ 
-for all valid indices, and we say that $A$ is **symmetric**.
+
+for all valid indices, so adjacency matrices in an undirected graph are symmetric.
 
 ::::{#exm-networks-adjmatrix chapter=7 type=💻 description="Adjacency matrix"}
 The star graph defined in @sec-networks-zoo has the following adjacency matrix:
@@ -313,6 +329,8 @@ As we are about to see, though, there's an easier way to compute the average deg
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_0ho332qk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0szkxms6" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.6" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+<br/>
+![](_media/memes/degree.jpg){.lightbox}
 
 :::
 
@@ -395,7 +413,9 @@ for iter in range(20000):
 
 sns.displot( x=kbar, bins=23 );
 ```
+
 The mean of this distribution converges to $p(n-1)=4$ as the number of random instances goes to infinity.
+
 ::::
 
 :::{.column-margin}
@@ -407,12 +427,14 @@ The mean of this distribution converges to $p(n-1)=4$ as the number of random in
 $$
 \frac{2m}{n} = p(n-1),
 $$ {#eq-networks-ER-prob}
+
 or $p=2m/(n^2-n)$. 
 
 In @exm-networks-import, for example, we found that our Twitch network has $n=7126$ nodes and $m=35324$ edges, which suggests an ER equivalent of
 $$
 p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
 $$
+
 That is, if connections in the Twitch network were made completely at random, they would have to occur at a probability of about $0.14$%.
 
 ### Watts–Strogatz graphs
@@ -434,11 +456,13 @@ If we set $q=0$, we disable the rewiring phase and get a regular ring lattice:
 WS = nx.watts_strogatz_graph(13, 4, 0, seed=302)
 nx.draw_circular(WS, node_size=100)
 ```
+
 As $q$ increases, we introduce more randomness:
 ```{python}
 WS = nx.watts_strogatz_graph(13, 4, 0.25, seed=302)
 nx.draw_circular(WS, node_size=100)
 ```
+
 Taken to the limit $q=1$, we end up with something that loses the mostly-local structure:
 ```{python}
 WS = nx.watts_strogatz_graph(13, 4, 1.0, seed=302)
@@ -449,6 +473,8 @@ nx.draw_circular(WS, node_size=100)
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_0ljq2qqg&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ddhp5q6a" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/bacon.jpg){.lightbox}
 
 :::
 
@@ -462,6 +488,7 @@ Because of this result and @thm-networks-degree, we have
 $$
 k = \frac{2m}{n}
 $$
+
 to get a WS graph of the same average degree as any other graph with $n$ nodes and $m$ edges. Keep in mind that we are constrained to use an even integer for $k$, so this relation usually can hold only approximately. 
 
 ## Clustering
@@ -575,6 +602,7 @@ sns.displot(x=results);
 ```
 
 The distribution above can't be normal, because there are hard bounds at 0 and 1, but it looks similar to a normal distribution. The peak is at the value of $p$ used in the simulation, in accordance with @thm-networks-clustering-ER.
+
 ::::
 
 :::{.column-margin}
@@ -642,6 +670,8 @@ print( f"avg WS clustering at q = 0.42 is {np.mean(cbar):.4f}" )
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_btoabd6z&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_6p6b27l8" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.13" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/cluster.png){.lightbox}
 
 :::
 
@@ -656,6 +686,7 @@ A **path** from node $x$ to node $y$ is a sequence of edges in the graph, either
 $$
 (x,z_1),\, (z_1,z_2)\, (z_2,z_3)\, \ldots, (z_{t-1},z_t)\, (z_t,y),
 $$
+
 for some $t\ge 1$. The path above has **length** $t+1$, which is the number of edges in the path. The **distance** between two nodes in a graph is the length of the shortest path between them. The maximum distance over all pairs of nodes in a graph is called its **diameter**.
 
 ::::
@@ -693,7 +724,9 @@ If all we want is the average distance, though, there is a convenience function 
 mean_dist = nx.average_shortest_path_length(W)
 print(f"The average distance is {mean_dist:.5f}" )
 ```
+
 This function becomes quite slow as the number of nodes grows. In practice, the average distance might be estimated by taking a sample from the set of all possible pairs.
+
 ::::
 
 ### Connectedness
@@ -706,16 +739,19 @@ The following graph is clearly connected:
 G = nx.lollipop_graph(5,3)
 nx.draw(G, with_labels=True, node_color="yellow" )
 ```
+
 NetworkX has a function to determine this for us:
 ```{python}
 nx.is_connected(G)
 ```
+
 If we remove the edge between nodes 4 and 5, then the graph is no longer connected:
 ```{python}
 G.remove_edge(4,5)
 print("Is it connected?", nx.is_connected(G))
 nx.draw(G, with_labels=True, node_color="yellow" )
 ```
+
 We get an error if we try to compute all the distances in a disconnected graph:
 ```{python}
 #| error: true
@@ -726,12 +762,15 @@ The `connected_components` function creates a generator of subgraphs that are th
 ```{python}
 list( nx.connected_components(G) )
 ```
+
 Each element of the list above is a set of nodes.
 
 ::::
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_pw4n4rxn&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_n8zj89s9" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.16" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/lollipop.jpg){.lightbox}
 
 :::
 
@@ -761,13 +800,16 @@ for iter in range(100):
 print("average distance in the big component of ER graphs:")
 sns.displot(x=dbar, bins=13);
 ```
-The chances are good, therefore, that any message could be passed along in three hops or fewer within the big component of this type of ER graph. 
+
+The chances are good, therefore, that any message could be passed along in three hops or fewer within the big component of this type of ER graph.
+
 ::::
 
 Theory states that as $n\to\infty$, the mean distance in ER graphs is expected to be approximately 
 $$
 \frac{\ln(n)}{\ln(\bar{k})}.
 $$ {#eq-networks-ER-distance}
+
 For @exm-networks-distance-ER, we have $n=121$ and $\bar{k}=6$, which gives about 2.68 in this formula.
 
 ### WS graphs {#sec-networks-distance-WS}
@@ -814,6 +856,11 @@ The $y$-axis shows the average clustering and distance relative to their values 
 
 ### Twitch network
 
+:::{.column-margin}
+![](_media/memes/graph_distance.jpg){.lightbox}
+
+:::
+
 Now we consider distances within the Twitch network.
 
 ```{python}
@@ -848,6 +895,7 @@ print( "estimated mean =", np.mean(distances) )
 :::
 
 Next we explore WS graphs with the same $n$ as the Twitch network and $k=10$ to get a similar average degree.
+
 ```{python}
 #| code-fold: true
 results = []
@@ -864,6 +912,7 @@ results = pd.DataFrame( results, columns=["q", "mean distance"] )
 print("Pairwise distances in WS graphs:")
 sns.relplot(data=results, x="q", y="mean distance", kind="line");
 ```
+
 The decrease with $q$ here is less pronounced that we saw for the smaller WS graphs in @sec-networks-distance-WS. 
 
 In @exm-networks-cluster-WS, we found that $q=0.42$ reproduces the same average clustering as in the Twitch network. In the graph above, that corresponds to a mean distance of about 4.5, which is a bit above the estimated Twitch mean distance of 3.7. 
@@ -1662,9 +1711,9 @@ For each graph, give the number of nodes, the number of edges, and the average d
 
 **(a)** The complete graph $K_6$.
 
-**(b)** ![](_media/nws.png "NWS graph"){width="380"}
+**(b)** ![](_media/nws.png "NWS graph"){width="380" .lightbox}
 
-**(c)** ![](_media/ladder.png "Ladder graph"){width="380"}
+**(c)** ![](_media/ladder.png "Ladder graph"){width="380" .lightbox}
 ::::
 
 ::::{#exr-networks-adjmat}
@@ -1674,7 +1723,7 @@ Give the adjacency matrix for the graphs in @exr-networks-basic (parts (a) and (
 ::::{#exr-networks-ego}
 For the graph below, draw the ego graph of **(a)** node 4 and **(b)** node 8.
 
-![](_media/ba.png "BA graph"){width="380" fig-align="center"}
+![](_media/ba.png "BA graph"){width="380" fig-align="center" .lightbox}
 ::::
 
 ::::{#exr-networks-erprob}
@@ -1696,7 +1745,7 @@ Explain why $\mathbf{d}$ is the vector whose components are the degrees of the n
 ::::{#exr-networks-centrality}
 Find **(a)** the clustering coefficient and **(b)** the betweenness centrality for each node in the following graph:
 
-![](_media/lolly.png "lollipop graph"){width="380" fig-align="center"}
+![](_media/lolly.png "lollipop graph"){width="380" fig-align="center" .lightbox}
 ::::
 
 ::::{#exr-networks-centrality-star}

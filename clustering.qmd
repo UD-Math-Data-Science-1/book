@@ -158,6 +158,7 @@ $$
 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_ib6r7f6v&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_bnic1gqh" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 6.1.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+
 :::
 
 Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. The latter property is important throughout linear algebra.
@@ -166,7 +167,6 @@ Note that $D_{ii}=0$ and $D_{ji}=D_{ij}$. The latter property is important throu
 An $n\times n$ matrix $\bfA$ in which $\bfA_{ij}=\bfA_{ji}$ for all $i,j$ is called **symmetric**.
 ::::
 
-![](_media/memes/symmetry.jpg){height=240px fig-align="center"}
 
 ::::{#exm-cluster-distmat-small chapter=6 type=✍️ description="Distance matrix"}
 Using 1-norm for distance, find the distance matrix for the feature matrix 
@@ -185,14 +185,21 @@ D_{13} &=  \abs{0} + \abs{3} + \abs{1} + \abs{-6}  = 10 \\
 D_{23} &=  \abs{-1} + \abs{4} + \abs{3} + \abs{-3}  = 11. 
 \end{split}
 $$
+
 Hence, 
 $$
 \mathbf{D} = \begin{bmatrix}
 0 & 7 & 10 \\ 7 & 0 & 11 \\ 10 & 11 & 0
 \end{bmatrix}. 
 $$
+
 :::
+
 ::::
+
+:::{.column-margin}
+![](_media/memes/symmetry.jpg){.lightbox}
+:::
 
 ::: {.callout-tip}
 In many problems, $n$ is much larger than $d$, so the distance matrix can be faster and easier to work with. Some clustering algorithms use only $\mathbf{D}$ and allow you to supply that in lieu of the feature vectors. 
@@ -259,7 +266,7 @@ X = np.array( [[6,1,10,2,5], [14,0,23,3,7], [2,3,1,5,0]] )
 pairwise_distances( X, metric="euclidean")
 ```
 
-Accoding to this metric, the most similar documents are the first and the last. However, cosine distance tells a different story:
+According to this metric, the most similar documents are the first and the last. However, cosine distance tells a different story:
 ```{python}
 pairwise_distances( X, metric="cosine")
 ```
@@ -267,7 +274,9 @@ pairwise_distances( X, metric="cosine")
 Now the first two documents look most similar. Looking at the vectors, we see that these two have the most similar relative frequencies, which is related to what we want to measure. The apparent dissimilarity in the 2-norm arises solely because the total word counts are very different.
 ::::
 
-![](_media/memes/angler_distance.jpg){height=240px fig-align="center"}
+::::{.column-margin}
+![](_media/memes/angler_distance.jpg){.lightbox}
+::::
 
 <!-- Categorical variables can be included in distance metrics. An ordinal variable is easily converted to equally spaced numerical values, which then may get a standard treatment. Nominal features are often compared using **Hamming distance**, which is just the total number of features that have different values in the two vectors. -->
 <!-- 
@@ -601,14 +610,14 @@ The central cluster scores well, but the rings score poorly because they are not
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y47kfwrc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hfq0mpjd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
-
+<br/>
+![](_media/memes/silhouette.jpg){.lightbox}
 :::
 
 ::: {.callout-note}
 While we have no trouble validating good clusterings by eye in two dimensions in cases such as @fig-clustering-stripes and @fig-clustering-bullseye, it can be challenging to assess such nonspherical clusters in higher dimensions if there is no reference or validation available.
 :::
 
-![](_media/memes/silhouette.jpg){height=240px fig-align="center"}
 
 ## k-means
 
@@ -723,7 +732,6 @@ If Lloyd's algorithm converges, it finds a local minimum of total inertia, in th
 Two-phase iterations like Lloyd's algorithm are common in optimization: you start with an approximate answer, compute something based on it, and use that to improve your answer.
 :::
 
-![](_media/memes/k-means.jpeg){height=240px fig-align="center"}
 
 
 ### Practical issues
@@ -731,6 +739,10 @@ Two-phase iterations like Lloyd's algorithm are common in optimization: you star
 * **Initialization**. The performance of $k$-means depends a great deal on the initial set of centroids. Traditionally, the centroids were chosen as random members of the sample set, but more reliable heuristics, such as *$k$-means++*, have since become dominant. 
 * **Multiple runs**. All the initialization methods include an element of randomness, and since the Lloyd algorithm usually converges quickly, it is often run with multiple instances of the initialization. The run with the lowest final inertia is kept.
 * **Distance metric**. The Lloyd algorithm often fails to converge for norms other than the 2-norm and must be modified if another norm is preferred.
+
+::::{.column-margin}
+![](_media/memes/k-means.jpeg){.lightbox}
+::::
 
 The algorithm treats $k$ as a hyperparameter. Increasing $k$ tends to lower the total inertia---at the extreme, taking $k=n$ puts each sample in its own cluster, with a total inertia of zero. Hence, one should use silhouette scores or some other measure in order to optimize $k$. Occam's Razor dictates preferring smaller values to large ones. There are many suggestions on how to find the choice that gives the most "bang for the buck," but none is foolproof.
 
@@ -1044,8 +1056,6 @@ We can choose to stop at any horizontal position (linkage value). Based on the d
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_2cz7adyp&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_yjsi5575" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.15" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 :::
-
-<!-- ![](_media/memes/hierarchy.jpg){height=240px fig-align="center"} -->
 
 
 The `AgglomerativeClustering` class in `sklearn.cluster` performs the clustering process to create a learner object.

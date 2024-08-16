@@ -117,7 +117,7 @@ The regression function is $\hat{f}(x)=\tfrac{3}{2} x + \tfrac{5}{3}$.
 (video example is different from the text) </br>
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_yhpg0xey&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_54wk2rgh" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.1" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 </br>
-![](_media/memes/slope-intercept.jpg){width=400}
+![](_media/memes/slope-intercept.jpg){.lightbox}
 
 :::
 
@@ -895,11 +895,11 @@ again for a nonnegative value of $\alpha$.
 
 ::::
 
-The new terms in @eq-regression-ridge and @eq-regression-ridge based on norms of $\bfw$ are called **penalty terms**. As $\alpha\to 0$, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as $\alpha \to \infty$, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. In this limit, the model pays less and less attention to the data, which can reduce overfitting.
-
 :::{.column-margin}
 ![](_media/memes/penalty.jpg){.lightbox}
 :::
+
+The new terms in @eq-regression-ridge and @eq-regression-ridge based on norms of $\bfw$ are called **penalty terms**. As $\alpha\to 0$, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as $\alpha \to \infty$, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for $\bfw$. In this limit, the model pays less and less attention to the data, which can reduce overfitting.
 
 ::::{#exm-regression-ridge-diabetes chapter=5 type=💻 description="Ridge regression for diabetes dataset"}
 We'll apply ridge regression to data collected about the progression of diabetes:
@@ -1113,10 +1113,6 @@ As the simplest type of multidimensional function, linear relationships are a go
 
 Alternatively, we can resort to fully nonlinear regression methods. Two of them come from generalizations of our staple classifiers.
 
-:::{.column-margin}
-![](_media/memes/not-a-classifier.jpg){.lightbox}
-:::
-
 ### Nearest neighbors
 
 To use kNN for regression, we find the $k$ nearest examples as with classification, but replace voting on classes with the mean or median of the neighboring values. A simple example confirms that the resulting approximation is not linear.
@@ -1193,6 +1189,8 @@ As you can see above, we got some improvement over the linear regressor.
 
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_vcdc7ddk&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_wri6tnzb" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 5.14" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
+</br>
+![](_media/memes/not-a-classifier.jpg){.lightbox}
 
 :::
 
@@ -1282,7 +1280,7 @@ dtree.fit(X, y)
 ```{python}
 #| code-fold: true
 from matplotlib.pyplot import figure
-figure(figsize=(17,10), dpi=160)
+figure(figsize=(6,4), dpi=160)
 plot_tree(dtree,feature_names=["x₁","x₂"]);
 ```
 
