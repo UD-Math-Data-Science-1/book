@@ -1009,7 +1009,10 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 <div id="def-class-generalization" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.2</strong></span> The performance of a predictor on previously unseen data is known as the <strong>generalization</strong> of the predictor.</p>
 </div>
-<p>In order to gauge generalization, we should hold back some of the original labeled data from training and use it only to test the performance. That is, we split the dataset into nonoverlapping <strong>training and testing sets</strong>. Only the training set is fit by the classifier, while the testing set is used to evaluate its performance.</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><a href="_media/memes/generalization.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/generalization.jpg" class="img-fluid"></a></p>
+</div></div><p>In order to gauge generalization, we should hold back some of the original labeled data from training and use it only to test the performance. That is, we split the dataset into nonoverlapping <strong>training and testing sets</strong>. Only the training set is fit by the classifier, while the testing set is used to evaluate its performance.</p>
 <div id="exm-class-traintest" class="theorem example" data-chapter="3" type="💻" data-description="Train–test split">
 <p><span class="theorem-title"><strong>Example 3.3</strong></span> Here is a cleaned-up version of the Lending Tree loan applications dataset.</p>
 <div id="3c49da70" class="cell" data-execution_count="11">
@@ -1161,7 +1164,7 @@ fraction of True in the testing set:
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/loans.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/loans.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/loans.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/loans.jpg" class="img-fluid"></a></p>
 </div></div></section>
 <section id="metrics-for-binary-classifiers" class="level3 page-columns page-full" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="metrics-for-binary-classifiers"><span class="header-section-number">3.2.2</span> Metrics for binary classifiers</h3>
@@ -1311,7 +1314,7 @@ How often are the <em>positive</em> predictions correct?
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/no fp.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/no fp.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/no fp.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/no fp.jpg" class="img-fluid"></a></p>
 </div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1473,7 +1476,7 @@ balanced accuracy = 52.1%</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/confusion.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/confusion.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/confusion.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/confusion.jpg" class="img-fluid"></a></p>
 </div></div><div id="exm-class-multiclass" class="theorem example" data-chapter="3" type="💻" data-description="Multiclass metrics">
 <p><span class="theorem-title"><strong>Example 3.9</strong></span> We load a dataset on the characteristics of cars and use quantitative factors to predict the region of origin:</p>
 <div id="d551c0a7" class="cell" data-execution_count="25">
@@ -1674,7 +1677,7 @@ weighted avg: 69.9%</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/car.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/car.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/car.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/car.jpg" class="img-fluid"></a></p>
 </div></div><p>It’s time to update our scikit-learn workflow:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1893,7 +1896,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/decision tree.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/decision tree.jpeg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/decision tree.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/decision tree.jpeg" class="img-fluid"></a></p>
 </div></div><p>Finally, once we have found the split that minimizes <span class="math inline">\(Q(S_L,S_R)\)</span>, we need to check whether it is an improvement—that is, whether</p>
 <p><span class="math display">\[
 Q(S_L,S_R) + \alpha &lt; Q(S,\varnothing) = |S| H(S),
@@ -2892,7 +2895,7 @@ dtype: float64</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/gentoo.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/gentoo.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/gentoo.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="_media/memes/gentoo.jpg" class="img-fluid"></a></p>
 </div></div></section>
 </section>
 <section id="nearest-neighbors" class="level2 page-columns page-full" data-number="3.4">
@@ -3000,7 +3003,7 @@ Note
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/neighbors.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="_media/memes/neighbors.jpeg" class="img-fluid"></a></p>
+<p><a href="_media/memes/neighbors.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/neighbors.jpeg" class="img-fluid"></a></p>
 </div></div><p>Like a decision tree, kNN divides up the feature space into domains that map to classes. The evolution of the decision boundary is illustrated in <a href="#fig-class-knn-boundary" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> for two features using 2-norm distance.</p>
 <div id="fig-class-knn-boundary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -3547,7 +3550,7 @@ Name: species, dtype: object</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/label.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/label.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/label.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="_media/memes/label.jpg" class="img-fluid"></a></p>
 </div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5008,7 +5011,7 @@ Tip
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/votes.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="_media/memes/votes.jpg" class="img-fluid"></a></p>
+<p><a href="_media/memes/votes.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="_media/memes/votes.jpg" class="img-fluid"></a></p>
 </div></div><p>It’s natural to interpret <span class="math inline">\(\hat{p}\)</span> as predicting the probability of each label at any query point, since the values are nonnegative and sum to 100%. Given <span class="math inline">\(\hat{p}\)</span>, we can still output a predicted class; it’s just that we also get additional information about how the prediction was made.</p>
 <div id="exm-class-prob" class="theorem example" data-chapter="3" type="💻" data-description="Probabilistic classifier for the penguins dataset">
 <p><span class="theorem-title"><strong>Example 3.23</strong></span> Consider once more the penguin species classification problem:</p>
@@ -5471,7 +5474,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/ROC.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="_media/memes/ROC.jpeg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/ROC.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="_media/memes/ROC.jpeg" class="img-fluid"></a></p>
 </div></div><div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5537,7 +5540,7 @@ Important
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/AUC.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="_media/memes/AUC.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/AUC.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="_media/memes/AUC.jpg" class="img-fluid"></a></p>
 </div></div><div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -5585,12 +5588,12 @@ Caution
 <p>For these exercises, you may use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).</p>
 <div id="exr-class-dankness" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.1</strong></span> (2.2) Here is a confusion matrix for a classifier of meme dankness.</p>
-<p><img src="./_media/dankness.png" class="img-fluid" width="360"></p>
+<p><a href="./_media/dankness.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="./_media/dankness.png" class="img-fluid" width="360"></a></p>
 <p>Considering <em>dank</em> to be the positive outcome, calculate the <strong>(a)</strong> recall, <strong>(b)</strong> precision, <strong>(c)</strong> specificity, <strong>(d)</strong> accuracy, and <strong>(e)</strong> <span class="math inline">\(F_1\)</span> score of the classifier.</p>
 </div>
 <div id="exr-class-flavors" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.2</strong></span> (2.2) Here is a confusion matrix for a classifier of ice cream flavors.</p>
-<p><img src="./_media/flavors.png" class="img-fluid" width="500"></p>
+<p><a href="./_media/flavors.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="./_media/flavors.png" class="img-fluid" width="500"></a></p>
 <p><strong>(a)</strong> Calculate the recall rate for <em>chocolate</em>.</p>
 <p><strong>(b)</strong> Find the precision for <em>vanilla</em>.</p>
 <p><strong>(c)</strong> Find the accuracy for <em>strawberry</em>.</p>
@@ -5687,7 +5690,7 @@ y = f(x) =
 </div>
 <div id="exr-class-lattice-colors" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.11</strong></span> (2.4) Here are blue/orange labels on an integer lattice.</p>
-<p><a href="_media/gridlabels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="_media/gridlabels.png" class="img-fluid" width="360"></a></p>
+<p><a href="_media/gridlabels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="_media/gridlabels.png" class="img-fluid" width="360"></a></p>
 <p>Let <span class="math inline">\(\hat{f}(x_1,x_2)\)</span> be the kNN probabilistic classifier with <span class="math inline">\(k=4\)</span>, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function <span class="math inline">\(g(t)\)</span> is defined from values of <span class="math inline">\(\hat{f}\)</span> along a vertical or horizontal line. Carefully sketch a plot of <span class="math inline">\(g(t)\)</span> for <span class="math inline">\(2\le t \le 2\)</span>.</p>
 <p><strong>(a)</strong> <span class="math inline">\(g(t) = \hat{f}(1.2,t)\)</span></p>
 <p><strong>(b)</strong> <span class="math inline">\(g(t) = \hat{f}(t,-0.75)\)</span></p>
@@ -6224,7 +6227,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

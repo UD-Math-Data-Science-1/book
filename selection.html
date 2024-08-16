@@ -76,6 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -363,7 +366,7 @@ window.Quarto = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div id="9343c047" class="cell" data-execution_count="1">
+<div id="9343c047" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -381,7 +384,7 @@ window.Quarto = {
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We have barely scratched the surface of the universe of classification algorithms. Even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through <em>hyperparameters</em>.</p>
+<p>We have barely scratched the surface of the universe of classification algorithms. But even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through <em>hyperparameters</em>.</p>
 <div id="def-select-hyper" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 4.1</strong></span> A <strong>hyperparameter</strong> of a learning algorithm is a value or setting affecting the algorithm that remains fixed throughout training.</p>
 </div>
@@ -403,15 +406,15 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In ML, a <em>parameter</em> is a value that is adjusted during training; i.e., it is learned from the training data. In most of mathematics, we would refer to these as <em>variables</em>, but in ML that term is often understood to be synonymous with <em>feature</em>.</p>
+<p>In machine learning, a <em>parameter</em> is a value that is adjusted during training; i.e., it is learned from the training data. In most of mathematics, we would refer to these as <em>variables</em>, but in ML that term is often understood to be synonymous with <em>feature</em>.</p>
 </div>
 </div>
 <p>Some hyperparameters, such as the choice of norm in the nearest-neighbors algorithm, have an influence that is not easy to characterize. But others clearly affect the potential expressive power of the algorithm.</p>
 <div id="exm-select-hyper" class="theorem example" data-chapter="4" type="✍️" data-description="Hyperparameters">
-<p><span class="theorem-title"><strong>Example 4.1</strong></span> The maximum depth <span class="math inline">\(r\)</span> of a decision tree limits the complexity that the tree can attain. When <span class="math inline">\(r=1\)</span>, the tree can divide the data only once and assign different values to the different sides. In general, though, a tree can assign up to <span class="math inline">\(2^r\)</span> unique values, which grows exponentially with <span class="math inline">\(r\)</span>; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.</p>
+<p><span class="theorem-title"><strong>Example 4.1</strong></span> The maximum depth <span class="math inline">\(r\)</span> of a decision tree limits the complexity that the tree can attain. When <span class="math inline">\(r=1\)</span>, the tree can divide the data only once and assign one or two different labels. In general, though, a tree can assign up to <span class="math inline">\(2^r\)</span> unique labels, which grows exponentially with <span class="math inline">\(r\)</span>; in fact, any training set of that size or smaller can be modeled with 100% training accuracy.</p>
 <p>For a kNN classifier, when <span class="math inline">\(k\)</span> is as large as the number of samples, the classifier can only take one value on the entire set—all the samples have a vote everywhere. The other extreme is <span class="math inline">\(k=1\)</span>, where each sample rules within its own neighborhood, and again we achieve 100% training accuracy.</p>
 </div>
-<p>Options provide flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.</p>
+<p>Options provide valuable flexibility but also demand rationales for their use. How can we choose the best hyperparameters for a given problem? And how do we choose the best algorithm overall? In order to answer these questions, we must first understand what to expect from the results of a learner in general terms.</p>
 <section id="sec-select-learning-curves" class="level2 page-columns page-full" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-select-learning-curves"><span class="header-section-number">4.1</span> Bias–variance tradeoff</h2>
 <p>When we train a classifier, we use a particular set of training data. In a different parallel universe, we might have been handed a different training set drawn from the same overall population. While we might be optimistic and hope for receiving the best-case training set, it’s more prudent to consider what happens in the average case.</p>
@@ -420,7 +423,8 @@ Note
 <p>Suppose that <span class="math inline">\(f(x)\)</span> is a perfect labeller, i.e., a function with 100% accuracy over an entire population. For simplicity, we can imagine that <span class="math inline">\(f\)</span> is a binary classifier, i.e., <span class="math inline">\(f(x) \in \{0,1\}\)</span>, although this assumption is not essential.</p>
 <p>Let <span class="math inline">\(\hat{f}(x)\)</span> denote a probabilistic classification function obtained after training. It depends on the particular training set we used. Suppose there are <span class="math inline">\(N\)</span> total possible training sets, leading to labelling functions <span class="math display">\[
 \hat{f}_1(x),\hat{f}_2(x),\dots,\hat{f}_N(x).
-\]</span> Then we define the <strong>expected value</strong> of the classifier as the average over all training sets: <span class="math display">\[
+\]</span></p>
+<p>Then we define the <strong>expected value</strong> of the classifier as the average over all training sets: <span class="math display">\[
 \E{\hat{f}(x)} = \frac{1}{N} \sum_{i=1}^N \hat{f_i}(x).
 \]</span></p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -433,21 +437,26 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Except on toy problems, we don’t know how to calculate this average. This is more of a thought experiment. But we will simulate the idea later on.</p>
+<p>Except on toy problems, we don’t know how to calculate this average. This is more of a thought experiment. But we do simulate the process later on.</p>
 </div>
 </div>
-<p>The term <em>expected</em> doesn’t mean that we anticipate getting this answer for our particular <span class="math inline">\(\hat{f}\)</span>. It’s just what we would get if we could average over all parallel universes receiving unique training sets.</p>
+<p>The term <em>expected</em> doesn’t mean that we anticipate getting this answer for our particular instance of <span class="math inline">\(\hat{f}\)</span>. It’s just what we would get if we could average over all parallel universes receiving unique training sets.</p>
 <p>We can apply the expectation operator <span class="math inline">\(\mathbb{E}\)</span> to any function of <span class="math inline">\(x\)</span>. In particular, the expected error in our own universe’s prediction is <span class="math display">\[
 \begin{split}
     \E{f(x) - \hat{f}(x)} &amp;= \frac{1}{N} \sum_{i=1}^N \left( f(x) - \hat{f_i}(x) \right) \\
   &amp;= \frac{1}{N} \left( \sum_{i=1}^N  f(x)  \right) - \frac{1}{N}\left( \sum_{i=1}^N \hat{f_i}(x) \right) \\
   &amp;= f(x) - \E{\hat{f}(x)}.
 \end{split}
-\]</span> We will set <span class="math inline">\(y=f(x)\)</span> as the true label and <span class="math inline">\(\hat{y}=\E{\hat{f}(x)}\)</span> as the expected prediction. The quantity above, <span class="math inline">\(y-\hat{y}\)</span>, is called the <strong>bias</strong> of the classifier. Bias depends on the particular algorithm and its hyperparameters, but not on the training set. Among other things, bias accounts for the fact that any particular finite algorithm can represent only some labelling functions perfectly.</p>
+\]</span></p>
+<div id="def-select-bias" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.2</strong></span> The <strong>bias</strong> of a method <span class="math inline">\(\hat{f}(x)\)</span> for learning the labeler <span class="math inline">\(f(x)\)</span> is the expected difference between the true label and the expected prediction, <span class="math inline">\(f(x) - \E{\hat{f}(x)}\)</span>.</p>
+</div>
+<p>We often set <span class="math inline">\(y=f(x)\)</span> as the true label and <span class="math inline">\(\hat{y}=\E{\hat{f}(x)}\)</span> as the expected prediction, allowing us to write the bias as <span class="math inline">\(y-\hat{y}\)</span>.</p>
+<p>Bias depends on the particular learning algorithm and its hyperparameters, but not on the training set. Among other things, bias accounts for the fact that any particular finite algorithm can represent only a finite number of labelling functions perfectly.</p>
 </section>
 <section id="variance" class="level3 page-columns page-full" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="variance"><span class="header-section-number">4.1.2</span> Variance</h3>
-<p>It might seem as though the only important goal is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You’re capable of landing the ball on the green in one swing, but it’s near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water’s edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing pretty well, though not optimally.</p>
+<p>It might seem as though the only important goal in machine learning is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You’re capable of landing the ball on the green in one swing, but it’s near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water’s edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score on the hole from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing fairly well, though not optimally.</p>
 <p>In essence, a good chance of a mediocre result can outweigh a small chance of a better result. To express this tradeoff mathematically, we can compute the variance of the predicted label at any <span class="math inline">\(x\)</span>: <span class="math display">\[
 \begin{split}
     \E{\bigl(y - \hat{f}(x)\bigr)^2} &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{f_i}(x) \right)^2 \\   
@@ -467,23 +476,35 @@ Note
 </div></div><p>Now we find something interesting: <span class="math display">\[
 \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right) =
 \hat{y} - \frac{1}{N} \sum_{i=1}^N \hat{f}_i(x) = 0,
-\]</span> by the definition of <span class="math inline">\(\hat{y}\)</span>. So overall, <span id="eq-select-biasvar"><span class="math display">\[
+\]</span></p>
+<p>by the definition of <span class="math inline">\(\hat{y}\)</span>. So overall,</p>
+<p><span id="eq-select-biasvar"><span class="math display">\[
 \begin{split}
     \E{\bigl(y - \hat{f}(x)\bigr)^2} &amp;= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{y} \right)^2 + \frac{1}{N} \sum_{i=1}^N \left( \hat{y}  - \hat{f}_i(x) \right)^2 \\
   &amp;= (y-\hat{y})^2 + \E{\left(\hat{y} - \hat{f}(x)\right)^2}
 \end{split}
-\tag{4.1}\]</span></span> The first term is the squared bias. The second is the <strong>variance</strong> of the learning method. In words, the variance of the learning process has two contributions:</p>
+\tag{4.1}\]</span></span></p>
+<p>At the end, we have a sum of two nonnegative terms. The first term is the squared bias. The second is the <em>variance</em> of the learning method.</p>
+<div id="def-select-variance" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4.3</strong></span> The <strong>variance</strong> of a method <span class="math inline">\(\hat{f}(x)\)</span> for learning the labeler <span class="math inline">\(f(x)\)</span> is</p>
+<p><span id="eq-select-variance"><span class="math display">\[
+\E{\left(\hat{y} - \hat{f}(x)\right)^2},
+\tag{4.2}\]</span></span></p>
+<p>where <span class="math inline">\(\hat{y} = \E{\hat{f}(x)}\)</span> is the expected prediction.</p>
+</div>
+<p>You might think of a method’s variance as the inverse of its repeatability or stability.</p>
+<p>To summarize <a href="#eq-select-biasvar" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, the variance of a prediction has two contributions:</p>
 <dl>
-<dt>Bias</dt>
+<dt>Method bias</dt>
 <dd>
 How close is the average prediction to the ground truth?
 </dd>
-<dt>Variance</dt>
+<dt>Method variance</dt>
 <dd>
 How close to the average prediction is any one prediction likely to be?
 </dd>
 </dl>
-<div id="cell-fig-select-biasvar" class="cell" data-execution_count="2">
+<div id="cell-fig-select-biasvar" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">302</span>)</span>
@@ -522,14 +543,14 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 </div>
 </div>
 <p>Why would these two factors be in opposition? When a learning method has the capacity to capture complex behavior, it potentially has a low bias. However, that same capacity means that the learner will fit itself very well to each individual training set, which increases the potential for variance over the whole collection of training sets.</p>
-<p>This tension is known as the <em>bias–variance tradeoff</em>. Perhaps we can view this tradeoff as a special case of <em>Occam’s Razor</em>: it’s best to choose the least complex method necessary to reach a particular level of explanatory power.</p>
+<p>This tension is known as the <em>bias–variance tradeoff</em>. Perhaps we can view this tradeoff as a special case of Occam’s Razor: it’s best to choose the least complex method necessary to reach a particular level of explanatory power.</p>
 </section>
 <section id="learning-curves" class="level3 page-columns page-full" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="learning-curves"><span class="header-section-number">4.1.3</span> Learning curves</h3>
 <p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
 <div id="exm-select-learning-curves" class="theorem example" data-chapter="4" type="💻" data-description="Learning curves">
 <p><span class="theorem-title"><strong>Example 4.2</strong></span> We will use the handwritten digits data in an experiment with a decision tree classifier of fixed depth:</p>
-<div id="ddbfd64c" class="cell" data-execution_count="3">
+<div id="ddbfd64c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> LearningCurveDisplay, StratifiedShuffleSplit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
@@ -563,13 +584,13 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 </iframe>
 </div>
 </div>
+<p><br> <a href="_media/memes/learning-curve.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/learning-curve.jpg" class="img-fluid"></a></p>
 </div></div><p>When you see a large gap between training and test errors, you should suspect that the learner may not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.</p>
-<p><img src="_media/memes/learning-curve.jpg" height="240"></p>
 </section>
 </section>
 <section id="overfitting" class="level2 page-columns page-full" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">4.2</span> Overfitting</h2>
-<p>One important factor we have not yet considered is noise in the training data—that is, erroneous values. If a learner responds too adeptly to isolated wrong values, it will also respond incorrectly to other nearby inputs. This situation is known as <strong>overfitting</strong>.</p>
+<p>One important factor we have not yet considered is noise in the training data—that is, erroneous labels. If a learner responds too adeptly to isolated wrong cases, it will also respond incorrectly to other nearby inputs. This situation is known as <strong>overfitting</strong>.</p>
 <section id="overfitting-in-knn" class="level3 page-columns page-full" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="overfitting-in-knn"><span class="header-section-number">4.2.1</span> Overfitting in kNN</h3>
 <p>To illustrate overfitting, let’s use a really simple classification problem: a single feature, with the class being the sign of the feature’s value. (We arbitrarily assign zero to have class <span class="math inline">\(+1\)</span>.)</p>
@@ -582,7 +603,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 </div>
 </div>
 </div></div><p>Consider first a kNN classifier with <span class="math inline">\(k=1\)</span>. The class assigned to each value is just that of the nearest training example, making for a piecewise constant labelling. Here are the results for four different training sets, each of size 40:</p>
-<div id="cell-fig-select-knn-1-clean" class="cell" data-execution_count="5">
+<div id="cell-fig-select-knn-1-clean" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-1-clean" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -598,7 +619,7 @@ Figure&nbsp;4.2: kNN with k=1 and perfect data
 </div>
 <p>As you can see above, all four results are quite good. The only errors are for queries near zero.</p>
 <p>Now suppose we use training sets that have just 3 mislabeled examples each. Here are some resulting classifiers:</p>
-<div id="cell-fig-select-knn-1-noisy" class="cell" data-execution_count="6">
+<div id="cell-fig-select-knn-1-noisy" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-1-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -612,9 +633,9 @@ Figure&nbsp;4.3: kNN with k=1 and noisy data
 </div>
 </div>
 </div>
-<p>Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. We can generally expect such overfitting with <span class="math inline">\(k=1\)</span>, for which the deicision boundary can be complex.</p>
+<p>Every sample is its own nearest neighbor, so this classifier responds to noisy data by reproducing it perfectly, which interferes with the larger trend we actually want to capture. We can generally expect such overfitting with <span class="math inline">\(k=1\)</span>, for which the decision boundary can be complex.</p>
 <p>Now let’s bump up to <span class="math inline">\(k=3\)</span>. The results are more like we want, even with noisy data:</p>
-<div id="cell-fig-select-knn-3-noisy" class="cell" data-execution_count="7">
+<div id="cell-fig-select-knn-3-noisy" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-3-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -629,7 +650,7 @@ Figure&nbsp;4.4: kNN with k=3 and noisy data
 </div>
 </div>
 <p>The voting mechanism of kNN allows the classifier to ignore isolated bad examples. If we continue to <span class="math inline">\(k=7\)</span>, then the 3 outliers will never be able to outvote the correct values:</p>
-<div id="cell-fig-select-knn-7-noisy" class="cell" data-execution_count="8">
+<div id="cell-fig-select-knn-7-noisy" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div id="fig-select-knn-7-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -668,7 +689,7 @@ Caution
 </iframe>
 </div>
 </div>
-</div></div><div id="cell-fig-select-tree-6-noisy" class="cell" data-execution_count="9">
+</div></div><div id="cell-fig-select-tree-6-noisy" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-6-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -683,7 +704,7 @@ Figure&nbsp;4.6: Decision tree with depth=6 and noisy data
 </div>
 </div>
 <p>Using a shallower tree reduces the extent of overfitting:</p>
-<div id="cell-fig-select-tree-3-noisy" class="cell" data-execution_count="10">
+<div id="cell-fig-select-tree-3-noisy" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-3-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -698,7 +719,7 @@ Figure&nbsp;4.7: Decision tree with depth=3 and noisy data
 </div>
 </div>
 <p>We can eliminate the overfitting completely and get a single point as the decision boundary, although its location still might not be ideal:</p>
-<div id="cell-fig-select-tree-2-noisy" class="cell" data-execution_count="11">
+<div id="cell-fig-select-tree-2-noisy" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div id="fig-select-tree-2-noisy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -718,7 +739,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 <p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>, and <a href="#fig-select-tree-6-noisy" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in <a href="#sec-select-learning-curves" class="quarto-xref"><span>Section 4.1</span></a>.</p>
 <div id="exm-select-overfit-digits" class="theorem example" data-chapter="4" type="💻" data-description="Overfitting">
 <p><span class="theorem-title"><strong>Example 4.3</strong></span> <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a> showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew. Now look at what happens for a much deeper decision tree:</p>
-<div id="f674f25d" class="cell" data-execution_count="12">
+<div id="f674f25d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]<span class="op">==</span><span class="dv">8</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">10</span>)</span>
@@ -749,16 +770,15 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 </iframe>
 </div>
 </div>
-</div></div><p><img src="_media/memes/overfit.jpg" height="240"></p>
-</section>
+<p><br> <a href="_media/memes/overfit.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/overfit.jpg" class="img-fluid"></a></p>
+</div></div></section>
 </section>
 <section id="ensemble-methods" class="level2 page-columns page-full" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="ensemble-methods"><span class="header-section-number">4.3</span> Ensemble methods</h2>
 <p>When a relatively expressive learning model is used, overfitting and strong dependence on the training set are possible. One meta-strategy for reducing training variance without decreasing the model expressiveness is to use an <strong>ensemble</strong> method. The idea of an ensemble is that averaging over many different training sets will reduce the variance that comes from overfitting. It’s a way to simulate the computation of expected values.</p>
 <div id="def-select-bagging" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.2</strong></span> In <em>bootstrap aggregation</em>, or <strong>bagging</strong> for short, samples are drawn randomly from the original training set. Usually, this is done <em>with replacement</em>, which means that some samples might be selected multiple times.</p>
+<p><span class="theorem-title"><strong>Definition 4.4</strong></span> In <em>bootstrap aggregation</em>, or <strong>bagging</strong> for short, samples are drawn randomly from the original training set. Usually, this is done <em>with replacement</em>, which means that some samples might be selected multiple times.</p>
 </div>
-<p>Why should bagging work? It comes down to the way that bias and variance behave. Suppose we produce <span class="math inline">\(M\)</span> prbabilstic binary classifiers, <span class="math inline">\(\hat{f}_1,\ldots,\hat{f}_M\)</span>, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
@@ -767,17 +787,30 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 </iframe>
 </div>
 </div>
-</div></div><p><span class="math display">\[
+</div></div><p>Why does bagging work? It comes down to the way that bias and variance behave. Suppose we produce <span class="math inline">\(M\)</span> probabilistic binary classifiers, <span class="math inline">\(\hat{f}_1,\ldots,\hat{f}_M\)</span>, that are identical except in having received independent training sets. They create the (probabilistic) bagging classifier <span class="math display">\[
 \hat{F}(x) = \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x).
-\]</span> The bias of the bagging classifier is the expectation of <span class="math display">\[
+\]</span></p>
+<p>The bias of the bagging classifier is the expectation of <span class="math display">\[
 y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \frac{1}{M} \sum_{m=1}^M \left(  y - \hat{f}_m(x)  \right).
-\]</span> This is simply the mean of the constitutent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bagging classifier has the same expected bias as its constituents.</p>
-<p>The story for the variance is different. It <a href="https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables">can be derived</a> that the variance of the bagging predictor is <span class="math inline">\(1/M\)</span> times that of the constituent classifiers. (This effect can be used to explain the <em>wisdom of crowds</em>. If each person in a classroom is asked to guess the number of jellybeans in a large jar, the mean of the class’ guesses will tend to be much closer to the true value than most individuals’ guesses are.)</p>
-<p>We should expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-<span class="math inline">\(k\)</span> kNN classifiers.</p>
+\]</span></p>
+<p>This is simply the mean of the constituent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bias of the bagging classifier has is the same as its constituents. But it <a href="https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables">can be derived</a> that the <em>variance</em> of the bagging predictor is <span class="math inline">\(1/M\)</span> times that of the constituent classifiers. We should therefore expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-<span class="math inline">\(k\)</span> kNN classifiers, for example.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bagging explains the <em>wisdom of crowds</em>. For instance, if many people are asked to independently guess the number of jellybeans in a large jar, the mean of the guesses will tend to be much closer to the true value than most individuals’ guesses are.</p>
+</div>
+</div>
 <p>Scikit-learn has a <code>BaggingClassifier</code> that automates the process of generating an ensemble from just one basic type of estimator.</p>
 <div id="exm-select-ensemble-knn" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble classifier">
 <p><span class="theorem-title"><strong>Example 4.4</strong></span> Here is a dataset collected from images of dried beans:</p>
-<div id="e735a068" class="cell" data-execution_count="13">
+<div id="e735a068" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -910,11 +943,11 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 </div>
 </div>
 <p>Although the dataset has data on 7 classes of beans, we will simplify our output by making it a one-vs-rest problem for just one class:</p>
-<div id="554b2db1" class="cell" data-execution_count="14">
+<div id="554b2db1" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"SIRA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is the confusion matrix we get from training a single kNN classifier on this dataset:</p>
-<div id="6cffdf0e" class="cell" data-execution_count="15">
+<div id="6cffdf0e" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  X, y,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -932,7 +965,7 @@ y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \
 </div>
 </div>
 <p>Here, we create an ensemble with 100 such classifiers, each trained on a different subset that is 75% of the size of the original training set:</p>
-<div id="e9234bbd" class="cell" data-execution_count="16">
+<div id="e9234bbd" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
@@ -1361,7 +1394,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:</p>
-<div id="bb1a1d0d" class="cell" data-execution_count="17">
+<div id="bb1a1d0d" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X_test.iloc[<span class="op">-</span><span class="dv">1</span>:,:]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(query)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ensemble probability of True on query is </span><span class="sc">{</span>p_hat[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1370,7 +1403,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Internally, the <code>estimators_</code> field of the ensemble object is a list of the individual trained classifiers. With a little work, we could find out the prediction for <em>True</em> from every constituent:</p>
-<div id="a9e13f2a" class="cell" data-execution_count="18">
+<div id="a9e13f2a" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>,<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]   <span class="co"># first 6 predictions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
@@ -1383,7 +1416,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The ensemble takes the average of this list to create its prediction:</p>
-<div id="9e9db936" class="cell" data-execution_count="19">
+<div id="9e9db936" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean probability of True for query is </span><span class="sc">{</span>np<span class="sc">.</span>mean(pm)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean probability of True for query is 52.67%</code></pre>
@@ -1391,7 +1424,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>The result above matches what we got by predicting directly from the ensemble, which is the normal mode of operation.</p>
 <p>Over the testing set, we find that the ensemble has improved the AUC score:</p>
-<div id="0c0a1e23" class="cell" data-execution_count="20">
+<div id="0c0a1e23" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1424,7 +1457,7 @@ Note
 </div>
 <div id="exm-select-ensemble-knn-better" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble (better)">
 <p><span class="theorem-title"><strong>Example 4.5</strong></span> If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:</p>
-<div id="220f93a0" class="cell" data-execution_count="21">
+<div id="220f93a0" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1444,7 +1477,7 @@ Note
 </div>
 <div id="exm-select-ensemble-forest" class="theorem example" data-chapter="4" type="💻" data-description="Random forest classifier">
 <p><span class="theorem-title"><strong>Example 4.6</strong></span> Let’s work again with the forest cover dataset. It’s got over 500,000 samples and 54 features:</p>
-<div id="44afa84d" class="cell" data-execution_count="22">
+<div id="44afa84d" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>forest[<span class="st">"data"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
@@ -1452,7 +1485,7 @@ Note
 </div>
 </div>
 <p>We’ll turn this into a binary classification by looking for just one of the possible label values:</p>
-<div id="24e983b7" class="cell" data-execution_count="23">
+<div id="24e983b7" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>] <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
@@ -1462,7 +1495,7 @@ Note
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How should we best make use of all that data? We can use a fairly deep decision tree without fear of overfitting, and the result is not bad:</p>
-<div id="757044ac" class="cell" data-execution_count="24">
+<div id="757044ac" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>) </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1474,7 +1507,7 @@ Note
 </div>
 </div>
 <p>A simple averaging over the same type of tree actually does worse here:</p>
-<div id="6f227b1b" class="cell" data-execution_count="25">
+<div id="6f227b1b" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">12</span>, </span>
@@ -1490,7 +1523,7 @@ Note
 </div>
 </div>
 <p>It’s possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:</p>
-<div id="795b0e13" class="cell" data-execution_count="26">
+<div id="795b0e13" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1505,7 +1538,7 @@ Note
 </div>
 </div>
 <p>In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:</p>
-<div id="f6a312c6" class="cell" data-execution_count="27">
+<div id="f6a312c6" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    max_features<span class="op">=</span><span class="fl">0.5</span>,</span>
@@ -1529,8 +1562,8 @@ Note
 </iframe>
 </div>
 </div>
+<p><br> <a href="_media/memes/random-forest.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/random-forest.jpeg" class="img-fluid"></a></p>
 </div></div><p>Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.</p>
-<p><img src="_media/memes/random-forest.jpeg" class="img-fluid" width="360"></p>
 </section>
 <section id="validation" class="level2 page-columns page-full" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="validation"><span class="header-section-number">4.4</span> Validation</h2>
@@ -1558,7 +1591,7 @@ Note
 </div>
 </div>
 </div></div><div id="def-select-cv" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4.3</strong></span> The steps for <strong><span class="math inline">\(k\)</span>-fold cross-validation</strong> are as follows:</p>
+<p><span class="theorem-title"><strong>Definition 4.5</strong></span> The steps for <strong><span class="math inline">\(k\)</span>-fold cross-validation</strong> are as follows:</p>
 <ol type="1">
 <li>Divide the original data into training and testing sets.</li>
 <li>Further divide the training data set into <span class="math inline">\(k\)</span> roughly equal parts called <em>folds</em>.</li>
@@ -1569,7 +1602,7 @@ Note
 </div>
 <div id="exm-select-folds" class="theorem example" data-chapter="4" type="✍️" data-description="Folds for validation">
 <p><span class="theorem-title"><strong>Example 4.7</strong></span> Here is how 16 elements can be split into 4 folds:</p>
-<div id="c689935d" class="cell" data-execution_count="28">
+<div id="c689935d" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
@@ -1586,13 +1619,13 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <p>A different variation is <strong>stratified</strong> <span class="math inline">\(k\)</span>-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.</p>
 <div id="exm-select-cv-beans" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation">
 <p><span class="theorem-title"><strong>Example 4.8</strong></span> Let’s apply cross-validation to the beans dataset.</p>
-<div id="8096161d" class="cell" data-execution_count="29">
+<div id="8096161d" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
-<div id="d61a5f30" class="cell" data-execution_count="30">
+<div id="d61a5f30" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
@@ -1643,7 +1676,7 @@ Important
 <p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
 <div id="exm-select-vc-beans" class="theorem example" data-chapter="4" type="💻" data-description="Validation curve">
 <p><span class="theorem-title"><strong>Example 4.9</strong></span> Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:</p>
-<div id="98f8d480" class="cell" data-execution_count="31">
+<div id="98f8d480" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ValidationCurveDisplay</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1678,7 +1711,7 @@ Important
 <p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
 <div id="exm-select-grid-cancer" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation grid search">
 <p><span class="theorem-title"><strong>Example 4.10</strong></span> Let’s work with a dataset on breast cancer detection:</p>
-<div id="6ca9d1bf" class="cell" data-execution_count="32">
+<div id="6ca9d1bf" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
@@ -1851,7 +1884,7 @@ Important
 </div>
 </div>
 <p>We start by trying decision tree classifiers in which we vary the maximum depth as well as some other options.</p>
-<div id="071e909a" class="cell" data-execution_count="33">
+<div id="071e909a" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"criterion"</span>:[<span class="st">"gini"</span>, <span class="st">"entropy"</span>], </span>
@@ -1882,7 +1915,7 @@ Best score:
 </div>
 </div>
 <p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
-<div id="10cd46b2" class="cell" data-execution_count="34">
+<div id="10cd46b2" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"kneighborsclassifier__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
@@ -1911,7 +1944,7 @@ Best score:
 </div>
 </div>
 <p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
-<div id="b1839022" class="cell" data-execution_count="35">
+<div id="b1839022" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>knn_score <span class="op">=</span> f1_score( y_test, grid_knn.predict(X_test) )</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best tree f1 score: </span><span class="sc">{</span>dt_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
@@ -1943,11 +1976,11 @@ Note
 </iframe>
 </div>
 </div>
+<p><br> <a href="_media/memes/validation.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/validation.jpg" class="img-fluid"></a></p>
 </div></div></section>
 <section id="alternatives-to-grid-search" class="level4" data-number="4.4.2.2">
 <h4 data-number="4.4.2.2" class="anchored" data-anchor-id="alternatives-to-grid-search"><span class="header-section-number">4.4.2.2</span> Alternatives to grid search</h4>
 <p>Grid search is a brute-force approach. It is <em>embarrassingly parallel</em>, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.</p>
-<p><img src="_media/memes/validation.jpg" height="300"></p>
 </section>
 </section>
 </section>
@@ -2446,6 +2479,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
