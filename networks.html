@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -390,7 +390,7 @@ window.Quarto = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div id="f7909f02" class="cell" data-execution_count="2">
+<div id="a5593009" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -420,12 +420,12 @@ window.Quarto = {
 </div>
 </div></div><p>Undirected, unweighted graphs will give us plenty to handle, and we will not go beyond them. We also will not allow graphs that have an edge from a node to itself.</p>
 <p>We will use the NetworkX package to work with graphs.</p>
-<div id="32b1fc46" class="cell" data-execution_count="3">
+<div id="0a89fe1f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="exm-networks-construct" class="theorem example" data-chapter="7" type="💻" data-description="Constructing networks/graphs">
 <p><span class="theorem-title"><strong>Example 7.1</strong></span> One way to create a graph is from a list of edges:</p>
-<div id="34bee1cd" class="cell" data-execution_count="4">
+<div id="4776d87c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>star <span class="op">=</span> nx.Graph( [ (<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">1</span>,<span class="dv">3</span>),(<span class="dv">1</span>,<span class="dv">4</span>),(<span class="dv">1</span>,<span class="dv">5</span>),(<span class="dv">1</span>,<span class="dv">6</span>) ] )</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>nx.draw(star, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -437,7 +437,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Another way to create a graph is to give the start and end nodes of the edges as columns in a data frame:</p>
-<div id="67937d8b" class="cell" data-execution_count="5">
+<div id="be0dac3c" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> pd.DataFrame( </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'from'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>], <span class="st">'to'</span>: [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">1</span>]} </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    )</span>
@@ -462,7 +462,7 @@ window.Quarto = {
 </div>
 </div>
 <p>We can deconstruct a graph object into its constituent nodes and edges, as they are properties of the graph object. The results have special types that can be converted into sets, lists, or other objects.</p>
-<div id="a12336eb" class="cell" data-execution_count="6">
+<div id="5adcb27c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nodes as a list:"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="bu">list</span>(star.nodes) )</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Nodes as an Index:"</span>)</span>
@@ -474,14 +474,14 @@ window.Quarto = {
 [1, 2, 3, 4, 5, 6]
 
 Nodes as an Index:
-Int64Index([1, 2, 3, 4, 5, 6], dtype='int64')
+Index([1, 2, 3, 4, 5, 6], dtype='int64')
 
 Edges as a list:
 [(1, 2), (1, 3), (1, 4), (1, 5), (1, 6)]</code></pre>
 </div>
 </div>
 <p>We can change the labels of the nodes to be whatever we want:</p>
-<div id="16fbc9f7" class="cell" data-execution_count="7">
+<div id="0c54b75a" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relabel <span class="op">=</span> pd.Series( [<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>], index<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">7</span>) )</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>star_letter <span class="op">=</span> nx.relabel_nodes(star, relabel )</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Edges as a list:"</span>)</span>
@@ -502,7 +502,7 @@ Edges as a list:
 </div>
 </div></div><div id="exm-networks-import" class="theorem example" data-chapter="7" type="💻" data-description="Importing networks">
 <p><span class="theorem-title"><strong>Example 7.2</strong></span> There are many ways to read graphs from, and write them to, files. For example, here is a friend network among Twitch users:</p>
-<div id="3432e50a" class="cell" data-execution_count="8">
+<div id="5f41d2a3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>twitch <span class="op">=</span> nx.read_edgelist(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"_datasets/musae_edges.csv"</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     delimiter<span class="op">=</span><span class="st">','</span>, </span>
@@ -511,7 +511,7 @@ Edges as a list:
 </div>
 <p>The file just imported has a pair of node labels separated by commas on each line, representing one edge. The node labels can be any strings, but we overrode that above to interpret them as integers.</p>
 <p>We will explore many functions that tell us facts about a graph. Here are two of the most fundamental:</p>
-<div id="fcfb05db" class="cell" data-execution_count="9">
+<div id="767e1887" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Twitch network has"</span>, </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    twitch.number_of_nodes(), </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nodes and"</span>,</span>
@@ -540,7 +540,7 @@ Note
 <section id="sec-networks-zoo" class="level3 page-columns page-full" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="sec-networks-zoo"><span class="header-section-number">7.1.1</span> A graph menagerie</h3>
 <p>There are functions that generate different well-studied types of graphs. The first graph constructed above is a <strong>star graph</strong>, and the graph <code>H</code> above is a <strong>cycle graph</strong>.</p>
-<div id="619f56dd" class="cell" data-execution_count="10">
+<div id="e056bac2" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nx.draw(nx.cycle_graph(<span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -560,7 +560,7 @@ Note
 </div>
 <p><br> <a href="_media/memes/cycle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/cycle.jpg" class="img-fluid"></a></p>
 </div></div><p>A cross between the star and the cycle is a <strong>wheel graph</strong>.</p>
-<div id="18f09568" class="cell" data-execution_count="11">
+<div id="18a5f600" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nx.draw(nx.wheel_graph(<span class="dv">9</span>), node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -574,7 +574,7 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <p><a href="_media/memes/wheel.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/wheel.jpg" class="img-fluid"></a></p>
 </div></div><p>A <strong>complete graph</strong> is one that has every possible edge, i.e., all possible pairs of nodes are connected.</p>
-<div id="53954868" class="cell" data-execution_count="12">
+<div id="497acc03" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>K5 <span class="op">=</span> nx.complete_graph(<span class="dv">5</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"5 nodes,"</span>, nx.number_of_edges(K5), <span class="st">"edges"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>nx.draw(K5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -598,7 +598,7 @@ Note
 \]</span></p>
 <p>unique pairs of distinct nodes, not counting ordering. Hence, there are <span class="math inline">\(\binom{n}{2}\)</span> edges in the undirected complete graph on <span class="math inline">\(n\)</span> nodes.</p>
 <p>A <strong>lattice graph</strong> has a regular structure, like graph paper.</p>
-<div id="4f869afc" class="cell" data-execution_count="13">
+<div id="3f50bd7d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> nx.grid_graph( (<span class="dv">5</span>,<span class="dv">4</span>) )</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lat.number_of_nodes(), <span class="st">"nodes,"</span>, lat.number_of_edges(), <span class="st">"edges"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>nx.draw(lat, node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -622,7 +622,7 @@ Note
 \]</span></p>
 <p>edges altogether.</p>
 <p>There are different ways to draw a particular graph in the plane, as determined by the positions of the nodes. The default is to imagine that the edges are springs pulling on the nodes. But there are alternatives that may be useful at times.</p>
-<div id="3321e49d" class="cell" data-execution_count="14">
+<div id="ed4761ee" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nx.draw_circular(lat, node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -650,7 +650,7 @@ Note
 </div>
 </div></div><div id="exm-networks-neighbors" class="theorem example" data-chapter="7" type="💻" data-description="Neighbors of a node">
 <p><span class="theorem-title"><strong>Example 7.3</strong></span> We get the neighbors of a node by using it as an index on the graph object. As with nodes and edges, we usually need to convert the result into a more convenient form:</p>
-<div id="c2552ffb" class="cell" data-execution_count="15">
+<div id="a3329444" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Neighbors of node 1 in the star graph:"</span>, <span class="bu">list</span>(star[<span class="dv">1</span>]) )</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"Neighbors of node 6 in the star graph:"</span>, <span class="bu">list</span>(star[<span class="dv">6</span>]) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -661,7 +661,7 @@ Neighbors of node 6 in the star graph: [1]</code></pre>
 </div>
 <div id="exm-networks-ego" class="theorem example" data-chapter="7" type="💻" data-description="Ego graph">
 <p><span class="theorem-title"><strong>Example 7.4</strong></span> We can zoom in on a subset of the Twitch graph by selecting a node and its <strong>ego graph</strong>, which includes its neighbors along with all edges between the captured nodes:</p>
-<div id="1458bdeb" class="cell" data-execution_count="16">
+<div id="3c1b5307" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ego <span class="op">=</span> nx.ego_graph(twitch, <span class="dv">400</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>nx.draw(ego, with_labels<span class="op">=</span><span class="va">True</span>, node_size<span class="op">=</span><span class="dv">800</span>, node_color<span class="op">=</span><span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -673,7 +673,7 @@ Neighbors of node 6 in the star graph: [1]</code></pre>
 </div>
 </div>
 <p>Notice that the nodes of the ego network have the same labels as they did in the graph that it was taken from. We can widen the ego graph to include the ego graphs of all the neighbors:</p>
-<div id="675ae892" class="cell" data-execution_count="17">
+<div id="6440759e" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>big_ego <span class="op">=</span> nx.ego_graph(twitch, <span class="dv">400</span>, radius<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(big_ego.number_of_nodes(), <span class="st">"nodes and"</span>, </span>
@@ -716,19 +716,22 @@ A_{ij}=A_{ji},
 <p>for all valid indices, so adjacency matrices in an undirected graph are symmetric.</p>
 <div id="exm-networks-adjmatrix" class="theorem example" data-chapter="7" type="💻" data-description="Adjacency matrix">
 <p><span class="theorem-title"><strong>Example 7.5</strong></span> The star graph defined in <a href="#sec-networks-zoo" class="quarto-xref"><span>Section 7.1.1</span></a> has the following adjacency matrix:</p>
-<div id="d4fbbc22" class="cell" data-execution_count="18">
+<div id="503435e4" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> nx.adjacency_matrix(star)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
-<pre><code>&lt;6x6 sparse array of type '&lt;class 'numpy.int64'&gt;'
-    with 10 stored elements in Compressed Sparse Row format&gt;</code></pre>
+<pre><code>&lt;Compressed Sparse Row sparse array of dtype 'int64'
+    with 10 stored elements and shape (6, 6)&gt;</code></pre>
 </div>
 </div>
 <p>The matrix <code>A</code> is not stored in the format we have been used to. In a large network we would expect most of its entries to be zero, so it makes more sense to store it as a <em>sparse matrix</em>, where we keep track of only the nonzero entries.</p>
-<div id="6693c1d6" class="cell" data-execution_count="19">
+<div id="f2d279c7" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  (0, 1)    1
+<pre><code>&lt;Compressed Sparse Row sparse array of dtype 'int64'
+    with 10 stored elements and shape (6, 6)&gt;
+  Coords    Values
+  (0, 1)    1
   (0, 2)    1
   (0, 3)    1
   (0, 4)    1
@@ -741,7 +744,7 @@ A_{ij}=A_{ji},
 </div>
 </div>
 <p>We can easily convert <code>A</code> to a standard array, if it is not too large to fit in memory.</p>
-<div id="bf10fb37" class="cell" data-execution_count="20">
+<div id="1e268b78" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>A.toarray()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>array([[0, 1, 1, 1, 1, 1],
@@ -779,14 +782,14 @@ A_{ij}=A_{ji},
 <p>The <code>degree</code> property of a NetworkX graph gives an object of all nodes with their degrees.</p>
 <div id="exm-networks-degree" class="theorem example" data-chapter="7" type="💻" data-description="Node degrees">
 <p><span class="theorem-title"><strong>Example 7.6</strong></span> Continuing with the graph from <a href="#exm-networks-ego" class="quarto-xref">Example&nbsp;<span>7.4</span></a>:</p>
-<div id="d4ad931e" class="cell" data-execution_count="21">
+<div id="ce3b91b5" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ego.degree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>DegreeView({897: 2, 400: 9, 5394: 2, 3379: 3, 4406: 1, 5079: 1, 6136: 2, 5049: 1, 6107: 1, 639: 2})</code></pre>
 </div>
 </div>
 <p>The result here can be a bit awkward to work with; it’s actually a <em>generator</em> of a list, rather than the list itself. (This “lazy” attitude is useful when dealing with very large networks.) We can transform it into different forms, such as a dictionary:</p>
-<div id="b8eeb536" class="cell" data-execution_count="22">
+<div id="8c3627b5" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dict</span>(ego.degree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>{897: 2,
@@ -802,7 +805,7 @@ A_{ij}=A_{ji},
 </div>
 </div>
 <p>Given our comfort level with pandas, it might be most convenient to use a series or frame to keep track of such quantities:</p>
-<div id="40b63b8c" class="cell" data-execution_count="23">
+<div id="94632256" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> pd.Series( <span class="bu">dict</span>(ego.degree) )</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>degrees</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
@@ -820,7 +823,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>We can then do familiar calculations:</p>
-<div id="5c432d5b" class="cell" data-execution_count="24">
+<div id="409e33e5" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"mean degree of ego graph:"</span>, degrees.mean())</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"median degree of ego graph:"</span>, degrees.median())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -850,7 +853,7 @@ median degree of ego graph: 2.0</code></pre>
 </div>
 <div id="exm-networks-avgdegree" class="theorem example" data-chapter="7" type="💻" data-description="Average degree">
 <p><span class="theorem-title"><strong>Example 7.7</strong></span> Just to check the theorem on the ego graph from <a href="#exm-networks-ego" class="quarto-xref">Example&nbsp;<span>7.4</span></a>:</p>
-<div id="549ca512" class="cell" data-execution_count="25">
+<div id="cc049c1e" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">*</span>ego.number_of_edges() <span class="op">/</span> ego.number_of_nodes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>2.4</code></pre>
@@ -888,7 +891,7 @@ p\binom{n}{2} = \frac{pn(n-1)}{2}.
 <p>There are two senses of averaging going on in <a href="#thm-networks-degree-ER" class="quarto-xref">Theorem&nbsp;<span>7.2</span></a>:. We take the average (expectation operation) over all random instances of the average degree over all nodes within the instance.</p>
 <div id="exm-networks-degree-ER" class="theorem example" data-chapter="7" type="💻" data-description="ER graphs">
 <p><span class="theorem-title"><strong>Example 7.8</strong></span> &nbsp;</p>
-<div id="fcd494e7" class="cell" data-execution_count="26">
+<div id="87b2e4df" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">50</span>, <span class="fl">0.08</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>ER <span class="op">=</span> nx.erdos_renyi_graph(n, p, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ER.number_of_nodes(), <span class="st">"nodes,"</span>, ER.number_of_edges(), <span class="st">"edges"</span>)</span>
@@ -905,7 +908,7 @@ p\binom{n}{2} = \frac{pn(n-1)}{2}.
 </div>
 </div>
 <p>Here is the distribution of <span class="math inline">\(\bar{k}\)</span> over 20000 ER instances:</p>
-<div id="207d64c0" class="cell" data-execution_count="27">
+<div id="4534a308" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> average_degree(G):</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>G.number_of_edges() <span class="op">/</span> G.number_of_nodes()</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -958,7 +961,7 @@ p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
 <p>In the next phase, we rewire some of the local relationships into far-flung ones. We visit each node <span class="math inline">\(i\)</span> in turn. For each edge from <span class="math inline">\(i\)</span> to a neighbor, with probability <span class="math inline">\(q\)</span> we replace it with an edge between <span class="math inline">\(i\)</span> and a node chosen at random from all the nodes <span class="math inline">\(i\)</span> currently not adjacent to <span class="math inline">\(i\)</span>.</p>
 <div id="exm-networks-WS" class="theorem example" data-chapter="7" type="💻" data-description="WS graphs">
 <p><span class="theorem-title"><strong>Example 7.9</strong></span> If we set <span class="math inline">\(q=0\)</span>, we disable the rewiring phase and get a regular ring lattice:</p>
-<div id="e46a5640" class="cell" data-execution_count="28">
+<div id="0bf17dcf" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>WS <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">13</span>, <span class="dv">4</span>, <span class="dv">0</span>, seed<span class="op">=</span><span class="dv">302</span>)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>nx.draw_circular(WS, node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -970,7 +973,7 @@ p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
 </div>
 </div>
 <p>As <span class="math inline">\(q\)</span> increases, we introduce more randomness:</p>
-<div id="4b32164a" class="cell" data-execution_count="29">
+<div id="fdc7fb27" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>WS <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">13</span>, <span class="dv">4</span>, <span class="fl">0.25</span>, seed<span class="op">=</span><span class="dv">302</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>nx.draw_circular(WS, node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -982,7 +985,7 @@ p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
 </div>
 </div>
 <p>Taken to the limit <span class="math inline">\(q=1\)</span>, we end up with something that loses the mostly-local structure:</p>
-<div id="8a3702e1" class="cell" data-execution_count="30">
+<div id="cbe49cac" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>WS <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">13</span>, <span class="dv">4</span>, <span class="fl">1.0</span>, seed<span class="op">=</span><span class="dv">302</span>)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>nx.draw_circular(WS, node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1037,7 +1040,7 @@ C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 <p>The value of <span class="math inline">\(T(i)\)</span> is the same as the number of edges between node <span class="math inline">\(i\)</span>’s neighbors. Because there are <span class="math inline">\(\binom{d_i}{2}\)</span> unique pairs of neighbors, the value of <span class="math inline">\(C(i)\)</span> is between 0 and 1.</p>
 <div id="exm-networks-cluster-small-world" class="theorem example" data-chapter="7" type="✍️" data-description="Clustering coefficient">
 <p><span class="theorem-title"><strong>Example 7.10</strong></span> Let’s find the clustering coefficient for each node in this wheel graph:</p>
-<div id="ba93d0cc" class="cell" data-execution_count="31">
+<div id="4ac0dd7c" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> nx.wheel_graph(<span class="dv">7</span>)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>nx.draw(W, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1054,14 +1057,14 @@ C(0) = \frac{6}{6 \cdot 5 / 2} = \frac{2}{5}.
 C(i) = \frac{2}{3 \cdot 2 / 2} = \frac{2}{3}, \quad i\neq 0.
 \]</span></p>
 <p>The <code>clustering</code> function in NetworkX computes <span class="math inline">\(C(i)\)</span> for any single node: or for all the nodes in a graph.</p>
-<div id="42b96553" class="cell" data-execution_count="32">
+<div id="9c5bff62" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"node 0 clustering is </span><span class="sc">{</span>nx<span class="sc">.</span>clustering(W, <span class="dv">0</span>)<span class="sc">:.7f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>node 0 clustering is 0.4000000</code></pre>
 </div>
 </div>
 <p>If not given a node label, the <code>clustering</code> function returns a dictionary of the clustering coefficients for all of the nodes. As usual, we can convert that output to a series or data frame.</p>
-<div id="738590bb" class="cell" data-execution_count="33">
+<div id="fe168483" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">clustering at each node:"</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( pd.Series(nx.clustering(W)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1088,7 +1091,7 @@ dtype: float64</code></pre>
 </div>
 </div></div><div id="exm-networks-cluster-twitch" class="theorem example" data-chapter="7" type="💻" data-description="Clustering in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.11</strong></span> Let’s examine clustering within the Twitch network:</p>
-<div id="7caa5283" class="cell" data-execution_count="34">
+<div id="3d321b62" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>twitch <span class="op">=</span> nx.read_edgelist(<span class="st">"_datasets/musae_edges.csv"</span>, delimiter<span class="op">=</span><span class="st">','</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span>
@@ -1106,14 +1109,14 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The average clustering coefficient is</p>
-<div id="1d202060" class="cell" data-execution_count="35">
+<div id="dabd298f" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"average Twitch clustering is </span><span class="sc">{</span>cluster<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>average Twitch clustering is 0.1309</code></pre>
 </div>
 </div>
 <p>Suppose we want to explore the relationship between clustering and degree in the network. It’s most convenient to store both values as columns of a data frame:</p>
-<div id="a24fa060" class="cell" data-execution_count="36">
+<div id="5f1af526" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>props <span class="op">=</span> pd.DataFrame()</span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>props[<span class="st">"clustering"</span>] <span class="op">=</span> nx.clustering(twitch)</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>props[<span class="st">"degree"</span>] <span class="op">=</span> <span class="bu">dict</span>(twitch.degree)   <span class="co"># degree view converted to dict</span></span>
@@ -1124,34 +1127,34 @@ dtype: float64</code></pre>
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">clustering</th>
 <th data-quarto-table-cell-role="th">degree</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">6194</td>
 <td>0.066667</td>
 <td>6</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">255</td>
 <td>0.133333</td>
 <td>6</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">980</td>
 <td>0.065359</td>
 <td>18</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">2992</td>
 <td>0.000000</td>
 <td>4</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2507</td>
 <td>0.073593</td>
 <td>22</td>
@@ -1163,7 +1166,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Here’s the distribution of clustering coefficients:</p>
-<div id="013aa112" class="cell" data-execution_count="37">
+<div id="5659a303" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>props, x<span class="op">=</span><span class="st">"clustering"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1174,7 +1177,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>There is a huge number of clustering values at zero. A plot of both quantities clarifies that these are due to nodes of degree 1:</p>
-<div id="cd1ad6de" class="cell" data-execution_count="38">
+<div id="d9458519" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>props, x<span class="op">=</span><span class="st">"degree"</span>, y<span class="op">=</span><span class="st">"clustering"</span>, kind<span class="op">=</span><span class="st">"line"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1202,7 +1205,7 @@ dtype: float64</code></pre>
 <p>A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability <span class="math inline">\(p\)</span> of inclusion, then <span class="math inline">\(p\)</span> is also the expected fraction of edges that appear within the neighborhood subgraph of any node.</p>
 <div id="exm-networks-cluster-er" class="theorem example" data-chapter="7" type="💻" data-description="Clustering in ER graphs">
 <p><span class="theorem-title"><strong>Example 7.12</strong></span> Let’s compute average clustering within multiple ER random graphs.</p>
-<div id="76d9fa18" class="cell" data-execution_count="39">
+<div id="23cb0965" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>n,p <span class="op">=</span> <span class="dv">121</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">20</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">iter</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">400</span>):</span>
@@ -1235,7 +1238,7 @@ dtype: float64</code></pre>
 <p>The initial setup of a WS graph of type <span class="math inline">\((n,k,q)\)</span> is highly clustered by design (see <a href="#exr-networks-ring-lattice" class="quarto-xref">Exercise&nbsp;<span>7.9</span></a>). If <span class="math inline">\(q\)</span> is close to zero, the final graph will retain much of this initial clustering. However, the average clustering coefficient tends to decrease as <span class="math inline">\(q\)</span> increases.</p>
 <div id="exm-networks-cluster-WS" class="theorem example" data-chapter="7" type="💻" data-description="Clustering of WS graphs">
 <p><span class="theorem-title"><strong>Example 7.13</strong></span> Here is an experiment to observe how the average clustering in a WS graph depends on the rewiring probability <span class="math inline">\(q\)</span>:</p>
-<div id="35ad9ff8" class="cell" data-execution_count="40">
+<div id="e2a10c33" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>n, k <span class="op">=</span> <span class="dv">60</span>, <span class="dv">6</span></span>
@@ -1266,7 +1269,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Let’s scale the experiment above up to the size of the Twitch network. Conveniently, the average degree in that network is roughly 10, which is the value we will use for <span class="math inline">\(k\)</span> in the WS construction. To save computation time, we use just one WS realization at each value of <span class="math inline">\(q\)</span>.</p>
-<div id="51adaf3a" class="cell" data-execution_count="41">
+<div id="ea43f8d9" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>n, k <span class="op">=</span> twitch.number_of_nodes(), <span class="dv">10</span></span>
@@ -1285,49 +1288,49 @@ dtype: float64</code></pre>
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">q</th>
 <th data-quarto-table-cell-role="th">mean clustering</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>0.15</td>
 <td>0.415477</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>0.20</td>
 <td>0.347262</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>0.25</td>
 <td>0.286947</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>0.30</td>
 <td>0.232891</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>0.35</td>
 <td>0.184559</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">5</td>
 <td>0.40</td>
 <td>0.146123</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">6</td>
 <td>0.45</td>
 <td>0.112606</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">7</td>
 <td>0.50</td>
 <td>0.085669</td>
@@ -1339,7 +1342,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The mean clustering for the Twitch network was found to be about 0.131 in <a href="#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>7.11</span></a>. From the above, it appears that the WS graphs will have a similar mean clustering at around <span class="math inline">\(q=0.42\)</span>. Let’s freeze <span class="math inline">\(q\)</span> there and try more WS realizations to check:</p>
-<div id="784f1cba" class="cell" data-execution_count="42">
+<div id="5a328d77" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">3383</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>n, k, q <span class="op">=</span> twitch.number_of_nodes(), <span class="dv">10</span>, <span class="fl">0.42</span></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> []</span>
@@ -1383,7 +1386,7 @@ dtype: float64</code></pre>
 <p>Because the diameter depends on the extreme outlier of the distance distribution, it’s often more useful to consider the <strong>average distance</strong> by taking the mean.</p>
 <div id="exm-networks-distance-wheel" class="theorem example" data-chapter="7" type="💻" data-description="Distances in a wheel graph">
 <p><span class="theorem-title"><strong>Example 7.15</strong></span> Here is a small wheel graph:</p>
-<div id="40de4b64" class="cell" data-execution_count="43">
+<div id="03759c04" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> nx.wheel_graph(<span class="dv">7</span>)</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>nx.draw(W, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1395,7 +1398,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>No node is more than two hops away from another, so the diameter of this graph is 2. This graph has so few nodes that we can easily compute the entire matrix of pairwise distances:</p>
-<div id="83ca7035" class="cell" data-execution_count="44">
+<div id="af42dc5a" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>distance <span class="op">=</span> <span class="bu">dict</span>( nx.all_pairs_shortest_path_length(W) )</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.array( [ [distance[i][j] <span class="cf">for</span> j <span class="kw">in</span> W.nodes] <span class="cf">for</span> i <span class="kw">in</span> W.nodes] )</span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1410,7 +1413,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>If all we want is the average distance, though, there is a convenience function for computing it directly:</p>
-<div id="08146f5e" class="cell" data-execution_count="45">
+<div id="2d7839d4" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>mean_dist <span class="op">=</span> nx.average_shortest_path_length(W)</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The average distance is </span><span class="sc">{</span>mean_dist<span class="sc">:.5f}</span><span class="ss">"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1424,7 +1427,7 @@ dtype: float64</code></pre>
 <p>It could happen that there is a pair of nodes that is not connected by any path of edges. In that case, the distance between them is either undefined or infinite, and we say the graph is <strong>disconnected</strong>. In such a situation, it’s common to decompose the graph into <strong>connected components</strong>, a separation of the nodes into connected subgraphs.</p>
 <div id="exm-networks-connected" class="theorem example" data-chapter="7" type="✍️" data-description="Connectedness">
 <p><span class="theorem-title"><strong>Example 7.16</strong></span> The following graph is clearly connected:</p>
-<div id="5e7a2d42" class="cell" data-execution_count="46">
+<div id="6c9fa7a5" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.lollipop_graph(<span class="dv">5</span>,<span class="dv">3</span>)</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"yellow"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1436,14 +1439,14 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>NetworkX has a function to determine this for us:</p>
-<div id="ee9faab2" class="cell" data-execution_count="47">
+<div id="173fb811" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>nx.is_connected(G)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>If we remove the edge between nodes 4 and 5, then the graph is no longer connected:</p>
-<div id="2a53987b" class="cell" data-execution_count="48">
+<div id="f20f7edb" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>G.remove_edge(<span class="dv">4</span>,<span class="dv">5</span>)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Is it connected?"</span>, nx.is_connected(G))</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>nx.draw(G, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"yellow"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1459,7 +1462,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>We get an error if we try to compute all the distances in a disconnected graph:</p>
-<div id="343691d5" class="cell" data-execution_count="49">
+<div id="0d623241" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>nx.average_shortest_path_length(G)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
@@ -1468,35 +1471,27 @@ dtype: float64</code></pre>
 Cell <span class="ansi-green-fg">In[48], line 1</span>
 <span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">nx</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">average_shortest_path_length</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">G</span><span class="ansi-yellow-bg">)</span>
 
-File <span class="ansi-green-fg">&lt;class 'networkx.utils.decorators.argmap'&gt; compilation 132:3</span>, in <span class="ansi-cyan-fg">argmap_average_shortest_path_length_129</span><span class="ansi-blue-fg">(G, weight, method, backend, **backend_kwargs)</span>
-<span class="ansi-green-fg ansi-bold">      1</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">bz2</span>
-<span class="ansi-green-fg ansi-bold">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">collections</span>
-<span class="ansi-green-fg">----&gt; 3</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">gzip</span>
-<span class="ansi-green-fg ansi-bold">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">inspect</span>
-<span class="ansi-green-fg ansi-bold">      5</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span> <span style="font-weight:bold;color:rgb(0,0,255)">itertools</span>
+File <span class="ansi-green-fg">~/mambaforge/envs/21924F/lib/python3.12/site-packages/networkx/utils/backends.py:412</span>, in <span class="ansi-cyan-fg">_dispatch.__call__</span><span class="ansi-blue-fg">(self, backend, *args, **kwargs)</span>
+<span class="ansi-green-fg ansi-bold">    409</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">__call__</span>(<span style="color:rgb(0,135,0)">self</span>, <span style="color:rgb(98,98,98)">/</span>, <span style="color:rgb(98,98,98)">*</span>args, backend<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">None</span>, <span style="color:rgb(98,98,98)">*</span><span style="color:rgb(98,98,98)">*</span>kwargs):
+<span class="ansi-green-fg ansi-bold">    410</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> backends:
+<span class="ansi-green-fg ansi-bold">    411</span>         <span style="font-style:italic;color:rgb(95,135,135)"># Fast path if no backends are installed</span>
+<span class="ansi-green-fg">--&gt; 412</span>         <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">orig_func</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">    414</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Use `backend_name` in this function instead of `backend`</span>
+<span class="ansi-green-fg ansi-bold">    415</span>     backend_name <span style="color:rgb(98,98,98)">=</span> backend
 
-File <span class="ansi-green-fg">~/mambaforge/envs/datasci/lib/python3.11/site-packages/networkx/utils/backends.py:633</span>, in <span class="ansi-cyan-fg">_dispatchable.__call__</span><span class="ansi-blue-fg">(self, backend, *args, **kwargs)</span>
-<span class="ansi-green-fg ansi-bold">    628</span> <span style="font-style:italic;color:rgb(175,0,0)">"""Returns the result of the original function, or the backend function if</span>
-<span class="ansi-green-fg ansi-bold">    629</span> <span style="font-style:italic;color:rgb(175,0,0)">the backend is specified and that backend implements `func`."""</span>
-<span class="ansi-green-fg ansi-bold">    631</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> backends:
-<span class="ansi-green-fg ansi-bold">    632</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Fast path if no backends are installed</span>
-<span class="ansi-green-fg">--&gt; 633</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">orig_func</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg ansi-bold">    635</span> <span style="font-style:italic;color:rgb(95,135,135)"># Use `backend_name` in this function instead of `backend`</span>
-<span class="ansi-green-fg ansi-bold">    636</span> backend_name <span style="color:rgb(98,98,98)">=</span> backend
-
-File <span class="ansi-green-fg">~/mambaforge/envs/datasci/lib/python3.11/site-packages/networkx/algorithms/shortest_paths/generic.py:428</span>, in <span class="ansi-cyan-fg">average_shortest_path_length</span><span class="ansi-blue-fg">(G, weight, method)</span>
-<span class="ansi-green-fg ansi-bold">    426</span> <span style="font-style:italic;color:rgb(95,135,135)"># Shortest path length is undefined if the graph is not connected.</span>
-<span class="ansi-green-fg ansi-bold">    427</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> G<span style="color:rgb(98,98,98)">.</span>is_directed() <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> nx<span style="color:rgb(98,98,98)">.</span>is_connected(G):
-<span class="ansi-green-fg">--&gt; 428</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> nx<span style="color:rgb(98,98,98)">.</span>NetworkXError(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Graph is not connected.</span><span style="color:rgb(175,0,0)">"</span>)
-<span class="ansi-green-fg ansi-bold">    430</span> <span style="font-style:italic;color:rgb(95,135,135)"># Compute all-pairs shortest paths.</span>
-<span class="ansi-green-fg ansi-bold">    431</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">path_length</span>(v):
+File <span class="ansi-green-fg">~/mambaforge/envs/21924F/lib/python3.12/site-packages/networkx/algorithms/shortest_paths/generic.py:419</span>, in <span class="ansi-cyan-fg">average_shortest_path_length</span><span class="ansi-blue-fg">(G, weight, method)</span>
+<span class="ansi-green-fg ansi-bold">    417</span> <span style="font-style:italic;color:rgb(95,135,135)"># Shortest path length is undefined if the graph is not connected.</span>
+<span class="ansi-green-fg ansi-bold">    418</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> G<span style="color:rgb(98,98,98)">.</span>is_directed() <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> nx<span style="color:rgb(98,98,98)">.</span>is_connected(G):
+<span class="ansi-green-fg">--&gt; 419</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> nx<span style="color:rgb(98,98,98)">.</span>NetworkXError(<span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">Graph is not connected.</span><span style="color:rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg ansi-bold">    421</span> <span style="font-style:italic;color:rgb(95,135,135)"># Compute all-pairs shortest paths.</span>
+<span class="ansi-green-fg ansi-bold">    422</span> <span style="font-weight:bold;color:rgb(0,135,0)">def</span> <span style="color:rgb(0,0,255)">path_length</span>(v):
 
 <span class="ansi-red-fg">NetworkXError</span>: Graph is not connected.</pre>
 </div>
 </div>
 </div>
 <p>The <code>connected_components</code> function creates a generator of subgraphs that are the connected components. We can collect the components into a list, for example:</p>
-<div id="cd15ab48" class="cell" data-execution_count="50">
+<div id="a5b831ca" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>( nx.connected_components(G) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>[{0, 1, 2, 3, 4}, {5, 6, 7}]</code></pre>
@@ -1519,7 +1514,7 @@ File <span class="ansi-green-fg">~/mambaforge/envs/datasci/lib/python3.11/site-p
 <p>An ER graph may be disconnected. In order to study the statistics of distances for ER graphs, it’s customary to use the largest connected component (often called the <em>big component</em>) of each instance.</p>
 <div id="exm-networks-distance-ER" class="theorem example" data-chapter="7" type="💻" data-description="Distances in ER graphs">
 <p><span class="theorem-title"><strong>Example 7.17</strong></span> Let’s examine average distances within ER graphs of a fixed type. First, we need to be able to extract the largest component of a disconnected graph. Here is the idiom (referring back to <a href="#exm-networks-connected" class="quarto-xref">Example&nbsp;<span>7.16</span></a>):</p>
-<div id="ec5765c0" class="cell" data-execution_count="51">
+<div id="74bbf805" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.lollipop_graph(<span class="dv">5</span>,<span class="dv">3</span>)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>G.remove_edge(<span class="dv">4</span>,<span class="dv">5</span>)</span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>G_sub <span class="op">=</span> G.subgraph( <span class="bu">max</span>(nx.connected_components(G), key<span class="op">=</span><span class="bu">len</span>) )</span>
@@ -1529,7 +1524,7 @@ File <span class="ansi-green-fg">~/mambaforge/envs/datasci/lib/python3.11/site-p
 </div>
 </div>
 <p>Using this idiom, we set up and run the experiment:</p>
-<div id="4d0b65f6" class="cell" data-execution_count="52">
+<div id="909153e7" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>n, p <span class="op">=</span> <span class="dv">121</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">20</span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>dbar <span class="op">=</span> []</span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">iter</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
@@ -1560,7 +1555,7 @@ File <span class="ansi-green-fg">~/mambaforge/envs/datasci/lib/python3.11/site-p
 <section id="sec-networks-distance-WS" class="level3 page-columns page-full" data-number="7.4.3">
 <h3 data-number="7.4.3" class="anchored" data-anchor-id="sec-networks-distance-WS"><span class="header-section-number">7.4.3</span> WS graphs</h3>
 <p>The Watts–Strogatz model was originally proposed to demonstrate small-world networks. The initial ring-lattice structure of the construction exhibits both large clustering and large mean distance:</p>
-<div id="23b950c1" class="cell" data-execution_count="53">
+<div id="aef575e6" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># q=0 ==&gt; initial ring lattice</span></span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">400</span>, <span class="dv">6</span>, <span class="dv">0</span>)  </span>
 <span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>C0 <span class="op">=</span> nx.average_clustering(G)</span>
@@ -1581,7 +1576,7 @@ and average shortest path length 33.75</code></pre>
 </div>
 </div>
 </div></div><p>At the other extreme of <span class="math inline">\(q=1\)</span>, we get small clustering and small average distance. The most interesting aspect of WS graphs is the transition between these extremes as <span class="math inline">\(q\)</span> varies.</p>
-<div id="c1d2028e" class="cell" data-execution_count="54">
+<div id="601c67b1" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
@@ -1617,7 +1612,7 @@ and average shortest path length 33.75</code></pre>
 <div class="no-row-height column-margin column-container"><div class="">
 <p><a href="_media/memes/graph_distance.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/graph_distance.jpg" class="img-fluid"></a></p>
 </div></div><p>Now we consider distances within the Twitch network.</p>
-<div id="338157aa" class="cell" data-execution_count="55">
+<div id="d09447de" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>twitch <span class="op">=</span> nx.read_edgelist(<span class="st">"_datasets/musae_edges.csv"</span>, delimiter<span class="op">=</span><span class="st">','</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>n, e <span class="op">=</span> twitch.number_of_nodes(), twitch.number_of_edges()</span>
 <span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>kbar <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>e<span class="op">/</span>n</span>
@@ -1629,7 +1624,7 @@ average degree is 9.914</code></pre>
 </div>
 </div>
 <p>Computing the distances between all pairs of nodes in this graph would take a long time, so we sample pairs randomly to get an estimate.</p>
-<div id="7b3a3373" class="cell" data-execution_count="56">
+<div id="2edd78d7" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
@@ -1667,7 +1662,7 @@ estimated mean = 3.67584</code></pre>
 </div>
 </div>
 </div></div><p>Next we explore WS graphs with the same <span class="math inline">\(n\)</span> as the Twitch network and <span class="math inline">\(k=10\)</span> to get a similar average degree.</p>
-<div id="c5fd9717" class="cell" data-execution_count="57">
+<div id="e8fe27ed" class="cell" data-execution_count="57">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
@@ -1705,7 +1700,7 @@ estimated mean = 3.67584</code></pre>
 <p>As we well know, the mean of a distribution does not tell the entire story about it.</p>
 <div id="exm-networks-ddist-twitch" class="theorem example" data-chapter="7" type="💻" data-description="Degree distribution in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.18</strong></span> The distribution of the degrees of all the nodes in our Twitch network has some surprising features:</p>
-<div id="871e0353" class="cell" data-execution_count="58">
+<div id="4e29bf75" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>twitch <span class="op">=</span> nx.read_edgelist(<span class="st">"_datasets/musae_edges.csv"</span>, delimiter<span class="op">=</span><span class="st">','</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>twitch_degrees <span class="op">=</span> pd.Series( <span class="bu">dict</span>(twitch.degree) )</span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>twitch_degrees.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1722,7 +1717,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Observe above that that there is a significant disparity between the mean and median values of the degree distribution, and that the standard deviation is much larger than the mean. A histogram plot confirms that the degree distribution is widely dispersed:</p>
-<div id="91f0d958" class="cell" data-execution_count="59">
+<div id="519f4170" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Twitch network degree distribution:"</span>)</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>sns.displot(twitch_degrees)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1737,7 +1732,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>In fact, a few nodes in the network have hundreds of friends:</p>
-<div id="d604f5f3" class="cell" data-execution_count="60">
+<div id="65ab446a" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>friend_counts <span class="op">=</span> twitch_degrees.value_counts()           <span class="co"># histogram bar heights</span></span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>friend_counts.sort_index(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
@@ -1746,7 +1741,7 @@ dtype: float64</code></pre>
 465    1
 378    1
 352    1
-dtype: int64</code></pre>
+Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>These “gregarious nodes” or <em>hubs</em> are characteristic of many social and other real-world networks.</p>
@@ -1762,7 +1757,7 @@ dtype: int64</code></pre>
 </div></div><p>Neither ER nor WS graphs show degree distributions even remotely like that of the Twitch network.</p>
 <div id="exm-networks-ddist-ERWS" class="theorem example" data-chapter="7" type="💻" data-description="Degree distribution in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.19</strong></span> We can compare the distribution from <a href="#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span>7.18</span></a> to that in a sample of ER graphs with the same size and expected average degree:</p>
-<div id="27f7634c" class="cell" data-execution_count="61">
+<div id="69fc062b" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>n, m <span class="op">=</span> twitch.number_of_nodes(), twitch.number_of_edges()</span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>kbar <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>m<span class="op">/</span>n</span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> kbar<span class="op">/</span>(n<span class="op">-</span><span class="dv">1</span>)</span>
@@ -1785,7 +1780,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Theory proves that the plot above converges to a <em>binomial distribution</em>. A WS graph has a similar distribution:</p>
-<div id="6d70aaab" class="cell" data-execution_count="62">
+<div id="3dc7f9e4" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>k, q <span class="op">=</span> <span class="dv">10</span>, <span class="fl">0.42</span></span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>degrees <span class="op">=</span> []</span>
 <span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">iter</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
@@ -1817,7 +1812,7 @@ dtype: int64</code></pre>
 </div></div><section id="power-law-distribution" class="level3 page-columns page-full" data-number="7.5.1">
 <h3 data-number="7.5.1" class="anchored" data-anchor-id="power-law-distribution"><span class="header-section-number">7.5.1</span> Power-law distribution</h3>
 <p>The behavior of the Twitch degree distribution in <a href="#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span>7.18</span></a> gets very interesting when the axes are transformed to use log scales:</p>
-<div id="f77e1277" class="cell" data-execution_count="63">
+<div id="7d229644" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>twitch_degrees, log_scale<span class="op">=</span>(<span class="va">True</span>, <span class="va">True</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1844,7 +1839,7 @@ y \approx B x^{-a},
 <!-- ::::{#exm-networks-ddist-powerlaw}
 We can get a fair estimate of the constants $B$ and $a$ in the power law by doing a least-squares fit on the logs of $x$ and $y$. First, we need the counts:
 
-::: {#f1e8f7cf .cell execution_count=64}
+::: {#bab3d0a1 .cell execution_count=64}
 ``` {.python .cell-code}
 y = twitch_degrees.value_counts()
 counts = pd.DataFrame( {"degree": y.index, "count": y.values} )
@@ -1872,39 +1867,39 @@ counts.head(6)
 
 <table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header" style="text-align: right;">
+<tr style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">degree</th>
 <th data-quarto-table-cell-role="th">count</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">10</td>
 <td>11</td>
 <td>193</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">11</td>
 <td>12</td>
 <td>155</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">12</td>
 <td>13</td>
 <td>131</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">13</td>
 <td>14</td>
 <td>122</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">14</td>
 <td>15</td>
 <td>103</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">15</td>
 <td>17</td>
 <td>83</td>
@@ -1921,7 +1916,7 @@ counts.head(6)
 
 Now we will get additional columns by log transformations. (Note: the `np.log` function is the natural logarithm.)
 
-::: {#7e727965 .cell execution_count=65}
+::: {#77215830 .cell execution_count=65}
 ``` {.python .cell-code}
 logcounts = counts.transform(np.log)
 ```
@@ -1930,7 +1925,7 @@ logcounts = counts.transform(np.log)
 
 Then we use `sklearn` for a linear regression:
 
-::: {#43c9c0ca .cell execution_count=66}
+::: {#8169cb67 .cell execution_count=66}
 ``` {.python .cell-code}
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
@@ -1940,7 +1935,7 @@ lm.coef_[0], lm.intercept_
 
 ::: {.cell-output .cell-output-display execution_count=65}
 ```
-(-1.9941272617745713, 9.7094067609447)
+(-1.9941272617745704, 9.709406760944697)
 ```
 :::
 :::
@@ -1964,7 +1959,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 <p>Because of preferential attachment, there is a strong tendency to develop some hubs of very high degree, as is required for a power-law degree distribution.</p>
 <div id="exm-networks-BA" class="theorem example" data-chapter="7" type="💻" data-description="Barabási--Albert graphs">
 <p><span class="theorem-title"><strong>Example 7.20</strong></span> Here is a BA graph with 200 nodes and <span class="math inline">\(m=3\)</span> connections per new node:</p>
-<div id="34eb21a1" class="cell" data-execution_count="67">
+<div id="ecf2a9f2" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>BA <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">200</span>, <span class="dv">3</span>, seed<span class="op">=</span><span class="dv">302</span>)</span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>BA_degrees <span class="op">=</span> pd.Series( <span class="bu">dict</span>(BA.degree) )</span>
 <span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>nx.draw(</span>
@@ -1986,7 +1981,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 <p>Except fot the initial seed stage, each node of a BA graph introduces <span class="math inline">\(m\)</span> new edges, for a total edge count of about <span class="math inline">\(mn\)</span>. By <a href="#thm-networks-degree" class="quarto-xref">Theorem&nbsp;<span>7.1</span></a>, the average degree of the graph is roughly <span class="math inline">\(\bar{k} = 2mn/n = 2m\)</span>.</p>
 <div id="exm-networks-powerlaw-ba" class="theorem example" data-chapter="7" type="💻" data-description="Power-law degrees in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.21</strong></span> For the Twitch network, <span class="math inline">\(\bar{k}\)</span> is almost 10, so we use <span class="math inline">\(m=5\)</span> to get a comparable BA graph. Here we construct such a graph with the same number of nodes as the Twitch network.</p>
-<div id="5a33da60" class="cell" data-execution_count="68">
+<div id="9ecd1bf0" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> twitch.number_of_nodes()</span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="bu">round</span>(kbar<span class="op">/</span><span class="dv">2</span>)</span>
 <span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>BA <span class="op">=</span> nx.barabasi_albert_graph(n, m, seed<span class="op">=</span><span class="dv">5</span>)</span>
@@ -2001,14 +1996,14 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 </div>
 </div>
 <p>While BA graphs capture the heavy-tailed degree distribution of the Twitch network rather well, they are way off when it comes to clustering. For the Twitch network, we have:</p>
-<div id="b3077614" class="cell" data-execution_count="69">
+<div id="6a6266d0" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean clustering in Twitch: </span><span class="sc">{</span>nx<span class="sc">.</span>average_clustering(twitch)<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean clustering in Twitch: 0.13093</code></pre>
 </div>
 </div>
 <p>And for BA, we get:</p>
-<div id="7ca99a44" class="cell" data-execution_count="70">
+<div id="e2517608" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> []</span>
 <span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>seed <span class="op">=</span> <span class="dv">3383</span></span>
 <span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">iter</span> <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">40</span>):</span>
@@ -2046,7 +2041,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 <p>While degree centrality yields useful information in some networks, it is not always a reliable measuring stick. For example, a search engine for the Web that uses degree centrality would be easily fooled by creating a large collection of sites that all link to each other, even if few outside sources also link to the collection. Other aspects of network layout also argue against relying on degree centrality.</p>
 <div id="exm-networks-centrality-degree" class="theorem example" data-chapter="7" type="💻" data-description="Degree centrality">
 <p><span class="theorem-title"><strong>Example 7.22</strong></span> We start with a small graph:</p>
-<div id="25118ecc" class="cell" data-execution_count="71">
+<div id="986f19d9" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.lollipop_graph(<span class="dv">4</span>,<span class="dv">2</span>)</span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"pink"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2058,7 +2053,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 </div>
 </div>
 <p>Since this graph has 6 nodes, the degree centrality is equal to the degree divided by 5:</p>
-<div id="6c71c355" class="cell" data-execution_count="72">
+<div id="832d4a58" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> pd.DataFrame( index<span class="op">=</span>G.nodes )</span>
 <span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>values[<span class="st">"degree"</span>] <span class="op">=</span> <span class="bu">dict</span>(G.degree)</span>
 <span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a>values[<span class="st">"degree centrality"</span>] <span class="op">=</span> nx.degree_centrality(G)</span>
@@ -2069,39 +2064,39 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">degree</th>
 <th data-quarto-table-cell-role="th">degree centrality</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>3</td>
 <td>0.6</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>3</td>
 <td>0.6</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>3</td>
 <td>0.6</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>4</td>
 <td>0.8</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>2</td>
 <td>0.4</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">5</td>
 <td>1</td>
 <td>0.2</td>
@@ -2113,7 +2108,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 </div>
 </div>
 <p>Now consider the following Watts–Strogatz graph:</p>
-<div id="65457c97" class="cell" data-execution_count="73">
+<div id="e63083c9" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">60</span>, <span class="dv">2</span>, <span class="fl">.1</span>, seed<span class="op">=</span><span class="dv">6</span>)</span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>deg_cen <span class="op">=</span> pd.Series( nx.degree_centrality(G) )</span>
 <span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2203,7 +2198,7 @@ c_B(3) = \frac{9}{15} = \frac{3}{5}.
 </div></div><p>The <code>betweenness_centrality</code> function returns a dictionary with nodes as keys and <span class="math inline">\(c_B\)</span> as values. (However, look at <em>both</em> of the next two examples.)</p>
 <div id="exm-networks-centrality-btw-power" class="theorem example" data-chapter="7" type="💻" data-description="Betweenness centrality in BA graphs">
 <p><span class="theorem-title"><strong>Example 7.24</strong></span> Let’s take a look at centrality measures for a power-law graph. Degree centrality points out a dominant hub:</p>
-<div id="46e3e1a8" class="cell" data-execution_count="74">
+<div id="4e963905" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">60</span>, <span class="dv">1</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>cdeg <span class="op">=</span> pd.Series( nx.degree_centrality(P) )</span>
 <span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2219,7 +2214,7 @@ c_B(3) = \frac{9}{15} = \frac{3}{5}.
 </div>
 </div>
 <p>However, betweenness centrality also highlights some secondary hubs:</p>
-<div id="9433a703" class="cell" data-execution_count="75">
+<div id="e5827519" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>cbet <span class="op">=</span> pd.Series( nx.betweenness_centrality(P) )</span>
 <span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>nx.draw(P, node_size<span class="op">=</span><span class="dv">600</span><span class="op">*</span>cbet, <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2247,7 +2242,7 @@ Caution
 <p>In practice, the <span class="math inline">\(\sigma\)</span> values in the definition of <span class="math inline">\(c_B\)</span> are often estimated by sampling. This capability is also offered by the <code>betweenness_centrality</code> function.</p>
 <div id="exm-networks-centrality-btw-big" class="theorem example" data-chapter="7" type="💻" data-description="Betweenness centrality in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.25</strong></span> With <span class="math inline">\(n&gt;7000\)</span>, the Twitch network is much too large for calculating betweenness centrality exactly. So we provide a parameter <code>k</code> to use estimation by sampling:</p>
-<div id="2174c0e2" class="cell" data-execution_count="76">
+<div id="14ce3343" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>tcb <span class="op">=</span> pd.Series( </span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>    nx.betweenness_centrality(twitch, k<span class="op">=</span><span class="dv">400</span>, seed<span class="op">=</span><span class="dv">302</span>), </span>
 <span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>twitch.nodes </span>
@@ -2264,7 +2259,7 @@ Caution
 </div>
 </div>
 <p>As you can see above, only a few nodes stand out as having relatively large betweenness centrality:</p>
-<div id="7180b168" class="cell" data-execution_count="77">
+<div id="9f0e35f7" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>tcb.sort_values().tail(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
 <pre><code>2732    0.024132
@@ -2368,7 +2363,7 @@ Note
 <p>NetworkX has two functions for computing eigenvector centrality. One that relies on numpy to solve the eigenvalue problem tends to be the faster one and is called <code>eigenvector_centrality_numpy</code>. As with betweenness centrality, the return value is a dictionary with nodes as the keys.</p>
 <div id="exm-networks-centrality-smallworld" class="theorem example" data-chapter="7" type="💻" data-description="Comparison of centrality metrics">
 <p><span class="theorem-title"><strong>Example 7.28</strong></span> Continuing with the small-world graph <code>G</code> from <a href="#exm-networks-centrality-degree" class="quarto-xref">Example&nbsp;<span>7.22</span></a>, we look at all three centrality measures side by side:</p>
-<div id="a80b0957" class="cell" data-execution_count="78">
+<div id="03f447a6" class="cell" data-execution_count="78">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> pd.DataFrame( {<span class="st">"degree"</span>: nx.degree_centrality(G)}, index<span class="op">=</span>G.nodes )</span>
@@ -2388,7 +2383,7 @@ Note
 </div>
 </div>
 <p>Of the three, eigenvector centrality does the most to create a relatively small distinguished group. Correlation coefficients suggest that while the three centrality measures are related, they are far from redundant:</p>
-<div id="642f2a93" class="cell" data-execution_count="79">
+<div id="3cb2fe60" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>centrality.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
 <div>
@@ -2396,7 +2391,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">degree</th>
 <th data-quarto-table-cell-role="th">between</th>
@@ -2404,19 +2399,19 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">degree</td>
 <td>1.000000</td>
 <td>0.630732</td>
 <td>0.601884</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">between</td>
 <td>0.630732</td>
 <td>1.000000</td>
 <td>0.736732</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">eigen</td>
 <td>0.601884</td>
 <td>0.736732</td>
@@ -2429,7 +2424,7 @@ Note
 </div>
 </div>
 <p>Here is a ranking based on betweenness:</p>
-<div id="311e26c9" class="cell" data-execution_count="80">
+<div id="c57c8ed9" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>centrality.sort_values(by<span class="op">=</span><span class="st">"between"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
 <div>
@@ -2437,7 +2432,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">degree</th>
 <th data-quarto-table-cell-role="th">between</th>
@@ -2445,49 +2440,49 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">42</td>
 <td>0.050847</td>
 <td>0.595850</td>
 <td>0.405831</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">23</td>
 <td>0.050847</td>
 <td>0.576856</td>
 <td>0.458056</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">41</td>
 <td>0.033898</td>
 <td>0.385739</td>
 <td>0.232910</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">40</td>
 <td>0.033898</td>
 <td>0.368206</td>
 <td>0.133669</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">51</td>
 <td>0.050847</td>
 <td>0.363822</td>
 <td>0.392303</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">39</td>
 <td>0.033898</td>
 <td>0.349503</td>
 <td>0.076714</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">38</td>
 <td>0.033898</td>
 <td>0.329632</td>
 <td>0.044027</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">22</td>
 <td>0.033898</td>
 <td>0.329632</td>
@@ -2500,7 +2495,7 @@ Note
 </div>
 </div>
 <p>As you can see, the top two are quite clear. A drawing of the graph supports the case that they are indeed central:</p>
-<div id="3ebab256" class="cell" data-execution_count="81">
+<div id="ec677afa" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>style[<span class="st">"pos"</span>] <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G, node_size<span class="op">=</span><span class="dv">500</span><span class="op">*</span>centrality[<span class="st">"between"</span>], <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2513,7 +2508,7 @@ Note
 </div>
 <p>A drawback, though, is that there are many secondary nodes whose values taper off only slowly as we enter the remote branches.</p>
 <p>Here is a ranking according to eigenvector centrality:</p>
-<div id="fa587c5b" class="cell" data-execution_count="82">
+<div id="db7d76d7" class="cell" data-execution_count="82">
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>centrality.sort_values(by<span class="op">=</span><span class="st">"eigen"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="81">
 <div>
@@ -2521,7 +2516,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">degree</th>
 <th data-quarto-table-cell-role="th">between</th>
@@ -2529,49 +2524,49 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">23</td>
 <td>0.050847</td>
 <td>0.576856</td>
 <td>0.458056</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">42</td>
 <td>0.050847</td>
 <td>0.595850</td>
 <td>0.405831</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">51</td>
 <td>0.050847</td>
 <td>0.363822</td>
 <td>0.392303</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">22</td>
 <td>0.033898</td>
 <td>0.329632</td>
 <td>0.262883</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>0.033898</td>
 <td>0.311806</td>
 <td>0.249077</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">41</td>
 <td>0.033898</td>
 <td>0.385739</td>
 <td>0.232910</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">52</td>
 <td>0.033898</td>
 <td>0.134717</td>
 <td>0.225527</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">50</td>
 <td>0.033898</td>
 <td>0.212741</td>
@@ -2584,7 +2579,7 @@ Note
 </div>
 </div>
 <p>This ranking has a clear top choice, followed by two that are nearly identical. Here we visualize the scores on the rendering:</p>
-<div id="c3d0a7b0" class="cell" data-execution_count="83">
+<div id="80347da8" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>nx.draw(G, node_size<span class="op">=</span><span class="dv">800</span><span class="op">*</span>centrality[<span class="st">"eigen"</span>], <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2606,7 +2601,7 @@ Note
 \]</span></p>
 <p>Now imagine that we create a list as follows: for each node <span class="math inline">\(i\)</span>, add to the list the number of friends of each of <span class="math inline">\(i\)</span>’s friends. The mean value of this list is the average number of “friends of friends.”</p>
 <p>For example, consider the following graph:</p>
-<div id="ade7131a" class="cell" data-execution_count="84">
+<div id="14ae01cc" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> nx.lollipop_graph(<span class="dv">4</span>, <span class="dv">1</span>)</span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>nx.draw(L, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2635,7 +2630,7 @@ Note
 \frac{\onenorm{\mathbf{d}}}{n} \le \frac{\mathbf{d}^T \mathbf{d}}{\onenorm{\mathbf{d}}}.
 \tag{7.4}\]</span></span></p>
 <p>You are asked to prove this inequality in the exercises. Here is a verification for the BA graph above:</p>
-<div id="e964ed99" class="cell" data-execution_count="85">
+<div id="c63b7423" class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> G.number_of_nodes()</span>
 <span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> pd.Series(<span class="bu">dict</span>(G.degree))</span>
 <span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>dbar <span class="op">=</span> d.mean()</span>
@@ -2649,13 +2644,13 @@ Note
 <p>The friendship paradox generalizes to eigenvector centrality: the average centrality of all nodes is less than the average of the centrality of all nodes’ friends. The mathematical statement is <span id="eq-networks-eigen-paradox"><span class="math display">\[
 \frac{\onenorm{\mathbf{x}}}{n} \le \frac{\mathbf{x}^T \mathbf{d}}{\onenorm{\mathbf{d}}},
 \tag{7.5}\]</span></span> where <span class="math inline">\(\bfx\)</span> is the eigenvector defining centrality of the nodes.</p>
-<div id="32cd89e8" class="cell" data-execution_count="86">
+<div id="76cbe1c1" class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> centrality[<span class="st">"eigen"</span>]</span>
 <span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>xbar <span class="op">=</span> x.mean()</span>
 <span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>xbar_friends <span class="op">=</span> np.dot(x,d) <span class="op">/</span> <span class="bu">sum</span>(d)</span>
 <span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(xbar, <span class="st">"is less than"</span>, xbar_friends)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.07365890048370116 is less than 0.08530969685141405</code></pre>
+<pre><code>0.073658900483701 is less than 0.0853096968514139</code></pre>
 </div>
 </div>
 <p>In fact, the friendship paradox inequality for any vector <span class="math inline">\(\bfx\)</span> is equivalent to <span class="math inline">\(\bfx\)</span> having nonnegative correlation with the degree vector.</p>
@@ -2666,7 +2661,7 @@ Note
 <p>Imagine that a bunny sits on node <span class="math inline">\(i\)</span>. In one second, the bunny hops to one of <span class="math inline">\(i\)</span>’s neighbors, chosen randomly. In the next second, the bunny hops to another node chosen randomly from the neighbors of the one it is sitting on, etc. This is a random walk on the nodes of the graph.</p>
 <p>Now imagine that we place another bunny on node <span class="math inline">\(i\)</span> and track its path as it hops around the graph. Then we place another bunny, etc., so that we have an ensemble of walks. We can now reason about the <em>probability</em> of the location of the walk after any number of hops. Initially, the probability of node <span class="math inline">\(i\)</span> is 100%. If <span class="math inline">\(i\)</span> has <span class="math inline">\(m\)</span> neighbors, then each of them will have probability <span class="math inline">\(1/m\)</span> after one hop, and all the other nodes (including <span class="math inline">\(i\)</span> itself) have zero probability.</p>
 <p>Let’s keep track of the probabilities for this simple wheel graph:</p>
-<div id="e6e15eec" class="cell" data-execution_count="87">
+<div id="fcb3f7c9" class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.wheel_graph(<span class="dv">5</span>)</span>
 <span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>nx.draw(G, node_size<span class="op">=</span><span class="dv">300</span>, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"yellow"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2732,7 +2727,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 <section id="simulating-the-random-walk" class="level3" data-number="7.8.1">
 <h3 data-number="7.8.1" class="anchored" data-anchor-id="simulating-the-random-walk"><span class="header-section-number">7.8.1</span> Simulating the random walk</h3>
 <p>Let’s do a simulation for a more interesting graph:</p>
-<div id="ae0f0c10" class="cell" data-execution_count="88">
+<div id="cef25093" class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>WS <span class="op">=</span> nx.watts_strogatz_graph(<span class="dv">40</span>, <span class="dv">4</span>, <span class="fl">0.04</span>, seed<span class="op">=</span><span class="dv">11</span>)</span>
 <span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(WS, k<span class="op">=</span><span class="fl">0.25</span>, seed<span class="op">=</span><span class="dv">1</span>, iterations<span class="op">=</span><span class="dv">200</span>)</span>
 <span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>style <span class="op">=</span> <span class="bu">dict</span>(pos<span class="op">=</span>pos, with_labels<span class="op">=</span><span class="va">True</span>, node_color<span class="op">=</span><span class="st">"pink"</span>, edge_color<span class="op">=</span><span class="st">"gray"</span>)</span>
@@ -2747,7 +2742,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 <p>First, we construct the random-walk matrix <span class="math inline">\(\bfW\)</span>.</p>
-<div id="c5d69cac" class="cell" data-execution_count="89">
+<div id="4d273f6b" class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> WS.number_of_nodes()</span>
 <span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> nx.adjacency_matrix(WS).toarray().astype(<span class="bu">float</span>)</span>
 <span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>degree <span class="op">=</span> [ WS.degree[i] <span class="cf">for</span> i <span class="kw">in</span> WS.nodes ] </span>
@@ -2766,7 +2761,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 <p>We set up a probability vector to start at node 0, and then use <code>W.dot</code> to compute the first hop. The result is to end up at 5 other nodes with equal probability:</p>
-<div id="e02c59b3" class="cell" data-execution_count="90">
+<div id="7ff4772c" class="cell" data-execution_count="90">
 <div class="sourceCode cell-code" id="cb130"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>init <span class="op">=</span> <span class="dv">33</span></span>
 <span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros(n)</span>
 <span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>p[init] <span class="op">=</span> <span class="dv">1</span></span>
@@ -2786,7 +2781,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 <p>After the next hop, there will again be a substantial probability of being at node 33. But we could also be at some second-generation nodes as well.</p>
-<div id="393548cb" class="cell" data-execution_count="91">
+<div id="7233a5eb" class="cell" data-execution_count="91">
 <div class="sourceCode cell-code" id="cb132"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> W.dot(p)</span>
 <span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"Total probability after 2 hops: </span><span class="sc">{</span>p<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.6f}</span><span class="ss">"</span> )</span>
 <span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>nx.draw(WS, node_size<span class="op">=</span><span class="dv">3000</span><span class="op">*</span>p, <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2802,7 +2797,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 <p>We’ll take 3 more hops. That lets us penetrate a little into the distant nodes.</p>
-<div id="d7d2819a" class="cell" data-execution_count="92">
+<div id="d74e19b2" class="cell" data-execution_count="92">
 <div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
 <span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> W.dot(p)</span>
 <span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f"Total probability after 5 hops: </span><span class="sc">{</span>p<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.6f}</span><span class="ss">"</span> )</span>
@@ -2819,7 +2814,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 <p>In the long run, the probabilities even out, as long as the graph is connected.</p>
-<div id="9040f2a0" class="cell" data-execution_count="93">
+<div id="dfdff422" class="cell" data-execution_count="93">
 <div class="sourceCode cell-code" id="cb136"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">200</span>):</span>
 <span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> W.dot(p)</span>
 <span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>nx.draw(WS, node_size<span class="op">=</span><span class="dv">3000</span><span class="op">*</span>p, <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2855,13 +2850,13 @@ $$
 \]</span></p>
 <p>The value <span class="math inline">\(x_i\)</span> can be interpreted as the probability of membership in the community.</p>
 <p>Let’s try looking for a community of node 0 in the WS graph above.</p>
-<div id="e137cf33" class="cell" data-execution_count="94">
+<div id="8cd72a56" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros(n)</span>
 <span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>p[init] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb137-3"><a href="#cb137-3" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">0.8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will compute <span class="math inline">\(\bfx\)</span> by accumulating terms in a loop. Note that there is no need to keep track of the entire history of random-walk probabilities; we just use one generation at a time.</p>
-<div id="7160c6d1" class="cell" data-execution_count="95">
+<div id="fe01fe78" class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb138"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.zeros(n)</span>
 <span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>mult <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">200</span>):</span>
@@ -2873,7 +2868,7 @@ $$
 </div>
 <p>The probabilities tend to be distributed logarithmically:</p>
 <p>In the following rendering, any node <span class="math inline">\(i\)</span> with a value of <span class="math inline">\(x_i &lt; 10^{-2}\)</span> gets a node size of 0. (You can ignore the warning below. It happens because we have negative node sizes.)</p>
-<div id="9cf3a3df" class="cell" data-execution_count="96">
+<div id="37f4b356" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb139"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a>x[x<span class="op">&lt;</span><span class="fl">0.01</span>] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb139-2"><a href="#cb139-2" aria-hidden="true" tabindex="-1"></a>style[<span class="st">"node_color"</span>] <span class="op">=</span> <span class="st">"lightblue"</span></span>
 <span id="cb139-3"><a href="#cb139-3" aria-hidden="true" tabindex="-1"></a>nx.draw(WS, node_size<span class="op">=</span><span class="dv">4000</span><span class="op">*</span>x, <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2886,7 +2881,7 @@ $$
 </div>
 </div>
 <p>The parameter <span class="math inline">\(\lambda\)</span> controls how quickly the random-walk process is faded out. A smaller value puts more weight on the early iterations, generally localizing the community more strictly.</p>
-<div id="4716ccc4" class="cell" data-execution_count="97">
+<div id="ab3aeeb3" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros(n)</span>
 <span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>p[init] <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">0.4</span></span>
@@ -2899,7 +2894,7 @@ $$
 <span id="cb140-10"><a href="#cb140-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb140-11"><a href="#cb140-11" aria-hidden="true" tabindex="-1"></a>x <span class="op">/=</span> np.<span class="bu">sum</span>(x)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="768b9b05" class="cell" data-execution_count="98">
+<div id="05357c5b" class="cell" data-execution_count="98">
 <div class="sourceCode cell-code" id="cb141"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>x[x<span class="op">&lt;</span><span class="fl">0.01</span>] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>nx.draw(WS, node_size<span class="op">=</span><span class="dv">4000</span><span class="op">*</span>x, <span class="op">**</span>style)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2912,7 +2907,7 @@ $$
 </div>
 <p>In practice, we could define a threshold cutoff on the probabilities, or set a community size and take the highest-ranking nodes. Then a new node could be selected and a community identified for it in the subgraph without the first community, etc.</p>
 <p>A more sophisticated version of the label propagation algorithm (and many other community detection methods) is offered in a special module.</p>
-<div id="ef617a20" class="cell" data-execution_count="99">
+<div id="c06cfcb3" class="cell" data-execution_count="99">
 <div class="sourceCode cell-code" id="cb142"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms.community <span class="im">import</span> label_propagation_communities</span>
 <span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>comm <span class="op">=</span> label_propagation_communities(WS)</span>
 <span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>[ <span class="bu">print</span>(c) <span class="cf">for</span> c <span class="kw">in</span> comm ]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2927,7 +2922,7 @@ $$
 {36, 37, 38}</code></pre>
 </div>
 </div>
-<div id="dc9b15a2" class="cell" data-execution_count="100">
+<div id="b9b08a1b" class="cell" data-execution_count="100">
 <div class="sourceCode cell-code" id="cb144"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> np.array( [<span class="st">"lightblue"</span>,<span class="st">"pink"</span>,<span class="st">"yellow"</span>,<span class="st">"lightgreen"</span>,<span class="st">"purple"</span>,<span class="st">"orange"</span>,<span class="st">"red"</span>,<span class="st">"lightgray"</span>] )</span>
 <span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>color_index <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n</span>
 <span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,S <span class="kw">in</span> <span class="bu">enumerate</span>(comm):</span>
@@ -3462,7 +3457,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
