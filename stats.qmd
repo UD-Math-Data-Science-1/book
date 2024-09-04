@@ -106,6 +106,7 @@ $$
 
 :::{.column-margin}
 ![](_media/memes/sample.jpg){.lightbox}
+
 :::
 
 It can be proved that the sample mean is an accurate way to estimate the population mean, in the following precise sense. If, in a thought experiment, we could average $\bar{x}$ over all possible samples of size $n$, the result would be exactly the population mean $\mu$. That is, we say that $\bar{x}$ is an **unbiased estimator** for $\mu$.
@@ -123,6 +124,7 @@ $$ {#eq-stats-var-sample}
 
 :::{.callout-warning}
 Sources are not always uniform using this terminology. Some use *sample variance* to mean $s_{n-1}^2$, not $s_n^2$, and many even omit the subscripts. You should check any source to understand its conventions.
+
 :::
 
 ::::{#exm-stats-sample chapter=2 type=✍️ description="Sample variance"}
@@ -155,7 +157,8 @@ For standard deviation, *neither* $s_n$ *nor* $s_{n-1}$ is an unbiased estimator
 While the `describe` method computes all the summary statistics, you can also obtain them individually using the `mean`, `var`, and `std` methods:
 
 ```{python}
-iris.mean()
+import numpy as np
+iris.select_dtypes(np.number).mean()
 ```
 
 The result above is a series with the mean of each column. When given a series, the result is just a number:
@@ -780,7 +783,7 @@ cars.groupby("origin")
 As you can see from the output above, a grouped data frame isn't of much value on its own. But let's use it to find the groupwise mean of each quantitative column in the frame:
 
 ```{python}
-cars.groupby("origin").mean()
+cars.groupby("origin").mean(numeric_only=True)
 ```
 
 Multiply dotted commands are common in pandas. You need to parse them from left to right. The first command above groups the data frame, and the second computes the mean within each group.

@@ -713,7 +713,7 @@ print(years.index)
 | Unique values           | `s.unique()`           | array          |
 | Appearance frequencies  | `s.value_counts()`     | Series         |
 | Extreme values          | `s.min()`, `s.max()`   | number         |
-| Sort by values          | `s.sort_values()       | Series         |
+| Sort by values          | `s.sort_values()`      | Series         |
 | Sum                     | `s.sum()`              | number         |
 | Comparison              | `s > 1`,  `s=="foo"`   | boolean Series |
 | Locate missing          | `s.isna()`             | boolean Series |
@@ -836,6 +836,7 @@ pd.DataFrame(
 <br></br>
 
 ![](_media/memes/say_line.jpeg){.lightbox}
+
 :::
 
 ### Common operations
@@ -1110,6 +1111,7 @@ pd.concat([birds, teams], axis="columns")
 ```
 
 The result is just a dumb pasting together of the source frames. There is no attempt to make the entries of the *Name* column match up, even though there were some overlapping values in it.
+
 ::::
 
 :::{.column-margin}
@@ -1240,6 +1242,7 @@ Here is a well-known demonstration data set often referred to as *Palmer Penguin
 
 ```{python}
 import seaborn as sns
+import numpy as np
 penguins = sns.load_dataset("penguins")
 penguins.head()
 ```
@@ -1264,14 +1267,16 @@ print("Original has", len(penguins), "rows.")
 print("After removals, there are", len(dropped), "rows.")
 ```
 
-If you want to impute missing values, you can use `fillna()`. Here, for example, we replace missing values in any column with the mean of the column:
+If you want to impute missing values, you can use `fillna()`. Here, for example, we replace missing values in any quantitative column with the mean of the column:
 
 ```{python}
-filled = penguins.fillna(penguins.mean())
+filled = penguins.copy()
+for col in penguins.select_dtypes(np.number).columns:
+    filled[col].fillna(penguins[col].mean(), inplace=True)
 filled.head()
 ```
 
-Note that only the numerical data columns were affected. The categorical column for *sex* was left alone.
+Note that, for example, the categorical column for *sex* was left alone and still contains missing values.
 
 ::::
 
