@@ -1414,11 +1414,6 @@ Table&nbsp;1.1: Operations on pandas series
 </figcaption>
 <div aria-describedby="tbl-data-series-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top">
-<colgroup>
-<col style="width: 38%">
-<col style="width: 37%">
-<col style="width: 23%">
-</colgroup>
 <thead>
 <tr>
 <th style="text-align: left;">Description</th>
@@ -1469,7 +1464,32 @@ Table&nbsp;1.1: Operations on pandas series
 </tr>
 <tr>
 <td style="text-align: left;">Sort by values</td>
-<td style="text-align: left;"><code>s.sort_values()       | Series         | | Sum                     |</code>s.sum()<code>| number         | | Comparison              |</code>s &gt; 1<code>,</code>s==“foo”<code>| boolean Series | | Locate missing          |</code>s.isna()<code>| boolean Series | | Arithmetic              |</code>s + 1<code>,</code>s * t<code>| Series         | | Delete one or more rows |</code>s.drop()`</td>
+<td style="text-align: left;"><code>s.sort_values()</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr>
+<td style="text-align: left;">Sum</td>
+<td style="text-align: left;"><code>s.sum()</code></td>
+<td style="text-align: left;">number</td>
+</tr>
+<tr>
+<td style="text-align: left;">Comparison</td>
+<td style="text-align: left;"><code>s &gt; 1</code>, <code>s=="foo"</code></td>
+<td style="text-align: left;">boolean Series</td>
+</tr>
+<tr>
+<td style="text-align: left;">Locate missing</td>
+<td style="text-align: left;"><code>s.isna()</code></td>
+<td style="text-align: left;">boolean Series</td>
+</tr>
+<tr>
+<td style="text-align: left;">Arithmetic</td>
+<td style="text-align: left;"><code>s + 1</code>, <code>s * t</code></td>
+<td style="text-align: left;">Series</td>
+</tr>
+<tr>
+<td style="text-align: left;">Delete one or more rows</td>
+<td style="text-align: left;"><code>s.drop()</code></td>
 <td style="text-align: left;">Series</td>
 </tr>
 </tbody>
@@ -5694,7 +5714,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
