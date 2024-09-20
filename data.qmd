@@ -1345,22 +1345,31 @@ diamonds = sns.load_dataset("diamonds")
 diamonds.head()
 ```
 
-As you can see above, some of the features (*cut*, *color*, *clarity*) have string designations. We could convert *cut*, for example, to a categorical variable like so: 
-
-```{python}
-pd.Categorical(diamonds["cut"])
-```
-
-However, these values actually have a specific ordering in this context that is lost in the nominal variable above. Instead, we can replace the strings with integers that reflect the ordering:
+As you can see above, some of the features (*cut*, *color*, *clarity*) have string designations. We could convert *cut* to an ordinal categorical variable like so: 
 
 ```{python}
 cuts = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
-diamonds["cut"].replace(cuts, range(1, 6), inplace=True)
+cuts_cat = pd.Categorical(diamonds["cut"], categories=cuts, ordered=True)  # ordinal
+cuts_cat
+```
+
+Replacing strings with categories in the *Cat* column makes no apparent change:
+
+```{python}
+diamonds["cut"] = cuts_cat
 diamonds.head()
 ```
+
+However, we could convert those values to integers with the same ordering:
+
+```{python}
+diamonds["cut"] = cuts_cat.codes
+diamonds.head()
+```
+
 ::::
 
-For nominal categories that have no natural ordering, it's common to encode via dummy variables.
+For nominal categories that have no natural ordering, it's typically best to encode via dummy variables rather than integers.
 
 ::::{#exm-data-dummies chapter=1 description="Dummy variables in pandas" type=💻}
 Here is a dataset of NBA player statistics from 2023–2024:
