@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -397,7 +397,7 @@ window.Quarto = {
 <p>The idea of descriptive statistics is to reduce a large collection of numerical values to a much smaller one, or even a single number, that captures essential features. You have probably encountered at least a few of these statistics before. In many cases, the statistical results connect to mathematical theory that makes it possible to reason abstractly about the data.</p>
 <div id="exm-stats-summary" class="theorem example" data-chapter="2" type="💻" data-description="Summary statistics in pandas">
 <p><span class="theorem-title"><strong>Example 2.1</strong></span> Here a classic dataset about flowers:</p>
-<div id="13cc7056" class="cell" data-execution_count="1">
+<div id="13cc7056" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>iris <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>iris.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -417,7 +417,7 @@ memory usage: 6.0+ KB</code></pre>
 </div>
 </div>
 <p>The <code>describe</code> method of a data frame gives a bunch of summary statistics for each column of quantitative data:</p>
-<div id="1c53b4b5" class="cell" data-execution_count="2">
+<div id="1c53b4b5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iris.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -425,7 +425,7 @@ memory usage: 6.0+ KB</code></pre>
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">sepal_length</th>
 <th data-quarto-table-cell-role="th">sepal_width</th>
@@ -434,56 +434,56 @@ memory usage: 6.0+ KB</code></pre>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">count</td>
 <td>150.000000</td>
 <td>150.000000</td>
 <td>150.000000</td>
 <td>150.000000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mean</td>
 <td>5.843333</td>
 <td>3.057333</td>
 <td>3.758000</td>
 <td>1.199333</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">std</td>
 <td>0.828066</td>
 <td>0.435866</td>
 <td>1.765298</td>
 <td>0.762238</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">min</td>
 <td>4.300000</td>
 <td>2.000000</td>
 <td>1.000000</td>
 <td>0.100000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">25%</td>
 <td>5.100000</td>
 <td>2.800000</td>
 <td>1.600000</td>
 <td>0.300000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">50%</td>
 <td>5.800000</td>
 <td>3.000000</td>
 <td>4.350000</td>
 <td>1.300000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">75%</td>
 <td>6.400000</td>
 <td>3.300000</td>
 <td>5.100000</td>
 <td>1.800000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">max</td>
 <td>7.900000</td>
 <td>4.400000</td>
@@ -621,7 +621,7 @@ Caution
 <p>For standard deviation, <em>neither</em> <span class="math inline">\(s_n\)</span> <em>nor</em> <span class="math inline">\(s_{n-1}\)</span> is an unbiased estimator of <span class="math inline">\(\sigma\)</span>, and there is no simple fix. Again, though, it’s not usually something we worry about in practice.</p>
 <div id="exm-stats-meanvar-pandas" class="theorem example" data-chapter="2" type="💻" data-description="Mean, variance, STD in pandas">
 <p><span class="theorem-title"><strong>Example 2.4</strong></span> While the <code>describe</code> method computes all the summary statistics, you can also obtain them individually using the <code>mean</code>, <code>var</code>, and <code>std</code> methods:</p>
-<div id="73a4b095" class="cell" data-execution_count="3">
+<div id="73a4b095" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>iris.select_dtypes(np.number).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -633,7 +633,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The result above is a series with the mean of each column. When given a series, the result is just a number:</p>
-<div id="2a90d18f" class="cell" data-execution_count="4">
+<div id="2a90d18f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">"sepal_length"</span>].var()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>0.6856935123042507</code></pre>
@@ -688,12 +688,12 @@ z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{
 </div>
 <div id="exm-stats-zscores-py" class="theorem example" data-chapter="2" type="💻" data-description="Z scores in Python">
 <p><span class="theorem-title"><strong>Example 2.6</strong></span> We can write a little function to compute z-scores in Python:</p>
-<div id="78df2d79" class="cell" data-execution_count="5">
+<div id="78df2d79" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standardize(x):</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This function can be applied to any series <code>x</code> and returns a series of the same length. If we apply it to a data frame, it standardizes each column:</p>
-<div id="52d09e53" class="cell" data-execution_count="6">
+<div id="52d09e53" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iris[<span class="st">"z"</span>] <span class="op">=</span> standardize( iris[<span class="st">"petal_length"</span>] )</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>iris[ [<span class="st">"petal_length"</span>, <span class="st">"z"</span>] ].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -702,49 +702,49 @@ z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">petal_length</th>
 <th data-quarto-table-cell-role="th">z</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">count</td>
 <td>150.000000</td>
 <td>1.500000e+02</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mean</td>
 <td>3.758000</td>
 <td>-2.842171e-16</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">std</td>
 <td>1.765298</td>
 <td>1.000000e+00</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">min</td>
 <td>1.000000</td>
 <td>-1.562342e+00</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">25%</td>
 <td>1.600000</td>
 <td>-1.222456e+00</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">50%</td>
 <td>4.350000</td>
 <td>3.353541e-01</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">75%</td>
 <td>5.100000</td>
 <td>7.602115e-01</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">max</td>
 <td>6.900000</td>
 <td>1.779869e+00</td>
@@ -806,7 +806,7 @@ Note
 </div>
 <div id="exm-stats-quantiles" class="theorem example" data-chapter="2" type="💻" data-description="Quantiles">
 <p><span class="theorem-title"><strong>Example 2.8</strong></span> Here we find the 90th quantile (percentile) of the <em>loan_amnt</em> variable in the <code>loans</code> dataset:</p>
-<div id="d61970b2" class="cell" data-execution_count="7">
+<div id="d61970b2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>loans <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/loans_small.csv"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> loans[<span class="st">"loan_amnt"</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pct90 <span class="op">=</span> x.quantile(<span class="fl">0.9</span>)</span>
@@ -816,14 +816,14 @@ Note
 </div>
 </div>
 <p>Equivalently, 90 percent of the values are no greater than that value:</p>
-<div id="d572905f" class="cell" data-execution_count="8">
+<div id="d572905f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(x <span class="op">&lt;=</span> pct90) <span class="op">/</span> <span class="bu">len</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0.9008233250245486</code></pre>
 </div>
 </div>
 <p>The 50th percentile is the same thing as the median:</p>
-<div id="7422e881" class="cell" data-execution_count="9">
+<div id="7422e881" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.median())</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.quantile(<span class="fl">0.50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -840,7 +840,7 @@ Note
 <p>For some samples, the median and IQR might be a good substitute for the mean and standard deviation.</p>
 <div id="exm-stats-describe" class="theorem example" data-chapter="2" type="💻" data-description="Quartiles and IQR">
 <p><span class="theorem-title"><strong>Example 2.9</strong></span> The dataframe <code>describe</code> method includes mean, standard deviation, and the quartiles:</p>
-<div id="28a4861b" class="cell" data-execution_count="10">
+<div id="28a4861b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>loans.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -848,7 +848,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Unnamed: 0</th>
 <th data-quarto-table-cell-role="th">loan_amnt</th>
@@ -859,7 +859,7 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">count</td>
 <td>39717.000000</td>
 <td>39717.000000</td>
@@ -868,7 +868,7 @@ Note
 <td>3.971700e+04</td>
 <td>39717.000000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mean</td>
 <td>19858.000000</td>
 <td>11219.443815</td>
@@ -877,7 +877,7 @@ Note
 <td>6.896893e+04</td>
 <td>12153.596544</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">std</td>
 <td>11465.454657</td>
 <td>7456.670694</td>
@@ -886,7 +886,7 @@ Note
 <td>6.379377e+04</td>
 <td>9042.040766</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">min</td>
 <td>0.000000</td>
 <td>500.000000</td>
@@ -895,7 +895,7 @@ Note
 <td>4.000000e+03</td>
 <td>0.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">25%</td>
 <td>9929.000000</td>
 <td>5500.000000</td>
@@ -904,7 +904,7 @@ Note
 <td>4.040400e+04</td>
 <td>5576.930000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">50%</td>
 <td>19858.000000</td>
 <td>10000.000000</td>
@@ -913,7 +913,7 @@ Note
 <td>5.900000e+04</td>
 <td>9899.640319</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">75%</td>
 <td>29787.000000</td>
 <td>15000.000000</td>
@@ -922,7 +922,7 @@ Note
 <td>8.230000e+04</td>
 <td>16534.433040</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">max</td>
 <td>39716.000000</td>
 <td>35000.000000</td>
@@ -938,7 +938,7 @@ Note
 </div>
 </div>
 <p>It’s easy to write a function that computes and returns the IQR of a series:</p>
-<div id="377eacf1" class="cell" data-execution_count="11">
+<div id="377eacf1" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> IQR(x):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    Q25, Q75 <span class="op">=</span> x.quantile( [<span class="fl">0.25</span>, <span class="fl">0.75</span>] )</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Q75 <span class="op">-</span> Q25 </span>
@@ -949,7 +949,7 @@ Note
 </div>
 </div>
 <p>That function can also be applied columnwise to a data frame:</p>
-<div id="d1d97b51" class="cell" data-execution_count="12">
+<div id="d1d97b51" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>loans.<span class="bu">apply</span>(IQR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>Unnamed: 0     19858.00000
@@ -969,7 +969,7 @@ dtype: float64</code></pre>
 <p>Mean and STD, or median and IQR, attempt to summarize quantitative data with a couple of numbers. At the other extreme, we can express the distribution values more precisely using functions and graphical tools.</p>
 <p>Python has many graphics packages with different niches. The most widespread is <strong>Matplotlib</strong>, for which you must explicitly specify most aspects of how the plots will look.</p>
 <p>We will instead use <strong>seaborn</strong>, which is built on top of Matplotlib. It’s built around a declarative style, meaning that you describe what you want to see and seaborn makes the decisions about how it looks. Most of the time, the decisions it makes are just fine. To use seaborn, you import it:</p>
-<div id="cbea8982" class="cell" data-execution_count="13">
+<div id="cbea8982" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are three major commands that you call in seaborn:</p>
@@ -1000,7 +1000,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 <p>Seaborn uses <code>displot</code> to show empirical distributions, and the default is to show a histogram.</p>
 <div id="exm-stats-ecdf-penguins" class="theorem example" data-chapter="2" type="💻" data-description="ECDF of penguins">
 <p><span class="theorem-title"><strong>Example 2.10</strong></span> Here is a histogram from the <code>penguins</code> dataset:</p>
-<div id="6b775673" class="cell" data-execution_count="14">
+<div id="6b775673" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">"body_mass_g"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1012,7 +1012,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 </div>
 <p>We can specify the number of bins to use, or their edges:</p>
-<div id="5d693a04" class="cell" data-execution_count="15">
+<div id="5d693a04" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">"body_mass_g"</span>, bins<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1023,7 +1023,7 @@ B_k = (t_k,t_{k+1}], \qquad k=0,\ldots,m,
 </div>
 </div>
 <p>Sometimes we’d rather show the proportions of values rather than the counts:</p>
-<div id="58412acf" class="cell" data-execution_count="16">
+<div id="58412acf" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">"body_mass_g"</span>, stat<span class="op">=</span><span class="st">"proportion"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1084,7 +1084,7 @@ Figure&nbsp;2.2: CDF for a population of size 10.
 </div>
 <div id="exm-stats-ecdf-penguins" class="theorem example" data-chapter="2" type="💻" data-description="ECDF of penguins">
 <p><span class="theorem-title"><strong>Example 2.12</strong></span> A variation of the seaborn <code>displot</code> function creates an ECDF. Here is one for the <code>penguins</code> dataset:</p>
-<div id="d1206122" class="cell" data-execution_count="17">
+<div id="d1206122" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>penguins, x<span class="op">=</span><span class="st">"body_mass_g"</span>, kind<span class="op">=</span><span class="st">"ecdf"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1140,7 +1140,7 @@ F(t) = \text{probability that a randomly chosen value is $\le t$},
 <p>For a finite population, the CDF and the ECDF are the same.</p>
 <div id="exm-stats-temps-ecdf" class="theorem example" data-chapter="2" type="💻" data-description="ECDF of temperatures">
 <p><span class="theorem-title"><strong>Example 2.14</strong></span> Here are maximum daily temperatures (in tenths of Celsius degrees) for Newark, DE, starting in 1894:</p>
-<div id="0d81f66b" class="cell" data-execution_count="18">
+<div id="0d81f66b" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>weather <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/ghcn_newark.csv"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sns.displot(weather, x<span class="op">=</span><span class="st">"TMAX"</span>, kind<span class="op">=</span><span class="st">"ecdf"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1171,7 +1171,7 @@ f(t) = F'(t).
 <p>The intuitive interpretation of <span class="math inline">\(f(t)\)</span> is as the probability of observing a value in a tiny interval around <span class="math inline">\(t\)</span>.</p>
 <div id="exm-stats-temps-pdf" class="theorem example" data-chapter="2" type="✍️" data-description="PDF of temperature distribution">
 <p><span class="theorem-title"><strong>Example 2.15</strong></span> The histogram of the temperature distribution in <a href="#exm-stats-temps-ecdf" class="quarto-xref">Example&nbsp;<span>2.14</span></a> is an approximation to the continuous PDF, if we normalize the counts properly:</p>
-<div id="6357aeca" class="cell" data-execution_count="19">
+<div id="6357aeca" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sns.displot(weather, x<span class="op">=</span><span class="st">"TMIN"</span>, bins<span class="op">=</span><span class="dv">20</span>, stat<span class="op">=</span><span class="st">"density"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1182,7 +1182,7 @@ f(t) = F'(t).
 </div>
 </div>
 <p>There is an algorithm known as <strong>kernel density estimation</strong> (KDE) that can be used to estimate the true PDF from a sample. It’s another option in the <code>displot</code> function:</p>
-<div id="01f48f19" class="cell" data-execution_count="20">
+<div id="01f48f19" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sns.displot(weather, x<span class="op">=</span><span class="st">"TMIN"</span>, kind<span class="op">=</span><span class="st">"kde"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1235,19 +1235,19 @@ Caution
 </div>
 <div id="exm-stats-numpy-uniform" class="theorem example" data-chapter="2" type="💻" data-description="Uniform random numbers in NumPy">
 <p><span class="theorem-title"><strong>Example 2.17</strong></span> We start by creating an RNG with a specific state. Every time this code is run, the same sequence of numbers will be generated from it.</p>
-<div id="37c179cc" class="cell" data-execution_count="21">
+<div id="37c179cc" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)    <span class="co"># setting an initial state</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>uniform</code> generator method produces numbers distributed uniformly between two limits you specify.</p>
-<div id="0ab218bd" class="cell" data-execution_count="22">
+<div id="0ab218bd" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rng.uniform( <span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>array([0.97584377, 0.65769739, 0.167421  , 0.7146286 , 0.98038127])</code></pre>
 </div>
 </div>
 <p>For a large uniform random sample, the ECDF will approximate the CDF in <a href="#fig-stats-cdf-c" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>.</p>
-<div id="b79a3387" class="cell" data-execution_count="23">
+<div id="b79a3387" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.uniform( size<span class="op">=</span><span class="dv">10000</span> )</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>sns.displot(x, kind<span class="op">=</span><span class="st">"ecdf"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1259,7 +1259,7 @@ Caution
 </div>
 </div>
 <p>Similarly, a histogram of the sample will approximate a plot of the PDF in <a href="#eq-stats-uniform-pdf" class="quarto-xref">Equation&nbsp;<span>2.10</span></a>:</p>
-<div id="411d2805" class="cell" data-execution_count="24">
+<div id="411d2805" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sns.displot(x, bins<span class="op">=</span><span class="dv">16</span>, stat<span class="op">=</span><span class="st">"density"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1307,7 +1307,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <p><a href="_media/memes/cant-be-normal.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/cant-be-normal.jpg" class="img-fluid"></a></p>
 </div></div><div id="exm-stats-normal" class="theorem example" data-chapter="2" type="💻" data-description="Normal distribution in NumPy">
 <p><span class="theorem-title"><strong>Example 2.18</strong></span> The <code>normal</code> method of a NumPy RNG simulates a standard normal distribution.</p>
-<div id="33e96467" class="cell" data-execution_count="25">
+<div id="33e96467" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">19716</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> rng.normal( size<span class="op">=</span>(<span class="dv">30000</span>,) )</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>sns.displot(x, bins<span class="op">=</span><span class="dv">25</span>, stat<span class="op">=</span><span class="st">"density"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1320,7 +1320,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>We can change the variance by multiplying by <span class="math inline">\(\sigma\)</span> and change the mean by adding <span class="math inline">\(\mu\)</span>:</p>
-<div id="c1391b9e" class="cell" data-execution_count="26">
+<div id="c1391b9e" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame( {<span class="st">"x"</span>: x, <span class="st">"3x-10"</span>: <span class="dv">3</span><span class="op">*</span>x<span class="op">-</span><span class="dv">10</span>} )</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>df.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
@@ -1329,49 +1329,49 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">3x-10</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">count</td>
 <td>30000.000000</td>
 <td>30000.000000</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mean</td>
 <td>-0.000175</td>
 <td>-10.000526</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">std</td>
 <td>1.001663</td>
 <td>3.004990</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">min</td>
 <td>-3.520333</td>
 <td>-20.560998</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">25%</td>
 <td>-0.671223</td>
 <td>-12.013670</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">50%</td>
 <td>0.001121</td>
 <td>-9.996636</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">75%</td>
 <td>0.672540</td>
 <td>-7.982381</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">max</td>
 <td>4.044099</td>
 <td>2.132297</td>
@@ -1383,7 +1383,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>A KDE plot shows us a result close to the classic bell curve:</p>
-<div id="ff496c7c" class="cell" data-execution_count="27">
+<div id="ff496c7c" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">"3x-10"</span>, kind<span class="op">=</span><span class="st">"kde"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1401,7 +1401,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <p>It’s often useful to analyze data in groups defined by one or more columns. Grouping data is tied to the idea of <strong>conditional probability</strong>.</p>
 <div id="exm-stats-groups" class="theorem example" data-chapter="2" type="💻" data-description="Grouping data">
 <p><span class="theorem-title"><strong>Example 2.19</strong></span> This is a dataset about the fuel efficiency of some cars:</p>
-<div id="eb95a0f2" class="cell" data-execution_count="28">
+<div id="eb95a0f2" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>cars.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
@@ -1410,7 +1410,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">cylinders</th>
@@ -1424,7 +1424,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
@@ -1436,7 +1436,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <td>usa</td>
 <td>chevrolet chevelle malibu</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
@@ -1448,7 +1448,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <td>usa</td>
 <td>buick skylark 320</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
@@ -1460,7 +1460,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <td>usa</td>
 <td>plymouth satellite</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
@@ -1472,7 +1472,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 <td>usa</td>
 <td>amc rebel sst</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
@@ -1491,7 +1491,7 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>Here’s the distribution of the <em>mpg</em> variable in <code>cars</code> over the entire dataset:</p>
-<div id="38713773" class="cell" data-execution_count="29">
+<div id="38713773" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, bins<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1502,14 +1502,14 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p>Here is the probability that a randomly chosen car has <em>mpg</em> less than 20:</p>
-<div id="7a04b9c6" class="cell" data-execution_count="30">
+<div id="7a04b9c6" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>(cars[<span class="st">"mpg"</span>] <span class="op">&lt;</span> <span class="dv">20</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>0.3793969849246231</code></pre>
 </div>
 </div>
 <p>Now, note that one of the columns of the dataset indicates the place of manufacture:</p>
-<div id="9b22e640" class="cell" data-execution_count="31">
+<div id="9b22e640" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"origin"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>origin
@@ -1520,7 +1520,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>Intuitively, it seems likely that the distribution of <em>mpg</em> will differ for different countries of origin. For example, if we narrow our focus to cars made in the U.S.A., we get a very different result for the probability of <em>mpg</em> less than 20:</p>
-<div id="f690547b" class="cell" data-execution_count="32">
+<div id="f690547b" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>(cars.loc[cars[<span class="st">"origin"</span>]<span class="op">==</span><span class="st">"usa"</span>, <span class="st">"mpg"</span>] <span class="op">&lt;</span> <span class="dv">20</span>).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>0.570281124497992</code></pre>
@@ -1554,7 +1554,7 @@ Important
 </div>
 <div id="exm-stats-groups-facet" class="theorem example" data-chapter="2" type="💻" data-description="Facet plots">
 <p><span class="theorem-title"><strong>Example 2.20</strong></span> A facet plot allows us to easily group data by a categorical variable. In this case, we select the <em>origin</em> column using the <code>col</code> keyword:</p>
-<div id="6bdcda3e" class="cell" data-execution_count="33">
+<div id="6bdcda3e" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1569,7 +1569,7 @@ Important
 <p>Other ways to visualize grouped data are offered by the <code>catplot</code> function in seaborn, including the well-known <strong>box plot</strong> and <strong>violin plot</strong>.</p>
 <div id="exm-stats-groups-box-violin" class="theorem example" data-chapter="2" type="💻" data-description="Box and violin plots">
 <p><span class="theorem-title"><strong>Example 2.21</strong></span> Here is a grouped <strong>box plot</strong> for <em>mpg</em>:</p>
-<div id="2aa50931" class="cell" data-execution_count="34">
+<div id="2aa50931" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"origin"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, kind<span class="op">=</span><span class="st">"box"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1580,7 +1580,7 @@ Important
 </div>
 </div>
 <p>Each colored box shows the interquartile range, with the interior horizontal line showing the median. The whiskers and dots are explained in a later section. A related visualization is a <strong>violin plot</strong>:</p>
-<div id="5468adbb" class="cell" data-execution_count="35">
+<div id="5468adbb" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, </span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, y<span class="op">=</span><span class="st">"origin"</span>, </span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"violin"</span></span>
@@ -1616,39 +1616,39 @@ Important
 Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 </figcaption>
 <div aria-describedby="tbl-stats-agg-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="caption-top table">
+<table class="caption-top">
 <thead>
-<tr class="header">
+<tr>
 <th>method</th>
 <th>effect</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><code>count</code></td>
 <td>Number of values in each group</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>mean</code></td>
 <td>Mean value in each group</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>sum</code></td>
 <td>Sum within each group</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>std</code>, <code>var</code></td>
 <td>Standard deviation/variance within groups</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>min</code>, <code>max</code></td>
 <td>Min or max within groups</td>
 </tr>
-<tr class="even">
+<tr>
 <td><code>describe</code></td>
 <td>Descriptive statistics</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><code>first</code>, <code>last</code></td>
 <td>First or last of group values</td>
 </tr>
@@ -1659,14 +1659,14 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 </div>
 <div id="exm-stats-groups-aggregation" class="theorem example" data-chapter="2" type="💻" data-description="Aggregating data in groups">
 <p><span class="theorem-title"><strong>Example 2.22</strong></span> Here is how we can define groups based on the categorical <em>origin</em> column:</p>
-<div id="30cb24f8" class="cell" data-execution_count="36">
+<div id="30cb24f8" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>cars.groupby(<span class="st">"origin"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x12f693380&gt;</code></pre>
 </div>
 </div>
 <p>As you can see from the output above, a grouped data frame isn’t of much value on its own. But let’s use it to find the groupwise mean of each quantitative column in the frame:</p>
-<div id="b1ccfe4d" class="cell" data-execution_count="37">
+<div id="b1ccfe4d" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>cars.groupby(<span class="st">"origin"</span>).mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <div>
@@ -1674,7 +1674,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">cylinders</th>
@@ -1684,7 +1684,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 <th data-quarto-table-cell-role="th">acceleration</th>
 <th data-quarto-table-cell-role="th">model_year</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">origin</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -1696,7 +1696,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">europe</td>
 <td>27.891429</td>
 <td>4.157143</td>
@@ -1706,7 +1706,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 <td>16.787143</td>
 <td>75.814286</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">japan</td>
 <td>30.450633</td>
 <td>4.101266</td>
@@ -1716,7 +1716,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 <td>16.172152</td>
 <td>77.443038</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">usa</td>
 <td>20.083534</td>
 <td>6.248996</td>
@@ -1734,7 +1734,7 @@ Table&nbsp;2.1: Aggregation functions. All ignore <code>NaN</code> values.
 </div>
 <p>Multiply dotted commands are common in pandas. You need to parse them from left to right. The first command above groups the data frame, and the second computes the mean within each group.</p>
 <p>If we want to focus on just <em>mpg</em> from the dataset, we can extract that column <em>after</em> the grouping but <em>before</em> operating on the groups:</p>
-<div id="a469a5dc" class="cell" data-execution_count="38">
+<div id="a469a5dc" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>cars.groupby(<span class="st">"origin"</span>)[<span class="st">"mpg"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>origin
@@ -1745,7 +1745,7 @@ Name: mpg, dtype: float64</code></pre>
 </div>
 </div>
 <p>To help interpret this expression, we could break it into equivalent separate steps:</p>
-<div id="b7e25306" class="cell" data-execution_count="39">
+<div id="b7e25306" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>by_origin <span class="op">=</span> cars.groupby(<span class="st">"origin"</span>)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>mpg_by_origin <span class="op">=</span> by_origin[<span class="st">"mpg"</span>]</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>mpg_by_origin.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1759,7 +1759,7 @@ Name: mpg, dtype: float64</code></pre>
 </div>
 <p>However, the one-liner is considered better style most of the time.</p>
 <p>If you want an aggregator other than those in <a href="#tbl-stats-agg" class="quarto-xref">Table&nbsp;<span>2.1</span></a>, you can call <code>agg</code> with your own function. Here are the conditional probabilities of <em>mpg</em> being less than 20 for all values of <em>origin</em>:</p>
-<div id="3e2e2084" class="cell" data-execution_count="40">
+<div id="3e2e2084" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> less_than_20(x):</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">&lt;</span> <span class="dv">20</span>).mean()</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1788,7 +1788,7 @@ Name: mpg, dtype: float64</code></pre>
 <p>A <strong>transformation</strong> applies a function groupwise to a column, producing a column of the same length.</p>
 <div id="exm-stats-groups-transformation" class="theorem example" data-chapter="2" type="💻" data-description="Transforming data in groups">
 <p><span class="theorem-title"><strong>Example 2.23</strong></span> We can convert the <em>mpg</em> values to z-scores using the population mean and variance:</p>
-<div id="73f146ca" class="cell" data-execution_count="41">
+<div id="73f146ca" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> standardize(x):</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std()</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1803,7 +1803,7 @@ Name: mpg, dtype: float64</code></pre>
 </div>
 </div>
 <p>Above, each of the conditional distributions was shifted and scaled identically. But we might instead, want to standardize within groups separately, with each group using its own mean and standard deviation:</p>
-<div id="8f03f385" class="cell" data-execution_count="42">
+<div id="8f03f385" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>by_origin <span class="op">=</span> cars.groupby(<span class="st">"origin"</span>)</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>cars[<span class="st">"group_mpg_z"</span>] <span class="op">=</span> by_origin[<span class="st">"mpg"</span>].transform(standardize)</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"group_mpg_z"</span>, col<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="fl">2.3</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1824,7 +1824,7 @@ Name: mpg, dtype: float64</code></pre>
 <p>Grouping is easiest to think about as being conditioned on a categorical variable. But it can also be done on a quantitative variable by first binning it into intervals using <code>pd.cut</code>.</p>
 <div id="exm-stats-groups-cuts" class="theorem example" data-chapter="2" type="💻" data-description="Grouping data by cuts">
 <p><span class="theorem-title"><strong>Example 2.24</strong></span> Suppose we want to group cars by horsepower, which is quantitative. We can use <code>pd.cut</code> to create bins of width 40:</p>
-<div id="a75830ca" class="cell" data-execution_count="43">
+<div id="a75830ca" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>cuts <span class="op">=</span> pd.cut(cars[<span class="st">"horsepower"</span>], <span class="bu">range</span>(<span class="dv">40</span>, <span class="dv">250</span>, <span class="dv">40</span>))</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>by_hp <span class="op">=</span> cars.groupby(cuts)</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>by_hp[<span class="st">"mpg"</span>].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1840,7 +1840,7 @@ Name: mpg, dtype: int64</code></pre>
 </div>
 <p>The <code>count</code> method then gives the number of observations in each group.</p>
 <p>We can also use the cuts to make, for example, a violin plot:</p>
-<div id="b744de5a" class="cell" data-execution_count="44">
+<div id="b744de5a" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"mpg"</span>, y<span class="op">=</span>cuts, kind<span class="op">=</span><span class="st">"violin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1887,7 +1887,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <p>In a box plot, the whiskers growing from a box show the extent of the non-outlier data, and the dots beyond the whiskers represent outliers.</p>
 <div id="exm-stats-outlier-iqr" class="theorem example" data-chapter="2" type="💻" data-description="Interquartile range">
 <p><span class="theorem-title"><strong>Example 2.26</strong></span> Let’s look at another data set, based on a functional MRI experiment:</p>
-<div id="cd83b8b4" class="cell" data-execution_count="45">
+<div id="cd83b8b4" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>fmri <span class="op">=</span> sns.load_dataset(<span class="st">"fmri"</span>)</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>fmri.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
@@ -1896,7 +1896,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">subject</th>
 <th data-quarto-table-cell-role="th">timepoint</th>
@@ -1906,7 +1906,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>s13</td>
 <td>18</td>
@@ -1914,7 +1914,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>parietal</td>
 <td>-0.017552</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>s5</td>
 <td>14</td>
@@ -1922,7 +1922,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>parietal</td>
 <td>-0.080883</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>s12</td>
 <td>18</td>
@@ -1930,7 +1930,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>parietal</td>
 <td>-0.081033</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>s11</td>
 <td>18</td>
@@ -1938,7 +1938,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>parietal</td>
 <td>-0.046134</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>s10</td>
 <td>18</td>
@@ -1953,7 +1953,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 </div>
 </div>
 <p>We want to focus on the <em>signal</em> column, splitting according to the <em>event</em>.</p>
-<div id="262c58ee" class="cell" data-execution_count="46">
+<div id="262c58ee" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>by_event <span class="op">=</span> fmri.groupby(<span class="st">"event"</span>)</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>by_event[<span class="st">"signal"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
@@ -1962,7 +1962,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">count</th>
 <th data-quarto-table-cell-role="th">mean</th>
@@ -1973,7 +1973,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <th data-quarto-table-cell-role="th">75%</th>
 <th data-quarto-table-cell-role="th">max</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">event</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -1986,7 +1986,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">cue</td>
 <td>532.0</td>
 <td>-0.006669</td>
@@ -1997,7 +1997,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 <td>0.015825</td>
 <td>0.215735</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">stim</td>
 <td>532.0</td>
 <td>0.013748</td>
@@ -2015,7 +2015,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 </div>
 </div>
 <p>Here is a box plot of the signal for these groups.</p>
-<div id="264b0964" class="cell" data-execution_count="47">
+<div id="264b0964" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>sns.catplot(data<span class="op">=</span>fmri, x<span class="op">=</span><span class="st">"event"</span>, y<span class="op">=</span><span class="st">"signal"</span>, kind<span class="op">=</span><span class="st">"box"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2027,7 +2027,7 @@ x &lt; Q_{25} - 1.5I \text{ or } x &gt; Q_{75} + 1.5I.
 </div>
 <p>The dots lying outside the whiskers in the plot can be considered outliers satisfying one of the inequalities in <a href="#eq-stats-outlier-iqr" class="quarto-xref">Equation&nbsp;<span>2.13</span></a>.</p>
 <p>Let’s now remove the outliers. We start with a function that computes a Boolean-valued series for a given input. This function is applied as a <code>transform</code> to the data as grouped by <em>events</em>:</p>
-<div id="cad9950d" class="cell" data-execution_count="48">
+<div id="cad9950d" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_outlier(x):</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>    Q25, Q75 <span class="op">=</span> x.quantile([<span class="fl">.25</span>,<span class="fl">.75</span>])</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    I <span class="op">=</span> Q75 <span class="op">-</span> Q25</span>
@@ -2043,11 +2043,11 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>You can see above that there are 66 outliers. To negate the outlier indicator, we can use <code>~outs</code> as a row selector.</p>
-<div id="6e1a0a22" class="cell" data-execution_count="49">
+<div id="6e1a0a22" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> fmri[<span class="op">~</span>outliers]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The median values are barely affected by the omission of the outliers:</p>
-<div id="1df10350" class="cell" data-execution_count="50">
+<div id="1df10350" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"medians with outliers:"</span> )</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( by_event[<span class="st">"signal"</span>].median() )</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">medians without outliers:"</span> )</span>
@@ -2067,7 +2067,7 @@ Name: signal, dtype: float64</code></pre>
 </div>
 </div>
 <p>The means, though, show much greater change:</p>
-<div id="bb022f25" class="cell" data-execution_count="51">
+<div id="bb022f25" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"means with outliers:"</span> )</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( by_event[<span class="st">"signal"</span>].mean() )</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="st">"</span><span class="ch">\n</span><span class="st">means without outliers:"</span> )</span>
@@ -2115,7 +2115,7 @@ Note
 </div>
 <div id="exm-stats-outlier-std" class="theorem example" data-chapter="2" type="💻" data-description="Outliers">
 <p><span class="theorem-title"><strong>Example 2.27</strong></span> The following plot shows the outlier cutoffs for 2000 samples from a normal distribution, using the criteria for 2σ (red), 3σ (blue), and 1.5 IQR (black).</p>
-<div id="5b433d0c" class="cell" data-execution_count="52">
+<div id="5b433d0c" class="cell" data-execution_count="53">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -2154,7 +2154,7 @@ Note
 <p>Thus far, we have used <code>displot</code>, or “distribution plot”, to make histograms, and <code>catplot</code>, or “categorical plot”, to make box and violin plots. The third major plot type in seaborn is <code>relplot</code>, or “relational plot”, to show the relationships between variables.</p>
 <div id="exm-stats-relational" class="theorem example" data-chapter="2" type="💻" data-description="Relational plots">
 <p><span class="theorem-title"><strong>Example 2.28</strong></span> By default, <code>relplot</code> makes a scatter plot of two different variables:</p>
-<div id="9efb9238" class="cell" data-execution_count="53">
+<div id="9efb9238" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2165,7 +2165,7 @@ Note
 </div>
 </div>
 <p>Like in the other plot types, we can use hue (color) and marker size to indicate groups within the data:</p>
-<div id="314774be" class="cell" data-execution_count="54">
+<div id="314774be" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>, size<span class="op">=</span><span class="st">"weight"</span>,</span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2178,7 +2178,7 @@ Note
 </div>
 </div>
 <p>If we want to emphasize a trend rather than the individual data values, we can instead plot the average value at each <span class="math inline">\(x\)</span> with error bars:</p>
-<div id="6dbdd72b" class="cell" data-execution_count="55">
+<div id="6dbdd72b" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, </span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"model_year"</span>, y<span class="op">=</span><span class="st">"mpg"</span>, kind<span class="op">=</span><span class="st">"line"</span>, errorbar<span class="op">=</span><span class="st">"sd"</span></span>
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2192,7 +2192,7 @@ Note
 </div>
 <p>The error ribbon above is drawn at one standard deviation around the mean.</p>
 <p>In order to see multiple pairwise scatter plots in one shot, we can use <code>pairplot</code> in seaborn:</p>
-<div id="a195679c" class="cell" data-execution_count="56">
+<div id="a195679c" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"mpg"</span>, <span class="st">"horsepower"</span>, <span class="st">"displacement"</span>, <span class="st">"origin"</span> ]</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>sns.pairplot(data<span class="op">=</span>cars[columns], hue<span class="op">=</span><span class="st">"origin"</span>, height<span class="op">=</span><span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2253,7 +2253,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <p>where the quantities in parentheses are z-scores.</p>
 <div id="exm-stats-pearson-cars" class="theorem example" data-chapter="2" type="💻" data-description="Pearson correlation coefficient">
 <p><span class="theorem-title"><strong>Example 2.29</strong></span> We might reasonably expect horsepower and miles per gallon to be negatively correlated:</p>
-<div id="a2d09d80" class="cell" data-execution_count="57">
+<div id="a2d09d80" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>cars, x<span class="op">=</span><span class="st">"horsepower"</span>, y<span class="op">=</span><span class="st">"mpg"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -2264,7 +2264,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 </div>
 <p>Covariance allows us to quantify the relationship:</p>
-<div id="c639c939" class="cell" data-execution_count="58">
+<div id="c639c939" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].cov()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <div>
@@ -2272,19 +2272,19 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">horsepower</th>
 <th data-quarto-table-cell-role="th">mpg</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">horsepower</td>
 <td>1481.569393</td>
 <td>-233.857926</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mpg</td>
 <td>-233.857926</td>
 <td>61.089611</td>
@@ -2296,7 +2296,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 </div>
 <p>But should these numbers considered big? The Pearson coefficient is more easily interpreted:</p>
-<div id="62bb4326" class="cell" data-execution_count="59">
+<div id="62bb4326" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>cars[ [<span class="st">"horsepower"</span>, <span class="st">"mpg"</span>] ].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <div>
@@ -2304,19 +2304,19 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">horsepower</th>
 <th data-quarto-table-cell-role="th">mpg</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">horsepower</td>
 <td>1.000000</td>
 <td>-0.778427</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mpg</td>
 <td>-0.778427</td>
 <td>1.000000</td>
@@ -2329,7 +2329,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 <p>The value of about <span class="math inline">\(-0.79\)</span> suggests that knowing one of the values would allow us to predict the other one rather well using a best-fit straight line (more on that in a future chapter).</p>
 <p>When you want to see correlations among many variables, the numbers can be overwhelming to look at:</p>
-<div id="049cc15a" class="cell" data-execution_count="60">
+<div id="049cc15a" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>cars.corr(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <div>
@@ -2337,7 +2337,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">cylinders</th>
@@ -2351,7 +2351,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">mpg</td>
 <td>1.000000</td>
 <td>-0.775396</td>
@@ -2363,7 +2363,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>1.000000</td>
 <td>0.816412</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">cylinders</td>
 <td>-0.775396</td>
 <td>1.000000</td>
@@ -2375,7 +2375,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>-0.775396</td>
 <td>-0.527214</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">displacement</td>
 <td>-0.804203</td>
 <td>0.950721</td>
@@ -2387,7 +2387,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>-0.804203</td>
 <td>-0.528723</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">horsepower</td>
 <td>-0.778427</td>
 <td>0.842983</td>
@@ -2399,7 +2399,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>-0.778427</td>
 <td>-0.609533</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">weight</td>
 <td>-0.831741</td>
 <td>0.896017</td>
@@ -2411,7 +2411,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>-0.831741</td>
 <td>-0.592236</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">acceleration</td>
 <td>0.420289</td>
 <td>-0.505419</td>
@@ -2423,7 +2423,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>0.420289</td>
 <td>0.348266</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">model_year</td>
 <td>0.579267</td>
 <td>-0.348746</td>
@@ -2435,7 +2435,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>0.579267</td>
 <td>0.596192</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">mpg_z</td>
 <td>1.000000</td>
 <td>-0.775396</td>
@@ -2447,7 +2447,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 <td>1.000000</td>
 <td>0.816412</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">group_mpg_z</td>
 <td>0.816412</td>
 <td>-0.527214</td>
@@ -2466,7 +2466,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 </div>
 <p>It’s often helpful to visualize correlations using a heatmap:</p>
-<div id="e61aa086" class="cell" data-execution_count="61">
+<div id="e61aa086" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use vmin and vmax to set the extreme values of the color scale</span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cars.corr(numeric_only<span class="op">=</span><span class="va">True</span>), </span>
 <span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">"coolwarm"</span>, vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2490,7 +2490,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div></div><p>As is usual when dealing with means, the Pearson coefficient can be sensitive to outlier values.</p>
 <div id="exm-stats-pearson-outlier" class="theorem example" data-chapter="2" type="💻" data-description="Outliers and the Pearson coefficient">
 <p><span class="theorem-title"><strong>Example 2.30</strong></span> The Pearson coefficient of any variable with itself is 1:</p>
-<div id="d675bb80" class="cell" data-execution_count="62">
+<div id="d675bb80" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series( <span class="bu">range</span>(<span class="dv">10</span>) )</span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>x.corr(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
@@ -2498,7 +2498,7 @@ r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \lef
 </div>
 </div>
 <p>Now let’s correlate <code>x</code> with a series that differs in only one element, but by a lot:</p>
-<div id="d7f95981" class="cell" data-execution_count="63">
+<div id="d7f95981" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x.copy()</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1000</span></span>
 <span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>x.corr(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2523,7 +2523,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 <div id="exm-stats-spearman-outlier" class="theorem example" data-chapter="2" type="💻" data-description="Spearman correlation coefficient">
 <p><span class="theorem-title"><strong>Example 2.31</strong></span> Continuing with <a href="#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span>2.30</span></a>, we can use <code>argsort</code> to find the rank series:</p>
-<div id="492bafa1" class="cell" data-execution_count="64">
+<div id="492bafa1" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>ranks <span class="op">=</span> pd.DataFrame( {<span class="st">'x'</span>: x.argsort(), <span class="st">'y'</span>: y.argsort()} )</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>ranks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
@@ -2532,59 +2532,59 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">y</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>0</td>
 <td>4</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>1</td>
 <td>0</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>2</td>
 <td>1</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>3</td>
 <td>2</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>4</td>
 <td>3</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">5</td>
 <td>5</td>
 <td>5</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">6</td>
 <td>6</td>
 <td>6</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">7</td>
 <td>7</td>
 <td>7</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">8</td>
 <td>8</td>
 <td>8</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">9</td>
 <td>9</td>
 <td>9</td>
@@ -2596,7 +2596,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>The Pearson coefficient of the ranks is the Spearman coefficient of the original <code>x</code> and <code>y</code> series:</p>
-<div id="91536a2e" class="cell" data-execution_count="65">
+<div id="91536a2e" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>ranks.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
 <div>
@@ -2604,19 +2604,19 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">y</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>0.878788</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>0.878788</td>
 <td>1.000000</td>
@@ -2628,14 +2628,14 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>Recall that <code>x</code> and <code>y</code> differ only in one element. The Spearman coefficient between them remains fairly close to one. Note that we don’t actually have to find the rank series manually:</p>
-<div id="1b9a4586" class="cell" data-execution_count="66">
+<div id="1b9a4586" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>x.corr(y, <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="66">
 <pre><code>0.8787878787878788</code></pre>
 </div>
 </div>
 <p>As long as <code>y[4]</code> is negative, so that its rank is zero, it doesn’t matter what its particular value is:</p>
-<div id="5e5ce3ef" class="cell" data-execution_count="67">
+<div id="5e5ce3ef" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">4</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">1000000</span></span>
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>x.corr(y,<span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
@@ -2659,7 +2659,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p>An ordinal variable, such as the days of the week, is often straightforward to quantify as integers. But a nominal variable poses a different challenge.</p>
 <div id="exm-stats-catcorr" class="theorem example" data-chapter="2" type="💻" data-description="Categorical correlation">
 <p><span class="theorem-title"><strong>Example 2.32</strong></span> Grouped histograms suggest an association between country of origin and MPG:</p>
-<div id="df03973a" class="cell" data-execution_count="68">
+<div id="df03973a" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>sns.displot(data<span class="op">=</span>cars, kind<span class="op">=</span><span class="st">"kde"</span>,</span>
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"mpg"</span>, hue<span class="op">=</span><span class="st">"origin"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2671,7 +2671,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>How can we quantify the association? The first step is to convert the <em>origin</em> column into dummy variables:</p>
-<div id="ff7cf246" class="cell" data-execution_count="69">
+<div id="ff7cf246" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>dum <span class="op">=</span> pd.get_dummies(cars, columns<span class="op">=</span>[<span class="st">"origin"</span>])</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>dum.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="69">
@@ -2680,7 +2680,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">cylinders</th>
@@ -2698,7 +2698,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
@@ -2714,7 +2714,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>False</td>
 <td>True</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
@@ -2730,7 +2730,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>False</td>
 <td>True</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
@@ -2746,7 +2746,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>False</td>
 <td>True</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
@@ -2762,7 +2762,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <td>False</td>
 <td>True</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
@@ -2785,7 +2785,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>The original <em>origin</em> column has been replaced by three binary indicator columns. Now we can look for correlations between them and <em>mpg</em>:</p>
-<div id="1545eda5" class="cell" data-execution_count="70">
+<div id="1545eda5" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [</span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mpg"</span>,</span>
 <span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"origin_europe"</span>,</span>
@@ -2799,7 +2799,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">origin_europe</th>
@@ -2808,28 +2808,28 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">mpg</td>
 <td>1.000000</td>
 <td>0.259022</td>
 <td>0.442174</td>
 <td>-0.568192</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">origin_europe</td>
 <td>0.259022</td>
 <td>1.000000</td>
 <td>-0.229895</td>
 <td>-0.597198</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">origin_japan</td>
 <td>0.442174</td>
 <td>-0.229895</td>
 <td>1.000000</td>
 <td>-0.643317</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">origin_usa</td>
 <td>-0.568192</td>
 <td>-0.597198</td>
@@ -2867,7 +2867,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 <p>The Datasaurus Dozen is a collection of datasets that highlights the perils of putting blind trust into summary statistics.</p>
 <div id="exm-stats-datasaurus" class="theorem example" data-chapter="2" type="💻" data-description="The Datasaurus">
 <p><span class="theorem-title"><strong>Example 2.33</strong></span> The Datasaurus is a set of 142 points making a handsome portrait:</p>
-<div id="31777996" class="cell" data-execution_count="71">
+<div id="31777996" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>dozen <span class="op">=</span> pd.read_csv(<span class="st">"_datasets/DatasaurusDozen.tsv"</span>, delimiter<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>dozen[dozen[<span class="st">"dataset"</span>]<span class="op">==</span><span class="st">"dino"</span>], x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -2879,7 +2879,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>However, there are 12 other datasets that all have roughly the same mean and variance for <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, and the same correlations between them:</p>
-<div id="98afe99a" class="cell" data-execution_count="72">
+<div id="98afe99a" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>by_set <span class="op">=</span> dozen.groupby(<span class="st">"dataset"</span>)</span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>by_set.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="72">
@@ -2888,79 +2888,79 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">y</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">dataset</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">away</td>
 <td>54.266100</td>
 <td>47.834721</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bullseye</td>
 <td>54.268730</td>
 <td>47.830823</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">circle</td>
 <td>54.267320</td>
 <td>47.837717</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">dino</td>
 <td>54.263273</td>
 <td>47.832253</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">dots</td>
 <td>54.260303</td>
 <td>47.839829</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">h_lines</td>
 <td>54.261442</td>
 <td>47.830252</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">high_lines</td>
 <td>54.268805</td>
 <td>47.835450</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">slant_down</td>
 <td>54.267849</td>
 <td>47.835896</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">slant_up</td>
 <td>54.265882</td>
 <td>47.831496</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">star</td>
 <td>54.267341</td>
 <td>47.839545</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">v_lines</td>
 <td>54.269927</td>
 <td>47.836988</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">wide_lines</td>
 <td>54.266916</td>
 <td>47.831602</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">x_shape</td>
 <td>54.260150</td>
 <td>47.839717</td>
@@ -2971,7 +2971,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 </div>
-<div id="e7ff8672" class="cell" data-execution_count="73">
+<div id="e7ff8672" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>by_set.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="73">
 <div>
@@ -2979,79 +2979,79 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">y</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">dataset</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">away</td>
 <td>16.769825</td>
 <td>26.939743</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bullseye</td>
 <td>16.769239</td>
 <td>26.935727</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">circle</td>
 <td>16.760013</td>
 <td>26.930036</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">dino</td>
 <td>16.765142</td>
 <td>26.935403</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">dots</td>
 <td>16.767735</td>
 <td>26.930192</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">h_lines</td>
 <td>16.765898</td>
 <td>26.939876</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">high_lines</td>
 <td>16.766704</td>
 <td>26.939998</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">slant_down</td>
 <td>16.766759</td>
 <td>26.936105</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">slant_up</td>
 <td>16.768853</td>
 <td>26.938608</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">star</td>
 <td>16.768959</td>
 <td>26.930275</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">v_lines</td>
 <td>16.769959</td>
 <td>26.937684</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">wide_lines</td>
 <td>16.770000</td>
 <td>26.937902</td>
 </tr>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">x_shape</td>
 <td>16.769958</td>
 <td>26.930002</td>
@@ -3062,7 +3062,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 </div>
-<div id="109b9906" class="cell" data-execution_count="74">
+<div id="109b9906" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>by_set.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="74">
 <div>
@@ -3070,13 +3070,13 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">x</th>
 <th data-quarto-table-cell-role="th">y</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">dataset</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -3084,145 +3084,145 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">away</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.064128</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.064128</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">bullseye</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068586</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.068586</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">circle</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068343</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.068343</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">dino</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.064472</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.064472</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">dots</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.060341</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.060341</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">h_lines</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.061715</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.061715</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">high_lines</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068504</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.068504</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">slant_down</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068980</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.068980</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">slant_up</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.068609</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.068609</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">star</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.062961</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.062961</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">v_lines</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.069446</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.069446</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">wide_lines</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.066575</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.066575</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">x_shape</td>
 <td data-quarto-table-cell-role="th">x</td>
 <td>1.000000</td>
 <td>-0.065583</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">y</td>
 <td>-0.065583</td>
 <td>1.000000</td>
@@ -3234,7 +3234,7 @@ x_{s_1},x_{s_2},\ldots,x_{s_n}.
 </div>
 </div>
 <p>However, a plot reveals that these sets are, to put it mildly, quite distinct:</p>
-<div id="0abd9f13" class="cell" data-execution_count="75">
+<div id="0abd9f13" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>others <span class="op">=</span> dozen[ dozen[<span class="st">"dataset"</span>] <span class="op">!=</span> <span class="st">"dino"</span> ]</span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>others,</span>
 <span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"x"</span>, y<span class="op">=</span><span class="st">"y"</span>,</span>
@@ -3277,7 +3277,7 @@ Important
 <p>In casual speech, you might expect two variables that are uncorrelated to be unrelated. But that is not at all how the mathematical definitions play out.</p>
 <div id="exm-stats-correlation" class="theorem example" data-chapter="2" type="💻" data-description="Correlation vs. dependence">
 <p><span class="theorem-title"><strong>Example 2.34</strong></span> For example, here are <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variables that both depend on a hidden variable <span class="math inline">\(\theta\)</span>:</p>
-<div id="14464094" class="cell" data-execution_count="76">
+<div id="14464094" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">2</span><span class="op">*</span>np.pi,<span class="dv">50</span>)</span>
 <span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> pd.Series(np.cos(theta))</span>
@@ -3292,7 +3292,7 @@ Important
 </div>
 </div>
 <p>Neither informally nor mathematically would we say that <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are independent! For example, if <span class="math inline">\(y=0\)</span>, then there is only one possible value for <span class="math inline">\(x\)</span>. Yet the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is zero:</p>
-<div id="4c4537ed" class="cell" data-execution_count="77">
+<div id="4c4537ed" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>x.corr(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
 <pre><code>8.276095507101827e-18</code></pre>
@@ -3306,7 +3306,7 @@ Important
 <p>The penguin dataset contains a common paradox—or a counterintuitive phenomenon, at least.</p>
 <div id="exm-stats-simpson" class="theorem example" data-chapter="2" type="💻" data-description="Simpson's paradox">
 <p><span class="theorem-title"><strong>Example 2.35</strong></span> Two of the variables show a fairly strong negative correlation:</p>
-<div id="644399ed" class="cell" data-execution_count="78">
+<div id="644399ed" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [ <span class="st">"body_mass_g"</span>, <span class="st">"bill_depth_mm"</span> ]</span>
 <span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>penguins[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3316,19 +3316,19 @@ Important
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">body_mass_g</th>
 <th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>-0.471916</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>-0.471916</td>
 <td>1.000000</td>
@@ -3340,7 +3340,7 @@ Important
 </div>
 </div>
 <p>But something surprising happens if we compute correlations <em>after</em> grouping by species.</p>
-<div id="5f96d39f" class="cell" data-execution_count="79">
+<div id="5f96d39f" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>penguins.groupby(<span class="st">"species"</span>)[columns].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="79">
 <div>
@@ -3348,13 +3348,13 @@ Important
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr class="header">
+<tr>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">body_mass_g</th>
 <th data-quarto-table-cell-role="th">bill_depth_mm</th>
 </tr>
-<tr class="odd">
+<tr>
 <th data-quarto-table-cell-role="th">species</th>
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th"></th>
@@ -3362,35 +3362,35 @@ Important
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Adelie</td>
 <td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.576138</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.576138</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Chinstrap</td>
 <td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.604498</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.604498</td>
 <td>1.000000</td>
 </tr>
-<tr class="odd">
+<tr>
 <td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">Gentoo</td>
 <td data-quarto-table-cell-role="th">body_mass_g</td>
 <td>1.000000</td>
 <td>0.719085</td>
 </tr>
-<tr class="even">
+<tr>
 <td data-quarto-table-cell-role="th">bill_depth_mm</td>
 <td>0.719085</td>
 <td>1.000000</td>
@@ -3403,7 +3403,7 @@ Important
 </div>
 <p>Within each individual species, the correlation between the variables is strongly positive!</p>
 <p>This is an example of <strong>Simpson’s paradox</strong>. The reason for it can be seen from a scatter plot:</p>
-<div id="5fbb7a1d" class="cell" data-execution_count="80">
+<div id="5fbb7a1d" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>penguins,</span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>columns[<span class="dv">0</span>], y<span class="op">=</span>columns[<span class="dv">1</span>], </span>
 <span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"species"</span></span>
@@ -3988,7 +3988,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
