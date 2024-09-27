@@ -1423,11 +1423,11 @@ results = pd.DataFrame( {"FP rate":fp, "TP rate":tp, "Threshold":theta} )
 results
 ```
 
-A plot is more informative than the table of numbers:
+A plot is more informative than the table of numbers above. We could make the plot ourselves using the data we got from `roc_curve`, but there is an even more convenient way to do it:
 
 ```{python}
-import seaborn as sns
-sns.relplot(data=results, x="FP rate", y="TP rate", kind="line");
+from sklearn.metrics import RocCurveDisplay
+RocCurveDisplay.from_estimator(dtree, X_test, y_test);
 ```
 
 ::::
@@ -1476,12 +1476,10 @@ print(f"AUC for kNN is {auc:.3f}")
 In terms of AUC, kNN looks better. But consider its ROC curve:
 
 ```{python}
-fp, tp, _ = roc_curve(y_test, p_hat[:, 1])
-results = pd.DataFrame( {"FP rate":fp, "TP rate":tp} )
-sns.relplot(data=results, x="FP rate", y="TP rate", kind="line");
+RocCurveDisplay.from_estimator(pipe, X_test, y_test);
 ```
 
-Reading from left to right, the curve in @exm-class-roc rises more quickly than this one at first but then more slowly increases once past a 90% TP rate. If we were satisfied with a 90% TP rate, we would prefer the decision tree at a 5% FP rate. But if we could tolerate a larger FP rate, we would then prefer the higher TP rate attainable with the kNN classifier.
+Reading from left to right, the curve in @exm-class-roc rises more quickly than this one at first but then more slowly increases once past a 90% TP rate. If we were satisfied with a 90% TP rate, we would prefer that decision tree, which has a 5% FP rate there. But if we could tolerate a larger FP rate, we would then prefer the higher TP rate attainable with the kNN classifier shown here.
 
 ::::
 
@@ -1513,7 +1511,7 @@ flowchart TD
     .predict_proba()"]
     evaluate["Compute metrics
     .confusion_matrix(), .score(), recall_score(), etc.
-    roc_curve()"]
+    roc_curve(), RocCurveDisplay.from_estimator()"]
     dataset --> split --> object --> train --> predict
     train --> evaluate
 ```
