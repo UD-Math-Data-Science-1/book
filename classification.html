@@ -1237,7 +1237,7 @@ Figure&nbsp;3.1: Binary confusion matrix.
 <tbody>
 <tr>
 <td style="text-align: right;"><strong>accuracy</strong></td>
-<td style="text-align: center;"><span class="math inline">\(\dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\quad \dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}\)</span></td>
 </tr>
 <tr>
 <td style="text-align: right;"><strong>recall</strong></td>
@@ -1254,6 +1254,25 @@ Figure&nbsp;3.1: Binary confusion matrix.
 </tbody>
 </table>
 </div>
+<p>All of the primary metrics vary between 0 (worst) and 1 (best).</p>
+<dl>
+<dt><strong>accuracy</strong></dt>
+<dd>
+How often are the predictions correct? This is the most intuitive metric, but it can be misleading if the classes are imbalanced.
+</dd>
+<dt><strong>recall</strong></dt>
+<dd>
+How often are actual <em>positive</em> cases predicted correctly? This is also called <em>sensitivity</em> or the <em>true positive rate</em>. It sets the goal as minimizing false negatives.
+</dd>
+<dt><strong>specificity</strong></dt>
+<dd>
+How often are actual <em>negative</em> cases predicted correctly? This is also called the <em>true negative rate</em>. It sets the goal as minimizing false positives.
+</dd>
+<dt><strong>precision</strong></dt>
+<dd>
+How often are the <em>positive</em> predictions correct? This is also called <em>positive predictive value</em>. Like specificity, it sets the goal as minimizing false positives, but measures it differently.
+</dd>
+</dl>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1264,24 +1283,9 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Recall is also known as <em>sensitivity</em> or the <em>true positive rate</em>. Specificity is the <em>true negative rate</em>.</p>
+<p>Specificity is equal to recall of the negative class. For that reason, <code>sklearn</code> provides a <code>recall_score</code> but not a <code>specificity_score</code> function, and you have to use a logical NOT with <code>recall_score</code> to get the specificity.</p>
 </div>
 </div>
-<p>All of the primary metrics vary between 0 (worst) and 1 (best). Accuracy is self-explanatory; the other metrics answer the following questions:</p>
-<dl>
-<dt><strong>recall</strong></dt>
-<dd>
-How often are actual <em>positive</em> cases predicted correctly?
-</dd>
-<dt><strong>specificity</strong></dt>
-<dd>
-How often are actual <em>negative</em> cases predicted correctly?
-</dd>
-<dt><strong>precision</strong></dt>
-<dd>
-How often are the <em>positive</em> predictions correct?
-</dd>
-</dl>
 <div id="exm-class-confusion" class="theorem example" data-chapter="3" type="✍️" data-description="Classifier performance metrics">
 <p><span class="theorem-title"><strong>Example 3.5</strong></span> Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:</p>
 <table class="caption-top">
@@ -1348,6 +1352,19 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>The harmonic mean is small if either of its terms is small, so a high <span class="math inline">\(F_1\)</span> means both precision and recall are good.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>sklearn.metrics</code> module provides scoring functions for the metrics defined in this section. They all take the ground-truth labels and the predicted labels as arguments.</p>
 </div>
 </div>
 <div id="exm-class-metrics" class="theorem example" data-chapter="3" type="💻" data-description="Binary classifier metrics">
@@ -6226,7 +6243,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
