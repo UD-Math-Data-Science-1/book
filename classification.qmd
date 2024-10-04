@@ -108,7 +108,7 @@ print(f"{num_ok} predicted correctly, or {num_ok/len(y):.2%}.")
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_f63ccqhd&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ox5akxcd" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/numbers.jpg){.lightbox}
+![](_media/memes/numbers.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -209,7 +209,7 @@ The performance of a predictor on previously unseen data is known as the **gener
 :::
 
 :::{.column-margin}
-![](_media/memes/generalization.jpg){.lightbox}
+![](_media/memes/generalization.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -269,7 +269,7 @@ print( f"{y_test.mean():.2%}" )
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_j0w2wyn3&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_udfl9dd3" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/loans.jpg){.lightbox}
+![](_media/memes/loans.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -403,7 +403,7 @@ From this we see that the accuracy is $84/100$, or 84\%. Out of 26 samples that 
 </br>
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_uz0psivl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_qgapi2yu" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.5" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/no%20fp.jpg){.lightbox}
+![](_media/memes/no%20fp.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -547,7 +547,7 @@ We could instead look at the bottom row, which tells us that out of 26 cases whe
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_hfixb8l6&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_eup2cbdf" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 3.2.3" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 </br>
-![](_media/memes/confusion.jpg){.lightbox}
+![](_media/memes/confusion.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -621,7 +621,7 @@ print(f'weighted avg: {precision_score(y_test, yhat, average="weighted"):.1%}')
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1qocbyij&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ad07ksvs" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/car.jpg){.lightbox}
+![](_media/memes/car.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -799,7 +799,7 @@ Both $\{ (0,A) \}, \{ (1,B), (2,A), (3,B) \}$ and $\{ (0,A), (1,B), (2,A) \}, \{
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_e1w27rpl&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_ejrvzi5x" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.13" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/decision%20tree.jpeg){.lightbox}
+![](_media/memes/decision%20tree.jpeg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -863,7 +863,7 @@ At this point, the `tree` object has created and stored all the information deri
 ```{python}
 #| code-fold: true
 from matplotlib.pyplot import figure
-figure(figsize=(6,8), dpi=200)
+figure(figsize=(3,3), dpi=200)
 plot_tree(tree, feature_names=["x₁", "x₂"]);
 ```
 
@@ -942,7 +942,7 @@ We get some interesting information from looking at the top levels of the decisi
 ```{python}
 #| code-fold: true
 from matplotlib.pyplot import figure
-figure(figsize=(8,4), dpi=200)
+figure(figsize=(5,4), dpi=200)
 plot_tree(dtree, max_depth=2, feature_names=features);
 ```
 
@@ -962,7 +962,7 @@ From above we see that flipper length alone accounts for about half of the resol
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_gr3z11sh&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_3rgpgrpj" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.16" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/gentoo.jpg){.lightbox}
+![](_media/memes/gentoo.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -1081,7 +1081,7 @@ Note that the blue sample point at $(0,-2)$ is its own closest neighbor, but the
 ::::
 
 :::{.column-margin}
-![](_media/memes/neighbors.jpeg){.lightbox}
+![](_media/memes/neighbors.jpeg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -1158,7 +1158,7 @@ knn.predict(query)
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_djnpafsx&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_lbr5rdhg" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.19" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/label.jpg){.lightbox}
+![](_media/memes/label.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -1310,7 +1310,7 @@ p_hat = np.array( [
 ::::
 
 :::{.column-margin}
-![](_media/memes/votes.jpg){.lightbox}
+![](_media/memes/votes.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -1449,7 +1449,7 @@ RocCurveDisplay.from_estimator(dtree, X_test, y_test);
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_8amtzxkx&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_0gtijpcm" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.25" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/ROC.jpeg){.lightbox}
+![](_media/memes/ width=200px fig-align="center"}
 
 :::
 
@@ -1480,7 +1480,9 @@ Let's compare this to a kNN classifier:
 ```{python}
 from sklearn.preprocessing import RobustScaler
 knn = KNeighborsClassifier(n_neighbors=7)
-pipe = make_pipeline(RobustScaler(), knn)
+pipe = Pipeline([
+  ('scale', RobustScaler()), ('knn', knn)
+])
 pipe.fit(X_train, y_train)
 p_hat = pipe.predict_proba(X_test)
 auc = roc_auc_score(y_test, p_hat[:, 1])
@@ -1500,7 +1502,7 @@ Reading from left to right, the curve in @exm-class-roc rises more quickly than 
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_wcwz6whf&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_l88zyvcx" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.26" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/AUC.jpg){.lightbox}
+![](_media/memes/AUC.jpg){.lightbox width=200px fig-align="center"}
 
 :::
 

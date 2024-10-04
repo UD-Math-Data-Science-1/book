@@ -198,7 +198,7 @@ $$
 ::::
 
 :::{.column-margin}
-![](_media/memes/symmetry.jpg){.lightbox}
+![](_media/memes/symmetry.jpg){.lightbox  width=200px fig-align="center"}
 :::
 
 ::: {.callout-tip}
@@ -275,7 +275,7 @@ Now the first two documents look most similar. Looking at the vectors, we see th
 ::::
 
 ::::{.column-margin}
-![](_media/memes/angler_distance.jpg){.lightbox}
+![](_media/memes/angler_distance.jpg){.lightbox  width=200px fig-align="center"}
 ::::
 
 <!-- Categorical variables can be included in distance metrics. An ordinal variable is easily converted to equally spaced numerical values, which then may get a standard treatment. Nominal features are often compared using **Hamming distance**, which is just the total number of features that have different values in the two vectors. -->
@@ -611,7 +611,7 @@ The central cluster scores well, but the rings score poorly because they are not
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_y47kfwrc&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_hfq0mpjd" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 6.9" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 <br/>
-![](_media/memes/silhouette.jpg){.lightbox}
+![](_media/memes/silhouette.jpg){.lightbox  width=200px fig-align="center"}
 :::
 
 ::: {.callout-note}
@@ -741,7 +741,7 @@ Two-phase iterations like Lloyd's algorithm are common in optimization: you star
 * **Distance metric**. The Lloyd algorithm often fails to converge for norms other than the 2-norm and must be modified if another norm is preferred.
 
 ::::{.column-margin}
-![](_media/memes/k-means.jpeg){.lightbox}
+![](_media/memes/k-means.jpeg){.lightbox  width=200px fig-align="center"}
 ::::
 
 The algorithm treats $k$ as a hyperparameter. Increasing $k$ tends to lower the total inertia---at the extreme, taking $k=n$ puts each sample in its own cluster, with a total inertia of zero. Hence, one should use silhouette scores or some other measure in order to optimize $k$. Occam's Razor dictates preferring smaller values to large ones. There are many suggestions on how to find the choice that gives the most "bang for the buck," but none is foolproof.
