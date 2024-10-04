@@ -359,27 +359,31 @@ The following primary metrics are defined for a binary classifier:
 
 |                 |                                            |
 | --------------: | :----------------------------------------: |
-|    **accuracy** | $\dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}$ |
+|    **accuracy** | $\quad \dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}$ |
 |      **recall** |          $\dfrac{\TP}{\TP + \FN}$          |
 | **specificity** |          $\dfrac{\TN}{\TN + \FP}$          |
 |   **precision** |          $\dfrac{\TP}{\TP + \FP}$          |
 
 ::::
 
-::: {.callout-note}
-Recall is also known as *sensitivity* or the *true positive rate*. Specificity is the *true negative rate*. 
-:::
+All of the primary metrics vary between 0 (worst) and 1 (best). 
 
-All of the primary metrics vary between 0 (worst) and 1 (best). Accuracy is self-explanatory; the other metrics answer the following questions:
+**accuracy**
+: How often are the predictions correct? This is the most intuitive metric, but it can be misleading if the classes are imbalanced.
 
 **recall** 
-: How often are actual *positive* cases predicted correctly?
+: How often are actual *positive* cases predicted correctly? This is also called *sensitivity* or the *true positive rate*. It sets the goal as minimizing false negatives.
 
 **specificity** 
-: How often are actual *negative* cases predicted correctly?
+: How often are actual *negative* cases predicted correctly? This is also called the *true negative rate*. It sets the goal as minimizing false positives.
 
 **precision**
-: How often are the *positive* predictions correct?
+: How often are the *positive* predictions correct? This is also called *positive predictive value*. Like specificity, it sets the goal as minimizing false positives, but measures it differently.
+
+::: {.callout-note}
+Specificity is equal to recall of the negative class. For that reason, `sklearn` provides a `recall_score` but not a `specificity_score` function, and you have to use a logical NOT with `recall_score` to get the specificity.
+:::
+
 
 ::::{#exm-class-confusion chapter=3 type=✍️ description="Classifier performance metrics"}
 Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:
