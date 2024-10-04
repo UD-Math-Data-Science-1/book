@@ -1111,12 +1111,12 @@ where $\bar{x}$ and $\bar{y}$ are sample means.
 
 Both $\rho_{XY}$ and $r_{xy}$ are between $-1$ and $1$, with the endpoints indicating perfect correlation (inverse or direct). 
 
-An equivalent formula for $r_{xy}$ is 
+An equivalent formula for the sampled case $r_{xy}$ is 
 $$
 r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \left(\frac{y_i-\bar{y}}{s_y}\right),
 $$ {#eq-stats-pearson-alt}
 
-where the quantities in parentheses are z-scores.
+where $s_x^2$ and $s_y^2$ are the (unbiased) sample variances of $X$ and $Y$.
 
 ::::{#exm-stats-pearson-cars chapter=2 type=💻 description="Pearson correlation coefficient"}
 We might reasonably expect horsepower and miles per gallon to be negatively correlated:
