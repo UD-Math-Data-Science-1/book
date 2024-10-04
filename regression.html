@@ -494,7 +494,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/slope-intercept.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/slope-intercept.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/slope-intercept.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/slope-intercept.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><section id="linear-algebra" class="level3 page-columns page-full" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="linear-algebra"><span class="header-section-number">5.1.1</span> Linear algebra</h3>
 <p>Before moving on, we want to examine a vector-oriented description of the process. First, a handy definition.</p>
@@ -1600,7 +1600,11 @@ dtype: float64</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/multiple-regression.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/multiple-regression.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/multiple-regression.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/multiple-regression.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>In the next example we will see that we can create new features out of the ones that are initially given. Sometimes these new features add a lot to the quality of the regression.</p>
 <div id="exm-regression-sales-multi" class="theorem example" data-chapter="5" type="💻" data-description="Multilinear regression for sales dataset">
 <p><span class="theorem-title"><strong>Example 5.8</strong></span> Here we load data about advertising spending on different media in many markets:</p>
@@ -2088,7 +2092,11 @@ L(\bfw) = \twonorm{ \bfX \bfw- \bfy }^2 + \alpha \onenorm{\bfw},
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/penalty.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/penalty.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/penalty.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/penalty.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>The new terms in <a href="#eq-regression-ridge" class="quarto-xref">Equation&nbsp;<span>5.11</span></a> and <a href="#eq-regression-ridge" class="quarto-xref">Equation&nbsp;<span>5.11</span></a> based on norms of <span class="math inline">\(\bfw\)</span> are called <strong>penalty terms</strong>. As <span class="math inline">\(\alpha\to 0\)</span>, the penalty terms vanish and both types of regularization revert to the usual least-squares loss. But as <span class="math inline">\(\alpha \to \infty\)</span>, the penalty terms dominate and the optimization becomes increasingly concerned with prioritizing a small result for <span class="math inline">\(\bfw\)</span>. In this limit, the model pays less and less attention to the data, which can reduce overfitting.</p>
 <div id="exm-regression-ridge-diabetes" class="theorem example" data-chapter="5" type="💻" data-description="Ridge regression for diabetes dataset">
 <p><span class="theorem-title"><strong>Example 5.11</strong></span> We’ll apply ridge regression to data collected about the progression of diabetes:</p>
@@ -2626,7 +2634,7 @@ c\cdot \hat{f}(\bfu) = -1 \cdot |1+1| = -2.
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/not-a-classifier.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/not-a-classifier.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/not-a-classifier.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/not-a-classifier.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 <section id="decision-tree" class="level3 page-columns page-full" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="decision-tree"><span class="header-section-number">5.4.2</span> Decision tree</h3>
@@ -3298,7 +3306,11 @@ y_4 \log(\hat{p}_4) + \cancel{(1-y_4) \log(1-\hat{p}_4)} &amp;= \log(0.3).\\
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/cross-entropy.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/cross-entropy.jpeg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/cross-entropy.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/cross-entropy.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>Logistic regression does have a major disadvantage compared to linear regression: the minimization of loss does <em>not</em> lead to a linear problem for the weight vector <span class="math inline">\(\bfw\)</span>. The difference in practice is usually not a concern, though.</p>
 <p>Cross-entropy is the default loss function for a <code>LogisticRegression</code> in scikit-learn. In <a href="#exm-regression-spam" class="quarto-xref">Example&nbsp;<span>5.21</span></a>, we use logistic regression on a binary classification problem, where we interpret the regression output as the probability of being in class 1, as opposed to class 0.</p>
 <div id="exm-regression-spam" class="theorem example" data-chapter="5" type="💻" data-description="Logistic regression as a spam filter">
@@ -4739,7 +4751,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","selector":".lightbox","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

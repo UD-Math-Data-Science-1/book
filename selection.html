@@ -366,7 +366,7 @@ window.Quarto = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div id="ef255a3a" class="cell" data-execution_count="2">
+<div id="40584b12" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -379,7 +379,7 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.utils <span class="im">import</span> shuffle</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, f1_score, balanced_accuracy_score</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -550,7 +550,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 <p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
 <div id="exm-select-learning-curves" class="theorem example" data-chapter="4" type="💻" data-description="Learning curves">
 <p><span class="theorem-title"><strong>Example 4.2</strong></span> We will use the handwritten digits data in an experiment with a decision tree classifier of fixed depth:</p>
-<div id="cdc6f21d" class="cell" data-execution_count="4">
+<div id="03b6d1e6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> LearningCurveDisplay, StratifiedShuffleSplit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
@@ -584,7 +584,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/learning-curve.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/learning-curve.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/learning-curve.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/learning-curve.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>When you see a large gap between training and test errors, you should suspect that the learner may not generalize well. Ideally, you could bring more data to the table, perhaps by artificially augmenting the training examples. If not, you might as well decrease the resolving power of your learner, because the excess power is likely to make things no better, and maybe worse.</p>
 </section>
 </section>
@@ -739,7 +739,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 <p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>, and <a href="#fig-select-tree-6-noisy" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in <a href="#sec-select-learning-curves" class="quarto-xref"><span>Section 4.1</span></a>.</p>
 <div id="exm-select-overfit-digits" class="theorem example" data-chapter="4" type="💻" data-description="Overfitting">
 <p><span class="theorem-title"><strong>Example 4.3</strong></span> <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a> showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew. Now look at what happens for a much deeper decision tree:</p>
-<div id="07565239" class="cell" data-execution_count="13">
+<div id="5ca9fdec" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]<span class="op">==</span><span class="dv">8</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">10</span>)</span>
@@ -770,7 +770,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/overfit.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/overfit.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/overfit.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/overfit.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 </section>
 <section id="ensemble-methods" class="level2 page-columns page-full" data-number="4.3">
@@ -810,11 +810,11 @@ Note
 <p>Scikit-learn has a <code>BaggingClassifier</code> that automates the process of generating an ensemble from just one basic type of estimator.</p>
 <div id="exm-select-ensemble-knn" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble classifier">
 <p><span class="theorem-title"><strong>Example 4.4</strong></span> Here is a dataset collected from images of dried beans:</p>
-<div id="694c71c5" class="cell" data-execution_count="14">
+<div id="fb06ce10" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="47">
 <div>
 
 
@@ -943,29 +943,32 @@ Note
 </div>
 </div>
 <p>Although the dataset has data on 7 classes of beans, we will simplify our output by making it a one-vs-rest problem for just one class:</p>
-<div id="ed41f582" class="cell" data-execution_count="15">
+<div id="70e80bb8" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"SIRA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is the confusion matrix we get from training a single kNN classifier on this dataset:</p>
-<div id="a3ceb2be" class="cell" data-execution_count="16">
+<div id="045a23ba" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  X, y,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">3</span>))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for single classifier is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline([</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'scale'</span>, StandardScaler()), </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'knn'</span>, KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">3</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for single classifier is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AUC for single classifier is 0.9633</code></pre>
 </div>
 </div>
 <p>Here, we create an ensemble with 100 such classifiers, each trained on a different subset that is 75% of the size of the original training set:</p>
-<div id="93152cb0" class="cell" data-execution_count="17">
+<div id="3a7590ac" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
@@ -976,8 +979,8 @@ Note
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ensemble.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<style>#sk-container-id-1 {
+<div class="cell-output cell-output-display" data-execution_count="50">
+<style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: black;
   --sklearn-color-line: gray;
@@ -1007,15 +1010,15 @@ Note
   }
 }
 
-#sk-container-id-1 {
+#sk-container-id-2 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-1 pre {
+#sk-container-id-2 pre {
   padding: 0;
 }
 
-#sk-container-id-1 input.sk-hidden--visually {
+#sk-container-id-2 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -1027,7 +1030,7 @@ Note
   width: 1px;
 }
 
-#sk-container-id-1 div.sk-dashed-wrapped {
+#sk-container-id-2 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -1035,7 +1038,7 @@ Note
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-1 div.sk-container {
+#sk-container-id-2 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -1045,7 +1048,7 @@ Note
   position: relative;
 }
 
-#sk-container-id-1 div.sk-text-repr-fallback {
+#sk-container-id-2 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1061,14 +1064,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-1 div.sk-parallel-item::after {
+#sk-container-id-2 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-1 div.sk-parallel {
+#sk-container-id-2 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1076,28 +1079,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-1 div.sk-parallel-item {
+#sk-container-id-2 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-1 div.sk-parallel-item:first-child::after {
+#sk-container-id-2 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:last-child::after {
+#sk-container-id-2 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-1 div.sk-parallel-item:only-child::after {
+#sk-container-id-2 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-1 div.sk-serial {
+#sk-container-id-2 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1115,14 +1118,14 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-1 div.sk-toggleable {
+#sk-container-id-2 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-1 label.sk-toggleable__label {
+#sk-container-id-2 label.sk-toggleable__label {
   cursor: pointer;
   display: block;
   width: 100%;
@@ -1132,7 +1135,7 @@ clickable and can be expanded/collapsed.
   text-align: center;
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+#sk-container-id-2 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1140,13 +1143,13 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-1 div.sk-toggleable__content {
+#sk-container-id-2 div.sk-toggleable__content {
   max-height: 0;
   max-width: 0;
   overflow: hidden;
@@ -1155,12 +1158,12 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted {
+#sk-container-id-2 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content pre {
+#sk-container-id-2 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1168,79 +1171,79 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+#sk-container-id-2 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
   max-height: 200px;
   max-width: 100%;
   overflow: auto;
 }
 
-#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-1 div.sk-label label.sk-toggleable__label,
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-2 div.sk-label label.sk-toggleable__label,
+#sk-container-id-2 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-1 div.sk-label label {
+#sk-container-id-2 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
   display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-1 div.sk-label-container {
+#sk-container-id-2 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-1 div.sk-estimator {
+#sk-container-id-2 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1250,18 +1253,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted {
+#sk-container-id-2 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-1 div.sk-estimator:hover {
+#sk-container-id-2 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-1 div.sk-estimator.fitted:hover {
+#sk-container-id-2 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1348,7 +1351,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-1 a.estimator_doc_link {
+#sk-container-id-2 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
@@ -1363,38 +1366,36 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted {
+#sk-container-id-2 a.estimator_doc_link.fitted {
   /* fitted */
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-1 a.estimator_doc_link:hover {
+#sk-container-id-2 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+#sk-container-id-2 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</a></style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BaggingClassifier(estimator=Pipeline(steps=[('standardscaler',
-                                             StandardScaler()),
-                                            ('kneighborsclassifier',
+</a></style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BaggingClassifier(estimator=Pipeline(steps=[('scale', StandardScaler()),
+                                            ('knn',
                                              KNeighborsClassifier(n_neighbors=3))]),
-                  max_samples=0.75, n_estimators=100, random_state=18621)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;BaggingClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.ensemble.BaggingClassifier.html">?<span>Documentation for BaggingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>BaggingClassifier(estimator=Pipeline(steps=[('standardscaler',
-                                             StandardScaler()),
-                                            ('kneighborsclassifier',
+                  max_samples=0.75, n_estimators=100, random_state=18621)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;BaggingClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.ensemble.BaggingClassifier.html">?<span>Documentation for BaggingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>BaggingClassifier(estimator=Pipeline(steps=[('scale', StandardScaler()),
+                                            ('knn',
                                              KNeighborsClassifier(n_neighbors=3))]),
-                  max_samples=0.75, n_estimators=100, random_state=18621)</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">estimator: Pipeline</label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[('standardscaler', StandardScaler()),
-                ('kneighborsclassifier', KNeighborsClassifier(n_neighbors=3))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;KNeighborsClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a></label><div class="sk-toggleable__content fitted"><pre>KNeighborsClassifier(n_neighbors=3)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
+                  max_samples=0.75, n_estimators=100, random_state=18621)</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">estimator: Pipeline</label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[('scale', StandardScaler()),
+                ('knn', KNeighborsClassifier(n_neighbors=3))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;KNeighborsClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a></label><div class="sk-toggleable__content fitted"><pre>KNeighborsClassifier(n_neighbors=3)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
 </div>
 </div>
 <p>We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:</p>
-<div id="b62a80fc" class="cell" data-execution_count="18">
+<div id="2482b803" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X_test.iloc[<span class="op">-</span><span class="dv">1</span>:,:]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(query)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ensemble probability of True on query is </span><span class="sc">{</span>p_hat[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1403,10 +1404,10 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Internally, the <code>estimators_</code> field of the ensemble object is a list of the individual trained classifiers. With a little work, we could find out the prediction for <em>True</em> from every constituent:</p>
-<div id="4f76e6fe" class="cell" data-execution_count="19">
+<div id="09ce14d7" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>,<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]   <span class="co"># first 6 predictions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>[0.6666666666666666,
  1.0,
  0.3333333333333333,
@@ -1416,7 +1417,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The ensemble takes the average of this list to create its prediction:</p>
-<div id="3d22d895" class="cell" data-execution_count="20">
+<div id="50cef22b" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean probability of True for query is </span><span class="sc">{</span>np<span class="sc">.</span>mean(pm)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean probability of True for query is 52.67%</code></pre>
@@ -1424,7 +1425,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>The result above matches what we got by predicting directly from the ensemble, which is the normal mode of operation.</p>
 <p>Over the testing set, we find that the ensemble has improved the AUC score:</p>
-<div id="a21194c7" class="cell" data-execution_count="21">
+<div id="4d765022" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1457,7 +1458,7 @@ Note
 </div>
 <div id="exm-select-ensemble-knn-better" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble (better)">
 <p><span class="theorem-title"><strong>Example 4.5</strong></span> If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:</p>
-<div id="4e4bca01" class="cell" data-execution_count="22">
+<div id="607457ba" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1477,15 +1478,15 @@ Note
 </div>
 <div id="exm-select-ensemble-forest" class="theorem example" data-chapter="4" type="💻" data-description="Random forest classifier">
 <p><span class="theorem-title"><strong>Example 4.6</strong></span> Let’s work again with the forest cover dataset. It’s got over 500,000 samples and 54 features:</p>
-<div id="872bb113" class="cell" data-execution_count="23">
+<div id="10c9832b" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>forest[<span class="st">"data"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="56">
 <pre><code>(581012, 54)</code></pre>
 </div>
 </div>
 <p>We’ll turn this into a binary classification by looking for just one of the possible label values:</p>
-<div id="d15042f0" class="cell" data-execution_count="24">
+<div id="bda996a3" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>] <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
@@ -1495,7 +1496,7 @@ Note
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How should we best make use of all that data? We can use a fairly deep decision tree without fear of overfitting, and the result is not bad:</p>
-<div id="f98dd69b" class="cell" data-execution_count="25">
+<div id="a313c34f" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>) </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1503,11 +1504,11 @@ Note
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, tree.predict(X_test) )</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a single tree is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a single tree is 0.8107</code></pre>
+<pre><code>F₁ for a single tree is 0.8106</code></pre>
 </div>
 </div>
 <p>A simple averaging over the same type of tree actually does worse here:</p>
-<div id="a2e0ee3f" class="cell" data-execution_count="26">
+<div id="330044d3" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">12</span>, </span>
@@ -1519,11 +1520,11 @@ Note
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a random forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a random forest is 0.7767</code></pre>
+<pre><code>F₁ for a random forest is 0.7772</code></pre>
 </div>
 </div>
 <p>It’s possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:</p>
-<div id="e6f0ca55" class="cell" data-execution_count="27">
+<div id="2aa3c474" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1534,11 +1535,11 @@ Note
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a taller forest is 0.9043</code></pre>
+<pre><code>F₁ for a taller forest is 0.9016</code></pre>
 </div>
 </div>
 <p>In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:</p>
-<div id="e8dd6f50" class="cell" data-execution_count="28">
+<div id="82be9c8a" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    max_features<span class="op">=</span><span class="fl">0.5</span>,</span>
@@ -1550,7 +1551,7 @@ Note
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
 <span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller, skinnier forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a taller, skinnier forest is 0.9409</code></pre>
+<pre><code>F₁ for a taller, skinnier forest is 0.9403</code></pre>
 </div>
 </div>
 </div>
@@ -1562,7 +1563,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/random-forest.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/random-forest.jpeg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/random-forest.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/random-forest.jpeg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.</p>
 </section>
 <section id="validation" class="level2 page-columns page-full" data-number="4.4">
@@ -1602,7 +1603,7 @@ Note
 </div>
 <div id="exm-select-folds" class="theorem example" data-chapter="4" type="✍️" data-description="Folds for validation">
 <p><span class="theorem-title"><strong>Example 4.7</strong></span> Here is how 16 elements can be split into 4 folds:</p>
-<div id="d1512f51" class="cell" data-execution_count="29">
+<div id="28fe8d45" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
@@ -1619,21 +1620,21 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <p>A different variation is <strong>stratified</strong> <span class="math inline">\(k\)</span>-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.</p>
 <div id="exm-select-cv-beans" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation">
 <p><span class="theorem-title"><strong>Example 4.8</strong></span> Let’s apply cross-validation to the beans dataset.</p>
-<div id="7910b77f" class="cell" data-execution_count="30">
+<div id="f1ed2ebc" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
-<div id="fca64500" class="cell" data-execution_count="31">
+<div id="30cc591e" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), knn)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([(<span class="st">'scale'</span>, StandardScaler()), (<span class="st">'knn'</span>, knn)])</span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">18621</span>)</span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_validate(</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    learner, </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    model, </span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    X, y, </span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"balanced_accuracy"</span>,</span>
@@ -1676,7 +1677,7 @@ Important
 <p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
 <div id="exm-select-vc-beans" class="theorem example" data-chapter="4" type="💻" data-description="Validation curve">
 <p><span class="theorem-title"><strong>Example 4.9</strong></span> Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:</p>
-<div id="c5de4631" class="cell" data-execution_count="32">
+<div id="ab1284d0" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ValidationCurveDisplay</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1711,7 +1712,7 @@ Important
 <p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
 <div id="exm-select-grid-cancer" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation grid search">
 <p><span class="theorem-title"><strong>Example 4.10</strong></span> Let’s work with a dataset on breast cancer detection:</p>
-<div id="eb1b8153" class="cell" data-execution_count="33">
+<div id="973b5863" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
@@ -1724,7 +1725,7 @@ Important
 <span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">3383</span></span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <div>
 
 
@@ -1884,7 +1885,7 @@ Important
 </div>
 </div>
 <p>We start by trying decision tree classifiers in which we vary the maximum depth as well as some other options.</p>
-<div id="630dd8fd" class="cell" data-execution_count="34">
+<div id="fa7c81da" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"criterion"</span>:[<span class="st">"gini"</span>, <span class="st">"entropy"</span>], </span>
@@ -1915,36 +1916,39 @@ Best score:
 </div>
 </div>
 <p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
-<div id="26e6945d" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"kneighborsclassifier__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">"kneighborsclassifier__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>learner <span class="op">=</span> make_pipeline(StandardScaler(), KNeighborsClassifier())</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>grid_knn <span class="op">=</span> GridSearchCV(</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    learner, grid, </span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_train, y_train)</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_params_)</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
-<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
-<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4f352268" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'scale'</span>, StandardScaler()), </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'knn'</span>,  KNeighborsClassifier())</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"knn__metric"</span>:[<span class="st">"euclidean"</span>, <span class="st">"manhattan"</span>], </span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn__n_neighbors"</span>:<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>), </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"knn__weights"</span>:[<span class="st">"uniform"</span>, <span class="st">"distance"</span>] }</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>grid_knn <span class="op">=</span> GridSearchCV(</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    model, grid, </span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"f1"</span>, </span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>kf,</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>grid_knn.fit(X_train, y_train)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_params_)</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters:
-{'kneighborsclassifier__metric': 'manhattan', 'kneighborsclassifier__n_neighbors': 4, 'kneighborsclassifier__weights': 'distance'}
+{'knn__metric': 'manhattan', 'knn__n_neighbors': 4, 'knn__weights': 'distance'}
 
 Best score:
 0.9734627184207016</code></pre>
 </div>
 </div>
 <p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
-<div id="2ee3b5e0" class="cell" data-execution_count="36">
+<div id="be338bdb" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>knn_score <span class="op">=</span> f1_score( y_test, grid_knn.predict(X_test) )</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best tree f1 score: </span><span class="sc">{</span>dt_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
@@ -1976,7 +1980,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/validation.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/validation.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/validation.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/validation.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 <section id="alternatives-to-grid-search" class="level4" data-number="4.4.2.2">
 <h4 data-number="4.4.2.2" class="anchored" data-anchor-id="alternatives-to-grid-search"><span class="header-section-number">4.4.2.2</span> Alternatives to grid search</h4>
@@ -2479,7 +2483,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

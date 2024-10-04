@@ -499,7 +499,11 @@ memory usage: 6.0+ KB</code></pre>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/panda.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/panda.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/panda.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/panda.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>We now discuss the definitions and interpretations of the values prodcued by <code>describe</code>.</p>
 <section id="mean-and-dispersion" class="level3 page-columns page-full" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="mean-and-dispersion"><span class="header-section-number">2.1.1</span> Mean and dispersion</h3>
@@ -569,7 +573,11 @@ s_n^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2.
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/sample.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/sample.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/sample.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/sample.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>It can be proved that the sample mean is an accurate way to estimate the population mean, in the following precise sense. If, in a thought experiment, we could average <span class="math inline">\(\bar{x}\)</span> over all possible samples of size <span class="math inline">\(n\)</span>, the result would be exactly the population mean <span class="math inline">\(\mu\)</span>. That is, we say that <span class="math inline">\(\bar{x}\)</span> is an <strong>unbiased estimator</strong> for <span class="math inline">\(\mu\)</span>.</p>
 <p>The situation with sample variance is more subtle. If <span class="math inline">\(s_n^2\)</span> is averaged over all possible sample sets, we do <em>not</em> get the population variance <span class="math inline">\(\sigma^2\)</span>; hence, <span class="math inline">\(s_n^2\)</span> is called a <strong>biased estimator</strong> of the population variance. This can be proved by a calculation we won’t go into here, but the essential issue is that the sample mean used in <span class="math inline">\(s_n^2\)</span> is itself only an estimate of the population mean. A minor adjustment fixes that issue.</p>
 <div id="thm-stats-sample-var" class="theorem">
@@ -1278,7 +1286,7 @@ Caution
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/cat-distributon.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/cat-distributon.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/cat-distributon.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/cat-distributon.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 <section id="normal-distribution" class="level3 page-columns page-full" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">2.3.4</span> Normal distribution</h3>
@@ -1304,7 +1312,11 @@ f(t) = \frac{1}{\sigma \sqrt{2\pi}} e^{ -(t - \mu)^2/(2\sigma^2)}.
 </div>
 </div>
 <p><br></p>
-<p><a href="_media/memes/cant-be-normal.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/cant-be-normal.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/cant-be-normal.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/cant-be-normal.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><div id="exm-stats-normal" class="theorem example" data-chapter="2" type="💻" data-description="Normal distribution in NumPy">
 <p><span class="theorem-title"><strong>Example 2.18</strong></span> The <code>normal</code> method of a NumPy RNG simulates a standard normal distribution.</p>
 <div id="33e96467" class="cell" data-execution_count="26">
@@ -1781,7 +1793,7 @@ Name: mpg, dtype: float64</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/groupby.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/groupby.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/groupby.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/groupby.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 <section id="transformation" class="level4" data-number="2.4.2.2">
 <h4 data-number="2.4.2.2" class="anchored" data-anchor-id="transformation"><span class="header-section-number">2.4.2.2</span> Transformation</h4>
@@ -1876,7 +1888,7 @@ Name: mpg, dtype: int64</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/outlier.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/outlier.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/outlier.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/outlier.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>If you want to use a statistic like the mean that is vulnerable to outliers, it’s typical to remove such values early on. There are various ways of deciding what qualifies as an outlier, with no one-size recommendation for all applications.</p>
 <section id="iqr" class="level3 page-columns page-full" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="iqr"><span class="header-section-number">2.5.1</span> IQR</h3>
@@ -2247,10 +2259,10 @@ r_{xy} =  \frac{\sum_{i=1}^n (x_i-\bar{x}) (y_i-\bar{y})}{\sqrt{\sum_{i=1}^n (x_
 <p>where <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> are sample means.</p>
 </div>
 <p>Both <span class="math inline">\(\rho_{XY}\)</span> and <span class="math inline">\(r_{xy}\)</span> are between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>, with the endpoints indicating perfect correlation (inverse or direct).</p>
-<p>An equivalent formula for <span class="math inline">\(r_{xy}\)</span> is <span id="eq-stats-pearson-alt"><span class="math display">\[
+<p>An equivalent formula for the sampled case <span class="math inline">\(r_{xy}\)</span> is <span id="eq-stats-pearson-alt"><span class="math display">\[
 r_{xy} =  \frac{1}{n-1} \sum_{i=1}^n \left(\frac{x_i-\bar{x}}{s_x}\right)\, \left(\frac{y_i-\bar{y}}{s_y}\right),
 \tag{2.16}\]</span></span></p>
-<p>where the quantities in parentheses are z-scores.</p>
+<p>where <span class="math inline">\(s_x^2\)</span> and <span class="math inline">\(s_y^2\)</span> are the (unbiased) sample variances of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 <div id="exm-stats-pearson-cars" class="theorem example" data-chapter="2" type="💻" data-description="Pearson correlation coefficient">
 <p><span class="theorem-title"><strong>Example 2.29</strong></span> We might reasonably expect horsepower and miles per gallon to be negatively correlated:</p>
 <div id="a2d09d80" class="cell" data-execution_count="58">
@@ -3426,7 +3438,7 @@ Important
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/simpson.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/simpson.gif" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/simpson.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/simpson.gif" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>As often happens in statistics, the precise framing of the question can strongly affect its answer. This can lead to honest mistakes by the naive as well as outright deception by the unscrupulous.</p>
 </section>
 </section>
@@ -3988,7 +4000,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -558,7 +558,7 @@ Note
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/cycle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/cycle.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/cycle.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="_media/memes/cycle.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>A cross between the star and the cycle is a <strong>wheel graph</strong>.</p>
 <div id="18a5f600" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nx.draw(nx.wheel_graph(<span class="dv">9</span>), node_size<span class="op">=</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -572,7 +572,11 @@ Note
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/wheel.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/wheel.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/wheel.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="_media/memes/wheel.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>A <strong>complete graph</strong> is one that has every possible edge, i.e., all possible pairs of nodes are connected.</p>
 <div id="497acc03" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>K5 <span class="op">=</span> nx.complete_graph(<span class="dv">5</span>)</span>
@@ -591,7 +595,11 @@ Note
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/complete.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/complete.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/complete.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/complete.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>In a graph on <span class="math inline">\(n\)</span> nodes, there are</p>
 <p><span class="math display">\[
 \binom{n}{2} = \frac{n!}{(n-2)!2!} = \frac{n(n-1)}{2}
@@ -615,7 +623,11 @@ Note
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/grid.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/grid.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/grid.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="_media/memes/grid.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>In an <span class="math inline">\(m\times n\)</span> lattice graph, there are <span class="math inline">\(m-1\)</span> edges in one direction repeated <span class="math inline">\(n\)</span> times, plus <span class="math inline">\(n-1\)</span> edges in the other direction, repeated <span class="math inline">\(m\)</span> times. Thus there are</p>
 <p><span class="math display">\[
 (m-1)n + (n-1)m = 2mn-(m+n)
@@ -841,7 +853,7 @@ median degree of ego graph: 2.0</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/degree.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/degree.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/degree.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="_media/memes/degree.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>Here is our first nontrivial fact about graphs.</p>
 <div id="thm-networks-degree" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 7.1</strong></span> Suppose a graph has <span class="math inline">\(n\)</span> nodes and <span class="math inline">\(m\)</span> edges. Then its average degree satisfies <span class="math display">\[
@@ -1005,7 +1017,7 @@ p = \frac{2(35324)}{(7126)(7125)} \approx 0.001391.
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/bacon.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/bacon.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/bacon.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="_media/memes/bacon.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>In the initial setup phase, every node in the WS graph has degree equal to <span class="math inline">\(k\)</span>. The rewiring phase only changes edges—it does not insert nor delete them—so the average degree remains <span class="math inline">\(k\)</span>.</p>
 <div id="thm-networks-WS" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 7.3</strong></span> A WS graph of type <span class="math inline">\((n,k,q)\)</span> has average node degree equal to <span class="math inline">\(k\)</span>.</p>
@@ -1364,7 +1376,7 @@ dtype: float64</code></pre>
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/cluster.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/cluster.png" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/cluster.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="_media/memes/cluster.png" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>So far, the WS construction gives a plausible way to reconstruct the clustering observed in the Twitch network. However, there are many other graph properties left to examine!</p>
 </section>
 </section>
@@ -1507,7 +1519,7 @@ File <span class="ansi-green-fg">~/mambaforge/envs/21924F/lib/python3.12/site-pa
 </iframe>
 </div>
 </div>
-<p><br> <a href="_media/memes/lollipop.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="_media/memes/lollipop.jpg" class="img-fluid"></a></p>
+<p><br> <a href="_media/memes/lollipop.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="_media/memes/lollipop.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div></section>
 <section id="er-graphs-1" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="er-graphs-1"><span class="header-section-number">7.4.2</span> ER graphs</h3>
@@ -1610,7 +1622,11 @@ and average shortest path length 33.75</code></pre>
 <h3 data-number="7.4.4" class="anchored" data-anchor-id="twitch-network"><span class="header-section-number">7.4.4</span> Twitch network</h3>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p><a href="_media/memes/graph_distance.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/graph_distance.jpg" class="img-fluid"></a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="_media/memes/graph_distance.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/graph_distance.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
+</figure>
+</div>
 </div></div><p>Now we consider distances within the Twitch network.</p>
 <div id="d09447de" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>twitch <span class="op">=</span> nx.read_edgelist(<span class="st">"_datasets/musae_edges.csv"</span>, delimiter<span class="op">=</span><span class="st">','</span>, nodetype<span class="op">=</span><span class="bu">int</span>)</span>
@@ -3457,7 +3473,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
