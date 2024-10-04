@@ -15,7 +15,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.utils import shuffle
 from sklearn.metrics import confusion_matrix, f1_score, balanced_accuracy_score
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, roc_auc_score
 ```
@@ -188,7 +188,7 @@ tree = DecisionTreeClassifier(max_depth=4)
 LearningCurveDisplay.from_estimator(
     tree, X, y,
     random_state=302,
-    cv=StratifiedShuffleSplit(n_splits=100, test_size=0.2, random_state=19716),
+    cv=StratifiedShuffleSplit(n_splits=50, test_size=0.2, random_state=19716),
     train_sizes=np.linspace(0.05, 1, 16),
     score_name="Accuracy",
     score_type="both",    # training and testing scores
@@ -427,7 +427,10 @@ X_train, X_test, y_train, y_test = train_test_split(
   shuffle=True, random_state=302
 )
 
-pipe = make_pipeline(StandardScaler(), KNeighborsClassifier(n_neighbors=3))
+pipe = Pipeline([
+    ('scale', StandardScaler()), 
+    ('knn', KNeighborsClassifier(n_neighbors=3))
+])
 pipe.fit(X_train, y_train)
 
 p_hat = pipe.predict_proba(X_test)
@@ -658,11 +661,11 @@ A round of 6-fold cross-validation on a standardized kNN classifier looks like t
 from sklearn.model_selection import cross_validate
 
 knn = KNeighborsClassifier(n_neighbors=5)
-learner = make_pipeline(StandardScaler(), knn)
+model = Pipeline([('scale', StandardScaler()), ('knn', knn)])
 
 kf = KFold(n_splits=6, shuffle=True, random_state=18621)
 scores = cross_validate(
-    learner, 
+    model, 
     X, y, 
     cv=kf,
     scoring="balanced_accuracy",
@@ -764,18 +767,21 @@ print(grid_dt.best_score_)
 Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:
 
 ```{python}
-grid = { "kneighborsclassifier__metric":["euclidean", "manhattan"], 
-         "kneighborsclassifier__n_neighbors":range(1, 20), 
-         "kneighborsclassifier__weights":["uniform", "distance"] }
+model = Pipeline([
+    ('scale', StandardScaler()), 
+    ('knn',  KNeighborsClassifier())
+])
 
-learner = make_pipeline(StandardScaler(), KNeighborsClassifier())
+grid = { "knn__metric":["euclidean", "manhattan"], 
+         "knn__n_neighbors":range(1, 20), 
+         "knn__weights":["uniform", "distance"] }
 
 grid_knn = GridSearchCV(
-    learner, grid, 
+    model, grid, 
     scoring="f1", 
     cv=kf,
     n_jobs=-1
-    )
+)
 grid_knn.fit(X_train, y_train)
 
 print("Best parameters:")

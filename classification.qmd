@@ -433,6 +433,11 @@ The harmonic mean is small if either of its terms is small, so a high $F_1$ mean
 
 :::
 
+::: {.callout-tip}
+The `sklearn.metrics` module provides scoring functions for the metrics defined in this section. They all take the ground-truth labels and the predicted labels as arguments.
+
+:::
+
 ::::{#exm-class-metrics chapter=3 type=💻 description="Binary classifier metrics"}
 Continuing with the loan classifier trained in @exm-class-accuracy, we can find its confusion matrix:
 
@@ -1217,11 +1222,14 @@ X_train.median()
 We may therefore benefit from standardizing the columns. We can do this by creating a pipeline:
 
 ```{python}
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler   # converts to z-scores
 
 knn = KNeighborsClassifier(n_neighbors=5)
-pipe = make_pipeline(StandardScaler(), knn)
+pipe = Pipeline([
+  ('scale', StandardScaler()),
+  ('knn', knn)
+])
 pipe.fit(X_train, y_train)
 ```
 
@@ -1323,7 +1331,9 @@ We can train a kNN classifier and then retrieve the probabilities via `predict_p
 
 ```{python}
 knn = KNeighborsClassifier(n_neighbors=15)
-pipe = make_pipeline(StandardScaler(), knn)
+pipe = Pipeline([ 
+  ('scale', StandardScaler()), ('knn', knn)
+  ])
 pipe.fit(X_train, y_train)
 p_hat = pipe.predict_proba(X_test)
 p_hat[:5, :]
