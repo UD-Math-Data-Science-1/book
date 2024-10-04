@@ -1535,7 +1535,7 @@ flowchart TD
 For these exercises, you may use computer help to work on a problem, but your answer should be self-contained without reference to computer output (unless stated otherwise).
 
 ::::{#exr-class-dankness}
-(2.2) Here is a confusion matrix for a classifier of meme dankness. 
+(3.2) Here is a confusion matrix for a classifier of meme dankness. 
 
 ![](./_media/dankness.png){width=360 .lightbox}
 
@@ -1543,7 +1543,7 @@ Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(
 ::::
 
 ::::{#exr-class-flavors}
-(2.2) Here is a confusion matrix for a classifier of ice cream flavors. 
+(3.2) Here is a confusion matrix for a classifier of ice cream flavors. 
 
 ![](./_media/flavors.png){width=500 .lightbox}
 
@@ -1555,16 +1555,16 @@ Considering *dank* to be the positive outcome, calculate the **(a)** recall, **(
 ::::
 
 ::::{#exr-class-gini}
-(2.3) Find the Gini impurity of this set: 
+(3.3) Find the Gini impurity of this set: 
 $$ \{ A, B, B, C, C, C \}.$$
 ::::
 
 ::::{#exr-class-maxgini}
-(2.3) Explain why for the binary case $K=2$, @def-class-gini implies that $H(S)$ is maximized when the two classes are equally represented in $S$.
+(3.3) Explain why for the binary case $K=2$, @def-class-gini implies that $H(S)$ is maximized when the two classes are equally represented in $S$.
 ::::
 
 ::::{#exr-class-partition}
-(2.3) Given $x_i=i$ for $i=0,\ldots,5$, with labels
+(3.3) Given $x_i=i$ for $i=0,\ldots,5$, with labels
 $$
 y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 $$
@@ -1572,14 +1572,14 @@ find an optimal partition threshold using Gini impurity.
 ::::
 
 ::::{#exr-class-tree}
-(2.3) For the decision tree drawn in @exm-class-tree, make predictions for each of the following queries, showing the path taken through the tree for each case.
+(3.3) For the decision tree drawn in @exm-class-tree, make predictions for each of the following queries, showing the path taken through the tree for each case.
 
 **(a)** $(x_1, x_2) = (4, 5),\quad$  **(b)** $(x_1, x_2) = (8,9),\quad$  **(c)** $(x_1, x_2) = (10, 4)$
 
 ::::
 
 ::::{#exr-class-distance}
-(2.4) Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vectors.
+(3.4) Using 1-norm, 2-norm, and $\infty$-norm, find the distance between the given vectors.
 
 **(a)** $\bfu=[2,3,0]$, $\;\bfv=[-2,2,1]$
 
@@ -1587,17 +1587,17 @@ find an optimal partition threshold using Gini impurity.
 ::::
 
 ::::{#exr-class-norm}
-**(a)** (2.4) Prove that for any $\bfu \in \real^d$, $\infnorm{\bfu} \le \twonorm{\bfu}$. 
+**(a)** (3.4) Prove that for any $\bfu \in \real^d$, $\infnorm{\bfu} \le \twonorm{\bfu}$. 
 
-**(b)** (2.4) Prove that for any $\bfu \in \real^d$, $\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}$. 
+**(b)** (3.4) Prove that for any $\bfu \in \real^d$, $\twonorm{\bfu} \le \sqrt{d}\, \infnorm{\bfu}$. 
 ::::
 
 ::::{#exr-class-manhattan}
-(2.4) Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*. (Hint: You can consider each quadrant of the plane separately.)
+(3.4) Carefully sketch the set of all points in $\real^2$ whose 1-norm distance from the origin equals 1. This is a *Manhattan unit circle*. (Hint: You can consider each quadrant of the plane separately.)
 ::::
 
 ::::{#exr-class-knn1d}
-(2.4) Suppose you are training to fit the ground-truth one-dimensional classifier
+(3.4) Suppose you are training to fit the ground-truth one-dimensional classifier
 
 $$
 y = f(x) =
@@ -1623,7 +1623,7 @@ Here is a table of training data:
 ::::
 
 ::::{#exr-class-lattice-colors}
-(2.4) Here are blue/orange labels on an integer lattice.
+(3.4) Here are blue/orange labels on an integer lattice.
 
 ![](_media/gridlabels.png){width="360" .lightbox}
 
@@ -1639,7 +1639,7 @@ Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean
 ::::
 
 ::::{#exr-class-knn-roc}
-(2.5) Suppose you have written a kNN classifier with $k=5$ to predict whether dad jokes are funny. Here are the votes for 6 test jokes:
+(3.5) Suppose you have written a kNN classifier with $k=5$ to predict whether dad jokes are funny. Here are the votes for 6 test jokes:
 
 ```{=html}
 <style type="text/css">
