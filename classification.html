@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.5.54">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -1029,7 +1029,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">loan_amnt</th>
 <th data-quarto-table-cell-role="th">int_rate</th>
@@ -1042,7 +1042,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>5000</td>
 <td>10.65</td>
@@ -1053,7 +1053,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 <td>0</td>
 <td>100.0</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>2500</td>
 <td>15.27</td>
@@ -1064,7 +1064,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 <td>0</td>
 <td>100.0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>2400</td>
 <td>15.96</td>
@@ -1075,7 +1075,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 <td>0</td>
 <td>100.0</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>10000</td>
 <td>13.49</td>
@@ -1086,7 +1086,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 <td>0</td>
 <td>100.0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>3000</td>
 <td>12.69</td>
@@ -1237,21 +1237,21 @@ Figure&nbsp;3.1: Binary confusion matrix.
 <p>When the counts of these four cases over the testing set are put into such a table, we call it a <strong>confusion matrix</strong>. Based on these counts, we can define several metrics that give a nuanced view of the classifier’s performance.</p>
 <div id="def-class-metrics" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 3.3</strong></span> The following primary metrics are defined for a binary classifier:</p>
-<table class="caption-top">
+<table class="caption-top table">
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"><strong>accuracy</strong></td>
 <td style="text-align: center;"><span class="math inline">\(\quad \dfrac{\TP + \TN}{\TP + \FP + \TN + \FN}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;"><strong>recall</strong></td>
 <td style="text-align: center;"><span class="math inline">\(\dfrac{\TP}{\TP + \FN}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"><strong>specificity</strong></td>
 <td style="text-align: center;"><span class="math inline">\(\dfrac{\TN}{\TN + \FP}\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;"><strong>precision</strong></td>
 <td style="text-align: center;"><span class="math inline">\(\dfrac{\TP}{\TP + \FP}\)</span></td>
 </tr>
@@ -1292,19 +1292,19 @@ Note
 </div>
 <div id="exm-class-confusion" class="theorem example" data-chapter="3" type="✍️" data-description="Classifier performance metrics">
 <p><span class="theorem-title"><strong>Example 3.5</strong></span> Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:</p>
-<table class="caption-top">
+<table class="caption-top table">
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"></td>
 <td style="text-align: center;">Predicted <span class="math inline">\(-\)</span></td>
 <td style="text-align: center;">Predicted <span class="math inline">\(+\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;">Actually <span class="math inline">\(-\)</span></td>
 <td style="text-align: center;">62</td>
 <td style="text-align: center;">12</td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;">Actually <span class="math inline">\(+\)</span></td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">22</td>
@@ -1510,7 +1510,7 @@ balanced accuracy = 52.1%</code></pre>
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mpg</th>
 <th data-quarto-table-cell-role="th">cylinders</th>
@@ -1524,7 +1524,7 @@ balanced accuracy = 52.1%</code></pre>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>18.0</td>
 <td>8</td>
@@ -1536,7 +1536,7 @@ balanced accuracy = 52.1%</code></pre>
 <td>usa</td>
 <td>chevrolet chevelle malibu</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>15.0</td>
 <td>8</td>
@@ -1548,7 +1548,7 @@ balanced accuracy = 52.1%</code></pre>
 <td>usa</td>
 <td>buick skylark 320</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>18.0</td>
 <td>8</td>
@@ -1560,7 +1560,7 @@ balanced accuracy = 52.1%</code></pre>
 <td>usa</td>
 <td>plymouth satellite</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>16.0</td>
 <td>8</td>
@@ -1572,7 +1572,7 @@ balanced accuracy = 52.1%</code></pre>
 <td>usa</td>
 <td>amc rebel sst</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>17.0</td>
 <td>8</td>
@@ -1648,7 +1648,7 @@ balanced accuracy is 59.3%</code></pre>
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Precision</th>
 <th data-quarto-table-cell-role="th">Recall</th>
@@ -1656,19 +1656,19 @@ balanced accuracy is 59.3%</code></pre>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">europe</td>
 <td>0.666667</td>
 <td>0.352941</td>
 <td>0.461538</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">japan</td>
 <td>0.615385</td>
 <td>0.533333</td>
 <td>0.571429</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">usa</td>
 <td>0.736842</td>
 <td>0.893617</td>
@@ -1858,7 +1858,7 @@ Note
 <p><span class="theorem-title"><strong>Example 3.13</strong></span> Suppose we have <span class="math inline">\(d=1\)</span> feature and are given the four samples <span class="math inline">\((x_i,y_i) = \{ (0,A), (1,B), (2,A), (3,B) \}\)</span>. What is the optimal partition?</p>
 <div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>We can partition into two pieces based on a threshold value <span class="math inline">\(\theta\)</span>: <span class="math inline">\(\{x \le \theta\}\)</span> and <span class="math inline">\(\{x &gt; \theta\}\)</span>. But there are really only 5 unique cases.</p>
-<table class="caption-top">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 3%">
 <col style="width: 38%">
@@ -1866,7 +1866,7 @@ Note
 <col style="width: 19%">
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th style="text-align: right;"><span class="math inline">\(\theta\)</span></th>
 <th style="text-align: center;">Left</th>
 <th style="text-align: center;">Right</th>
@@ -1874,31 +1874,31 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"><span class="math inline">\(&lt; 0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\varnothing\)</span>, <span class="math inline">\(H=0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(0\cdot 0 + 4\cdot \tfrac{1}{2} = 2\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;"><span class="math inline">\([0,1)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A]\)</span>, <span class="math inline">\(H=0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(1 \cdot 0 + 3 \cdot\tfrac{4}{9} = \tfrac{4}{3}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"><span class="math inline">\([1,2)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(2 \cdot \tfrac{1}{2} + 2 \cdot\tfrac{1}{2} = 2\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: right;"><span class="math inline">\([2,3)\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A,B,A]\)</span>, <span class="math inline">\(H=\tfrac{2}{3}\cdot \tfrac{1}{3} +  \tfrac{1}{3}\cdot \tfrac{2}{3} =\tfrac{4}{9}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([B]\)</span>, <span class="math inline">\(H=0\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(3 \cdot\tfrac{4}{9} + 1\cdot 0= \tfrac{4}{3}\)</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: right;"><span class="math inline">\(\ge 3\)</span></td>
 <td style="text-align: center;"><span class="math inline">\([A, B, A, B]\)</span>, <span class="math inline">\(H=\tfrac{1}{2}\cdot \tfrac{1}{2} +  \tfrac{1}{2}\cdot \tfrac{1}{2} =\tfrac{1}{2}\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\varnothing\)</span>, <span class="math inline">\(H=0\)</span></td>
@@ -3498,7 +3498,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">bill_length_mm</th>
 <th data-quarto-table-cell-role="th">bill_depth_mm</th>
@@ -3507,35 +3507,35 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>39.1</td>
 <td>18.7</td>
 <td>181.0</td>
 <td>3750.0</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">149</td>
 <td>37.8</td>
 <td>18.1</td>
 <td>193.0</td>
 <td>3750.0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">59</td>
 <td>37.6</td>
 <td>19.1</td>
 <td>194.0</td>
 <td>3750.0</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">106</td>
 <td>38.6</td>
 <td>17.2</td>
 <td>199.0</td>
 <td>3750.0</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">159</td>
 <td>51.3</td>
 <td>18.2</td>
@@ -3596,21 +3596,21 @@ Tip
 <p>Norms are sensitive to the scales of the features.</p>
 <div id="exm-class-knn-norm" class="theorem example" data-chapter="3" type="✍️" data-description="kNN sensitivity to scaling">
 <p><span class="theorem-title"><strong>Example 3.20</strong></span> Here are the heights and weights of two NBA players:</p>
-<table class="caption-top">
+<table class="caption-top table">
 <thead>
-<tr>
+<tr class="header">
 <th>Player</th>
 <th>Height (m)</th>
 <th>Weight (kg)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>Mugsy Bogues</td>
 <td>1.60</td>
 <td>62</td>
 </tr>
-<tr>
+<tr class="even">
 <td>LeBron James</td>
 <td>2.06</td>
 <td>113</td>
@@ -4981,7 +4981,7 @@ Tip
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">A</th>
 <th data-quarto-table-cell-role="th">B</th>
@@ -4989,31 +4989,31 @@ Tip
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>9</td>
 <td>0</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>5</td>
 <td>3</td>
 <td>2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>6</td>
 <td>1</td>
 <td>3</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>2</td>
 <td>0</td>
 <td>8</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>4</td>
 <td>5</td>
@@ -5093,7 +5093,7 @@ Tip
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">negative</th>
 <th data-quarto-table-cell-role="th">positive</th>
@@ -5101,31 +5101,31 @@ Tip
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>3</td>
 <td>7</td>
 <td>+</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>0</td>
 <td>10</td>
 <td>+</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>4</td>
 <td>6</td>
 <td>-</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>2</td>
 <td>8</td>
 <td>+</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>7</td>
 <td>3</td>
@@ -5184,7 +5184,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">word_freq_make</th>
 <th data-quarto-table-cell-role="th">word_freq_address</th>
@@ -5210,7 +5210,7 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>0.00</td>
 <td>0.64</td>
@@ -5234,7 +5234,7 @@ Note
 <td>278</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>0.21</td>
 <td>0.28</td>
@@ -5258,7 +5258,7 @@ Note
 <td>1028</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>0.06</td>
 <td>0.00</td>
@@ -5282,7 +5282,7 @@ Note
 <td>2259</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -5306,7 +5306,7 @@ Note
 <td>191</td>
 <td>1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>0.00</td>
 <td>0.00</td>
@@ -5370,7 +5370,7 @@ Note
 
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">FP rate</th>
 <th data-quarto-table-cell-role="th">TP rate</th>
@@ -5378,103 +5378,103 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>0.000000</td>
 <td>0.000000</td>
 <td>inf</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>0.005639</td>
 <td>0.025707</td>
 <td>1.000000</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>0.009398</td>
 <td>0.187661</td>
 <td>0.986364</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>0.018797</td>
 <td>0.701799</td>
 <td>0.975093</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>0.022556</td>
 <td>0.717224</td>
 <td>0.950000</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>0.033835</td>
 <td>0.838046</td>
 <td>0.907285</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
 <td>0.033835</td>
 <td>0.843188</td>
 <td>0.866667</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
 <td>0.033835</td>
 <td>0.858612</td>
 <td>0.840000</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>0.035714</td>
 <td>0.863753</td>
 <td>0.625000</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>0.050752</td>
 <td>0.910026</td>
 <td>0.620000</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>0.052632</td>
 <td>0.910026</td>
 <td>0.500000</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
 <td>0.056391</td>
 <td>0.910026</td>
 <td>0.200000</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
 <td>0.069549</td>
 <td>0.910026</td>
 <td>0.181818</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
 <td>0.101504</td>
 <td>0.933162</td>
 <td>0.092593</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">14</td>
 <td>0.926692</td>
 <td>0.989717</td>
 <td>0.052905</td>
 </tr>
-<tr>
+<tr class="even">
 <td data-quarto-table-cell-role="th">15</td>
 <td>0.930451</td>
 <td>0.992288</td>
 <td>0.032258</td>
 </tr>
-<tr>
+<tr class="odd">
 <td data-quarto-table-cell-role="th">16</td>
 <td>1.000000</td>
 <td>1.000000</td>
@@ -5668,7 +5668,7 @@ y = f(x) =
 \end{cases}
 \]</span></p>
 <p>Here is a table of training data:</p>
-<table class="caption-top" style="width:100%;">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
 <col style="width: 8%">
@@ -5684,7 +5684,7 @@ y = f(x) =
 <col style="width: 8%">
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th><span class="math inline">\(x_i\)</span></th>
 <th><span class="math inline">\(-5\)</span></th>
 <th><span class="math inline">\(-4\)</span></th>
@@ -5700,7 +5700,7 @@ y = f(x) =
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><span class="math inline">\(y_i\)</span></td>
 <td><span class="math inline">\(-1\)</span></td>
 <td><span class="math inline">\(-1\)</span></td>
@@ -5716,10 +5716,59 @@ y = f(x) =
 </tr>
 </tbody>
 </table>
-<p><strong>(a)</strong> Make a table of <span class="math inline">\(x\)</span> and <span class="math inline">\(f(x)\)</span> values on the testing set <span class="math inline">\(-4.75,-3.75,\ldots,-0.75,0.25,\ldots,4.25\)</span>.</p>
+<p><strong>(a)</strong> Here is a table of testing data:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t_i\)</span></th>
+<th><span class="math inline">\(-4.75\)</span></th>
+<th><span class="math inline">\(-3.75\)</span></th>
+<th><span class="math inline">\(-2.75\)</span></th>
+<th><span class="math inline">\(-1.75\)</span></th>
+<th><span class="math inline">\(-0.75\)</span></th>
+<th><span class="math inline">\(0.25\)</span></th>
+<th><span class="math inline">\(1.25\)</span></th>
+<th><span class="math inline">\(2.25\)</span></th>
+<th><span class="math inline">\(3.25\)</span></th>
+<th><span class="math inline">\(4.25\)</span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(f(t_i)\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Fill in the second row.</p>
 <p><strong>(b)</strong> Add a row to your table from part (a) showing the predictions of a kNN classifier with <span class="math inline">\(k=1\)</span> trained on the given training data.</p>
 <p><strong>(c)</strong> Add another row for a kNN classifier with <span class="math inline">\(k=3\)</span>. Then add another row for <span class="math inline">\(k=9\)</span>.</p>
-<p><strong>(d)</strong> Find the testing precision and recall for the rows with <span class="math inline">\(k=1,3,9\)</span>.</p>
+<p><strong>(d)</strong> Find the testing precision and recall for the rows with <span class="math inline">\(k=1,3,9\)</span>, considering <span class="math inline">\(+1\)</span> to be the positive outcome.</p>
 </div>
 <div id="exr-class-lattice-colors" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.11</strong></span> (3.4) Here are blue/orange labels on an integer lattice.</p>
@@ -5742,7 +5791,7 @@ y = f(x) =
 .tg .tg-0lax{text-align:left;vertical-align:top}
 </style>
 
-<table class="tg caption-top" data-quarto-postprocess="true" style="undefined;table-layout: fixed; width: 604px">
+<table class="tg caption-top table" data-quarto-postprocess="true">
 <colgroup>
 <col style="width: 55%">
 <col style="width: 14%">
@@ -5750,7 +5799,7 @@ y = f(x) =
 <col style="width: 20%">
 </colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th class="tg-1wig" data-quarto-table-cell-role="th">Joke</th>
 <th class="tg-1wig" data-quarto-table-cell-role="th">Funny</th>
 <th class="tg-1wig" data-quarto-table-cell-role="th">Not funny</th>
@@ -5758,37 +5807,37 @@ y = f(x) =
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td class="tg-0lax">Is the refrigerator running? Better go catch it!</td>
 <td class="tg-0lax">3</td>
 <td class="tg-0lax">2</td>
 <td class="tg-0lax">not funny</td>
 </tr>
-<tr>
+<tr class="even">
 <td class="tg-0lax">Why did the scarecrow win an award? Because he was outstanding in his field!</td>
 <td class="tg-0lax">1</td>
 <td class="tg-0lax">4</td>
 <td class="tg-0lax">funny</td>
 </tr>
-<tr>
+<tr class="odd">
 <td class="tg-0lax">What do you call a fake noodle? An impasta!</td>
 <td class="tg-0lax">5</td>
 <td class="tg-0lax">0</td>
 <td class="tg-0lax">funny</td>
 </tr>
-<tr>
+<tr class="even">
 <td class="tg-0lax">Why couldn’t the bicycle stand up by itself? It was two-tired!</td>
 <td class="tg-0lax">4</td>
 <td class="tg-0lax">1</td>
 <td class="tg-0lax">funny</td>
 </tr>
-<tr>
+<tr class="odd">
 <td class="tg-0lax">What’s blue and not heavy? Light blue.</td>
 <td class="tg-0lax">2</td>
 <td class="tg-0lax">3</td>
 <td class="tg-0lax">not funny</td>
 </tr>
-<tr>
+<tr class="even">
 <td class="tg-0lax">What do you call a pile of cats? A meowtain!</td>
 <td class="tg-0lax">0</td>
 <td class="tg-0lax">5</td>
@@ -6260,7 +6309,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
