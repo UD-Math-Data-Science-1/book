@@ -1737,8 +1737,8 @@ weighted avg: 69.9%</code></pre>
 <div aria-describedby="fig-class-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-class-tree">flowchart TD
-    root[Is y &lt; 2?]
-    l[Is x &lt; 0?]
+    root["Is x₂ &lt; 2?"]
+    l["Is x₁ &lt; 0?"]
     root-- Yes --&gt;l
     r([leaf A])
     root--&gt;|No|r
@@ -1758,7 +1758,7 @@ Figure&nbsp;3.2: A simple binary decision tree on two features.
 </div>
 <p>When a prediction is required, we apply the same criteria as the splits in our tree, and when we reach a <em>leaf</em> of the tree (i.e., no further subdivisions), we take a vote of all the samples in the leaf subset to determine the label.</p>
 <div id="exm-class-tree" class="theorem example" data-chapter="3" type="✍️" data-description="Decision tree">
-<p><span class="theorem-title"><strong>Example 3.10</strong></span> In <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, suppose that leaf A contains [H,T,T], leaf B contains [H], and leaf C contains [H,H,T]. The query <span class="math inline">\((x,y)=(1,0)\)</span> first goes left (since <span class="math inline">\(0 &lt;2\)</span>) and then right (since <span class="math inline">\(1\not&lt; 0\)</span>), landing in leaf C. The prediction for this query is then “H”.</p>
+<p><span class="theorem-title"><strong>Example 3.10</strong></span> In <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, suppose that leaf A contains [H,T,T], leaf B contains [H], and leaf C contains [H,H,T]. The query <span class="math inline">\((x_1,x_2)=(1,0)\)</span> first goes left (since <span class="math inline">\(0 &lt;2\)</span>) and then right (since <span class="math inline">\(1\not&lt; 0\)</span>), landing in leaf C. The prediction for this query is then “H”.</p>
 </div>
 <p>There are two crucial details that still need to be specified: how to split samples into subsets, and how to determine the uniformity of labels within each subset. The answer to the first issue was hinted at in <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>: each split is defined by a cutoff value for one of the features. Addressing the second issue is more complicated.</p>
 <section id="gini-impurity" class="level3 page-columns page-full" data-number="3.3.1">
@@ -2918,7 +2918,20 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p><br> <a href="_media/memes/gentoo.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="_media/memes/gentoo.jpg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
-</div></div></section>
+</div></div><div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Decision tree feature importance values are not always reliable. They are known to favor quantitative features over categorical ones, and they can be sensitive to the presence of highly correlated features.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="nearest-neighbors" class="level2 page-columns page-full" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="nearest-neighbors"><span class="header-section-number">3.4</span> Nearest neighbors</h2>
@@ -5141,12 +5154,58 @@ Tip
 <p><span class="math display">\[
 [ -, +, -, -, - ],
 \]</span></p>
-<p>which implies 1 true positive and 0 false positives.</p>
+<p>which implies the confusion matrix</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">actually <span class="math inline">\(+\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">actually <span class="math inline">\(-\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"></td>
+<td style="text-align: center;">predicted <span class="math inline">\(+\)</span></td>
+<td style="text-align: center;">predicted <span class="math inline">\(-\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We can summarize these using the true positive rate (TPR), which is the recall, and the false positive rate (FPR), which is 1 minus the specificity:</p>
+<p><span class="math display">\[
+\text{TPR} = \dfrac{\TP}{\TP + \FN} = \dfrac{1}{1+2}, \quad \text{FPR} = \dfrac{\FP}{\FP + \TN} = \dfrac{0}{0+2}.
+\]</span></p>
 <p>As <span class="math inline">\(\theta\)</span> decreases further, nothing happens until it reaches 0.8, at which point the 4th sample becomes a hit. The predictions are now</p>
 <p><span class="math display">\[
 [ -, +, -, +, - ],
 \]</span></p>
-<p>which implies 2 true positives and 0 false positives.</p>
+<p>which implies the confusion matrix</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">actually <span class="math inline">\(+\)</span></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">actually <span class="math inline">\(-\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"></td>
+<td style="text-align: center;">predicted <span class="math inline">\(+\)</span></td>
+<td style="text-align: center;">predicted <span class="math inline">\(-\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>from which</p>
+<p><span class="math display">\[
+\text{TPR} = \dfrac{\TP}{\TP + \FN} = \dfrac{2}{2+1}, \quad \text{FPR} = \dfrac{\FP}{\FP + \TN} = \dfrac{0}{0+2}.
+\]</span></p>
 <p>We continue accruing more hits as <span class="math inline">\(\theta\)</span> decreases every time it crosses over a vote fraction for one of the samples. Eventually, we reach <span class="math inline">\(\theta=0\)</span>, in which, by definition, every sample must hit. With all positive predictions, we end up with 3 true positives and 2 false positives.</p>
 </div>
 
@@ -5158,7 +5217,7 @@ Tip
 </iframe>
 </div>
 </div>
-</div></div><p>Imagine <span class="math inline">\(\theta\)</span> as a dial that tunes the classification method. At <span class="math inline">\(\theta=0\)</span>, we have maximum credulity—everybody gets a trophy! Once <span class="math inline">\(\theta\)</span> goes above 1, we have maximum skepticism—nobody’s good enough to get a hit. If we turn the dial from infinity down to zero, each sample eventually toggles from a miss to a hit. Both the true positives and false positives can only increase as <span class="math inline">\(\theta\)</span> decreases.</p>
+</div></div><p>Imagine <span class="math inline">\(\theta\)</span> as a dial that tunes the classification method. At <span class="math inline">\(\theta=0\)</span>, we have maximum credulity—everybody gets a trophy! Once <span class="math inline">\(\theta\)</span> goes above 1, we have maximum skepticism—nobody’s good enough to get a hit. If we turn the <span class="math inline">\(\theta\)</span> dial from infinity down to zero, each sample eventually toggles from a miss to a hit, so both the true positives and false positives can only increase along the way.</p>
 <p>The <strong>ROC curve</strong> is a way to visualize this process over a fixed testing set.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -5720,12 +5779,11 @@ y = f(x) =
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
 <col style="width: 8%">
 <col style="width: 8%">
 <col style="width: 8%">
@@ -5745,13 +5803,11 @@ y = f(x) =
 <th><span class="math inline">\(2.25\)</span></th>
 <th><span class="math inline">\(3.25\)</span></th>
 <th><span class="math inline">\(4.25\)</span></th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><span class="math inline">\(f(t_i)\)</span></td>
-<td></td>
 <td></td>
 <td></td>
 <td></td>
@@ -5845,7 +5901,7 @@ y = f(x) =
 </tr>
 </tbody>
 </table>
-<p>Carefully sketch the ROC curve for this classifier.</p>
+<p>Carefully sketch the ROC curve for this classifier, considering the positive outcome to be “funny.”</p>
 <p>(This exercise is for illustration only. In reality, all the jokes are funny.)</p>
 </div>
 
@@ -6309,7 +6365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
