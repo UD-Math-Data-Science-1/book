@@ -598,8 +598,7 @@ print(f"F₁ for a taller, skinnier forest is {F1:.4f}")
 
 :::
 
-Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. For random forests in particular, we also lose the ability to interpret the decision process the way we can for an individual tree.
-
+Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel. 
 
 ## Validation
 
