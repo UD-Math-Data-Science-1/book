@@ -709,7 +709,7 @@ Warning
 \]</span></p>
 <p>This is quite close to 1, indicating a good fit. Compare that to the arbitrary predictor <span class="math inline">\(\hat{f}(x)=x\)</span>, which has <span class="math inline">\(\hat{y}_1=-1\)</span>, <span class="math inline">\(\hat{y}_2=0\)</span>, <span class="math inline">\(\hat{y}_3=1\)</span>: <span class="math display">\[
 \begin{split}
-    text{CoD} &amp; = 1 - \frac{\left(y_i - \hat{y}_i \right)^2 = \left(0+1\right)^2 + \left(2-0\right)^2 + \left(3-1\right)^2}{14/3}  \\
+    \text{CoD} &amp; = 1 - \frac{\left(y_i - \hat{y}_i \right)^2 = \left(0+1\right)^2 + \left(2-0\right)^2 + \left(3-1\right)^2}{14/3}  \\
     &amp;= 1 - \frac{9}{14/3} = -\frac{13}{14}.
 \end{split}
 \]</span></p>
@@ -2332,9 +2332,11 @@ ridge regression CoD score: 0.3478
 </iframe>
 </div>
 </div>
-</div></div><p>While ridge regression is an easier function to minimize quickly, LASSO has an interesting advantage, as illustrated in this figure.</p>
-<p><img src="_media/regularization.png" class="img-fluid"></p>
-<p>LASSO tends to produce <em>sparse</em> results, meaning that some of the regression coefficients are zero or negligible. These zeros indicate predictor variables that have minor predictive value, which can be valuable information in itself. Moreover, these variables can often be removed from the regression to reduce variance without noticeably affecting the bias.</p>
+</div></div><p>While ridge regression is an easier function to minimize quickly, LASSO has an interesting advantage, as illustrated in this figure for two features:</p>
+<p><img src="_media/lasso.svg" class="img-fluid"></p>
+<p>On the left, the elliptical contours represent the unregularized, data-fitting loss function. The best we could do is to be at the blue dot, but regularization changes the result. The points lying on a circle centered at the origin make a constant contribution to the ridge regularization loss term. You can see why the point on such a circle that gets the smallest fitting loss is where a loss contour just grazes the circle tangentially. Whichever circle ultimately ends up being best, the optimum point will lie on a point of tangency like this.</p>
+<p>The situation on the right for LASSO shows an important difference: the constant contributions to fitting loss are on “circles” of constant 1-norm that are actually rotated squares. It’s intuitively clear from the picture that the point on this square minimizing the fitting part of the loss is likely to be a corner.</p>
+<p>The idea shown here scales up into higher dimensions—the minimizers in LASSO tend to be corner points at which some of the weights are exactly zero, producing so-called <em>sparse</em> weight vectors. These zeros indicate features that have low predictive value. Those variables can often be removed from the regression to reduce model variance without significantly affecting the bias.</p>
 <div id="exm-regression-lasso-diabetes" class="theorem example" data-chapter="5" type="💻" data-description="LASSO regression for diabetes dataset">
 <p><span class="theorem-title"><strong>Example 5.12</strong></span> We continue with the diabetes data from <a href="#exm-regression-ridge-diabetes" class="quarto-xref">Example&nbsp;<span>5.11</span></a>, but this time, we try LASSO regularization. A validation curve suggests initial gains in the CoD score as the regularization parameter <span class="math inline">\(\alpha\)</span> is varied, followed by a decrease:</p>
 <div id="da1edf84" class="cell" data-execution_count="40">
@@ -4738,7 +4740,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

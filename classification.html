@@ -967,9 +967,22 @@ Important
 <p>In math, we usually start the row and column indexes at 1, but Python starts them at 0.</p>
 </div>
 </div>
-<p>Each row of the feature matrix is a single feature vector, while each column is the value for a single feature over the entire training set.</p>
-<div id="exm-class-basketball" class="theorem example" data-chapter="3" type="✍️" data-description="Feature matrix">
-<p><span class="theorem-title"><strong>Example 3.2</strong></span> Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a <span class="math inline">\(200\times 9\)</span> feature matrix.</p>
+<p>Each row of the feature matrix is the feature vector of one sample, while each column is the value of a single feature over the entire dataset.</p>
+<div id="exm-class-emoji" class="theorem example" data-chapter="3" type="✍️" data-description="Feature matrix">
+<p><span class="theorem-title"><strong>Example 3.2</strong></span> Suppose that to each text message in a collection, we ascribe a vector of counts for certain emoji. The messages are</p>
+<ol type="1">
+<li>“lol 🤣💀”</li>
+<li>“sushi nite 🐟🍚❤️❤️”</li>
+<li>“worked out 💪💯”</li>
+</ol>
+<p>If the emoji features to be counted are [❤️, 🤣, 💀, 💪], then the feature matrix is</p>
+<p><span class="math display">\[
+\bfX = \begin{bmatrix}
+0 &amp; 1 &amp; 1 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}.
+\]</span></p>
 </div>
 <section id="one-vs-rest" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="one-vs-rest"><span class="header-section-number">3.1.1</span> One-vs-rest</h3>
@@ -6365,7 +6378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":false,"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
