@@ -997,11 +997,16 @@ $$
 
 **Single.** The pairwise distances between members of $C_1$ and $C_2$ form a $3\times 3$ matrix:
 
-|     | -3  | -2  | -1  |
-| --- | --- | --- | --- |
-3 | 6 | 5 | 4 |
-4 | 7 | 6 | 5 |
-5 | 8 | 7 | 6 |
+$$
+\begin{array}{r|ccc}
+& -3 & -2 & -1 \\
+\hline 
+3 & 6 & 5 & 4 \\
+4 & 7 & 6 & 5 \\
+5 & 8 & 7 & 6
+\end{array}
+$$
+
 
 (Note that this is a submatrix of the full $6\times 6$ distance matrix.) The single linkage is therefore 4.
 

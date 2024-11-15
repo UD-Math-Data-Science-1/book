@@ -156,11 +156,27 @@ A 2D array or matrix has elements that are addressed by two subscripts. These ar
 In math, we usually start the row and column indexes at 1, but Python starts them at 0. 
 :::
 
-Each row of the feature matrix is a single feature vector, while each column is the value for a single feature over the entire training set.
+Each row of the feature matrix is the feature vector of one sample, while each column is the value of a single feature over the entire dataset.
 
-::::{#exm-class-basketball chapter=3 type=✍️ description="Feature matrix"}
-Suppose we want to train an algorithm to predict whether a basketball shot will score. For one shot, we might collect three coordinates to represent the launch point, three to represent the launch velocity, and three to represent the initial angular rotation (axis and magnitude). Thus each shot will require a feature vector of length 9. A collection of 200 sample shots would be encoded as a $200\times 9$ feature matrix.
+::::{#exm-class-emoji chapter=3 type=✍️ description="Feature matrix"}
+Suppose that to each text message in a collection, we ascribe a vector of counts for certain emoji. The messages are
+
+1. "lol 🤣💀"
+2. "sushi nite 🐟🍚❤️❤️"
+3. "worked out 💪💯"
+
+If the emoji features to be counted are [❤️, 🤣, 💀, 💪], then the feature matrix is
+
+$$
+\bfX = \begin{bmatrix}
+0 & 1 & 1 & 0 \\
+2 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}.
+$$
+
 ::::
+
 
 ### One-vs-rest
 
@@ -383,7 +399,6 @@ All of the primary metrics vary between 0 (worst) and 1 (best).
 ::: {.callout-note}
 Specificity is equal to recall of the negative class. For that reason, `sklearn` provides a `recall_score` but not a `specificity_score` function, and you have to use a logical NOT with `recall_score` to get the specificity.
 :::
-
 
 ::::{#exm-class-confusion chapter=3 type=✍️ description="Classifier performance metrics"}
 Here is a confusion matrix for a hypothetical test for COVID-19 antigens applied to 100 samples:

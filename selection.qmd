@@ -820,7 +820,7 @@ Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning 
 ## Exercises {.unnumbered}
 
 ::::{#exr-select-always}
-One (dumb) algorithm for binary classification is to always predict the positive outcome. 
+(4.1) One (dumb) algorithm for binary classification is to always predict the positive outcome. 
 
 **(a)** Considered over all possible training sets, does this method have a high training variance or low training variance? Explain.
 
@@ -828,7 +828,7 @@ One (dumb) algorithm for binary classification is to always predict the positive
 ::::
 
 ::::{#exr-select-ensemble}
-Suppose you are trying to fit this ground-truth one-dimensional classifier defined on positive integers:
+(4.3) Suppose you are trying to fit this ground-truth one-dimensional classifier defined on positive integers:
 
 $$
 y = f(m) = 

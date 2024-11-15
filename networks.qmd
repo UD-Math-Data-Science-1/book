@@ -25,6 +25,7 @@ A graph is a collection of **nodes** (also called *vertices*) and **edges** that
 In an **undirected graph**, the edge $(a,b)$ is identical to $(b,a)$, while in a **directed graph** or **digraph**, $(a,b)$ and $(b,a)$ are different potential edges.
 
 In either type of graph, each edge might be labeled with a numerical value, which results in a **weighted graph**.
+
 ::::
 
 :::{.column-margin}
@@ -288,6 +289,7 @@ A.toarray()
 
 ::::{#def-networks-degree}
 The **degree** of a node is the number of neighbors it has. The **average degree** of a graph is the mean of the degrees of all of its nodes. 
+
 ::::
 
 :::{.column-margin}
@@ -373,6 +375,7 @@ Start with $n$ nodes and no edges. Suppose you have a weighted coin that comes u
 
 ::::{#def-networks-ER}
 An **Erdős-Rényi graph** (ER graph) is a graph in which each potential edge occurs with a fixed probability $p$.
+
 ::::
 
 Since there are $\binom{n}{2}$ unique unordered pairs among $n$ nodes, the mean number of edges in an ER graph is 
@@ -437,7 +440,7 @@ $$
 
 That is, if connections in the Twitch network were made completely at random, they would have to occur at a probability of about $0.14$%.
 
-### Watts–Strogatz graphs
+### Watts–Strogatz graphs {#sec-networks-WS}
 
 A **Watts–Strogatz graph** (WS graph) is a crude model of human social relationships. A WS graph has three parameters: $n$, an even integer $k$, and a probability $q$.
 
@@ -504,7 +507,9 @@ The **local clustering coefficient** for node $i$ is
 $$
 C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 $$
+
 where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
+
 ::::
 
 The value of $T(i)$ is the same as the number of edges between node $i$'s neighbors. Because there are $\binom{d_i}{2}$ unique pairs of neighbors, the value of $C(i)$ is between 0 and 1.
@@ -1010,10 +1015,12 @@ For degrees between 10 and several hundred, the counts lie nearly on a straight 
 $$
 \log(y) \approx  - a\cdot \log(x) + b,
 $$
+
 i.e.,
 $$
 y \approx B x^{-a},
 $$
+
 for some $a > 0$. This relationship is known as a **power law**, a relationship often seen in physics. The decay of $x^{-a}$ to zero as $x\to\infty$ is much slower than the normal distribution's $e^{-x^2/2}$, for instance, and we often say that the power-law network has a *heavy-tailed distribution*. 
 
 Many social networks seem to follow a power-law distribution of node degrees, to some extent. The precise extent is a subject of heated debate.
@@ -1066,7 +1073,9 @@ nx.draw(
     node_color="red", edge_color="gray"
     )
 ```
+
 The size of each node in the drawing above is proportional to its degree. In the default rendering, the large hubs crowd into the center of the picture, while the lowest-degree nodes are pushed to the periphery.
+
 ::::
 
 Probability theory predicts that a BA graph has a power-law degree distribution with exponent $-3$ as $n\to \infty$.
@@ -1087,6 +1096,7 @@ While BA graphs capture the heavy-tailed degree distribution of the Twitch netwo
 ```{python}
 print(f"Mean clustering in Twitch: {nx.average_clustering(twitch):.5f}")
 ```
+
 And for BA, we get:
 ```{python}
 cbar = []
@@ -1118,6 +1128,7 @@ A clear candidate for measuring the centrality of a node is its degree.
 
 ::::{#def-networks-centrality-degree}
 The **degree centrality** of a node is its degree, divided by the maximum possible degree for a node in the graph.
+
 ::::
 
 For an undirected graph without self-links, the maximum degree of a node in a graph with $n$ nodes is just $n-1$. NetworkX has a function `degree_centrality` to compute this quantity. 
@@ -1147,6 +1158,7 @@ pos = nx.spring_layout(G, seed=1)
 style = dict(pos=pos, edge_color="gray", node_color="pink", with_labels=True)
 nx.draw(G, **style, node_size=3000*deg_cen.values)
 ```
+
 There is little variation in the degrees of the nodes. In fact, there are only 3 unique values of the degree centrality. From the rendering of the graph, though, it's clear that the nodes with degree equal to 2 are not all roughly equivalent. If we remove node 6, for instance, then node 5 is the only other node that will be affected. But if we remove node 22, we cut off a large branch from the rest of the network.
 ::::
 
@@ -1161,9 +1173,11 @@ A different way to measure centrality is to consider the paths between nodes. If
 
 ::::{#def-networks-betweenness}
 For a graph on $n$ nodes, let $\sigma(i,j)$ denote the number of shortest paths between nodes $i$ and $j$. For any other node $k$, let $\sigma(i,j|k)$ be the number of such shortest paths that pass through node $k$. Then the **betweenness centrality** of node $k$ is
+
 $$
 c_B(k) = \frac{1}{\binom{n-1}{2}}\, \displaystyle\sum_{\substack{\text{all pairs }i,j\\[1mm]i\neq k,\,j\neq k}} \frac{\sigma(i,j|k)}{\sigma(i,j)}.
 $$ {#eq-networks-betweenness}
+
 ::::
 
 :::{.column-margin}
@@ -1192,6 +1206,7 @@ $$
 6 & 1/1 & 1/1 & 1/1 & & & \\
 \end{array}
 $$
+
 How was this filled in? Note that we can divide the nodes into the right-side triangle $\{0,1,2\}$ and the left-side triangle $\{4,5,6\}$. If we take both $i$ and $j$ from the same triangle, then no shortest paths between $i$ and $j$ ever go through node $3$. This explains the empty entries. On the other hand, if $i$ and $j$ are in different triangles, then there is a unique shortest path between them, and it does pass through node 3. Therefore, $\sigma(i,j)=\sigma(i,j|3)=1$ for those pairs. As usual, we sum over only the upper triangle of the matrix to avoid counting both $(i,j)$ and $(j,i)$, and since $n=7$, we divide by $(6)(5)/2=15$ to obtain
 $$
 c_B(3) = \frac{9}{15} = \frac{3}{5}.
@@ -1253,8 +1268,7 @@ tcb = pd.Series(
     index=twitch.nodes 
     )
 
-hist = sns.displot(x=tcb, bins=24);
-hist.axes[0,0].set_yscale("log");
+sns.displot(x=tcb, bins=24, log_scale=(False, True));
 ```
 As you can see above, only a few nodes stand out as having relatively large betweenness centrality:
 ```{python}
@@ -1301,7 +1315,12 @@ $$
 \lambda \bfx = \bfA \bfx
 $$
 
-for a number $\lambda$. This is an **eigenvalue equation**, one of the fundamental problems in linear algebra. 
+for a number $\lambda$. This is one of the fundamental problems in linear algebra. 
+
+::::{#def-networks-eigen}
+An **eigenvector** of a square matrix $\bfA$ is a nonzero vector $\bfx$ such that $\bfA \bfx = \lambda \bfx$ for some number $\lambda$. The number $\lambda$ is called the **eigenvalue** corresponding to $\bfx$.
+
+::::
 
 ::::{#exm-networks-centrality-eigvector chapter=7 type=✍️ description="Eigenvectors"}
 Eigenvectors!
@@ -1313,6 +1332,7 @@ Every $n\times n$ matrix has at least one nonzero solution to the eigenvalue equ
 
 ::::{#def-networks-centrality-eig}
 The **eigenvector centrality** of node $i$ is the value of $x_i$, where $\bfx$ is a positive eigenvector of the adjacency matrix. 
+
 ::::
 
 ::::{#exm-networks-centrality-eig chapter=7 type=✍️ description="Eigenvector centrality"}
@@ -1322,23 +1342,30 @@ $$
 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0
 \end{bmatrix}.
 $$
+
 We would expect to discover that all three vertices are ranked equally. In fact, if we define $\bfx=\tfrac{1}{3}[1,1,1]$, then 
 $$
 \bfA \bfx = \bigl[\tfrac{2}{3},\tfrac{2}{3},\tfrac{2}{3} \bigr] = 2 \bfx,
 $$
+
 is an eigenvalue to go with eigenvector $\bfx$. Note that any (nonzero) multiple of $\bfx$ would work just as well:
 $$
 \bfA (c \bfx) =  \bigl[\tfrac{2}{3}c,\tfrac{2}{3}c,\tfrac{2}{3}c \bigr] = 2 (c\bfx),
 $$
+
 so that $c\bfx$ is also an eigenvector. All that the eigenvector gives us, in other words, is the *relative* centrality of the nodes.
+
 ::::
+
 :::{.column-margin}
 <div style="max-width:304px"><div style="position:relative;padding-bottom:75.986842105263%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&playerId=kaltura_player&entry_id=1_1vnsvxd5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_53cuyvsh" width="304" height="231" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 7.27" style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe></div></div>
 (video example is slightly different)
+
 :::
 
 ::: {.callout-note}
 With a small tweak to avoid overestimating the neighbors of a major hub, eigenvector centrality becomes the *PageRank* algorithm, which launched Google.
+
 :::
 
 NetworkX has two functions for computing eigenvector centrality. One that relies on numpy to solve the eigenvalue problem tends to be the faster one and is called `eigenvector_centrality_numpy`. As with betweenness centrality, the return value is a dictionary with nodes as the keys.
@@ -1367,14 +1394,14 @@ Here is a ranking based on betweenness:
 ```{python}
 centrality.sort_values(by="between", ascending=False).head(8)
 ```
+
 As you can see, the top two are quite clear. A drawing of the graph supports the case that they are indeed central:
 ```{python}
 style["pos"] = nx.spring_layout(G, seed=1)
 nx.draw(G, node_size=500*centrality["between"], **style)
 ```
-A drawback, though, is that there are many secondary nodes whose values taper off only slowly as we enter the remote branches.
 
-Here is a ranking according to eigenvector centrality:
+A drawback, though, is that there are many secondary nodes whose values taper off only slowly as we enter the remote branches. Here is a ranking according to eigenvector centrality:
 
 ```{python}
 centrality.sort_values(by="eigen", ascending=False).head(8)
@@ -1387,6 +1414,7 @@ nx.draw(G, node_size=800*centrality["eigen"], **style)
 ```
 
 Eigenvector centrality identifies a more compact and distinct center. 
+
 ::::
 
 ## Friendship paradox
@@ -1443,6 +1471,7 @@ The friendship paradox generalizes to eigenvector centrality: the average centra
 $$
 \frac{\onenorm{\mathbf{x}}}{n} \le \frac{\mathbf{x}^T \mathbf{d}}{\onenorm{\mathbf{d}}},
 $$ {#eq-networks-eigen-paradox}
+
 where $\bfx$ is the eigenvector defining centrality of the nodes.
 
 ```{python}
@@ -1707,7 +1736,7 @@ nx.draw( WS, node_size=100, pos=pos, node_color=color[color_index] )
 ## Exercises {.unnumbered}
 
 ::::{#exr-networks-basic}
-For each graph, give the number of nodes, the number of edges, and the average degree.
+For each graph, give the number of nodes, the number of edges, and the [average degree](networks.qmd#def-networks-degree).
 
 **(a)** The complete graph $K_6$.
 
@@ -1717,7 +1746,7 @@ For each graph, give the number of nodes, the number of edges, and the average d
 ::::
 
 ::::{#exr-networks-adjmat}
-Give the adjacency matrix for the graphs in @exr-networks-basic (parts (a) and (b) only).
+Give the [adjacency matrix](networks.qmd#def-networks-adjacency) for the graphs in @exr-networks-basic (parts (a) and (b) only).
 ::::
 
 ::::{#exr-networks-ego}
@@ -1727,15 +1756,15 @@ For the graph below, draw the ego graph of **(a)** node 4 and **(b)** node 8.
 ::::
 
 ::::{#exr-networks-erprob}
-To construct an Erdős-Rényi graph on 25 nodes with expected average degree 8, what should the edge inclusion probability $p$ be?
+To construct an [Erdős-Rényi graph](networks.qmd#def-networks-ER) on 25 nodes with expected average degree 8, what should the [edge inclusion probability](networks.qmd#thm-networks-degree-ER) $p$ be?
 ::::
 
 ::::{#exr-networks-diam}
-Find the diameters of the graphs in @exr-networks-basic.
+Find the [diameters](networks.qmd#def-networks-distance) of the graphs in @exr-networks-basic.
 ::::
 
 ::::{#exr-networks-degree-vector}
-Suppose that $\bfA$ is the adjacency matrix of an undirected graph on $n$ nodes. Let $\boldsymbol{1}$ be the $n$-vector whose components all equal 1, and let
+Suppose that $\bfA$ is the [adjacency matrix](networks.qmd#def-networks-adjacency) of an undirected graph on $n$ nodes. Let $\boldsymbol{1}$ be the $n$-vector whose components all equal 1, and let
 $$
 \mathbf{d} = \bfA \boldsymbol{1}. 
 $$
@@ -1743,17 +1772,17 @@ Explain why $\mathbf{d}$ is the vector whose components are the degrees of the n
 ::::
 
 ::::{#exr-networks-centrality}
-Find **(a)** the clustering coefficient and **(b)** the betweenness centrality for each node in the following graph:
+Find **(a)** the [clustering coefficient](networks.qmd#def-networks-clustering) and **(b)** the [betweenness centrality](networks.qmd#def-networks-betweenness) for each node in the following graph:
 
 ![](_media/lolly.png "lollipop graph"){width="380" fig-align="center" .lightbox}
 ::::
 
 ::::{#exr-networks-centrality-star}
-A star graph with $n$ nodes and $n-1$ edges has a central node that has an edge to each other node. In terms of $n$, find **(a)** the clustering coefficient and **(b)** the betweenness centrality of the central node of the star graph. 
+A star graph with $n$ nodes and $n-1$ edges has a central node that has an edge to each other node. In terms of $n$, find **(a)** the  [clustering coefficient](networks.qmd#def-networks-clustering) and **(b)** the [betweenness centrality](networks.qmd#def-networks-betweenness) of the central node of the star graph. 
 ::::
 
 ::::{#exr-networks-ring-lattice}
-The Watts–Strogatz construction starts with a *ring lattice* in which the nodes are arranged in a circle and each is connected to its $k$ nearest neighbors (i.e., $k/2$ on each side). Show that the clustering coefficient of an arbitrary node in the ring lattice is 
+The [Watts–Strogatz](networks.qmd#sec-networks-WS) construction starts with a *ring lattice* in which the nodes are arranged in a circle and each is connected to its $k$ nearest neighbors (i.e., $k/2$ on each side). Show that the [clustering coefficient](networks.qmd#def-networks-clustering) of an arbitrary node in the ring lattice is 
 $$ 
 \frac{3(k-2)}{4(k-1)}. 
 $$
@@ -1762,15 +1791,15 @@ $$
 ::::
 
 ::::{#exr-networks-centrality-complete}
-Recall that the complete graph $K_n$ contains every possible edge on $n$ nodes. Prove that the vector $\bfx=[1,1,\ldots,1]$ is an eigenvector of the adjacency matrix of $K_n$. (Therefore, the eigenvector centrality is uniform over the nodes.) Note: You do not need to know how to compute an eigenvector or eigenvalue in general; just verify that the given vector satisfies the equation $\bfA \bfx = \lambda \bfx$ for some $\lambda$.
+Recall that the complete graph $K_n$ contains every possible edge on $n$ nodes. Prove that the vector $\bfx=[1,1,\ldots,1]$ is an [eigenvector](networks.qmd#def-networks-eigen) of the [adjacency matrix](networks.qmd#def-networks-adjacency) of $K_n$. (Therefore, the eigenvector centrality is uniform over the nodes.) Note: You do not need to know how to compute an eigenvector or eigenvalue in general; just verify that the given vector satisfies the equation $\bfA \bfx = \lambda \bfx$ for some $\lambda$.
 ::::
 
 ::::{#exr-networks-star-eigen}
-Prove that for the star graph on $n$ nodes as described in @exr-networks-centrality-star, the vector 
+Prove that for the star graph on $n$ nodes, as mentioned in @exr-networks-centrality-star, the vector 
 $$
 \bfx = \bigl[ \sqrt{n-1},1,1,\ldots,1 \bigr]
 $$
-is an eigenvector of the adjacency matrix, where the central node corresponds to the first element of the vector.
+is an [eigenvector](networks.qmd#def-networks-eigen) of the [adjacency matrix](networks.qmd#def-networks-adjacency), where the central node corresponds to the first element of the vector.
 ::::
 
 ::::{#exr-networks-friendship}
