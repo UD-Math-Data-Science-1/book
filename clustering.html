@@ -692,7 +692,7 @@ Tip
 </div></div><p>We then let <span class="math inline">\(\dist(\bfx,\bfy)=\theta \in [0,\pi]\)</span>, using the standard branch of arccos.</p>
 <p>However, arccos is a relatively expensive computational operation, and sometimes we use the pseudodistance <span class="math display">\[
 d(\bfx,\bfy) = 1 - \cos(\theta)
-\]</span> in place of <span class="math inline">\(\theta\)</span>. This function (which ranges between 0 and 2) is not a true distance function, though, as <span class="math inline">\(d\)</span> fails to satisfy the triangle inequality in all cases (see <a href="#exr-cluster-cosine" class="quarto-xref">Exercise&nbsp;<span>6.2</span></a>).</p>
+\]</span> in place of <span class="math inline">\(\theta\)</span>. This function (which ranges between 0 and 2) is not a true distance function, though, as <span class="math inline">\(d\)</span> fails to satisfy the triangle inequality in all cases (see <a href="#exr-cluster-cosine" class="quarto-xref">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-cluster-cosine</span></a>).</p>
 <p>Angular distance and cosine pseudodistance are useful when we want to ignore the magnitudes of vectors and consider only their directions.</p>
 <div id="exm-cluster-angular" class="theorem example" data-chapter="6" type="💻" data-description="Angular distance">
 <p><span class="theorem-title"><strong>Example 6.3</strong></span> We might represent a text document by a vector of the number of occurrences of certain keywords. In sentiment analysis, these would be terms such as <em>happy</em>, <em>excited</em>, <em>sad</em>, <em>angry</em>, <em>confused</em>, and so on. For sake of argument, suppose three documents have the feature matrix <span class="math display">\[
@@ -821,7 +821,7 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 </iframe>
 </div>
 </div>
-</div></div><p>The reason for the denominator in <a href="#eq-cluster-RI" class="quarto-xref">Equation&nbsp;<span>6.2</span></a> is that there are <span class="math inline">\(\binom{n}{2}\)</span> distinct pairs of <span class="math inline">\(n\)</span> sample points, so we know that <span class="math inline">\(0 \le \text{RI} \le 1\)</span>.</p>
+</div></div><p>The reason for the denominator in <a href="#eq-cluster-RI" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-cluster-RI</span></a> is that there are <span class="math inline">\(\binom{n}{2}\)</span> distinct pairs of <span class="math inline">\(n\)</span> sample points, so we know that <span class="math inline">\(0 \le \text{RI} \le 1\)</span>.</p>
 <p>The Rand index has some attractive features:</p>
 <ul>
 <li>The value is between 0 (complete disagreement) and 1 (complete agreement).</li>
@@ -900,7 +900,7 @@ x_1^2 + x_2^2 + \cdots + x_d^2 \le 1,
 <p>where the expectation and max operations are performed over all possible clusterings. These values can be worked out exactly using combinatorics, but we do not give them here.</p>
 <p>An ARI of 0 indicates no better agreement than a random clustering, while an ARI of 1 is complete agreement. Unlike the RI, the ARI value can be negative, indicating a performance worse than on average.</p>
 <div id="exm-cluster-ARI-blobs" class="theorem example" data-chapter="6" type="💻" data-description="Adjusted Rand index">
-<p><span class="theorem-title"><strong>Example 6.5</strong></span> Our <em>blobs</em> dataset has a reference clustering shown in <a href="#fig-clustering-blobs" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> that we take to be the ground truth. Let’s create another clustering based entirely on the quadrants of the plane:</p>
+<p><span class="theorem-title"><strong>Example 6.5</strong></span> Our <em>blobs</em> dataset has a reference clustering shown in <a href="#fig-clustering-blobs" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-clustering-blobs</span></a> that we take to be the ground truth. Let’s create another clustering based entirely on the quadrants of the plane:</p>
 <div id="f0a988f3" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> blobs_data()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1051,7 +1051,7 @@ dtype: float64</code></pre>
 dtype: float64</code></pre>
 </div>
 </div>
-<p>We can also compute the silhouette scores for the quadrant-based clustering defined in <a href="#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span>6.5</span></a>:</p>
+<p>We can also compute the silhouette scores for the quadrant-based clustering defined in <a href="#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-ARI-blobs</span></a>:</p>
 <div id="524b1a0c" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sil <span class="op">=</span> pd.Series( silhouette_samples(X, q) )</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>sns.relplot(data<span class="op">=</span>X, x<span class="op">=</span><span class="st">"x1"</span>, y<span class="op">=</span><span class="st">"x2"</span>,</span>
@@ -1137,7 +1137,7 @@ Name: sil value, dtype: float64</code></pre>
 </div>
 </div></div><p>Silhouette values are fairly easy to use, but they are an imperfect tool. They favor clusters that have a compact, roughly spherical shape, in which all the members of the cluster are mutually close to one another.</p>
 <div id="exm-cluster-sil-bullseye" class="theorem example" data-chapter="6" type="💻" data-description="Limitation of silhouettes">
-<p><span class="theorem-title"><strong>Example 6.9</strong></span> The bullseye dataset shown in <a href="#fig-clustering-bullseye" class="quarto-xref">Figure&nbsp;<span>6.3</span></a> has only one central cluster that silhouette values approve of:</p>
+<p><span class="theorem-title"><strong>Example 6.9</strong></span> The bullseye dataset shown in <a href="#fig-clustering-bullseye" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-clustering-bullseye</span></a> has only one central cluster that silhouette values approve of:</p>
 <div id="7c834301" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> bullseye_data()</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> silhouette_samples(X, y)</span>
@@ -1172,7 +1172,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>While we have no trouble validating good clusterings by eye in two dimensions in cases such as <a href="#fig-clustering-stripes" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> and <a href="#fig-clustering-bullseye" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>, it can be challenging to assess such nonspherical clusters in higher dimensions if there is no reference or validation available.</p>
+<p>While we have no trouble validating good clusterings by eye in two dimensions in cases such as <a href="#fig-clustering-stripes" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-clustering-stripes</span></a> and <a href="#fig-clustering-bullseye" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-clustering-bullseye</span></a>, it can be challenging to assess such nonspherical clusters in higher dimensions if there is no reference or validation available.</p>
 </div>
 </div>
 </section>
@@ -1876,7 +1876,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <a href="#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span>6.11</span></a>, we were able to visualize the clusters because the data is two-dimensional. That is not a trivial matter in higher dimensions, and we usually have to rely on scoring methods like silhouette values to guide us.</p>
+<p>In <a href="#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-kmeans-blobs</span></a>, we were able to visualize the clusters because the data is two-dimensional. That is not a trivial matter in higher dimensions, and we usually have to rely on scoring methods like silhouette values to guide us.</p>
 </div>
 </div>
 <div id="exm-cluster-kmeans-stripes" class="theorem example" data-chapter="6" type="💻" data-description="k-means on *stripes* dataset">
@@ -2140,36 +2140,15 @@ Defined as the increase in inertia resulting from merging <span class="math inli
 \frac{3\cdot 3}{3+3} \, 6^2 = 54.
 \]</span></p>
 <p><strong>Single.</strong> The pairwise distances between members of <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> form a <span class="math inline">\(3\times 3\)</span> matrix:</p>
-<table class="caption-top">
-<thead>
-<tr>
-<th></th>
-<th>-3</th>
-<th>-2</th>
-<th>-1</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3</td>
-<td>6</td>
-<td>5</td>
-<td>4</td>
-</tr>
-<tr>
-<td>4</td>
-<td>7</td>
-<td>6</td>
-<td>5</td>
-</tr>
-<tr>
-<td>5</td>
-<td>8</td>
-<td>7</td>
-<td>6</td>
-</tr>
-</tbody>
-</table>
+<p><span class="math display">\[
+\begin{array}{r|ccc}
+&amp; -3 &amp; -2 &amp; -1 \\
+\hline
+3 &amp; 6 &amp; 5 &amp; 4 \\
+4 &amp; 7 &amp; 6 &amp; 5 \\
+5 &amp; 8 &amp; 7 &amp; 6
+\end{array}
+\]</span></p>
 <p>(Note that this is a submatrix of the full <span class="math inline">\(6\times 6\)</span> distance matrix.) The single linkage is therefore 4.</p>
 <p><strong>Complete.</strong> The maximum of the matrix above is 8.</p>
 <p><strong>Average.</strong> The average value of the matrix entries is <span class="math inline">\(54/9\)</span>, which is 6.</p>
@@ -2450,7 +2429,7 @@ Name: count, dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<p>As we saw with the <em>bullseye</em> dataset in <a href="#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span>6.16</span></a>, single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
+<p>As we saw with the <em>bullseye</em> dataset in <a href="#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-linkage</span></a>, single linkage is susceptible to declaring one isolated point to be a cluster, while grouping together other points we would like to separate. Here is the ARI for this clustering, compared to the true classification:</p>
 <div id="b91d6e1f" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> adjusted_rand_score</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>ARI <span class="op">=</span> adjusted_rand_score(y, y_hat)</span>
@@ -2513,7 +2492,7 @@ Name: count, dtype: int64</code></pre>
 </iframe>
 </div>
 </div>
-</div></div><p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span>6.17</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
+</div></div><p>While the performance of clustering as a classifier in <a href="#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-penguins</span></a> is inferior to supervised methods we used for that purpose, the clustering process reveals that the Gentoo penguins are the most dissimilar from the other species. By inspecting the mislabeled cases in the confusion matrix, further insight might be gained about what particular traits can make the other species difficult to distinguish. In clustering, the goal is often more about insight than prediction.</p>
 </section>
 <section id="exercises" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
@@ -2555,23 +2534,23 @@ Name: count, dtype: int64</code></pre>
 &amp; [z,-3],\, [z,-2],\, [z,-1],\,[z,1],\,[z,2],\,[z,3], \\
 &amp; [-z,-3],\, [-z,-2],\, [-z,-1],\,[-z,1],\,[-z,2],\,[-z,3].
 \end{split}
-\]</span> See <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>.</p>
+\]</span> See <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-exercise6_5</span></a>.</p>
 <div id="fig-exercise6_5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-exercise6_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="_media/exer6_5.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exercise6_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.4: Samples for <a href="#exr-cluster-inertia" class="quarto-xref">Exercise&nbsp;<span>6.5</span></a>.
+Figure&nbsp;6.4: Samples for <a href="#exr-cluster-inertia" class="quarto-xref">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-cluster-inertia</span></a>.
 </figcaption>
 </figure>
 </div>
 <p><strong>(a)</strong> Using the 2-norm, calculate the inertia, which may depend on <span class="math inline">\(z\)</span>, of the clustering <span class="math display">\[
 C_1 = \{ [-z,j]: j=-3,-2,-1,1,2,3\}, \qquad C_2 = \{ [z,j]: j=-3,-2,-1,1,2,3\}.
-\]</span> (This means clustering by the colors in <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>.)</p>
+\]</span> (This means clustering by the colors in <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-exercise6_5</span></a>.)</p>
 <p><strong>(b)</strong> Using the 2-norm, calculate the inertia, which may depend on <span class="math inline">\(z\)</span>, of the clustering <span class="math display">\[
 C_1 = \{ [-z,j] \text{ and } [z,j]: j=-3,-2,-1\}, \qquad C_2 = \{ [-z,j] \text{ and } [z,j]: j=1,2,3\}.
-\]</span> (This means clustering by the shapes in <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>.)</p>
+\]</span> (This means clustering by the shapes in <a href="#fig-exercise6_5" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-exercise6_5</span></a>.)</p>
 <p><strong>(c)</strong> It seems obvious that when <span class="math inline">\(z\)</span> is large, we would prefer the clustering in part (a), and when it is close to zero, we would prefer the one in part (b). Find the value of <span class="math inline">\(z\)</span> at which the transition occurs, i.e., when the inertias are equal.</p>
 </div>
 <div id="exr-cluster-linkage" class="theorem exercise">
@@ -2591,7 +2570,7 @@ C_1 = \{ [-z,j] \text{ and } [z,j]: j=-3,-2,-1\}, \qquad C_2 = \{ [-z,j] \text{ 
 <p><strong>(b)</strong> Compute the single linkage between the clusters <span class="math inline">\(C_1=\{\bfX_1,\bfX_3,\bfX_4\}\)</span> and <span class="math inline">\(C_2=\{\bfX_2,\bfX_5\}\)</span>.</p>
 </div>
 <div id="exr-cluster-agglom" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.7</strong></span> (6.4) Find the agglomerative clustering, using complete linkage, for the samples given in <a href="#exr-cluster-linkage" class="quarto-xref">Exercise&nbsp;<span>6.6</span></a>. (This means finding four individual merge steps based on the distance matrix.)</p>
+<p><span class="theorem-title"><strong>Exercise 6.7</strong></span> (6.4) Find the agglomerative clustering, using complete linkage, for the samples given in <a href="#exr-cluster-linkage" class="quarto-xref">Exercise&nbsp;<span class="quarto-unresolved-ref">exr-cluster-linkage</span></a>. (This means finding four individual merge steps based on the distance matrix.)</p>
 </div>
 
 
@@ -3053,7 +3032,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

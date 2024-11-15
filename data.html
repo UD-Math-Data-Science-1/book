@@ -1418,7 +1418,7 @@ Index(['Marge', 'Homer', 'Bart', 'Lisa', 'Maggie'], dtype='object')</code></pre>
 </iframe>
 </div>
 </div>
-</div></div><p><a href="#tbl-data-series" class="quarto-xref">Table&nbsp;<span>1.1</span></a> lists some common operations on pandas series. There is an <a href="https://pandas.pydata.org/docs/reference/series.html">exhaustive list</a> in the pandas documentation.</p>
+</div></div><p><a href="#tbl-data-series" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-data-series</span></a> lists some common operations on pandas series. There is an <a href="https://pandas.pydata.org/docs/reference/series.html">exhaustive list</a> in the pandas documentation.</p>
 <div id="tbl-data-series" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-series-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1523,7 +1523,7 @@ Caution
 </div>
 </div>
 <div id="exm-data-series-operate" class="theorem example" data-chapter="1" data-description="Operations on series" type="💻">
-<p><span class="theorem-title"><strong>Example 1.15</strong></span> We continue with the definitions in <a href="#exm-data-series-create" class="quarto-xref">Example&nbsp;<span>1.14</span></a>. Here are all the unique values of the months:</p>
+<p><span class="theorem-title"><strong>Example 1.15</strong></span> We continue with the definitions in <a href="#exm-data-series-create" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-series-create</span></a>. Here are all the unique values of the months:</p>
 <div id="60155592" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>months.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
@@ -1599,7 +1599,7 @@ Tip
 </div>
 </div>
 <div id="exm-data-frames-create" class="theorem example" data-chapter="1" data-description="Series and frames in pandas" type="💻">
-<p><span class="theorem-title"><strong>Example 1.16</strong></span> We continue with the definitions of <code>months</code> and <code>years</code> in <a href="#exm-data-series-create" class="quarto-xref">Example&nbsp;<span>1.14</span></a>, and use a dictionary to specify the columns of a data frame:</p>
+<p><span class="theorem-title"><strong>Example 1.16</strong></span> We continue with the definitions of <code>months</code> and <code>years</code> in <a href="#exm-data-series-create" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-series-create</span></a>, and use a dictionary to specify the columns of a data frame:</p>
 <div id="84281ce6" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>simpsons <span class="op">=</span> pd.DataFrame( {<span class="st">"month"</span>: months, <span class="st">"date"</span>:  [<span class="dv">19</span>, <span class="dv">12</span>, <span class="dv">23</span>, <span class="dv">9</span>, <span class="dv">14</span>], <span class="st">"year"</span>: years } )</span>
 <span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a>simpsons</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1854,7 +1854,7 @@ Name: Maggie, dtype: object</code></pre>
 </div></div></section>
 <section id="common-operations" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="common-operations"><span class="header-section-number">1.5.3</span> Common operations</h3>
-<p><a href="#tbl-data-frames" class="quarto-xref">Table&nbsp;<span>1.2</span></a> shows common operations specific to a data frame. But since the columns are series, the operations in <a href="#tbl-data-series" class="quarto-xref">Table&nbsp;<span>1.1</span></a> can be applied too, and they will act columnwise.</p>
+<p><a href="#tbl-data-frames" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-data-frames</span></a> shows common operations specific to a data frame. But since the columns are series, the operations in <a href="#tbl-data-series" class="quarto-xref">Table&nbsp;<span class="quarto-unresolved-ref">tbl-data-series</span></a> can be applied too, and they will act columnwise.</p>
 <div id="tbl-data-frames" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-frames-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1941,7 +1941,7 @@ Table&nbsp;1.2: Operations on pandas data frames
 </figure>
 </div>
 <div id="exm-data-frames-operate" class="theorem example" data-chapter="1" data-description="Operations on data frames" type="💻">
-<p><span class="theorem-title"><strong>Example 1.17</strong></span> We continue with the definitions of <code>simpsons</code> in <a href="#exm-data-frames-create" class="quarto-xref">Example&nbsp;<span>1.16</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 1.17</strong></span> We continue with the definitions of <code>simpsons</code> in <a href="#exm-data-frames-create" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-frames-create</span></a>:</p>
 <div id="52a07ad0" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb145"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a>simpsons.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -2519,7 +2519,7 @@ Name: 0, dtype: object</code></pre>
 </iframe>
 </div>
 </div>
-</div></div><p>In <a href="#exm-data-row-iloc" class="quarto-xref">Example&nbsp;<span>1.19</span></a>, we did not specify an index for the data frame, so the row numbers were the index. If we give a data frame a different index, we can use <code>loc</code> to access rows by the index value.</p>
+</div></div><p>In <a href="#exm-data-row-iloc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-row-iloc</span></a>, we did not specify an index for the data frame, so the row numbers were the index. If we give a data frame a different index, we can use <code>loc</code> to access rows by the index value.</p>
 <div id="exm-data-row-loc" class="theorem example" data-chapter="1" data-description="loc for rows in a frame" type="💻">
 <p><span class="theorem-title"><strong>Example 1.20</strong></span> A natural candidate for an index in the weather data is the <em>DATE</em> column. This can be specified when the file is read, but here we do it after the fact:</p>
 <div id="4c159be3" class="cell" data-execution_count="89">
@@ -3263,7 +3263,7 @@ Tip
 <h3 data-number="1.7.2" class="anchored" data-anchor-id="merging-data"><span class="header-section-number">1.7.2</span> Merging data</h3>
 <p>The <code>merge</code> function is used to merge frames based on the values within the columns. Generically, each source frame can have a <em>key</em> column that is used to match up rows.</p>
 <div id="exm-data-merge" class="theorem example" data-chapter="1" data-description="Merging data in pandas" type="💻">
-<p><span class="theorem-title"><strong>Example 1.23</strong></span> Continuing with the data frames from <a href="#exm-data-concat" class="quarto-xref">Example&nbsp;<span>1.22</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 1.23</strong></span> Continuing with the data frames from <a href="#exm-data-concat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-concat</span></a>:</p>
 <div id="401610a5" class="cell" data-execution_count="101">
 <div class="sourceCode cell-code" id="cb177"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>pd.merge(birds, teams, on<span class="op">=</span><span class="st">"Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="100">
@@ -5839,7 +5839,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":false});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

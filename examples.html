@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       valueNames: ['listing-description','listing-type','listing-chapter','listing-link',{ data: ['index'] },{ data: ['categories'] }],
       page: 50,
     pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
-      searchColumns: ["listing-chapter","listing-description","listing-link","listing-type"],
+      searchColumns: ["listing-chapter","listing-description","listing-link","listing-type","listing-collapse"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -348,7 +348,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-quantitative" class="quarto-xref">Example&nbsp;<span>1.1</span></a></span>
+<span class="listing-link"><a href="#exm-data-quantitative" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-quantitative</span></a></span>
 </td>
 </tr>
 <tr data-index="1">
@@ -362,7 +362,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-float" class="quarto-xref">Example&nbsp;<span>1.2</span></a></span>
+<span class="listing-link"><a href="#exm-data-float" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-float</span></a></span>
 </td>
 </tr>
 <tr data-index="2">
@@ -376,7 +376,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-inf-nan" class="quarto-xref">Example&nbsp;<span>1.3</span></a></span>
+<span class="listing-link"><a href="#exm-data-inf-nan" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-inf-nan</span></a></span>
 </td>
 </tr>
 <tr data-index="3">
@@ -390,7 +390,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-datetime" class="quarto-xref">Example&nbsp;<span>1.4</span></a></span>
+<span class="listing-link"><a href="#exm-data-datetime" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-datetime</span></a></span>
 </td>
 </tr>
 <tr data-index="4">
@@ -404,7 +404,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-vector" class="quarto-xref">Example&nbsp;<span>1.5</span></a></span>
+<span class="listing-link"><a href="#exm-data-vector" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-vector</span></a></span>
 </td>
 </tr>
 <tr data-index="5">
@@ -418,7 +418,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-access" class="quarto-xref">Example&nbsp;<span>1.6</span></a></span>
+<span class="listing-link"><a href="#exm-data-access" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-access</span></a></span>
 </td>
 </tr>
 <tr data-index="6">
@@ -432,7 +432,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-slice" class="quarto-xref">Example&nbsp;<span>1.7</span></a></span>
+<span class="listing-link"><a href="#exm-data-slice" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-slice</span></a></span>
 </td>
 </tr>
 <tr data-index="7">
@@ -446,7 +446,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-array" class="quarto-xref">Example&nbsp;<span>1.8</span></a></span>
+<span class="listing-link"><a href="#exm-data-array" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-array</span></a></span>
 </td>
 </tr>
 <tr data-index="8">
@@ -460,7 +460,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-array-index" class="quarto-xref">Example&nbsp;<span>1.9</span></a></span>
+<span class="listing-link"><a href="#exm-data-array-index" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-array-index</span></a></span>
 </td>
 </tr>
 <tr data-index="9">
@@ -474,7 +474,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-array-reduce" class="quarto-xref">Example&nbsp;<span>1.10</span></a></span>
+<span class="listing-link"><a href="#exm-data-array-reduce" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-array-reduce</span></a></span>
 </td>
 </tr>
 <tr data-index="10">
@@ -488,7 +488,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-categorical" class="quarto-xref">Example&nbsp;<span>1.11</span></a></span>
+<span class="listing-link"><a href="#exm-data-categorical" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-categorical</span></a></span>
 </td>
 </tr>
 <tr data-index="11">
@@ -502,7 +502,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-dummy" class="quarto-xref">Example&nbsp;<span>1.12</span></a></span>
+<span class="listing-link"><a href="#exm-data-dummy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-dummy</span></a></span>
 </td>
 </tr>
 <tr data-index="12">
@@ -516,7 +516,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-series" class="quarto-xref">Example&nbsp;<span>1.13</span></a></span>
+<span class="listing-link"><a href="#exm-data-series" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-series</span></a></span>
 </td>
 </tr>
 <tr data-index="13">
@@ -530,7 +530,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-series-create" class="quarto-xref">Example&nbsp;<span>1.14</span></a></span>
+<span class="listing-link"><a href="#exm-data-series-create" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-series-create</span></a></span>
 </td>
 </tr>
 <tr data-index="14">
@@ -544,7 +544,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-series-operate" class="quarto-xref">Example&nbsp;<span>1.15</span></a></span>
+<span class="listing-link"><a href="#exm-data-series-operate" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-series-operate</span></a></span>
 </td>
 </tr>
 <tr data-index="15">
@@ -558,7 +558,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-frames-create" class="quarto-xref">Example&nbsp;<span>1.16</span></a></span>
+<span class="listing-link"><a href="#exm-data-frames-create" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-frames-create</span></a></span>
 </td>
 </tr>
 <tr data-index="16">
@@ -572,7 +572,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-frames-operate" class="quarto-xref">Example&nbsp;<span>1.17</span></a></span>
+<span class="listing-link"><a href="#exm-data-frames-operate" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-frames-operate</span></a></span>
 </td>
 </tr>
 <tr data-index="17">
@@ -586,7 +586,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-read" class="quarto-xref">Example&nbsp;<span>1.18</span></a></span>
+<span class="listing-link"><a href="#exm-data-read" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-read</span></a></span>
 </td>
 </tr>
 <tr data-index="18">
@@ -600,7 +600,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-row-iloc" class="quarto-xref">Example&nbsp;<span>1.19</span></a></span>
+<span class="listing-link"><a href="#exm-data-row-iloc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-row-iloc</span></a></span>
 </td>
 </tr>
 <tr data-index="19">
@@ -614,7 +614,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-row-loc" class="quarto-xref">Example&nbsp;<span>1.20</span></a></span>
+<span class="listing-link"><a href="#exm-data-row-loc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-row-loc</span></a></span>
 </td>
 </tr>
 <tr data-index="20">
@@ -628,7 +628,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-row-select" class="quarto-xref">Example&nbsp;<span>1.21</span></a></span>
+<span class="listing-link"><a href="#exm-data-row-select" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-row-select</span></a></span>
 </td>
 </tr>
 <tr data-index="21">
@@ -642,7 +642,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-concat" class="quarto-xref">Example&nbsp;<span>1.22</span></a></span>
+<span class="listing-link"><a href="#exm-data-concat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-concat</span></a></span>
 </td>
 </tr>
 <tr data-index="22">
@@ -656,7 +656,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-merge" class="quarto-xref">Example&nbsp;<span>1.23</span></a></span>
+<span class="listing-link"><a href="#exm-data-merge" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-merge</span></a></span>
 </td>
 </tr>
 <tr data-index="23">
@@ -670,7 +670,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-merge-weather" class="quarto-xref">Example&nbsp;<span>1.24</span></a></span>
+<span class="listing-link"><a href="#exm-data-merge-weather" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-merge-weather</span></a></span>
 </td>
 </tr>
 <tr data-index="24">
@@ -684,7 +684,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-missing" class="quarto-xref">Example&nbsp;<span>1.25</span></a></span>
+<span class="listing-link"><a href="#exm-data-missing" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-missing</span></a></span>
 </td>
 </tr>
 <tr data-index="25">
@@ -698,7 +698,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-loans" class="quarto-xref">Example&nbsp;<span>1.26</span></a></span>
+<span class="listing-link"><a href="#exm-data-loans" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-loans</span></a></span>
 </td>
 </tr>
 <tr data-index="26">
@@ -712,7 +712,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-encoding" class="quarto-xref">Example&nbsp;<span>1.27</span></a></span>
+<span class="listing-link"><a href="#exm-data-encoding" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-encoding</span></a></span>
 </td>
 </tr>
 <tr data-index="27">
@@ -726,7 +726,7 @@ window.Quarto = {
 <span class="listing-chapter">1</span>
 </td>
 <td>
-<span class="listing-link"><a href="data.html#exm-data-dummies" class="quarto-xref">Example&nbsp;<span>1.28</span></a></span>
+<span class="listing-link"><a href="#exm-data-dummies" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-data-dummies</span></a></span>
 </td>
 </tr>
 <tr data-index="28">
@@ -740,7 +740,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-summary" class="quarto-xref">Example&nbsp;<span>2.1</span></a></span>
+<span class="listing-link"><a href="#exm-stats-summary" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-summary</span></a></span>
 </td>
 </tr>
 <tr data-index="29">
@@ -754,7 +754,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-maxvar" class="quarto-xref">Example&nbsp;<span>2.2</span></a></span>
+<span class="listing-link"><a href="#exm-stats-maxvar" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-maxvar</span></a></span>
 </td>
 </tr>
 <tr data-index="30">
@@ -768,7 +768,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-sample" class="quarto-xref">Example&nbsp;<span>2.3</span></a></span>
+<span class="listing-link"><a href="#exm-stats-sample" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-sample</span></a></span>
 </td>
 </tr>
 <tr data-index="31">
@@ -782,7 +782,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-meanvar-pandas" class="quarto-xref">Example&nbsp;<span>2.4</span></a></span>
+<span class="listing-link"><a href="#exm-stats-meanvar-pandas" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-meanvar-pandas</span></a></span>
 </td>
 </tr>
 <tr data-index="32">
@@ -796,7 +796,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-zscores" class="quarto-xref">Example&nbsp;<span>2.5</span></a></span>
+<span class="listing-link"><a href="#exm-stats-zscores" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-zscores</span></a></span>
 </td>
 </tr>
 <tr data-index="33">
@@ -810,7 +810,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-zscores-py" class="quarto-xref">Example&nbsp;<span>2.6</span></a></span>
+<span class="listing-link"><a href="#exm-stats-zscores-py" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-zscores-py</span></a></span>
 </td>
 </tr>
 <tr data-index="34">
@@ -824,7 +824,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-median" class="quarto-xref">Example&nbsp;<span>2.7</span></a></span>
+<span class="listing-link"><a href="#exm-stats-median" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-median</span></a></span>
 </td>
 </tr>
 <tr data-index="35">
@@ -838,7 +838,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-quantiles" class="quarto-xref">Example&nbsp;<span>2.8</span></a></span>
+<span class="listing-link"><a href="#exm-stats-quantiles" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-quantiles</span></a></span>
 </td>
 </tr>
 <tr data-index="36">
@@ -852,7 +852,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-describe" class="quarto-xref">Example&nbsp;<span>2.9</span></a></span>
+<span class="listing-link"><a href="#exm-stats-describe" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-describe</span></a></span>
 </td>
 </tr>
 <tr data-index="37">
@@ -866,7 +866,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span>2.12</span></a></span>
+<span class="listing-link"><a href="#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-ecdf-penguins</span></a></span>
 </td>
 </tr>
 <tr data-index="38">
@@ -880,7 +880,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-discrete" class="quarto-xref">Example&nbsp;<span>2.11</span></a></span>
+<span class="listing-link"><a href="#exm-stats-uniform-discrete" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-uniform-discrete</span></a></span>
 </td>
 </tr>
 <tr data-index="39">
@@ -894,7 +894,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span>2.12</span></a></span>
+<span class="listing-link"><a href="#exm-stats-ecdf-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-ecdf-penguins</span></a></span>
 </td>
 </tr>
 <tr data-index="40">
@@ -908,7 +908,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-continuous" class="quarto-xref">Example&nbsp;<span>2.13</span></a></span>
+<span class="listing-link"><a href="#exm-stats-uniform-continuous" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-uniform-continuous</span></a></span>
 </td>
 </tr>
 <tr data-index="41">
@@ -922,7 +922,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-temps-ecdf" class="quarto-xref">Example&nbsp;<span>2.14</span></a></span>
+<span class="listing-link"><a href="#exm-stats-temps-ecdf" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-temps-ecdf</span></a></span>
 </td>
 </tr>
 <tr data-index="42">
@@ -936,7 +936,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-temps-pdf" class="quarto-xref">Example&nbsp;<span>2.15</span></a></span>
+<span class="listing-link"><a href="#exm-stats-temps-pdf" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-temps-pdf</span></a></span>
 </td>
 </tr>
 <tr data-index="43">
@@ -950,7 +950,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-uniform-pdf" class="quarto-xref">Example&nbsp;<span>2.16</span></a></span>
+<span class="listing-link"><a href="#exm-stats-uniform-pdf" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-uniform-pdf</span></a></span>
 </td>
 </tr>
 <tr data-index="44">
@@ -964,7 +964,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-numpy-uniform" class="quarto-xref">Example&nbsp;<span>2.17</span></a></span>
+<span class="listing-link"><a href="#exm-stats-numpy-uniform" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-numpy-uniform</span></a></span>
 </td>
 </tr>
 <tr data-index="45">
@@ -978,7 +978,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-normal" class="quarto-xref">Example&nbsp;<span>2.18</span></a></span>
+<span class="listing-link"><a href="#exm-stats-normal" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-normal</span></a></span>
 </td>
 </tr>
 <tr data-index="46">
@@ -992,7 +992,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups" class="quarto-xref">Example&nbsp;<span>2.19</span></a></span>
+<span class="listing-link"><a href="#exm-stats-groups" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-groups</span></a></span>
 </td>
 </tr>
 <tr data-index="47">
@@ -1006,7 +1006,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-facet" class="quarto-xref">Example&nbsp;<span>2.20</span></a></span>
+<span class="listing-link"><a href="#exm-stats-groups-facet" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-groups-facet</span></a></span>
 </td>
 </tr>
 <tr data-index="48">
@@ -1020,7 +1020,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-box-violin" class="quarto-xref">Example&nbsp;<span>2.21</span></a></span>
+<span class="listing-link"><a href="#exm-stats-groups-box-violin" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-groups-box-violin</span></a></span>
 </td>
 </tr>
 <tr data-index="49">
@@ -1034,7 +1034,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-aggregation" class="quarto-xref">Example&nbsp;<span>2.22</span></a></span>
+<span class="listing-link"><a href="#exm-stats-groups-aggregation" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-groups-aggregation</span></a></span>
 </td>
 </tr>
 <tr data-index="50">
@@ -1048,7 +1048,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-groups-cuts" class="quarto-xref">Example&nbsp;<span>2.24</span></a></span>
+<span class="listing-link"><a href="#exm-stats-groups-cuts" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-groups-cuts</span></a></span>
 </td>
 </tr>
 <tr data-index="51">
@@ -1062,7 +1062,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-median-mean" class="quarto-xref">Example&nbsp;<span>2.25</span></a></span>
+<span class="listing-link"><a href="#exm-stats-median-mean" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-median-mean</span></a></span>
 </td>
 </tr>
 <tr data-index="52">
@@ -1076,7 +1076,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-outlier-iqr" class="quarto-xref">Example&nbsp;<span>2.26</span></a></span>
+<span class="listing-link"><a href="#exm-stats-outlier-iqr" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-outlier-iqr</span></a></span>
 </td>
 </tr>
 <tr data-index="53">
@@ -1090,7 +1090,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-outlier-std" class="quarto-xref">Example&nbsp;<span>2.27</span></a></span>
+<span class="listing-link"><a href="#exm-stats-outlier-std" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-outlier-std</span></a></span>
 </td>
 </tr>
 <tr data-index="54">
@@ -1104,7 +1104,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span>2.30</span></a></span>
+<span class="listing-link"><a href="#exm-stats-pearson-outlier" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-pearson-outlier</span></a></span>
 </td>
 </tr>
 <tr data-index="55">
@@ -1118,7 +1118,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-spearman-outlier" class="quarto-xref">Example&nbsp;<span>2.31</span></a></span>
+<span class="listing-link"><a href="#exm-stats-spearman-outlier" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-spearman-outlier</span></a></span>
 </td>
 </tr>
 <tr data-index="56">
@@ -1132,7 +1132,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-catcorr" class="quarto-xref">Example&nbsp;<span>2.32</span></a></span>
+<span class="listing-link"><a href="#exm-stats-catcorr" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-catcorr</span></a></span>
 </td>
 </tr>
 <tr data-index="57">
@@ -1146,7 +1146,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-datasaurus" class="quarto-xref">Example&nbsp;<span>2.33</span></a></span>
+<span class="listing-link"><a href="#exm-stats-datasaurus" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-datasaurus</span></a></span>
 </td>
 </tr>
 <tr data-index="58">
@@ -1160,7 +1160,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-correlation" class="quarto-xref">Example&nbsp;<span>2.34</span></a></span>
+<span class="listing-link"><a href="#exm-stats-correlation" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-correlation</span></a></span>
 </td>
 </tr>
 <tr data-index="59">
@@ -1174,7 +1174,7 @@ window.Quarto = {
 <span class="listing-chapter">2</span>
 </td>
 <td>
-<span class="listing-link"><a href="stats.html#exm-stats-simpson" class="quarto-xref">Example&nbsp;<span>2.35</span></a></span>
+<span class="listing-link"><a href="#exm-stats-simpson" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-stats-simpson</span></a></span>
 </td>
 </tr>
 <tr data-index="60">
@@ -1188,7 +1188,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-digits" class="quarto-xref">Example&nbsp;<span>3.1</span></a></span>
+<span class="listing-link"><a href="#exm-class-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-digits</span></a></span>
 </td>
 </tr>
 <tr data-index="61">
@@ -1202,7 +1202,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-emoji" class="quarto-xref">Example&nbsp;<span>3.2</span></a></span>
+<span class="listing-link"><a href="#exm-class-emoji" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-emoji</span></a></span>
 </td>
 </tr>
 <tr data-index="62">
@@ -1216,7 +1216,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-traintest" class="quarto-xref">Example&nbsp;<span>3.3</span></a></span>
+<span class="listing-link"><a href="#exm-class-traintest" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-traintest</span></a></span>
 </td>
 </tr>
 <tr data-index="63">
@@ -1230,7 +1230,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span>3.4</span></a></span>
+<span class="listing-link"><a href="#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-accuracy</span></a></span>
 </td>
 </tr>
 <tr data-index="64">
@@ -1244,7 +1244,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-scores-simple" class="quarto-xref">Example&nbsp;<span>3.7</span></a></span>
+<span class="listing-link"><a href="#exm-class-scores-simple" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-scores-simple</span></a></span>
 </td>
 </tr>
 <tr data-index="65">
@@ -1258,7 +1258,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-one-vs-rest" class="quarto-xref">Example&nbsp;<span>3.8</span></a></span>
+<span class="listing-link"><a href="#exm-class-one-vs-rest" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-one-vs-rest</span></a></span>
 </td>
 </tr>
 <tr data-index="66">
@@ -1272,7 +1272,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-multiclass" class="quarto-xref">Example&nbsp;<span>3.9</span></a></span>
+<span class="listing-link"><a href="#exm-class-multiclass" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-multiclass</span></a></span>
 </td>
 </tr>
 <tr data-index="67">
@@ -1286,7 +1286,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree" class="quarto-xref">Example&nbsp;<span>3.10</span></a></span>
+<span class="listing-link"><a href="#exm-class-tree" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree</span></a></span>
 </td>
 </tr>
 <tr data-index="68">
@@ -1300,7 +1300,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-gini-spread" class="quarto-xref">Example&nbsp;<span>3.11</span></a></span>
+<span class="listing-link"><a href="#exm-class-gini-spread" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-gini-spread</span></a></span>
 </td>
 </tr>
 <tr data-index="69">
@@ -1314,7 +1314,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-gini" class="quarto-xref">Example&nbsp;<span>3.12</span></a></span>
+<span class="listing-link"><a href="#exm-class-gini" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-gini</span></a></span>
 </td>
 </tr>
 <tr data-index="70">
@@ -1328,7 +1328,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-partition" class="quarto-xref">Example&nbsp;<span>3.13</span></a></span>
+<span class="listing-link"><a href="#exm-class-tree-partition" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree-partition</span></a></span>
 </td>
 </tr>
 <tr data-index="71">
@@ -1342,7 +1342,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-toy" class="quarto-xref">Example&nbsp;<span>3.14</span></a></span>
+<span class="listing-link"><a href="#exm-class-tree-toy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree-toy</span></a></span>
 </td>
 </tr>
 <tr data-index="72">
@@ -1356,7 +1356,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span>3.15</span></a></span>
+<span class="listing-link"><a href="#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree-penguins</span></a></span>
 </td>
 </tr>
 <tr data-index="73">
@@ -1370,7 +1370,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-tree-penguins-interpret" class="quarto-xref">Example&nbsp;<span>3.16</span></a></span>
+<span class="listing-link"><a href="#exm-class-tree-penguins-interpret" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree-penguins-interpret</span></a></span>
 </td>
 </tr>
 <tr data-index="74">
@@ -1384,7 +1384,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-distance" class="quarto-xref">Example&nbsp;<span>3.17</span></a></span>
+<span class="listing-link"><a href="#exm-class-distance" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-distance</span></a></span>
 </td>
 </tr>
 <tr data-index="75">
@@ -1398,7 +1398,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn-small" class="quarto-xref">Example&nbsp;<span>3.18</span></a></span>
+<span class="listing-link"><a href="#exm-class-knn-small" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-knn-small</span></a></span>
 </td>
 </tr>
 <tr data-index="76">
@@ -1412,7 +1412,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn" class="quarto-xref">Example&nbsp;<span>3.19</span></a></span>
+<span class="listing-link"><a href="#exm-class-knn" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-knn</span></a></span>
 </td>
 </tr>
 <tr data-index="77">
@@ -1426,7 +1426,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn-norm" class="quarto-xref">Example&nbsp;<span>3.20</span></a></span>
+<span class="listing-link"><a href="#exm-class-knn-norm" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-knn-norm</span></a></span>
 </td>
 </tr>
 <tr data-index="78">
@@ -1440,7 +1440,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-knn-standard" class="quarto-xref">Example&nbsp;<span>3.21</span></a></span>
+<span class="listing-link"><a href="#exm-class-knn-standard" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-knn-standard</span></a></span>
 </td>
 </tr>
 <tr data-index="79">
@@ -1454,7 +1454,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-phat" class="quarto-xref">Example&nbsp;<span>3.22</span></a></span>
+<span class="listing-link"><a href="#exm-class-phat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-phat</span></a></span>
 </td>
 </tr>
 <tr data-index="80">
@@ -1468,7 +1468,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-prob" class="quarto-xref">Example&nbsp;<span>3.23</span></a></span>
+<span class="listing-link"><a href="#exm-class-prob" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-prob</span></a></span>
 </td>
 </tr>
 <tr data-index="81">
@@ -1482,7 +1482,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-hits" class="quarto-xref">Example&nbsp;<span>3.24</span></a></span>
+<span class="listing-link"><a href="#exm-class-hits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-hits</span></a></span>
 </td>
 </tr>
 <tr data-index="82">
@@ -1496,7 +1496,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-roc" class="quarto-xref">Example&nbsp;<span>3.25</span></a></span>
+<span class="listing-link"><a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-roc</span></a></span>
 </td>
 </tr>
 <tr data-index="83">
@@ -1510,7 +1510,7 @@ window.Quarto = {
 <span class="listing-chapter">3</span>
 </td>
 <td>
-<span class="listing-link"><a href="classification.html#exm-class-auc" class="quarto-xref">Example&nbsp;<span>3.26</span></a></span>
+<span class="listing-link"><a href="#exm-class-auc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-auc</span></a></span>
 </td>
 </tr>
 <tr data-index="84">
@@ -1524,7 +1524,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-hyper" class="quarto-xref">Example&nbsp;<span>4.1</span></a></span>
+<span class="listing-link"><a href="#exm-select-hyper" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-hyper</span></a></span>
 </td>
 </tr>
 <tr data-index="85">
@@ -1538,7 +1538,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a></span>
+<span class="listing-link"><a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-learning-curves</span></a></span>
 </td>
 </tr>
 <tr data-index="86">
@@ -1552,7 +1552,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-overfit-digits" class="quarto-xref">Example&nbsp;<span>4.3</span></a></span>
+<span class="listing-link"><a href="#exm-select-overfit-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-overfit-digits</span></a></span>
 </td>
 </tr>
 <tr data-index="87">
@@ -1566,7 +1566,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-ensemble-knn" class="quarto-xref">Example&nbsp;<span>4.4</span></a></span>
+<span class="listing-link"><a href="#exm-select-ensemble-knn" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-ensemble-knn</span></a></span>
 </td>
 </tr>
 <tr data-index="88">
@@ -1580,7 +1580,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-ensemble-knn-better" class="quarto-xref">Example&nbsp;<span>4.5</span></a></span>
+<span class="listing-link"><a href="#exm-select-ensemble-knn-better" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-ensemble-knn-better</span></a></span>
 </td>
 </tr>
 <tr data-index="89">
@@ -1594,7 +1594,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-folds" class="quarto-xref">Example&nbsp;<span>4.7</span></a></span>
+<span class="listing-link"><a href="#exm-select-folds" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-folds</span></a></span>
 </td>
 </tr>
 <tr data-index="90">
@@ -1608,7 +1608,7 @@ window.Quarto = {
 <span class="listing-chapter">4</span>
 </td>
 <td>
-<span class="listing-link"><a href="selection.html#exm-select-grid-cancer" class="quarto-xref">Example&nbsp;<span>4.10</span></a></span>
+<span class="listing-link"><a href="#exm-select-grid-cancer" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-grid-cancer</span></a></span>
 </td>
 </tr>
 <tr data-index="91">
@@ -1622,7 +1622,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-linear" class="quarto-xref">Example&nbsp;<span>5.13</span></a></span>
+<span class="listing-link"><a href="#exm-regression-linear" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-linear</span></a></span>
 </td>
 </tr>
 <tr data-index="92">
@@ -1636,7 +1636,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-dot" class="quarto-xref">Example&nbsp;<span>5.2</span></a></span>
+<span class="listing-link"><a href="#exm-regression-dot" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-dot</span></a></span>
 </td>
 </tr>
 <tr data-index="93">
@@ -1650,7 +1650,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-mse-mae" class="quarto-xref">Example&nbsp;<span>5.3</span></a></span>
+<span class="listing-link"><a href="#exm-regression-mse-mae" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-mse-mae</span></a></span>
 </td>
 </tr>
 <tr data-index="94">
@@ -1664,7 +1664,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-cod" class="quarto-xref">Example&nbsp;<span>5.4</span></a></span>
+<span class="listing-link"><a href="#exm-regression-cod" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-cod</span></a></span>
 </td>
 </tr>
 <tr data-index="95">
@@ -1678,7 +1678,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-ice-linear" class="quarto-xref">Example&nbsp;<span>5.5</span></a></span>
+<span class="listing-link"><a href="#exm-regression-ice-linear" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-ice-linear</span></a></span>
 </td>
 </tr>
 <tr data-index="96">
@@ -1692,7 +1692,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-matvec" class="quarto-xref">Example&nbsp;<span>5.6</span></a></span>
+<span class="listing-link"><a href="#exm-regression-matvec" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-matvec</span></a></span>
 </td>
 </tr>
 <tr data-index="97">
@@ -1706,7 +1706,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-cars-multi" class="quarto-xref">Example&nbsp;<span>5.7</span></a></span>
+<span class="listing-link"><a href="#exm-regression-cars-multi" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-cars-multi</span></a></span>
 </td>
 </tr>
 <tr data-index="98">
@@ -1720,7 +1720,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-sales-multi" class="quarto-xref">Example&nbsp;<span>5.8</span></a></span>
+<span class="listing-link"><a href="#exm-regression-sales-multi" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-sales-multi</span></a></span>
 </td>
 </tr>
 <tr data-index="99">
@@ -1734,7 +1734,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-polynomial" class="quarto-xref">Example&nbsp;<span>5.9</span></a></span>
+<span class="listing-link"><a href="#exm-regression-polynomial" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-polynomial</span></a></span>
 </td>
 </tr>
 <tr data-index="100">
@@ -1748,7 +1748,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-polynomial-high" class="quarto-xref">Example&nbsp;<span>5.10</span></a></span>
+<span class="listing-link"><a href="#exm-regression-polynomial-high" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-polynomial-high</span></a></span>
 </td>
 </tr>
 <tr data-index="101">
@@ -1762,7 +1762,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-lasso-diabetes" class="quarto-xref">Example&nbsp;<span>5.12</span></a></span>
+<span class="listing-link"><a href="#exm-regression-lasso-diabetes" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-lasso-diabetes</span></a></span>
 </td>
 </tr>
 <tr data-index="102">
@@ -1776,7 +1776,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-tree-demo" class="quarto-xref">Example&nbsp;<span>5.19</span></a></span>
+<span class="listing-link"><a href="#exm-regression-tree-demo" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-tree-demo</span></a></span>
 </td>
 </tr>
 <tr data-index="103">
@@ -1790,7 +1790,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-cross-entropy" class="quarto-xref">Example&nbsp;<span>5.20</span></a></span>
+<span class="listing-link"><a href="#exm-regression-cross-entropy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-cross-entropy</span></a></span>
 </td>
 </tr>
 <tr data-index="104">
@@ -1804,7 +1804,7 @@ window.Quarto = {
 <span class="listing-chapter">5</span>
 </td>
 <td>
-<span class="listing-link"><a href="regression.html#exm-regression-spam" class="quarto-xref">Example&nbsp;<span>5.21</span></a></span>
+<span class="listing-link"><a href="#exm-regression-spam" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-regression-spam</span></a></span>
 </td>
 </tr>
 <tr data-index="105">
@@ -1818,7 +1818,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-distmat-small" class="quarto-xref">Example&nbsp;<span>6.1</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-distmat-small" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-distmat-small</span></a></span>
 </td>
 </tr>
 <tr data-index="106">
@@ -1832,7 +1832,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-distmat" class="quarto-xref">Example&nbsp;<span>6.2</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-distmat" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-distmat</span></a></span>
 </td>
 </tr>
 <tr data-index="107">
@@ -1846,7 +1846,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-angular" class="quarto-xref">Example&nbsp;<span>6.3</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-angular" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-angular</span></a></span>
 </td>
 </tr>
 <tr data-index="108">
@@ -1860,7 +1860,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-rand" class="quarto-xref">Example&nbsp;<span>6.4</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-rand" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-rand</span></a></span>
 </td>
 </tr>
 <tr data-index="109">
@@ -1874,7 +1874,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span>6.5</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-ARI-blobs" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-ARI-blobs</span></a></span>
 </td>
 </tr>
 <tr data-index="110">
@@ -1888,7 +1888,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-silhouette" class="quarto-xref">Example&nbsp;<span>6.6</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-silhouette" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-silhouette</span></a></span>
 </td>
 </tr>
 <tr data-index="111">
@@ -1902,7 +1902,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-sil-blobs" class="quarto-xref">Example&nbsp;<span>6.7</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-sil-blobs" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-sil-blobs</span></a></span>
 </td>
 </tr>
 <tr data-index="112">
@@ -1916,7 +1916,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-perform-digits" class="quarto-xref">Example&nbsp;<span>6.8</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-perform-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-perform-digits</span></a></span>
 </td>
 </tr>
 <tr data-index="113">
@@ -1930,7 +1930,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-sil-bullseye" class="quarto-xref">Example&nbsp;<span>6.9</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-sil-bullseye" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-sil-bullseye</span></a></span>
 </td>
 </tr>
 <tr data-index="114">
@@ -1944,7 +1944,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-inertia" class="quarto-xref">Example&nbsp;<span>6.10</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-inertia" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-inertia</span></a></span>
 </td>
 </tr>
 <tr data-index="115">
@@ -1958,7 +1958,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span>6.11</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-kmeans-blobs" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-kmeans-blobs</span></a></span>
 </td>
 </tr>
 <tr data-index="116">
@@ -1972,7 +1972,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-stripes" class="quarto-xref">Example&nbsp;<span>6.12</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-kmeans-stripes" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-kmeans-stripes</span></a></span>
 </td>
 </tr>
 <tr data-index="117">
@@ -1986,7 +1986,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-kmeans-digits" class="quarto-xref">Example&nbsp;<span>6.13</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-kmeans-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-kmeans-digits</span></a></span>
 </td>
 </tr>
 <tr data-index="118">
@@ -2000,7 +2000,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span>6.16</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-linkage" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-linkage</span></a></span>
 </td>
 </tr>
 <tr data-index="119">
@@ -2014,7 +2014,7 @@ window.Quarto = {
 <span class="listing-chapter">6</span>
 </td>
 <td>
-<span class="listing-link"><a href="clustering.html#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span>6.17</span></a></span>
+<span class="listing-link"><a href="#exm-cluster-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-cluster-penguins</span></a></span>
 </td>
 </tr>
 <tr data-index="120">
@@ -2028,7 +2028,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-construct" class="quarto-xref">Example&nbsp;<span>7.1</span></a></span>
+<span class="listing-link"><a href="#exm-networks-construct" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-construct</span></a></span>
 </td>
 </tr>
 <tr data-index="121">
@@ -2042,7 +2042,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-import" class="quarto-xref">Example&nbsp;<span>7.2</span></a></span>
+<span class="listing-link"><a href="#exm-networks-import" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-import</span></a></span>
 </td>
 </tr>
 <tr data-index="122">
@@ -2056,7 +2056,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-neighbors" class="quarto-xref">Example&nbsp;<span>7.3</span></a></span>
+<span class="listing-link"><a href="#exm-networks-neighbors" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-neighbors</span></a></span>
 </td>
 </tr>
 <tr data-index="123">
@@ -2070,7 +2070,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-ego" class="quarto-xref">Example&nbsp;<span>7.4</span></a></span>
+<span class="listing-link"><a href="#exm-networks-ego" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-ego</span></a></span>
 </td>
 </tr>
 <tr data-index="124">
@@ -2084,7 +2084,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-degree" class="quarto-xref">Example&nbsp;<span>7.6</span></a></span>
+<span class="listing-link"><a href="#exm-networks-degree" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-degree</span></a></span>
 </td>
 </tr>
 <tr data-index="125">
@@ -2098,7 +2098,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-avgdegree" class="quarto-xref">Example&nbsp;<span>7.7</span></a></span>
+<span class="listing-link"><a href="#exm-networks-avgdegree" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-avgdegree</span></a></span>
 </td>
 </tr>
 <tr data-index="126">
@@ -2112,7 +2112,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-degree-ER" class="quarto-xref">Example&nbsp;<span>7.8</span></a></span>
+<span class="listing-link"><a href="#exm-networks-degree-ER" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-degree-ER</span></a></span>
 </td>
 </tr>
 <tr data-index="127">
@@ -2126,7 +2126,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-cluster-small-world" class="quarto-xref">Example&nbsp;<span>7.10</span></a></span>
+<span class="listing-link"><a href="#exm-networks-cluster-small-world" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-cluster-small-world</span></a></span>
 </td>
 </tr>
 <tr data-index="128">
@@ -2140,7 +2140,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>7.11</span></a></span>
+<span class="listing-link"><a href="#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-cluster-twitch</span></a></span>
 </td>
 </tr>
 <tr data-index="129">
@@ -2154,7 +2154,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-cluster-er" class="quarto-xref">Example&nbsp;<span>7.12</span></a></span>
+<span class="listing-link"><a href="#exm-networks-cluster-er" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-cluster-er</span></a></span>
 </td>
 </tr>
 <tr data-index="130">
@@ -2168,7 +2168,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-distance-complete" class="quarto-xref">Example&nbsp;<span>7.14</span></a></span>
+<span class="listing-link"><a href="#exm-networks-distance-complete" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-distance-complete</span></a></span>
 </td>
 </tr>
 <tr data-index="131">
@@ -2182,7 +2182,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-distance-wheel" class="quarto-xref">Example&nbsp;<span>7.15</span></a></span>
+<span class="listing-link"><a href="#exm-networks-distance-wheel" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-distance-wheel</span></a></span>
 </td>
 </tr>
 <tr data-index="132">
@@ -2196,7 +2196,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-connected" class="quarto-xref">Example&nbsp;<span>7.16</span></a></span>
+<span class="listing-link"><a href="#exm-networks-connected" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-connected</span></a></span>
 </td>
 </tr>
 <tr data-index="133">
@@ -2210,7 +2210,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-distance-ER" class="quarto-xref">Example&nbsp;<span>7.17</span></a></span>
+<span class="listing-link"><a href="#exm-networks-distance-ER" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-distance-ER</span></a></span>
 </td>
 </tr>
 <tr data-index="134">
@@ -2224,7 +2224,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span>7.18</span></a></span>
+<span class="listing-link"><a href="#exm-networks-ddist-twitch" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-ddist-twitch</span></a></span>
 </td>
 </tr>
 <tr data-index="135">
@@ -2238,7 +2238,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-ddist-ERWS" class="quarto-xref">Example&nbsp;<span>7.19</span></a></span>
+<span class="listing-link"><a href="#exm-networks-ddist-ERWS" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-ddist-ERWS</span></a></span>
 </td>
 </tr>
 <tr data-index="136">
@@ -2252,7 +2252,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-BA" class="quarto-xref">Example&nbsp;<span>7.20</span></a></span>
+<span class="listing-link"><a href="#exm-networks-BA" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-BA</span></a></span>
 </td>
 </tr>
 <tr data-index="137">
@@ -2266,7 +2266,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-powerlaw-ba" class="quarto-xref">Example&nbsp;<span>7.21</span></a></span>
+<span class="listing-link"><a href="#exm-networks-powerlaw-ba" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-powerlaw-ba</span></a></span>
 </td>
 </tr>
 <tr data-index="138">
@@ -2280,7 +2280,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-centrality-btw-big" class="quarto-xref">Example&nbsp;<span>7.25</span></a></span>
+<span class="listing-link"><a href="#exm-networks-centrality-btw-big" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-centrality-btw-big</span></a></span>
 </td>
 </tr>
 <tr data-index="139">
@@ -2294,7 +2294,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-centrality-eigvector" class="quarto-xref">Example&nbsp;<span>7.26</span></a></span>
+<span class="listing-link"><a href="#exm-networks-centrality-eigvector" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-centrality-eigvector</span></a></span>
 </td>
 </tr>
 <tr data-index="140">
@@ -2308,7 +2308,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-centrality-eig" class="quarto-xref">Example&nbsp;<span>7.27</span></a></span>
+<span class="listing-link"><a href="#exm-networks-centrality-eig" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-centrality-eig</span></a></span>
 </td>
 </tr>
 <tr data-index="141">
@@ -2322,7 +2322,7 @@ window.Quarto = {
 <span class="listing-chapter">7</span>
 </td>
 <td>
-<span class="listing-link"><a href="networks.html#exm-networks-centrality-smallworld" class="quarto-xref">Example&nbsp;<span>7.28</span></a></span>
+<span class="listing-link"><a href="#exm-networks-centrality-smallworld" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-networks-centrality-smallworld</span></a></span>
 </td>
 </tr>
 </tbody>

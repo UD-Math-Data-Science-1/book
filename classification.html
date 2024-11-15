@@ -986,7 +986,7 @@ Important
 </div>
 <section id="one-vs-rest" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="one-vs-rest"><span class="header-section-number">3.1.1</span> One-vs-rest</h3>
-<p>In <a href="#exm-class-digits" class="quarto-xref">Example&nbsp;<span>3.1</span></a> we simplified the problem of recognizing 10 digits by asking the classifier to distinguish only 6 from all the others. This is known as a <strong>one-versus-rest</strong> strategy. In fact, any multiclass problem can be broken down into separate binary problems using one-versus-rest.</p>
+<p>In <a href="#exm-class-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-digits</span></a> we simplified the problem of recognizing 10 digits by asking the classifier to distinguish only 6 from all the others. This is known as a <strong>one-versus-rest</strong> strategy. In fact, any multiclass problem can be broken down into separate binary problems using one-versus-rest.</p>
 <p>Suppose the label set <span class="math inline">\(L\)</span> has <span class="math inline">\(m\)</span> members <span class="math inline">\(\ell_1, \ell_2, \ldots, \ell_m\)</span>. We can define <span class="math inline">\(m\)</span> binary classification problems by</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -1015,7 +1015,7 @@ It is possible to use binning (i.e., `pd.cuts` in pandas) to change the continuo
 </section>
 <section id="classifier-performance" class="level2 page-columns page-full" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="classifier-performance"><span class="header-section-number">3.2</span> Classifier performance</h2>
-<p>Before we start discussing classification algorithms, we need to understand how to evaluate the performance of a classifier. The most straightforward take would be to calculate how often the classifier is correct on the data used to train it, like we did in <a href="#exm-class-digits" class="quarto-xref">Example&nbsp;<span>3.1</span></a>. But there are some important reasons why this is not a good idea.</p>
+<p>Before we start discussing classification algorithms, we need to understand how to evaluate the performance of a classifier. The most straightforward take would be to calculate how often the classifier is correct on the data used to train it, like we did in <a href="#exm-class-digits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-digits</span></a>. But there are some important reasons why this is not a good idea.</p>
 <section id="generalization" class="level3 page-columns page-full" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="generalization"><span class="header-section-number">3.2.1</span> Generalization</h3>
 <p>Consider the following classification algorithm: To make a prediction, see if the input matches one of the samples in the training set. If so, return the correct label; otherwise, predict randomly. This algorithm would have perfect accuracy on the training set, but it would be useless for any new data—which is the entire point of training a classifier!</p>
@@ -1187,7 +1187,7 @@ fraction of True in the testing set:
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="metrics-for-binary-classifiers"><span class="header-section-number">3.2.2</span> Metrics for binary classifiers</h3>
 <p>A binary classifier is one that produces just two unique labels, which we can call <em>yes</em> and <em>no</em>, <em>positive</em> and <em>negative</em>, or <code>True</code> and <code>False</code>. The accuracy of the classifier is the proportion of correct predictions made on the test set.</p>
 <div id="exm-class-accuracy" class="theorem example" data-chapter="3" type="💻" data-description="Testing accuracy">
-<p><span class="theorem-title"><strong>Example 3.4</strong></span> Continuing with <a href="#exm-class-traintest" class="quarto-xref">Example&nbsp;<span>3.3</span></a>, we can now train a classifier on the training data and test it on the testing data.</p>
+<p><span class="theorem-title"><strong>Example 3.4</strong></span> Continuing with <a href="#exm-class-traintest" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-traintest</span></a>, we can now train a classifier on the training data and test it on the testing data.</p>
 <div id="4bb8460b" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>knn.fit(X_train, y_train)     <span class="co"># fit only to training set</span></span>
@@ -1225,7 +1225,7 @@ fraction of True in the testing set:
 </iframe>
 </div>
 </div>
-</div></div><p><a href="#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span>3.4</span></a> demonstrates that accuracy alone may not capture anything useful about a classifier. In that case, it happened that a huge fraction of the loans were actually funded, so the “predict True always” classifier scored amazingly well. Presumably, though, approving loans for the small fraction of applicants who should not get them could lead to big financial losses. The possibilities for comparing a prediction with the correct value, or <em>ground truth</em>, can be diagrammed in a 2x2 table, as illustrated in <a href="#fig-class-confusion" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
+</div></div><p><a href="#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-accuracy</span></a> demonstrates that accuracy alone may not capture anything useful about a classifier. In that case, it happened that a huge fraction of the loans were actually funded, so the “predict True always” classifier scored amazingly well. Presumably, though, approving loans for the small fraction of applicants who should not get them could lead to big financial losses. The possibilities for comparing a prediction with the correct value, or <em>ground truth</em>, can be diagrammed in a 2x2 table, as illustrated in <a href="#fig-class-confusion" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-class-confusion</span></a>.</p>
 <div id="cell-fig-class-confusion" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div id="fig-class-confusion" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1346,7 +1346,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As you can see from <a href="#def-class-metrics" class="quarto-xref">Definition&nbsp;<span>3.3</span></a>, recall and specificity switch places if we swap the roles of <em>positive</em> and <em>negative</em>. In other words, specificity is equal to recall of the negative class.</p>
+<p>As you can see from <a href="#def-class-metrics" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-class-metrics</span></a>, recall and specificity switch places if we swap the roles of <em>positive</em> and <em>negative</em>. In other words, specificity is equal to recall of the negative class.</p>
 </div>
 </div>
 <p>The metrics to pay attention to depend on the context and application. For a pregnancy test, for example, the health consequences of a false negative might be substantial, so the manufacturer might prioritize a high recall rate. But a risk-averse loan officer would be most concerned about making loans to those who end up defaulting, i.e.&nbsp;a low false positive rate, and therefore seek a high precision.</p>
@@ -1385,7 +1385,7 @@ Tip
 </div>
 </div>
 <div id="exm-class-metrics" class="theorem example" data-chapter="3" type="💻" data-description="Binary classifier metrics">
-<p><span class="theorem-title"><strong>Example 3.6</strong></span> Continuing with the loan classifier trained in <a href="#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span>3.4</span></a>, we can find its confusion matrix:</p>
+<p><span class="theorem-title"><strong>Example 3.6</strong></span> Continuing with the loan classifier trained in <a href="#exm-class-accuracy" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-accuracy</span></a>, we can find its confusion matrix:</p>
 <div id="2953f203" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> knn.predict(X_test)</span>
@@ -1439,7 +1439,7 @@ Caution
 <pre><code>recall is 100.0%, precision is 95.7%, and specificity is 4.2%</code></pre>
 </div>
 </div>
-<p>There are also functions for the composite scores defined in <a href="#def-class-metrics-2nd" class="quarto-xref">Definition&nbsp;<span>3.4</span></a>:</p>
+<p>There are also functions for the composite scores defined in <a href="#def-class-metrics-2nd" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-class-metrics-2nd</span></a>:</p>
 <div id="f323f3b4" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> f1_score, balanced_accuracy_score</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1742,7 +1742,7 @@ weighted avg: 69.9%</code></pre>
 <section id="decision-trees" class="level2 page-columns page-full" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">3.3</span> Decision trees</h2>
 <p>A decision tree is much like playing Twenty Questions. A question is asked, and the answer reduces the possible results, leading to a new question.</p>
-<p>The fundamental step is: <em>given feature vectors <span class="math inline">\(\bfx_1,\ldots,\bfx_n\)</span> with labels <span class="math inline">\(y_1,\ldots,y_n\)</span>, partition the samples into two subsets, each of which has as uniform as set of labels as possible.</em> That step is then repeated recursively on the two subsets just formed by the partition, and so on. The result is a <strong>binary tree</strong>, as illustrated in <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>.</p>
+<p>The fundamental step is: <em>given feature vectors <span class="math inline">\(\bfx_1,\ldots,\bfx_n\)</span> with labels <span class="math inline">\(y_1,\ldots,y_n\)</span>, partition the samples into two subsets, each of which has as uniform as set of labels as possible.</em> That step is then repeated recursively on the two subsets just formed by the partition, and so on. The result is a <strong>binary tree</strong>, as illustrated in <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-class-tree</span></a>.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div id="fig-class-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1771,9 +1771,9 @@ Figure&nbsp;3.2: A simple binary decision tree on two features.
 </div>
 <p>When a prediction is required, we apply the same criteria as the splits in our tree, and when we reach a <em>leaf</em> of the tree (i.e., no further subdivisions), we take a vote of all the samples in the leaf subset to determine the label.</p>
 <div id="exm-class-tree" class="theorem example" data-chapter="3" type="✍️" data-description="Decision tree">
-<p><span class="theorem-title"><strong>Example 3.10</strong></span> In <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>, suppose that leaf A contains [H,T,T], leaf B contains [H], and leaf C contains [H,H,T]. The query <span class="math inline">\((x_1,x_2)=(1,0)\)</span> first goes left (since <span class="math inline">\(0 &lt;2\)</span>) and then right (since <span class="math inline">\(1\not&lt; 0\)</span>), landing in leaf C. The prediction for this query is then “H”.</p>
+<p><span class="theorem-title"><strong>Example 3.10</strong></span> In <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-class-tree</span></a>, suppose that leaf A contains [H,T,T], leaf B contains [H], and leaf C contains [H,H,T]. The query <span class="math inline">\((x_1,x_2)=(1,0)\)</span> first goes left (since <span class="math inline">\(0 &lt;2\)</span>) and then right (since <span class="math inline">\(1\not&lt; 0\)</span>), landing in leaf C. The prediction for this query is then “H”.</p>
 </div>
-<p>There are two crucial details that still need to be specified: how to split samples into subsets, and how to determine the uniformity of labels within each subset. The answer to the first issue was hinted at in <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>: each split is defined by a cutoff value for one of the features. Addressing the second issue is more complicated.</p>
+<p>There are two crucial details that still need to be specified: how to split samples into subsets, and how to determine the uniformity of labels within each subset. The answer to the first issue was hinted at in <a href="#fig-class-tree" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-class-tree</span></a>: each split is defined by a cutoff value for one of the features. Addressing the second issue is more complicated.</p>
 <section id="gini-impurity" class="level3 page-columns page-full" data-number="3.3.1">
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="gini-impurity"><span class="header-section-number">3.3.1</span> Gini impurity</h3>
 <p>In thinking about how to determine the uniformity of a set of samples, it helps to start with the extreme cases. Consider a binary classification problem. If all the samples in a set have the same label, then we say the set is maximally pure; the decision for any query landing here is clear. At the other end, a set that has an equal number of samples from each class. This set is maximally impure, because the decision for any query landing here is essentially a coin toss.</p>
@@ -1796,7 +1796,7 @@ H(S) = 2p(1-p),
 </iframe>
 </div>
 </div>
-</div></div><p>Consider our two extreme binary cases from above. First, if all the samples in <span class="math inline">\(S\)</span> have the same label, then either <span class="math inline">\(p=1\)</span> or <span class="math inline">\(p=0\)</span> in <a href="#eq-class-gini-binary" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>, so <span class="math inline">\(H(S)=0\)</span>. On the other hand, if there are two labels equally present, then <span class="math inline">\(p=\tfrac{1}{2}\)</span>, and <span class="math inline">\(H(S)=\tfrac{1}{2}\)</span> as well.</p>
+</div></div><p>Consider our two extreme binary cases from above. First, if all the samples in <span class="math inline">\(S\)</span> have the same label, then either <span class="math inline">\(p=1\)</span> or <span class="math inline">\(p=0\)</span> in <a href="#eq-class-gini-binary" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-class-gini-binary</span></a>, so <span class="math inline">\(H(S)=0\)</span>. On the other hand, if there are two labels equally present, then <span class="math inline">\(p=\tfrac{1}{2}\)</span>, and <span class="math inline">\(H(S)=\tfrac{1}{2}\)</span> as well.</p>
 <div id="exm-class-gini-spread" class="theorem example" data-chapter="3" type="✍️" data-description="Gini impurity">
 <p><span class="theorem-title"><strong>Example 3.11</strong></span> Suppose set <span class="math inline">\(S\)</span> has equal numbers of members having class 1, class 2, etc., up to class <span class="math inline">\(K\)</span>. Then for every <span class="math inline">\(k=1,\ldots,K,\)</span> <span class="math inline">\(p_k=1/K\)</span>, and</p>
 <p><span class="math display">\[
@@ -1844,7 +1844,7 @@ Q(S_L,S_R) = \lvert S_L\rvert\, H(S_L) + \lvert S_R \rvert \, H(S_R),
 \tag{3.3}\]</span></span></p>
 <p>where <span class="math inline">\(H\)</span> is Gini impurity and <span class="math inline">\(|S_L|\)</span> and <span class="math inline">\(|S_R|\)</span> are the number of samples in <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span>, respectively.</p>
 </div>
-<p>If <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> are both pure subsets, then <span class="math inline">\(Q(S_L,S_R)=0\)</span>. Otherwise, <a href="#eq-class-partition-impurity" class="quarto-xref">Equation&nbsp;<span>3.3</span></a> favors equally sized subsets as well as low impurity within the subsets.</p>
+<p>If <span class="math inline">\(S_L\)</span> and <span class="math inline">\(S_R\)</span> are both pure subsets, then <span class="math inline">\(Q(S_L,S_R)=0\)</span>. Otherwise, <a href="#eq-class-partition-impurity" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-class-partition-impurity</span></a> favors equally sized subsets as well as low impurity within the subsets.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
@@ -2891,7 +2891,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div></div><p>Because we can follow a decision tree’s logic step by step, we say it is highly <em>interpretable</em>. The transparency of the prediction algorithm is an attractive aspect of decision trees, although this advantage weakens as the power of the tree is increased to handle difficult datasets.</p>
 <div id="exm-class-tree-penguins-interpret" class="theorem example" data-chapter="3" type="💻" data-description="Interpreting a decision tree">
-<p><span class="theorem-title"><strong>Example 3.16</strong></span> We get some interesting information from looking at the top levels of the decision tree from <a href="#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span>3.15</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 3.16</strong></span> We get some interesting information from looking at the top levels of the decision tree from <a href="#exm-class-tree-penguins" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree-penguins</span></a>:</p>
 <div id="9620a432" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3056,7 +3056,7 @@ Note
 <p><a href="_media/memes/neighbors.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="_media/memes/neighbors.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="200"></a></p>
 </figure>
 </div>
-</div></div><p>Like a decision tree, kNN divides up the feature space into domains that map to classes. The evolution of the decision boundary is illustrated in <a href="#fig-class-knn-boundary" class="quarto-xref">Figure&nbsp;<span>3.3</span></a> for two features using 2-norm distance.</p>
+</div></div><p>Like a decision tree, kNN divides up the feature space into domains that map to classes. The evolution of the decision boundary is illustrated in <a href="#fig-class-knn-boundary" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-class-knn-boundary</span></a> for two features using 2-norm distance.</p>
 <div id="fig-class-knn-boundary" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-class-knn-boundary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -3660,7 +3660,7 @@ Tip
 </div>
 <p>A common remedy to the dependence on scales is to standardize the feature columns before using them. Scikit-learn allows us to automate that process by creating a <strong>pipeline</strong>, which makes it easy to chain together a data transformation followed by a learner.</p>
 <div id="exm-class-knn-standard" class="theorem example" data-chapter="3" type="💻" data-description="Pipeline for standardizing columns">
-<p><span class="theorem-title"><strong>Example 3.21</strong></span> Let’s use a train–test split to gauge the performance of the KNN classifier in <a href="#exm-class-knn" class="quarto-xref">Example&nbsp;<span>3.19</span></a>:</p>
+<p><span class="theorem-title"><strong>Example 3.21</strong></span> Let’s use a train–test split to gauge the performance of the KNN classifier in <a href="#exm-class-knn" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-knn</span></a>:</p>
 <div id="89765b6f" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</span>
@@ -5426,7 +5426,7 @@ Note
 <pre><code>Accuracy is 93.27%</code></pre>
 </div>
 </div>
-<p>Now we use a function that tabulates true and false positives at relevant values of <span class="math inline">\(\theta\)</span>, as we did manually in <a href="#exm-class-hits" class="quarto-xref">Example&nbsp;<span>3.24</span></a>:</p>
+<p>Now we use a function that tabulates true and false positives at relevant values of <span class="math inline">\(\theta\)</span>, as we did manually in <a href="#exm-class-hits" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-hits</span></a>:</p>
 <div id="e224a62b" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> dtree.predict_proba(X_test)</span>
@@ -5594,13 +5594,13 @@ Important
 </div>
 </div>
 <p>The ROC curve always starts in the top right corner (total skepticism) and ends in the bottom left corner (total credulity). The ideal situation is in the top left corner of the plot, corresponding to perfect TP rate (recall) and perfect FP rate (specificity).</p>
-<p>The ROC curve in <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span>3.25</span></a> illustrates the tradeoff between true positives (recall) and false positives (specificity). For that classifier, if we want a TP rate greater than 90%, then we have to accept a FP rate of about 5%.</p>
+<p>The ROC curve in <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-roc</span></a> illustrates the tradeoff between true positives (recall) and false positives (specificity). For that classifier, if we want a TP rate greater than 90%, then we have to accept a FP rate of about 5%.</p>
 </section>
 <section id="auc" class="level3 page-columns page-full" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="auc"><span class="header-section-number">3.5.2</span> AUC</h3>
 <p>ROC curves lead to another classification performance metric known as <strong>area under ROC curve (AUC)</strong>. Its name tells you exactly what it is, and it ranges between 0 (bad) and 1 (ideal). Unlike the other classification metrics we have encountered, AUC tries to account not just for the result of the classification at a single threshold, but over the full range. You might think of it as grading with partial credit.</p>
 <div id="exm-class-auc" class="theorem example" data-chapter="3" type="💻" data-description="Area under ROC curve">
-<p><span class="theorem-title"><strong>Example 3.26</strong></span> The AUC metric allows us to compare classifiers for <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span>3.25</span></a>. Note that the function for computing them, <code>roc_auc_score</code>, requires a keyword argument when there are more than two classes, to specify “one vs.&nbsp;rest” (our usual) or “one vs.&nbsp;one” matchups.</p>
+<p><span class="theorem-title"><strong>Example 3.26</strong></span> The AUC metric allows us to compare classifiers for <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-roc</span></a>. Note that the function for computing them, <code>roc_auc_score</code>, requires a keyword argument when there are more than two classes, to specify “one vs.&nbsp;rest” (our usual) or “one vs.&nbsp;one” matchups.</p>
 <div id="f0b58dbb" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_auc_score</span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test, p_hat[:, <span class="dv">1</span>])</span>
@@ -5635,7 +5635,7 @@ Important
 </div>
 </div>
 </div>
-<p>Reading from left to right, the curve in <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span>3.25</span></a> rises more quickly than this one at first but then more slowly increases once past a 90% TP rate. If we were satisfied with a 90% TP rate, we would prefer that decision tree, which has a 5% FP rate there. But if we could tolerate a larger FP rate, we would then prefer the higher TP rate attainable with the kNN classifier shown here.</p>
+<p>Reading from left to right, the curve in <a href="#exm-class-roc" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-roc</span></a> rises more quickly than this one at first but then more slowly increases once past a 90% TP rate. If we were satisfied with a 90% TP rate, we would prefer that decision tree, which has a 5% FP rate there. But if we could tolerate a larger FP rate, we would then prefer the higher TP rate attainable with the kNN classifier shown here.</p>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
@@ -5707,7 +5707,7 @@ Caution
 <p><span class="theorem-title"><strong>Exercise 3.3</strong></span> (3.3) Find the Gini impurity of this set: <span class="math display">\[ \{ A, B, B, C, C, C \}.\]</span></p>
 </div>
 <div id="exr-class-maxgini" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.4</strong></span> (3.3) Explain why for the binary case <span class="math inline">\(K=2\)</span>, <a href="#def-class-gini" class="quarto-xref">Definition&nbsp;<span>3.5</span></a> implies that <span class="math inline">\(H(S)\)</span> is maximized when the two classes are equally represented in <span class="math inline">\(S\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 3.4</strong></span> (3.3) Explain why for the binary case <span class="math inline">\(K=2\)</span>, <a href="#def-class-gini" class="quarto-xref">Definition&nbsp;<span class="quarto-unresolved-ref">def-class-gini</span></a> implies that <span class="math inline">\(H(S)\)</span> is maximized when the two classes are equally represented in <span class="math inline">\(S\)</span>.</p>
 </div>
 <div id="exr-class-partition" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 3.5</strong></span> (3.3) Given <span class="math inline">\(x_i=i\)</span> for <span class="math inline">\(i=0,\ldots,5\)</span>, with labels <span class="math display">\[
@@ -5715,7 +5715,7 @@ y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 \]</span> find an optimal partition threshold using Gini impurity.</p>
 </div>
 <div id="exr-class-tree" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3.6</strong></span> (3.3) For the decision tree drawn in <a href="#exm-class-tree" class="quarto-xref">Example&nbsp;<span>3.10</span></a>, make predictions for each of the following queries, showing the path taken through the tree for each case.</p>
+<p><span class="theorem-title"><strong>Exercise 3.6</strong></span> (3.3) For the decision tree drawn in <a href="#exm-class-tree" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-class-tree</span></a>, make predictions for each of the following queries, showing the path taken through the tree for each case.</p>
 <p><strong>(a)</strong> <span class="math inline">\((x_1, x_2) = (4, 5),\quad\)</span> <strong>(b)</strong> <span class="math inline">\((x_1, x_2) = (8,9),\quad\)</span> <strong>(c)</strong> <span class="math inline">\((x_1, x_2) = (10, 4)\)</span></p>
 </div>
 <div id="exr-class-distance" class="theorem exercise">
@@ -6378,7 +6378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </footer>
 <script>videojs(video_shortcode_videojs_video1);</script>
 <script>videojs(video_shortcode_videojs_video2);</script>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
