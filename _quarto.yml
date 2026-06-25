@@ -39,13 +39,11 @@ book:
 
 bibliography: references.bib
 
-execute: 
+jupyter: python3
+
+execute:
   cache: true
   warning: false
-  kernelspec:
-    name: "python3"
-    language: "python"
-    display_name: "Python (datasci)"
 
 format:
   html:
