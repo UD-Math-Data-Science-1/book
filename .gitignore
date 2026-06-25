@@ -24,3 +24,7 @@ _notebooks/.ipynb_checkpoints/*
 diamonds.csv
 loan_clean.csv
 _extensions/quarto-ext/lightbox/*
+**/*.quarto_ipynb
+# pixi environments
+.pixi/*
+!.pixi/config.toml

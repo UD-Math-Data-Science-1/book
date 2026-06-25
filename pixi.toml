@@ -1,0 +1,27 @@
+[workspace]
+authors = ["Toby Driscoll <driscoll@udel.edu>"]
+channels = ["conda-forge"]
+name = "ds1book"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+render = { cmd = "quarto render", env = { QUARTO_PYTHON = ".pixi/envs/default/bin/python", JUPYTER_PATH = ".pixi/envs/default/share/jupyter" } }
+
+[dependencies]
+python = ">=3.12,<3.15"
+scipy = ">=1.17.1,<2"
+matplotlib = ">=3.10.9,<4"
+pandas = ">=2.2.2,<2.3"
+seaborn = ">=0.13.2,<0.14"
+networkx = ">=3.2.1,<3.3"
+scikit-learn = ">=1.4.2,<1.5"
+pandoc = ">=3.9.0.2,<4"
+jupyter = ">=1.1.1,<2"
+pixi-kernel = ">=0.7.1,<0.8"
+jupyter-cache = ">=1.0.1,<2"
+openpyxl = ">=3.1.5,<4"
+
+[pypi-dependencies]
+pandoc = ">=2.4, <3"
+quarto = ">=0.1.0, <0.2"
