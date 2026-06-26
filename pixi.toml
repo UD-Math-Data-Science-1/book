@@ -7,6 +7,7 @@ version = "0.1.0"
 
 [tasks]
 render = { cmd = "quarto render", env = { QUARTO_PYTHON = ".pixi/envs/default/bin/python", JUPYTER_PATH = ".pixi/envs/default/share/jupyter" } }
+deploy = { cmd = "quarto publish gh-pages --no-prompt", env = { QUARTO_PYTHON = ".pixi/envs/default/bin/python", JUPYTER_PATH = ".pixi/envs/default/share/jupyter" } }
 
 [dependencies]
 python = ">=3.12,<3.15"
