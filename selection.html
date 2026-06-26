@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.55">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>4&nbsp; Model selection – Data Science 1</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -21,8 +24,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +37,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -57,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,15 +71,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./regression.html" rel="next">
 <link href="./classification.html" rel="prev">
 <link href="./_media/logo_small.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ff1aa49695f6613af3898e590fdac19b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -113,12 +118,12 @@ MathJax = {
   }
 }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -131,7 +136,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -149,7 +154,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -366,10 +371,10 @@ window.Quarto = {
     \newcommand{\logit}{\operatorname{logit}}
 \]</span></p>
 </div>
-<div id="40584b12" class="cell" data-execution_count="2">
+<div id="bed234ed" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy.random <span class="im">import</span> default_rng</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -381,7 +386,7 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, f1_score, balanced_accuracy_score</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>We have barely scratched the surface of the universe of classification algorithms. But even just the two types we have seen, nearest neighbors and decision trees, have multiple variations and options available through <em>hyperparameters</em>.</p>
@@ -392,7 +397,7 @@ window.Quarto = {
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_r8th6xu9&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_vbhsqt2o" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Chapter 4" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_r8th6xu9&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ge6boow6%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" style="width: 304px;height: 231px;border: 0;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Chapter 4">
 </iframe>
 </div>
 </div>
@@ -469,7 +474,7 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_otm3376y&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_102mwgd8" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_otm3376y&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_x4ti7k79%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.1.2" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -493,7 +498,7 @@ Note
 <p>where <span class="math inline">\(\hat{y} = \E{\hat{f}(x)}\)</span> is the expected prediction.</p>
 </div>
 <p>You might think of a method’s variance as the inverse of its repeatability or stability.</p>
-<p>To summarize <a href="#eq-select-biasvar" class="quarto-xref">Equation&nbsp;<span class="quarto-unresolved-ref">eq-select-biasvar</span></a>, the variance of a prediction has two contributions:</p>
+<p>To summarize <a href="#eq-select-biasvar" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, the variance of a prediction has two contributions:</p>
 <dl>
 <dt>Method bias</dt>
 <dd>
@@ -507,7 +512,7 @@ How close to the average prediction is any one prediction likely to be?
 <div id="cell-fig-select-biasvar" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">302</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> default_rng(<span class="dv">302</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x, y, bias, var <span class="op">=</span> [], [], [], []</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x.extend(rng.normal(<span class="fl">0.04</span>,<span class="fl">0.08</span>,<span class="dv">40</span>))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>y.extend(rng.normal(<span class="op">-</span><span class="fl">0.03</span>,<span class="fl">0.06</span>,<span class="dv">40</span>))</span>
@@ -527,7 +532,7 @@ How close to the average prediction is any one prediction likely to be?
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>var.extend([<span class="st">"high"</span>]<span class="op">*</span><span class="dv">40</span>)</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> pd.DataFrame({<span class="st">"bias"</span>: bias, <span class="st">"variance"</span>: var, <span class="st">"x₁"</span>: x, <span class="st">"x₂"</span>: y})</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> sns.relplot(data<span class="op">=</span>points, x<span class="op">=</span><span class="st">"x₁"</span>, y<span class="op">=</span><span class="st">"x₂"</span>, row<span class="op">=</span><span class="st">"variance"</span>, col<span class="op">=</span><span class="st">"bias"</span>, aspect<span class="op">=</span><span class="dv">1</span>, height<span class="op">=</span><span class="dv">3</span>)<span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fig.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>fig.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>), ylim<span class="op">=</span>(<span class="op">-</span><span class="fl">1.25</span>,<span class="fl">1.25</span>))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-select-biasvar" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -550,8 +555,8 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 <p>We can illustrate the tradeoff between bias and variance by running an artificial experiment with different sizes for the training datasets.</p>
 <div id="exm-select-learning-curves" class="theorem example" data-chapter="4" type="💻" data-description="Learning curves">
 <p><span class="theorem-title"><strong>Example 4.2</strong></span> We will use the handwritten digits data in an experiment with a decision tree classifier of fixed depth:</p>
-<div id="03b6d1e6" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> LearningCurveDisplay, StratifiedShuffleSplit</span>
+<div id="d8f08143" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> LearningCurveDisplay, StratifiedShuffleSplit</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]<span class="op">==</span><span class="dv">8</span></span>
@@ -564,7 +569,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    score_name<span class="op">=</span><span class="st">"Accuracy"</span>,</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    score_type<span class="op">=</span><span class="st">"both"</span>,    <span class="co"># training and testing scores</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>             <span class="co"># use all processors</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -580,7 +585,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:400px">
 <div style="position:relative;padding-bottom:71.25%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_9bbqi721&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_h1yyrcno" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_9bbqi721&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_0x9esxzr%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.2" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
 </iframe>
 </div>
 </div>
@@ -598,7 +603,7 @@ Figure&nbsp;4.1: Bias versus variance (imagine you are aiming at the center of t
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_hohesbfn&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_kjhir68p" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_hohesbfn&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_on8un3rq%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.2.1" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -680,12 +685,12 @@ Caution
 </section>
 <section id="overfitting-in-decision-trees" class="level3 page-columns page-full" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="overfitting-in-decision-trees"><span class="header-section-number">4.2.2</span> Overfitting in decision trees</h3>
-<p>As mentioned in <a href="#exm-select-hyper" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-hyper</span></a>, the depth of a decision tree correlates with its ability to divide the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. Thus, with noisy data, we see clear signs of overfitting:</p>
+<p>As mentioned in <a href="#exm-select-hyper" class="quarto-xref">Example&nbsp;<span>4.1</span></a>, the depth of a decision tree correlates with its ability to divide the samples more finely. For <span class="math inline">\(n=40\)</span> values, a tree of depth 6 is guaranteed to reproduce every sample value perfectly. Thus, with noisy data, we see clear signs of overfitting:</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_cb07946k&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_7znd3f12" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.2.2" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_cb07946k&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_csbs894q%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.2.2" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -736,11 +741,11 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 </section>
 <section id="overfitting-and-variance" class="level3 page-columns page-full" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="overfitting-and-variance"><span class="header-section-number">4.2.3</span> Overfitting and variance</h3>
-<p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-select-knn-1-noisy</span></a>, and <a href="#fig-select-tree-6-noisy" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-select-tree-6-noisy</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in <a href="#sec-select-learning-curves" class="quarto-xref"><span class="quarto-unresolved-ref">sec-select-learning-curves</span></a>.</p>
+<p>The tendency to fit closely to training data also implies that the learner may have a good deal of variance in training (see <a href="#fig-select-knn-1-noisy" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>, and <a href="#fig-select-tree-6-noisy" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>, for example). Thus, overfitting is often associated with a large gap between training and testing errors, as observed in <a href="#sec-select-learning-curves" class="quarto-xref"><span>Section 4.1</span></a>.</p>
 <div id="exm-select-overfit-digits" class="theorem example" data-chapter="4" type="💻" data-description="Overfitting">
-<p><span class="theorem-title"><strong>Example 4.3</strong></span> <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-learning-curves</span></a> showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew. Now look at what happens for a much deeper decision tree:</p>
-<div id="5ca9fdec" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
+<p><span class="theorem-title"><strong>Example 4.3</strong></span> <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a> showed that a decision tree of depth 4 had a closing gap between scores for training and testing sets as the training set size grew. Now look at what happens for a much deeper decision tree:</p>
+<div id="ae20cfb1" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> datasets.load_digits()        </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> ds[<span class="st">"data"</span>], ds[<span class="st">"target"</span>]<span class="op">==</span><span class="dv">8</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>LearningCurveDisplay.from_estimator(</span>
@@ -751,7 +756,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">302</span>,</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    train_sizes<span class="op">=</span>np.linspace(<span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">16</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -760,13 +765,13 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 </div>
 </div>
 </div>
-<p>The testing scores increase with the training set size, which is good, but the training score remains stuck at 100% and the gap between training and test never fully closes. In effect, the model can perfectly reproduce its training set but never knows what it doesn’t see. The final score of this more-complex tree is not appreciably better than that of the simpler tree in <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-learning-curves</span></a>. All of the extra resolving power went to fixing details that don’t generalize.</p>
+<p>The testing scores increase with the training set size, which is good, but the training score remains stuck at 100% and the gap between training and test never fully closes. In effect, the model can perfectly reproduce its training set but never knows what it doesn’t see. The final score of this more-complex tree is not appreciably better than that of the simpler tree in <a href="#exm-select-learning-curves" class="quarto-xref">Example&nbsp;<span>4.2</span></a>. All of the extra resolving power went to fixing details that don’t generalize.</p>
 </div>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:400px">
 <div style="position:relative;padding-bottom:71.25%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_6y3owvh7&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_n5k5ciot" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_6y3owvh7&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_g82xz35i%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
 </iframe>
 </div>
 </div>
@@ -783,7 +788,7 @@ Figure&nbsp;4.8: Decision tree with depth=2 and noisy data
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_he2khxi8&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_315g3ohe" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_he2khxi8&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_tldpl8bq%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.3" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -808,19 +813,19 @@ Note
 </div>
 </div>
 <p>Scikit-learn has a <code>BaggingClassifier</code> that automates the process of generating an ensemble from just one basic type of estimator.</p>
-<div id="exm-select-ensemble-knn" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble classifier">
+<div id="exm-select-ensemble-knn" class="theorem example page-columns page-full" data-chapter="4" type="💻" data-description="Bagging ensemble classifier">
 <p><span class="theorem-title"><strong>Example 4.4</strong></span> Here is a dataset collected from images of dried beans:</p>
-<div id="fb06ce10" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
+<div id="db28d529" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="47">
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">Area</th>
 <th data-quarto-table-cell-role="th">Perimeter</th>
@@ -841,8 +846,8 @@ Note
 </tr>
 </thead>
 <tbody>
-<tr>
-<td data-quarto-table-cell-role="th">0</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
 <td>28395</td>
 <td>610.291</td>
 <td>208.178117</td>
@@ -860,8 +865,8 @@ Note
 <td>0.834222</td>
 <td>0.998724</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">1</td>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
 <td>28734</td>
 <td>638.018</td>
 <td>200.524796</td>
@@ -879,8 +884,8 @@ Note
 <td>0.909851</td>
 <td>0.998430</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">2</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
 <td>29380</td>
 <td>624.110</td>
 <td>212.826130</td>
@@ -898,8 +903,8 @@ Note
 <td>0.825871</td>
 <td>0.999066</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">3</td>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
 <td>30008</td>
 <td>645.884</td>
 <td>210.557999</td>
@@ -917,8 +922,8 @@ Note
 <td>0.861794</td>
 <td>0.994199</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">4</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
 <td>30140</td>
 <td>620.134</td>
 <td>201.847882</td>
@@ -943,12 +948,12 @@ Note
 </div>
 </div>
 <p>Although the dataset has data on 7 classes of beans, we will simplify our output by making it a one-vs-rest problem for just one class:</p>
-<div id="70e80bb8" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"SIRA"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6ba73455" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>] <span class="op">==</span> <span class="st">"SIRA"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here is the confusion matrix we get from training a single kNN classifier on this dataset:</p>
-<div id="045a23ba" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<div id="7a9c31aa" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  X, y,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
@@ -962,14 +967,14 @@ Note
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> pipe.predict_proba(X_test)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for single classifier is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for single classifier is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AUC for single classifier is 0.9633</code></pre>
 </div>
 </div>
 <p>Here, we create an ensemble with 100 such classifiers, each trained on a different subset that is 75% of the size of the original training set:</p>
-<div id="3a7590ac" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
+<div id="eb032af3" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
@@ -978,11 +983,12 @@ Note
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">18621</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ensemble.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
-<style>#sk-container-id-2 {
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ensemble.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
-  --sklearn-color-text: black;
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
   --sklearn-color-line: gray;
   /* Definition of color scheme for unfitted estimators */
   --sklearn-color-unfitted-level-0: #fff5e6;
@@ -994,31 +1000,32 @@ Note
   --sklearn-color-fitted-level-1: #d4ebff;
   --sklearn-color-fitted-level-2: #b3dbfd;
   --sklearn-color-fitted-level-3: cornflowerblue;
-
-  /* Specific color for light theme */
-  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
-  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
-  --sklearn-color-icon: #696969;
-
-  @media (prefers-color-scheme: dark) {
-    /* Redefinition of color scheme for dark theme */
-    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
-    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
-    --sklearn-color-icon: #878787;
-  }
 }
 
-#sk-container-id-2 {
+#sk-container-id-1.light {
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: black;
+  --sklearn-color-background: white;
+  --sklearn-color-border-box: black;
+  --sklearn-color-icon: #696969;
+}
+
+#sk-container-id-1.dark {
+  --sklearn-color-text-on-default-background: white;
+  --sklearn-color-background: #111;
+  --sklearn-color-border-box: white;
+  --sklearn-color-icon: #878787;
+}
+
+#sk-container-id-1 {
   color: var(--sklearn-color-text);
 }
 
-#sk-container-id-2 pre {
+#sk-container-id-1 pre {
   padding: 0;
 }
 
-#sk-container-id-2 input.sk-hidden--visually {
+#sk-container-id-1 input.sk-hidden--visually {
   border: 0;
   clip: rect(1px 1px 1px 1px);
   clip: rect(1px, 1px, 1px, 1px);
@@ -1030,7 +1037,7 @@ Note
   width: 1px;
 }
 
-#sk-container-id-2 div.sk-dashed-wrapped {
+#sk-container-id-1 div.sk-dashed-wrapped {
   border: 1px dashed var(--sklearn-color-line);
   margin: 0 0.4em 0.5em 0.4em;
   box-sizing: border-box;
@@ -1038,7 +1045,7 @@ Note
   background-color: var(--sklearn-color-background);
 }
 
-#sk-container-id-2 div.sk-container {
+#sk-container-id-1 div.sk-container {
   /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
      but bootstrap.min.css set `[hidden] { display: none !important; }`
      so we also need the `!important` here to be able to override the
@@ -1048,7 +1055,7 @@ Note
   position: relative;
 }
 
-#sk-container-id-2 div.sk-text-repr-fallback {
+#sk-container-id-1 div.sk-text-repr-fallback {
   display: none;
 }
 
@@ -1064,14 +1071,14 @@ div.sk-item {
 
 /* Parallel-specific style estimator block */
 
-#sk-container-id-2 div.sk-parallel-item::after {
+#sk-container-id-1 div.sk-parallel-item::after {
   content: "";
   width: 100%;
   border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
   flex-grow: 1;
 }
 
-#sk-container-id-2 div.sk-parallel {
+#sk-container-id-1 div.sk-parallel {
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -1079,28 +1086,28 @@ div.sk-item {
   position: relative;
 }
 
-#sk-container-id-2 div.sk-parallel-item {
+#sk-container-id-1 div.sk-parallel-item {
   display: flex;
   flex-direction: column;
 }
 
-#sk-container-id-2 div.sk-parallel-item:first-child::after {
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
   align-self: flex-end;
   width: 50%;
 }
 
-#sk-container-id-2 div.sk-parallel-item:last-child::after {
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
   align-self: flex-start;
   width: 50%;
 }
 
-#sk-container-id-2 div.sk-parallel-item:only-child::after {
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
   width: 0;
 }
 
 /* Serial-specific style estimator block */
 
-#sk-container-id-2 div.sk-serial {
+#sk-container-id-1 div.sk-serial {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1118,24 +1125,33 @@ clickable and can be expanded/collapsed.
 
 /* Pipeline and ColumnTransformer style (default) */
 
-#sk-container-id-2 div.sk-toggleable {
+#sk-container-id-1 div.sk-toggleable {
   /* Default theme specific background. It is overwritten whether we have a
   specific estimator or a Pipeline/ColumnTransformer */
   background-color: var(--sklearn-color-background);
 }
 
 /* Toggleable label */
-#sk-container-id-2 label.sk-toggleable__label {
+#sk-container-id-1 label.sk-toggleable__label {
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
   margin-bottom: 0;
   padding: 0.5em;
   box-sizing: border-box;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
 }
 
-#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
   /* Arrow on the left of the label */
   content: "▸";
   float: left;
@@ -1143,27 +1159,25 @@ clickable and can be expanded/collapsed.
   color: var(--sklearn-color-icon);
 }
 
-#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
   color: var(--sklearn-color-text);
 }
 
 /* Toggleable content - dropdown */
 
-#sk-container-id-2 div.sk-toggleable__content {
-  max-height: 0;
-  max-width: 0;
-  overflow: hidden;
+#sk-container-id-1 div.sk-toggleable__content {
+  display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content.fitted {
+#sk-container-id-1 div.sk-toggleable__content.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content pre {
+#sk-container-id-1 div.sk-toggleable__content pre {
   margin: 0.2em;
   border-radius: 0.25em;
   color: var(--sklearn-color-text);
@@ -1171,79 +1185,78 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
   /* unfitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
-#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
-  max-height: 200px;
-  max-width: 100%;
-  overflow: auto;
+  display: block;
+  width: 100%;
+  overflow: visible;
 }
 
-#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
   content: "▾";
 }
 
 /* Pipeline/ColumnTransformer-specific style */
 
-#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator-specific style */
 
 /* Colorize estimator box */
-#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
-#sk-container-id-2 div.sk-label label.sk-toggleable__label,
-#sk-container-id-2 div.sk-label label {
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
   /* The background is the default theme color */
   color: var(--sklearn-color-text-on-default-background);
 }
 
 /* On hover, darken the color of the background */
-#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
 /* Label box, darken color on hover, fitted */
-#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
   color: var(--sklearn-color-text);
   background-color: var(--sklearn-color-fitted-level-2);
 }
 
 /* Estimator label */
 
-#sk-container-id-2 div.sk-label label {
+#sk-container-id-1 div.sk-label label {
   font-family: monospace;
   font-weight: bold;
-  display: inline-block;
   line-height: 1.2em;
 }
 
-#sk-container-id-2 div.sk-label-container {
+#sk-container-id-1 div.sk-label-container {
   text-align: center;
 }
 
 /* Estimator-specific */
-#sk-container-id-2 div.sk-estimator {
+#sk-container-id-1 div.sk-estimator {
   font-family: monospace;
   border: 1px dotted var(--sklearn-color-border-box);
   border-radius: 0.25em;
@@ -1253,18 +1266,18 @@ clickable and can be expanded/collapsed.
   background-color: var(--sklearn-color-unfitted-level-0);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted {
+#sk-container-id-1 div.sk-estimator.fitted {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-0);
 }
 
 /* on hover */
-#sk-container-id-2 div.sk-estimator:hover {
+#sk-container-id-1 div.sk-estimator:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-2);
 }
 
-#sk-container-id-2 div.sk-estimator.fitted:hover {
+#sk-container-id-1 div.sk-estimator.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-2);
 }
@@ -1280,23 +1293,25 @@ a:visited.sk-estimator-doc-link {
   font-size: smaller;
   line-height: 1em;
   font-family: monospace;
-  background-color: var(--sklearn-color-background);
+  background-color: var(--sklearn-color-unfitted-level-0);
   border-radius: 1em;
   height: 1em;
   width: 1em;
   text-decoration: none !important;
-  margin-left: 1ex;
+  margin-left: 0.5em;
+  text-align: center;
   /* unfitted */
-  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
-  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-3) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-3);
 }
 
 .sk-estimator-doc-link.fitted,
 a:link.sk-estimator-doc-link.fitted,
 a:visited.sk-estimator-doc-link.fitted {
   /* fitted */
-  border: var(--sklearn-color-fitted-level-1) 1pt solid;
-  color: var(--sklearn-color-fitted-level-1);
+  background-color: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3) 1pt solid;
+  color: var(--sklearn-color-fitted-level-3);
 }
 
 /* On hover */
@@ -1306,7 +1321,8 @@ div.sk-label-container:hover .sk-estimator-doc-link:hover,
 .sk-estimator-doc-link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
-  color: var(--sklearn-color-background);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-0);
   text-decoration: none;
 }
 
@@ -1316,7 +1332,8 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 .sk-estimator-doc-link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
-  color: var(--sklearn-color-background);
+  border: var(--sklearn-color-fitted-level-0) 1pt solid;
+  color: var(--sklearn-color-fitted-level-0);
   text-decoration: none;
 }
 
@@ -1351,12 +1368,12 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 
 /* "?"-specific style due to the `<a>` HTML tag */
 
-#sk-container-id-2 a.estimator_doc_link {
+#sk-container-id-1 a.estimator_doc_link {
   float: right;
   font-size: 1rem;
   line-height: 1em;
   font-family: monospace;
-  background-color: var(--sklearn-color-background);
+  background-color: var(--sklearn-color-unfitted-level-0);
   border-radius: 1rem;
   height: 1rem;
   width: 1rem;
@@ -1366,69 +1383,608 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   border: var(--sklearn-color-unfitted-level-1) 1pt solid;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted {
+#sk-container-id-1 a.estimator_doc_link.fitted {
   /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
   border: var(--sklearn-color-fitted-level-1) 1pt solid;
   color: var(--sklearn-color-fitted-level-1);
 }
 
 /* On hover */
-#sk-container-id-2 a.estimator_doc_link:hover {
+#sk-container-id-1 a.estimator_doc_link:hover {
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-3);
   color: var(--sklearn-color-background);
   text-decoration: none;
 }
 
-#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</a></style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BaggingClassifier(estimator=Pipeline(steps=[('scale', StandardScaler()),
+
+.estimator-table {
+    font-family: monospace;
+}
+
+.estimator-table summary {
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.estimator-table summary::marker {
+    font-size: 0.7rem;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+/*
+    `table td`is set in notebook with right text-align.
+    We need to overwrite it.
+*/
+.estimator-table table td.param {
+    text-align: left;
+    position: relative;
+    padding: 0;
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left !important;
+}
+
+.user-set td.value {
+    color:rgb(255, 94, 0);
+    background-color: transparent;
+}
+
+.default td {
+    color: black;
+    text-align: left !important;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+/*
+    Styles for parameter documentation links
+    We need styling for visited so jupyter doesn't overwrite it
+*/
+a.param-doc-link,
+a.param-doc-link:link,
+a.param-doc-link:visited {
+    text-decoration: underline dashed;
+    text-underline-offset: .3em;
+    color: inherit;
+    display: block;
+    padding: .5em;
+}
+
+/* "hack" to make the entire area of the cell containing the link clickable */
+a.param-doc-link::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+}
+
+.param-doc-description {
+    display: none;
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    padding: .5ex;
+    margin-left: 1.5em;
+    color: var(--sklearn-color-text);
+    box-shadow: .3em .3em .4em #999;
+    width: max-content;
+    text-align: left;
+    max-height: 10em;
+    overflow-y: auto;
+
+    /* unfitted */
+    background: var(--sklearn-color-unfitted-level-0);
+    border: thin solid var(--sklearn-color-unfitted-level-3);
+}
+
+/* Fitted state for parameter tooltips */
+.fitted .param-doc-description {
+    /* fitted */
+    background: var(--sklearn-color-fitted-level-0);
+    border: thin solid var(--sklearn-color-fitted-level-3);
+}
+
+.param-doc-link:hover .param-doc-description {
+    display: block;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BaggingClassifier(estimator=Pipeline(steps=[('scale', StandardScaler()),
                                             ('knn',
                                              KNeighborsClassifier(n_neighbors=3))]),
-                  max_samples=0.75, n_estimators=100, random_state=18621)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"><label for="sk-estimator-id-5" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;BaggingClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.ensemble.BaggingClassifier.html">?<span>Documentation for BaggingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>BaggingClassifier(estimator=Pipeline(steps=[('scale', StandardScaler()),
-                                            ('knn',
-                                             KNeighborsClassifier(n_neighbors=3))]),
-                  max_samples=0.75, n_estimators=100, random_state=18621)</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"><label for="sk-estimator-id-6" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">estimator: Pipeline</label><div class="sk-toggleable__content fitted"><pre>Pipeline(steps=[('scale', StandardScaler()),
-                ('knn', KNeighborsClassifier(n_neighbors=3))])</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"><label for="sk-estimator-id-7" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;StandardScaler<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></label><div class="sk-toggleable__content fitted"><pre>StandardScaler()</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox"><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;KNeighborsClassifier<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a></label><div class="sk-toggleable__content fitted"><pre>KNeighborsClassifier(n_neighbors=3)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
+                  max_samples=0.75, n_estimators=100, random_state=18621)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox"><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>BaggingClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html">?<span>Documentation for BaggingClassifier</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=estimator,-object%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">estimator <span class="param-doc-description">estimator: object, default=None<br>
+<br>
+The base estimator to fit on random subsets of the dataset.<br>
+If None, then the base estimator is a<br>
+:class:`~sklearn.tree.DecisionTreeClassifier`.<br>
+<br>
+.. versionadded:: 1.2<br>
+`base_estimator` was renamed to `estimator`.</span></a></td>
+<td class="value">Pipeline(step...eighbors=3))])</td>
+</tr>
+<tr class="user-set even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=n_estimators,-int%2C%20default%3D10" class="param-doc-link" rel="noreferrer" target="_blank">n_estimators <span class="param-doc-description">n_estimators: int, default=10<br>
+<br>
+The number of base estimators in the ensemble.</span></a></td>
+<td class="value">100</td>
+</tr>
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=max_samples,-int%20or%20float%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">max_samples <span class="param-doc-description">max_samples: int or float, default=None<br>
+<br>
+The number of samples to draw from X to train each base estimator (with<br>
+replacement by default, see `bootstrap` for more details).<br>
+<br>
+- If None, then draw `X.shape[0]` samples irrespective of `sample_weight`.<br>
+- If int, then draw `max_samples` samples.<br>
+- If float, then draw `max_samples * X.shape[0]` unweighted samples or<br>
+`max_samples * sample_weight.sum()` weighted samples.</span></a></td>
+<td class="value">0.75</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=max_features,-int%20or%20float%2C%20default%3D1.0" class="param-doc-link" rel="noreferrer" target="_blank">max_features <span class="param-doc-description">max_features: int or float, default=1.0<br>
+<br>
+The number of features to draw from X to train each base estimator (<br>
+without replacement by default, see `bootstrap_features` for more<br>
+details).<br>
+<br>
+- If int, then draw `max_features` features.<br>
+- If float, then draw `max(1, int(max_features * n_features_in_))` features.</span></a></td>
+<td class="value">1.0</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=bootstrap,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">bootstrap <span class="param-doc-description">bootstrap: bool, default=True<br>
+<br>
+Whether samples are drawn with replacement. If False, sampling without<br>
+replacement is performed. If fitting with `sample_weight`, it is<br>
+strongly recommended to choose True, as only drawing with replacement<br>
+will ensure the expected frequency semantics of `sample_weight`.</span></a></td>
+<td class="value">True</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=bootstrap_features,-bool%2C%20default%3DFalse" class="param-doc-link" rel="noreferrer" target="_blank">bootstrap_features <span class="param-doc-description">bootstrap_features: bool, default=False<br>
+<br>
+Whether features are drawn with replacement.</span></a></td>
+<td class="value">False</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=oob_score,-bool%2C%20default%3DFalse" class="param-doc-link" rel="noreferrer" target="_blank">oob_score <span class="param-doc-description">oob_score: bool, default=False<br>
+<br>
+Whether to use out-of-bag samples to estimate<br>
+the generalization error. Only available if bootstrap=True.</span></a></td>
+<td class="value">False</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=warm_start,-bool%2C%20default%3DFalse" class="param-doc-link" rel="noreferrer" target="_blank">warm_start <span class="param-doc-description">warm_start: bool, default=False<br>
+<br>
+When set to True, reuse the solution of the previous call to fit<br>
+and add more estimators to the ensemble, otherwise, just fit<br>
+a whole new ensemble. See :term:`the Glossary <warm_start>`.<br>
+<br>
+.. versionadded:: 0.17<br>
+*warm_start* constructor parameter.</warm_start></span></a></td>
+<td class="value">False</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description">n_jobs: int, default=None<br>
+<br>
+The number of jobs to run in parallel for both :meth:`fit` and<br>
+:meth:`predict`. ``None`` means 1 unless in a<br>
+:obj:`joblib.parallel_backend` context. ``-1`` means using all<br>
+processors. See :term:`Glossary <n_jobs>` for more details.</n_jobs></span></a></td>
+<td class="value">None</td>
+</tr>
+<tr class="user-set even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=random_state,-int%2C%20RandomState%20instance%20or%20None%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">random_state <span class="param-doc-description">random_state: int, RandomState instance or None, default=None<br>
+<br>
+Controls the random resampling of the original dataset<br>
+(sample wise and feature wise).<br>
+If the base estimator accepts a `random_state` attribute, a different<br>
+seed is generated for each instance in the ensemble.<br>
+Pass an int for reproducible output across multiple function calls.<br>
+See :term:`Glossary <random_state>`.</random_state></span></a></td>
+<td class="value">18621</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.ensemble.BaggingClassifier.html#:~:text=verbose,-int%2C%20default%3D0" class="param-doc-link" rel="noreferrer" target="_blank">verbose <span class="param-doc-description">verbose: int, default=0<br>
+<br>
+Controls the verbosity when fitting and predicting.</span></a></td>
+<td class="value">0</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox"><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>estimator: Pipeline</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__"></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox"><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>StandardScaler</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html">?<span>Documentation for StandardScaler</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__scale__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=copy,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">copy <span class="param-doc-description">copy: bool, default=True<br>
+<br>
+If False, try to avoid a copy and do inplace scaling instead.<br>
+This is not guaranteed to always work inplace; e.g. if the data is<br>
+not a NumPy array or scipy.sparse CSR matrix, a copy may still be<br>
+returned.</span></a></td>
+<td class="value">True</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=with_mean,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">with_mean <span class="param-doc-description">with_mean: bool, default=True<br>
+<br>
+If True, center the data before scaling.<br>
+This does not work (and will raise an exception) when attempted on<br>
+sparse matrices, because centering them entails building a dense<br>
+matrix which in common use cases is likely to be too large to fit in<br>
+memory.</span></a></td>
+<td class="value">True</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.preprocessing.StandardScaler.html#:~:text=with_std,-bool%2C%20default%3DTrue" class="param-doc-link" rel="noreferrer" target="_blank">with_std <span class="param-doc-description">with_std: bool, default=True<br>
+<br>
+If True, scale the data to unit variance (or equivalently,<br>
+unit standard deviation).</span></a></td>
+<td class="value">True</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"><label for="sk-estimator-id-4" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>KNeighborsClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html">?<span>Documentation for KNeighborsClassifier</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="estimator__knn__">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                
+<table class="parameters-table caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<tbody>
+<tr class="user-set odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=n_neighbors,-int%2C%20default%3D5" class="param-doc-link" rel="noreferrer" target="_blank">n_neighbors <span class="param-doc-description">n_neighbors: int, default=5<br>
+<br>
+Number of neighbors to use by default for :meth:`kneighbors` queries.</span></a></td>
+<td class="value">3</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=weights,-%7B%27uniform%27%2C%20%27distance%27%7D%2C%20callable%20or%20None%2C%20default%3D%27uniform%27" class="param-doc-link" rel="noreferrer" target="_blank">weights <span class="param-doc-description">weights: {'uniform', 'distance'}, callable or None, default='uniform'<br>
+<br>
+Weight function used in prediction. Possible values:<br>
+<br>
+- 'uniform' : uniform weights. All points in each neighborhood<br>
+are weighted equally.<br>
+- 'distance' : weight points by the inverse of their distance.<br>
+in this case, closer neighbors of a query point will have a<br>
+greater influence than neighbors which are further away.<br>
+- [callable] : a user-defined function which accepts an<br>
+array of distances, and returns an array of the same shape<br>
+containing the weights.<br>
+<br>
+Refer to the example entitled<br>
+:ref:`sphx_glr_auto_examples_neighbors_plot_classification.py`<br>
+showing the impact of the `weights` parameter on the decision<br>
+boundary.</span></a></td>
+<td class="value">'uniform'</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=algorithm,-%7B%27auto%27%2C%20%27ball_tree%27%2C%20%27kd_tree%27%2C%20%27brute%27%7D%2C%20default%3D%27auto%27" class="param-doc-link" rel="noreferrer" target="_blank">algorithm <span class="param-doc-description">algorithm: {'auto', 'ball_tree', 'kd_tree', 'brute'}, default='auto'<br>
+<br>
+Algorithm used to compute the nearest neighbors:<br>
+<br>
+- 'ball_tree' will use :class:`BallTree`<br>
+- 'kd_tree' will use :class:`KDTree`<br>
+- 'brute' will use a brute-force search.<br>
+- 'auto' will attempt to decide the most appropriate algorithm<br>
+based on the values passed to :meth:`fit` method.<br>
+<br>
+Note: fitting on sparse input will override the setting of<br>
+this parameter, using brute force.</span></a></td>
+<td class="value">'auto'</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=leaf_size,-int%2C%20default%3D30" class="param-doc-link" rel="noreferrer" target="_blank">leaf_size <span class="param-doc-description">leaf_size: int, default=30<br>
+<br>
+Leaf size passed to BallTree or KDTree. This can affect the<br>
+speed of the construction and query, as well as the memory<br>
+required to store the tree. The optimal value depends on the<br>
+nature of the problem.</span></a></td>
+<td class="value">30</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=p,-float%2C%20default%3D2" class="param-doc-link" rel="noreferrer" target="_blank">p <span class="param-doc-description">p: float, default=2<br>
+<br>
+Power parameter for the Minkowski metric. When p = 1, this is equivalent<br>
+to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2.<br>
+For arbitrary p, minkowski_distance (l_p) is used. This parameter is expected<br>
+to be positive.</span></a></td>
+<td class="value">2</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=metric,-str%20or%20callable%2C%20default%3D%27minkowski%27" class="param-doc-link" rel="noreferrer" target="_blank">metric <span class="param-doc-description">metric: str or callable, default='minkowski'<br>
+<br>
+Metric to use for distance computation. Default is "minkowski", which<br>
+results in the standard Euclidean distance when p = 2. See the<br>
+documentation of `scipy.spatial.distance<br>
+&lt; docs.scipy.org doc scipy reference spatial.distance.html&gt;`_ and<br>
+the metrics listed in<br>
+:class:`~sklearn.metrics.pairwise.distance_metrics` for valid metric<br>
+values.<br>
+<br>
+If metric is "precomputed", X is assumed to be a distance matrix and<br>
+must be square during fit. X may be a :term:`sparse graph`, in which<br>
+case only "nonzero" elements may be considered neighbors.<br>
+<br>
+If metric is a callable function, it takes two arrays representing 1D<br>
+vectors as inputs and must return one value indicating the distance<br>
+between those vectors. This works for Scipy's metrics, but is less<br>
+efficient than passing the metric name as a string.</span></a></td>
+<td class="value">'minkowski'</td>
+</tr>
+<tr class="default odd">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=metric_params,-dict%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">metric_params <span class="param-doc-description">metric_params: dict, default=None<br>
+<br>
+Additional keyword arguments for the metric function.</span></a></td>
+<td class="value">None</td>
+</tr>
+<tr class="default even">
+<td><em></em></td>
+<td class="param"><a href="https://scikit-learn.org/1.8/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#:~:text=n_jobs,-int%2C%20default%3DNone" class="param-doc-link" rel="noreferrer" target="_blank">n_jobs <span class="param-doc-description">n_jobs: int, default=None<br>
+<br>
+The number of parallel jobs to run for neighbors search.<br>
+``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.<br>
+``-1`` means using all processors. See :term:`Glossary <n_jobs>`<br>
+for more details.<br>
+Doesn't affect :meth:`fit` method.</n_jobs></span></a></td>
+<td class="value">None</td>
+</tr>
+</tbody>
+</table>
+
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.copy-paste-icon').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling
+        .textContent.trim().split(' ')[0];
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+
+
+/**
+ * Adapted from Skrub
+ * https://github.com/skrub-data/skrub/blob/403466d1d5d4dc76a7ef569b3f8228db59a31dc3/skrub/_reporting/_data/templates/report.js#L789
+ * @returns "light" or "dark"
+ */
+function detectTheme(element) {
+    const body = document.querySelector('body');
+
+    // Check VSCode theme
+    const themeKindAttr = body.getAttribute('data-vscode-theme-kind');
+    const themeNameAttr = body.getAttribute('data-vscode-theme-name');
+
+    if (themeKindAttr && themeNameAttr) {
+        const themeKind = themeKindAttr.toLowerCase();
+        const themeName = themeNameAttr.toLowerCase();
+
+        if (themeKind.includes("dark") || themeName.includes("dark")) {
+            return "dark";
+        }
+        if (themeKind.includes("light") || themeName.includes("light")) {
+            return "light";
+        }
+    }
+
+    // Check Jupyter theme
+    if (body.getAttribute('data-jp-theme-light') === 'false') {
+        return 'dark';
+    } else if (body.getAttribute('data-jp-theme-light') === 'true') {
+        return 'light';
+    }
+
+    // Guess based on a parent element's color
+    const color = window.getComputedStyle(element.parentNode, null).getPropertyValue('color');
+    const match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i);
+    if (match) {
+        const [r, g, b] = [
+            parseFloat(match[1]),
+            parseFloat(match[2]),
+            parseFloat(match[3])
+        ];
+
+        // https://en.wikipedia.org/wiki/HSL_and_HSV#Lightness
+        const luma = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        if (luma > 180) {
+            // If the text is very bright we have a dark theme
+            return 'dark';
+        }
+        if (luma < 75) {
+            // If the text is very dark we have a light theme
+            return 'light';
+        }
+        // Otherwise fall back to the next heuristic.
+    }
+
+    // Fallback to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+
+function forceTheme(elementId) {
+    const estimatorElement = document.querySelector(`#${elementId}`);
+    if (estimatorElement === null) {
+        console.error(`Element with id ${elementId} not found.`);
+    } else {
+        const theme = detectTheme(estimatorElement);
+        estimatorElement.classList.add(theme);
+    }
+}
+
+forceTheme('sk-container-id-1');</script>
 </div>
 </div>
 <p>We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:</p>
-<div id="2482b803" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X_test.iloc[<span class="op">-</span><span class="dv">1</span>:,:]</span>
+<div id="10f8cf46" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> X_test.iloc[<span class="op">-</span><span class="dv">1</span>:,:]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(query)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ensemble probability of True on query is </span><span class="sc">{</span>p_hat[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Predicted ensemble probability of True on query is </span><span class="sc">{</span>p_hat[<span class="dv">0</span>][<span class="dv">1</span>]<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted ensemble probability of True on query is 52.67%</code></pre>
 </div>
 </div>
 <p>Internally, the <code>estimators_</code> field of the ensemble object is a list of the individual trained classifiers. With a little work, we could find out the prediction for <em>True</em> from every constituent:</p>
-<div id="09ce14d7" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>,<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]   <span class="co"># first 6 predictions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="52">
-<pre><code>[0.6666666666666666,
- 1.0,
- 0.3333333333333333,
- 0.6666666666666666,
- 0.3333333333333333,
- 0.6666666666666666]</code></pre>
+<div id="55cfb906" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pm <span class="op">=</span> [ model.predict_proba(query.to_numpy())[<span class="dv">0</span>,<span class="dv">1</span>] <span class="cf">for</span> model <span class="kw">in</span> ensemble.estimators_ ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pm[:<span class="dv">6</span>]   <span class="co"># first 6 predictions</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>[np.float64(0.6666666666666666),
+ np.float64(1.0),
+ np.float64(0.3333333333333333),
+ np.float64(0.6666666666666666),
+ np.float64(0.3333333333333333),
+ np.float64(0.6666666666666666)]</code></pre>
 </div>
 </div>
 <p>The ensemble takes the average of this list to create its prediction:</p>
-<div id="50cef22b" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean probability of True for query is </span><span class="sc">{</span>np<span class="sc">.</span>mean(pm)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b9e99fb9" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean probability of True for query is </span><span class="sc">{</span>np<span class="sc">.</span>mean(pm)<span class="sc">:.2%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Mean probability of True for query is 52.67%</code></pre>
 </div>
 </div>
 <p>The result above matches what we got by predicting directly from the ensemble, which is the normal mode of operation.</p>
 <p>Over the testing set, we find that the ensemble has improved the AUC score:</p>
-<div id="4d765022" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
+<div id="99908152" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AUC for ensemble is 0.9839</code></pre>
 </div>
@@ -1438,7 +1994,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_4ad9lnpm&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_28i59tgw" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.4" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_4ad9lnpm&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ta9orzjw%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.4" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -1458,8 +2014,8 @@ Note
 </div>
 <div id="exm-select-ensemble-knn-better" class="theorem example" data-chapter="4" type="💻" data-description="Bagging ensemble (better)">
 <p><span class="theorem-title"><strong>Example 4.5</strong></span> If we repeat the above but reduce the bagging training sets to just 20% of the full training set, we get a slightly better result:</p>
-<div id="607457ba" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
+<div id="38d326d7" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ensemble <span class="op">=</span> BaggingClassifier( </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    pipe, </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">100</span>,</span>
@@ -1469,7 +2025,7 @@ Note
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ensemble.fit(X_train, y_train)</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>p_hat <span class="op">=</span> ensemble.predict_proba(X_test)</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test<span class="op">==</span><span class="va">True</span>, p_hat[:,<span class="dv">1</span>])   <span class="co"># columns are for [False, True]</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for the new ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC for the new ensemble is </span><span class="sc">{</span>auc<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>AUC for the new ensemble is 0.9873</code></pre>
 </div>
@@ -1478,38 +2034,38 @@ Note
 </div>
 <div id="exm-select-ensemble-forest" class="theorem example" data-chapter="4" type="💻" data-description="Random forest classifier">
 <p><span class="theorem-title"><strong>Example 4.6</strong></span> Let’s work again with the forest cover dataset. It’s got over 500,000 samples and 54 features:</p>
-<div id="10c9832b" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>forest[<span class="st">"data"</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="56">
+<div id="f0fb7638" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>forest <span class="op">=</span> datasets.fetch_covtype()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>forest[<span class="st">"data"</span>].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>(581012, 54)</code></pre>
 </div>
 </div>
 <p>We’ll turn this into a binary classification by looking for just one of the possible label values:</p>
-<div id="bda996a3" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>]</span>
+<div id="1fd7a242" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> forest[<span class="st">"data"</span>]</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> forest[<span class="st">"target"</span>] <span class="op">==</span> <span class="dv">1</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>, </span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">302</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>How should we best make use of all that data? We can use a fairly deep decision tree without fear of overfitting, and the result is not bad:</p>
-<div id="a313c34f" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>) </span>
+<div id="84ee56cc" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">12</span>) </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tree.fit(X_train, y_train)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> f1_score</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, tree.predict(X_test) )</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a single tree is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a single tree is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>F₁ for a single tree is 0.8106</code></pre>
 </div>
 </div>
 <p>A simple averaging over the same type of tree actually does worse here:</p>
-<div id="330044d3" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<div id="3887d083" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">12</span>, </span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1518,14 +2074,14 @@ Note
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train,y_train)</span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a random forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a random forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a random forest is 0.7772</code></pre>
+<pre><code>F₁ for a random forest is 0.7743</code></pre>
 </div>
 </div>
 <p>It’s possible that these trees are too correlated. We can combat that by exaggerating their degree of overfitting:</p>
-<div id="2aa3c474" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
+<div id="6193149b" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    n_estimators<span class="op">=</span><span class="dv">100</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
@@ -1533,14 +2089,14 @@ Note
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train,y_train)</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>F₁ for a taller forest is 0.9016</code></pre>
+<pre><code>F₁ for a taller forest is 0.9027</code></pre>
 </div>
 </div>
 <p>In fact, we can decorrelate even better by only using random subsets of the features on each tree. Here, for example, we construct the ensemble so that each tree randomly selects 50% of the original 54 dimensions to work with:</p>
-<div id="82be9c8a" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
+<div id="f6b2cf83" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">24</span>, </span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    max_features<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    max_samples<span class="op">=</span><span class="fl">0.2</span>,</span>
@@ -1549,7 +2105,7 @@ Note
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train,y_train)</span>
 <span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>F1 <span class="op">=</span> f1_score(y_test, rf.predict(X_test) )</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller, skinnier forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F₁ for a taller, skinnier forest is </span><span class="sc">{</span>F1<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>F₁ for a taller, skinnier forest is 0.9403</code></pre>
 </div>
@@ -1559,13 +2115,13 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_nx4y7s7a&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5kl56l4m" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.6" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_nx4y7s7a&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_a2nojdw7%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.6" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
 <p><br> <a href="_media/memes/random-forest.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="_media/memes/random-forest.jpeg" class="img-fluid quarto-figure quarto-figure-center" width="200"></a></p>
 </div></div><p>Ensembles can be constructed for any individual model type. Their chief disadvantage is the need to repeat the fitting process multiple times, although this can be mitigated by computing the fits in parallel.</p>
-</section>
+</div></section>
 <section id="validation" class="level2 page-columns page-full" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="validation"><span class="header-section-number">4.4</span> Validation</h2>
 <p>We now return to the opening questions of this chapter: how should we determine optimal hyperparameters and algorithms?</p>
@@ -1574,7 +2130,7 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_uwweso9y&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_th8qvxxo" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.4" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_uwweso9y&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_9xne9sft%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.4" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -1587,7 +2143,7 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_oo0o9ots&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5tn4ycbn" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.4.1" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_oo0o9ots&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_8y7i0dax%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Section 4.4.1" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -1603,12 +2159,12 @@ Note
 </div>
 <div id="exm-select-folds" class="theorem example" data-chapter="4" type="✍️" data-description="Folds for validation">
 <p><span class="theorem-title"><strong>Example 4.7</strong></span> Here is how 16 elements can be split into 4 folds:</p>
-<div id="28fe8d45" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
+<div id="bdbb34ee" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>kf <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">4</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> train,test <span class="kw">in</span> kf.split(<span class="bu">range</span>(<span class="dv">16</span>)): </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"train:"</span>, train, <span class="st">", test:"</span>, test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"train:"</span>, train, <span class="st">", test:"</span>, test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>train: [ 0  2  3  4  5  7 10 11 12 13 14 15] , test: [1 6 8 9]
 train: [ 0  1  3  5  6  7  8  9 10 11 12 15] , test: [ 2  4 13 14]
@@ -1620,14 +2176,14 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <p>A different variation is <strong>stratified</strong> <span class="math inline">\(k\)</span>-fold, in which the division in step 2 is constrained so that the relative membership of each class is the same in every fold as it is in the full training set. This is advisable when one or more classes is scarce and might otherwise become underrepresented in some folds.</p>
 <div id="exm-select-cv-beans" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation">
 <p><span class="theorem-title"><strong>Example 4.8</strong></span> Let’s apply cross-validation to the beans dataset.</p>
-<div id="f1ed2ebc" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
+<div id="d5e3af48" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>beans <span class="op">=</span> pd.read_excel(<span class="st">"_datasets/Dry_Bean_Dataset.xlsx"</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> beans.drop(<span class="st">"Class"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> beans[<span class="st">"Class"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A round of 6-fold cross-validation on a standardized kNN classifier looks like the following:</p>
-<div id="30cc591e" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
+<div id="3942fa64" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>)</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([(<span class="st">'scale'</span>, StandardScaler()), (<span class="st">'knn'</span>, knn)])</span>
@@ -1642,7 +2198,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Validation scores:"</span>)</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( scores[<span class="st">"test_score"</span>] )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( scores[<span class="st">"test_score"</span>] )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Validation scores:
 [0.93528923 0.93624518 0.93042563 0.93281594 0.93020502 0.93265611]</code></pre>
@@ -1654,7 +2210,7 @@ train: [ 1  2  4  6  7  8  9 10 11 13 14 15] , test: [ 0  3  5 12]</code></pre>
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:400px">
 <div style="position:relative;padding-bottom:71.25%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_56enxap2&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_5reb2d00" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_56enxap2&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_ua1s37yw%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.8" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
 </iframe>
 </div>
 </div>
@@ -1668,7 +2224,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note in <a href="#exm-select-cv-beans" class="quarto-xref">Example&nbsp;<span class="quarto-unresolved-ref">exm-select-cv-beans</span></a> that the dataset was not split into fixed training and test sets. Instead, the cross-validation process itself was used to estimate the generalization error.</p>
+<p>Note in <a href="#exm-select-cv-beans" class="quarto-xref">Example&nbsp;<span>4.8</span></a> that the dataset was not split into fixed training and test sets. Instead, the cross-validation process itself was used to estimate the generalization error.</p>
 </div>
 </div>
 </section>
@@ -1677,8 +2233,8 @@ Important
 <p>If we perform cross-validations as we vary a hyperparameter, we get a <strong>validation curve</strong>.</p>
 <div id="exm-select-vc-beans" class="theorem example" data-chapter="4" type="💻" data-description="Validation curve">
 <p><span class="theorem-title"><strong>Example 4.9</strong></span> Here is a validation curve for the maximum depth of a decision tree classifier on the beans data:</p>
-<div id="ab1284d0" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ValidationCurveDisplay</span>
+<div id="fa24d180" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> ValidationCurveDisplay</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>ValidationCurveDisplay.from_estimator(</span>
@@ -1688,7 +2244,7 @@ Important
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span>StratifiedKFold(n_splits<span class="op">=</span><span class="dv">6</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">19716</span>),</span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">"balanced_accuracy"</span>,</span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1703,7 +2259,7 @@ Important
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:400px">
 <div style="position:relative;padding-bottom:71.25%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_rgts5r8d&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_kiocbor5" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_rgts5r8d&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_c6akvj7u%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.9" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0">
 </iframe>
 </div>
 </div>
@@ -1712,8 +2268,8 @@ Important
 <p>When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it’s common to perform a <em>grid search</em>, in which we try cross-validated fitting using every specified combination of parameter values.</p>
 <div id="exm-select-grid-cancer" class="theorem example" data-chapter="4" type="💻" data-description="Cross-validation grid search">
 <p><span class="theorem-title"><strong>Example 4.10</strong></span> Let’s work with a dataset on breast cancer detection:</p>
-<div id="973b5863" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<div id="4fc57533" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)[<span class="st">"frame"</span>]</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> cancer.drop(<span class="st">"target"</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
@@ -1724,14 +2280,14 @@ Important
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.15</span>, </span>
 <span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">3383</span></span>
 <span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>X_test.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
-<tr>
+<tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">mean radius</th>
 <th data-quarto-table-cell-role="th">mean texture</th>
@@ -1757,8 +2313,8 @@ Important
 </tr>
 </thead>
 <tbody>
-<tr>
-<td data-quarto-table-cell-role="th">242</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">242</th>
 <td>11.300</td>
 <td>18.19</td>
 <td>73.93</td>
@@ -1781,8 +2337,8 @@ Important
 <td>0.3308</td>
 <td>0.12970</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">375</td>
+<tr class="even">
+<th data-quarto-table-cell-role="th">375</th>
 <td>16.170</td>
 <td>16.07</td>
 <td>106.30</td>
@@ -1805,8 +2361,8 @@ Important
 <td>0.3153</td>
 <td>0.08960</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">446</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">446</th>
 <td>17.750</td>
 <td>28.03</td>
 <td>117.30</td>
@@ -1829,8 +2385,8 @@ Important
 <td>0.2972</td>
 <td>0.09075</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">289</td>
+<tr class="even">
+<th data-quarto-table-cell-role="th">289</th>
 <td>11.370</td>
 <td>18.89</td>
 <td>72.17</td>
@@ -1853,8 +2409,8 @@ Important
 <td>0.3267</td>
 <td>0.06994</td>
 </tr>
-<tr>
-<td data-quarto-table-cell-role="th">318</td>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">318</th>
 <td>9.042</td>
 <td>18.90</td>
 <td>60.07</td>
@@ -1885,8 +2441,8 @@ Important
 </div>
 </div>
 <p>We start by trying decision tree classifiers in which we vary the maximum depth as well as some other options.</p>
-<div id="fa7c81da" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<div id="03c8ba3d" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> { <span class="st">"criterion"</span>:[<span class="st">"gini"</span>, <span class="st">"entropy"</span>], </span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">"max_depth"</span>:<span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">15</span>), </span>
@@ -1906,18 +2462,18 @@ Important
 <span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_params_)</span>
 <span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
 <span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_dt.best_score_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters:
-{'criterion': 'gini', 'max_depth': 7, 'min_impurity_decrease': 0.0}
+{'criterion': 'gini', 'max_depth': 7, 'min_impurity_decrease': np.float64(0.0)}
 
 Best score:
 0.9455901279430692</code></pre>
 </div>
 </div>
 <p>Next, we do the same search over kNN classifiers. We always use standardization as a preprocessor; note how the syntax of the grid search is adapted:</p>
-<div id="4f352268" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([</span>
+<div id="6f1147d0" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline([</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'scale'</span>, StandardScaler()), </span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'knn'</span>,  KNeighborsClassifier())</span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>])</span>
@@ -1938,7 +2494,7 @@ Best score:
 <span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_params_)</span>
 <span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
 <span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best score:"</span>)</span>
-<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_knn.best_score_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters:
 {'knn__metric': 'manhattan', 'knn__n_neighbors': 4, 'knn__weights': 'distance'}
@@ -1948,11 +2504,11 @@ Best score:
 </div>
 </div>
 <p>Each fitted grid search object is itself a classifier that was trained on the full training set at the optimal hyperparameters:</p>
-<div id="be338bdb" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
+<div id="5d7c9098" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dt_score <span class="op">=</span> f1_score( y_test, grid_dt.predict(X_test) )</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>knn_score <span class="op">=</span> f1_score( y_test, grid_knn.predict(X_test) )</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best tree f1 score: </span><span class="sc">{</span>dt_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best knn f1 score: </span><span class="sc">{</span>knn_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"best knn f1 score: </span><span class="sc">{</span>knn_score<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>best tree f1 score: 0.94915
 best knn f1 score: 0.99187</code></pre>
@@ -1976,7 +2532,7 @@ Note
 <div class="no-row-height column-margin column-container"><div class="">
 <div style="max-width:304px">
 <div style="position:relative;padding-bottom:75.986842105263%">
-<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/sp/235838100/embedIframeJs/uiconf_id/43030021/partner_id/2358381?iframeembed=true&amp;playerId=kaltura_player&amp;entry_id=1_ry2p82e9&amp;flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[hotspots.plugin]=1&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&amp;wid=1_awcakaj1" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.10" style="position:absolute;top:0;left:0;width:100%;height:100%">
+<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_ry2p82e9&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_d8byb406%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="304" height="231" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 4.10" style="position:absolute;top:0;left:0;width:100%;height:100%">
 </iframe>
 </div>
 </div>
@@ -2030,239 +2586,243 @@ y = f(m) =
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2270,185 +2830,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./classification.html" class="pagination-link" aria-label="Classification">
@@ -2483,7 +3019,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
