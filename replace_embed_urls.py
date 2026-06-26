@@ -19,6 +19,7 @@ you left off -- and can run headless once the session is still valid.
 
 import re
 import sys
+import json
 import time
 import argparse
 from pathlib import Path
@@ -30,6 +31,10 @@ from playwright.sync_api import sync_playwright
 SOURCE_ROOT = Path(".")   # adjust if running from outside the repo root
 SOURCE_GLOBS = ["**/*.qmd", "**/*.md"]
 
+# Cache of scraped embed srcs ({entry_id: new_src}) so a long run can be
+# resumed after an interruption without re-scraping everything.
+CACHE_FILE = Path("kaltura_embeds.json")
+
 # Persistent browser profile so the SSO session survives between runs.
 PROFILE_DIR = Path.home() / ".kaltura-playwright-profile"
 
@@ -37,7 +42,8 @@ PROFILE_DIR = Path.home() / ".kaltura-playwright-profile"
 LOGIN_HOST = "idp.nss.udel.edu"
 
 OLD_ENTRY_PATTERN = re.compile(
-    r'https://cdnapisec\.kaltura\.com/p/\d+/(?:embedIframeJs|embedPlaykitJs)'
+    r'https://cdnapisec\.kaltura\.com/p/\d+/(?:sp/\d+/)?'
+    r'(?:embedIframeJs|embedPlaykitJs)'
     r'/[^\s\'"]*?entry_id=([\w]+)'
 )
 
@@ -53,6 +59,19 @@ def collect_entry_ids():
     return mapping
 
 # ── 2. scrape new embed src for each entry_id ──────────────────────────────
+
+def safe_goto(page, url: str, timeout: int = 30_000, retries: int = 2) -> None:
+    """Navigate with retries. Waits for domcontentloaded (networkidle is
+    unreliable here -- the player keeps background requests alive)."""
+    last: Exception = RuntimeError("safe_goto: no attempt made")
+    for _ in range(retries + 1):
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=timeout)
+            return
+        except Exception as e:
+            last = e
+            time.sleep(1.5)
+    raise last
 
 def find_login_link(page):
     """
@@ -84,7 +103,7 @@ def ensure_logged_in(page, sample_entry_id: str) -> None:
     stays fully interactive while Python waits on input().
     """
     url = f"https://capture.udel.edu/media/x/{sample_entry_id}"
-    page.goto(url, wait_until="networkidle", timeout=60_000)
+    safe_goto(page, url, timeout=60_000)
 
     if LOGIN_HOST not in page.url and find_login_link(page) is None:
         return  # already authenticated
@@ -113,7 +132,7 @@ def ensure_logged_in(page, sample_entry_id: str) -> None:
     input("Press Enter once you are logged in... ")
 
     # Re-load the target page and confirm we're no longer a guest.
-    page.goto(url, wait_until="networkidle", timeout=60_000)
+    safe_goto(page, url, timeout=60_000)
     if LOGIN_HOST in page.url or find_login_link(page) is not None:
         print("  [!] Still appears to be a guest -- login may not have completed.",
               file=sys.stderr)
@@ -186,7 +205,9 @@ def get_embed_src(page, entry_id: str) -> str | None:
     and return the iframe src string.
     """
     url = f"https://capture.udel.edu/media/x/{entry_id}"
-    page.goto(url, wait_until="networkidle", timeout=30_000)
+    # Use domcontentloaded, not networkidle: MediaSpace keeps background
+    # player/analytics requests alive, so the page may never go fully idle.
+    safe_goto(page, url, timeout=30_000, retries=2)
 
     if LOGIN_HOST in page.url:
         print(f"  [!] Session expired (redirected to login) for {entry_id}",
@@ -199,7 +220,7 @@ def get_embed_src(page, entry_id: str) -> str | None:
         "#tab-share-tab",
         "a.tab-share-tab",
         "[aria-controls='share-tab']",
-    ], timeout=8_000):
+    ], timeout=5_000):
         print(f"  [!] Could not find Share button for {entry_id}", file=sys.stderr)
         dump_debug(page, entry_id, "no-share")
         return None
@@ -209,22 +230,25 @@ def get_embed_src(page, entry_id: str) -> str | None:
         "#embedTextArea-pane-tab",
         "a.embedTextArea-pane-tab",
         "a:has-text('Embed')",
-    ], timeout=5_000):
+    ], timeout=4_000):
         print(f"  [!] Could not find Embed tab for {entry_id}", file=sys.stderr)
         dump_debug(page, entry_id, "no-embed")
         return None
 
-    # The embed snippet lives in textarea#embedTextArea; wait for it to be
-    # populated with the playkit code.
+    # The embed snippet lives in textarea#embedTextArea. Wait, event-driven,
+    # until its value actually contains the playkit code -- this returns the
+    # instant the field is populated instead of polling on a fixed interval.
     embed_code = None
     try:
-        ta = page.locator("#embedTextArea")
-        ta.wait_for(state="attached", timeout=5_000)
-        for _ in range(20):  # poll up to ~5s for the value to render
-            embed_code = ta.input_value()
-            if embed_code and "embedPlaykitJs" in embed_code:
-                break
-            time.sleep(0.25)
+        page.wait_for_function(
+            """() => {
+                const el = document.querySelector('#embedTextArea');
+                return el && el.value && el.value.includes('embedPlaykitJs')
+                    ? el.value : null;
+            }""",
+            timeout=5_000,
+        )
+        embed_code = page.locator("#embedTextArea").input_value()
     except Exception:
         pass
 
@@ -265,7 +289,7 @@ def get_embed_src(page, entry_id: str) -> str | None:
 # Matches the full iframe src attribute value for a given entry_id
 def make_old_src_pattern(entry_id: str) -> re.Pattern:
     return re.compile(
-        r"(src=['\"])https://cdnapisec\.kaltura\.com/p/\d+/"
+        r"(src=['\"])https://cdnapisec\.kaltura\.com/p/\d+/(?:sp/\d+/)?"
         r"(?:embedIframeJs|embedPlaykitJs)/[^\s'\"]*?"
         rf"entry_id={re.escape(entry_id)}[^\s'\"]*(['\"])"
     )
@@ -283,6 +307,19 @@ def update_files(entry_map: dict[str, tuple[str, list[Path]]], dry_run: bool):
 
 # ── 4. main ────────────────────────────────────────────────────────────────
 
+def load_cache() -> dict[str, str]:
+    if CACHE_FILE.exists():
+        try:
+            return json.loads(CACHE_FILE.read_text())
+        except Exception:
+            pass
+    return {}
+
+
+def save_cache(cache: dict[str, str]) -> None:
+    CACHE_FILE.write_text(json.dumps(cache, indent=2, sort_keys=True))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
@@ -295,6 +332,10 @@ def main():
     parser.add_argument(
         "--limit", type=int, default=None,
         help="Only process the first N entry_ids (handy for a test run).",
+    )
+    parser.add_argument(
+        "--refresh", action="store_true",
+        help="Ignore the resume cache and re-scrape every entry_id.",
     )
     args = parser.parse_args()
 
@@ -310,7 +351,15 @@ def main():
         id_to_paths = dict(list(id_to_paths.items())[:args.limit])
         print(f"Limiting to first {len(id_to_paths)} entry_ids.\n")
 
-    entry_map = {}  # entry_id -> (new_src, paths)
+    cache = {} if args.refresh else load_cache()
+    if cache:
+        print(f"Loaded {len(cache)} cached embed srcs from {CACHE_FILE}.")
+
+    # Only scrape the ids we don't already have.
+    todo = {eid: paths for eid, paths in id_to_paths.items() if eid not in cache}
+    print(f"{len(todo)} to scrape, {len(id_to_paths) - len(todo)} from cache.\n")
+
+    failures = []
 
     with sync_playwright() as p:
         # Persistent context keeps the SSO cookies between runs.
@@ -320,21 +369,37 @@ def main():
         )
         page = ctx.pages[0] if ctx.pages else ctx.new_page()
 
-        # Make sure we're authenticated before grinding through every id.
-        first_id = next(iter(id_to_paths))
-        ensure_logged_in(page, first_id)
+        if todo:
+            # Make sure we're authenticated before grinding through every id.
+            ensure_logged_in(page, next(iter(todo)))
 
-        for i, (entry_id, paths) in enumerate(id_to_paths.items(), 1):
-            print(f"[{i}/{len(id_to_paths)}] {entry_id} ...", end=" ", flush=True)
-            new_src = get_embed_src(page, entry_id)
+        for i, (entry_id, _paths) in enumerate(todo.items(), 1):
+            print(f"[{i}/{len(todo)}] {entry_id} ...", end=" ", flush=True)
+            try:
+                new_src = get_embed_src(page, entry_id)
+            except Exception as e:
+                # One bad page must never abort the whole run.
+                new_src = None
+                print(f"ERROR ({type(e).__name__})", end=" ")
             if new_src:
-                print(f"OK")
-                entry_map[entry_id] = (new_src, paths)
+                print("OK")
+                cache[entry_id] = new_src
+                save_cache(cache)  # persist after every success -> resumable
             else:
-                print(f"FAILED")
-            time.sleep(0.5)  # be polite
+                print("FAILED")
+                failures.append(entry_id)
 
         ctx.close()
+
+    # Build the replacement map from the cache (covers this run + prior runs).
+    entry_map = {
+        eid: (cache[eid], paths)
+        for eid, paths in id_to_paths.items() if eid in cache
+    }
+
+    if failures:
+        print(f"\n{len(failures)} entries FAILED this run: {', '.join(failures)}")
+        print("Re-run to retry just these (cached successes are skipped).")
 
     print(f"\n{len(entry_map)}/{len(id_to_paths)} entries resolved.")
     print("\nApplying replacements" + (" (dry run)" if args.dry_run else "") + "...")
