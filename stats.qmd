@@ -14,7 +14,7 @@ When confronted with a new dataset, it's crucial to get a sense of its character
 The idea of descriptive statistics is to reduce a large collection of numerical values to a much smaller one, or even a single number, that captures essential features. You have probably encountered at least a few of these statistics before. In many cases, the statistical results connect to mathematical theory that makes it possible to reason abstractly about the data. 
 
 ::::{#exm-stats-summary chapter=2 type=💻 description="Summary statistics in pandas"}
-Here a classic dataset about flowers:
+Here is a classic dataset about flowers:
 
 ```{python}
 import pandas as pd
@@ -34,7 +34,7 @@ iris.describe()
 
 :::
 
-We now discuss the definitions and interpretations of the values prodcued by `describe`.
+We now discuss the definitions and interpretations of the values produced by `describe`.
 
 ### Mean and dispersion
 
@@ -148,7 +148,7 @@ $$
 
 ::::
 
-As you can see from the formulas and in @exm-stats-sample, $s_n^2$ is always an overestimate of the variance. However, the difference becomes negligible as the sample size $n$ increases, and in any practical dataset the distinction is basically academic.
+As you can see from the formulas and in @exm-stats-sample, $s_n^2$ is always an underestimate of the variance. However, the difference becomes negligible as the sample size $n$ increases, and in any practical dataset the distinction is basically academic.
 
 :::{.callout-caution}
 NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee! 
@@ -216,7 +216,7 @@ A longer but similar direct calculation shows that the variance is 1.
 ::::{#exm-stats-zscores chapter=2 type="✍️, 💻" description="Z scores"}
 Continuing with the values from @exm-stats-maxvar, we assume without losing generality that $t\ge 0$. (Otherwise, we can just swap $x_2$ and $x_3$.) Then we have the z-scores
 $$
-z_1 = \frac{0-0}{2t\sqrt{6}} = 0, \quad z_2 = \frac{t-0}{2t\sqrt{6}} = \frac{1}{2\sqrt{6}} \quad z_3 = \frac{-t-0}{2t\sqrt{6}} = \frac{-1}{2\sqrt{6}}. 
+z_1 = \frac{0-0}{\sqrt{\tfrac{2}{3}}|t|} = 0, \quad z_2 = \frac{t-0}{\sqrt{\frac{2}{3}}|t|} = \sqrt{\frac{3}{2}} \quad z_3 = \frac{-t-0}{\sqrt{\tfrac{2}{3}}|t|} = -\sqrt{\frac{3}{2}}. 
 $$
 
 These are independent of $t$, which just scales the original values. 
@@ -298,7 +298,7 @@ print(x.quantile(0.50))
 The median is a measure of central tendency that can substitute for the mean. To calculate an alternative to the standard deviation, we can use two other quantiles.
 
 ::::{#def-stats-quartile}
-The 25th, 50th, and 75th percentiles are the called first, second, and third **quartiles** of the distribution. The **interquartile range (IQR)** is the difference between the 75th percentile and the 25th percentile.
+The 25th, 50th, and 75th percentiles are called the first, second, and third **quartiles** of the distribution. The **interquartile range (IQR)** is the difference between the 75th percentile and the 25th percentile.
 ::::
 
 <!-- Sometimes the definition above is extended to the *zeroth quartile*, which is the minimum sample value, and the *fourth quartile*, which is the maximum sample value. -->
@@ -455,7 +455,7 @@ Paradoxically, sometimes infinity makes things easier. For instance, a Riemann s
 ### CDF
 
 ::::{#exm-stats-uniform-continuous chapter=2 type=✍️ description="CDF of a uniform distribution"}
-It's natural and easy to generalize @exm-stats-uniform-discrete to samples of any size $n$: $x_i=i/n$ for $i=1,\ldots,n$. Intuitively you cam see that as $n$ increases,     the stairs in the plots in @fig-stats-cdf-a and @fig-stats-cdf-b become narrower and shallower, eventually becoming a smooth ramp:
+It's natural and easy to generalize @exm-stats-uniform-discrete to samples of any size $n$: $x_i=i/n$ for $i=1,\ldots,n$. Intuitively you can see that as $n$ increases,     the stairs in the plots in @fig-stats-cdf-a and @fig-stats-cdf-b become narrower and shallower, eventually becoming a smooth ramp:
 
 ![CDF for an infinite population.](_media/ch2_cdf_c.svg){width=75% #fig-stats-cdf-c}
 
@@ -519,7 +519,7 @@ $$ {#eq-stats-pdf-def}
 
 ::::
 
-The intuitive interpretation of $f(t)$ is as the probability of observing a value in a tiny interval around $t$. 
+The intuitive interpretation of $f(t)$ is the probability of observing a value in a tiny interval around $t$ divided by the width of the tiny interval.
 
 ::::{#exm-stats-temps-pdf chapter=2 type=✍️ description="PDF of temperature distribution"}
 The histogram of the temperature distribution in @exm-stats-temps-ecdf is an approximation to the continuous PDF, if we normalize the counts properly:
@@ -948,7 +948,7 @@ outliers = by_event["signal"].transform(is_outlier)
 fmri.loc[outliers,"event"].value_counts()
 ```
 
-You can see above that there are 66 outliers. To negate the outlier indicator, we can use `~outs` as a row selector.
+You can see above that there are 66 outliers. To negate the outlier indicator, we can use `~outliers` as a row selector.
 
 ```{python}
 cleaned = fmri[~outliers]
@@ -1134,7 +1134,7 @@ Covariance allows us to quantify the relationship:
 cars[ ["horsepower", "mpg"] ].cov()
 ```
 
-But should these numbers considered big? The Pearson coefficient is more easily interpreted:
+But should these numbers be considered big? The Pearson coefficient is more easily interpreted:
 
 ```{python}
 cars[ ["horsepower", "mpg"] ].corr()
@@ -1239,7 +1239,7 @@ x.corr(y,"spearman")
 
 :::
 
-The robustness of the Spearman coefficient makes in an interesting alternative to the Pearson coefficient when dealing with datasets that have outliers.
+The robustness of the Spearman coefficient makes it an interesting alternative to the Pearson coefficient when dealing with datasets that have outliers.
 
 ### Categorical correlation
 
@@ -1281,7 +1281,7 @@ As you can see from the above, `europe` and `japan` are positively associated wi
 
 :::
 
-![xckd by [Randall Munroe](https://xkcd.com/license.html)](https://imgs.xkcd.com/comics/correlation.png)
+![xkcd by [Randall Munroe](https://xkcd.com/license.html)](https://imgs.xkcd.com/comics/correlation.png)
 
 ## Cautionary tales
 
@@ -1453,13 +1453,13 @@ Show using calculus that $r_2$ is minimized at $x=\mu$, the population mean. (Th
 :::
 
 :::{#exr-stats-least-mad}
-(2.1) Suppose that $n=2k+1$ and a population has values $x_1,x_2,\ldots,x_{n}$ in sorted order, so that the median is equal to $x_k$. Define the function 
+(2.1) Suppose that $n=2k+1$ and a population has values $x_1,x_2,\ldots,x_{n}$ in sorted order, so that the median is equal to $x_{k+1}$. Define the function 
 
 $$
 r_1(x) = \sum_{i=1}^n |x_i - x|.
 $$
 
-(This function is called the *total absolute deviation* of $x$ from the population.) Show that $r_1$ has a global minimum at $x=x_k$ by way of the following steps. 
+(This function is called the *total absolute deviation* of $x$ from the population.) Show that $r_1$ has a global minimum at $x=x_{k+1}$ by way of the following steps. 
 
 **(a)** Explain why the derivative of $r_1$ is undefined at every $x_i$. Consequently, all of the $x_i$ are critical points of $r_1$. 
 
@@ -1468,7 +1468,7 @@ $$
 **(c)** By considering the $r_1'$ values between the $x_i$, explain why it must be that
 
 $$
-r_1(x_1) > r_1(x_2) > \cdots > r_1(x_k) < r_1(x_{k+1}) < \cdots < r_1(x_n).
+r_1(x_1) > r_1(x_2) > \cdots > r_1(x_k) > r_1(x_{k+1}) < r_1(x_{k+2}) < \cdots < r_1(x_n).
 $$
 :::
 
