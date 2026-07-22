@@ -93,7 +93,7 @@ Bias depends on the particular learning algorithm and its hyperparameters, but n
 
 It might seem as though the only important goal in machine learning is to minimize the bias. To see why this is not the case, imagine that you are playing a hole of golf where the green lies on an island at the end of the fairway. You're capable of landing the ball on the green in one swing, but it's near the upper end of your range, and the penalty for landing in the water instead is severe. You might be better off playing it safe by just approaching the water's edge, which is a shot you can make much more reliably. On average over many attempts, you may well get a better score on the hole from the aggressive strategy, but the safe strategy gives you a more reliable result and better odds of doing fairly well, though not optimally. 
 
-In essence, a good chance of a mediocre result can outweigh a small chance of a better result. To express this tradeoff mathematically, we can compute the variance of the predicted label at any $x$:
+In essence, a good chance of a mediocre result can outweigh a small chance of a better result. To express this tradeoff mathematically, we can compute the expected squared error at any $x$:
 $$
 \begin{split}
 	\E{\bigl(y - \hat{f}(x)\bigr)^2} &= \frac{1}{N} \sum_{i=1}^N \left( y - \hat{f_i}(x) \right)^2 \\   
@@ -136,7 +136,7 @@ where $\hat{y} = \E{\hat{f}(x)}$ is the expected prediction.
 
 You might think of a method's variance as the inverse of its repeatability or stability. 
 
-To summarize @eq-select-biasvar, the variance of a prediction has two contributions:
+To summarize @eq-select-biasvar, the expected squared error has two contributions:
 
 Method bias
 : How close is the average prediction to the ground truth? 
@@ -199,7 +199,7 @@ LearningCurveDisplay.from_estimator(
     )
 ```
 
-The plot above shows **learning curves** resulting from experiments over 100 different training sets at various sizes selected randomly from the full set. The solid lines and ribbons show the means and standard deviations, respectively, for each training set size. 
+The plot above shows **learning curves** resulting from experiments over 16 different training sets at various sizes selected randomly from the full set. The solid lines and ribbons show the means and standard deviations, respectively, for each training set size. 
 
 The model in the experiment is a decision tree of depth 4. When the training set is tiny, the model can represent it very well. But those results generalize poorly, and the testing score is much lower and shows a lot of variance. As the training set size increases, the model cannot fit it as well (bias increases), but both the testing scores and training scores show less variance due to better generalization. 
 
@@ -397,7 +397,7 @@ $$
 y - \hat{F}(x) = \frac{1}{M} (My) -  \frac{1}{M} \sum_{m=1}^M \hat{f}_m(x)  =  \frac{1}{M} \sum_{m=1}^M \left(  y - \hat{f}_m(x)  \right). 
 $$
 
-This is simply the mean of the constituent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bias of the bagging classifier has is the same as its constituents. But it [can be derived](https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables) that the *variance* of the bagging predictor is $1/M$ times that of the constituent classifiers. We should therefore expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-$k$ kNN classifiers, for example. 
+This is simply the mean of the constituent classifier biases. Since the original classifiers are identical, in expected value they all have the same bias, and we conclude that the bias of the bagging classifier is the same as its constituents. But it [can be derived](https://en.wikipedia.org/wiki/Variance#Sum_of_uncorrelated_variables) that the *variance* of the bagging predictor is $1/M$ times that of the constituent classifiers. We should therefore expect bagging to work best with highly expressive classifiers that have low bias and large variance. These tend to occur in large-depth decision trees and small-$k$ kNN classifiers, for example. 
 
 :::{.callout-note}
 Bagging explains the *wisdom of crowds*. For instance, if many people are asked to independently guess the number of jellybeans in a large jar, the mean of the guesses will tend to be much closer to the true value than most individuals' guesses are.
@@ -421,7 +421,7 @@ Although the dataset has data on 7 classes of beans, we will simplify our output
 y = beans["Class"] == "SIRA"
 ```
 
-Here is the confusion matrix we get from training a single kNN classifier on this dataset:
+Here is the AUC score that we get from training a single kNN classifier on this dataset:
 
 ```{python}
 X_train, X_test, y_train, y_test = train_test_split(
@@ -456,7 +456,7 @@ ensemble = BaggingClassifier(
 ensemble.fit(X_train, y_train)
 ```
 
-We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the training set:
+We can use the trained ensemble object much like any learner. For example, here is the prediction obtained for the last row of the testing set:
 
 ```{python}
 query = X_test.iloc[-1:,:]
@@ -720,7 +720,7 @@ The score increases nicely until the depth is 6, after which it levels off, with
 :::
 
 #### Grid search 
-When there is a single hyperparameter in play, the validation curve is useful way to optimize it. When multiple hyperparameters are available, it's common to perform a *grid search*, in which we try cross-validated fitting using every specified combination of parameter values. 
+When there is a single hyperparameter in play, the validation curve is a useful way to optimize it. When multiple hyperparameters are available, it's common to perform a *grid search*, in which we try cross-validated fitting using every specified combination of parameter values. 
 
 ::::{#exm-select-grid-cancer chapter=4 type=💻 description="Cross-validation grid search"}
 Let's work with a dataset on breast cancer detection:
@@ -817,7 +817,7 @@ It may be instructive to rerun the competition above using different random seed
 
 #### Alternatives to grid search
 
-Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and to guide the process with experience and intuition.
+Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning that different processors can work on different locations on the grid at the same time. But it is usually too slow for large training sets, or when the search space has more than two or three dimensions. In such cases you can try searching over crude versions of the grid, perhaps with just part of the training data, and gradually narrow the search while using all the data. When desperate, one may try a randomized search and guide the process with experience and intuition.
 
 
 ## Exercises {.unnumbered}
@@ -825,9 +825,9 @@ Grid search is a brute-force approach. It is *embarrassingly parallel*, meaning 
 ::::{#exr-select-always}
 (4.1) One (dumb) algorithm for binary classification is to always predict the positive outcome. 
 
-**(a)** Considered over all possible training sets, does this method have a high training variance or low training variance? Explain.
+**(a)** Considered over all possible training sets, does this method have a high (method) variance or low (method) variance? Explain.
 
-**(b)** Considered over all possible testing sets, does this method have a high testing bias or low testing bias? Explain.
+**(b)** Considered over all possible training sets, does this method have a high (method) bias or low (method) bias? Explain.
 ::::
 
 ::::{#exr-select-ensemble}
