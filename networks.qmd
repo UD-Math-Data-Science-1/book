@@ -511,7 +511,7 @@ $$
 C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 $$
 
-where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
+where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$ with one corner at $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
 
 ::::
 
@@ -591,10 +591,10 @@ Other than that massive group, there is a negative association between degree an
 ### ER graphs
 
 ::: {#thm-networks-clustering-ER}
-The expected value of the average clustering coefficient in ER graphs of type $(n,p)$ is $p$.
+The expected value of the average clustering coefficient in ER graphs of type $(n,p)$ is $p$, assuming that each node has degree at least 2.
 :::
 
-A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability $p$ of inclusion, then $p$ is also the expected fraction of edges that appear within the neighborhood subgraph of any node. 
+A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability $p$ of inclusion, then $p$ is also the expected fraction of edges that appear within the neighborhood subgraph of any node. The assumption that each node has degree at least 2 is necessary to make sure that adding an edge between two neighbors of a node actually creates a triangle. The probability of a node having degree less than 2 is $(1-p)^{n-1}+(n-1)p(1-p)^{n-2}$. As $n$ gets large, this probability and also the expected number of such nodes approaches to 0. So, the assumption is not very restrictive for large $n$.
 
 ::::{#exm-networks-cluster-er chapter=7 type=💻 description="Clustering in ER graphs"}
 Let's compute average clustering within multiple ER random graphs.
@@ -618,7 +618,7 @@ The distribution above can't be normal, because there are hard bounds at 0 and 1
 
 :::
 
-In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 10 times larger than what is actually observed! Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
+In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 100 times larger than what is actually observed! (The average node degree in the Twitch network is $\tfrac{2m}{n}=\tfrac{2(35324)}{7126} \approx 9.91$) Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
 
 ### WS graphs
 
@@ -705,7 +705,7 @@ for some $t\ge 1$. The path above has **length** $t+1$, which is the number of e
 :::
 
 ::::{#exm-networks-distance-complete chapter=7 type=✍️ description="Distances in a complete graph"}
-In a complete graph, all possible pairs of nodes are directly connected by edges. Therefor, distance between any pair of distinct nodes is 1, and the graph has diameter 1.
+In a complete graph, all possible pairs of nodes are directly connected by edges. Therefore, distance between any pair of distinct nodes is 1, and the graph has diameter 1.
 
 ::::
 
@@ -1083,7 +1083,7 @@ The size of each node in the drawing above is proportional to its degree. In the
 
 Probability theory predicts that a BA graph has a power-law degree distribution with exponent $-3$ as $n\to \infty$.
 
-Except fot the initial seed stage, each node of a BA graph introduces $m$ new edges, for a total edge count of about $mn$. By @thm-networks-degree, the average degree of the graph is roughly $\bar{k} = 2mn/n = 2m$.
+Except for the initial seed stage, each node of a BA graph introduces $m$ new edges, for a total edge count of about $mn$. By @thm-networks-degree, the average degree of the graph is roughly $\bar{k} = 2mn/n = 2m$.
 
 ::::{#exm-networks-powerlaw-ba chapter=7 type=💻 description="Power-law degrees in the Twitch network"}
 For the Twitch network, $\bar{k}$ is almost 10, so we use $m=5$ to get a comparable BA graph. Here we construct such a graph with the same number of nodes as the Twitch network.
@@ -1598,7 +1598,7 @@ for j in range(n):
 sns.heatmap(W).set_aspect(1);
 ```
 
-We set up a probability vector to start at node 0, and then use `W.dot` to compute the first hop. The result is to end up at 5 other nodes with equal probability:
+We set up a probability vector to start at node 33, and then use `W.dot` to compute the first hop. The result is to end up at 5 other nodes with equal probability:
 
 ```{python}
 init = 33
@@ -1665,7 +1665,7 @@ $$
 
 The value $x_i$ can be interpreted as the probability of membership in the community.
 
-Let's try looking for a community of node 0 in the WS graph above.
+Let's try looking for a community of node 33 in the WS graph above.
 
 ```{python}
 p = np.zeros(n)
@@ -1749,7 +1749,7 @@ For each graph, give the number of nodes, the number of edges, and the [average 
 ::::
 
 ::::{#exr-networks-adjmat}
-Give the [adjacency matrix](networks.qmd#def-networks-adjacency) for the graphs in @exr-networks-basic (parts (a) and (b) only).
+Give the [adjacency matrix](networks.qmd#def-networks-adjmatrix) for the graphs in @exr-networks-basic (parts (a) and (b) only).
 ::::
 
 ::::{#exr-networks-ego}
