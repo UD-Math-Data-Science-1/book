@@ -511,7 +511,7 @@ $$
 C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 $$
 
-where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$ with one corner at $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$.
+where $d_i$ is the degree of the node and $T(i)$ is the number of triangles in the ego graph of node $i$ with one corner at $i$. If $d_i=0$ or $d_i=1$, we set $C(i)=0$ (though some sources prefer to leave these cases undefined).
 
 ::::
 
@@ -591,10 +591,10 @@ Other than that massive group, there is a negative association between degree an
 ### ER graphs
 
 ::: {#thm-networks-clustering-ER}
-The expected value of the average clustering coefficient in ER graphs of type $(n,p)$ is $p$, assuming that each node has degree at least 2.
+The expected value of the average clustering coefficient in ER graphs of type $(n,p)$ is $p$, if nodes of degree 0 or 1 are ignored in the averaging.
 :::
 
-A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability $p$ of inclusion, then $p$ is also the expected fraction of edges that appear within the neighborhood subgraph of any node. The assumption that each node has degree at least 2 is necessary to make sure that adding an edge between two neighbors of a node actually creates a triangle. The probability of a node having degree less than 2 is $(1-p)^{n-1}+(n-1)p(1-p)^{n-2}$. As $n$ gets large, this probability and also the expected number of such nodes approaches to 0. So, the assumption is not very restrictive for large $n$.
+The proof is straightforward: every edge in the graph has a probability $p$ of inclusion, so $p$ is also the expected fraction of edges that appear within the neighborhood subgraph of any node. 
 
 ::::{#exm-networks-cluster-er chapter=7 type=💻 description="Clustering in ER graphs"}
 Let's compute average clustering within multiple ER random graphs.
@@ -618,7 +618,7 @@ The distribution above can't be normal, because there are hard bounds at 0 and 1
 
 :::
 
-In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 100 times larger than what is actually observed! (The average node degree in the Twitch network is $\tfrac{2m}{n}=\tfrac{2(35324)}{7126} \approx 9.91$) Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
+In @exm-networks-cluster-twitch, we saw that the Twitch network has $n=7126$ and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take $p=0.131$, according to @thm-networks-clustering-ER. But by @thm-networks-degree-ER, this would imply an average node degree of $p(n-1)\approx 933$, which is almost 100 times larger than the actual value of $\tfrac{2m}{n}=\tfrac{2(35324)}{7126} \approx 9.91$. Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.
 
 ### WS graphs
 
