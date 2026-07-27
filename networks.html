@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -77,10 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ff1aa49695f6613af3898e590fdac19b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a2491fa3eb0020a65836a5732098f465.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
 <link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -125,7 +128,7 @@ MathJax = {
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -1053,7 +1056,7 @@ Note
 <p><span class="theorem-title"><strong>Definition 7.6</strong></span> The <strong>local clustering coefficient</strong> for node <span class="math inline">\(i\)</span> is <span class="math display">\[
 C(i) = \frac{ 2 T(i) }{d_i(d_i-1)},
 \]</span></p>
-<p>where <span class="math inline">\(d_i\)</span> is the degree of the node and <span class="math inline">\(T(i)\)</span> is the number of triangles in the ego graph of node <span class="math inline">\(i\)</span>. If <span class="math inline">\(d_i=0\)</span> or <span class="math inline">\(d_i=1\)</span>, we set <span class="math inline">\(C(i)=0\)</span>.</p>
+<p>where <span class="math inline">\(d_i\)</span> is the degree of the node and <span class="math inline">\(T(i)\)</span> is the number of triangles in the ego graph of node <span class="math inline">\(i\)</span> with one corner at <span class="math inline">\(i\)</span>. If <span class="math inline">\(d_i=0\)</span> or <span class="math inline">\(d_i=1\)</span>, we set <span class="math inline">\(C(i)=0\)</span> (though some sources prefer to leave these cases undefined).</p>
 </div>
 <p>The value of <span class="math inline">\(T(i)\)</span> is the same as the number of edges between node <span class="math inline">\(i\)</span>’s neighbors. Because there are <span class="math inline">\(\binom{d_i}{2}\)</span> unique pairs of neighbors, the value of <span class="math inline">\(C(i)\)</span> is between 0 and 1.</p>
 <div id="exm-networks-cluster-small-world" class="theorem example" data-chapter="7" type="✍️" data-description="Clustering coefficient">
@@ -1218,9 +1221,9 @@ dtype: float64</code></pre>
 </div></div><section id="er-graphs" class="level3 page-columns page-full" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="er-graphs"><span class="header-section-number">7.3.1</span> ER graphs</h3>
 <div id="thm-networks-clustering-ER" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 7.4</strong></span> The expected value of the average clustering coefficient in ER graphs of type <span class="math inline">\((n,p)\)</span> is <span class="math inline">\(p\)</span>.</p>
+<p><span class="theorem-title"><strong>Theorem 7.4</strong></span> The expected value of the average clustering coefficient in ER graphs of type <span class="math inline">\((n,p)\)</span> is <span class="math inline">\(p\)</span>, if nodes of degree 0 or 1 are ignored in the averaging.</p>
 </div>
-<p>A formal proof of this theorem is largely superfluous. Considering that each edge in the graph has a probability <span class="math inline">\(p\)</span> of inclusion, then <span class="math inline">\(p\)</span> is also the expected fraction of edges that appear within the neighborhood subgraph of any node.</p>
+<p>The proof is straightforward: every edge in the graph has a probability <span class="math inline">\(p\)</span> of inclusion, so <span class="math inline">\(p\)</span> is also the expected fraction of edges that appear within the neighborhood subgraph of any node.</p>
 <div id="exm-networks-cluster-er" class="theorem example" data-chapter="7" type="💻" data-description="Clustering in ER graphs">
 <p><span class="theorem-title"><strong>Example 7.12</strong></span> Let’s compute average clustering within multiple ER random graphs.</p>
 <div id="5ee22b12" class="cell" data-execution_count="39">
@@ -1249,7 +1252,7 @@ dtype: float64</code></pre>
 </iframe>
 </div>
 </div>
-</div></div><p>In <a href="#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>7.11</span></a>, we saw that the Twitch network has <span class="math inline">\(n=7126\)</span> and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take <span class="math inline">\(p=0.131\)</span>, according to <a href="#thm-networks-clustering-ER" class="quarto-xref">Theorem&nbsp;<span>7.4</span></a>. But by <a href="#thm-networks-degree-ER" class="quarto-xref">Theorem&nbsp;<span>7.2</span></a>, this would imply an average node degree of <span class="math inline">\(p(n-1)\approx 933\)</span>, which is almost 10 times larger than what is actually observed! Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.</p>
+</div></div><p>In <a href="#exm-networks-cluster-twitch" class="quarto-xref">Example&nbsp;<span>7.11</span></a>, we saw that the Twitch network has <span class="math inline">\(n=7126\)</span> and mean clustering equal to about 0.131. If an ER graph is expected to have that same mean clustering, then we must take <span class="math inline">\(p=0.131\)</span>, according to <a href="#thm-networks-clustering-ER" class="quarto-xref">Theorem&nbsp;<span>7.4</span></a>. But by <a href="#thm-networks-degree-ER" class="quarto-xref">Theorem&nbsp;<span>7.2</span></a>, this would imply an average node degree of <span class="math inline">\(p(n-1)\approx 933\)</span>, which is almost 100 times larger than the actual value of <span class="math inline">\(\tfrac{2m}{n}=\tfrac{2(35324)}{7126} \approx 9.91\)</span>. Thus, clustering strongly suggests that the Twitch network is not much like an ER graph.</p>
 </section>
 <section id="ws-graphs" class="level3 page-columns page-full" data-number="7.3.2">
 <h3 data-number="7.3.2" class="anchored" data-anchor-id="ws-graphs"><span class="header-section-number">7.3.2</span> WS graphs</h3>
@@ -1399,7 +1402,7 @@ dtype: float64</code></pre>
 <div class="no-row-height column-margin column-container"><div class="">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="https://www.dropbox.com/s/5nue68tr24nwdon/Section7_4.mp4?raw=1"></video></div>
 </div></div><div id="exm-networks-distance-complete" class="theorem example" data-chapter="7" type="✍️" data-description="Distances in a complete graph">
-<p><span class="theorem-title"><strong>Example 7.14</strong></span> In a complete graph, all possible pairs of nodes are directly connected by edges. Therefor, distance between any pair of distinct nodes is 1, and the graph has diameter 1.</p>
+<p><span class="theorem-title"><strong>Example 7.14</strong></span> In a complete graph, all possible pairs of nodes are directly connected by edges. Therefore, distance between any pair of distinct nodes is 1, and the graph has diameter 1.</p>
 </div>
 <p>Because the diameter depends on the extreme outlier of the distance distribution, it’s often more useful to consider the <strong>average distance</strong> by taking the mean.</p>
 <div id="exm-networks-distance-wheel" class="theorem example" data-chapter="7" type="💻" data-description="Distances in a wheel graph">
@@ -2000,7 +2003,7 @@ The first value, which is both the slope of the line and the exponent of $x$ in 
 <p>The size of each node in the drawing above is proportional to its degree. In the default rendering, the large hubs crowd into the center of the picture, while the lowest-degree nodes are pushed to the periphery.</p>
 </div>
 <p>Probability theory predicts that a BA graph has a power-law degree distribution with exponent <span class="math inline">\(-3\)</span> as <span class="math inline">\(n\to \infty\)</span>.</p>
-<p>Except fot the initial seed stage, each node of a BA graph introduces <span class="math inline">\(m\)</span> new edges, for a total edge count of about <span class="math inline">\(mn\)</span>. By <a href="#thm-networks-degree" class="quarto-xref">Theorem&nbsp;<span>7.1</span></a>, the average degree of the graph is roughly <span class="math inline">\(\bar{k} = 2mn/n = 2m\)</span>.</p>
+<p>Except for the initial seed stage, each node of a BA graph introduces <span class="math inline">\(m\)</span> new edges, for a total edge count of about <span class="math inline">\(mn\)</span>. By <a href="#thm-networks-degree" class="quarto-xref">Theorem&nbsp;<span>7.1</span></a>, the average degree of the graph is roughly <span class="math inline">\(\bar{k} = 2mn/n = 2m\)</span>.</p>
 <div id="exm-networks-powerlaw-ba" class="theorem example" data-chapter="7" type="💻" data-description="Power-law degrees in the Twitch network">
 <p><span class="theorem-title"><strong>Example 7.21</strong></span> For the Twitch network, <span class="math inline">\(\bar{k}\)</span> is almost 10, so we use <span class="math inline">\(m=5\)</span> to get a comparable BA graph. Here we construct such a graph with the same number of nodes as the Twitch network.</p>
 <div id="e1110235" class="cell" data-execution_count="68">
@@ -2789,7 +2792,7 @@ W_{ij} = \frac{1}{\operatorname{deg}(j)}\,A_{ij}.
 </div>
 </div>
 </div>
-<p>We set up a probability vector to start at node 0, and then use <code>W.dot</code> to compute the first hop. The result is to end up at 5 other nodes with equal probability:</p>
+<p>We set up a probability vector to start at node 33, and then use <code>W.dot</code> to compute the first hop. The result is to end up at 5 other nodes with equal probability:</p>
 <div id="996e24b6" class="cell" data-execution_count="90">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>init <span class="op">=</span> <span class="dv">33</span></span>
 <span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros(n)</span>
@@ -2878,7 +2881,7 @@ $$
 \bfx = \frac{\hat{\bfx}}{\norm{\hat{\bfx}}_1}.
 \]</span></p>
 <p>The value <span class="math inline">\(x_i\)</span> can be interpreted as the probability of membership in the community.</p>
-<p>Let’s try looking for a community of node 0 in the WS graph above.</p>
+<p>Let’s try looking for a community of node 33 in the WS graph above.</p>
 <div id="940ee5fc" class="cell" data-execution_count="94">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.zeros(n)</span>
 <span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a>p[init] <span class="op">=</span> <span class="dv">1</span></span>
@@ -2977,7 +2980,7 @@ $$
 <p><strong>(c)</strong> <a href="_media/ladder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="_media/ladder.png" title="Ladder graph" class="img-fluid" width="380"></a></p>
 </div>
 <div id="exr-networks-adjmat" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.2</strong></span> Give the <a href="./networks.html#def-networks-adjacency">adjacency matrix</a> for the graphs in <a href="#exr-networks-basic" class="quarto-xref">Exercise&nbsp;<span>7.1</span></a> (parts (a) and (b) only).</p>
+<p><span class="theorem-title"><strong>Exercise 7.2</strong></span> Give the <a href="./networks.html#def-networks-adjmatrix">adjacency matrix</a> for the graphs in <a href="#exr-networks-basic" class="quarto-xref">Exercise&nbsp;<span>7.1</span></a> (parts (a) and (b) only).</p>
 </div>
 <div id="exr-networks-ego" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.3</strong></span> For the graph below, draw the ego graph of <strong>(a)</strong> node 4 and <strong>(b)</strong> node 8.</p>
