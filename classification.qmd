@@ -11,7 +11,7 @@ Machine learning is the use of data to tune algorithms for making decisions or p
 We divide machine learning into three major forms: 
 
 Supervised learning
-: The training data only examples that include the answer (or **label**) we expect to get. The goals are to find important effects and/or to predict labels for previously unseen examples.
+: The training data consists of only examples that include the answer (or **label**) we expect to get. The goals are to find important effects and/or to predict labels for previously unseen examples.
 
 Unsupervised learning
 : The data is unlabeled, and the goal is to discover structure and relationships inherent to the data set.
@@ -64,7 +64,7 @@ def plot_digits(X):
 plot_digits(X)
 ```
 
-The value `digits` is the a vector of labels for the digits:
+The value `digits` is a vector of labels for the digits:
 
 ```{python}
 print("There are", len(digits), "labels. Here are the first 16:")
@@ -391,13 +391,13 @@ All of the primary metrics vary between 0 (worst) and 1 (best).
 : How often are the predictions correct? This is the most intuitive metric, but it can be misleading if the classes are imbalanced.
 
 **recall** 
-: How often are actual *positive* cases predicted correctly? This is also called *sensitivity* or the *true positive rate*. It sets the goal as minimizing false negatives.
+: How often are actual *positive* cases predicted correctly? This is also called *sensitivity* or the *true positive rate*. It sets the goal as minimizing false negatives among actual positive cases.
 
 **specificity** 
-: How often are actual *negative* cases predicted correctly? This is also called the *true negative rate*. It sets the goal as minimizing false positives.
+: How often are actual *negative* cases predicted correctly? This is also called the *true negative rate*. It sets the goal as minimizing false positives among actual negative cases.
 
 **precision**
-: How often are the *positive* predictions correct? This is also called *positive predictive value*. Like specificity, it sets the goal as minimizing false positives, but measures it differently.
+: How often are the *positive* predictions correct? This is also called *positive predictive value*. It sets the goal as minimizing false positives among positive predictions.
 
 ::: {.callout-note}
 Specificity is equal to recall of the negative class. For that reason, `sklearn` provides a `recall_score` but not a `specificity_score` function, and you have to use a logical NOT with `recall_score` to get the specificity.
@@ -665,7 +665,7 @@ flowchart TD
 
 A decision tree is much like playing Twenty Questions. A question is asked, and the answer reduces the possible results, leading to a new question. 
 
-The fundamental step is: *given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, partition the samples into two subsets, each of which has as uniform as set of labels as possible.* That step is then repeated recursively on the two subsets just formed by the partition, and so on. The result is a **binary tree**, as illustrated in @fig-class-tree.
+The fundamental step is: *given feature vectors $\bfx_1,\ldots,\bfx_n$ with labels $y_1,\ldots,y_n$, partition the samples into two subsets, each of which has labels as uniform as possible.* That step is then repeated recursively on the two subsets just formed by the partition, and so on. The result is a **binary tree**, as illustrated in @fig-class-tree.
 
 ```{mermaid} 
 %%| label: fig-class-tree
@@ -861,6 +861,13 @@ gp2 = rng.random((10,2))
 gp2[:,0] += 0.1
 X = np.round(10*np.vstack((gp1,gp2)))
 y = np.hstack(([1]*10,[2]*10))
+
+# There are double red points at (9, 7). One of them is moved to (11, 3) for clarity. Find the red points at (9, 7) and move the second one:
+duplicates = np.flatnonzero(
+    (y == 1) & np.all(X == [9, 7], axis=1)
+)
+X[duplicates[1]] = [11, 3]
+
 import seaborn as sns
 df = pd.DataFrame( {"x₁":X[:,0], "x₂":X[:,1], "y":y} )
 sns.scatterplot(data=df, x="x₁", y="x₂", hue="y", palette=["red", "blue"]);
@@ -1092,7 +1099,7 @@ Here are 6 sample points, labeled blue and red, in 2-dimensional feature space:
 
 ![](_media/knn_example1.svg)
 
-Using inf-norm distance and $k=3$, find the kNN labels at the locations marked A and B.
+Using $\infty$-norm distance and $k=3$, find the kNN labels at the locations marked A and B.
 
 :::{.solution}
 At point A, the nearest samples are at $(0,2)$ with distance $1$, $(0,0)$ with distance $1$, and $(2,1)$ with distance $1.5$. By a 2-1 vote, the point should be labeled blue.
@@ -1497,7 +1504,7 @@ RocCurveDisplay.from_estimator(dtree, X_test, y_test);
 :::{.column-margin}
 <div style="max-width:400px"><div style="position:relative;padding-bottom:71.25%"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2358381/embedPlaykitJs/uiconf_id/57659783?iframeembed=true&amp;entry_id=1_8amtzxkx&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_2s3wbacx%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" frameborder="0" title="Example 3.25" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe></div></div>
 </br>
-![](_media/memes/ width=200px fig-align="center"}
+![](_media/memes/ROC.jpeg){.lightbox width=200px fig-align="center"}
 
 :::
 
@@ -1506,7 +1513,7 @@ When using `roc_curve`, the second argument should be the probability of the pos
 
 :::
 
-The ROC curve always starts in the top right corner (total skepticism) and ends in the bottom left corner (total credulity). The ideal situation is in the top left corner of the plot, corresponding to perfect TP rate (recall) and perfect FP rate (specificity). 
+The ROC curve always starts in the bottom left corner (total skepticism) and ends in the top right corner (total credulity). The ideal situation is in the top left corner of the plot, corresponding to perfect TP rate (recall) and perfect FP rate (specificity).
 
 The ROC curve in @exm-class-roc illustrates the tradeoff between true positives (recall) and false positives (specificity). For that classifier, if we want a TP rate greater than 90%, then we have to accept a FP rate of about 5%.
 
@@ -1614,7 +1621,7 @@ $$ \{ A, B, B, C, C, C \}.$$
 ::::
 
 ::::{#exr-class-partition}
-(3.3) Given $x_i=i$ for $i=0,\ldots,5$, with labels
+(3.3) Given $x_i=i$ for $i=1,\ldots,6$, with labels
 $$
 y_1=y_5=y_6=A, \quad y_2=y_3=y_4=B,
 $$
@@ -1622,7 +1629,7 @@ find an optimal partition threshold using Gini impurity.
 ::::
 
 ::::{#exr-class-tree}
-(3.3) For the decision tree drawn in @exm-class-tree, make predictions for each of the following queries, showing the path taken through the tree for each case.
+(3.3) For the decision tree drawn in @exm-class-tree-toy, make predictions for each of the following queries, showing the path taken through the tree for each case.
 
 **(a)** $(x_1, x_2) = (4, 5),\quad$  **(b)** $(x_1, x_2) = (8,9),\quad$  **(c)** $(x_1, x_2) = (10, 4)$
 
@@ -1683,7 +1690,7 @@ Fill in the second row.
 
 ![](_media/gridlabels.png){width="360" .lightbox}
 
-Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $2\le t \le 2$. 
+Let $\hat{f}(x_1,x_2)$ be the kNN probabilistic classifier with $k=4$, Euclidean metric, and mean averaging that returns the probability of a blue label. In each case below, a function $g(t)$ is defined from values of $\hat{f}$ along a vertical or horizontal line. Carefully sketch a plot of $g(t)$ for $-2\le t \le 2$. 
 
 **(a)** $g(t) = \hat{f}(1.2,t)$ 
 
