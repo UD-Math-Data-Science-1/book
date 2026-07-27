@@ -148,7 +148,7 @@ $$
 
 ::::
 
-As you can see from the formulas and in @exm-stats-sample, $s_n^2$ is always an underestimate of the variance. However, the difference becomes negligible as the sample size $n$ increases, and in any practical dataset the distinction is basically academic.
+As you can see from the formulas and in @exm-stats-sample, $s_{n-1}^2$ is always larger than the sample variance. However, the difference becomes negligible as the sample size $n$ increases, and in any practical dataset the distinction is basically academic.
 
 :::{.callout-caution}
 NumPy computes the biased estimator of variance by default, while pandas computes the unbiased version. Whee! 
