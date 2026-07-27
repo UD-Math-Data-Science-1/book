@@ -75,7 +75,7 @@ There are also explicit converter functions. The conversion of an `int` to a `fl
 print( "float(3) creates",float(3) )
 ```
 
-But the conversion of `int` to `float` truncates the number, which can cause subtle bugs:
+But the conversion of `float` to `int` truncates the number, which can cause subtle bugs:
 ```{python}
 # Truncate float to int
 print( "int(3.14) creates", int(3.14) )
@@ -112,7 +112,7 @@ Be careful about comparing floating-point values. Exact comparisons may fail due
 There are two additional quasi-numerical `float` values to be aware of as well.
 
 ::: {.callout-important}
-For numerical work in Python, the NumPy package indispensible. We will use it often, and it is also loaded and used by most other scientifically oriented packages.
+For numerical work in Python, the NumPy package is indispensable. We will use it often, and it is also loaded and used by most other scientifically oriented packages.
 :::
 
 The value `inf` in NumPy stands for infinity. 
@@ -632,7 +632,7 @@ Text is a ubiquitous data source. One way to quantify text is to use a dictionar
 
 ### Images
 
-The most straightforward way to represent an image is as a 3D array of values representing intensities representing of red, green and blue in each pixel. Sometimes it might be preferable to represent the image by a vector of statistics about these values, or by presence or absence of detected objects, etc.
+The most straightforward way to represent an image is as a 3D array of values representing intensities of red, green and blue in each pixel. Sometimes it might be preferable to represent the image by a vector of statistics about these values, or by presence or absence of detected objects, etc.
 
 ## Working in pandas
 
@@ -1215,7 +1215,7 @@ result.head()
 
 ## Data wrangling
 
-Raw data often needs to be manipulated into a useable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling**.
+Raw data often needs to be manipulated into a usable format before algorithms can be applied. Preprocessing data so that it is suitable for machine analysis is known as **data wrangling**.
 
 There are a number of frequently encountered tasks in data wrangling, including:
 
