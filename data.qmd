@@ -112,7 +112,7 @@ Be careful about comparing floating-point values. Exact comparisons may fail due
 There are two additional quasi-numerical `float` values to be aware of as well.
 
 ::: {.callout-important}
-For numerical work in Python, the NumPy package indispensable. We will use it often, and it is also loaded and used by most other scientifically oriented packages.
+For numerical work in Python, the NumPy package is indispensable. We will use it often, and it is also loaded and used by most other scientifically oriented packages.
 :::
 
 The value `inf` in NumPy stands for infinity. 
